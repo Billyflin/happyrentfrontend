@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+    "name":"Oliver Liam",
+    "companyName": "Viking Burrito",
+    "emailAddress": "oliver@burrito.com",
+    "VATNumber": "FRB1235476"
+    },
+    {
+    "name":"Lucas Harper",
+    "companyName": "Stone Tech Zone",
+    "emailAddress": "lucas@stone-tech.com",
+    "VATNumber": "FRB1235476"
+    },
+    {
+    "name":"Ethan James",
+    "companyName": "Fiber Notion",
+    "emailAddress": "ethan@fiber.com",
+    "VATNumber": "FRB1235476"
+    }
+  ]
+}

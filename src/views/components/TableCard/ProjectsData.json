@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "logo": "src/assets/img/small-logos/logo-asana.svg",
+      "project": "Asana",
+      "budget": "$2,500",
+      "status": "working",
+      "percentage": 60,
+      "color": "info"
+    },
+    {
+      "logo": "src/assets/img/small-logos/github.svg",
+      "project": "Github",
+      "budget": "$5,000",
+      "status": "done",
+      "percentage": 100,
+      "color": "success"
+    },
+    {
+      "logo": "src/assets/img/small-logos/logo-atlassian.svg",
+      "project": "Atlassian",
+      "budget": "$3,400",
+      "status": "canceled",
+      "percentage": 30,
+      "color": "danger"
+    },
+    {
+      "logo": "src/assets/img/small-logos/bootstrap.svg",
+      "project": "Bootstrap",
+      "budget": "$14,000",
+      "status": "working",
+      "percentage": 80,
+      "color": "info"
+    },
+    {
+      "logo": "src/assets/img/small-logos/logo-slack.svg",
+      "project": "Slack",
+      "budget": "$1,000",
+      "status": "canceled",
+      "percentage": 0,
+      "color": "danger"
+    },
+    {
+      "logo": "src/assets/img/small-logos/devto.svg",
+      "project": "Devto",
+      "budget": "$2,300",
+      "status": "done",
+      "percentage": 100,
+      "color": "success"
+    }
+  ]
+}

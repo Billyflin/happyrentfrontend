@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "title": {
+        "text": "Today's Money",
+        "value": "$53k"
+      },
+      "detail": "<span class='text-success text-sm font-weight-bolder'> +55%</span> than last week",
+      "icon": {
+        "name": "weekend",
+        "color": "white",
+        "background": "dark"
+      }
+    },
+    {
+      "title": {
+        "text": "Today's Users",
+        "value": "2,300"
+      },
+      "detail": "<span class='text-success text-sm font-weight-bolder'>+3%</span> than last month",
+      "icon": {
+        "name": "leaderboard",
+        "color": "white",
+        "background": "primary"
+      }
+    },
+    {
+      "title": {
+        "text": "New Clients",
+        "value": "3,462"
+      },
+      "detail": "<span class='text-danger text-sm font-weight-bolder'>-2%</span> than yesterday",
+      "icon": {
+        "name": "person",
+        "color": "white",
+        "background": "success"
+      }
+    },
+    {
+      "title": {
+        "text": "Sales",
+        "value": "$103,430"
+      },
+      "detail": "<span class='text-success text-sm font-weight-bolder'>+5%</span> Just updated",
+      "icon": {
+        "name": "weekend",
+        "color": "white",
+        "background": "info"
+      }
+    }
+  ]
+}

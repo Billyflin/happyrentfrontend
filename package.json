@@ -1,0 +1,48 @@
+{
+  "name": "happyrentfrontend",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "test:e2e": "start-server-and-test preview http://localhost:4173 'cypress run --e2e'",
+    "test:e2e:dev": "start-server-and-test 'vite dev --port 4173' http://localhost:4173 'cypress open --e2e'",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/"
+  },
+  "dependencies": {
+  "@popperjs/core": "^2.11.8",
+  "axios": "^1.6.2",
+  "bootstrap": "^5.3.2",
+  "dropzone": "6.0.0-beta.2",
+  "echarts": "^5.4.3",
+  "flowbite-vue": "^0.1.0",
+  "pinia": "2.1.7",
+  "pinia-plugin-persistedstate": "^3.2.0",
+  "vue": "^3.4.15",
+  "vue-awesome-swiper": "^5.0.1",
+  "vue-router": "4.2.5",
+  "vue3-google-login": "2.0.25",
+  "vue3-modal": "^0.1.6"
+},
+  "devDependencies": {
+    "@rushstack/eslint-patch": "^1.6.0",
+    "@vitejs/plugin-vue": "^4.5.0",
+    "@vue/eslint-config-prettier": "^8.0.0",
+    "@vue/test-utils": "^2.4.2",
+    "cypress": "^13.6.0",
+    "eslint": "^8.54.0",
+    "eslint-plugin-cypress": "^2.15.1",
+    "eslint-plugin-prettier": "5.0.1",
+    "eslint-plugin-vue": "^9.18.1",
+    "jsdom": "^22.1.0",
+    "prettier": "^3.1.0",
+    "sass": "1.69.5",
+    "start-server-and-test": "^2.0.3",
+    "vite": "^5.0.2",
+    "vitest": "^0.34.6"
+  }
+}

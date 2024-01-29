@@ -1,0 +1,54 @@
+//[
+//  {
+//    "productId": 1,
+//    "productName": "Producto de prueba 1",
+//    "brand": "Marca de prueba",
+//    "price": 100.0,
+//    "category": {
+//      "categoryId": 1,
+//      "categoryName": "Cooling"
+//    },
+//    "images": [{}, {}, {}]
+//  },
+//  {
+//    "productId": 2,
+//    "productName": "Producto de prueba 32",
+//    "brand": "Marca de prueba",
+//    "price": 100.0,
+//    "category": {
+//      "categoryId": 4,
+//      "categoryName": "Power Supply"
+//    },
+//    "images":[{}]
+//  }
+//]
+
+{
+  "efficiency": "80 Plus Gold",
+  "fanless": false,
+  "formFactor": "ATX",
+  "modular": true,
+  "power": 750.0,
+  "product": {
+    "productId": 4,
+    "productName": "Producto de pruebadsad 1",
+    "brand": "Marca de prueba",
+    "price": 100.0,
+    "category": {
+      "categoryId": 4,
+      "categoryName": "Power Supply"
+    },
+    "stock": 0,
+    "images": [
+      {
+        "imageData":imagen en base64
+      },
+      {
+        "imageData":imagen en base64
+      },
+      {
+        "imageData":imagen en base64
+      }
+    ]
+  }
+}

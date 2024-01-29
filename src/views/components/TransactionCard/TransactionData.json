@@ -1,0 +1,52 @@
+{
+  "data": [
+    {
+      "color": "danger",
+      "icon": "fa-arrow-down",
+      "trader": "Netflix",
+      "date": "27 March 2020, at 12:30 PM",
+      "transactionAmount": "- $ 2,500",
+      "newest": true
+    },
+    {
+      "color": "success",
+      "icon": "fa-arrow-up",
+      "trader": "Apple",
+      "date": "27 March 2020, at 04:30 AM",
+      "transactionAmount": "+ $ 2,000",
+      "newest": true
+    },
+    {
+      "color": "success",
+      "icon": "fa-arrow-up",
+      "trader": "Stripe",
+      "date": "26 March 2020, at 13:45 PM",
+      "transactionAmount": "+ $ 750",
+      "newest": false
+    },
+    {
+      "color": "success",
+      "icon": "fa-arrow-up",
+      "trader": "HubSpot",
+      "date": "26 March 2020, at 12:30 PM",
+      "transactionAmount": "+ $ 1,000",
+      "newest": false
+    },
+    {
+      "color": "success",
+      "icon": "fa-arrow-up",
+      "trader": "Creative Tim",
+      "date": "26 March 2020, at 08:30 AM",
+      "transactionAmount": "+ $ 2,500",
+      "newest": false
+    },
+    {
+      "color": "dark",
+      "icon": "fa-exclamation",
+      "trader": "Webflow",
+      "date": "26 March 2020, at 08:30 AM",
+      "transactionAmount": "Pending",
+      "newest": false
+    }
+  ]
+}

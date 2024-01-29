@@ -1,0 +1,23 @@
+{
+  "data": {
+    "title": "Información personal",
+    "description": "Hi, I'm Billy, a otako developer.",
+    "info": {
+      "fullName": "Billyflin",
+      "mobile": "1234567890",
+      "email": "xxx@xxx.com",
+      "location": "Japon"
+    },
+    "social": [
+      {
+        "link": "https://github.com/Billyflin",
+        "icon": "fa-github"
+      }
+    ],
+    "action":
+    {
+      "route": "javascript:;",
+      "tooltip": "Edit Profile"
+    }
+  }
+}
