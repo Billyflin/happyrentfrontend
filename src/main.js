@@ -4,7 +4,7 @@ import router from './router'
 import {createPinia} from 'pinia'
 import './assets/css/nucleo-icons.css'
 import './assets/css/nucleo-svg.css'
-import MaterialDashboard from './material-dashboard'
+import MaterialDashboard from "./material-dashboard";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
 const appInstance = createApp(App)

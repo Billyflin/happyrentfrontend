@@ -15,7 +15,7 @@
                   <img class="btn btn-link px-3" src="@/assets/LogoHappy.svg" alt="Logo" width="98"
                        height="98"/>
                 </div>
-                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0">Login</h4>
+<!--                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0"></h4>-->
               </div>
             </div>
             <div class="card-body">
@@ -26,10 +26,13 @@
                 <div class="mb-3">
                   <material-input v-model="password" id="password" type="password" label="Password" name="password" />
                 </div>
-                <material-switch id="rememberMe" name="rememberMe" >Remember me</material-switch>
+                <material-switch v-model=rememberMe  id="rememberMe" name="rememberMe" >Remember me</material-switch>
                 <div class="text-center">
                   <material-button type="submit" class="my-4 mb-2" variant="gradient" color="primary" fullWidth>Sign in</material-button>
                 </div>
+                <p class="mt-4 text-xs text-center">
+                  <span class="text-danger">{{auth.errMsg}}</span>
+                </p>
                 <p class="mt-4 text-sm text-center">
                   No tienes una cuenta?
                   <router-link :to="{name: 'SignUp'}" class="text-primary text-gradient font-weight-bold"

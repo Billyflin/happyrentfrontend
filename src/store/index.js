@@ -71,6 +71,9 @@ export const useAuthStore = defineStore("auth", {
                         case 400:
                             this.errMsg = "Invalid username or password";
                             break;
+                        case 401:
+                            this.errMsg = "Invalid username or password";
+                            break;
                         case 404:
                             this.errMsg = "No account found with that username";
                             break;
