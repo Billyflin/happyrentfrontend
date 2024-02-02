@@ -8,7 +8,7 @@
               <div class="row justify-content-between">
                 <div class="col-md-4 text-start">
                   <img
-                      class="mb-2 w-25 p-2"
+                      class="mb-2 w-75 p-2"
                       src="@/assets/LogoHappy.svg"
                       alt="Logo"
                   />

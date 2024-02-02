@@ -17,7 +17,7 @@
         </div>
         <div class="col-auto my-auto">
           <div class="h-100">
-            <h5 class="mb-1">Billyflin</h5>
+            <h5 class="mb-1">{{auth.userInfo.persona.nombres}}</h5>
             <p class="mb-0 font-weight-normal text-sm">Developer</p>
           </div>
         </div>
@@ -232,7 +232,7 @@
 
 <script setup>
 import {onMounted, onBeforeUnmount} from 'vue'
-import {useAppStore} from '@/store/index.js'
+import {useAppStore,useAuthStore} from '@/store/index.js'
 import ProfileInfoCard from './components/ProfileInfoCard/ProfileInfoCard.vue'
 import ProfileInfo from './components/ProfileInfoCard/ProfileInfo.json'
 import ConversationsCard from './components/ConversationsCard/ConversationsCard.vue'
@@ -247,6 +247,7 @@ defineProps({
 })
 
 const store = useAppStore()
+const auth = useAuthStore()
 const ProfileInfoData = ProfileInfo.data
 const ConversationsData = Conversations.data
 

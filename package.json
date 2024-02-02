@@ -22,7 +22,7 @@
     "flowbite-vue": "^0.1.2",
     "pinia": "2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
-    "simple-datatables": "^9.0.0",
+    "simple-datatables": "^3.2.0",
     "vue": "^3.4.15",
     "vue-awesome-swiper": "^5.0.1",
     "vue-router": "4.2.5",

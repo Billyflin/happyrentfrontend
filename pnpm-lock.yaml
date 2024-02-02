@@ -30,8 +30,8 @@ dependencies:
     specifier: ^3.2.1
     version: 3.2.1(pinia@2.1.7)
   simple-datatables:
-    specifier: ^9.0.0
-    version: 9.0.0
+    specifier: ^3.2.0
+    version: 3.2.2
   vue:
     specifier: ^3.4.15
     version: 3.4.15
@@ -1426,10 +1426,6 @@ packages:
 
   /didyoumean@1.2.2:
     resolution: {integrity: sha512-gxtyfqMg7GKyhQmb056K7M3xszy/myH8w+B4RT+QXBQsvAOdc3XymqDDPHx1BgPgsdAA5SIifona89YtRATDzw==}
-    dev: false
-
-  /diff-dom@5.1.2:
-    resolution: {integrity: sha512-ayOX+pBYzyLdt7iXFd+8jvWzhrcWk+9gQqYk7Zz8/0hpIsqSbtk6MNbtds+Ox6B8ONsdtIcfPmk3NXPdgb3+xQ==}
     dev: false
 
   /diff-sequences@29.6.3:
@@ -3264,11 +3260,10 @@ packages:
     resolution: {integrity: sha512-bzyZ1e88w9O1iNJbKnOlvYTrWPDl46O1bG0D3XInv+9tkPrxrN8jUUTiFlDkkmKWgn1M6CfIA13SuGqOa9Korw==}
     engines: {node: '>=14'}
 
-  /simple-datatables@9.0.0:
-    resolution: {integrity: sha512-Muux/vfv07QFIWOduJiPnWoxRNGTijc0GEcqZ0XShonXZSqYq7BkDhvaI7OSoLmGZXo45z3Yrk+IRF4A1iosUg==}
+  /simple-datatables@3.2.2:
+    resolution: {integrity: sha512-h/6qziHj7We7NzKJoP3n2JcUTmuxINygIZPLCibUGqqMZxRCtzJiDuBluCCwmSLo+aLi2qxUg2F3UAlIonsS5Q==}
     dependencies:
       dayjs: 1.11.10
-      diff-dom: 5.1.2
     dev: false
 
   /slice-ansi@3.0.0:
