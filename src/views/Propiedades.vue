@@ -10,7 +10,7 @@
       <div
         class="text-right col-lg-6 d-flex flex-column justify-content-center"
       >
-        <router-link to="/agregar-propiedad" class="mt-2 mb-0 btn bg-gradient-success ms-lg-auto me-lg-0 me-auto mt-lg-0">
+        <router-link to="/agregarPropiedad" class="mt-2 mb-0 btn bg-gradient-success ms-lg-auto me-lg-0 me-auto mt-lg-0">
           Agregar propiedad</router-link>
       </div>
     </div>
