@@ -1,6 +1,6 @@
 <template>
   <div class="container-fluid mt-4">
-    <div id="Nueva Propiedad" class="card mt-4">
+    <div id="Agregar Propiedad" class="card mt-4">
       <div class="card-header">
         <h5>Basic Info</h5>
       </div>
@@ -8,9 +8,9 @@
         <div class="row">
           <div class="col-6">
             <material-input
-              id="tipoPropiedad"
+              id="firstName"
               variant="static"
-              label="Tipo de Propiedad"
+              label="First Name"
               placeholder="Alec"
             />
           </div>
