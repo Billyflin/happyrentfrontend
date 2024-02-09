@@ -1,33 +1,16 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
-import Tables from '../views/Tables.vue'
-import Billing from '../views/Billing.vue'
 import Profile from '../views/Profile.vue'
 import SignIn from '../views/SignIn.vue'
 import SignUp from '../views/SignUp.vue'
-import Products from '@/views/Products.vue'
 import { useAuthStore } from '@/store'
 import Dev from '@/views/Dev.vue'
-import Cart from '@/views/Cart.vue'
-import ProductDetails from '@/views/components/ProductDetailCard/ProductDetails.vue'
 
 const routes = [{
-  path: '/', name: '/', redirect: '/Products'
+  path: '/', name: '/', redirect: '/Propiedades'
 }, {
   path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN']
-  }
-}, {
-  path: '/tables', name: 'Tables', component: Tables, meta: {
-    requiresAuth: true
-  }
-}, {
-  path: '/billing', name: 'Billing', component: Billing, meta: {
-    requiresAuth: true, roles: ['ROLE_USER']
-  }
-}, {
-  path: '/cart', name: 'Cart', component: Cart, meta: {
-    requiresAuth: true, roles: ['ROLE_USER']
   }
 }, {
   path: '/dev', name: 'dev', component: Dev
@@ -40,20 +23,44 @@ const routes = [{
     requiresAuth: true, roles: ['ROLE_ADMIN']
   }
 }, {
-  path: '/products', name: 'Products', component: Products, props: true
-}, { path: '/products/:id', name: 'ProductDetails', component: ProductDetails },
-
-  , {
-    path: '/sign-in', name: 'SignIn', component: SignIn
-  }, {
-    path: '/sign-up', name: 'SignUp', component: SignUp
-  }, {
-    path: '/contact', name: 'Contact', component: () => import('../views/Contact.vue'), meta: {
-      roles: ['ROLE_USER']
+  path: '/sign-in', name: 'SignIn', component: SignIn
+}, {
+  path: '/sign-up', name: 'SignUp', component: SignUp
+}, {
+  path: '/contact', name: 'Contact', component: () => import('../views/Contact.vue'), meta: {
+    roles: ['ROLE_USER']
+  }
+}, {
+  path: '/misContratos', name: 'MisContratos', component: () => import('../views/MisContratos.vue'), meta: {
+    requiresAuth: true, roles: ['ROLE_USER']
+  }
+},{
+  path: '/agregarPropiedad/', name: 'AgregarPropiedad', component: () => import('../views/AgregarPropiedad.vue'), meta: {
+    requiresAuth: true, roles: ['ROLE_USER']
+  }
+},
+  {
+    path: '/Propiedades', name: 'Propiedades', component: () => import('../views/Propiedades.vue'), meta: {
+      requiresAuth: true, roles: ['ROLE_USER']
     }
+  },
+  {
+    path: '/propiedad/:id', name: 'Propiedad', component: () => import('../views/Propiedad.vue'), meta: {}
   }, {
-    path: '/misContratos', name: 'MisContratos', component: () => import('../views/MisContratos.vue'), meta: {}
-  }]
+    path: '/propiedad/edit/:id', name: 'PropiedadEdit', component: () => import('../views/EditarPropiedad.vue'), meta: {}
+  },
+
+  {
+    path: '/contrato/:id', name: 'Contrato', component: () => import('../views/Contrato.vue'), meta: {
+      requiresAuth: true, roles: ['ROLE_USER']
+    }
+  }
+  ,
+  {
+    path: '/error', name: 'Error', component: () => import('../views/Error.vue')
+  }
+
+]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL), routes, linkActiveClass: 'active'

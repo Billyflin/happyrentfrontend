@@ -137,18 +137,6 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item d-flex align-items-center">
-            <router-link
-                :to="{name: 'Cart'}"
-                class="px-0 nav-link font-weight-bold lh-1"
-                :class="color ? color : 'text-body'"
-            >
-              <i class="material-icons me-sm-1">shopping_cart</i>
-              <span class="badge badge-info position-absolute translate-middle p-2 small" style="top: 30%; start: 100%;">
-            {{ cartStore.cartItemCount }}
-        </span>
-            </router-link>
-          </li>
         </ul>
       </div>
     </div>
@@ -161,11 +149,10 @@ import {useRoute} from 'vue-router'
 import {storeToRefs} from 'pinia'
 import MaterialInput from '@/components/MaterialInput.vue'
 import Breadcrumbs from '../Breadcrumbs.vue'
-import {useAppStore,useCartStore} from '@/store/index.js'
+import {useAppStore} from '@/store/index.js'
 
 const props = defineProps(['minNav', 'color'])
 const store = useAppStore()
-const cartStore = useCartStore()
 const {isAbsolute} = storeToRefs(store)
 const {toggleConfigurator, navbarMinimize} = store
 
