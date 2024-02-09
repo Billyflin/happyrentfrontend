@@ -35,6 +35,13 @@ const routes = [{
     requiresAuth: true, roles: ['ROLE_USER']
   }
 },{
+  path: '/nuevoContrato', name: 'NuevoContrato', component: () => import('../views/NuevoContrato.vue'), meta: {
+    requiresAuth: true, roles: ['ROLE_USER']
+  }
+},
+
+
+  {
   path: '/agregarPropiedad/', name: 'AgregarPropiedad', component: () => import('../views/AgregarPropiedad.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }

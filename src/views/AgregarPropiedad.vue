@@ -130,19 +130,20 @@
             />
           </div>
         </div>
-      </div>
-      <div class="row">
-        <!--    Agregar imagenes-->
-        <h5 class="font-weight-bolder">Media</h5>
-        <div class="multisteps-form__content">
-          <div class="mt-3 row">
-            <div class="col-12">
-              <label class="form-control mb-0">Product images</label>
-              <div
-                id="productImg"
-                action="/file-upload"
-                class="form-control border dropzone"
-              ></div>
+
+        <div class="row">
+          <!--    Agregar imagenes-->
+          <h5 class="font-weight-bolder">Media</h5>
+          <div class="multisteps-form__content">
+            <div class="mt-3 row">
+              <div class="col-12">
+                <label class="form-control mb-0">Product images</label>
+                <div
+                  id="productImg"
+                  action="/file-upload"
+                  class="form-control border dropzone"
+                ></div>
+              </div>
             </div>
           </div>
         </div>
@@ -172,10 +173,10 @@ export default {
     MaterialInput
   },
   mounted() {
-    let myDropzone = new Dropzone("#productImg");
-    myDropzone.on("addedfile", (file) => {
-      console.log(`File added: ${file.name}`);
-    });
+    let myDropzone = new Dropzone('#productImg')
+    myDropzone.on('addedfile', (file) => {
+      console.log(`File added: ${file.name}`)
+    })
 
     if (document.getElementById('choices-gender')) {
       var gender = document.getElementById('choices-gender')

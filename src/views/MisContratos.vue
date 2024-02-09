@@ -2,7 +2,9 @@
   <div class="py-4 container-fluid">
     <div class="d-sm-flex justify-content-between">
       <div>
-        <material-button color="success" variant="gradient">Nuevo Contrato</material-button>
+        <router-link to="/nuevoContrato">
+          <material-button color="success" variant="gradient">Nuevo Contrato</material-button>
+        </router-link>
       </div>
       <div class="d-flex">
         <div class="dropdown d-inline">
