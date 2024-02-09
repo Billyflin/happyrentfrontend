@@ -2,64 +2,63 @@
   <div class="container-fluid mt-4">
     <div id="Nueva Propiedad" class="card mt-4">
       <div class="card-header">
-        <h5>Basic Info</h5>
+        <h5>Pico al Niko</h5>
       </div>
       <div class="card-body pt-0">
         <div class="row">
-          <div class="col-6">
+          <div class="col-4">
             <material-input
-              id="tipoPropiedad"
+              id="Nombre"
               variant="static"
-              label="Tipo de Propiedad"
+              label="Nombre"
               placeholder="Alec"
             />
           </div>
-          <div class="col-6">
+          <div class="col-4">
             <material-input
-              id="lastName"
+              id="apellidoPaterno"
               variant="static"
-              label="Last Name"
+              label="Apellido Paterno"
+              placeholder="Thompson"
+            />
+          </div>
+          <div class="col-4">
+            <material-input
+              id="apellidoMaterno"
+              variant="static"
+              label="Apellido Materno"
               placeholder="Thompson"
             />
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4 col-6">
-            <label class="form-label mt-4 ms-0">I'm</label>
-            <select
-              id="choices-gender"
-              class="form-control"
-              name="choices-gender"
-            >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
-          </div>
           <div class="col-sm-8">
-            <div class="row">
-              <div class="col-sm-5 col-5">
-                <label class="form-label mt-4 ms-0">Birth Date</label>
-                <select
-                  id="choices-month"
-                  class="form-control"
-                  name="choices-month"
-                ></select>
-              </div>
-              <div class="col-sm-4 col-3">
-                <label class="form-label mt-4 ms-0">&nbsp;</label>
-                <select
-                  id="choices-day"
-                  class="form-control"
-                  name="choices-day"
-                ></select>
-              </div>
-              <div class="col-sm-3 col-4">
-                <label class="form-label mt-4 ms-0">&nbsp;</label>
-                <select
-                  id="choices-year"
-                  class="form-control"
-                  name="choices-year"
-                ></select>
+            <div class="col-sm-8">
+              <div class="row">
+                <div class="col-sm-5 col-5">
+                  <label class="form-label mt-4 ms-0">Birth Date</label>
+                  <select
+                    id="choices-month"
+                    class="form-control"
+                    name="choices-month"
+                  ></select>
+                </div>
+                <div class="col-sm-4 col-3">
+                  <label class="form-label mt-4 ms-0">&nbsp;</label>
+                  <select
+                    id="choices-day"
+                    class="form-control"
+                    name="choices-day"
+                  ></select>
+                </div>
+                <div class="col-sm-3 col-4">
+                  <label class="form-label mt-4 ms-0">&nbsp;</label>
+                  <select
+                    id="choices-year"
+                    class="form-control"
+                    name="choices-year"
+                  ></select>
+                </div>
               </div>
             </div>
           </div>
@@ -112,7 +111,7 @@
               class="form-control"
               name="choices-language"
             >
-              <option value="English">English</option>
+              <option value="English">Pene</option>
               <option value="French">French</option>
               <option value="Spanish">Spanish</option>
             </select>
@@ -129,8 +128,22 @@
               onfocusout="defocused(this)"
             />
           </div>
+          <div class="col-sm-3 col-4">
+            <label class="form-label mt-4 ms-0">Tipo de propiedad</label>
+            <select
+              id="choices-gender"
+              class="form-control"
+              name="Tipo de Propiedad"
+            >
+              <option value="Casa">Casa</option>
+              <option value="Edificio">Edificio</option>
+              <option value="Sitio">Sitio</option>
+              <option value="Bodega">Bodega</option>
+              <option value="Departamento">Departamento</option>
+              <option value="Parcela">Parcela</option>
+            </select>
+          </div>
         </div>
-      </div>
       <div class="row">
         <!--    Agregar imagenes-->
         <h5 class="font-weight-bolder">Media</h5>
@@ -150,6 +163,7 @@
     </div>
 
   </div>
+      </div>
 </template>
 
 
