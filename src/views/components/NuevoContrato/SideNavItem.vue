@@ -456,10 +456,28 @@ export default {
     console.log('País seleccionado:', this.selectedPais)
     console.log('Región seleccionada:', this.selectedRegion)
     console.log('Ciudad seleccionada:', this.selectedCiudad)
-    let myDropzone = new Dropzone('#propiedadImg')
+    let myDropzone = new Dropzone('#propiedadImg', {
+      maxFiles: 6,
+      acceptedFiles: 'image/*',
+      autoProcessQueue: false,
+      addRemoveLinks: true,
+      dictRemoveFile: 'Eliminar',
+      dictDefaultMessage: 'Arrastra aquí tus imágenes',
+      dictFallbackMessage: 'Tu navegador no soporta arrastrar y soltar para subir archivos',
+      dictInvalidFileType: 'No puedes subir este tipo de archivo',
+      dictFileTooBig: 'El archivo es muy grande',
+      dictCancelUpload: 'Cancelar subida',
+
+
+    });
+
     myDropzone.on('addedfile', (file) => {
-      console.log(`File added: ${file.name}`)
-    })
+      if (myDropzone.files.length > 6) {
+        myDropzone.removeFile(myDropzone.files[0]);
+      }
+      console.log(`Archivo añadido: ${file.name}`);
+    });
+
 
     // TODO, arreglar esto para que se vea lindo
     if (document.getElementById('choices-ciudad')) {
@@ -487,33 +505,28 @@ export default {
       })
     }
     if (document.getElementById('choices-tipo-arrendador')) {
-      var arrendador = document.getElementById('choices-tipo-arrendador')
-      new Choices(arrendador, {
+      new Choices( document.getElementById('choices-tipo-arrendador'), {
         allowHTML: true
       })
     }
 
     // seccion arrendatario
     if (document.getElementById('choices-estadoCivil-arrendatario')) {
-      var estadoCivil = document.getElementById('choices-estadoCivil-arrendatario')
-      new Choices(estadoCivil, {
+      new Choices(document.getElementById('choices-estadoCivil-arrendatario'), {
         allowHTML: true
       })
     }
     if (document.getElementById('choices-ciudad-arrendatario')) {
-      var city = document.getElementById('choices-ciudad-arrendatario')
-      new Choices(city)
+      new Choices(document.getElementById('choices-ciudad-arrendatario'))
     }
     if (document.getElementById('choices-region-arrendatario')) {
-      var region = document.getElementById('choices-region-arrendatario')
-      new Choices(region, {
+      new Choices(document.getElementById('choices-region-arrendatario'), {
         allowHTML: true,
         searchEnabled: false
       })
     }
     if (document.getElementById('choices-pais-arrendatario')) {
-      const country = document.getElementById('choices-pais-arrendatario')
-      new Choices(country,
+      new Choices(document.getElementById('choices-pais-arrendatario'),
         {
           allowHTML: true, itemSelectText: 'Presiona para seleccionar'
         })
