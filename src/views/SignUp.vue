@@ -1,16 +1,5 @@
 <template>
   <div class="bg-white">
-    <div class="container top-0 position-sticky z-index-sticky">
-      <div class="row">
-        <div class="col-12">
-          <navbar
-            isBlur="blur my-3 py-2 mt-4 start-0 end-0 mx-4 shadow blur border-radius-lg"
-            btnBackground="bg-gradient-primary"
-            v-bind:darkMode="true"
-          />
-        </div>
-      </div>
-    </div>
     <main class="mt-0 main-content">
       <section>
         <div class="page-header min-vh-100">
@@ -33,25 +22,25 @@
                     <p class="mb-0">Ingresa tus datos para crear una cuenta!</p>
                   </div>
                   <div class="card-body">
-                    <form role="form">
+                    <form role="form" @submit.prevent="submitForm">
                       <div class="mb-3">
-                        <material-input id="name" type="text" label="Name" name="name" size="lg" />
+                        <material-input id="name" type="text" label="Name" name="name" size="lg" v-model="name" />
                       </div>
                       <div class="mb-3">
-                        <material-input id="email" type="email" label="Email" name="email" size="lg" />
+                        <material-input id="email" type="email" label="Email" name="email" size="lg" v-model="email" />
                       </div>
                       <div class="mb-3">
-                        <material-input id="password" type="password" label="Password" name="password" size="lg" />
+                        <material-input id="password" type="password" label="Password" name="password" size="lg" v-model="password" />
                       </div>
                       <material-checkbox id="flexCheckDefault" class="font-weight-light" checked>
                         Acepto los
                         <a href="" class="text-dark font-weight-bolder"
-                          >Términos y Condiciones</a
+                        >Términos y Condiciones</a
                         >
                       </material-checkbox>
                       <div class="text-center">
                         <material-button class="mt-4" variant="gradient" color="primary" fullWidth size="lg"
-                          >Registrarse</material-button
+                        >Registrarse</material-button
                         >
                       </div>
                     </form>
@@ -60,7 +49,7 @@
                     <p class="mx-auto mb-4 text-sm">
                       Tienes una cuenta?
                       <router-link :to="{name: 'SignIn'}" class="text-primary text-gradient font-weight-bold"
-                        >Sign In</router-link
+                      >Sign In</router-link
                       >
                     </p>
                   </div>
@@ -76,15 +65,32 @@
 
 <script setup>
 import {onBeforeMount, onBeforeUnmount} from 'vue'
-import Navbar from '@/examples/PageLayout/Navbar.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
 import {useAppStore} from '@/store/index.js'
+import { ref, watchEffect } from 'vue';
 
 const body = document.getElementsByTagName('body')[0]
 const store = useAppStore()
 const {toggleEveryDisplay, toggleHideConfig} = store
+
+
+const name = ref('');
+const email = ref('');
+const password = ref('');
+
+const submitForm = () => {
+  console.log(`Nombre: ${name.value}`);
+  console.log(`Correo electrónico: ${email.value}`);
+  console.log(`Contraseña: ${password.value}`);
+};
+
+// watchEffect(() => {
+//   console.log(`Nombre: ${name.value}`);
+//   console.log(`Correo electrónico: ${email.value}`);
+//   console.log(`Contraseña: ${password.value}`);
+// });
 
 onBeforeMount(() => {
   toggleEveryDisplay()

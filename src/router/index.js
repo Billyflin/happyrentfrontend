@@ -38,6 +38,10 @@ const routes = [{
   path: '/nuevoContrato', name: 'NuevoContrato', component: () => import('../views/NuevoContrato.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }
+},{
+  path: '/formularioInvitado/:uuid', name: 'FormularioInvitado', component: () => import('../views/FormularioInvitado.vue'), meta: {
+    requiresAuth: true, roles: ['ROLE_USER']
+  }
 },
 
 

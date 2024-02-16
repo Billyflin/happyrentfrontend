@@ -144,6 +144,49 @@
     </div>
   </div>
 
+  <!--  Seccion Enviar Correo-->
+  <div id="Solicitar datos" class="card mt-5">
+    <div class="card-header">
+      <h5>Solicitar datos al arrendatario </h5>
+      <p class="mb-0 text-sm">
+        El arrendatario recibirá un correo con un link para completar los datos necesarios para el contrato.
+        Estos pueden ser verificados por el arrendador cuando sean completados.
+      </p>
+    </div>
+    <div class="card-body pt-0">
+      <div class="row">
+        <div class="col-4">
+          <material-input
+            id="email"
+            type="email"
+            variant="static"
+            label="Email"
+            placeholder="Email"
+            :disabled="isEmailDisabled"
+          />
+        </div>
+        <div class="col-4">
+          <material-input
+            id="confirmEmail"
+            type="email"
+            variant="static"
+            label="Confimar Email"
+            placeholder="Confirma Email"
+            :disabled="isConfirmEmailDisabled"
+          />
+        </div>
+        <div class="col-4">
+          <MaterialButton class="mt-4" variant="gradient" color="primary" fullWidth @click="blockearInputs">Enviar
+          </MaterialButton>
+        </div>
+      </div>
+      <div v-if="isEmailDisabled" class="row mt-3">
+          <span class="badge badge-success">Correo enviado</span>
+
+      </div>
+    </div>
+  </div>
+
   <!--  Seccion arrendador-->
   <div id="Arrendador" class="card mt-5">
     <div class="card-header">
@@ -411,6 +454,8 @@ export default {
     MaterialInput
   }, data() {
     return {
+      isEmailDisabled: false,
+      isConfirmEmailDisabled: false,
       reajusteValue: 0.0, // Valor inicial del input
       progressValue: 0.0, // Valor inicial de la barra de progreso
       selectedPais: null,
@@ -421,6 +466,10 @@ export default {
     }
   },
   methods: {
+    blockearInputs() {
+      this.isEmailDisabled = true
+      this.isConfirmEmailDisabled = true
+    },
     actualizarRegiones() {
       console.log('llegamos a seleccionar')
     },
@@ -466,17 +515,17 @@ export default {
       dictFallbackMessage: 'Tu navegador no soporta arrastrar y soltar para subir archivos',
       dictInvalidFileType: 'No puedes subir este tipo de archivo',
       dictFileTooBig: 'El archivo es muy grande',
-      dictCancelUpload: 'Cancelar subida',
+      dictCancelUpload: 'Cancelar subida'
 
 
-    });
+    })
 
     myDropzone.on('addedfile', (file) => {
       if (myDropzone.files.length > 6) {
-        myDropzone.removeFile(myDropzone.files[0]);
+        myDropzone.removeFile(myDropzone.files[0])
       }
-      console.log(`Archivo añadido: ${file.name}`);
-    });
+      console.log(`Archivo añadido: ${file.name}`)
+    })
 
 
     // TODO, arreglar esto para que se vea lindo
@@ -505,7 +554,7 @@ export default {
       })
     }
     if (document.getElementById('choices-tipo-arrendador')) {
-      new Choices( document.getElementById('choices-tipo-arrendador'), {
+      new Choices(document.getElementById('choices-tipo-arrendador'), {
         allowHTML: true
       })
     }
@@ -531,22 +580,22 @@ export default {
           allowHTML: true, itemSelectText: 'Presiona para seleccionar'
         })
     }
-    if (document.getElementById("choices-day")) {
-      var day = document.getElementById("choices-day");
-      setTimeout(function () {
-        new Choices(day);
-      }, 1);
+    if (document.getElementById('choices-day')) {
+      var day = document.getElementById('choices-day')
+      setTimeout(function() {
+        new Choices(day)
+      }, 1)
 
       for (let y = 1; y <= 31; y++) {
-        var optn1 = document.createElement("OPTION");
-        optn1.text = y;
-        optn1.value = y;
+        var optn1 = document.createElement('OPTION')
+        optn1.text = y
+        optn1.value = y
 
         if (y == 1) {
-          optn1.selected = true;
+          optn1.selected = true
         }
 
-        day.options.add(optn1);
+        day.options.add(optn1)
       }
     }
   }
