@@ -39,7 +39,8 @@ const routes = [{
     requiresAuth: true, roles: ['ROLE_USER']
   }
 },{
-  path: '/formularioInvitado/:uuid', name: 'FormularioInvitado', component: () => import('../views/FormularioInvitado.vue'), meta: {
+  // todo /formularioInvitado/:uuid
+  path: '/formularioInvitado', name: 'FormularioInvitado', component: () => import('../views/FormularioInvitado.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }
 },
@@ -69,6 +70,14 @@ const routes = [{
   ,
   {
     path: '/error', name: 'Error', component: () => import('../views/Error.vue')
+  }
+  // ,
+  // {
+  // todo  path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/NotFound.vue')
+  // }
+  ,
+  {
+    path: '/correoVerificado', name: 'CorreoVerificado', component: () => import('../views/CorreoVerificado.vue')
   }
 
 ]
