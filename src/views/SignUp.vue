@@ -24,15 +24,24 @@
                   <div class="card-body">
                     <form role="form" @submit.prevent="submitForm">
                       <div class="mb-3">
-                        <material-input id="name" type="text" label="Name" name="name" size="lg" v-model="name" />
+                        <material-input id="name" type="text" label="Nombre Usuario" name="name" size="lg"
+                                        v-model="name" />
                       </div>
                       <div class="mb-3">
-                        <material-input id="email" type="email" label="Email" name="email" size="lg" v-model="email" />
+                        <material-input id="email" type="email" label="Correo" name="email" size="lg" v-model="email" />
                       </div>
                       <div class="mb-3">
-                        <material-input id="password" type="password" label="Password" name="password" size="lg" v-model="password" />
+                        <material-input id="password" type="password" label="Contraseña" name="password" size="lg"
+                                        v-model="password" />
                       </div>
-                      <material-checkbox id="flexCheckDefault" class="font-weight-light" checked>
+                      <div class="mb-3">
+                        <material-input id="passwordConfirm" type="password" label="Confirma tu contraseña"
+                                        name="passwordConfirm" size="lg" v-model="passwordConfirm" />
+                      </div>
+                      <div v-if="passwordMismatch" class="row mb-3 mt-3">
+                        <span class="badge badge-danger">Las contraseñas no coinciden</span>
+                      </div>
+                      <material-checkbox v-model="accept" id="flexCheckDefault" class="font-weight-light" checked>
                         Acepto los
                         <a href="" class="text-dark font-weight-bolder"
                         >Términos y Condiciones</a
@@ -40,7 +49,8 @@
                       </material-checkbox>
                       <div class="text-center">
                         <material-button class="mt-4" variant="gradient" color="primary" fullWidth size="lg"
-                        >Registrarse</material-button
+                        >Registrarse
+                        </material-button
                         >
                       </div>
                     </form>
@@ -49,7 +59,8 @@
                     <p class="mx-auto mb-4 text-sm">
                       Tienes una cuenta?
                       <router-link :to="{name: 'SignIn'}" class="text-primary text-gradient font-weight-bold"
-                      >Sign In</router-link
+                      >Sign In
+                      </router-link
                       >
                     </p>
                   </div>
@@ -64,33 +75,72 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onBeforeUnmount} from 'vue'
+import { onBeforeMount, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
-import {useAppStore} from '@/store/index.js'
-import { ref, watchEffect } from 'vue';
+import { useAppStore,useRegisterFormStore } from '@/store/index.js'
+import { useRouter } from 'vue-router'
+import axios from 'axios'
+
 
 const body = document.getElementsByTagName('body')[0]
+const formStore = useRegisterFormStore()
 const store = useAppStore()
-const {toggleEveryDisplay, toggleHideConfig} = store
+const { toggleEveryDisplay, toggleHideConfig } = store
 
 
-const name = ref('');
-const email = ref('');
-const password = ref('');
+const name = ref('')
+const email = ref('')
+const password = ref('')
+const passwordConfirm = ref('')
+const passwordMismatch = ref(false)
+const accept = ref(false)
+
+const router = useRouter()
 
 const submitForm = () => {
-  console.log(`Nombre: ${name.value}`);
-  console.log(`Correo electrónico: ${email.value}`);
-  console.log(`Contraseña: ${password.value}`);
+  if (passwordMismatch.value) {
+    console.log('Las contraseñas no coinciden');
+    return;
+  }
+  if (!accept.value) {
+    console.log('Debes aceptar los términos y condiciones');
+    return;
+  }
+  const user = {
+    username: name.value,
+    password: password.value,
+    email: email.value,
+    authorityDtoSet: [
+      {
+        authorityName: "ROLE_PROVICIONAL"
+      }
+    ]
+  };
+
+  axios.post('http://localhost:8080/api/signup', user)
+    .then(response => {
+      console.log(response.data);
+      // Si la respuesta es 200 OK, redirige a /registroExitoso
+      if (response.status === 200) {
+        router.push({name: 'RegistroExitoso'});
+      }
+    })
+    .catch(error => {
+      console.error(error);
+    });
 };
 
-// watchEffect(() => {
-//   console.log(`Nombre: ${name.value}`);
-//   console.log(`Correo electrónico: ${email.value}`);
-//   console.log(`Contraseña: ${password.value}`);
-// });
+
+watch([password, passwordConfirm], () => {
+    passwordMismatch.value = password.value !== passwordConfirm.value
+  }
+)
+
+
+watchEffect(() => {
+})
 
 onBeforeMount(() => {
   toggleEveryDisplay()

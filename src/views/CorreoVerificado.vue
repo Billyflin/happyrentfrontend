@@ -27,7 +27,7 @@
         <div class="row mb-5">
           <div class="col-lg-4 col-md-6 col-7 mx-auto text-center">
             <div class="card-body">
-              <form role="form" class="text-start mt-3">
+              <form role="form" class="text-start mt-3" @submit.prevent="submitForm">
                 <div class="text-center">
                   <material-button type="submit" class="my-4 mb-2" variant="gradient" color="primary" fullWidth>Sign in</material-button>
                 </div>
@@ -45,12 +45,18 @@ import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
 import MaterialButton from '@/components/MaterialButton.vue'
 import {activateDarkMode, deactivateDarkMode} from '@/assets/js/dark-mode'
+import router from '@/router/index.js'
 
 export default {
   name: 'CorreoVerificado',
   components: { MaterialButton },
   data() {
     return {}
+  },
+  methods: {
+    submitForm() {
+     router.push({ name: 'SignIn' })
+    },
   },
   setup() {
     const store = useAppStore()

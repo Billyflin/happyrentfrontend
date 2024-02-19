@@ -1,5 +1,4 @@
 <template>
-  <navbar btnBackground="bg-gradient-primary"/>
   <div
       class="page-header align-items-start min-vh-100 bg-gradient-secondary"
 
@@ -40,6 +39,12 @@
                   </router-link
                   >
                 </p>
+                <p class="mt-4 text-sm text-center">
+                  <router-link :to="{name: 'rememberPassword'}" class="text-primary text-gradient font-weight-bold"
+                  >Olvidaste tu contraseña?
+                  </router-link
+                  >
+                  </p>
               </form>
             </div>
           </div>

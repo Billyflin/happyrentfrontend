@@ -49,6 +49,7 @@ export const useAppStore = defineStore({
     }
 })
 
+
 export const useAuthStore = defineStore("auth", {
     state: () => ({
         auth: null, isLoggedIn: false, errMsg: "", userInfo: null, rememberMe: false, isAdmin: false,propiedades: [],
@@ -125,3 +126,39 @@ export const useAuthStore = defineStore("auth", {
 });
 
 
+export const useRegisterFormStore = defineStore({
+    id: 'registerForm',
+    state: () => ({
+        form: {
+            username: '',
+            password: '',
+            nickname: '',
+            persona: {
+                nombres: '',
+                apellidoPaterno: '',
+                apellidoMaterno: '',
+                email: '',
+                direccion: {
+                    calle: '',
+                    numero: null,
+                    ciudad: '',
+                    region: '',
+                    pais: '',
+                    codigoPostal: ''
+                },
+                telefono: '',
+                estadoCivil: '',
+                nacionalidad: ''
+            },
+            authorityDtoSet: []
+        }
+    }),
+    actions: {
+        setForm(payload) {
+            this.form = payload;
+        },
+        setAuthority(authorityName) {
+            this.form.authorityDtoSet.push({ authorityName });
+        }
+    }
+});

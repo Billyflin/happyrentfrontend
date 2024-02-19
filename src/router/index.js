@@ -60,6 +60,11 @@ const routes = [{
     path: '/propiedad/:id', name: 'Propiedad', component: () => import('../views/Propiedad.vue'), meta: {}
   }, {
     path: '/propiedad/edit/:id', name: 'PropiedadEdit', component: () => import('../views/EditarPropiedad.vue'), meta: {}
+  },{
+    path: '/formularioRegistro',
+    name: 'FormularioRegistro',
+    component: () => import('@/views/FormularioRegistro.vue'),
+    props: true
   },
 
   {
@@ -67,10 +72,12 @@ const routes = [{
       requiresAuth: true, roles: ['ROLE_USER']
     }
   }
-  ,
-  {
-    path: '/error', name: 'Error', component: () => import('../views/Error.vue')
+  ,{
+  path: '/rememberPassword', name: 'rememberPassword', component: () => import('../views/RememberPassword.vue')
   }
+  // {
+  //   path: '/error', name: 'Error', component: () => import('../views/Error.vue')
+  // }
   // ,
   // {
   // todo  path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/NotFound.vue')
@@ -78,7 +85,9 @@ const routes = [{
   ,
   {
     path: '/correoVerificado', name: 'CorreoVerificado', component: () => import('../views/CorreoVerificado.vue')
-  }
+  },
+  { path: '/registroExitoso', name: 'RegistroExitoso', component: () => import('../views/RegistroExitoso.vue') },
+
 
 ]
 
