@@ -12,10 +12,22 @@
         </div>
       </div>
       <div class="mt-4 row">
-          <div class="col">
-            <MaterialChoices id="uwu" :options="bancos" name="bancos" v-model="banco" @change="console.log(banco)"/>
-            <MaterialChoices id="TipoCuentaBanco" :options="tipoCuenta" name="cuenta" v-model="cuenta" @change="console.log(cuenta)"/>
-          </div>
+        <div class="col">
+          <MaterialChoices id="uwu" :options=" [
+        // bancos chilenos
+        { value: 1, text: 'Banco Estado' },
+        { value: 2, text: 'Banco de Chile' },
+        { value: 3, text: 'Santander' },
+        { value: 4, text: 'Vice' },
+        { value: 5, text: 'Scotiabank' },
+        { value: 6, text: 'Banco BCI' },
+      ]" name="bancos" v-model="banco" @change="console.log(banco)" />
+          <MaterialChoices id="TipoCuentaBanco" :options="[
+        { value: 'Corriente', text: 'Corriente' },
+        { value: 'Vista', text: 'Vista' }
+      ]" name="cuenta" v-model="cuenta"
+                           @change="console.log(cuenta)" />
+        </div>
       </div>
     </div>
   </div>
@@ -34,20 +46,7 @@ export default defineComponent({
       numeroCuenta: '',
       emailBanco: '',
       banco: 1,
-      bancos: [
-        // bancos chilenos
-        { value: 1, text: 'Banco Estado' },
-        { value: 2, text: 'Banco de Chile' },
-        { value: 3, text: 'Santander' },
-        { value: 4, text: 'Vice' },
-        { value: 5, text: 'Scotiabank' },
-        {value: 6, text: 'Banco BCI' },
-      ],
-      cuenta: '',
-      tipoCuenta: [
-        { value: 'Corriente', text: 'Corriente' },
-        { value:'Vista', text: 'Vista' },
-      ]
+      cuenta: ''
     }
   }
 })
