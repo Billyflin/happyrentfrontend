@@ -8,13 +8,14 @@
       alt="pattern-lines"
       class="page-header top-0 position-absolute opacity-8 start-0 w-100"
     />
+    <img src="../assets/LogoHappyGrandeBlanco.svg" alt="logo-Happy" class="position-absolute top-3 start-1" />
     <span class="mask bg-gradient-dark opacity-2"></span>
     <div class="container py-10 position-relative z-index-2">
       <div class="row">
         <div class="col-md-6 mx-auto text-center">
-          <h2 class="text-white">Pick the best plan for you</h2>
+          <h2 class="text-white">Selecciona un plan para ti</h2>
           <p class="text-white">
-            You have Free Unlimited Updates and Premium Support on each package.
+            Los mejores planes para ti, con los mejores precios y beneficios
           </p>
         </div>
       </div>
@@ -36,11 +37,11 @@
                     id="tabs-iconpricing-tab-1"
                     class="nav-link mb-0 active"
                     data-bs-toggle="tab"
-                    href="#monthly"
+                    href="#personal"
                     role="tab"
-                    aria-controls="monthly"
+                    aria-controls="Personal"
                     aria-selected="true"
-                  >Monthly</a
+                  >Personal</a
                   >
                 </li>
                 <li class="nav-item">
@@ -48,11 +49,11 @@
                     id="tabs-iconpricing-tab-2"
                     class="nav-link mb-0"
                     data-bs-toggle="tab"
-                    href="#annual"
+                    href="#ejecutivo"
                     role="tab"
-                    aria-controls="annual"
+                    aria-controls="ejecutivo"
                     aria-selected="false"
-                  >Annual</a
+                  >Ejecutivo</a
                   >
                 </li>
               </ul>
@@ -60,117 +61,120 @@
           </div>
         </div>
         <div class="tab-content tab-space">
-          <div id="monthly" class="tab-pane active">
+          <div id="personal" class="tab-pane active">
             <div class="row">
               <pricing-card
-                :badge="{ color: 'light', label: 'Starter' }"
-                :price="{ currency: '$', value: '59', charged: 'mo' }"
+                :badge="{ color: 'light', label: 'Crecimiento' }"
+                :price="{ currency: '$', value: '0,8 UF', charged: 'Mes + iva' }"
                 :specifications="[
-                  { label: '2 team members', includes: true },
-                  { label: '20GB Cloud storage', includes: true },
-                  { label: 'Integration help', includes: false },
-                  { label: 'Sketch Files', includes: false },
-                  { label: 'API Access', includes: false },
-                  { label: 'Complete documentation', includes: false },
+                  { label: 'Desde 1 a 10 Propiedades', includes: true },
+                  { label: 'Organizador de cartera', includes: true },
+                  { label: 'Envío Automático de mails y cobranzas', includes: true },
+                  { label: 'Generación de contrato', includes: false },
+                  { label: 'Información consolidada de pagos', includes: false },
+                  { label: 'Deshboard con análisis de datos', includes: false },
+                  { label: 'Servicio al cliente vía mail', includes: false },
+                  { label: 'Informe de liquidación automática', includes: false },
+                  { label: 'Perfil del corredor', includes: false },
+                  { label: 'Perfil del propietario', includes: false },
                 ]"
                 :action="{
                   color: 'dark',
                   route: 'javascript:;',
-                  label: 'Join',
+                  label: 'Obtener',
                 }"
               />
               <pricing-card
                 color="dark"
-                :badge="{ color: 'success', label: 'premium' }"
-                :price="{ currency: '$', value: '89', charged: 'mo' }"
+                :badge="{ color: 'success', label: 'Desarrollo' }"
+                :price="{ currency: '$', value: '1,4 UF', charged: 'Mes + iva' }"
                 :specifications="[
-                  { label: '10 team members', includes: true },
-                  { label: '40GB Cloud storage', includes: true },
-                  { label: 'Integration help', includes: true },
-                  { label: 'Sketch Files', includes: true },
-                  { label: 'API Access', includes: false },
-                  { label: 'Complete documentation', includes: false },
+                  { label: 'Hasta 20 Propiedades', includes: true },
+                  { label: 'Organizador de cartera', includes: true },
+                  { label: 'Envío Automático de mails y cobranzas', includes: true },
+                  { label: 'Generación de contrato', includes: true },
+                  { label: 'Información consolidada de pagos', includes: true },
+                  { label: 'Deshboard con análisis de datos', includes: false },
+                  { label: 'Servicio al cliente vía mail', includes: false },
+                  { label: 'Informe de liquidación automática', includes: false },
+                  { label: 'Perfil del corredor', includes: false },
+                  { label: 'Perfil del propietario', includes: false },
                 ]"
                 :action="{
                   color: 'success',
                   route: 'javascript:;',
-                  label: 'Try Premium',
+                  label: 'Obtener',
                 }"
                 dark-mode
               />
               <pricing-card
-                :badge="{ color: 'light', label: 'Enterprise' }"
-                :price="{ currency: '$', value: '99', charged: 'mo' }"
+                :badge="{ color: 'light', label: 'Avance' }"
+                :price="{ currency: '$', value: '3,0 UF', charged: 'Mes + iva' }"
                 :specifications="[
-                  { label: 'Unlimited team members', includes: true },
-                  { label: '100GB Cloud storage', includes: true },
-                  { label: 'Integration help', includes: true },
-                  { label: 'Sketch Files', includes: true },
-                  { label: 'API Access', includes: true },
-                  { label: 'Complete documentation', includes: true },
+                  { label: 'Hasta 80 Propiedades', includes: true },
+                  { label: 'Organizador de cartera', includes: true },
+                  { label: 'Envío Automático de mails y cobranzas', includes: true },
+                  { label: 'Generación de contrato', includes: true },
+                  { label: 'Información consolidada de pagos', includes: true },
+                  { label: 'Deshboard con análisis de datos', includes: true },
+                  { label: 'Servicio al cliente vía mail', includes: true },
+                  { label: 'Informe de liquidación automática', includes: true },
+                  { label: 'Perfil del corredor', includes: true },
+                  { label: 'Perfil del propietario', includes: true },
                 ]"
                 :action="{
                   color: 'dark',
                   route: 'javascript:;',
-                  label: 'Join',
+                  label: 'Obtener',
                 }"
               />
             </div>
           </div>
-          <div id="annual" class="tab-pane">
+          <div id="ejecutivo" class="tab-pane">
             <div class="row">
               <pricing-card
-                :badge="{ color: 'light', label: 'Starter' }"
-                :price="{ currency: '$', value: '119', charged: 'yearly' }"
+                :badge="{ color: 'light', label: 'Consolidado' }"
+                :price="{ currency: '$', value: '4,0 UF', charged: 'Mes + iva' }"
                 :specifications="[
-                  { label: '2 team members', includes: true },
-                  { label: '20GB Cloud storage', includes: true },
-                  { label: 'Integration help', includes: false },
-                  { label: 'Sketch Files', includes: false },
-                  { label: 'API Access', includes: false },
-                  { label: 'Complete documentation', includes: false },
+                  { label: 'Hasta 200 Propiedades', includes: true },
+                  { label: 'Organizador de cartera', includes: true },
+                  { label: 'Envío Automático de mails y cobranzas', includes: true },
+                  { label: 'Generación de contrato', includes: true },
+                  { label: 'Información consolidada de pagos', includes: true },
+                  { label: 'Deshboard con análisis de datos', includes: false },
+                  { label: 'Servicio al cliente vía mail', includes: false },
+                  { label: 'Informe de liquidación automática', includes: false },
+                  { label: 'Perfil del corredor', includes: false },
+                  { label: 'Perfil del propietario', includes: false },
                 ]"
                 :action="{
                   color: 'dark',
                   route: 'javascript:;',
-                  label: 'Join',
+                  label: 'Obtener',
                 }"
               />
               <pricing-card
                 color="dark"
-                :badge="{ color: 'success', label: 'premium' }"
-                :price="{ currency: '$', value: '159', charged: 'yearly' }"
+                :badge="{ color: 'success', label: 'Infinito' }"
+                :price="{ currency: '$', value: '9,0 UF', charged: 'Mes + iva' }"
                 :specifications="[
-                  { label: '10 team members', includes: true },
-                  { label: '40GB Cloud storage', includes: true },
-                  { label: 'Integration help', includes: true },
-                  { label: 'Sketch Files', includes: true },
-                  { label: 'API Access', includes: false },
-                  { label: 'Complete documentation', includes: false },
+                  { label: 'Hasta 500 Propiedades', includes: true },
+                  { label: 'Organizador de cartera', includes: true },
+                  { label: 'Envío Automático de mails y cobranzas', includes: true },
+                  { label: 'Generación de contrato', includes: true },
+                  { label: 'Información consolidada de pagos', includes: true },
+                  { label: 'Deshboard con análisis de datos', includes: false },
+                  { label: 'Servicio al cliente vía mail', includes: false },
+                  { label: 'Informe de liquidación automática', includes: false },
+                  { label: 'Perfil del corredor', includes: false },
+                  { label: 'Perfil del propietario', includes: false },
                 ]"
                 :action="{
                   color: 'success',
                   route: 'javascript:;',
-                  label: 'Try Premium',
+                  label: 'Obtener',
                 }"
                 dark-mode
-              />
-              <pricing-card
-                :badge="{ color: 'light', label: 'Enterprise' }"
-                :price="{ currency: '$', value: '399', charged: 'yearly' }"
-                :specifications="[
-                  { label: 'Unlimited team members', includes: true },
-                  { label: '100GB Cloud storage', includes: true },
-                  { label: 'Integration help', includes: true },
-                  { label: 'Sketch Files', includes: true },
-                  { label: 'API Access', includes: true },
-                  { label: 'Complete documentation', includes: true },
-                ]"
-                :action="{
-                  color: 'dark',
-                  route: 'javascript:;',
-                  label: 'Join',
-                }"
               />
             </div>
           </div>
@@ -228,10 +232,9 @@
         </div>
         <div class="mt-8 row">
           <div class="mx-auto text-center col-md-6">
-            <h2>Frequently Asked Questions</h2>
+            <h2>Preguntas frecuentes</h2>
             <p>
-              A lot of people don&#39;t appreciate the moment until it’s passed.
-              I&#39;m not trying my hardest, and I&#39;m not trying to do
+              Si tienes alguna duda, revisa nuestras preguntas frecuentes
             </p>
           </div>
         </div>
@@ -279,7 +282,8 @@
                 collapse-id="collapseThree"
               >
                 <template #question
-                >How much time does it take to receive the order?</template
+                >How much time does it take to receive the order?
+                </template
                 >
                 <template #answer>
                   The time is now for it to be okay to be great. People in this
@@ -322,7 +326,8 @@
                 collapse-id="collapseFifth"
               >
                 <template #question
-                >Where do I find the shipping details?</template
+                >Where do I find the shipping details?
+                </template
                 >
                 <template #answer>
                   There’s nothing I really wanted to do in life that I wasn’t
@@ -351,26 +356,22 @@ import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
 import PricingCard from '@/views/components/PricingCard.vue'
 import AccordionItem from '@/views/components/AccordionItem.vue'
-// eslint-disable-next-line no-unused-vars
-// import NavPill from "./components/NavPill.vue";
-import setNavPills from "@/assets/js/nav-pills.js";
+import NavPill from '@/assets/js/nav-pills.js'
+
 export default {
   name: 'PrincipalPlanes',
-  components: { AccordionItem, PricingCard,},
+  components: { AccordionItem, PricingCard },
   data() {
     return {}
   },
-  methods: {
-  },
-  mounted() {
-    setNavPills();
-  },
+  methods: {},
   setup() {
     const store = useAppStore()
     const { toggleEveryDisplay, toggleHideConfig } = store
     onMounted(() => {
       toggleEveryDisplay()
       toggleHideConfig()
+      NavPill()
     })
 
     onUnmounted(() => {
