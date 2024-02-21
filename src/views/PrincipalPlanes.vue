@@ -353,7 +353,7 @@ import PricingCard from '@/views/components/PricingCard.vue'
 import AccordionItem from '@/views/components/AccordionItem.vue'
 // eslint-disable-next-line no-unused-vars
 // import NavPill from "./components/NavPill.vue";
-
+import setNavPills from "@/assets/js/nav-pills.js";
 export default {
   name: 'PrincipalPlanes',
   components: { AccordionItem, PricingCard,},
@@ -361,6 +361,9 @@ export default {
     return {}
   },
   methods: {
+  },
+  mounted() {
+    setNavPills();
   },
   setup() {
     const store = useAppStore()
