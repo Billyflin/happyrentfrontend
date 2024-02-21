@@ -1,7 +1,7 @@
 <template>
-    <label class="form-label" :for="id">{{ label }}</label>
-    <select class="choices form-control" :id="id" v-model="selected" :name="name" @change="emitChange" :disabled="isDisabled">
-    </select>
+  <label class="form-label" :for="id">{{ label }}</label>
+  <select class="choices form-control" :id="id" v-model="selected" :name="name" @change="emitChange" :disabled="isDisabled">
+  </select>
 </template>
 
 <script>
@@ -40,6 +40,7 @@ export default defineComponent({
       default: false,
     },
   },
+  emits: ['update:modelValue', 'change'], // Agrega 'change' aquí
   data() {
     return {
       selected: this.modelValue,
@@ -78,9 +79,8 @@ export default defineComponent({
   methods: {
     emitChange() {
       this.$emit('update:modelValue', this.selected)
+      this.$emit('change', this.selected) // Emite el evento 'change' aquí
     },
   },
 })
 </script>
-
-
