@@ -31,6 +31,7 @@
         </div>
         <div class="col-sm-3">
           <material-input
+            v-if = "values === 'Chile'"
             id="RazonSocial"
             variant="static"
             label="Razón Social"

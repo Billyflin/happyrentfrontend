@@ -26,8 +26,8 @@
 
 <script setup>
 import SidenavList from './SidenavList.vue'
-import logo from '@/assets/LogoHappyBlanco.svg'
-import logoDark from '@/assets/LogoHappy.svg'
+import logo from '@/assets/LogoHappBlanco.svg'
+import logoDark from '@/assets/LogoHapp.svg'
 import {storeToRefs} from 'pinia'
 import {useAppStore} from '@/store/index.js'
 

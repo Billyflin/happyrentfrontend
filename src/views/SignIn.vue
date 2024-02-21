@@ -11,7 +11,7 @@
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-success border-radius-lg py-3 pe-1">
                 <div class="row mt-3 d-flex justify-content-center align-items-center">
-                  <img class="btn btn-link px-3" src="@/assets/LogoHappy.svg" alt="Logo" width="98"
+                  <img class="btn btn-link px-3" src="@/assets/LogoHapp.svg" alt="Logo" width="98"
                        height="98"/>
                 </div>
 <!--                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0"></h4>-->
@@ -68,7 +68,6 @@
 
 <script setup>
 import {onBeforeMount, onBeforeUnmount} from 'vue'
-import Navbar from '@/examples/PageLayout/Navbar.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
