@@ -9,16 +9,17 @@
     <div class="card-body pt-0">
       <div class="row">
         <div class="col-sm-4 col-3">
-          <label class="form-label ms-0">Tipo Arrendatario</label>
-          <select
+          <MaterialChoices
             id="choices-tipo-arrendatario"
-            class="form-control"
             name="choices-tipo-arrendatario"
-          >
-            <option value="Empresa">Empresa</option>
-            <option value="Persona Natural">Persona Natural</option>
-
-          </select>
+            label="Tipo Arrendatario"
+            :options="[
+        { value: 'Empresa', text: 'Empresa' },
+        { value: 'Persona Natural', text: 'Persona Natural' }
+      ]"
+            v-model="tipoArrendatario"
+            @change = "console.log('tipoArrendatario', tipoArrendatario)"
+          />
         </div>
         <div class="col-sm-3">
           <material-input
@@ -31,7 +32,6 @@
         </div>
         <div class="col-sm-3">
           <material-input
-            v-if = "values === 'Chile'"
             id="RazonSocial"
             variant="static"
             label="Razón Social"
@@ -75,25 +75,32 @@
       </div>
       <div class="row">
         <div class="col-sm-2 col-2">
-          <label class="form-label mt-4 ms-0" for="choices-estadoCivil-arrendatario">Estado Civil</label>
-          <select id="choices-estadoCivil-arrendatario" class="form-control">
-            <!-- Opciones de regiones según el país seleccionado -->
-            <option value="Soltero">Soltero</option>
-            <option value="Casado">Casado</option>
-            <option value="Divorciado">Divorciado</option>
-            <option value="Viudo">Viudo</option>
-            <option value="Separado">Separado</option>
-            <option value="Conviviente">Conviviente</option>
-          </select>
+          <MaterialChoices
+            id="choices-estadoCivil-arrendatario"
+            name="choices-estadoCivil-arrendatario"
+            label="Estado Civil"
+            :options="[
+          { value: 'Soltero', text: 'Soltero' },
+          { value: 'Casado', text: 'Casado' },
+          { value: 'Divorciado', text: 'Divorciado' },
+          { value: 'Viudo', text: 'Viudo' },
+          { value: 'Separado', text: 'Separado' },
+          { value: 'Conviviente', text: 'Conviviente' }
+        ]"
+            v-model="selectedEstadoCivil"
+          />
         </div>
         <div class="col-sm-2 col-2">
-          <label class="form-label mt-4 ms-0" for="choices-estadoCivil-arrendatario">Nacionalidad</label>
-          <select id="choices-nacionalidad-arrendatario" class="form-control" disabled="disabled">
-            <!-- Opciones de regiones según el país seleccionado -->
-            <option value="Chileno">
-              Chileno
-            </option>
-          </select>
+          <MaterialChoices
+            id="choices-nacionalidad-arrendatario"
+            name="choices-nacionalidad-arrendatario"
+            label="Nacionalidad"
+            :options="[
+          { value: 'Chileno', text: 'Chileno' }
+        ]"
+            v-model="selectedNacionalidad"
+            :isDisabled="true"
+          />
         </div>
       </div>
 
@@ -154,30 +161,40 @@
               placeholder="n°"
             />
           </div>
-          <div class="col-sm-2 col-2">
-            <label class="form-label mt-4 ms-0" for="choices-pais">País</label>
-
-            <select class="form-control" id="choices-pais-arrendatario"
-                    name="choices-pais-arrendatario">
-              <option value="Chile">Chile</option>
-              <!-- Agrega más opciones aquí -->
-            </select>
-
-          </div>
-          <div class="col-sm-2 col-2">
-            <label class="form-label mt-4 ms-0" for="choices-region-arrendatario">Región</label>
-            <select v-model="selectedRegion" id="choices-region-arrendatario" :disabled="!selectedPais">
-              <!-- Opciones de regiones según el país seleccionado -->
-              <option v-for="region in regions" :key="region">{{ region }}</option>
-            </select>
-          </div>
-
-          <div class="col-sm-3 col-2">
-            <label class="form-label mt-4 ms-0" for="choices-ciudad-arrendatario">Ciudad</label>
-            <select v-model="selectedCiudad" id="choices-ciudad-arrendatario" :disabled="!selectedRegion">
-              <!-- Opciones de ciudades según la región seleccionada -->
-              <option v-for="ciudad in ciudades" :key="ciudad">{{ ciudad }}</option>
-            </select>
+          <div class="row">
+            <div class="col-sm-2 col-2">
+              <MaterialChoices
+                id="choices-pais-arrendatario"
+                name="choices-pais-arrendatario"
+                label="País"
+                :options="[
+          { value: 'Chile', text: 'Chile'},
+          {value: 'Argentina', text: 'Argentina'}
+          // Agrega más opciones aquí
+        ]"
+                v-model="selectedPais"
+              />
+            </div>
+            <div class="col-sm-2 col-2">
+              <MaterialChoices
+                id="choices-region-arrendatario"
+                name="choices-region-arrendatario"
+                label="Región"
+                :options="regions.map(region => ({ value: region, text: region }))"
+                v-model="selectedRegion"
+                :isDisabled="!selectedPais"
+              />
+            </div>
+            <div class="col-sm-3 col-2">
+              <MaterialChoices
+                id="choices-ciudad-arrendatario"
+                name="choices-ciudad-arrendatario"
+                label="Ciudad"
+                :options="ciudades.map(ciudad => ({ value: ciudad, text: ciudad }))"
+                v-model="selectedCiudad"
+                :isDisabled="!selectedRegion"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -192,6 +209,7 @@ import * as Choices from 'choices.js'
 import MaterialInput from '@/components/MaterialInput.vue'
 import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
+import MaterialChoices from '@/components/MaterialChoices.vue'
 // todo re importar para el uuid
 // import { ref } from 'vue'
 // import { useRoute } from 'vue-router'
@@ -202,9 +220,13 @@ import { onMounted, onUnmounted } from 'vue'
 export default {
   name: 'FormularioInvitado',
   components: {
+    MaterialChoices,
     MaterialInput
   }, data() {
     return {
+      selectedEstadoCivil: null,
+      selectedNacionalidad: null,
+      tipoArrendatario: null,
       isEmailDisabled: false,
       isConfirmEmailDisabled: false,
       reajusteValue: 0.0, // Valor inicial del input
@@ -272,51 +294,6 @@ export default {
 
 
     // TODO, arreglar esto para que se vea lindo
-    if (document.getElementById('choices-ciudad')) {
-      var city = document.getElementById('choices-ciudad')
-      new Choices(city)
-    }
-    if (document.getElementById('choices-region')) {
-      var region = document.getElementById('choices-region')
-      new Choices(region, {
-        allowHTML: true,
-        searchEnabled: false
-      })
-    }
-    if (document.getElementById('choices-pais')) {
-      const country = document.getElementById('choices-pais')
-      new Choices(country,
-        {
-          allowHTML: true, itemSelectText: 'Presiona para seleccionar'
-        })
-    }
-    if (document.getElementById('choices-tipo-arrendatario')) {
-      new Choices(document.getElementById('choices-tipo-arrendatario'), {
-        allowHTML: true
-      })
-    }
-
-    // seccion arrendatario
-    if (document.getElementById('choices-estadoCivil-arrendatario')) {
-      new Choices(document.getElementById('choices-estadoCivil-arrendatario'), {
-        allowHTML: true
-      })
-    }
-    if (document.getElementById('choices-ciudad-arrendatario')) {
-      new Choices(document.getElementById('choices-ciudad-arrendatario'))
-    }
-    if (document.getElementById('choices-region-arrendatario')) {
-      new Choices(document.getElementById('choices-region-arrendatario'), {
-        allowHTML: true,
-        searchEnabled: false
-      })
-    }
-    if (document.getElementById('choices-pais-arrendatario')) {
-      new Choices(document.getElementById('choices-pais-arrendatario'),
-        {
-          allowHTML: true, itemSelectText: 'Presiona para seleccionar'
-        })
-    }
     if (document.getElementById('choices-day')) {
       var day = document.getElementById('choices-day')
       setTimeout(function() {
