@@ -1,6 +1,6 @@
 <template>
   <label class="form-label" :for="id">{{ label }}</label>
-  <select class="choices form-control" :id="id" v-model="selected" :name="name" @change="emitChange" :disabled="isDisabled">
+  <select class="choices form-control" :id="id" v-model="selected" :name="name" @change="emitChange">
   </select>
 </template>
 
@@ -28,7 +28,7 @@ export default defineComponent({
       required: true,
     },
     modelValue: {
-      type: String,
+      type: [String, Number],
       required: false,
     },
     searchEnabled: {
@@ -64,7 +64,15 @@ export default defineComponent({
     }
   },
   watch: {
+    isDisabled(newVal) {
+      if (newVal) {
+        this.choices.disable();
+      } else {
+        this.choices.enable();
+      }
+    },
     options(newOptions) {
+
       // Update Choices options when options prop changes
       this.choices.setChoices(newOptions.map((option) => ({
         value: option.value,
