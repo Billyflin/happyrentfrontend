@@ -87,6 +87,9 @@ const routes = [{
     path: '/correoVerificado', name: 'CorreoVerificado', component: () => import('../views/CorreoVerificado.vue')
   },
   { path: '/registroExitoso', name: 'RegistroExitoso', component: () => import('../views/RegistroExitoso.vue') },
+  {
+    path: '/principalPlanes', name: 'PrincipalPlanes', component: () => import('../views/PrincipalPlanes.vue')
+  }
 
 
 ]
