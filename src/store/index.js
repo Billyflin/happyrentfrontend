@@ -4,6 +4,7 @@ import axios from 'axios'
 
 import router from '@/router'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
+import * as process from 'echarts'
 
 export const useAppStore = defineStore({
   id: 'app', state: () => ({
@@ -56,7 +57,7 @@ export const useAuthStore = defineStore('auth', {
     auth: null, isLoggedIn: false, errMsg: '', userInfo: null, rememberMe: false, isAdmin: false, propiedades: []
   }), persist: true, actions: {
     async loginHandler(username, password) {
-      await axios.post(`${SERVER_URL}`+':8080/api/authenticate', { username, password }, {
+      await axios.post(`${process.env.SERVER_URL}`+':8080/api/authenticate', { username, password }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -87,7 +88,7 @@ export const useAuthStore = defineStore('auth', {
     }, async getCurrentUser() {
       if (this.auth) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${this.auth}`
-        await axios.get(`${SERVER_URL}`+':8080/api/user', {})
+        await axios.get(`${process.env.SERVER_URL}:8080/api/user`, {})
           .then((response) => {
             this.userInfo = response.data
             this.isAdmin = this.userInfo.authorityDtoSet.some(a => a.authorityName === 'ROLE_ADMIN')
