@@ -111,7 +111,7 @@ export const useAuthStore = defineStore('auth', {
       this.rememberMe = value
     }, async getPropiedades() {
       if (this.userInfo) {
-        const userId = this.userInfo.persona.id
+        const userId = this.userInfo.id
         await axios.get(`http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/propiedad/user/${userId}`)
           .then((response) => {
             this.propiedades = response.data
