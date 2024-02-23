@@ -13,31 +13,11 @@
     <div class="container py-10 postion-relative z-index-2">
       <div class="row">
         <div class="col-md-6 mx-auto text-center">
-          <h1 class="text-white">Registro Exitoso!</h1>
+          <h1 class="text-white">NotFound</h1>
         </div>
       </div>
     </div>
   </div>
-  <div class="container-fluid px-5 my-6">
-    <div class="card mt-n8">
-      <div class="container">
-        <div class="row mb-5">
-          <div class="col-lg-4 col-md-6 col-7 mx-auto text-center">
-            <div class="card-body">
-              <div class="mt-3" >
-                <h5 >
-                  Te hemos enviado un correo de confirmación a tu dirección de correo electrónico.<br>
-                  Por favor, sigue las instrucciones en el correo para activar tu cuenta.
-                </h5>
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
 </template>
 <script>
 import { useAppStore } from '@/store/index.js'
@@ -46,8 +26,8 @@ import {activateDarkMode, deactivateDarkMode} from '@/assets/js/dark-mode'
 import router from '@/router/index.js'
 
 export default {
-  name: 'RegistroExitoso',
-  components: { },
+  name: 'NotFound',
+  components: {},
   data() {
     return {}
   },

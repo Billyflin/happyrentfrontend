@@ -74,14 +74,14 @@ const routes = [{
   }
   ,{
   path: '/rememberPassword', name: 'rememberPassword', component: () => import('../views/RememberPassword.vue')
+  },
+  {
+    path: '/error', name: 'Error', component: () => import('../views/Error.vue')
   }
-  // {
-  //   path: '/error', name: 'Error', component: () => import('../views/Error.vue')
-  // }
-  // ,
-  // {
-  // todo  path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/NotFound.vue')
-  // }
+  ,
+  {
+  path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/NotFound.vue')
+  }
   ,
   {
     path: '/correoVerificado', name: 'CorreoVerificado', component: () => import('../views/CorreoVerificado.vue')

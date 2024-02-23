@@ -46,7 +46,38 @@
           </template>
         </sidenav-collapse>
       </li>
-
+      <li class="nav-item">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="formularioRegistro"
+                          navText="FirstLogin">
+          <template v-slot:icon>
+            <i class="material-icons-round opacity-10 fs-5">house</i>
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="registroExitoso"
+                          navText="Registro Exitoso">
+          <template v-slot:icon>
+            <i class="material-icons-round opacity-10 fs-5">house</i>
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="error"
+                          navText="Error">
+          <template v-slot:icon>
+            <i class="material-icons-round opacity-10 fs-5">house</i>
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="notasdqwedasd"
+                          navText="No encontrado">
+          <template v-slot:icon>
+            <i class="material-icons-round opacity-10 fs-5">house</i>
+          </template>
+        </sidenav-collapse>
+      </li>
 
 
       <li class="mt-3 nav-item">
