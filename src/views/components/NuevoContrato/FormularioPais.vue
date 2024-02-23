@@ -26,7 +26,7 @@ export default {
   methods: {
     async getpais() {
       try {
-        const response = await axios.get('http://localhost:8080/pais')
+        const response = await axios.get(`${SERVER_URL}`+':8080/pais')
         console.log('Países:', response.data)
         return response.data
       } catch (error) {

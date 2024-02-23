@@ -8,12 +8,10 @@
               <div
                 class="col-6 d-lg-flex d-none h-100 my-auto pe-0 ps-0 position-absolute top-0 start-0 text-center justify-content-center flex-column"
               >
-                <div
-                  class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
-                  :style="{
-                    backgroundImage: 'url(src/assets/img/illustrations/illustration-signin.jpg)',
-                  }"
-                ></div>
+                <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
+                     :style="{ 'backgroundImage': 'url(' + Image + ')' }">
+                </div>
+
               </div>
               <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column ms-auto me-auto ms-lg-auto me-lg-5">
                 <div class="card card-plain">
@@ -79,6 +77,7 @@ import { onBeforeMount, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
+import Image from '@/assets/img/illustrations/illustration-signin.jpg'
 import { useAppStore,useRegisterFormStore } from '@/store/index.js'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
@@ -119,7 +118,7 @@ const submitForm = () => {
     ]
   };
 
-  axios.post('http://localhost:8080/api/signup', user)
+  axios.post(`${SERVER_URL}`+':8080/api/signup', user)
     .then(response => {
       console.log(response.data);
       // Si la respuesta es 200 OK, redirige a /registroExitoso
