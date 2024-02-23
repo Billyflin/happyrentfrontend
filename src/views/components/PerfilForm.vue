@@ -2,8 +2,8 @@
   <div class="pt-3 bg-white multisteps-form__panel" data-animation="FadeIn">
     <div class="text-center row">
       <div class="mx-auto col-10">
-        <h5 class="font-weight-normal">Let's start with the basic information</h5>
-        <p>Let us know more about you.</p>
+        <h5 class="font-weight-normal">Empecemos con información básica</h5>
+        <p>Dejanos saber de tí.</p>
       </div>
     </div>
     <div class="multisteps-form__content">

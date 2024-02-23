@@ -7,6 +7,7 @@
       type="checkbox"
       :name="name"
       :checked="checked"
+      @change="updateValue"
     />
     <label class="form-check-label ms-3" :class="labelClass" :for="id">
       <slot />
@@ -35,5 +36,10 @@ export default {
       default: "",
     },
   },
+  methods: {
+    updateValue(event) {
+      this.$emit('update:checked', event.target.checked);
+    }
+  }
 };
 </script>

@@ -66,6 +66,8 @@
                     <app-address :class="activeStep === 2 ? activeClass : ''" />
                     <!--single form panel-->
                     <bank-account :class="activeStep === 3 ? activeClass : ''" />
+                    <!--single form panel-->
+                    <plan-selection :class="activeStep === 4 ? activeClass : ''" />
                   </form>
                 </div>
               </div>
@@ -84,9 +86,10 @@ import AppAddress from "./components/Dirreccion.vue";
 import BankAccount from "./components/BankAccount.vue";
 import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
+import PlanSelection from '@/views/components/PlanSelection.vue'
 export default {
   name: "FormularioRegistro",
-  components: {  Cuenta, Perfil, AppAddress, BankAccount },
+  components: { PlanSelection,  Cuenta, Perfil, AppAddress, BankAccount },
   data() {
     return {
       activeClass: "js-active position-relative",

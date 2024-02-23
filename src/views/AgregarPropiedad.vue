@@ -2,134 +2,251 @@
   <div class="container-fluid mt-4">
     <div id="Agregar Propiedad" class="card mt-4">
       <div class="card-header">
-        <h5>Basic Info</h5>
+        <h4>Agregar Propiedad</h4>
       </div>
       <div class="card-body pt-0">
         <div class="row">
           <div class="col-6">
             <material-input
-              id="firstName"
+              id="PropiedadName"
               variant="static"
-              label="First Name"
-              placeholder="Alec"
+              label="Nombre Propiedad"
+              placeholder="Casa de campo, etc"
             />
           </div>
-          <div class="col-6">
+          <div class="col-4">
+            <material-choices id="tipo_propiedad"
+                              v-model="tipo_propiedad"
+                              :options="[
+                              {value:'Casa',text:'Casa'},
+                              {value:'Terreno',text:'Terreno'},
+                              {value:'Departamento',text:'Departamento'}
+                              ]"
+                              name="TipoPropiedad" label="Tipo Propiedad" :search-enabled="false" />
+          </div>
+          <div class="col-2">
             <material-input
-              id="lastName"
+              id="fechaNacimento"
               variant="static"
-              label="Last Name"
-              placeholder="Thompson"
+              type="date"
+              label="Fecha Nacimiento"
+              placeholder="10/10/2001"
             />
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-4 col-6">
-            <label class="form-label mt-4 ms-0">I'm</label>
-            <select
-              id="choices-gender"
-              class="form-control"
-              name="choices-gender"
-            >
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-            </select>
+          <div class="col-3">
+            <material-input
+              id="numBanos"
+              type="number"
+              variant="static"
+              label="numero de baños"
+              placeholder="1"
+            />
           </div>
-          <div class="col-sm-8">
-            <div class="row">
-              <div class="col-sm-5 col-5">
-                <label class="form-label mt-4 ms-0">Birth Date</label>
-                <select
-                  id="choices-month"
-                  class="form-control"
-                  name="choices-month"
-                ></select>
+          <div class="col-3">
+            <material-input
+              id="numEstacionamientos"
+              type="number"
+              variant="static"
+              label="numero de estacionamientos"
+              placeholder="1"
+            />
+          </div>
+          <div class="col-3">
+            <material-input
+              id="numPiezas"
+              type="number"
+              variant="static"
+              label="numero de piezas"
+              placeholder="1"
+            />
+          </div>
+          <div class="col-3">
+            <material-input
+              id="metrosCuadradosTerreno"
+              type="number"
+              variant="static"
+              label="metros cuadrados terreno"
+              placeholder="50"
+            />
+          </div>
+          <div class="col-3">
+            <material-input
+              id="metrosCuadradosConstruidos"
+              type="number"
+              variant="static"
+              label="metros cuadrados construidos"
+              placeholder="40"
+            />
+          </div>
+          <div class="col-3">
+            <material-input
+              id="numBodegas"
+              type="number"
+              variant="static"
+              label="numero de bodegas"
+              placeholder="1"
+            />
+          </div>
+        </div>
+
+<!--        inicio fomulario propiedades-->
+        <div class="row">
+          <h5 class="font-weight-bolder" >Propietario</h5>
+          <material-switch id="existente" name="existente"  v-model:checked="propietarioNuevo"></material-switch>
+        </div>
+        <div class="row" v-if="!propietarioNuevo">
+          <div class="col-4">
+            <material-choices id="tipo_Propietario"
+                              v-model="tipo_propietario"
+                              :options="[
+                              {value:'Empresa',text:'Empresa'},
+                              {value:'Persona',text:'Persona'}
+                              ]"
+                              name="TipoPropietario" label="Tipo Propietario" :search-enabled="false" />
+                </div>
+          <!--  Seccion RepresentanteLegal Empresa-->
+                <div class="col-sm-3">
+                  <material-input
+                    id="Rut"
+                    type="text"
+                    variant="static"
+                    label="Rut Representante Legal"
+                    placeholder="Con guión"
+                  />
+                </div>
+                <div class="col-sm-3">
+                  <material-input
+                    id="RazonSocial"
+                    variant="static"
+                    label="Razón Social"
+                    placeholder="Razón Social"
+                  />
+                </div>
+                <div class="col-sm-2">
+                  <material-input
+                    id="Giro"
+                    variant="static"
+                    label="Giro"
+                    placeholder="Giro"
+                  />
+                </div>
               </div>
-              <div class="col-sm-4 col-3">
-                <label class="form-label mt-4 ms-0">&nbsp;</label>
-                <select
-                  id="choices-day"
-                  class="form-control"
-                  name="choices-day"
-                ></select>
+              <div class="row">
+                <div class="col-4">
+                  <material-input
+                    id="NombreRepresentanteLegal"
+                    variant="static"
+                    label="Nombre Representante Legal"
+                    placeholder="Nombre"
+                  />
+                </div>
+                <div class="col-4">
+                  <material-input
+                    id="ApellidoPaternoRepresentanteLegal"
+                    variant="static"
+                    label="Apellido Paterno Representante Legal"
+                    placeholder="Apellido"
+                  />
+                </div>
+                <div class="col-4">
+                  <material-input
+                    id="ApellidoMaternoRepresentanteLegal"
+                    variant="static"
+                    label="Apellido Materno Representante Legal"
+                    placeholder="Apellido"
+                  />
+                </div>
               </div>
-              <div class="col-sm-3 col-4">
-                <label class="form-label mt-4 ms-0">&nbsp;</label>
-                <select
-                  id="choices-year"
-                  class="form-control"
-                  name="choices-year"
-                ></select>
+
+              <div class="card-category mt-4">
+                <h5>Contacto Representante Legal</h5>
               </div>
+              <div class="row">
+                <div class="col-4 mt-4">
+                  <material-input
+                    id="emailRepresentanteLegal"
+                    type="email"
+                    variant="static"
+                    label="Email Representante Legal"
+                    placeholder="Email"
+                  />
+                </div>
+                <div class="col-4 mt-4">
+                  <material-input
+                    id="confirmEmailRepresentanteLegal"
+                    type="email"
+                    variant="static"
+                    label="Confimar Email Representante Legal"
+                    placeholder="Confirma Email"
+                  />
+                </div>
+                <div class="col-2 mt-4">
+                  <material-input
+                    id="numeroRepresentanteLegal"
+                    type="phone"
+                    variant="static"
+                    label="Numero de teléfono"
+                    placeholder="+569 xxxxxxxx"
+                  />
+                </div>
+              </div>
+
+              <div class="card-category mt-4">
+                <h5>Dirección Representante Legal</h5>
+              </div>
+        <div class="multisteps-form__content">
+          <div class="row mt-4 text-start">
+            <div class="mt-3 col-3">
+              <MaterialChoices id="pais"
+                               :options=" [
+                             { value: 'Chile', text: 'Chile' },
+                             { value: 'Peru', text: 'Perú' },
+                             { value: 'Argentina', text: 'Argentina'},
+                             { value: 'Brasil', text: 'Brasil'},
+                              { value: 'Colombia', text: 'Colombia'}
+                             ]"
+                               name="pais" v-model="paisSeleccionado" />
+            </div>
+            <div class="col-sm-4 mt-3 col-6 ms-auto">
+              <MaterialChoices id="region" :options="regiones" name="region" v-model="regionSeleccionada"
+                               :is-disabled="!paisSeleccionado"  @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)"/>
+            </div>
+            <div class="col-sm-4 mt-3 col-6 ms-auto">
+              <MaterialChoices id="ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada" @change="console.log(ciudadSeleccionada)"
+                               :is-disabled="!regionSeleccionada" />
             </div>
           </div>
-        </div>
-        <div class="row mt-4">
-          <div class="col-6">
-            <material-input
-              id="email"
-              type="email"
-              variant="static"
-              label="Email"
-              placeholder="example@email.com"
-            />
+          <div class="row mt-4 text-start">
+            <div class="mt-3 col-12 col-md-8 ms-auto">
+              <material-input id="nombreCalle" variant="static" label="Nombre de la calle" />
+            </div>
+            <div class="mt-3 col-12 col-md-4 ms-auto">
+              <material-input id="numeroCalle" variant="static" label="Número de la calle" />
+            </div>
           </div>
-          <div class="col-6">
-            <material-input
-              id="confirmEmail"
-              type="email"
-              variant="static"
-              label="Confirm Email"
-              placeholder="example@email.com"
-            />
+          <div class="mt-4 button-row d-flex">
+            <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="this.$parent.nextStep">
+              Next
+            </button>
           </div>
         </div>
-        <div class="row mt-4">
+          <!--  Seccion Reajuste-->
+
+        <div class="row" v-if="propietarioNuevo">
           <div class="col-6">
-            <material-input
-              id="location"
-              type="text"
-              variant="static"
-              label="Your Location"
-              placeholder="Sydney, A"
-            />
-          </div>
-          <div class="col-6">
-            <material-input
-              id="phoneNumber"
-              type="phone"
-              variant="static"
-              label="Phone Number"
-              placeholder="+40 745 765 439"
-            />
+            <material-choices id="propietario_seleccionado"
+                              v-model="propietario_seleccionado"
+                              :options="[
+                              {value:'1',text:'Acá van a estar los propietarios existentes'},
+                              {value:'2',text:'Pero de momento no se a implementado'},
+                              {value:'3',text:'Se los debemos :P'}
+                              ]"
+                              name="propietario_existente" label="Selecciona un propietario existente" :search-enabled="false" />
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-6 align-self-center">
-            <label class="form-label mt-4 ms-0">Language</label>
-            <select
-              id="choices-language"
-              class="form-control"
-              name="choices-language"
-            >
-              <option value="English">English</option>
-              <option value="French">French</option>
-              <option value="Spanish">Spanish</option>
-            </select>
-          </div>
-          <div class="col-md-6">
-            <label class="form-label mt-4 ms-0">Skills</label>
-            <input
-              id="choices-skills"
-              class="form-control"
-              type="text"
-              value="vuejs, angular, react"
-              placeholder="Enter something"
-              onfocus="focused(this)"
-              onfocusout="defocused(this)"
-            />
-          </div>
-        </div>
+
 
         <div class="row">
           <!--    Agregar imagenes-->
@@ -155,121 +272,85 @@
 
 
 <script>
-import * as Choices from 'choices.js'
 import MaterialButton from '@/components/MaterialButton.vue'
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialBadge from '@/components/MaterialBadge.vue'
 import MaterialAvatar from '@/components/MaterialAvatar.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import Dropzone from 'dropzone'
+import MaterialChoices from '@/components/MaterialChoices.vue'
 
 export default {
   name: 'AgregarPropiedad',
   components: {
+    MaterialChoices,
     MaterialButton,
     MaterialSwitch,
     MaterialBadge,
     MaterialAvatar,
     MaterialInput
   },
+  data() {
+    return {
+      paisSeleccionado: 'Argentina',
+      regionSeleccionada: null,
+      ciudadSeleccionada: null,
+      tipo_propiedad: null,
+      propietario_seleccionado: null,
+      propietarioNuevo: false
+    }
+  },
+  watch: {
+    paisSeleccionado(nuevoPais) {
+      if (nuevoPais === 'Chile') {
+        this.regiones = [
+          { value: 'Región Metropolitana', text: 'Región Metropolitana' },
+          { value: 'Valparaíso', text: 'Valparaíso' },
+          { value: 'Biobío', text: 'Biobío' },
+          // Agrega más opciones aquí
+        ]
+      } else {
+        this.regiones = []
+      }
+      this.regionSeleccionada = null
+      this.ciudadSeleccionada = null
+    },
+    regionSeleccionada(nuevaRegion) {
+      if (nuevaRegion) {
+        if (nuevaRegion === 'Región Metropolitana') {
+          this.ciudades = [
+            { value: 'Santiago', text: 'Santiago' },
+            { value: 'Puente Alto', text: 'Puente Alto' },
+            { value: 'Maipú', text: 'Maipú' },
+            // Agrega más opciones aquí
+          ]
+        } else if (nuevaRegion === 'Valparaíso') {
+          this.ciudades = [
+            { value: 'Viña del Mar', text: 'Viña del Mar' },
+            { value: 'Valparaíso', text: 'Valparaíso' },
+            { value: 'Quilpué', text: 'Quilpué' },
+            // Agrega más opciones aquí
+          ]
+        } else if (nuevaRegion === 'Biobío') {
+          this.ciudades = [
+            { value: 'Concepción', text: 'Concepción' },
+            { value: 'Talcahuano', text: 'Talcahuano' },
+            { value: 'Los Ángeles', text: 'Los Ángeles' },
+            // Agrega más opciones aquí
+          ]
+        } else {
+          this.ciudades = []
+        }
+      } else {
+        this.ciudades = []
+      }
+    },
+  },
   mounted() {
     let myDropzone = new Dropzone('#productImg')
     myDropzone.on('addedfile', (file) => {
       console.log(`File added: ${file.name}`)
     })
-
-    if (document.getElementById('choices-gender')) {
-      var gender = document.getElementById('choices-gender')
-      new Choices(gender)
-    }
-
-    if (document.getElementById('choices-language')) {
-      var language = document.getElementById('choices-language')
-      new Choices(language)
-    }
-
-    if (document.getElementById('choices-month')) {
-      var month = document.getElementById('choices-month')
-      setTimeout(function() {
-        new Choices(month)
-      }, 1)
-
-      // eslint-disable-next-line no-unused-vars
-      var d = new Date()
-      var monthArray = new Array()
-      monthArray[0] = 'January'
-      monthArray[1] = 'February'
-      monthArray[2] = 'March'
-      monthArray[3] = 'April'
-      monthArray[4] = 'May'
-      monthArray[5] = 'June'
-      monthArray[6] = 'July'
-      monthArray[7] = 'August'
-      monthArray[8] = 'September'
-      monthArray[9] = 'October'
-      monthArray[10] = 'November'
-      monthArray[11] = 'December'
-      for (let m = 0; m <= 11; m++) {
-        var optn = document.createElement('OPTION')
-        optn.text = monthArray[m]
-        // server side month start from one\
-        optn.value = m + 1
-        // if june selected
-        if (m == 1) {
-          optn.selected = true
-        }
-        month.options.add(optn)
-      }
-    }
-
-    if (document.getElementById('choices-day')) {
-      var day = document.getElementById('choices-day')
-      setTimeout(function() {
-        new Choices(day)
-      }, 1)
-
-      for (let y = 1; y <= 31; y++) {
-        var optn1 = document.createElement('OPTION')
-        optn1.text = y
-        optn1.value = y
-
-        if (y == 1) {
-          optn1.selected = true
-        }
-
-        day.options.add(optn1)
-      }
-    }
-
-    if (document.getElementById('choices-year')) {
-      var year = document.getElementById('choices-year')
-      setTimeout(function() {
-        new Choices(year)
-      }, 1)
-
-      for (let y = 1900; y <= 2020; y++) {
-        var optn2 = document.createElement('OPTION')
-        optn2.text = y
-        optn2.value = y
-
-        if (y == 2020) {
-          optn.selected = true
-        }
-
-        year.options.add(optn2)
-      }
-    }
-
-    if (document.getElementById('choices-skills')) {
-      var skills = document.getElementById('choices-skills')
-      new Choices(skills, {
-        delimiter: ',',
-        editItems: true,
-        maxItemCount: 5,
-        removeItemButton: true,
-        addItems: true
-      })
-    }
   }
 }
 </script>

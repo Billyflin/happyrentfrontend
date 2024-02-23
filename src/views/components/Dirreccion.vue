@@ -3,8 +3,7 @@
     <div class="text-center row">
       <div class="mx-auto col-10">
         <h5 class="font-weight-normal">¿Vives en una buena zona?</h5>
-        <p>Una cosa que me encanta de los atardeceres más tardíos es la oportunidad de dar un paseo por el bosque del
-          vecindario antes de cenar</p>
+        <p>La ausencia de venezolanos aumenta la plus valía del vecindario</p>
       </div>
     </div>
     <div class="multisteps-form__content">
@@ -37,6 +36,11 @@
           <material-input id="numeroCalle" variant="static" label="Número de la calle" />
         </div>
       </div>
+      <div class="mt-4 button-row d-flex">
+        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="this.$parent.nextStep">
+          Next
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -49,7 +53,7 @@ export default defineComponent({
   components: { MaterialInput, MaterialChoices },
   data() {
     return {
-      paisSeleccionado: 'Chile',
+      paisSeleccionado: 'Argentina',
       regionSeleccionada: null,
       ciudadSeleccionada: null,
       active: true,
