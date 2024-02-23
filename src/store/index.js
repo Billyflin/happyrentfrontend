@@ -57,7 +57,7 @@ export const useAuthStore = defineStore('auth', {
     auth: null, isLoggedIn: false, errMsg: '', userInfo: null, rememberMe: false, isAdmin: false, propiedades: []
   }), persist: true, actions: {
     async loginHandler(username, password) {
-      await axios.post(`${process.env.SERVER_URL}`+':8080/api/authenticate', { username, password }, {
+      await axios.post('http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/api/authenticate', { username, password }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -88,7 +88,7 @@ export const useAuthStore = defineStore('auth', {
     }, async getCurrentUser() {
       if (this.auth) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${this.auth}`
-        await axios.get(`${process.env.SERVER_URL}:8080/api/user`, {})
+        await axios.get(`http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/api/user`, {})
           .then((response) => {
             this.userInfo = response.data
             this.isAdmin = this.userInfo.authorityDtoSet.some(a => a.authorityName === 'ROLE_ADMIN')
@@ -112,7 +112,7 @@ export const useAuthStore = defineStore('auth', {
     }, async getPropiedades() {
       if (this.userInfo) {
         const userId = this.userInfo.persona.id
-        await axios.get(`${SERVER_URL}:8080/propiedad/user/${userId}`)
+        await axios.get(`http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/propiedad/user/${userId}`)
           .then((response) => {
             this.propiedades = response.data
             console.log(response.data)
