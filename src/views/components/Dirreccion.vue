@@ -3,7 +3,7 @@
     <div class="text-center row">
       <div class="mx-auto col-10">
         <h5 class="font-weight-normal">¿Vives en una buena zona?</h5>
-        <p>La ausencia de venezolanos aumenta la plus valía del vecindario</p>
+        <p>Te sugeriremos esta dirección en todas las funciones que ofrece la aplicación, nuestro objetivo es ahorrarte tiempo</p>
       </div>
     </div>
     <div class="multisteps-form__content">
