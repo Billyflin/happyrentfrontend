@@ -118,7 +118,7 @@ const submitForm = () => {
     ]
   };
 
-  axios.post(`${SERVER_URL}`+':8080/api/signup', user)
+  axios.post('http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/api/signup', user)
     .then(response => {
       console.log(response.data);
       // Si la respuesta es 200 OK, redirige a /registroExitoso
