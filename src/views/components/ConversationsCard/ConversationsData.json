@@ -1,9 +1,9 @@
 {
   "data": [
     {
-      "avatar": "src/assets/img/monachina.jpg",
-      "name": "Mona china",
-      "info": "Billy responde estoy embarazada.."
+      "avatar": "@/assets/img/Billyflin.jpg",
+      "name": "Soporte",
+      "info": "Su pedido está siendo procesado"
     }
   ]
 }
