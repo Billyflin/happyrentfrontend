@@ -17,6 +17,14 @@ const props = defineProps({
     type: [Number, String],
     default: '170',
   },
+  yAxisMin: {
+    type: Number,
+    default: 0,
+  },
+  yAxisMax: {
+    type: Number,
+    default: null,
+  },
   chart: {
     type: Object,
     required: true,
@@ -107,8 +115,8 @@ onMounted(() => {
           type: 'dashed',
         },
       },
-      min: 0,
-      max: Math.max(...data) < 100 ? Math.max(...data) + 10 : (Math.ceil(Math.max(...data) / 100) + 1) * 100,
+      min: props.yAxisMin,
+      max: props.yAxisMax !== null ? props.yAxisMax : Math.max(...data) < 100 ? Math.max(...data) + 10 : (Math.ceil(Math.max(...data) / 100) + 1) * 100,
     },
     series: [
       {

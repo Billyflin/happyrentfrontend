@@ -13,8 +13,8 @@
           <h4 class="mb-0">{{ title.value }}</h4>
         </div>
       </div>
-      <hr class="dark horizontal my-0" />
-      <div class="card-footer p-3 text-end">
+      <hr class="dark horizontal my-0" v-if="detail"/>
+      <div class="card-footer p-3 text-end" >
         <!--  eslint-disable-next-line vue/no-v-html -->
         <p class="mb-0" v-html="detail"></p>
       </div>

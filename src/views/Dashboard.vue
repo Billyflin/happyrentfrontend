@@ -4,86 +4,203 @@
       <div class="col-lg-12 position-relative z-index-2">
         <div class="row">
           <mini-statistics-card
-              v-for="{title, detail, icon} of MiniStatisticsData"
-              :key="title.text"
-              :title="title"
-              :detail="detail"
-              :icon="icon"
+            v-for="{title, detail, icon} of MiniStatisticsData"
+            :key="title.text"
+            :title="title"
+            :detail="detail"
+            :icon="icon"
           />
         </div>
         <div class="row mt-4">
+<!--          <div class="col-lg-4 col-md-6 mt-4">-->
+<!--            <ChartHolderCard-->
+<!--              title="Website Views"-->
+<!--              subtitle="Last Campaign Performance"-->
+<!--              update="campaign sent 2 days ago"-->
+<!--            >-->
+<!--              <BarChart-->
+<!--                :chart="{-->
+<!--                  xAxislDatas: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],-->
+<!--                  datasets: {-->
+<!--                    label: 'Sales',-->
+<!--                    data: [50, 20, 10, 22, 50, 10, 40],-->
+<!--                  },-->
+<!--                }"-->
+<!--              />-->
+<!--            </ChartHolderCard>-->
+<!--          </div>-->
           <div class="col-lg-4 col-md-6 mt-4">
-            <ChartHolderCard
-                title="Website Views"
-                subtitle="Last Campaign Performance"
-                update="campaign sent 2 days ago"
+            <ChartHolderCard v-if="DolarData"
+                             title="Valor del Dólar"
+                             subtitle="Últimos valores"
+                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
+                             color="success"
             >
-              <BarChart
-                  :chart="{
-                  xAxislDatas: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
-                  datasets: {
-                    label: 'Sales',
-                    data: [12, 20, 10, 22, 50, 10, 40],
-                  },
-                }"
-              />
+              <LineChart :chart="DolarData" id="line-chart-1" :yAxisMin="Math.min(...DolarData.datasets.data)"
+                         :y-axis-max="Math.max(...DolarData.datasets.data) " />
             </ChartHolderCard>
           </div>
-          <div class="col-lg-4 col-md-6 mt-4">
-            <ChartHolderCard
-                title="Daily Sales"
-                subtitle="(<span class='font-weight-bolder'>+15%</span>) increase in today sales."
-                update="updated 4 min ago"
-                color="success"
-            >
-              <LineChart
-                  :chart="{
-                  xAxislDatas: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                  datasets: {
-                    label: 'Mobile apps',
-                    data: [50, 40, 300, 320, 500, 350, 200, 230, 500],
-                  },
-                }"
-              />
-            </ChartHolderCard>
-          </div>
+          <!--          modifica este grafico para ponerle uf-->
+
           <div class="col-lg-4 mt-4">
-            <ChartHolderCard
-                title="Completed Tasks"
-                subtitle="Last Campaign Performance"
-                update="just updated"
-                color="dark"
+            <ChartHolderCard v-if="UFData"
+                             title="Valor de la Unidad de Fomento (UF)"
+                             subtitle="Last Campaign Performance"
+                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
+                             color="dark"
             >
-              <LineChart
-                  id="tasks-chart"
-                  :chart="{
-                  xAxislDatas: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                  datasets: {
-                    label: 'Mobile apps',
-                    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                  },
-                }"
-              />
+              <LineChart :chart="UFData" id="line-chart-2" :yAxisMin="Math.min(...UFData.datasets.data)"
+                         :y-axis-max="Math.max(...UFData.datasets.data)" />
+            </ChartHolderCard>
+          </div>
+          <div class="col-lg-4 col-md-6 mt-4">
+            <ChartHolderCard v-if="IPCData"
+                             title="Valor del IPC"
+                             subtitle="Últimos valores"
+                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
+                             color="secondary"
+            >
+              <LineChart :chart="IPCData" id="line-chart-3" :yAxisMin="Math.min(...IPCData.datasets.data)"
+                         :y-axis-max="Math.max(...IPCData.datasets.data)" />
             </ChartHolderCard>
           </div>
         </div>
       </div>
     </div>
-    <div class="row">
-      <pedidos-table/>
-    </div>
   </div>
 </template>
 
 <script setup>
-import MiniStatistics from './components/MiniStatisticsCard/MiniStatisticsData.json'
-import Project from './components/ProjectCard/ProjectCardData.json'
-import PedidosTable from "@/views/components/TableCard/pedidosTable.vue";
-import ChartHolderCard from "@/views/components/ChartHolderCard.vue";
-import LineChart from "@/examples/Charts/LineChart.vue";
-import BarChart from "@/examples/Charts/BarChart.vue";
-import MiniStatisticsCard from "@/views/components/MiniStatisticsCard/MiniStatisticsCard.vue";
+import { onMounted, ref } from 'vue'
+import axios from 'axios'
+import MiniStatisticsCard from '@/views/components/MiniStatisticsCard/MiniStatisticsCard.vue'
+import LineChart from '@/examples/Charts/LineChart.vue'
+import ChartHolderCard from '@/views/components/ChartHolderCard.vue'
+import BarChart from '@/examples/Charts/BarChart.vue'
 
-const MiniStatisticsData = MiniStatistics.data
-const ProjectCardData = Project.data
+
+let MiniStatisticsData = ref([])
+let DolarData = ref(null)
+let UFData = ref(null)
+let UTMData = ref(null)
+let IPCData = ref(null)
+let previousData = ref(null)
+let lastUpdated = new Date()
+
+
+onMounted(async () => {
+  const response = await axios.get('/api')
+  const data = response.data
+
+  DolarData.value = await getChartData('/api/dolar', 'Valor del Dólar')
+  UFData.value = await getChartData('/api/uf', 'Valor del UF')
+  IPCData.value = await getChartData('/api/ipc', 'Valor del IPC')
+  UTMData.value = await getChartData('/api/utm', 'Valor del UTM')
+  MiniStatisticsData.value = createStatisticsData(data)
+})
+
+function getMinutesSinceLastUpdate() {
+  let now = new Date() // Obtiene la hora actual
+  let difference = now - lastUpdated // Calcula la diferencia en milisegundos
+  return Math.floor(difference / 1000 / 60) // Convierte la diferencia a minutos
+}
+
+async function getChartData(apiEndpoint, label) {
+  const response = await axios.get(apiEndpoint)
+  const data = response.data.serie
+  lastUpdated = new Date()
+  return {
+    xAxislDatas: data.map((item) => new Date(item.fecha).toLocaleDateString('es-CL', {
+      year: 'numeric',
+      month: 'short',
+      day: 'numeric'
+    })).reverse(),
+    datasets: {
+      label: label,
+      data: data.map((item) => item.valor).reverse()
+    }
+  }
+}
+
+function createStatisticsData(data) {
+  const newData = [
+    {
+      'title': {
+        'text': 'Dólar',
+        'value': `$${data.dolar.valor}`
+      },
+      'detail': getDetail(DolarData, 'Dólar'),
+      'icon': {
+        'name': 'attach_money',
+        'color': 'white',
+        'background': 'success'
+      }
+    },
+    {
+      'title': {
+        'text': 'UF',
+        'value': `$${data.uf.valor}`
+      },
+      'detail': getDetail(UFData, 'UF'),
+      'icon': {
+        'name': 'weekend',
+        'color': 'white',
+        'background': 'primary'
+      }
+    },
+    {
+      'title': {
+        'text': 'UTM',
+        'value': `$${data.utm.valor}`
+      },
+      'detail': getDetail(UTMData, 'UTM'),
+      'icon': {
+        'name': 'weekend',
+        'color': 'white',
+        'background': 'secondary'
+      }
+    },
+    {
+      'title': {
+        'text': 'IPC',
+        'value': `%${data.ipc.valor}`
+      },
+      'detail': getDetail(IPCData, 'IPC'),
+      'icon': {
+        'name': 'euro_symbol',
+        'color': 'white',
+        'background': 'dark'
+      }
+    }
+  ]
+
+  // Almacenar los nuevos valores para la próxima comparación
+  previousData.value = newData
+
+  return newData
+}
+
+function getDetail(data, label) {
+  if (!data.value || !data.value.datasets.data.length) {
+    return '<span class=\'text-success text-sm font-weight-bolder\'> Actualizado</span>'
+  }
+
+  const lastValue = data.value.datasets.data[data.value.datasets.data.length - 1]
+  const secondLastValue = data.value.datasets.data[data.value.datasets.data.length - 2]
+
+  if (secondLastValue) {
+    let change
+    if (label === 'IPC') {
+      change = lastValue - secondLastValue
+      return `<span class='${change >= 0 ? 'text-success' : 'text-danger'} text-sm font-weight-bolder'> ${change.toFixed(2)} </span> ${change >= 0 ? 'más' : 'menos'} que el mes pasado`
+    } else {
+      change = ((lastValue - secondLastValue) / Math.abs(secondLastValue)) * 100
+      return `<span class='${change >= 0 ? 'text-success' : 'text-danger'} text-sm font-weight-bolder'> ${change.toFixed(2)}% </span> ${change >= 0 ? 'más' : 'menos'} que ayer`
+    }
+  } else {
+    return '<span class=\'text-success text-sm font-weight-bolder\'> Actualizado</span>'
+  }
+}
+
+
 </script>
