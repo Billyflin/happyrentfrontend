@@ -3,9 +3,50 @@
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
-import { ref } from 'vue'
-const propietarioNuevo = ref(false)
+import { defineEmits, ref, watchEffect } from 'vue'
+
+const propietarioNuevo = ref(true)
 const esEmpresa = ref(true)
+const propietario_existente = ref('')
+const propietarioEmpresa = ref({
+  rut: '',
+  rutRepresentante: '',
+  razonSocial: '',
+  giro: '',
+  nombreRepresentante: '',
+  apellidoPaternoRepresentante: '',
+  apellidoMaternoRepresentante: '',
+  emailRepresentante: '',
+  confirmEmailRepresentante: '',
+  numeroRepresentante: ''
+})
+const propietarioPersona = ref({
+  rut: '',
+  nombre: '',
+  apellidoPaterno: '',
+  apellidoMaterno: '',
+  email: '',
+  confirmEmail: '',
+  numero: ''
+})
+const direccion = ref({
+  pais: '',
+  region: '',
+  ciudad: '',
+  calle: '',
+  numero: ''
+})
+const emit = defineEmits(['update:propietario'])
+watchEffect(() => {
+  emit('update:propietario', {
+    propietarioNuevo: propietarioNuevo.value,
+    esEmpresa: esEmpresa.value,
+    propietario_existente: propietario_existente.value,
+    propietarioEmpresa: propietarioEmpresa.value,
+    propietarioPersona: propietarioPersona.value,
+    direccion: direccion.value
+  })
+})
 
 </script>
 
@@ -18,12 +59,12 @@ const esEmpresa = ref(true)
       <div class="row">
         <div class="col-4 mt-3">
           <material-switch class="" id="existente" name="existente" v-model:checked="propietarioNuevo"
-                           label-class="mb-0 text-body text-truncate w-100"> Propietario existente
+                           label-class="mb-0 text-body text-truncate w-100"> Propietario nuevo
           </material-switch>
         </div>
       </div>
       <div class="row">
-        <div class="row mt-4" v-if="!propietarioNuevo">
+        <div class="row mt-4" v-if="propietarioNuevo">
 
           <div class="col-3">
             <material-switch id="tipo_propietario" name="tipo_propietario" v-model:checked="esEmpresa" checked
@@ -45,6 +86,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Rut propietario"
                 placeholder="Con guión"
+                v-model="propietarioPersona.rut"
               />
             </div>
             <div class="col-4">
@@ -53,6 +95,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Nombre propietario"
                 placeholder="Nombre"
+                v-model="propietarioPersona.nombre"
               />
             </div>
             <div class="col-4">
@@ -61,6 +104,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Apellido Paterno Propietario"
                 placeholder="Apellido"
+                v-model="propietarioPersona.apellidoPaterno"
               />
             </div>
             <div class="col-4">
@@ -69,6 +113,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Apellido Materno propietario"
                 placeholder="Apellido"
+                v-model="propietarioPersona.apellidoMaterno"
               />
             </div>
           </div>
@@ -81,6 +126,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Email propietario"
                 placeholder="Email"
+                v-model="propietarioPersona.email"
               />
             </div>
             <div class="col-4 mt-4">
@@ -99,6 +145,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Numero de teléfono"
                 placeholder="+569 xxxxxxxx"
+                v-model="propietarioPersona.numero"
               />
             </div>
           </div>
@@ -115,6 +162,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Rut Empresa"
                 placeholder="Con guión"
+                v-model="propietarioEmpresa.rut"
               />
             </div>
           </div>
@@ -127,6 +175,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Rut Representante Legal"
                 placeholder="Con guión"
+                v-model="propietarioEmpresa.rutRepresentante"
               />
             </div>
             <div class="col-sm-5">
@@ -135,6 +184,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Razón Social"
                 placeholder="Razón Social"
+                v-model="propietarioEmpresa.razonSocial"
               />
             </div>
             <div class="col-sm-4">
@@ -143,6 +193,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Giro"
                 placeholder="Giro"
+                v-model="propietarioEmpresa.giro"
               />
             </div>
           </div>
@@ -153,6 +204,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Nombre Representante Legal"
                 placeholder="Nombre"
+                v-model="propietarioEmpresa.nombreRepresentante"
               />
             </div>
             <div class="col-4">
@@ -161,6 +213,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Apellido Paterno Representante Legal"
                 placeholder="Apellido"
+                v-model="propietarioEmpresa.apellidoPaternoRepresentante"
               />
             </div>
             <div class="col-4">
@@ -169,6 +222,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Apellido Materno Representante Legal"
                 placeholder="Apellido"
+                v-model="propietarioEmpresa.apellidoMaternoRepresentante"
               />
             </div>
           </div>
@@ -181,6 +235,7 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Email Representante Legal"
                 placeholder="Email"
+                v-model="propietarioEmpresa.emailRepresentante"
               />
             </div>
             <div class="col-4 mt-4">
@@ -199,15 +254,16 @@ const esEmpresa = ref(true)
                 variant="static"
                 label="Numero de teléfono"
                 placeholder="+569 xxxxxxxx"
+                v-model="propietarioEmpresa.numeroRepresentante"
               />
             </div>
           </div>
         </div>
-        <div class="row mt-4" v-if="propietarioNuevo">
+        <div class="row mt-4" v-if="!propietarioNuevo">
           <div class="row">
             <div class="col-6 mb-4">
               <material-choices id="propietario_seleccionado"
-                                v-model="propietario_elegido"
+                                v-model="propietario_existente"
                                 :options="[
                               {value:'1',text:'Acá van a estar los propietarios existentes'},
                               {value:'2',text:'Pero de momento no se a implementado'},
@@ -222,7 +278,7 @@ const esEmpresa = ref(true)
 
         </div>
 
-        <div class="row mt-4 text-start" v-if="!propietarioNuevo">
+        <div class="row mt-4 text-start" v-if="propietarioNuevo">
           <h5 class="mt-3 mb-3">Dirección</h5>
           <div class="mt-3 col-3">
             <MaterialChoices id="paisPropiedad"
@@ -234,25 +290,24 @@ const esEmpresa = ref(true)
                              { value: 'Brasil', text: 'Brasil'},
                               { value: 'Colombia', text: 'Colombia'}
                              ]"
-                             name="pais" v-model="paisSeleccionado" />
+                             name="pais" v-model="direccion.pais" />
           </div>
           <div class="col-sm-4 mt-3 col-6 ms-auto">
-            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="regionSeleccionada"
+            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="direccion.region"
                              :is-disabled="!paisSeleccionado"
-                             @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)" />
+            />
           </div>
           <div class="col-sm-4 mt-3 col-6 ms-auto">
-            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada"
-                             @change="console.log(ciudadSeleccionada)"
+            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="direccion.ciudad"
                              :is-disabled="!regionSeleccionada" />
           </div>
         </div>
-        <div class="row mt-3 text-start" v-if="!propietarioNuevo">
+        <div class="row mt-3 text-start" v-if="propietarioNuevo">
           <div class="mt-3 col-12 col-md-8 ms-auto">
-            <material-input id="nombreCalle" variant="static" label="Nombre de la calle" />
+            <material-input id="nombreCalle" variant="static" label="Nombre de la calle" v-model="direccion.calle" />
           </div>
           <div class="mt-3 col-12 col-md-4 ms-auto">
-            <material-input id="numeroCalle" variant="static" label="Número de la calle" />
+            <material-input id="numeroCalle" variant="static" label="Número de la calle" v-model="direccion.numero" />
           </div>
         </div>
       </div>

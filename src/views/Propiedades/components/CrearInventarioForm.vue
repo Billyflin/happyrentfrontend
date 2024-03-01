@@ -9,6 +9,7 @@ import MaterialButton from '@/components/MaterialButton.vue'
 let myDropzone = null
 
 const agregarInventario = ref(false)
+const modificable = ref(false)
 
 const nuevoItem = ref({ nombre: '', estado: '', descripcion: '', fotos: [] })
 const items = ref([])
@@ -69,10 +70,14 @@ watch(agregarInventario, (newValue) => {
       <div class="row mt-4" v-if="agregarInventario">
         <div class="row mt-4">
           <h5>Agregar Item</h5>
-          <form @submit.prevent="agregarItem" class="row">
+          <form @submit.prevent="agregarItem" class="row mt-2">
+            <div class="col-4 mt-3">
+            <material-switch id="modificable" name="modificable" v-model:checked="modificable" checked>{{modificable? 'Es modificable':'No es modificable'}}</material-switch>
+            </div>
             <div class="col-4">
               <MaterialInput
                 id="nombre"
+                size="lg"
                 label="Nombre del objeto"
                 v-model="nuevoItem.nombre"
                 isRequired
@@ -86,7 +91,7 @@ watch(agregarInventario, (newValue) => {
                 isRequired
               />
             </div>
-            <div class="col-4">
+            <div class="col-12 mt-2">
               <MaterialTextarea
                 id="descripcion"
                 placeholder="Añade una descripción..."
@@ -95,7 +100,7 @@ watch(agregarInventario, (newValue) => {
                 :resizable="false"
               />
             </div>
-            <div class="row">
+            <div class="row mt-2 ">
               <!--    Agregar imagenes-->
               <h5 class="font-weight-bolder">Imagenes</h5>
               <div class="multisteps-form__content">

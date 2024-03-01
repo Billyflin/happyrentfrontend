@@ -1,20 +1,60 @@
 <script setup>
-
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import { onMounted , ref } from 'vue'
+import { defineEmits, onMounted, ref, watchEffect } from 'vue'
 import Dropzone from 'dropzone'
-const tipo_propiedad = ref(null)
-// todo Arrerglar dropzone
-onMounted(() => {
-  {
-    let myDropzone = new Dropzone('#productImg')
-    myDropzone.on('addedfile', (file) => {
-      console.log(`File added: ${file.name}`)
-    })
-  }
+import MaterialChoices from '@/components/MaterialChoices.vue'
+import MaterialInput from '@/components/MaterialInput.vue'
+
+let myDropzone = null
+const propiedad = ref({
+  nombre: '',
+  tipo: '',
+  numBanos: 0,
+  numEstacionamientos: 0,
+  numPiezas: 0,
+  metrosCuadradosTerreno: 0,
+  metrosCuadradosConstruidos: 0,
+  numBodegas: 0,
+  imagenes: []
 })
 
+const emit = defineEmits(['update:propiedad'])
+watchEffect(() => {
+  emit('update:propiedad', propiedad.value)
+})
+
+onMounted(() => {
+  myDropzone = new Dropzone('#productImg', {
+    maxFiles: 1,
+    acceptedFiles: 'image/*',
+    autoProcessQueue: false,
+    addRemoveLinks: true,
+    dictRemoveFile: 'Eliminar',
+    dictDefaultMessage: 'Arrastra aquí tus imágenes',
+    dictFallbackMessage: 'Tu navegador no soporta arrastrar y soltar para subir archivos',
+    dictInvalidFileType: 'No puedes subir este tipo de archivo',
+    dictFileTooBig: 'El archivo es muy grande',
+    dictCancelUpload: 'Cancelar subida'
+  })
+
+  myDropzone.on('addedfile', (file) => {
+    if (myDropzone.files.length > 1) {
+      myDropzone.removeFile(myDropzone.files[0])
+    }
+    // Agregar el objeto de archivo a propiedad.value.imagenes
+    propiedad.value.imagenes.push(file)
+    console.log(
+      'Imagenes: ',
+      propiedad.value.imagenes)
+    console.log('Propiedad: ', propiedad.value)
+    emit('update:propiedad', propiedad.value)
+  })
+  myDropzone.on('removedfile', (file) => {
+    propiedad.value.imagenes = []
+    console.log('Imagenes: ', propiedad.value.imagenes)
+    console.log('Propiedad: ', propiedad.value)
+    emit('update:propiedad', propiedad.value)
+  })
+})
 </script>
 
 <template>
@@ -30,11 +70,12 @@ onMounted(() => {
             variant="static"
             label="Nombre Propiedad"
             placeholder="Casa de campo, etc"
+            v-model="propiedad.nombre"
           />
         </div>
         <div class="col-4">
           <material-choices id="tipo_propiedad"
-                            v-model="tipo_propiedad"
+                            v-model="propiedad.tipo"
                             :options="[
                               {value:'Casa',text:'Casa'},
                               {value:'Terreno',text:'Terreno'},
@@ -42,15 +83,6 @@ onMounted(() => {
                               ]"
                             name="TipoPropiedad" label="Tipo Propiedad" :search-enabled="false" />
         </div>
-        <!--          <div class="col-2">-->
-        <!--            <material-input-->
-        <!--              id="fechaNacimento"-->
-        <!--              variant="static"-->
-        <!--              type="date"-->
-        <!--              label="Fecha Nacimiento"-->
-        <!--              placeholder="10/10/2001"-->
-        <!--            />-->
-        <!--          </div>-->
       </div>
       <div class="row">
         <div class="col-3">
@@ -60,6 +92,7 @@ onMounted(() => {
             variant="static"
             label="numero de baños"
             placeholder="1"
+            v-model="propiedad.numBanos"
           />
         </div>
         <div class="col-3">
@@ -119,7 +152,7 @@ onMounted(() => {
         <div class="multisteps-form__content">
           <div class="mt-3 row">
             <div class="col-12">
-              <label class="form-control mb-0">Product images</label>
+              <label class="form-control mb-0">Imagen de la propiedad</label>
               <div
                 id="productImg"
                 action="/file-upload"
@@ -132,7 +165,3 @@ onMounted(() => {
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>
