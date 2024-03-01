@@ -13,7 +13,7 @@ const routes = [{
     requiresAuth: true, roles: ['ROLE_ADMIN']
   }
 }, {
-  path: '/dev', name: 'dev', component: Dev
+  path: '/dev', name: 'dev', component: () => import('../views/Contrato/components/ArrendadorContrato.vue')
 }, {
   path: '/profile', name: 'Profile', component: Profile, meta: {
     requiresAuth: true, roles: ['ROLE_USER']
@@ -22,8 +22,7 @@ const routes = [{
   path: '/sign-in', name: 'SignIn', component: SignIn
 }, {
   path: '/sign-up', name: 'SignUp', component: SignUp
-}
-, {
+}, {
   path: '/misContratos', name: 'MisContratos', component: () => import('../views/Contrato/MisContratos.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }
