@@ -13,23 +13,15 @@ const routes = [{
     requiresAuth: true, roles: ['ROLE_ADMIN']
   }
 }, {
-  path: '/dev', name: 'dev', component: Dev
+  path: '/dev', name: 'dev', component: () => import('../views/Contrato/components/ArrendadorContrato.vue')
 }, {
   path: '/profile', name: 'Profile', component: Profile, meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }
 }, {
-  path: '/addProduct', name: 'AddProduct', component: () => import('../views/AddProduct.vue'), meta: {
-    requiresAuth: true, roles: ['ROLE_ADMIN']
-  }
-}, {
   path: '/sign-in', name: 'SignIn', component: SignIn
 }, {
   path: '/sign-up', name: 'SignUp', component: SignUp
-}, {
-  path: '/contact', name: 'Contact', component: () => import('../views/Contact.vue'), meta: {
-    roles: ['ROLE_USER']
-  }
 }, {
   path: '/misContratos', name: 'MisContratos', component: () => import('../views/Contrato/MisContratos.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']

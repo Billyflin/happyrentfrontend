@@ -1,8 +1,9 @@
 <script setup>
 
 import MaterialInput from '@/components/MaterialInput.vue'
+import MaterialChoices from '@/components/MaterialChoices.vue'
 </script>
-
+<!--todo LISTO-->
 <template>
   <div id="Propiedad" class="card mt-4">
     <div class="card-header">
@@ -39,44 +40,36 @@ import MaterialInput from '@/components/MaterialInput.vue'
       </div>
       <div class="row">
         <div class="col-sm-4 col-3">
-          <label class="form-label mt-4 ms-0">Tipo Propiedad</label>
-          <select
-            id="choices-tipo-propiedad"
-            class="form-control"
-            name="choices-tipo-propiedad"
-          >
-            <option value="Casa">Casa</option>
-            <option value="Edificio">Edificio</option>
-            <option value="Sitio">Sitio</option>
-            <option value="Bodega">Bodega</option>
-            <option value="Departamento">Departamento</option>
-            <option value="Parcela">Parcela</option>
-          </select>
+          <material-choices id="tipo_propiedad"
+                            v-model="tipo_propiedad"
+                            :options="[
+                              {value:'Casa',text:'Casa'},
+                              {value:'Terreno',text:'Terreno'},
+                              {value:'Departamento',text:'Departamento'}
+                              ]"
+                            name="TipoPropiedad" label="Tipo Propiedad" :search-enabled="false" />
         </div>
-        <div class="col-sm-2 col-2">
-          <label class="form-label mt-4 ms-0" for="choices-pais">País</label>
-
-          <select class="form-control" v-model="selectedPais" @change="actualizarRegiones" id="choices-pais"
-                  name="choices-pais">
-            <option value="Chile">Chile</option>
-            <!-- Agrega más opciones aquí -->
-          </select>
-
+        <div class="mt-2 col-2">
+          <MaterialChoices id="pais"
+                           label="País"
+                           :options=" [
+                             { value: 'Chile', text: 'Chile' },
+                             { value: 'Peru', text: 'Perú' },
+                             { value: 'Argentina', text: 'Argentina'},
+                             { value: 'Brasil', text: 'Brasil'},
+                              { value: 'Colombia', text: 'Colombia'}
+                             ]"
+                           name="pais" v-model="paisSeleccionado" />
         </div>
-        <div class="col-sm-2 col-2">
-          <label class="form-label mt-4 ms-0" for="choices-region">Región</label>
-          <select v-model="selectedRegion" id="choices-region" :disabled="!selectedPais">
-            <!-- Opciones de regiones según el país seleccionado -->
-            <option v-for="region in regions" :key="region">{{ region }}</option>
-          </select>
+        <div class="col-sm-3 mt-3 col-3 ms-auto">
+          <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="regionSeleccionada"
+                           :is-disabled="!paisSeleccionado"
+                           @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)" />
         </div>
-
-        <div class="col-sm-3 col-2">
-          <label class="form-label mt-4 ms-0" for="choices-ciudad">Ciudad</label>
-          <select v-model="selectedCiudad" id="choices-ciudad" :disabled="!selectedRegion">
-            <!-- Opciones de ciudades según la región seleccionada -->
-            <option v-for="ciudad in ciudades" :key="ciudad">{{ ciudad }}</option>
-          </select>
+        <div class="col-sm-3 mt-3 col-3 ms-auto">
+          <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada"
+                           @change="console.log(ciudadSeleccionada)"
+                           :is-disabled="!regionSeleccionada" />
         </div>
       </div>
       <div class="row mt-4">
