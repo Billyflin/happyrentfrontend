@@ -13,6 +13,7 @@
         :isRequired="isRequired"
         :disabled="disabled"
         @input="$emit('update:modelValue', $event.target.value)"
+        :style="{ resize: resizable ? 'auto' : 'none' }"
     ></textarea>
   </div>
 </template>
@@ -62,6 +63,10 @@ export default {
     error: {
       type: Boolean,
       default: false,
+    },
+    resizable: {
+      type: Boolean,
+      default: true,
     },
   },
   mounted() {

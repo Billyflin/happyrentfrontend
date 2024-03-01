@@ -362,9 +362,6 @@ export default {
     }
   },
   mounted() {
-    console.log('País seleccionado:', this.selectedPais)
-    console.log('Región seleccionada:', this.selectedRegion)
-    console.log('Ciudad seleccionada:', this.selectedCiudad)
     let myDropzone = new Dropzone('#propiedadImg', {
       maxFiles: 6,
       acceptedFiles: 'image/*',

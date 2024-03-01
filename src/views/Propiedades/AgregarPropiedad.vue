@@ -208,7 +208,7 @@
           <div class="row mt-4" v-if="esEmpresa">
             <h5 class=" mt-3 mb-3">Empresa</h5>
           </div>
-          <div class="row mt-4">
+          <div class="row mt-4" v-if="esEmpresa">
             <div class="col-sm-3">
               <material-input
                 id="Rut"
@@ -219,7 +219,7 @@
               />
             </div>
           </div>
-          <div class="row mt-4">
+          <div class="row mt-4" v-if="esEmpresa">
 
             <div class="col-sm-3">
               <material-input
@@ -362,8 +362,7 @@
     </div>
 
   <!--INVENTARIO-->
-<!--    <crear-inventario-form :propietarioNuevo="propietarioNuevo" :agregarInventario="agregarInventario"-->
-<!--                           :esEmpresa="esEmpresa" />-->
+    <crear-inventario-form  />
 
     <!--  Boton enviar! -->
 
@@ -382,12 +381,12 @@ import MaterialAvatar from '@/components/MaterialAvatar.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import Dropzone from 'dropzone'
 import MaterialChoices from '@/components/MaterialChoices.vue'
-// import CrearInventarioForm from '@/views/Propiedades/components/CrearInventarioForm.vue'
+import CrearInventarioForm from '@/views/Propiedades/components/CrearInventarioForm.vue'
 
 export default {
   name: 'AgregarPropiedad',
   components: {
-    // CrearInventarioForm,
+    CrearInventarioForm,
     MaterialChoices,
     MaterialButton,
     MaterialSwitch,

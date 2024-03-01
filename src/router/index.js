@@ -82,6 +82,9 @@ const routes = [{
   { path: '/registroExitoso', name: 'RegistroExitoso', component: () => import('../views/PlantillasPlanas/RegistroExitoso.vue') },
   {
     path: '/principalPlanes', name: 'PrincipalPlanes', component: () => import('../views/PlantillasPlanas/PrincipalPlanes.vue')
+  },
+  {
+    path:'/billy' , name: 'Billy', component: () => import('../views/Propiedades/components/CrearInventarioForm.vue')
   }
 
 

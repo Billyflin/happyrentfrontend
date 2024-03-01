@@ -257,7 +257,8 @@ import MaterialButton from '@/components/MaterialButton.vue'
 export default {
   name: 'DataTables',
   components: { MaterialButton },
-  mounted() {
+  mounted()
+  {
     // eslint-disable-next-line no-unused-vars
     // const dataTableBasic = new DataTable("#datatable-basic", {
     //   searchable: false,
@@ -265,10 +266,11 @@ export default {
     // });
 
     // eslint-disable-next-line no-unused-vars
-    const dataTableSearch = new DataTable('#datatable-search', {
+    new DataTable('#datatable-search', {
       searchable: true,
       fixedHeight: true
     })
   }
+
 }
 </script>
