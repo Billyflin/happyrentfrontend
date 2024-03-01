@@ -69,6 +69,7 @@ onMounted(() => {
             variant="static"
             label="numero de estacionamientos"
             placeholder="1"
+            v-model="propiedad.numEstacionamientos"
           />
         </div>
         <div class="col-3">
@@ -78,6 +79,7 @@ onMounted(() => {
             variant="static"
             label="numero de piezas"
             placeholder="1"
+            v-model="propiedad.numPiezas"
           />
         </div>
         <div class="col-3">
@@ -87,6 +89,7 @@ onMounted(() => {
             variant="static"
             label="metros cuadrados terreno"
             placeholder="50"
+            v-model="propiedad.metrosCuadradosTerreno"
           />
         </div>
         <div class="col-3">
@@ -96,6 +99,7 @@ onMounted(() => {
             variant="static"
             label="metros cuadrados construidos"
             placeholder="40"
+            v-model="propiedad.metrosCuadradosConstruidos"
           />
         </div>
         <div class="col-3">
@@ -105,6 +109,7 @@ onMounted(() => {
             variant="static"
             label="numero de bodegas"
             placeholder="1"
+            v-model="propiedad.numBodegas"
           />
         </div>
       </div>
