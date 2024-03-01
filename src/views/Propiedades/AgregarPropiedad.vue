@@ -24,15 +24,15 @@
                               ]"
                               name="TipoPropiedad" label="Tipo Propiedad" :search-enabled="false" />
           </div>
-          <div class="col-2">
-            <material-input
-              id="fechaNacimento"
-              variant="static"
-              type="date"
-              label="Fecha Nacimiento"
-              placeholder="10/10/2001"
-            />
-          </div>
+          <!--          <div class="col-2">-->
+          <!--            <material-input-->
+          <!--              id="fechaNacimento"-->
+          <!--              variant="static"-->
+          <!--              type="date"-->
+          <!--              label="Fecha Nacimiento"-->
+          <!--              placeholder="10/10/2001"-->
+          <!--            />-->
+          <!--          </div>-->
         </div>
         <div class="row">
           <div class="col-3">
@@ -207,6 +207,20 @@
           <!--  Seccion Empresa-->
           <div class="row mt-4" v-if="esEmpresa">
             <h5 class=" mt-3 mb-3">Empresa</h5>
+          </div>
+          <div class="row mt-4">
+            <div class="col-sm-3">
+              <material-input
+                id="Rut"
+                type="text"
+                variant="static"
+                label="Rut Empresa"
+                placeholder="Con guión"
+              />
+            </div>
+          </div>
+          <div class="row mt-4">
+
             <div class="col-sm-3">
               <material-input
                 id="Rut"
@@ -347,21 +361,14 @@
       </div>
     </div>
 
-
-    <div id="Agregar Propiedad" class="card mt-4">
-      <div class="card-header">
-        <h4>Agregar Propiedad</h4>
-      </div>
-      <div class="card-body pt-0">
-
-
-      </div>
-    </div>
-
+  <!--INVENTARIO-->
+<!--    <crear-inventario-form :propietarioNuevo="propietarioNuevo" :agregarInventario="agregarInventario"-->
+<!--                           :esEmpresa="esEmpresa" />-->
 
     <!--  Boton enviar! -->
 
-    <material-button variant="success" size="lg" class="mt-4" full-width @click="mostrarAlerta">Enviar</material-button>
+    <material-button variant="success" size="lg" class="mt-4" full-width @click="mostrarAlerta">Enviar
+    </material-button>
 
   </div>
 </template>
@@ -375,10 +382,12 @@ import MaterialAvatar from '@/components/MaterialAvatar.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import Dropzone from 'dropzone'
 import MaterialChoices from '@/components/MaterialChoices.vue'
+// import CrearInventarioForm from '@/views/Propiedades/components/CrearInventarioForm.vue'
 
 export default {
   name: 'AgregarPropiedad',
   components: {
+    // CrearInventarioForm,
     MaterialChoices,
     MaterialButton,
     MaterialSwitch,
@@ -395,6 +404,7 @@ export default {
       tipo_propietario: null,
       propietario_seleccionado: null,
       propietarioNuevo: false,
+      agregarInventario: false,
       regiones: [],
       ciudades: [],
       esEmpresa: true,

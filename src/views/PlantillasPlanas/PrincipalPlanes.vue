@@ -4,11 +4,11 @@
     class="page-header bg-gradient-dark position-relative m-3 border-radius-xl min-vh-50"
   >
     <img
-      src="../assets/img/bg-pricing.jpg"
+      src="../../assets/img/bg-pricing.jpg"
       alt="pattern-lines"
       class="page-header top-0 position-absolute opacity-8 start-0 w-100"
     />
-    <img src="../assets/LogoHappGrandeBlanco.svg" alt="logo-Happ" class="position-absolute top-3 start-1" height="150" />
+    <img src="../../assets/LogoHappGrandeBlanco.svg" alt="logo-Happ" class="position-absolute top-3 start-1" height="150" />
     <span class="mask bg-gradient-dark opacity-2"></span>
     <div class="container py-10 position-relative z-index-2">
       <div class="row">
@@ -190,42 +190,42 @@
           <div class="mb-4 col-lg-2 col-md-4 col-6">
             <img
               class="w-100 opacity-9"
-              src="../assets/img/logos/gray-logos/logo-coinbase.svg"
+              src="../../assets/img/logos/gray-logos/logo-coinbase.svg"
               alt="logo_coinbase"
             />
           </div>
           <div class="mb-4 col-lg-2 col-md-4 col-6">
             <img
               class="w-100 opacity-9"
-              src="../assets/img/logos/gray-logos/logo-nasa.svg"
+              src="../../assets/img/logos/gray-logos/logo-nasa.svg"
               alt="logo_nasa"
             />
           </div>
           <div class="mb-4 col-lg-2 col-md-4 col-6">
             <img
               class="w-100 opacity-9"
-              src="../assets/img/logos/gray-logos/logo-netflix.svg"
+              src="../../assets/img/logos/gray-logos/logo-netflix.svg"
               alt="logo_netflix"
             />
           </div>
           <div class="mb-4 col-lg-2 col-md-4 col-6">
             <img
               class="w-100 opacity-9"
-              src="../assets/img/logos/gray-logos/logo-pinterest.svg"
+              src="../../assets/img/logos/gray-logos/logo-pinterest.svg"
               alt="logo_pinterest"
             />
           </div>
           <div class="mb-4 col-lg-2 col-md-4 col-6">
             <img
               class="w-100 opacity-9"
-              src="../assets/img/logos/gray-logos/logo-spotify.svg"
+              src="../../assets/img/logos/gray-logos/logo-spotify.svg"
               alt="logo_spotify"
             />
           </div>
           <div class="mb-4 col-lg-2 col-md-4 col-6">
             <img
               class="w-100 opacity-9"
-              src="../assets/img/logos/gray-logos/logo-vodafone.svg"
+              src="../../assets/img/logos/gray-logos/logo-vodafone.svg"
               alt="logo_vodafone"
             />
           </div>

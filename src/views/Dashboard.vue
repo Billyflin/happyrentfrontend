@@ -12,23 +12,6 @@
           />
         </div>
         <div class="row mt-4">
-<!--          <div class="col-lg-4 col-md-6 mt-4">-->
-<!--            <ChartHolderCard-->
-<!--              title="Website Views"-->
-<!--              subtitle="Last Campaign Performance"-->
-<!--              update="campaign sent 2 days ago"-->
-<!--            >-->
-<!--              <BarChart-->
-<!--                :chart="{-->
-<!--                  xAxislDatas: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],-->
-<!--                  datasets: {-->
-<!--                    label: 'Sales',-->
-<!--                    data: [50, 20, 10, 22, 50, 10, 40],-->
-<!--                  },-->
-<!--                }"-->
-<!--              />-->
-<!--            </ChartHolderCard>-->
-<!--          </div>-->
           <div class="col-lg-4 col-md-6 mt-4">
             <ChartHolderCard v-if="DolarData"
                              title="Valor del Dólar"
@@ -62,6 +45,23 @@
             >
               <LineChart :chart="IPCData" id="line-chart-3" :yAxisMin="Math.min(...IPCData.datasets.data)"
                          :y-axis-max="Math.max(...IPCData.datasets.data)" />
+            </ChartHolderCard>
+          </div>
+          <div class="col-lg-4 col-md-6 mt-4">
+            <ChartHolderCard
+              title="Website Views"
+              subtitle="Last Campaign Performance"
+              update="campaign sent 2 days ago"
+            >
+              <BarChart
+                :chart="{
+                              xAxislDatas: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],
+                              datasets: {
+                                label: 'Sales',
+                                data: [50, 20, 10, 22, 50, 10, 40],
+                              },
+                            }"
+              />
             </ChartHolderCard>
           </div>
         </div>
@@ -100,9 +100,9 @@ onMounted(async () => {
 })
 
 function getMinutesSinceLastUpdate() {
-  let now = new Date() // Obtiene la hora actual
-  let difference = now - lastUpdated // Calcula la diferencia en milisegundos
-  return Math.floor(difference / 1000 / 60) // Convierte la diferencia a minutos
+  let now = new Date()
+  let difference = now - lastUpdated
+  return Math.floor(difference / 1000 / 60)
 }
 
 async function getChartData(apiEndpoint, label) {
@@ -143,7 +143,7 @@ function createStatisticsData(data) {
       },
       'detail': getDetail(UFData, 'UF'),
       'icon': {
-        'name': 'weekend',
+        'name': 'UF',
         'color': 'white',
         'background': 'primary'
       }
@@ -155,7 +155,7 @@ function createStatisticsData(data) {
       },
       'detail': getDetail(UTMData, 'UTM'),
       'icon': {
-        'name': 'weekend',
+        'name': 'UTM',
         'color': 'white',
         'background': 'secondary'
       }

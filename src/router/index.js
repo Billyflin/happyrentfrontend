@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
 import Profile from '../views/Profile.vue'
-import SignIn from '../views/SignIn.vue'
-import SignUp from '../views/SignUp.vue'
+import SignIn from '../views/Auth/SignIn.vue'
+import SignUp from '../views/Auth/SignUp.vue'
 import { useAuthStore } from '@/store'
 import Dev from '@/views/Dev.vue'
 
@@ -31,64 +31,64 @@ const routes = [{
     roles: ['ROLE_USER']
   }
 }, {
-  path: '/misContratos', name: 'MisContratos', component: () => import('../views/MisContratos.vue'), meta: {
+  path: '/misContratos', name: 'MisContratos', component: () => import('../views/Contrato/MisContratos.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }
 },{
-  path: '/nuevoContrato', name: 'NuevoContrato', component: () => import('../views/NuevoContrato.vue'), meta: {
+  path: '/nuevoContrato', name: 'NuevoContrato', component: () => import('../views/Contrato/NuevoContrato.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }
 },{
   // todo /formularioInvitado/:uuid
-  path: '/formularioInvitado', name: 'FormularioInvitado', component: () => import('../views/FormularioInvitado.vue'), meta: {
+  path: '/formularioInvitado', name: 'FormularioInvitado', component: () => import('../views/Contrato/FormularioInvitado.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }
 },
 
 
   {
-  path: '/agregarPropiedad/', name: 'AgregarPropiedad', component: () => import('../views/AgregarPropiedad.vue'), meta: {
+  path: '/agregarPropiedad/', name: 'AgregarPropiedad', component: () => import('../views/Propiedades/AgregarPropiedad.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_USER']
   }
 },
   {
-    path: '/Propiedades', name: 'Propiedades', component: () => import('../views/Propiedades.vue'), meta: {
+    path: '/Propiedades', name: 'Propiedades', component: () => import('../views/Propiedades/Propiedades.vue'), meta: {
       requiresAuth: true, roles: ['ROLE_USER']
     }
   },
   {
-    path: '/propiedad/:id', name: 'Propiedad', component: () => import('../views/Propiedad.vue'), meta: {}
+    path: '/propiedad/:id', name: 'Propiedad', component: () => import('../views/Propiedades/Propiedad.vue'), meta: {}
   }, {
-    path: '/propiedad/edit/:id', name: 'PropiedadEdit', component: () => import('../views/EditarPropiedad.vue'), meta: {}
+    path: '/propiedad/edit/:id', name: 'PropiedadEdit', component: () => import('../views/Propiedades/EditarPropiedad.vue'), meta: {}
   },{
     path: '/formularioRegistro',
     name: 'FormularioRegistro',
-    component: () => import('@/views/FormularioRegistro.vue'),
+    component: () => import('@/views/Auth/FormularioRegistro.vue'),
     props: true
   },
 
   {
-    path: '/contrato/:id', name: 'Contrato', component: () => import('../views/Contrato.vue'), meta: {
+    path: '/contrato/:id', name: 'Contrato', component: () => import('../views/Contrato/Contrato.vue'), meta: {
       requiresAuth: true, roles: ['ROLE_USER']
     }
   }
   ,{
-  path: '/rememberPassword', name: 'rememberPassword', component: () => import('../views/RememberPassword.vue')
+  path: '/rememberPassword', name: 'rememberPassword', component: () => import('../views/Auth/RememberPassword.vue')
   },
   {
-    path: '/error', name: 'Error', component: () => import('../views/Error.vue')
+    path: '/error', name: 'Error', component: () => import('../views/PlantillasPlanas/Error.vue')
   }
   ,
   {
-  path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/NotFound.vue')
+  path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/PlantillasPlanas/NotFound.vue')
   }
   ,
   {
-    path: '/correoVerificado', name: 'CorreoVerificado', component: () => import('../views/CorreoVerificado.vue')
+    path: '/correoVerificado', name: 'CorreoVerificado', component: () => import('../views/PlantillasPlanas/CorreoVerificado.vue')
   },
-  { path: '/registroExitoso', name: 'RegistroExitoso', component: () => import('../views/RegistroExitoso.vue') },
+  { path: '/registroExitoso', name: 'RegistroExitoso', component: () => import('../views/PlantillasPlanas/RegistroExitoso.vue') },
   {
-    path: '/principalPlanes', name: 'PrincipalPlanes', component: () => import('../views/PrincipalPlanes.vue')
+    path: '/principalPlanes', name: 'PrincipalPlanes', component: () => import('../views/PlantillasPlanas/PrincipalPlanes.vue')
   }
 
 

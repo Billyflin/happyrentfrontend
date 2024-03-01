@@ -28,18 +28,14 @@
 
 <script>
 // import NavPill from "./components/NavPill.vue";
-import FormularioPais from '@/views/components/NuevoContrato/FormularioPais.vue'
-import FormularioRegion from '@/views/components/NuevoContrato/FormularioRegion.vue'
-import SideNav from './components/NuevoContrato/SideNav.vue'
-import SideNavItem from './components/NuevoContrato/SideNavItem.vue'
+import SideNav from './components/SideNav.vue'
+import SideNavItem from './components/SideNavItem.vue'
 import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
 
 export default {
   name: 'NuevoContrato',
   components: {
-    FormularioRegion,
-    FormularioPais,
     // NavPill,
     SideNav,
     SideNavItem

@@ -80,10 +80,10 @@
 </template>
 
 <script>
-import Cuenta from "./components/Cuenta.vue";
-import Perfil from "./components/PerfilForm.vue";
-import AppAddress from "./components/Dirreccion.vue";
-import BankAccount from "./components/BankAccount.vue";
+import Cuenta from "../components/Cuenta.vue";
+import Perfil from "../components/PerfilForm.vue";
+import AppAddress from "../components/Dirreccion.vue";
+import BankAccount from "../components/BankAccount.vue";
 import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
 import PlanSelection from '@/views/components/PlanSelection.vue'
