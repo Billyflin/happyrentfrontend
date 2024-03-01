@@ -222,31 +222,31 @@ const propietario_elegido = ref(null)
 
         </div>
 
-        <div class="row mt-4 text-start" v-if="!propietarioContrato">
-          <h5 class="mt-3 mb-3">Dirección</h5>
-          <div class="mt-3 col-3">
-            <MaterialChoices id="paisPropiedad"
-                             label="País"
-                             :options=" [
-                             { value: 'Chile', text: 'Chile' },
-                             { value: 'Peru', text: 'Perú' },
-                             { value: 'Argentina', text: 'Argentina'},
-                             { value: 'Brasil', text: 'Brasil'},
-                              { value: 'Colombia', text: 'Colombia'}
-                             ]"
-                             name="pais" v-model="paisSeleccionado" />
-          </div>
-          <div class="col-sm-4 mt-3 col-6 ms-auto">
-            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="regionSeleccionada"
-                             :is-disabled="!paisSeleccionado"
-                             @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)" />
-          </div>
-          <div class="col-sm-4 mt-3 col-6 ms-auto">
-            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada"
-                             @change="console.log(ciudadSeleccionada)"
-                             :is-disabled="!regionSeleccionada" />
-          </div>
-        </div>
+<!--        <div class="row mt-4 text-start" v-if="!propietarioContrato">-->
+<!--          <h5 class="mt-3 mb-3">Dirección</h5>-->
+<!--          <div class="mt-3 col-3">-->
+<!--            <MaterialChoices id="paisPropiedad"-->
+<!--                             label="País"-->
+<!--                             :options=" [-->
+<!--                             { value: 'Chile', text: 'Chile' },-->
+<!--                             { value: 'Peru', text: 'Perú' },-->
+<!--                             { value: 'Argentina', text: 'Argentina'},-->
+<!--                             { value: 'Brasil', text: 'Brasil'},-->
+<!--                              { value: 'Colombia', text: 'Colombia'}-->
+<!--                             ]"-->
+<!--                             name="pais" v-model="paisSeleccionado" />-->
+<!--          </div>-->
+<!--          <div class="col-sm-4 mt-3 col-6 ms-auto">-->
+<!--            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="regionSeleccionada"-->
+<!--                             :is-disabled="!paisSeleccionado"-->
+<!--                             @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)" />-->
+<!--          </div>-->
+<!--          <div class="col-sm-4 mt-3 col-6 ms-auto">-->
+<!--            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada"-->
+<!--                             @change="console.log(ciudadSeleccionada)"-->
+<!--                             :is-disabled="!regionSeleccionada" />-->
+<!--          </div>-->
+<!--        </div>-->
         <div class="row mt-3 text-start" v-if="!propietarioContrato">
           <div class="mt-3 col-12 col-md-8 ms-auto">
             <material-input id="nombreCalle" variant="static" label="Nombre de la calle" />

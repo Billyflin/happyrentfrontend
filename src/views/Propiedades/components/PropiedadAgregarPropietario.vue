@@ -290,17 +290,17 @@ watchEffect(() => {
                              { value: 'Brasil', text: 'Brasil'},
                               { value: 'Colombia', text: 'Colombia'}
                              ]"
-                             name="pais" v-model="direccion.pais" />
+                             name="pais" v-model="direccion.pais"  :disabled="true"/>
           </div>
-          <div class="col-sm-4 mt-3 col-6 ms-auto">
-            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="direccion.region"
-                             :is-disabled="!paisSeleccionado"
-            />
-          </div>
-          <div class="col-sm-4 mt-3 col-6 ms-auto">
-            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="direccion.ciudad"
-                             :is-disabled="!regionSeleccionada" />
-          </div>
+<!--          <div class="col-sm-4 mt-3 col-6 ms-auto">-->
+<!--            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="direccion.region"-->
+<!--                             :is-disabled="!paisSeleccionado"-->
+<!--            />-->
+<!--          </div>-->
+<!--          <div class="col-sm-4 mt-3 col-6 ms-auto">-->
+<!--            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="direccion.ciudad"-->
+<!--                             :is-disabled="!regionSeleccionada" />-->
+<!--          </div>-->
         </div>
         <div class="row mt-3 text-start" v-if="propietarioNuevo">
           <div class="mt-3 col-12 col-md-8 ms-auto">

@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import { defineComponent, ref, onMounted, watch } from 'vue'
 import Choices from 'choices.js'
 
 export default defineComponent({
@@ -40,7 +40,7 @@ export default defineComponent({
       default: false,
     },
   },
-  emits: ['update:modelValue', 'change'], // Agrega 'change' aquí
+  emits: ['update:modelValue', 'change'],
   data() {
     return {
       selected: this.modelValue,
@@ -54,12 +54,13 @@ export default defineComponent({
         searchEnabled: this.searchEnabled,
         choices: this.options.map((option) => ({ value: option.value, label: option.text }))
       })
+      this.selected = this.options.length > 0 ? this.options[0].value : null
       this.choices.setChoiceByValue(this.selected)
+      this.$emit('update:modelValue', this.selected)
     })
   },
   beforeUnmount() {
     if (this.choices) {
-      // Destroy Choices instance when component is unmounted
       this.choices.destroy()
     }
   },
@@ -72,22 +73,24 @@ export default defineComponent({
       }
     },
     options(newOptions) {
-
-      // Update Choices options when options prop changes
+      this.choices.clearStore()
       this.choices.setChoices(newOptions.map((option) => ({
         value: option.value,
         label: option.text
       })), 'value', 'label', true)
+      this.selected = newOptions.length > 0 ? newOptions[0].value : null
+      this.choices.setChoiceByValue(this.selected)
+      this.$emit('update:modelValue', this.selected)
     },
     modelValue(newValue) {
-      // Update Choices selection when modelValue prop changes
+      this.selected = newValue
       this.choices.setChoiceByValue(newValue)
     },
   },
   methods: {
     emitChange() {
       this.$emit('update:modelValue', this.selected)
-      this.$emit('change', this.selected) // Emite el evento 'change' aquí
+      this.$emit('change', this.selected)
     },
   },
 })

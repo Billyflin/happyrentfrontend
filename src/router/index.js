@@ -13,7 +13,7 @@ const routes = [{
     requiresAuth: true, roles: ['ROLE_ADMIN']
   }
 }, {
-  path: '/dev', name: 'dev', component: () => import('../views/Contrato/components/ArrendadorContrato.vue')
+  path: '/dev', name: 'dev', component: () => import('../views/Dev.vue')
 }, {
   path: '/profile', name: 'Profile', component: Profile, meta: {
     requiresAuth: true, roles: ['ROLE_USER']

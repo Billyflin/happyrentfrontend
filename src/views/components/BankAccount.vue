@@ -39,7 +39,8 @@
       </div>
       <div class="mt-4 button-row d-flex">
         <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next"
-                @click="this.$parent.nextStep">
+                @click="console.log(this.cuenta)">
+<!--                @click="this.$parent.nextStep">-->
           Next
         </button>
       </div>
