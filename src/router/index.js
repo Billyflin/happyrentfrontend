@@ -73,6 +73,9 @@ const routes = [{
   ,
   {
   path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/PlantillasPlanas/NotFound.vue')
+  },
+  {
+    path: '/noVerificado', name: 'noVerificado', component: () => import('../views/PlantillasPlanas/noVerificado.vue')
   }
   ,
   {
