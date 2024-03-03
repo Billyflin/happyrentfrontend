@@ -1,9 +1,15 @@
+<!--todo LISTO-->
 <script setup>
 
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
+
+const validateInput = (event) => {
+  if (event.target.value < 0) {
+    event.target.value = 0;
+  }
+}
 </script>
-<!--todo LISTO-->
 <template>
   <div id="Propiedad" class="card mt-4">
     <div class="card-header">
@@ -26,6 +32,7 @@ import MaterialChoices from '@/components/MaterialChoices.vue'
             variant="static"
             label="Número"
             placeholder="n°"
+            @input="validateInput"
           />
         </div>
         <div class="col-3">
@@ -35,6 +42,7 @@ import MaterialChoices from '@/components/MaterialChoices.vue'
             variant="static"
             label="Código postal"
             placeholder="postal"
+            @input="validateInput"
           />
         </div>
       </div>
@@ -80,6 +88,7 @@ import MaterialChoices from '@/components/MaterialChoices.vue'
             variant="static"
             label="Numero de baños"
             placeholder="Numero de baños"
+            @input="validateInput"
           />
         </div>
         <div class="col-2">
@@ -89,6 +98,7 @@ import MaterialChoices from '@/components/MaterialChoices.vue'
             variant="static"
             label="Numero de Piezas"
             placeholder="Numero de Piezas"
+            @input="validateInput"
           />
         </div>
         <div class="col-3">
@@ -98,25 +108,29 @@ import MaterialChoices from '@/components/MaterialChoices.vue'
             variant="static"
             label="Numero de Estacionamientos"
             placeholder="Numero de Estacionamientos"
+            @input="validateInput"
           />
         </div>
         <!--        <div class="row mt-4">-->
         <div class="col-2">
           <material-input
-            id="metrosCuadrados"
+            id="metrosCuadradosT"
             type="number"
             variant="static"
             label="Metros Cuadrados Terreno"
             placeholder=" M²"
+            @input="validateInput"
           />
         </div>
         <div class="col-2">
           <material-input
-            id="metrosCuadrados"
+            id="metrosCuadradosC"
             type="number"
             variant="static"
             label="Metros Cuadrados Construidos"
             placeholder=" M²"
+            @input="validateInput"
+
           />
         </div>
         <!--        </div>-->
@@ -145,3 +159,4 @@ import MaterialChoices from '@/components/MaterialChoices.vue'
 <style scoped>
 
 </style>
+

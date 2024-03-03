@@ -1,3 +1,4 @@
+<!--todo Revisado-->
 <script setup>
 import { defineEmits, onMounted, ref, watchEffect } from 'vue'
 import Dropzone from 'dropzone'
@@ -16,6 +17,11 @@ const propiedad = ref({
   numBodegas: 0,
   imagenes: []
 })
+const validateInput = (event) => {
+  if (event.target.value < 0) {
+    event.target.value = 0
+  }
+}
 
 const emit = defineEmits(['update:propiedad'])
 watchEffect(() => {
@@ -75,7 +81,6 @@ onMounted(() => {
         </div>
         <div class="col-4">
           <material-choices id="tipo_propiedad"
-                            v-model="propiedad.tipo"
                             :options="[
                               {value:'Casa',text:'Casa'},
                               {value:'Terreno',text:'Terreno'},
@@ -93,6 +98,7 @@ onMounted(() => {
             label="numero de baños"
             placeholder="1"
             v-model="propiedad.numBanos"
+            @input="validateInput"
           />
         </div>
         <div class="col-3">
@@ -103,6 +109,7 @@ onMounted(() => {
             label="numero de estacionamientos"
             placeholder="1"
             v-model="propiedad.numEstacionamientos"
+            @input="validateInput"
           />
         </div>
         <div class="col-3">
@@ -113,6 +120,7 @@ onMounted(() => {
             label="numero de piezas"
             placeholder="1"
             v-model="propiedad.numPiezas"
+            @input="validateInput"
           />
         </div>
         <div class="col-3">
@@ -123,6 +131,7 @@ onMounted(() => {
             label="metros cuadrados terreno"
             placeholder="50"
             v-model="propiedad.metrosCuadradosTerreno"
+            @input="validateInput"
           />
         </div>
         <div class="col-3">
@@ -133,6 +142,7 @@ onMounted(() => {
             label="metros cuadrados construidos"
             placeholder="40"
             v-model="propiedad.metrosCuadradosConstruidos"
+            @input="validateInput"
           />
         </div>
         <div class="col-3">
@@ -143,6 +153,7 @@ onMounted(() => {
             label="numero de bodegas"
             placeholder="1"
             v-model="propiedad.numBodegas"
+            @input="validateInput"
           />
         </div>
       </div>
