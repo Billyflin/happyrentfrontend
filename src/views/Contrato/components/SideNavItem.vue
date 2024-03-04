@@ -8,6 +8,12 @@
   <!--  Seccion arrendador-->
   <arrendador-contrato />
 
+  <!--  Seccion Multa -->
+  <multa-contrato />
+
+  <!--  Seccion Termino Anticipado-->
+  <termino-anticipado-contrato />
+
   <!--  Seccion Reajuste-->
   <reajuste-contrato />
 
@@ -20,8 +26,17 @@ import FormularioPropiedadContrato from '@/views/Contrato/components/FormularioP
 import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosContrato.vue'
 import ArrendadorContrato from '@/views/Contrato/components/ArrendadorContrato.vue'
 import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
+import MultaContrato from '@/views/Contrato/components/MultaContrato.vue'
+import TerminoAnticipadoContrato from '@/views/Contrato/components/TerminoAnticipadoContrato.vue'
 
 export default defineComponent({
-  components: { ReajusteContrato, ArrendadorContrato, SolicitarDatosContrato, FormularioPropiedadContrato }
+  components: {
+    TerminoAnticipadoContrato,
+    MultaContrato,
+    ReajusteContrato,
+    ArrendadorContrato,
+    SolicitarDatosContrato,
+    FormularioPropiedadContrato
+  }
 })
 </script>
