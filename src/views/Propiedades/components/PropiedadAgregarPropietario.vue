@@ -53,18 +53,18 @@ watchEffect(() => {
 <template>
   <div id="Propietario" class="card mt-5">
     <div class="card-header">
-      <h5>Datos del propietario</h5>
+      <h5>Datos del Propietario</h5>
     </div>
     <div class="card-body pt-0">
       <div class="row">
         <div class="col-4 mt-3">
           <material-switch class="" id="existente" name="existente" v-model:checked="propietarioNuevo"
-                           label-class="mb-0 text-body text-truncate w-100"> Propietario nuevo
+                           label-class="mb-0 text-body text-truncate w-100"> Propietario existente
           </material-switch>
         </div>
       </div>
       <div class="row">
-        <div class="row mt-4" v-if="propietarioNuevo">
+        <div class="row mt-4" v-if="!propietarioNuevo">
 
           <div class="col-3">
             <material-switch id="tipo_propietario" name="tipo_propietario" v-model:checked="esEmpresa" checked
@@ -86,7 +86,6 @@ watchEffect(() => {
                 variant="static"
                 label="Rut propietario"
                 placeholder="Con guión"
-                v-model="propietarioPersona.rut"
               />
             </div>
             <div class="col-4">
@@ -95,7 +94,6 @@ watchEffect(() => {
                 variant="static"
                 label="Nombre propietario"
                 placeholder="Nombre"
-                v-model="propietarioPersona.nombre"
               />
             </div>
             <div class="col-4">
@@ -104,7 +102,6 @@ watchEffect(() => {
                 variant="static"
                 label="Apellido Paterno Propietario"
                 placeholder="Apellido"
-                v-model="propietarioPersona.apellidoPaterno"
               />
             </div>
             <div class="col-4">
@@ -113,7 +110,15 @@ watchEffect(() => {
                 variant="static"
                 label="Apellido Materno propietario"
                 placeholder="Apellido"
-                v-model="propietarioPersona.apellidoMaterno"
+              />
+            </div>
+            <div class="col-sm-3">
+              <material-input
+                id="Ocupacion"
+                type="text"
+                variant="static"
+                label="Ocupación Propietario"
+                placeholder="Ingeniero"
               />
             </div>
           </div>
@@ -126,7 +131,6 @@ watchEffect(() => {
                 variant="static"
                 label="Email propietario"
                 placeholder="Email"
-                v-model="propietarioPersona.email"
               />
             </div>
             <div class="col-4 mt-4">
@@ -145,7 +149,6 @@ watchEffect(() => {
                 variant="static"
                 label="Numero de teléfono"
                 placeholder="+569 xxxxxxxx"
-                v-model="propietarioPersona.numero"
               />
             </div>
           </div>
@@ -162,12 +165,8 @@ watchEffect(() => {
                 variant="static"
                 label="Rut Empresa"
                 placeholder="Con guión"
-                v-model="propietarioEmpresa.rut"
               />
             </div>
-          </div>
-          <div class="row mt-4" v-if="esEmpresa">
-
             <div class="col-sm-3">
               <material-input
                 id="Rut"
@@ -175,25 +174,6 @@ watchEffect(() => {
                 variant="static"
                 label="Rut Representante Legal"
                 placeholder="Con guión"
-                v-model="propietarioEmpresa.rutRepresentante"
-              />
-            </div>
-            <div class="col-sm-5">
-              <material-input
-                id="RazonSocial"
-                variant="static"
-                label="Razón Social"
-                placeholder="Razón Social"
-                v-model="propietarioEmpresa.razonSocial"
-              />
-            </div>
-            <div class="col-sm-4">
-              <material-input
-                id="Giro"
-                variant="static"
-                label="Giro"
-                placeholder="Giro"
-                v-model="propietarioEmpresa.giro"
               />
             </div>
           </div>
@@ -204,7 +184,6 @@ watchEffect(() => {
                 variant="static"
                 label="Nombre Representante Legal"
                 placeholder="Nombre"
-                v-model="propietarioEmpresa.nombreRepresentante"
               />
             </div>
             <div class="col-4">
@@ -213,7 +192,6 @@ watchEffect(() => {
                 variant="static"
                 label="Apellido Paterno Representante Legal"
                 placeholder="Apellido"
-                v-model="propietarioEmpresa.apellidoPaternoRepresentante"
               />
             </div>
             <div class="col-4">
@@ -222,7 +200,34 @@ watchEffect(() => {
                 variant="static"
                 label="Apellido Materno Representante Legal"
                 placeholder="Apellido"
-                v-model="propietarioEmpresa.apellidoMaternoRepresentante"
+              />
+            </div>
+          </div>
+          <div class="row mt-4" v-if="esEmpresa">
+
+            <div class="col-sm-3">
+              <material-input
+                id="Ocupacion"
+                type="text"
+                variant="static"
+                label="Ocupación Representante Legal"
+                placeholder="Ingeniero"
+              />
+            </div>
+            <div class="col-sm-5">
+              <material-input
+                id="RazonSocial"
+                variant="static"
+                label="Razón Social"
+                placeholder="Razón Social"
+              />
+            </div>
+            <div class="col-sm-4">
+              <material-input
+                id="Giro"
+                variant="static"
+                label="Giro"
+                placeholder="Giro"
               />
             </div>
           </div>
@@ -235,7 +240,6 @@ watchEffect(() => {
                 variant="static"
                 label="Email Representante Legal"
                 placeholder="Email"
-                v-model="propietarioEmpresa.emailRepresentante"
               />
             </div>
             <div class="col-4 mt-4">
@@ -254,12 +258,11 @@ watchEffect(() => {
                 variant="static"
                 label="Numero de teléfono"
                 placeholder="+569 xxxxxxxx"
-                v-model="propietarioEmpresa.numeroRepresentante"
               />
             </div>
           </div>
         </div>
-        <div class="row mt-4" v-if="!propietarioNuevo">
+        <div class="row mt-4" v-if="propietarioNuevo">
           <div class="row">
             <div class="col-6 mb-4">
               <material-choices id="propietario_seleccionado"
@@ -278,7 +281,7 @@ watchEffect(() => {
 
         </div>
 
-        <div class="row mt-4 text-start" v-if="propietarioNuevo">
+        <div class="row mt-4 text-start" v-if="!propietarioNuevo">
           <h5 class="mt-3 mb-3">Dirección</h5>
           <div class="mt-3 col-3">
             <MaterialChoices id="paisPropiedad"
@@ -292,17 +295,16 @@ watchEffect(() => {
                              ]"
                              name="pais" v-model="direccion.pais"  :disabled="true"/>
           </div>
-<!--          <div class="col-sm-4 mt-3 col-6 ms-auto">-->
-<!--            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="direccion.region"-->
-<!--                             :is-disabled="!paisSeleccionado"-->
-<!--            />-->
-<!--          </div>-->
-<!--          <div class="col-sm-4 mt-3 col-6 ms-auto">-->
-<!--            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="direccion.ciudad"-->
-<!--                             :is-disabled="!regionSeleccionada" />-->
-<!--          </div>-->
-        </div>
-        <div class="row mt-3 text-start" v-if="propietarioNuevo">
+          <div class="col-sm-3 mt-3 col-3 ms-auto">
+            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="regionSeleccionada"
+                             :is-disabled="!paisSeleccionado"
+                             @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)" />
+          </div>
+          <div class="col-sm-3 mt-3 col-3 ms-auto">
+            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada"
+                             @change="console.log(ciudadSeleccionada)"
+                             :is-disabled="!regionSeleccionada" />
+          </div>
           <div class="mt-3 col-12 col-md-8 ms-auto">
             <material-input id="nombreCalle" variant="static" label="Nombre de la calle" v-model="direccion.calle" />
           </div>

@@ -72,6 +72,15 @@ const propietario_elegido = ref(null)
                 placeholder="Apellido"
               />
             </div>
+            <div class="col-sm-3">
+              <material-input
+                id="Ocupacion"
+                type="text"
+                variant="static"
+                label="Ocupación Propietario"
+                placeholder="Ingeniero"
+              />
+            </div>
           </div>
           <div class="row mt-3" v-if="!esEmpresa">
             <h5 class="mt-3 mb-3">Contacto</h5>
@@ -118,9 +127,6 @@ const propietario_elegido = ref(null)
                 placeholder="Con guión"
               />
             </div>
-          </div>
-          <div class="row mt-4" v-if="esEmpresa">
-
             <div class="col-sm-3">
               <material-input
                 id="Rut"
@@ -128,22 +134,6 @@ const propietario_elegido = ref(null)
                 variant="static"
                 label="Rut Representante Legal"
                 placeholder="Con guión"
-              />
-            </div>
-            <div class="col-sm-5">
-              <material-input
-                id="RazonSocial"
-                variant="static"
-                label="Razón Social"
-                placeholder="Razón Social"
-              />
-            </div>
-            <div class="col-sm-4">
-              <material-input
-                id="Giro"
-                variant="static"
-                label="Giro"
-                placeholder="Giro"
               />
             </div>
           </div>
@@ -170,6 +160,34 @@ const propietario_elegido = ref(null)
                 variant="static"
                 label="Apellido Materno Representante Legal"
                 placeholder="Apellido"
+              />
+            </div>
+          </div>
+          <div class="row mt-4" v-if="esEmpresa">
+
+            <div class="col-sm-3">
+              <material-input
+                id="Ocupacion"
+                type="text"
+                variant="static"
+                label="Ocupación Representante Legal"
+                placeholder="Ingeniero"
+              />
+            </div>
+            <div class="col-sm-5">
+              <material-input
+                id="RazonSocial"
+                variant="static"
+                label="Razón Social"
+                placeholder="Razón Social"
+              />
+            </div>
+            <div class="col-sm-4">
+              <material-input
+                id="Giro"
+                variant="static"
+                label="Giro"
+                placeholder="Giro"
               />
             </div>
           </div>
@@ -249,6 +267,7 @@ const propietario_elegido = ref(null)
         <!--          </div>-->
         <!--        </div>-->
         <div class="row mt-3 text-start" v-if="!propietarioContrato">
+          <h5 class="mt-3 mb-3">Dirección</h5>
           <div class="mt-3 col-12 col-md-8 ms-auto">
             <material-input id="nombreCalle" variant="static" label="Nombre de la calle" />
           </div>
