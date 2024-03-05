@@ -80,13 +80,13 @@
 </template>
 
 <script>
-import Cuenta from "../components/Cuenta.vue";
-import Perfil from "../components/PerfilForm.vue";
-import AppAddress from "../components/Dirreccion.vue";
-import BankAccount from "../components/BankAccount.vue";
+import Cuenta from "./Cuenta.vue";
+import Perfil from "./PerfilForm.vue";
+import AppAddress from "./Dirreccion.vue";
+import BankAccount from "../../components/BankAccount.vue";
 import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
-import PlanSelection from '@/views/components/PlanSelection.vue'
+import PlanSelection from '@/views/Auth/components/PlanSelection.vue'
 export default {
   name: "FormularioRegistro",
   components: { PlanSelection,  Cuenta, Perfil, AppAddress, BankAccount },

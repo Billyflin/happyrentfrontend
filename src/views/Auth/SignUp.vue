@@ -1,5 +1,8 @@
 <template>
   <div class="bg-white">
+    <div v-if="loading" class="loading-overlay">
+      <div class="spinner"></div>
+    </div>
     <main class="mt-0 main-content">
       <section>
         <div class="page-header min-vh-100">
@@ -21,6 +24,9 @@
                   </div>
                   <div class="card-body">
                     <form role="form" @submit.prevent="submitForm">
+                      <div v-if="err" class="row mb-3 mt-3">
+                        <span class="badge badge-danger">{{err}}</span>
+                      </div>
                       <div class="mb-3">
                         <material-input id="name" type="text" label="Nombre Usuario" name="name" size="lg"
                                         v-model="name" />
@@ -95,9 +101,10 @@ const password = ref('')
 const passwordConfirm = ref('')
 const passwordMismatch = ref(false)
 const accept = ref(false)
+const err = ref('')
 
 const router = useRouter()
-
+const loading = ref(false)
 const submitForm = () => {
   if (passwordMismatch.value) {
     console.log('Las contraseñas no coinciden');
@@ -117,18 +124,21 @@ const submitForm = () => {
       }
     ]
   };
+  loading.value = true;
 
-  axios.post('http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/api/signup', user)
-    .then(response => {
-      console.log(response.data);
-      // Si la respuesta es 200 OK, redirige a /registroExitoso
-      if (response.status === 200) {
-        router.push({name: 'RegistroExitoso'});
-      }
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  axios.post(`${import.meta.env.VITE_SERVER_URL}:8080/api/signup`, user)
+      .then(response => {
+        console.log(response.data);
+        if (response.status === 200) {
+          router.push({name: 'RegistroExitoso'});
+        }
+        loading.value = false;
+      })
+      .catch(error => {
+        console.error(error);
+        err.value = error.response.data.message;
+        loading.value = false;
+      });
 };
 
 

@@ -4,6 +4,7 @@ import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import { defineEmits, ref, watchEffect } from 'vue'
+import LocalidadForm from "@/views/Propiedades/components/LocalidadForm.vue";
 
 const propietarioNuevo = ref(true)
 const esEmpresa = ref(true)
@@ -281,37 +282,39 @@ watchEffect(() => {
 
         </div>
 
-        <div class="row mt-4 text-start" v-if="!propietarioNuevo">
-          <h5 class="mt-3 mb-3">Dirección</h5>
-          <div class="mt-3 col-3">
-            <MaterialChoices id="paisPropiedad"
-                             label="País"
-                             :options=" [
-                             { value: 'Chile', text: 'Chile' },
-                             { value: 'Peru', text: 'Perú' },
-                             { value: 'Argentina', text: 'Argentina'},
-                             { value: 'Brasil', text: 'Brasil'},
-                              { value: 'Colombia', text: 'Colombia'}
-                             ]"
-                             name="pais" v-model="direccion.pais"  :disabled="true"/>
-          </div>
-          <div class="col-sm-3 mt-3 col-3 ms-auto">
-            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="regionSeleccionada"
-                             :is-disabled="!paisSeleccionado"
-                             @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)" />
-          </div>
-          <div class="col-sm-3 mt-3 col-3 ms-auto">
-            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada"
-                             @change="console.log(ciudadSeleccionada)"
-                             :is-disabled="!regionSeleccionada" />
-          </div>
-          <div class="mt-3 col-12 col-md-8 ms-auto">
-            <material-input id="nombreCalle" variant="static" label="Nombre de la calle" v-model="direccion.calle" />
-          </div>
-          <div class="mt-3 col-12 col-md-4 ms-auto">
-            <material-input id="numeroCalle" variant="static" label="Número de la calle" v-model="direccion.numero" />
-          </div>
-        </div>
+<!--        <div class="row mt-4 text-start" v-if="!propietarioNuevo">-->
+<!--          <h5 class="mt-3 mb-3">Dirección</h5>-->
+<!--          <div class="mt-3 col-3">-->
+<!--            <MaterialChoices id="paisPropiedad"-->
+<!--                             label="País"-->
+<!--                             :options=" [-->
+<!--                             { value: 'Chile', text: 'Chile' },-->
+<!--                             { value: 'Peru', text: 'Perú' },-->
+<!--                             { value: 'Argentina', text: 'Argentina'},-->
+<!--                             { value: 'Brasil', text: 'Brasil'},-->
+<!--                              { value: 'Colombia', text: 'Colombia'}-->
+<!--                             ]"-->
+<!--                             name="pais" v-model="direccion.pais"  :disabled="true"/>-->
+<!--          </div>-->
+<!--          <div class="col-sm-3 mt-3 col-3 ms-auto">-->
+<!--            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="regionSeleccionada"-->
+<!--                             :is-disabled="!paisSeleccionado"-->
+<!--                             @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)" />-->
+<!--          </div>-->
+<!--          <div class="col-sm-3 mt-3 col-3 ms-auto">-->
+<!--            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada"-->
+<!--                             @change="console.log(ciudadSeleccionada)"-->
+<!--                             :is-disabled="!regionSeleccionada" />-->
+<!--          </div>-->
+<!--          <div class="mt-3 col-12 col-md-8 ms-auto">-->
+<!--            <material-input id="nombreCalle" variant="static" label="Nombre de la calle" v-model="direccion.calle" />-->
+<!--          </div>-->
+<!--          <div class="mt-3 col-12 col-md-4 ms-auto">-->
+<!--            <material-input id="numeroCalle" variant="static" label="Número de la calle" v-model="direccion.numero" />-->
+<!--          </div>-->
+<!--        </div>-->
+        <h4>Direccion</h4>
+        <LocalidadForm></LocalidadForm>
       </div>
     </div>
   </div>

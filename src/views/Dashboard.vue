@@ -4,15 +4,15 @@
       <div class="col-lg-12 position-relative z-index-2">
         <div class="row">
           <mini-statistics-card
-            v-for="{title, detail, icon} of MiniStatisticsData"
-            :key="title.text"
-            :title="title"
-            :detail="detail"
-            :icon="icon"
+              v-for="{title, detail, icon} of MiniStatisticsData"
+              :key="title.text"
+              :title="title"
+              :detail="detail"
+              :icon="icon"
           />
         </div>
         <div class="row mt-4">
-          <div class="col-lg-4 col-md-6 mt-4">
+          <div class="col-lg-6 col-md-6 mt-4">
             <ChartHolderCard v-if="DolarData"
                              title="Valor del Dólar"
                              subtitle="Últimos valores"
@@ -20,12 +20,12 @@
                              color="success"
             >
               <LineChart :chart="DolarData" id="line-chart-1" :yAxisMin="Math.min(...DolarData.datasets.data)"
-                         :y-axis-max="Math.max(...DolarData.datasets.data) " />
+                         :y-axis-max="Math.max(...DolarData.datasets.data) "/>
             </ChartHolderCard>
           </div>
           <!--          modifica este grafico para ponerle uf-->
 
-          <div class="col-lg-4 mt-4">
+          <div class="col-lg-6 mt-4">
             <ChartHolderCard v-if="UFData"
                              title="Valor de la Unidad de Fomento (UF)"
                              subtitle="Last Campaign Performance"
@@ -33,10 +33,12 @@
                              color="dark"
             >
               <LineChart :chart="UFData" id="line-chart-2" :yAxisMin="Math.min(...UFData.datasets.data)"
-                         :y-axis-max="Math.max(...UFData.datasets.data)" />
+                         :y-axis-max="Math.max(...UFData.datasets.data)"/>
             </ChartHolderCard>
           </div>
-          <div class="col-lg-4 col-md-6 mt-4">
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-6 col-md-6 mt-4">
             <ChartHolderCard v-if="IPCData"
                              title="Valor del IPC"
                              subtitle="Últimos valores"
@@ -44,17 +46,17 @@
                              color="secondary"
             >
               <LineChart :chart="IPCData" id="line-chart-3" :yAxisMin="Math.min(...IPCData.datasets.data)"
-                         :y-axis-max="Math.max(...IPCData.datasets.data)" />
+                         :y-axis-max="Math.max(...IPCData.datasets.data)"/>
             </ChartHolderCard>
           </div>
-          <div class="col-lg-4 col-md-6 mt-4">
+          <div class="col-lg-6 col-md-6 mt-4">
             <ChartHolderCard
-              title="Website Views"
-              subtitle="Last Campaign Performance"
-              update="campaign sent 2 days ago"
+                title="Website Views"
+                subtitle="Last Campaign Performance"
+                update="campaign sent 2 days ago"
             >
               <BarChart
-                :chart="{
+                  :chart="{
                               xAxislDatas: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],
                               datasets: {
                                 label: 'Sales',
@@ -71,7 +73,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import axios from 'axios'
 import MiniStatisticsCard from '@/views/components/MiniStatisticsCard/MiniStatisticsCard.vue'
 import LineChart from '@/examples/Charts/LineChart.vue'

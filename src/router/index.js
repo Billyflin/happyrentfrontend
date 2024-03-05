@@ -13,7 +13,7 @@ const routes = [{
     requiresAuth: true, roles: ['ROLE_ADMIN']
   }
 }, {
-  path: '/dev', name: 'dev', component: () => import('@/views/Contrato/components/ArrendadorContrato.vue')
+  path: '/dev', name: 'dev', component: () => import('@/views/Auth/components/prueba.vue')
 }, {
   path: '/profile', name: 'Profile', component: Profile, meta: {
     requiresAuth: true, roles: ['ROLE_USER']
@@ -55,7 +55,7 @@ const routes = [{
   },{
     path: '/formularioRegistro',
     name: 'FormularioRegistro',
-    component: () => import('@/views/Auth/FormularioRegistro.vue'),
+    component: () => import('@/views/Auth/components/FormularioRegistro.vue'),
     props: true
   },
 
@@ -75,7 +75,10 @@ const routes = [{
   path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/PlantillasPlanas/NotFound.vue')
   },
   {
-    path: '/noVerificado', name: 'noVerificado', component: () => import('../views/PlantillasPlanas/noVerificado.vue')
+    path: '/noVerificado', name: 'noVerificado', component: () => import('../views/PlantillasPlanas/noVerificado.vue'),
+    meta: {
+      requiresAuth: true, roles: ['ROLE_PROVICIONAL']
+    }
   }
   ,
   {
@@ -86,7 +89,7 @@ const routes = [{
     path: '/principalPlanes', name: 'PrincipalPlanes', component: () => import('../views/PlantillasPlanas/PrincipalPlanes.vue')
   },
   {
-    path:'/billy' , name: 'Billy', component: () => import('../views/Propiedades/components/CrearInventarioForm.vue')
+    path:'/billy' , name: 'Billy', component: () => import('../views/Propiedades/components/LocalidadForm.vue')
   }
 
 
@@ -97,24 +100,29 @@ const router = createRouter({
 })
 
 router.beforeEach(async (to, from, next) => {
-  const authStore = useAuthStore()
-  if (to.meta.requiresAuth && !authStore.isLoggedIn) return next({ name: 'SignIn' })
+    const authStore = useAuthStore()
 
-  // Verificar si la ruta requiere roles
-  if (to.meta.roles) {
-    // Obtener los roles del usuario
-    const userRoles = authStore.userInfo.authorityDtoSet.map(a => a.authorityName)
-
-    // Verificar si el usuario tiene los roles necesarios
-    const hasRequiredRoles = to.meta.roles.every(role => userRoles.includes(role))
-
-    if (!hasRequiredRoles) {
-      // Si el usuario no tiene los roles necesarios, redirigir a una página de error o a donde prefieras
-      return next({ name: 'Error' })
+    if (to.matched.some(record => record.meta.requiresAuth)) {
+        if (!authStore.isLoggedIn) {
+            next({ name: 'SignIn' })
+        } else {
+            const userHasRequiredRole = to.meta.roles.some(role =>
+                authStore.userInfo.authorityDtoSet.some(auth => auth.authorityName === role)
+            )
+            const userHasProvisionalRole = authStore.userInfo.authorityDtoSet.some(auth => auth.authorityName === 'ROLE_PROVICIONAL')
+            if (userHasRequiredRole) {
+                next()
+            } else if (userHasProvisionalRole) {
+                next({ name: 'FormularioRegistro' })
+            } else {
+                next({ name: 'SignIn' })
+            }
+        }
+    } else {
+        next()
     }
-  }
-
-  next()
 })
+
+
 
 export default router

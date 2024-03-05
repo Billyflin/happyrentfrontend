@@ -54,20 +54,19 @@ export const useAppStore = defineStore({
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    auth: null, isLoggedIn: false, errMsg: '', userInfo: null, rememberMe: false, isAdmin: false, propiedades: []
+    auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorityDtoSet":[]}, rememberMe: false, isAdmin: false, propiedades: []
   }), persist: true, actions: {
     async loginHandler(username, password) {
-      await axios.post('http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/api/authenticate', { username, password }, {
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}:8080/api/authenticate`, { username, password }, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
         .then((response) => {
           this.auth = response.data.token
-          this.isLoggedIn = true
           axios.defaults.headers.common['Authorization'] = `Bearer ${this.auth}`
           this.getCurrentUser()
-          router.push({ name: 'Propiedades' })
+          this.isLoggedIn = true
         })
         .catch((err) => {
           switch (err.response.status) {
@@ -88,10 +87,11 @@ export const useAuthStore = defineStore('auth', {
     }, async getCurrentUser() {
       if (this.auth) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${this.auth}`
-        await axios.get(`http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/api/user`, {})
+        await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/api/user`, {})
           .then((response) => {
             this.userInfo = response.data
             this.isAdmin = this.userInfo.authorityDtoSet.some(a => a.authorityName === 'ROLE_ADMIN')
+            router.push({ name: 'Propiedades' })
           })
           .catch((err) => {
             console.error(err)
@@ -112,7 +112,7 @@ export const useAuthStore = defineStore('auth', {
     }, async getPropiedades() {
       if (this.userInfo) {
         const userId = this.userInfo.id
-        await axios.get(`http://ec2-15-228-13-185.sa-east-1.compute.amazonaws.com:8080/propiedad/user/${userId}`)
+        await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/propiedad/user/${userId}`)
           .then((response) => {
             this.propiedades = response.data
             console.log(response.data)

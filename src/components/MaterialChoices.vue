@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { defineComponent, ref, onMounted, watch } from 'vue'
+import { defineComponent } from 'vue'
 import Choices from 'choices.js'
 
 export default defineComponent({
@@ -57,6 +57,9 @@ export default defineComponent({
       this.selected = this.options.length > 0 ? this.options[0].value : null
       this.choices.setChoiceByValue(this.selected)
       this.$emit('update:modelValue', this.selected)
+      if(this.isDisabled) {
+        this.choices.disable()
+      }
     })
   },
   beforeUnmount() {

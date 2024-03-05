@@ -2,6 +2,16 @@
 
 import MaterialButton from '@/components/MaterialButton.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
+import { ref } from 'vue'
+
+const isEmailDisabled = ref(false)
+const isConfirmEmailDisabled = ref(false)
+
+function blockearInputs() {
+  isEmailDisabled.value = true
+  isConfirmEmailDisabled.value = true
+}
+
 </script>
 
 <template>

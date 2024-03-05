@@ -8,25 +8,7 @@
     </div>
     <div class="multisteps-form__content">
       <div class="row mt-4 text-start">
-        <div class="mt-3 col-3">
-          <MaterialChoices id="pais"
-                           :options=" [
-                             { value: 'Chile', text: 'Chile' },
-                             { value: 'Peru', text: 'Perú' },
-                             { value: 'Argentina', text: 'Argentina'},
-                             { value: 'Brasil', text: 'Brasil'},
-                              { value: 'Colombia', text: 'Colombia'}
-                             ]"
-                           name="pais" v-model="paisSeleccionado" />
-        </div>
-        <div class="col-sm-4 mt-3 col-6 ms-auto">
-          <MaterialChoices id="region" :options="regiones" name="region" v-model="regionSeleccionada"
-                           :is-disabled="!paisSeleccionado"  @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)"/>
-        </div>
-        <div class="col-sm-4 mt-3 col-6 ms-auto">
-          <MaterialChoices id="ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada" @change="console.log(ciudadSeleccionada)"
-                           :is-disabled="!regionSeleccionada" />
-        </div>
+        <LocaleRegister/>
       </div>
       <div class="row mt-4 text-start">
         <div class="mt-3 col-12 col-md-8 ms-auto">
@@ -48,9 +30,11 @@
 import { defineComponent } from 'vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
+import LocalidadForm from "@/views/Propiedades/components/LocalidadForm.vue";
+import LocaleRegister from "@/views/Auth/components/LocaleRegister.vue";
 
 export default defineComponent({
-  components: { MaterialInput, MaterialChoices },
+  components: {LocaleRegister, LocalidadForm, MaterialInput, MaterialChoices },
   data() {
     return {
       paisSeleccionado: 'Argentina',

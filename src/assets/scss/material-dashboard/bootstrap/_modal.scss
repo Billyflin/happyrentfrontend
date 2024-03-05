@@ -206,4 +206,33 @@
     }
   }
 }
+// Clase para el overlay de carga
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); // Puedes cambiar el color y la opacidad a tu gusto
+  z-index: $zindex-modal + 1; // Asegúrate de que el z-index sea mayor que el del modal para que se muestre encima
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Clase para la animación de spinner
+.spinner {
+  border: 16px solid rgba(19, 80, 91, 0.29);
+  border-top: 16px solid #13505B;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 // scss-docs-end modal-fullscreen-loop
