@@ -3,12 +3,51 @@
 
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
+import { defineEmits, onMounted, watchEffect } from 'vue'
+import Dropzone from 'dropzone'
+import propiedad from '@/views/Propiedades/Propiedad.vue'
 
+let myDropzone = null
 const validateInput = (event) => {
   if (event.target.value < 0) {
     event.target.value = 0;
   }
 }
+const emit = defineEmits(['update:propiedad'])
+watchEffect(() => {
+  emit('update:propiedad', propiedad.value)
+})
+onMounted(() => {
+  myDropzone = new Dropzone('#propiedadImg', {
+    maxFiles: 1,
+    acceptedFiles: 'image/*',
+    autoProcessQueue: false,
+    addRemoveLinks: true,
+    dictRemoveFile: 'Eliminar',
+    dictDefaultMessage: 'Arrastra aquí tus imágenes',
+    dictFallbackMessage: 'Tu navegador no soporta arrastrar y soltar para subir archivos',
+    dictInvalidFileType: 'No puedes subir este tipo de archivo',
+    dictFileTooBig: 'El archivo es muy grande',
+    dictCancelUpload: 'Cancelar subida'
+  })
+  myDropzone.on('addedfile', (file) => {
+    if (myDropzone.files.length > 1) {
+      myDropzone.removeFile(myDropzone.files[0])
+    }
+    // Agregar el objeto de archivo a propiedad.value.imagenes
+    propiedad.value.imagenes.push(file)
+    console.log(
+      'Imagenes: ',
+      propiedad.value.imagenes)
+    console.log('Propiedad: ', propiedad.value)
+    emit('update:propiedad', propiedad.value)
+  })
+  myDropzone.on('removedfile', (file) => {
+    propiedad.value.imagenes = []
+    console.log('Imagenes: ', propiedad.value.imagenes)
+    console.log('Propiedad: ', propiedad.value)
+  })
+})
 </script>
 <template>
   <div id="Propiedad" class="card mt-4">
