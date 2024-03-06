@@ -1,6 +1,6 @@
 <template>
   <div>
-    <select ref="choicesElement" :multiple="isMultiple">
+    <select ref="choicesElement" :multiple="isMultiple" @change="emitValue">
       <option v-for="option in options" :value="option.value" :key="option.value">
         {{ option.text }}
       </option>
@@ -24,10 +24,18 @@ export default {
     }
   },
   mounted() {
-    this.choices = new Choices(this.$refs.choicesElement);
+    this.choices = new Choices(this.$refs.choicesElement,{
+      allowHTML: false,
+    });
   },
   beforeDestroy() {
     this.choices.destroy();
+  },
+  methods: {
+    emitValue() {
+      const selectedValue = this.choices.getValue();
+      this.$emit('input', selectedValue);
+    }
   }
 }
 </script>

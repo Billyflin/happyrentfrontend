@@ -97,7 +97,7 @@ const routes = [{
     }, {
         path: '/billy', name: 'Billy', component: () => import('../views/Propiedades/components/LocalidadForm.vue')
     }, {
-        path: '/dev', name: 'dev', component: () => import('@/views/Auth/components/prueba.vue')
+        path: '/dev', name: 'dev', component: () => import('@/views/Auth/components/ParentComponent.vue')
     }, {
         path: '/Propiedades',
         name: 'Propiedades',
@@ -116,7 +116,6 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore()
-    console.log(to)
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!authStore.isLoggedIn) {
             next({ name: 'SignIn' })
