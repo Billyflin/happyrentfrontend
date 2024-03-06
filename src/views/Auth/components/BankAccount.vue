@@ -38,11 +38,10 @@
         </div>
       </div>
       <div class="mt-4 button-row d-flex">
-        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next"
-                @click="console.log(this.cuenta)">
-<!--                @click="this.$parent.nextStep">-->
+        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="this.$parent.nextStep" >
           Next
         </button>
+
       </div>
     </div>
   </div>
@@ -55,6 +54,7 @@ import MaterialChoices from '@/components/MaterialChoices.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 
 export default defineComponent({
+  // eslint-disable-next-line vue/no-unused-components
   components: { MaterialInput, MaterialChoices, MaterialComboBox },
   data() {
     return {

@@ -1,4 +1,17 @@
 <template>
+  <!--    -->
+  <div class="row  mt-3">
+    <div class="col-lg-2 ms-auto">
+      <router-link to="/"
+                   class="btn btn-simple d-flex align-items-center mt-0">
+      <span class="material-symbols-outlined mx-2">
+        arrow_back
+      </span>
+        Volver
+      </router-link>
+    </div>
+  </div>
+  <!--    -->
   <div class="container-sm">
     <div>
       <h1>Formulario de invitado</h1>
