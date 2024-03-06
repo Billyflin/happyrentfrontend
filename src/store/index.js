@@ -91,7 +91,6 @@ export const useAuthStore = defineStore('auth', {
           .then((response) => {
             this.userInfo = response.data
             this.isAdmin = this.userInfo.authorityDtoSet.some(a => a.authorityName === 'ROLE_ADMIN')
-            router.push({ name: 'Propiedades' })
           })
           .catch((err) => {
             console.error(err)

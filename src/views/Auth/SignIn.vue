@@ -67,12 +67,13 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onBeforeUnmount} from 'vue'
+import {onBeforeMount, onBeforeUnmount, watch} from 'vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
 import {useAppStore, useAuthStore} from '@/store/index.js'
 import {ref} from 'vue'
+import router from "@/router/index.js";
 
 
 const auth = useAuthStore()
@@ -81,12 +82,17 @@ const password = ref('')
 const rememberMe = ref(false)
 
 const loginHandler = async () => {
-    await auth.loginHandler(document.getElementById("username").value, document.getElementById("password").value)
     auth.setRememberMe(document.getElementById("rememberMe").value)
+    await auth.loginHandler(document.getElementById("username").value, document.getElementById("password").value)
 }
 
 const store = useAppStore()
 const {toggleEveryDisplay, toggleHideConfig} = store
+watch(() => auth.userInfo, (value) => {
+    if (value) {
+        router.push({name: 'Dashboard'})
+    }
+})
 
 onBeforeMount(() => {
   toggleEveryDisplay()
