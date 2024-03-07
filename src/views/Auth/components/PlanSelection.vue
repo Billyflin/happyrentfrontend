@@ -78,9 +78,19 @@
                 }"
         />
       </div>
+      <div class="mt-3 button-row d-flex">
+      <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next btn-lg" type="button" title="Omitir" @click="ruta">
+        Omitir y Guardar
+      </button>
+    </div>
     </div>
   </div>
 </template>
 <script setup>
 import PricingCard from '@/views/components/PricingCard.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
+const ruta = () => {
+  router.push('/')
+}
 </script>

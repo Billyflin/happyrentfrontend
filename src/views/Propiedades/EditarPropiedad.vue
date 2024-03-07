@@ -1,6 +1,7 @@
 <script setup>
 
 import MaterialInput from '@/components/MaterialInput.vue'
+import DefaultProjectCard from '@/views/components/DefaultProjectCard/DefaultProjectCard.vue'
 </script>
 <template>
   <div class="py-4 container-fluid">
@@ -21,6 +22,134 @@ import MaterialInput from '@/components/MaterialInput.vue'
         >
           Save
         </button>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="mb-5 ps-3">
+          <h6 class="mb-1">Projects</h6>
+          <p class="text-sm">Architects design houses</p>
+        </div>
+        <div class="row">
+          <default-project-card
+            title="Modern"
+            :image="img1"
+            label="Project #2"
+            description="As Uber works through a huge amount of internal
+                management turmoil."
+            :authors="[
+                  {
+                    image: team1,
+                    name: 'Elena Morison',
+                  },
+                  {
+                    image: team2,
+                    name: 'Ryan Milly',
+                  },
+                  {
+                    image: team3,
+                    name: 'Nick Daniel',
+                  },
+                  {
+                    image: team4,
+                    name: 'Peterson',
+                  },
+                ]"
+            :action="{
+                  color: 'success',
+                  label: 'View Project',
+                }"
+          />
+
+          <default-project-card
+            title="Scandinavian"
+            :image="img2"
+            label="Project #1"
+            description="Music is something that every person has his or her own
+                      specific opinion about."
+            :authors="[
+                  {
+                    image: team3,
+                    name: 'Nick Daniel',
+                  },
+                  {
+                    image: team4,
+                    name: 'Peterson',
+                  },
+                  {
+                    image: team1,
+                    name: 'Elena Morison',
+                  },
+                  {
+                    image: team2,
+                    name: 'Ryan Milly',
+                  },
+                ]"
+            :action="{
+                  color: 'success',
+                  label: 'View Project',
+                }"
+          />
+
+          <default-project-card
+            title="Minimalist"
+            :image="img3"
+            label="Project #3"
+            description="Different people have different taste, and various types
+                      of music."
+            :authors="[
+                  {
+                    image: team4,
+                    name: 'Peterson',
+                  },
+                  {
+                    image: team3,
+                    name: 'Nick Daniel',
+                  },
+                  {
+                    image: team1,
+                    name: 'Elena Morison',
+                  },
+                  {
+                    image: team2,
+                    name: 'Ryan Milly',
+                  },
+                ]"
+            :action="{
+                  color: 'success',
+                  label: 'View Project',
+                }"
+          />
+          <default-project-card
+            title="Gothic"
+            image="https://images.unsplash.com/photo-1606744824163-985d376605aa?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+            label="Project #4"
+            description="Why would anyone pick blue over pink? Pink is obviously a
+                      better color."
+            :authors="[
+                  {
+                    image: team4,
+                    name: 'Peterson',
+                  },
+                  {
+                    image: team3,
+                    name: 'Nick Daniel',
+                  },
+                  {
+                    image: team2,
+                    name: 'Ryan Milly',
+                  },
+                  {
+                    image: team1,
+                    name: 'Elena Morison',
+                  },
+                ]"
+            :action="{
+                  color: 'success',
+                  label: 'View Project',
+                }"
+          />
+        </div>
       </div>
     </div>
     <div class="mt-4 row">
