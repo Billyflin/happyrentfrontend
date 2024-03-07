@@ -38,28 +38,24 @@
           name="choices-pais"
           label="Pais"
           :options="paisOptions"
-          v-model="selectedPais"
-          :is-disabled="disabled"
+          v-model:model-value="selectedPais"
+          :disabled="true"
       />
     </div>
-    <div class="col-sm-4 col-4">
-      <MaterialChoices
-          id="choices-region"
-          name="choices-region"
-          label="Region"
-          :options="regionOptions"
-          v-model="selectedRegion"
-      />
-    </div>
-    <div class="col-sm-6 col-6">
-      <MaterialChoices
-          id="choices-ciudad"
-          name="choices-ciudad"
-          label="Ciudad"
-          :options="ciudadOptions"
-          v-model="selectedCiudad"
-      />
-    </div>
+    <MaterialChoices
+        id="choices-region"
+        name="choices-region"
+        label="Region"
+        :options="regionOptions"
+        v-model="selectedRegion"
+    />
+    <MaterialChoices
+        id="choices-ciudad"
+        name="choices-ciudad"
+        label="Ciudad"
+        :options="ciudadOptions"
+        v-model="selectedCiudad"
+    />
 
   </div>
 
@@ -70,46 +66,49 @@ import {onMounted, ref, watch} from "vue";
 import axios from "axios";
 import MaterialInput from "@/components/MaterialInput.vue";
 
-const text = ref("");
 const selectedCiudad = ref("");
-const selectedPais = ref("");
 const selectedRegion = ref("");
+const selectedPais = ref("");
 const paisOptions = ref([{
   value: "Chile",
   text: "Chile"
 }])
-const regionOptions = ref([]);
-const ciudadOptions = ref([]);
+const regionOptions = ref();
+const ciudadOptions = ref();
 const direccion = ref({
   calle: "",
   numero: "",
   postal: "",
 });
-const disabled = ref(false);
-
-
+const loginHandler = () => {
+  console.log(selectedCiudad.value+selectedRegion.value+selectedPais.value)
+};
+//
 watch(selectedRegion, (newVal) => {
   if (newVal) {
     console.log(newVal);
-    getCiudades(newVal);
+    getCiudades(newVal.value);
+    console.log(newVal.value);
   }
 });
-
-const getCiudades = async (idRegion) => {
-  const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/ciudad/${idRegion}`);
-  ciudadOptions.value = response.data.map(ciudad => ({value: ciudad.numero, text: ciudad.nombre}));
-
-};
 const getRegiones = async (idPais) => {
   const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/region/${idPais}`);
-  regionOptions.value = response.data.map(region => ({value: region.nombre, text: region.nombre}));
+  regionOptions.value = response.data.map(region => ({value: region.numero, text: region.nombre}));
 };
 
 
 
 onMounted(async () => {
   await getRegiones(38);
-  disabled.value = true;
 });
 
+
+const getCiudades = async (idRegion) => {
+  console.log(idRegion);
+  const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/ciudad/${idRegion}`);
+  console.log(response.data);
+  ciudadOptions.value = response.data.map(ciudad => ({value: ciudad.nombre, text: ciudad.nombre}));
+  console.log(response.data.map(ciudad => ({value: ciudad.nombre, text: ciudad.nombre})))
+  console.log(ciudadOptions.value);
+};
 </script>

@@ -7,7 +7,7 @@ import {useAuthStore} from '@/store'
 import Dev from '@/views/Dev.vue'
 
 const routes = [{
-    path: '/', name: '/', redirect: '/Propiedades'
+    path: '/', name: '/', redirect: '/PrincipalPlanes'
 }, {
     path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: {
         requiresAuth: true, roles: ['ROLE_ADMIN']
