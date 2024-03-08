@@ -123,9 +123,7 @@ router.beforeEach(async (to, from, next) => {
             const userHasRequiredRole = to.meta.roles.some(role =>
                 authStore.userInfo.authorityDtoSet.some(auth => auth.authorityName === role)
             )
-            console.log(userHasRequiredRole)
             const userHasProvisionalRole = authStore.userInfo.authorityDtoSet.some(auth => auth.authorityName === 'ROLE_PROVICIONAL')
-            console.log(userHasProvisionalRole)
             if (userHasRequiredRole) {
                 next()
             } else if (userHasProvisionalRole) {
