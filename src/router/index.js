@@ -95,6 +95,8 @@ const routes = [{
         name: 'PrincipalPlanes',
         component: () => import('@/views/PlantillasPlanas/PrincipalPlanes.vue')
     }, {
+        path: '/detallesContrato', name: 'detallesContrato', component: () => import('@/views/Contrato/DetallesContrato.vue')
+    },{
         path: '/billy', name: 'Billy', component: () => import('@/views/Propiedades/components/LocalidadForm.vue')
     }, {
         path: '/danko', name: 'Danko', component: () => import('@/views/Contrato/DetallesContrato.vue')
