@@ -7,7 +7,7 @@ import {useAuthStore} from '@/store'
 import Dev from '@/views/Dev.vue'
 
 const routes = [{
-    path: '/', name: '/', redirect: '/PrincipalPlanes'
+    path: '/', name: '/', redirect: '/Propiedades'
 }, {
     path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: {
         requiresAuth: true, roles: ['ROLE_ADMIN']
@@ -21,13 +21,13 @@ const routes = [{
 }, {
     path: '/sign-up', name: 'SignUp', component: SignUp
 }, {
-    path: '/misContratos', name: 'MisContratos', component: () => import('../views/Contrato/MisContratos.vue'), meta: {
+    path: '/misContratos', name: 'MisContratos', component: () => import('@/views/Contrato/MisContratos.vue'), meta: {
         requiresAuth: true, roles: ['ROLE_USER']
     }
 }, {
     path: '/nuevoContrato',
     name: 'NuevoContrato',
-    component: () => import('../views/Contrato/NuevoContrato.vue'),
+    component: () => import('@/views/Contrato/NuevoContrato.vue'),
     meta: {
         requiresAuth: true, roles: ['ROLE_USER']
     }
@@ -35,26 +35,26 @@ const routes = [{
     // todo /formularioInvitado/:uuid
     path: '/formularioInvitado',
     name: 'FormularioInvitado',
-    component: () => import('../views/Contrato/FormularioInvitado.vue'),
+    component: () => import('@/views/Contrato/FormularioInvitado.vue'),
     meta: {
         requiresAuth: true, roles: ['ROLE_USER']
     }
 },  {
         path: '/agregarPropiedad/',
         name: 'AgregarPropiedad',
-        component: () => import('../views/Propiedades/AgregarPropiedad.vue'),
+        component: () => import('@/views/Propiedades/AgregarPropiedad.vue'),
         meta: {
             requiresAuth: true, roles: ['ROLE_USER']
         }
     }, {
         path: '/propiedad/:id',
         name: 'Propiedad',
-        component: () => import('../views/Propiedades/Propiedad.vue'),
+        component: () => import('@/views/Propiedades/Propiedad.vue'),
         meta: {}
     }, {
         path: '/propiedad/edit/:id',
         name: 'PropiedadEdit',
-        component: () => import('../views/Propiedades/EditarPropiedad.vue'),
+        component: () => import('@/views/Propiedades/EditarPropiedad.vue'),
         meta: {}
     }, {
         path: '/formularioRegistro',
@@ -64,44 +64,44 @@ const routes = [{
     },
 
     {
-        path: '/contrato/:id', name: 'Contrato', component: () => import('../views/Contrato/Contrato.vue'), meta: {
+        path: '/contrato/:id', name: 'Contrato', component: () => import('@/views/Contrato/Contrato.vue'), meta: {
             requiresAuth: true, roles: ['ROLE_USER']
         }
     }, {
         path: '/rememberPassword',
         name: 'rememberPassword',
-        component: () => import('../views/Auth/RememberPassword.vue')
+        component: () => import('@/views/Auth/RememberPassword.vue')
     }, {
-        path: '/error', name: 'Error', component: () => import('../views/PlantillasPlanas/Error.vue')
+        path: '/error', name: 'Error', component: () => import('@/views/PlantillasPlanas/Error.vue')
     }, {
-        path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('../views/PlantillasPlanas/NotFound.vue')
+        path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/views/PlantillasPlanas/NotFound.vue')
     }, {
         path: '/noVerificado',
         name: 'noVerificado',
-        component: () => import('../views/PlantillasPlanas/noVerificado.vue'),
+        component: () => import('@/views/PlantillasPlanas/noVerificado.vue'),
         meta: {
             requiresAuth: true, roles: ['ROLE_PROVICIONAL']
         }
     }, {
         path: '/correoVerificado',
         name: 'CorreoVerificado',
-        component: () => import('../views/PlantillasPlanas/CorreoVerificado.vue')
+        component: () => import('@/views/PlantillasPlanas/CorreoVerificado.vue')
     }, {
         path: '/registroExitoso',
         name: 'RegistroExitoso',
-        component: () => import('../views/PlantillasPlanas/RegistroExitoso.vue')
+        component: () => import('@/views/PlantillasPlanas/RegistroExitoso.vue')
     }, {
         path: '/principalPlanes',
         name: 'PrincipalPlanes',
-        component: () => import('../views/PlantillasPlanas/PrincipalPlanes.vue')
+        component: () => import('@/views/PlantillasPlanas/PrincipalPlanes.vue')
     }, {
-        path: '/billy', name: 'Billy', component: () => import('../views/Propiedades/components/LocalidadForm.vue')
+        path: '/billy', name: 'Billy', component: () => import('@/views/Propiedades/components/LocalidadForm.vue')
     }, {
-        path: '/dev', name: 'dev', component: () => import('@/views/Auth/components/ParentComponent.vue')
+        path: '/dev', name: 'dev', component: () => import('@/views/Propiedades/EditarPropiedad.vue')
     }, {
         path: '/Propiedades',
         name: 'Propiedades',
-        component: () => import('../views/Propiedades/Propiedades.vue'),
+        component: () => import('@/views/Propiedades/Propiedades.vue'),
         meta: {
             requiresAuth: true, roles: ['ROLE_USER']
         }
@@ -116,6 +116,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore()
+    console.log(to)
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!authStore.isLoggedIn) {
             next({ name: 'SignIn' })
