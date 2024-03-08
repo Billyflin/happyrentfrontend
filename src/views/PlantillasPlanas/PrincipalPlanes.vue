@@ -57,7 +57,7 @@ export default {
     return {}
   },
   methods: {submitForm() {
-      router.push({ name: 'SignIn' })
+      router.push({ name: '/' })
     },},
   setup() {
     const store = useAppStore()

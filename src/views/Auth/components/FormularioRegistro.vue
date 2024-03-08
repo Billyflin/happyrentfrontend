@@ -1,6 +1,6 @@
 <template>
   <div class="py-4 container-fluid">
-<!--    -->
+    <!--    -->
     <div class="row mb-4">
       <div class="col-lg-2">
         <router-link to="/"
@@ -11,78 +11,77 @@
           Volver
         </router-link>
       </div>
-      </div>
-<!--    -->
-      <div class="row mt-4">
-        <div class="text-center col-12">
-          <div class="mb-5 multisteps-form">
-            <!--progress bar-->
-            <div class="row">
-              <div class="mx-auto my-5 col-12 col-lg-8">
-                <div class="card">
+    </div>
+    <!--    -->
+    <div class="row mt-4">
+      <div class="text-center col-12">
+        <div class="mb-5 multisteps-form">
+          <!--progress bar-->
+          <div class="row">
+            <div class="mx-auto my-5 col-12 col-lg-8">
+              <div class="card">
+                <div
+                    class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+                >
                   <div
-                      class="card-header p-0 position-relative mt-n4 mx-3 z-index-2"
+                      class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3"
                   >
-                    <div
-                        class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3"
-                    >
-                      <div class="multisteps-form__progress">
-                        <button
-                            class="multisteps-form__progress-btn js-active"
-                            type="button"
-                            title="User Info"
-                            :class="activeStep >= 0 ? activeClass : ''"
-                            @click="activeStep = 0"
-                        >
-                          <span>Cuenta</span>
-                        </button>
-                        <button
-                            class="multisteps-form__progress-btn"
-                            type="button"
-                            title="Address"
-                            :class="activeStep >= 1 ? activeClass : ''"
-                            @click="activeStep = 1"
-                        >
-                          <span>Perfil</span>
-                        </button>
-                        <button
-                            class="multisteps-form__progress-btn"
-                            type="button"
-                            title="Order Info"
-                            :class="activeStep >= 2 ? activeClass : ''"
-                            @click="activeStep = 2"
-                        >
-                          <span>Dirección</span>
-                        </button>
-                        <button class="multisteps-form__progress-btn"
-                                type="button" title="Order Info"
-                                :class="activeStep >= 3 ? activeClass : ''"
-                                @click="activeStep = 3">
-                          <span>Banco</span>
-                        </button>
-                        <button class="multisteps-form__progress-btn"
-                                type="button" title="Order Info"
-                                :class="activeStep >= 4 ? activeClass : ''"
-                                @click="activeStep = 4">
-                          <span>Plan</span>
-                        </button>
-                      </div>
+                    <div class="multisteps-form__progress">
+                      <button
+                          class="multisteps-form__progress-btn js-active"
+                          type="button"
+                          title="User Info"
+                          :class="activeStep >= 0 ? activeClass : ''"
+                          @click="activeStep = 0"
+                      >
+                        <span>Cuenta</span>
+                      </button>
+                      <button
+                          class="multisteps-form__progress-btn"
+                          type="button"
+                          title="Address"
+                          :class="activeStep >= 1 ? activeClass : ''"
+                          @click="activeStep = 1"
+                      >
+                        <span>Perfil</span>
+                      </button>
+                      <button
+                          class="multisteps-form__progress-btn"
+                          type="button"
+                          title="Order Info"
+                          :class="activeStep >= 2 ? activeClass : ''"
+                          @click="activeStep = 2"
+                      >
+                        <span>Dirección</span>
+                      </button>
+                      <button class="multisteps-form__progress-btn"
+                              type="button" title="Order Info"
+                              :class="activeStep >= 3 ? activeClass : ''"
+                              @click="activeStep = 3">
+                        <span>Banco</span>
+                      </button>
+                      <button class="multisteps-form__progress-btn"
+                              type="button" title="Order Info"
+                              :class="activeStep >= 4 ? activeClass : ''"
+                              @click="activeStep = 4">
+                        <span>Plan</span>
+                      </button>
                     </div>
                   </div>
-                  <div class="card-body">
-                    <form class="multisteps-form__form">
-                      <!--single form panel-->
-                      <cuenta v-if="activeStep === 0"/>
-                      <!--single form panel-->
-                      <Perfil :class="activeStep === 1 ? activeClass : ''"/>
-                      <!--single form panel-->
-                      <app-address :class="activeStep === 2 ? activeClass : ''"/>
-                      <!--single form panel-->
-                      <bank-account :class="activeStep === 3 ? activeClass : ''"/>
-                      <!--single form panel-->
-                      <plan-selection :class="activeStep === 4 ? activeClass : ''"/>
-                    </form>
-                  </div>
+                </div>
+                <div class="card-body">
+                  <form class="multisteps-form__form">
+                    <!--single form panel-->
+                    <cuenta @update-authority="updateAuthority" v-if="activeStep === 0"/>
+                    <!--single form panel-->
+                    <Perfil @update-persona="updatePersona" @next-step="nextStep" :class="activeStep === 1 ? activeClass : ''"/>
+                    <!--single form panel-->
+                    <app-address @update-direccion="updateDireccion" :class="activeStep === 2 ? activeClass : ''"/>
+                    <!--single form panel-->
+                    <bank-account :class="activeStep === 3 ? activeClass : ''"/>
+                    <!--single form panel-->
+                    <plan-selection @update-cuenta="enviarForm" :class="activeStep === 4 ? activeClass : ''"/>
+                  </form>
                 </div>
               </div>
             </div>
@@ -90,6 +89,7 @@
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -97,9 +97,11 @@ import Cuenta from "./Cuenta.vue";
 import Perfil from "./PerfilForm.vue";
 import AppAddress from "./Dirreccion.vue";
 import BankAccount from "./BankAccount.vue";
-import {useAppStore} from '@/store/index.js'
+import {useAppStore, useAuthStore} from '@/store/index.js'
 import {onMounted, onUnmounted} from 'vue'
 import PlanSelection from '@/views/Auth/components/PlanSelection.vue'
+import axios from "axios";
+import router from "@/router/index.js";
 
 export default {
   name: "FormularioRegistro",
@@ -109,10 +111,37 @@ export default {
       activeClass: "js-active position-relative",
       activeStep: 0,
       formSteps: 5,
+      datosForm: {
+        username: null,
+        authorityDtoSet: [],
+
+        persona: {
+          nombres: "",
+          apellidoPaterno: "",
+          apellidoMaterno: "",
+          nombreCompleto: "",
+          direccion: {
+            calle: "",
+            numero: null,
+            ciudad: "",
+            region: "",
+            pais: "",
+            codigoPostal: ""
+          },
+          telefono: "",
+          email: "",
+          estadoCivil: "",
+          ocupacion: "",
+          nacionalidad: ""
+        },
+      }
+
     };
   },
   setup() {
     const store = useAppStore()
+    const authStore = useAuthStore()
+    // this.datosForm.id = authStore.userInfo.id
     const {toggleEveryDisplay, toggleHideConfig} = store
     onMounted(() => {
       toggleEveryDisplay()
@@ -125,6 +154,35 @@ export default {
     })
   },
   methods: {
+    enviarForm() {
+      axios.put(`${import.meta.env.VITE_SERVER_URL}:8080/api/completeUser`, this.datosForm)
+          .then(response => {
+            console.log(response)
+            useAuthStore().getCurrentUser()
+            router.push('/')
+          })
+          .catch(error => {
+            console.log(error)
+          })
+      console.log(this.datosForm)
+    },
+    updateDireccion(newDireccion) {
+      this.datosForm.persona.direccion = newDireccion;
+      this.datosForm.username = useAuthStore().userInfo.username
+      console.log(this.datosForm)
+
+    },
+
+    updatePersona(newPersona) {
+      this.datosForm.persona = newPersona;
+      console.log(this.datosForm.persona)
+    },
+
+    updateAuthority(newAuthority) {
+      this.datosForm.authorityDtoSet = newAuthority;
+      this.datosForm.authorityDtoSet.push({authority: "ROLE_ADMIN"})
+      console.log(this.datosForm.authorityDtoSet)
+    },
     nextStep() {
       if (this.activeStep < this.formSteps) {
         this.activeStep += 1;

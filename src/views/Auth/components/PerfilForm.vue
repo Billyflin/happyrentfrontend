@@ -9,13 +9,15 @@
     <div class="multisteps-form__content">
       <div class="mt-3 row">
         <div class="mb-4 col-4">
-          <material-input id="nombres" variant="dynamic" label="Nombres"/>
+          <material-input id="nombres" variant="dynamic" label="Nombres" v-model="persona.nombres"/>
         </div>
         <div class="col-4 mb-4">
-          <material-input id="apellidoPaterno" variant="dynamic" label="Apellido Paterno"/>
+          <material-input id="apellidoPaterno" variant="dynamic" label="Apellido Paterno"
+                          v-model="persona.apellidoPaterno"/>
         </div>
         <div class="col-4 mb-4">
-          <material-input id="apellidoMaterno" variant="dynamic" label="Apellido Materno"/>
+          <material-input id="apellidoMaterno" variant="dynamic" label="Apellido Materno"
+                          v-model="persona.apellidoMaterno"/>
         </div>
       </div>
       <div class="row mt-3">
@@ -65,21 +67,28 @@
 
       <div class="row mt-3">
         <div class="col-3 mt-4">
-          <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="String"/>
+          <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="String"
+                          v-model="persona.telefono"/>
         </div>
         <div class="col-4 mt-4 mb-3">
-          <material-input id="ocupacion" variant="dynamic" label="Ocupación" is-required type="String"/>
+          <material-input id="ocupacion" variant="dynamic" label="Ocupación" is-required type="String"
+                          v-model="persona.ocupacion"/>
         </div>
         <div class="col-5 mt-4 mb-3">
-          <material-input id="email" variant="dynamic" label="Email" is-required type="String"/>
+          <material-input id="email" variant="dynamic" label="Email" is-required type="String" v-model="persona.email"/>
+
+        </div>
 
       </div>
-
-      </div>
-
       <div class="mt-4 button-row d-flex">
         <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next"
-                @click="this.$parent.nextStep">
+                @click="console.log(persona)">
+          Next
+        </button>
+      </div>
+      <div class="mt-4 button-row d-flex">
+        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next"
+                @click="nextStep">
           Next
         </button>
       </div>
@@ -101,12 +110,41 @@ export default {
     return {
       estado: "",
       nacionalidad: "",
-      cuenta: '',
+      persona: {
+        nombres: '',
+        apellidoPaterno: '',
+        apellidoMaterno: '',
+        estadoCivil: '',
+        nacionalidad: '',
+        telefono: '',
+        ocupacion: '',
+        email: ''
+
+      }
     }
+  },
+  methods: {
+    nextStep() {
+      this.$emit("update-persona", this.persona);
+      this.$emit("next-step");
+    },
+  },
+  watch: {
+    estado(nuevoEstado) {
+      this.persona.estadoCivil = nuevoEstado.value
+      this.$emit("update-persona", this.persona);
+    },
+    nacionalidad(nuevaNacionalidad) {
+      this.persona.nacionalidad = nuevaNacionalidad.value
+      this.$emit("update-persona", this.persona);
+    },
   },
   mounted() {
     const store = useAppStore()
     setTooltip(store.bootstrap);
   },
+  beforeUnmount() {
+    this.$emit("update-persona", this.persona);
+  }
 };
 </script>

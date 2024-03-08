@@ -9,10 +9,10 @@
     <div class="multisteps-form__content">
       <div class="row">
         <pricing-card
-          color="dark"
-          :badge="{ color: 'success', label: 'Crecimiento' }"
-          :price="{ currency: '$', value: '0,8 UF', charged: 'Mes + iva' }"
-          :specifications="[
+            color="dark"
+            :badge="{ color: 'success', label: 'Crecimiento' }"
+            :price="{ currency: '$', value: '0,8 UF', charged: 'Mes + iva' }"
+            :specifications="[
                   { label: 'Desde 1 a 10 Propiedades', includes: true },
                   { label: 'Organizador de cartera', includes: true },
                   { label: 'Envío Automático de mails y cobranzas', includes: true },
@@ -24,18 +24,18 @@
                   { label: 'Perfil del corredor', includes: false },
                   { label: 'Perfil del propietario', includes: false },
                 ]"
-          :action="{
+            :action="{
                   color: 'light',
                   route: 'javascript:;',
                   label: 'Obtener',
                 }"
-          dark-mode
+            dark-mode
         />
         <pricing-card
-          color="dark"
-          :badge="{ color: 'success', label: 'Desarrollo' }"
-          :price="{ currency: '$', value: '1,4 UF', charged: 'Mes + iva' }"
-          :specifications="[
+            color="dark"
+            :badge="{ color: 'success', label: 'Desarrollo' }"
+            :price="{ currency: '$', value: '1,4 UF', charged: 'Mes + iva' }"
+            :specifications="[
                   { label: 'Hasta 20 Propiedades', includes: true },
                   { label: 'Organizador de cartera', includes: true },
                   { label: 'Envío Automático de mails y cobranzas', includes: true },
@@ -47,19 +47,19 @@
                   { label: 'Perfil del corredor', includes: false },
                   { label: 'Perfil del propietario', includes: false },
                 ]"
-          :action="{
+            :action="{
                   color: 'success',
                   route: 'javascript:;',
                   label: 'Obtener',
                 }"
-          dark-mode
+            dark-mode
         />
         <pricing-card
-          dark-mode
-          color="dark"
-          :badge="{ color: 'success', label: 'Avance' }"
-          :price="{ currency: '$', value: '3,0 UF', charged: 'Mes + iva' }"
-          :specifications="[
+            dark-mode
+            color="dark"
+            :badge="{ color: 'success', label: 'Avance' }"
+            :price="{ currency: '$', value: '3,0 UF', charged: 'Mes + iva' }"
+            :specifications="[
                   { label: 'Hasta 80 Propiedades', includes: true },
                   { label: 'Organizador de cartera', includes: true },
                   { label: 'Envío Automático de mails y cobranzas', includes: true },
@@ -71,7 +71,7 @@
                   { label: 'Perfil del corredor', includes: true },
                   { label: 'Perfil del propietario', includes: true },
                 ]"
-          :action="{
+            :action="{
                   color: 'light',
                   route: 'javascript:;',
                   label: 'Obtener',
@@ -79,18 +79,32 @@
         />
       </div>
       <div class="mt-3 button-row d-flex">
-      <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next btn-lg" type="button" title="Omitir" @click="ruta">
-        Omitir y Guardar
-      </button>
-    </div>
+        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next btn-lg" type="button" title="Omitir" @click="ruta">
+          Omitir y Guardar
+        </button>
+      </div>
     </div>
   </div>
 </template>
-<script setup>
-import PricingCard from '@/views/components/PricingCard.vue'
-import { useRouter } from 'vue-router'
-const router = useRouter()
-const ruta = () => {
-  router.push('/')
-}
+<script>
+import {defineComponent} from "vue";
+import PricingCard from "@/views/components/PricingCard.vue";
+
+export default defineComponent({
+  components: {PricingCard},
+  methods: {
+    ruta() {
+      this.$emit('update-cuenta')
+
+    }
+  }
+})
 </script>
+<!--import PricingCard from '@/views/components/PricingCard.vue'-->
+<!--import {useRouter} from 'vue-router'-->
+
+<!--const router = useRouter()-->
+<!--const ruta = () => {-->
+<!--  this.$emit('update-cuenta')-->
+<!--  router.push('/')-->
+<!--}-->

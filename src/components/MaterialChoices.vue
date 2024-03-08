@@ -42,21 +42,13 @@ export default {
     },
     disabled: {
       type: Boolean,
-      default: false
+      default: true
     }
   },
   mounted() {
     this.choices = new Choices(this.$refs.choicesElement, {
       allowHTML: true,
     });
-
-    this.choices.setChoices(this.options, 'value', 'text', true);
-    const selectedValue = this.choices.getValue();
-    this.$emit('update:modelValue', selectedValue);
-
-    if (this.disabled) {
-      this.choices.disable();
-    }
   },
   watch: {
     disabled(value) {

@@ -8,15 +8,7 @@
     </div>
     <div class="multisteps-form__content">
       <div class="row mt-4 text-start">
-        <LocaleRegister/>
-      </div>
-      <div class="row mt-4 text-start">
-        <div class="mt-3 col-12 col-md-8 ms-auto">
-          <material-input id="nombreCalle" variant="static" label="Nombre de la calle" />
-        </div>
-        <div class="mt-3 col-12 col-md-4 ms-auto">
-          <material-input id="numeroCalle" variant="static" label="Número de la calle" />
-        </div>
+        <LocalidadForm @update-direccion="reenviar"/>
       </div>
       <div class="mt-4 button-row d-flex">
         <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="this.$parent.nextStep">
@@ -27,69 +19,15 @@
   </div>
 </template>
 <script>
-import { defineComponent } from 'vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
+import {defineComponent} from "vue";
 import LocalidadForm from "@/views/Propiedades/components/LocalidadForm.vue";
-import LocaleRegister from "@/views/Auth/components/LocaleRegister.vue";
 
 export default defineComponent({
-  components: {LocaleRegister, LocalidadForm, MaterialInput, MaterialChoices },
-  data() {
-    return {
-      paisSeleccionado: 'Argentina',
-      regionSeleccionada: null,
-      ciudadSeleccionada: null,
-      active: true,
-      regiones: [],
-      ciudades: []
+  components: {LocalidadForm},
+  methods: {
+    reenviar(direccion) {
+      this.$emit('update-direccion', direccion);
     }
-  },
-  watch: {
-    paisSeleccionado(nuevoPais) {
-      if (nuevoPais === 'Chile') {
-        this.regiones = [
-          { value: 'Región Metropolitana', text: 'Región Metropolitana' },
-          { value: 'Valparaíso', text: 'Valparaíso' },
-          { value: 'Biobío', text: 'Biobío' },
-          // Agrega más opciones aquí
-        ]
-      } else {
-        this.regiones = []
-      }
-      this.regionSeleccionada = null
-      this.ciudadSeleccionada = null
-    },
-    regionSeleccionada(nuevaRegion) {
-      if (nuevaRegion) {
-        if (nuevaRegion === 'Región Metropolitana') {
-          this.ciudades = [
-            { value: 'Santiago', text: 'Santiago' },
-            { value: 'Puente Alto', text: 'Puente Alto' },
-            { value: 'Maipú', text: 'Maipú' },
-            // Agrega más opciones aquí
-          ]
-        } else if (nuevaRegion === 'Valparaíso') {
-          this.ciudades = [
-            { value: 'Viña del Mar', text: 'Viña del Mar' },
-            { value: 'Valparaíso', text: 'Valparaíso' },
-            { value: 'Quilpué', text: 'Quilpué' },
-            // Agrega más opciones aquí
-          ]
-        } else if (nuevaRegion === 'Biobío') {
-          this.ciudades = [
-            { value: 'Concepción', text: 'Concepción' },
-            { value: 'Talcahuano', text: 'Talcahuano' },
-            { value: 'Los Ángeles', text: 'Los Ángeles' },
-            // Agrega más opciones aquí
-          ]
-        } else {
-          this.ciudades = []
-        }
-      } else {
-        this.ciudades = []
-      }
-    },
-  },
+  }
 })
 </script>
