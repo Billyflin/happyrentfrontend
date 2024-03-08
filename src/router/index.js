@@ -4,7 +4,7 @@ import Profile from '../views/Profile.vue'
 import SignIn from '../views/Auth/SignIn.vue'
 import SignUp from '../views/Auth/SignUp.vue'
 import {useAuthStore} from '@/store'
-import Dev from '@/views/Dev.vue'
+
 
 const routes = [{
     path: '/', name: '/', redirect: '/Propiedades'
@@ -97,7 +97,7 @@ const routes = [{
     }, {
         path: '/billy', name: 'Billy', component: () => import('@/views/Propiedades/components/LocalidadForm.vue')
     }, {
-        path: '/dev', name: 'dev', component: () => import('@/views/Propiedades/EditarPropiedad.vue')
+        path: '/danko', name: 'Danko', component: () => import('@/views/Contrato/DetallesContrato.vue')
     }, {
         path: '/Propiedades',
         name: 'Propiedades',
