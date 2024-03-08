@@ -180,7 +180,7 @@ export default {
 
     updateAuthority(newAuthority) {
       this.datosForm.authorityDtoSet = newAuthority;
-      this.datosForm.authorityDtoSet.push({authority: "ROLE_ADMIN"})
+      this.datosForm.authorityDtoSet.push({authorityName: "ROLE_USER"})
       console.log(this.datosForm.authorityDtoSet)
     },
     nextStep() {

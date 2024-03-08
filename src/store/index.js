@@ -95,6 +95,7 @@ export const useAuthStore = defineStore('auth', {
           .catch((err) => {
             console.error(err)
           })
+        router.push('/')
       }
     }, userSignOut() {
       this.auth = null
