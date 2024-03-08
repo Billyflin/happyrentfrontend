@@ -14,7 +14,7 @@ import Choices from 'choices.js';
 
 export default {
   name: 'MaterialChoices',
-  emits: ['change', 'update:modelValue'],
+  emits: ['input', 'change', 'update:modelValue'],
   props: {
     id: {
       type: String,
@@ -47,13 +47,10 @@ export default {
   },
   mounted() {
     this.choices = new Choices(this.$refs.choicesElement, {
-      allowHTML: true,
+      allowHTML: false,
     });
-
-    this.choices.setChoices(this.options, 'value', 'text', true);
     const selectedValue = this.choices.getValue();
     this.$emit('update:modelValue', selectedValue);
-
     if (this.disabled) {
       this.choices.disable();
     }
@@ -65,12 +62,6 @@ export default {
       } else {
         this.choices.enable();
       }
-    },
-    options(value) {
-      console.log(value);
-      this.choices.setChoices(value, 'value', 'text', true);
-      const selectedValue = this.choices.getValue();
-      this.$emit('update:modelValue', selectedValue);
     }
   },
   beforeDestroy() {
