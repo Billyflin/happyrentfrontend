@@ -98,7 +98,7 @@ import Perfil from "./PerfilForm.vue";
 import AppAddress from "./Dirreccion.vue";
 import BankAccount from "./BankAccount.vue";
 import {useAppStore, useAuthStore} from '@/store/index.js'
-import {onMounted, onUnmounted} from 'vue'
+import {onMounted, onUnmounted, watch} from 'vue'
 import PlanSelection from '@/views/Auth/components/PlanSelection.vue'
 import axios from "axios";
 import router from "@/router/index.js";
@@ -110,6 +110,7 @@ export default {
     return {
       activeClass: "js-active position-relative",
       activeStep: 0,
+      registrado: false,
       formSteps: 5,
       datosForm: {
         username: null,
@@ -153,13 +154,21 @@ export default {
       toggleHideConfig()
     })
   },
+  watch:{
+    registrado(){
+            router.push('/')
+    }
+  },
   methods: {
     enviarForm() {
+      this.datosForm.authorityDtoSet.push({authorityName: "ROLE_ADMIN"})
+      this.datosForm.authorityDtoSet.push({authorityName: "ROLE_USER"})
       axios.put(`${import.meta.env.VITE_SERVER_URL}:8080/api/completeUser`, this.datosForm)
           .then(response => {
             console.log(response)
-            useAuthStore().getCurrentUser()
-            router.push('/')
+            useAuthStore().getCurrentUser().then(() => {
+              this.registrado = true
+            })
           })
           .catch(error => {
             console.log(error)
@@ -180,7 +189,6 @@ export default {
 
     updateAuthority(newAuthority) {
       this.datosForm.authorityDtoSet = newAuthority;
-      this.datosForm.authorityDtoSet.push({authorityName: "ROLE_USER"})
       console.log(this.datosForm.authorityDtoSet)
     },
     nextStep() {

@@ -71,16 +71,16 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="error"
-                          navText="Error">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="detallesContrato"
+                          navText="Detalles Contrato">
           <template v-slot:icon>
             <i class="material-icons-round opacity-10 fs-5">house</i>
           </template>
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="notasdqwedasd"
-                          navText="No encontrado">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="PropiedadEdit"
+                          navText="Detalles Propiedad">
           <template v-slot:icon>
             <i class="material-icons-round opacity-10 fs-5">house</i>
           </template>
