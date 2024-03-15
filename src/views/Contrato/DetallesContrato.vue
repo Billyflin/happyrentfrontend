@@ -307,7 +307,10 @@
 import axios from 'axios'
 
 export default {
-  name: 'TablaContratos',
+  name: 'DetallesContratos',
+  props: {
+    uuid: String
+  },
   components: {},
   data() {
     return {
@@ -317,7 +320,7 @@ export default {
   methods: {
     async fetchItems() {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/contrato/49a09304-30f8-45f6-9853-41b561c910be`)
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/contrato/${this.uuid}`)
         this.detalleContrato = response.data
         console.log(this.detalleContrato)
       } catch (e) {

@@ -16,14 +16,21 @@
       <tr v-for="item in items" :key="item.id">
         <td class="text-sm font-weight-bold text-center align-middle">
           <div class="d-flex align-items-center justify-content-center">
-            <material-button
+            <material-button v-if="item.activo === true"
                 color="success"
                 variant="outline"
                 class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
             >
               <i class="fas fa-check" aria-hidden="true"></i>
             </material-button>
-            <span>{{ item.estado }}</span>
+            <material-button v-else
+                color="danger"
+                variant="outline"
+                class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
+
+              <i class="fas fa-times" aria-hidden="true"></i>
+            </material-button>
+            <span>{{ item.activo ? 'Activo' : 'Inactivo' }}</span>
           </div>
         </td>
         <td class="text-sm font-weight-normal text-center">{{ item.propiedad.tipoPropiedad.tipo }}</td>
@@ -36,7 +43,12 @@
             <i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i>
             PDF
           </a>
+          <a @click="verDetalles(item.uuid)" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4">
+            <i class="fa fa-eye text-lg me-1" aria-hidden="true"></i>
+            Ver
+          </a>
         </td>
+
       </tr>
       </tbody>
     </table>
@@ -58,7 +70,13 @@ export default {
     }
   },
   methods: {
-    async getReport(id) {
+    verDetalles(uuid) {
+      console.log(uuid)
+      this.$router.push({ name: 'detallesContrato', params: { uuid: uuid } });
+    }
+
+
+    ,async getReport(id) {
       try {
         const response = await axios.get(`${this.reportUrl}${id}`, {responseType: 'blob'})
         const file = new Blob([response.data], {type: 'application/pdf'});
@@ -71,6 +89,7 @@ export default {
     async fetchItems() {
       try {
         const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/contrato/user/${useAuthStore().userInfo.id}`)
+        console.log(response.data)
         this.items = response.data
       } catch (e) {
         console.error(e)

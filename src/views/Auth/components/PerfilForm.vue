@@ -23,13 +23,13 @@
       <div class="row mt-3">
         <div class="col-sm-6 col-6">
           <material-choices id="estadoCivil" :options="[
-              {value: 'Soltero',label: 'Soltero' },
+              {value: 'Anulado',label: 'Anulado'},
               {value: 'Casado',label: 'Casado'},
-              {value: 'Viudo',label: 'Viudo'},
+              {value: 'Conviviente',label: 'Conviviente'},
               {value: 'Divorciado',label: 'Divorciado'},
               {value: 'Separado',label: 'Separado'},
-              {value: 'Conviviente',label: 'Conviviente'},
-              {value: 'Anulado',label: 'Anulado'},
+              {value: 'Soltero',label: 'Soltero' },
+              {value: 'Viudo',label: 'Viudo'},
               {value: 'Otro',label: 'Otro'}
              ]"
                             name="estadoCivil"
@@ -39,8 +39,8 @@
         </div>
         <div class="col-sm-6 col-6">
           <material-choices id="nacionalidad" :options="[
-              {value: 'Chileno',label: 'Chileno' },
               {value: 'Argentino',label: 'Argentino'},
+              {value: 'Chileno',label: 'Chileno' },
               {value: 'Peruano',label: 'Peruano'},
               {value: 'Boliviano',label: 'Boliviano'},
               {value: 'Colombiano',label: 'Colombiano'},
@@ -79,12 +79,6 @@
 
         </div>
 
-      </div>
-      <div class="mt-4 button-row d-flex">
-        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next"
-                @click="console.log(persona)">
-          Next
-        </button>
       </div>
       <div class="mt-4 button-row d-flex">
         <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next"
