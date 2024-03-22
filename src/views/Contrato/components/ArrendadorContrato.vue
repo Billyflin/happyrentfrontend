@@ -14,7 +14,7 @@ const propietario_elegido = ref(null)
 <template>
   <div id="Propietario" class="card mt-5">
     <div class="card-header">
-      <h5>Datos del arrendador</h5>
+      <h5>Datos del propietario</h5>
     </div>
     <div class="card-body pt-0">
       <div class="row">

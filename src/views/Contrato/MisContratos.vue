@@ -1,11 +1,13 @@
 <template>
   <div class="py-4 container-fluid">
     <div class="d-sm-flex justify-content-between">
-      <div>
-        <router-link to="/nuevoContrato">
-          <material-button color="success" variant="gradient">Nuevo Contrato</material-button>
-        </router-link>
-      </div>
+
+<!--      todo boton de crear contrato -->
+<!--      <div>-->
+<!--        <router-link to="/nuevoContrato">-->
+<!--          <material-button color="success" variant="gradient">Nuevo Contrato</material-button>-->
+<!--        </router-link>-->
+<!--      </div>-->
 
       <barra-contratos></barra-contratos>
     </div>

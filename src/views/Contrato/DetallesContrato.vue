@@ -202,24 +202,26 @@
           <div>Código Postal: {{ detalleContrato.empresa.direccion.codigoPostal }}</div>
         </div>
       </div>
+<!--     todo
+ pendiente terminar persona dentro de representante legal-->
             <div class="row mt-3">
               <div class="col-2">
-                <div>Representante Legal: {{ detalleContrato.empresa.representanteLegal.nombreCompleto }}</div>
+                <div>Representante Legal: {{ detalleContrato.empresa.representanteLegal.persona.nombreCompleto }}</div>
               </div>
               <div class="col-2">
-                <div>Email: {{ detalleContrato.empresa.representanteLegal.email }}</div>
+                <div>Email: {{ detalleContrato.empresa.representanteLegal.persona.email }}</div>
               </div>
               <div class="col-2">
-                <div>Teléfono: {{ detalleContrato.empresa.representanteLegal.telefono }}</div>
+                <div>Teléfono: {{ detalleContrato.empresa.representanteLegal.persona.telefono }}</div>
               </div>
               <div class="col-2">
-                <div>Estado Civil: {{ detalleContrato.empresa.representanteLegal.estadoCivil }}</div>
+                <div>Estado Civil: {{ detalleContrato.empresa.representanteLegal.persona.estadoCivil }}</div>
               </div>
               <div class="col-2">
-                <div>Nacionalidad: {{ detalleContrato.empresa.representanteLegal.nacionalidad }}</div>
+                <div>Nacionalidad: {{ detalleContrato.empresa.representanteLegal.persona.nacionalidad }}</div>
               </div>
               <div class="col-2">
-                <div>Ocupación: {{ detalleContrato.empresa.representanteLegal.ocupacion }}</div>
+                <div>Ocupación: {{ detalleContrato.empresa.representanteLegal.persona.ocupacion }}</div>
               </div>
             </div>
     </div>

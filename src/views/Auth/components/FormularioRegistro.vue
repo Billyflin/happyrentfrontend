@@ -129,6 +129,7 @@ export default {
             pais: "",
             codigoPostal: ""
           },
+          rut:"",
           telefono: "",
           email: "",
           estadoCivil: "",

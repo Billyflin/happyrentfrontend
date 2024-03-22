@@ -78,6 +78,10 @@
           <material-input id="email" variant="dynamic" label="Email" is-required type="String" v-model="persona.email"/>
 
         </div>
+        <div class="col-5 mt-4 mb-3">
+          <material-input id="rut" variant="dynamic" label="RUT" is-required type="String" v-model="persona.rut"/>
+
+        </div>
 
       </div>
       <div class="mt-4 button-row d-flex">
@@ -94,7 +98,6 @@
 import setTooltip from "@/assets/js/tooltip.js";
 import MaterialInput from "@/components/MaterialInput.vue";
 import {useAppStore} from '@/store/index.js'
-import {ref} from "vue";
 import MaterialChoices from '@/components/MaterialChoices.vue'
 
 export default {
@@ -112,7 +115,8 @@ export default {
         nacionalidad: '',
         telefono: '',
         ocupacion: '',
-        email: ''
+        email: '',
+        rut:''
 
       }
     }

@@ -15,6 +15,7 @@
     </div>
     <div class="card-body text-center">
       <div class="d-flex justify-content-center mt-n6 mx-auto">
+        <router-link :to="'/nuevoContrato'">
         <button
             class="btn btn-link text-primary border-0 d-flex align-items-center justify-content-center"
             data-bs-toggle="tooltip"
@@ -23,7 +24,7 @@
         >
           <span class="material-symbols-outlined">history_edu</span> Crear Contrato
         </button>
-
+        </router-link>
 
         <router-link :to="'/propiedad/edit/'+propiedad.id">
           <button
