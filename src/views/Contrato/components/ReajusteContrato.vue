@@ -17,6 +17,15 @@ const validateInput = (event) => {
     <div class="card-body pt-0">
       <div class="row">
         <div class="col-4">
+          <material-input id="renta"
+                          type="number"
+                          variant="static"
+                          label="renta"
+                          placeholder="Renta"
+                          @input="validateInput"
+          />
+        </div>
+        <div class="col-4">
           <MaterialChoices id="periodoContrato"
                            label="Periodicidad"
                            :options="[
@@ -36,14 +45,7 @@ const validateInput = (event) => {
                            name="formaPago"
           />
         </div>
-        <div class="col-4">
-          <MaterialChoices id="cuenta" label="tipo de cuenta"
-                           :options="[{value:'vista',label:'Vista'},
-                           {value:'corriente',label:'Corriente'},
-                           {value:'ahorro',label:'Ahorro'},
-                           {value:'otra',label:'Otra'}]"
-                           name="cuenta" />
-        </div>
+
       </div>
       <div class="row mt-2">
         <div class="col-4">
@@ -62,10 +64,12 @@ const validateInput = (event) => {
                            name="moneda" />
         </div>
         <div class="col-4">
-          <MaterialChoices id="tipoPago" label="Tipo Pago"
-                           :options="[{value: 'Anticipado', label: 'Anticipado'},
-                                      {value: 'Vencido', label: 'Vencido'}]"
-                           name="tipoPago" />
+          <MaterialChoices id="cuenta" label="tipo de cuenta"
+                           :options="[{value:'vista',label:'Vista'},
+                           {value:'corriente',label:'Corriente'},
+                           {value:'ahorro',label:'Ahorro'},
+                           {value:'otra',label:'Otra'}]"
+                           name="cuenta" />
         </div>
       </div>
       <div>
