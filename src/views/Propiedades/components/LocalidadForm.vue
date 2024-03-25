@@ -1,9 +1,9 @@
 <template>
 
-  <div class="row mb-3 mt-3">
+  <div class="row m-md-1 " >
     <span class="badge badge-danger">Disclaimer, hay que hacer click en todos los componentes de seleccion, se arreglará en versiones posteriores</span>
   </div>
-  <div class="row">
+  <div class="row m-md-3" >
     <div class="col-4 mt-4">
       <material-input
           id="calleDirection"
@@ -34,14 +34,14 @@
       />
     </div>
   </div>
- <div class="row mt-4">
+ <div class="row mt-4 m-md-3">
     <ChoicesComponent class="col-3"
         ruta="/pais"
         nombre="nombreEsp"
         :default="defaultPais"
         @choice-changed="handleChoiceChanged"
     />
-    <ChoicesComponent class="col-5"
+    <ChoicesComponent class="col-4 col-5"
         ruta="/region/"
         :id="numeroRegion"
         nombre="nombre"
