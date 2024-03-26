@@ -99,7 +99,7 @@ const routes = [{
     props: true,
     component: () => import('@/views/Contrato/DetallesContrato.vue')
     },{
-        path: '/billy', name: 'Billy', component: () => import('@/views/Propiedades/components/LocalidadForm.vue')
+        path: '/billy', name: 'Billy', component: () => import('@/views/Dev.vue')
     }, {
         path: '/danko', name: 'Danko', component: () => import('@/views/Contrato/DetallesContrato.vue')
     }, {
