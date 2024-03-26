@@ -6,8 +6,9 @@ import './assets/css/nucleo-icons.css'
 import './assets/css/nucleo-svg.css'
 import MaterialDashboard from "./material-dashboard";
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import setTooltip from "@/assets/js/tooltip.js";
 import axios from "axios";
-
+setTooltip()
 
 axios.defaults.headers.common = {
     'Content-Type': 'application/json',

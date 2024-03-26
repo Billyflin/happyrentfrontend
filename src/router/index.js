@@ -109,7 +109,15 @@ const routes = [{
         meta: {
             requiresAuth: true, roles: ['ROLE_USER']
         }
-    },
+    },{
+        path: '/Corredora',
+        name: 'Corredora',
+        component: () => import('@/views/Corredora/Corredora.vue'),
+    },{
+        path: '/detallesCorredora',
+        name: 'detallesCorredora',
+        component: () => import('@/views/Corredora/DetallesCorredora.vue'),
+    }
 
 
 ]

@@ -12,43 +12,33 @@
       <div class="mt-4 row">
         <div class="col-sm-3 ms-auto">
           <input
-              :id="'perfilSelection_Corredor_'"
-              type="radio"
-              class="btn-check"
-              name="profileSelection"
-              value="ROLE_CORREDOR"
-              v-model="selectedRole"
+            :id="'perfilSelection_Corredor_'"
+            type="radio"
+            class="btn-check"
+            name="profileSelection"
+            value="ROLE_CORREDOR"
+            v-model="selectedRole"
           />
           <label
-              class="btn btn-lg btn-outline-success border-2 px-6 py-5"
-              :for="'perfilSelection_Corredor_'"
+            class="btn btn-lg btn-outline-success border-2 px-6 py-5"
+            :for="'perfilSelection_Corredor_'"
           >
             <i class="material-icons">brush</i>
           </label>
           <h6>Corredor</h6>
         </div>
-        <div class="col-sm-3">
-          <input id="btncheck2" type="checkbox" class="btn-check" v-model="isEmpresa"/>
-          <label
-              class="btn btn-lg btn-outline-success border-2 px-6 py-5"
-              for="btncheck2"
-          >
-            <i class="material-icons">integration_instructions</i>
-          </label>
-          <h6>Empresa</h6>
-        </div>
         <div class="col-sm-3 me-auto">
           <input
-              :id="'perfilSelection_Propietario_'"
-              type="radio"
-              class="btn-check"
-              name="profileSelection"
-              value="ROLE_PROPIETARIO"
-              v-model="selectedRole"
+            :id="'perfilSelection_Propietario_'"
+            type="radio"
+            class="btn-check"
+            name="profileSelection"
+            value="ROLE_PROPIETARIO"
+            v-model="selectedRole"
           />
           <label
-              class="btn btn-lg btn-outline-success border-2 px-6 py-5"
-              :for="'perfilSelection_Propietario_' "
+            class="btn btn-lg btn-outline-success border-2 px-6 py-5"
+            :for="'perfilSelection_Propietario_' "
           >
             <i class="material-icons">integration_instructions</i>
           </label>
@@ -69,36 +59,17 @@ export default {
   data() {
     return {
       selectedRole: '',
-      isEmpresa: false,
       authorityDtoSet: []
-    };
+    }
   },
   watch: {
     selectedRole(newRole) {
-      if (this.isEmpresa) {
-        this.authorityDtoSet = this.authorityDtoSet.filter(
-            role => role.authorityName === "ROLE_EMPRESA"
-        );
-      } else {
-        this.authorityDtoSet = [];
-      }
-      this.authorityDtoSet.push({
+      this.authorityDtoSet = []
+      this.authorityDtoSet = [{
         authorityName: newRole
-      });
-      this.$emit('update-authority', this.authorityDtoSet);
-    },
-    isEmpresa(newIsEmpresa) {
-      if (newIsEmpresa) {
-        this.authorityDtoSet.push({
-          authorityName: "ROLE_EMPRESA"
-        });
-      } else {
-        this.authorityDtoSet = this.authorityDtoSet.filter(
-            role => role.authorityName !== "ROLE_EMPRESA"
-        );
-      }
-      this.$emit('update-authority', this.authorityDtoSet);
+      }]
+      this.$emit('update-authority', this.authorityDtoSet)
     }
   }
-};
+}
 </script>

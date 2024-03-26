@@ -31,10 +31,10 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="correoVerificado"
-                          navText="CorreoVerificado">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="Corredora"
+                          navText="Corredora">
           <template v-slot:icon>
-            <i class="material-icons-round opacity-10 fs-5">house</i>
+           <span class="material-symbols-outlined opacity-10 fs-5">apartment</span>
           </template>
         </sidenav-collapse>
       </li>
@@ -55,32 +55,8 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="registroExitoso"
-                          navText="Registro Exitoso">
-          <template v-slot:icon>
-            <i class="material-icons-round opacity-10 fs-5">house</i>
-          </template>
-        </sidenav-collapse>
-      </li>
-      <li class="nav-item">
         <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="formularioInvitado"
                           navText="Formulario invitado">
-          <template v-slot:icon>
-            <i class="material-icons-round opacity-10 fs-5">house</i>
-          </template>
-        </sidenav-collapse>
-      </li>
-      <li class="nav-item">
-        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="detallesContrato"
-                          navText="Detalles Contrato">
-          <template v-slot:icon>
-            <i class="material-icons-round opacity-10 fs-5">house</i>
-          </template>
-        </sidenav-collapse>
-      </li>
-      <li class="nav-item">
-        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="PropiedadEdit"
-                          navText="Detalles Propiedad">
           <template v-slot:icon>
             <i class="material-icons-round opacity-10 fs-5">house</i>
           </template>

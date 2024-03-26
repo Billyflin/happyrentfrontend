@@ -73,7 +73,7 @@
 </template>
 
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onBeforeMount, onMounted, ref} from 'vue'
 import axios from 'axios'
 import MiniStatisticsCard from '@/views/components/MiniStatisticsCard/MiniStatisticsCard.vue'
 import LineChart from '@/examples/Charts/LineChart.vue'
@@ -90,7 +90,7 @@ let previousData = ref(null)
 let lastUpdated = new Date()
 
 
-onMounted(async () => {
+onBeforeMount(async () => {
   const response = await axios.get('/api')
   const data = response.data
 

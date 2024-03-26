@@ -25,7 +25,7 @@
         <a href="#" class="switch-trigger background-color">
           <div class="my-2 badge-colors text-start">
             <span class="badge filter bg-gradient-primary" data-color="primary" @click="sidebarColor('primary')"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" @click="sidebarColor('dark')"></span>
+            <span class="badge filter bg-gradient-success" data-color="success" @click="sidebarColor('success')"></span>
           </div>
         </a>
         <!-- Sidenav Type -->
