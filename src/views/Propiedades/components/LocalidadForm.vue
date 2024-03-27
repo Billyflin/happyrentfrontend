@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-4 mt-4">
+    <div class="col-6 mt-4">
       <material-input
         id="calleDirection"
         variant="static"
@@ -9,6 +9,7 @@
         placeholder="Calle"
       />
     </div>
+    <div class="col-1"></div>
     <div class="col-1 mt-4">
       <material-input
         id="numeroDirection"
@@ -19,6 +20,7 @@
         placeholder="n°"
       />
     </div>
+    <div class="col-2"></div>
     <div class="col-2 mt-4">
       <material-input
         id="postal"
@@ -56,7 +58,6 @@
                      name="ciudad"
     />
   </div>
-  <button @click="console.log(direccion)">cambiar</button>
 </template>
 
 <script>

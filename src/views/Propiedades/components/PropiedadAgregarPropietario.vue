@@ -269,9 +269,9 @@ watchEffect(() => {
               <material-choices id="propietario_seleccionado"
                                 v-model="propietario_existente"
                                 :options="[
-                              {value:'1',text:'Acá van a estar los propietarios existentes'},
-                              {value:'2',text:'Pero de momento no se a implementado'},
-                              {value:'3',text:'Se los debemos :P'}
+                              {value:'1',label:'Acá van a estar los propietarios existentes'},
+                              {value:'2',label:'Pero de momento no se a implementado'},
+                              {value:'3',label:'Se los debemos :P'}
                               ]"
                                 name="propietario_existente" label="Selecciona un propietario existente"
                                 :search-enabled="false" />

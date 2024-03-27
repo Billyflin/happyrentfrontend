@@ -82,9 +82,9 @@ onMounted(() => {
         <div class="col-4">
           <material-choices id="tipo_propiedad"
                             :options="[
-                              {value:'Casa',text:'Casa'},
-                              {value:'Terreno',text:'Terreno'},
-                              {value:'Departamento',text:'Departamento'}
+                              {value:'Terreno',label:'Terreno'},
+                              {value:'Casa',label:'Casa',selected:true},
+                              {value:'Departamento',label:'Departamento'}
                               ]"
                             name="TipoPropiedad" label="Tipo Propiedad" :search-enabled="false" />
         </div>

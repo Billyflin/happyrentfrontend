@@ -5,20 +5,58 @@ import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialTextarea from '@/components/MaterialTextarea.vue'
 import Dropzone from 'dropzone'
 import MaterialButton from '@/components/MaterialButton.vue'
+import axios from 'axios'
 
 let myDropzone = null
 
 const agregarInventario = ref(false)
 const modificable = ref(false)
 
-const nuevoItem = ref({ nombre: '', estado: '', descripcion: '', fotos: [] })
+const nuevoItem = ref({ nombre: '', estado: '', modificable: true, descripcion: '', fotos: [] })
 const items = ref([])
+
+watch(modificable, (newValue) => {
+  if (newValue) {
+    nuevoItem.value.modificable = true
+  } else {
+    nuevoItem.value.modificable = false
+  }
+})
+
+async function enviar() {
+  for (const item of items.value) {
+    const formData = new FormData()
+    const inventario = {
+      nombre: item.nombre,
+      descripcion: item.descripcion,
+      modificable: item.modificable,
+      estado: item.estado
+    }
+    formData.append('inventario', JSON.stringify(inventario))
+    item.fotos.forEach((foto) => {
+      formData.append('imagenes', foto, {
+        type: 'image/jpeg',
+      })
+    })
+
+    try {
+      const response = await axios.post('http://localhost:8080/propiedad/1', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      console.log('Item guardado:', response.data)
+    } catch (error) {
+      console.error('Error al guardar item:', error)
+    }
+  }
+}
 
 function agregarItem() {
   nuevoItem.value.fotos = myDropzone.files
   console.log('Nuevo item:', nuevoItem.value)
   items.value.push({ ...nuevoItem.value })
-  nuevoItem.value = { nombre: '', estado: '', descripcion: '', fotos: [] }
+  nuevoItem.value = { nombre: '', estado: '', modificable: modificable.value, descripcion: '', fotos: [] }
   myDropzone.removeAllFiles()
 }
 
@@ -72,7 +110,9 @@ watch(agregarInventario, (newValue) => {
           <h5>Agregar Item</h5>
           <form @submit.prevent="agregarItem" class="row mt-2">
             <div class="col-4 mt-3">
-            <material-switch id="modificable" name="modificable" v-model:checked="modificable" checked>{{modificable? 'Es modificable':'No es modificable'}}</material-switch>
+              <material-switch id="modificable" name="modificable" v-model:checked="modificable" checked>
+                {{ modificable ? 'Es modificable' : 'No es modificable' }}
+              </material-switch>
             </div>
             <div class="col-4">
               <MaterialInput
@@ -144,6 +184,7 @@ watch(agregarInventario, (newValue) => {
             </tr>
             </tbody>
           </table>
+          <button class="btn btn-primary" @click="enviar">Guardar</button>
         </div>
       </div>
     </div>
