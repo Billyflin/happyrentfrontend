@@ -101,7 +101,7 @@ const validateInput = (event) => {
           />
         </div>
       </div>
-  </div>
+    </div>
   </div>
 </template>
 
