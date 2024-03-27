@@ -28,6 +28,7 @@ const routes = [{
     path: '/nuevoContrato',
     name: 'NuevoContrato',
     component: () => import('@/views/Contrato/NuevoContrato.vue'),
+    props: true,
     meta: {
         requiresAuth: true, roles: ['ROLE_USER']
     }

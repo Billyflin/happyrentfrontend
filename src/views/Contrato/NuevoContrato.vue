@@ -8,7 +8,8 @@
     </div>
     <div class="row mb-4">
       <div class="col-lg-2">
-        <router-link to="/MisContratos" class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0">
+        <router-link to="/MisContratos"
+                     class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0">
   <span class="material-symbols-outlined mx-1">
     arrow_back
   </span>
@@ -18,54 +19,41 @@
         <side-nav />
       </div>
       <div class="col-lg-10 mt-lg-0 mt-4">
-                <side-nav-item />
-<!--        <FormularioPais @paisSeleccionado="handlePaisSeleccionado" />-->
-<!--        <FormularioRegion :selectedPais="selectedPais" />-->
+                        <formulario-propiedad-contrato />
+
+                <!--  Seccion Reajuste-->
+                <reajuste-contrato />
+
+                <!--  Seccion Enviar Correo-->
+                <solicitar-datos-contrato />
+
+                <!--  Seccion arrendador-->
+                <arrendador-contrato />
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 // import NavPill from "./components/NavPill.vue";
 import SideNav from './components/SideNav.vue'
-import SideNavItem from './components/SideNavItem.vue'
-import { useAppStore } from '@/store/index.js'
-import { onMounted, onUnmounted } from 'vue'
+import { useAppStore, useAuthStore } from '@/store/index.js'
+import { onMounted, onUnmounted, ref } from 'vue'
+import ArrendadorContrato from '@/views/Contrato/components/ArrendadorContrato.vue'
+import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosContrato.vue'
+import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
+import FormularioPropiedadContrato from '@/views/Contrato/components/FormularioPropiedadContrato.vue'
 
-export default {
-  name: 'NuevoContrato',
-  components: {
-    // NavPill,
-    SideNav,
-    SideNavItem
+const store = useAppStore()
+const { toggleEveryDisplay, toggleHideConfig } = store
 
-  },
-  data() {
-    return {
-      selectedPais: null
+onMounted(() => {
+  toggleEveryDisplay()
+  toggleHideConfig()
+})
 
-    }
-  },
-  setup() {
-    const store = useAppStore()
-    const { toggleEveryDisplay, toggleHideConfig } = store
-    onMounted(() => {
-      toggleEveryDisplay()
-      toggleHideConfig()
-    })
-
-    onUnmounted(() => {
-      toggleEveryDisplay()
-      toggleHideConfig()
-    })
-  },
-  methods: {
-    handlePaisSeleccionado(paisId) {
-      this.selectedPais = paisId
-      console.log('ID del país seleccionado en el padre:', paisId)
-    }
-  }
-
-}
+onUnmounted(() => {
+  toggleEveryDisplay()
+  toggleHideConfig()
+})
 </script>

@@ -32,11 +32,11 @@ async function enviar() {
       modificable: item.modificable,
       estado: item.estado
     }
-    formData.append('inventario', JSON.stringify(inventario))
+    formData.append('inventario', new Blob([JSON.stringify(inventario)], { type: 'application/json' }))
+
     item.fotos.forEach((foto) => {
-      formData.append('imagenes', foto, {
-        type: 'image/jpeg',
-      })
+      const blob = dataURLtoBlob(foto.dataURL);
+      formData.append('imagenes', blob, foto.upload.filename);
     })
 
     try {
@@ -51,6 +51,15 @@ async function enviar() {
     }
   }
 }
+function dataURLtoBlob(dataurl) {
+  var arr = dataurl.split(','), mime = 'image/jpg',
+    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
+  while(n--){
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+  return new Blob([u8arr], {type:mime});
+}
+
 
 function agregarItem() {
   nuevoItem.value.fotos = myDropzone.files

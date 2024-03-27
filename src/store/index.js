@@ -54,7 +54,8 @@ export const useAppStore = defineStore({
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorityDtoSet":[]}, rememberMe: false, isAdmin: false, propiedades: []
+    auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorityDtoSet":[]}, rememberMe: false, isAdmin: false, propiedades: [],
+    propiedad: { }
   }), persist: true, actions: {
     async loginHandler(username, password) {
       await axios.post(`${import.meta.env.VITE_SERVER_URL}:8080/api/authenticate`, { username, password }, {
@@ -111,7 +112,7 @@ export const useAuthStore = defineStore('auth', {
     }, async getPropiedades() {
       if (this.userInfo) {
         const userId = this.userInfo.id
-        await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/propiedad/user/${userId}`)
+        await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/propiedad`)
           .then((response) => {
             this.propiedades = response.data
             console.log(response.data)

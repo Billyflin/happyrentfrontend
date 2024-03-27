@@ -3,35 +3,36 @@
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
       <a class="d-block blur-shadow-image">
         <img
-            :src="'data:image/png;base64,' + img"
-            alt="img-blur-shadow"
-            class="img-fluid shadow border-radius-lg"
+          :src="'data:image/png;base64,' + img"
+          alt="img-blur-shadow"
+          class="img-fluid shadow border-radius-lg"
         />
       </a>
       <div
-          class="colored-shadow"
-          :style="`background-image: url('data:image/png;base64,' + img)`"
+        class="colored-shadow"
+        :style="`background-image: url('data:image/png;base64,' + img)`"
       ></div>
     </div>
     <div class="card-body text-center">
       <div class="d-flex justify-content-center mt-n6 mx-auto">
-        <router-link :to="'/nuevoContrato'">
+
+
         <button
-            class="btn btn-link text-primary border-0 d-flex align-items-center justify-content-center"
-            data-bs-toggle="tooltip"
-            data-bs-placement="bottom"
-            title="Crear contrato"
+          class="btn btn-link text-primary border-0 d-flex align-items-center justify-content-center"
+          data-bs-toggle="tooltip"
+          data-bs-placement="bottom"
+          title="Crear contrato"
+          @click="irANuevoContrato"
         >
           <span class="material-symbols-outlined">history_edu</span> Crear Contrato
         </button>
-        </router-link>
 
         <router-link :to="'/propiedad/edit/'+propiedad.id">
           <button
-              class="btn btn-link text-primary border-0 d-flex align-items-center justify-content-center"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
-              title="Editar Propiedad"
+            class="btn btn-link text-primary border-0 d-flex align-items-center justify-content-center"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title="Editar Propiedad"
           >
             <span class="material-symbols-outlined text-lg">edit</span> Editar
           </button>
@@ -44,7 +45,7 @@
         {{ propiedad.propietario.persona.nombreCompleto }}
       </p>
     </div>
-    <hr class="dark horizontal my-0"/>
+    <hr class="dark horizontal my-0" />
     <div class="card-footer d-flex">
       <p class="font-weight-normal my-auto">{{ propiedad.fechaCreacion }}</p>
       <i class="material-icons position-relative ms-auto text-lg me-1 my-auto"
@@ -54,19 +55,26 @@
     </div>
   </div>
 </template>
+<script setup>
+import { useRouter } from 'vue-router'
+import { useAuthStore } from '@/store/index.js'
 
-<script>
-export default {
-  name: 'BookingCard',
-  props: {
-    img: {
-      type: String,
-      required: true
-    },
-    propiedad: {
-      type: Object,
-      required: true
-    }
+const router = useRouter()
+const store = useAuthStore()
+
+const props = defineProps({
+  img: {
+    type: String,
+    required: true
+  },
+  propiedad: {
+    type: Object,
+    required: true
   }
+})
+
+const irANuevoContrato = () => {
+  store.propiedad = props.propiedad
+  router.push({ name: 'NuevoContrato' })
 }
 </script>
