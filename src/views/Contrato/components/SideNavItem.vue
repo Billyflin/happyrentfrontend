@@ -12,10 +12,10 @@
   <arrendador-contrato />
 
   <!--  Seccion Multa -->
-<!--  <multa-contrato />-->
+  <!--  <multa-contrato />-->
 
   <!--  Seccion Termino Anticipado-->
-<!--  <termino-anticipado-contrato />-->
+  <!--  <termino-anticipado-contrato />-->
 
 
 </template>

@@ -260,7 +260,7 @@
         </div>
         <div class="col-2">
           <div>comuna: {{ detalleContrato.arrendatario.persona.direccion.ciudad }}</div>
-      </div>
+        </div>
       </div>
       <div class="row mt-3">
         <div class="col-2">
@@ -281,7 +281,7 @@
       </div>
     </div>
   </div>
-<!-- Codeudor -->
+  <!-- Codeudor -->
   <div id="Codeudor" class="card mt-4" v-if="detalleContrato.codeudor">
     <div class="card-header">
       <h5>Codeudor</h5>
@@ -392,3 +392,4 @@ export default {
   }
 }
 </script>
+
