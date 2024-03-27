@@ -4,23 +4,53 @@ import { defineEmits, onMounted, ref, watchEffect } from 'vue'
 import Dropzone from 'dropzone'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
+import MaterialSwitch from '@/components/MaterialSwitch.vue'
+import MaterialTextarea from '@/components/MaterialTextarea.vue'
+import MaterialButton from '@/components/MaterialButton.vue'
 
 let myDropzone = null
+const nuevoEstacionamiento = ref(false)
+const nuevaBodega = ref(false)
+const items = ref([])
+const nuevoItemEstacionamiento = ref({
+  nombre: 'Estacionamiento',
+  piso: '',
+  numero: '',
+  descripcion: ''
+})
+const nuevoItemBodega = ref({
+  nombre: 'Bodega',
+  piso: '',
+  numero: '',
+  descripcion: ''
+})
 const propiedad = ref({
   nombre: '',
   tipo: '',
   numBanos: 0,
-  numEstacionamientos: 0,
+  numEstacionamientos: [],
   numPiezas: 0,
   metrosCuadradosTerreno: 0,
   metrosCuadradosConstruidos: 0,
-  numBodegas: 0,
+  numBodegas: [],
   imagenes: []
 })
 const validateInput = (event) => {
   if (event.target.value < 0) {
     event.target.value = 0
   }
+}
+
+function agregarEstacionamiento() {
+  console.log('Nuevo item:', nuevoItemEstacionamiento.value)
+  items.value.push({ ...nuevoItemEstacionamiento.value })
+  nuevoItemEstacionamiento.value = { piso: '', numero: '', descripcion: '',nombre:'Estacionamiento' }
+}
+
+function agregarBodega() {
+  console.log('Nuevo item:', nuevoItemBodega.value)
+  items.value.push({ ...nuevoItemBodega.value })
+  nuevoItemBodega.value = { piso: '', numero: '', descripcion: '',nombre:'Bodega' }
 }
 
 const emit = defineEmits(['update:propiedad'])
@@ -103,17 +133,6 @@ onMounted(() => {
         </div>
         <div class="col-3">
           <material-input
-            id="numEstacionamientos"
-            type="number"
-            variant="static"
-            label="numero de estacionamientos"
-            placeholder="1"
-            v-model="propiedad.numEstacionamientos"
-            @input="validateInput"
-          />
-        </div>
-        <div class="col-3">
-          <material-input
             id="numPiezas"
             type="number"
             variant="static"
@@ -145,17 +164,6 @@ onMounted(() => {
             @input="validateInput"
           />
         </div>
-        <div class="col-3">
-          <material-input
-            id="numBodegas"
-            type="number"
-            variant="static"
-            label="numero de bodegas"
-            placeholder="1"
-            v-model="propiedad.numBodegas"
-            @input="validateInput"
-          />
-        </div>
       </div>
       <div class="row mt-5">
         <!--    Agregar imagenes-->
@@ -171,6 +179,125 @@ onMounted(() => {
               ></div>
             </div>
           </div>
+        </div>
+      </div>
+      <!--      estacionamientos y bodegas-->
+      <div class="card-body pt-0">
+        <div class="row">
+          <div class="col-4 mt-3">
+            <material-switch id="estacionamientos" name="estacionamientos" v-model:checked="nuevoEstacionamiento"
+                             checked
+                             label-class="mb-0 text-body text-truncate w-100">
+              {{ nuevoEstacionamiento ? 'con Estacionamiento' : 'sin Estacionamiento' }}
+            </material-switch>
+          </div>
+          <div class="col-4 mt-3">
+            <material-switch id="bodegas" name="bodegas" v-model:checked="nuevaBodega" checked
+                             label-class="mb-0 text-body text-truncate w-100">
+              {{ nuevaBodega ? 'con Bodega' : 'sin Bodega' }}
+            </material-switch>
+          </div>
+        </div>
+        <div class="row mt-4" v-if="nuevoEstacionamiento">
+          <div class="row mt-4">
+            <h5>Agregar Estacionamiento</h5>
+            <form @submit.prevent="agregarEstacionamiento" class="row mt-2">
+              <div class="col-4">
+                <MaterialInput
+                  id="pisoEstacionamiento"
+                  size="lg"
+                  type="number"
+                  label="piso"
+
+                  v-model="nuevoItemEstacionamiento.piso"
+                  isRequired
+                />
+              </div>
+              <div class="col-4">
+                <MaterialInput
+                  id="numeroEstacionamiento"
+                  type="number"
+                  label="numero"
+                  @input="validateInput"
+                  v-model="nuevoItemEstacionamiento.numero"
+                  isRequired
+                />
+              </div>
+              <div class="col-12 mt-2">
+                <MaterialTextarea
+                  id="descripcionEstacionamiento"
+                  placeholder="Añade una descripción..."
+                  v-model="nuevoItemEstacionamiento.descripcion"
+                  isRequired
+                  :resizable="false"
+                />
+              </div>
+              <div class="col-12 mt-4 mb-4">
+                <material-button type="submit" color="success">Agregar</material-button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="row mt-4" v-if="nuevaBodega">
+          <div class="row mt-4">
+            <h5>Agregar Bodega</h5>
+            <form @submit.prevent="agregarBodega" class="row mt-2">
+              <div class="col-4">
+                <MaterialInput
+                  id="pisoBodega"
+                  size="lg"
+                  type="number"
+                  label="piso"
+                  v-model="nuevoItemBodega.piso"
+                  isRequired
+                />
+              </div>
+              <div class="col-4">
+                <MaterialInput
+                  id="numeroBodega"
+                  type="number"
+                  label="numero"
+                  @input="validateInput"
+                  v-model="nuevoItemBodega.numero"
+                  isRequired
+                />
+              </div>
+              <div class="col-12 mt-2">
+                <MaterialTextarea
+                  id="descripcionBodega"
+                  placeholder="Añade una descripción..."
+                  v-model="nuevoItemBodega.descripcion"
+                  isRequired
+                  :resizable="false"
+                />
+              </div>
+              <div class="col-12 mt-4 mb-4">
+                <material-button type="submit" color="success">Agregar</material-button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4" v-if="nuevoEstacionamiento || nuevaBodega" >
+        <div class="table-responsive">
+          <table id="datatable-search2" class="table table-flush">
+            <thead class="thead-light">
+            <tr>
+              <th class="text-center">nombre</th>
+              <th class="text-center">Piso</th>
+              <th class="text-center">Numero</th>
+              <th class="text-center">Descripción</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(item, index) in items" :key="index">
+              <td class="text-sm font-weight-normal text-center">{{ item.nombre }}</td>
+              <td class="text-sm font-weight-normal text-center">{{ item.piso }}</td>
+              <td class="text-sm font-weight-normal text-center">{{ item.numero }}</td>
+              <td class="text-sm font-weight-normal text-center">{{ item.descripcion }}</td>
+            </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
