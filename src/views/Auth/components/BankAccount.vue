@@ -13,19 +13,22 @@
         <div class="col">
           <MaterialChoices id="uwu" :options=" [
         // bancos chilenos
-        { value: 1, text: 'Banco Estado' },
-        { value: 2, text: 'Banco de Chile' },
-        { value: 3, text: 'Santander' },
-        { value: 4, text: 'Vice' },
-        { value: 5, text: 'Scotiabank' },
-        { value: 6, text: 'Banco BCI' },
-      ]" name="bancos" v-model="banco" @change="console.log(banco)" />
+        { value: 1, label: 'Banco Estado', selected: true},
+        { value: 2, label: 'Banco de Chile' },
+        { value: 3, label: 'Santander' },
+        { value: 4, label: 'Vice' },
+        { value: 5, label: 'Scotiabank' },
+        { value: 6, label: 'Banco BCI' },
+      ]" name="bancos" v-model:value="banco" @change="console.log(banco)" />
         </div>
         <div class="col">
           <MaterialChoices id="TipoCuentaBanco" :options="[
-        { value: 'Corriente', text: 'Corriente' },
+        { value: 'Corriente', text: 'Corriente',selected: true },
+        { value: 'Rut', text: 'Rut' },
+        { value: 'Chequera Electrónica', text: 'Chequera Electrónica' },
+        { value: 'Ahorro', text: 'Ahorro' },
         { value: 'Vista', text: 'Vista' }
-      ]" name="cuenta" v-model="cuenta"
+      ]" name="cuenta" v-model:value="cuenta"
                            @change="console.log(cuenta)" />
         </div>
       </div>
@@ -49,13 +52,11 @@
 </template>
 <script>
 import { defineComponent } from 'vue'
-import MaterialComboBox from '@/components/MaterialComboBox.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 
 export default defineComponent({
-  // eslint-disable-next-line vue/no-unused-components
-  components: { MaterialInput, MaterialChoices, MaterialComboBox },
+  components: { MaterialInput, MaterialChoices },
   data() {
     return {
       numeroCuenta: '',

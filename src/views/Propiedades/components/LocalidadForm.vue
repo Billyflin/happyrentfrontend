@@ -1,34 +1,120 @@
 <template>
-  <div class="card">
-    <ChoicesComponent @selection-changed="handleSelection">
-      <option v-for="option in options" :value="option.value" :key="option.value">
-        {{ option.label }}
-      </option>
-    </ChoicesComponent>
+  <div class="row">
+    <div class="col-4 mt-4">
+      <material-input
+        id="calleDirection"
+        variant="static"
+        label="Calle"
+        v-model="direccion.calle"
+        placeholder="Calle"
+      />
+    </div>
+    <div class="col-1 mt-4">
+      <material-input
+        id="numeroDirection"
+        type="number"
+        variant="static"
+        label="Número"
+        v-model="direccion.numero"
+        placeholder="n°"
+      />
+    </div>
+    <div class="col-2 mt-4">
+      <material-input
+        id="postal"
+        type="number"
+        variant="static"
+        v-model="direccion.codigoPostal"
+        label="Postal"
+        placeholder="Postal"
+      />
+    </div>
   </div>
+  <div class="row mt-4">
+    <material-choices class="col-3"
+                      id="Pais"
+                      :options="paises"
+                      label="Pais"
+                      v-model:text="direccion.pais"
+                      disabled
+                      :is-multiple="false"
+                      name="pais" />
+    <MaterialChoices class="col-5"
+                     id="Region"
+                     :options="regiones"
+                     label="Region"
+                     v-model:text="direccion.region"
+                     v-model:value="regionNum"
+                     :is-multiple="false"
+                     name="region" />
+    <MaterialChoices class="col-4"
+                     id="Ciudad"
+                     :options="ciudades"
+                     label="Ciudad"
+                     v-model:text="direccion.ciudad"
+                     :is-multiple="false"
+                     name="ciudad"
+    />
+  </div>
+  <button @click="console.log(direccion)">cambiar</button>
 </template>
 
 <script>
-import ChoicesComponent from './ChoicesComponent.vue';
-import axios from 'axios';
+import axios from 'axios'
+import MaterialInput from '@/components/MaterialInput.vue'
+import MaterialChoices from '@/components/MaterialChoices.vue'
 
 export default {
-  name: 'ParentComponent',
   components: {
-    ChoicesComponent
+    MaterialChoices,
+    MaterialInput
   },
   data() {
     return {
-      options: []
-    };
+      direccion: {
+        calle: '',
+        numero: '',
+        codigoPostal: '',
+        pais: '',
+        region: '',
+        ciudad: ''
+      },
+      regiones: [],
+      ciudades: [],
+      regionNum: 1,
+      paises: [
+        { value: 1, label: 'Argentina' },
+        { value: 38, label: 'Chile', selected: true }
+      ]
+    }
   },
-  async created() {
-    const response = await axios.get('http://localhost:8080/region/38');
-    this.options = response.data.map(item => ({ value: item.numero, label: item.nombre }));
+  mounted() {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/region/38`)
+      .then(response => {
+        this.regiones = response.data.map(region => ({
+          value: region.numero,
+          label: region.nombre,
+          selected: region.nombre === 'Región Metropolitana de Santiago' ? true : undefined
+        }))
+        console.log('Regiones: ', this.regiones)
+      })
+      .catch(error => {
+        console.error(error)
+      })
   },
-  methods: {
-    handleSelection(value) {
-      console.log('La opción seleccionada es: ', value);
+  watch: {
+    regionNum() {
+      axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/ciudad/${this.regionNum}`)
+        .then(response => {
+          this.ciudades = response.data.map(ciudad => ({
+            value: ciudad.nombre,
+            label: ciudad.nombre
+          }))
+          console.log('Ciudades: ', this.ciudades)
+        })
+        .catch(error => {
+          console.error(error)
+        })
     }
   }
 }

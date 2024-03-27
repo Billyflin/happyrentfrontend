@@ -23,7 +23,7 @@
       <div class="row mt-3">
         <div class="col-sm-6 col-6">
           <material-choices id="estadoCivil" :options="[
-              {value: 'Anulado',label: 'Anulado'},
+              {value: 'Anulado',label: 'Anulado',selected: true},
               {value: 'Casado',label: 'Casado'},
               {value: 'Conviviente',label: 'Conviviente'},
               {value: 'Divorciado',label: 'Divorciado'},
@@ -34,34 +34,16 @@
              ]"
                             name="estadoCivil"
                             label="Estado Civil"
-                            :search-enabled="false"
                             v-model="estado"/>
+<!--                            :search-enabled="false"-->
         </div>
         <div class="col-sm-6 col-6">
-          <material-choices id="nacionalidad" :options="[
-              {value: 'Argentino',label: 'Argentino'},
-              {value: 'Chileno',label: 'Chileno' },
-              {value: 'Peruano',label: 'Peruano'},
-              {value: 'Boliviano',label: 'Boliviano'},
-              {value: 'Colombiano',label: 'Colombiano'},
-              {value: 'Ecuatoriano',label: 'Ecuatoriano'},
-              {value: 'Venezolano',label: 'Venezolano'},
-              {value: 'Brasileño',label: 'Brasileño'},
-              {value: 'Uruguayo',label: 'Uruguayo'},
-              {value: 'Paraguayo',label: 'Paraguayo'},
-              {value: 'Mexicano',label: 'Mexicano'},
-              {value: 'Estadounidense',label: 'Estadounidense'},
-              {value: 'Canadiense',label: 'Canadiense'},
-              {value: 'Español',label: 'Español'},
-              {value: 'Portugués',label: 'Portugués'},
-              {value: 'Italiano',label: 'Italiano'},
-              {value: 'Francés',label: 'Francés'},
-              {value: 'Alemán',label: 'Alemán'},
-              {value: 'Inglés',label: 'Inglés'},
-              {value: 'Ruso',label: 'Ruso'},
-              {value: 'Chino',label: 'Chino'},
-              {value: 'Japonés',label: 'Japonés'}
-            ]" name="nacionalidad" label="Nacionalidad" v-model="nacionalidad"/>
+          <material-choices id="nacionalidad"
+                            :options="opcionsNacionalidad"
+                            name="nacionalidad"
+                            label="Nacionalidad"
+                            v-model="nacionalidad"
+          />
         </div>
       </div>
 
@@ -105,6 +87,17 @@ export default {
   components: {MaterialChoices, MaterialInput},
   data() {
     return {
+
+      opcionsNacionalidad: [
+        {value: 'Argentino',label: 'Argentino'},
+        {value: 'Chileno',label: 'Chileno', selected: true},
+        {value: 'Peruano',label: 'Peruano'},
+        {value: 'Boliviano',label: 'Boliviano'},
+        {value: 'Colombiano',label: 'Colombiano'},
+        {value: 'Ecuatoriano',label: 'Ecuatoriano'},
+
+      ] ,
+
       estado: "",
       nacionalidad: "",
       persona: {
