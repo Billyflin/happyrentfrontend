@@ -102,7 +102,7 @@ const routes = [{
     },{
         path: '/billy', name: 'Billy', component: () => import('@/views/Dev.vue')
     }, {
-        path: '/danko', name: 'Danko', component: () => import('@/views/Contrato/DetallesContrato.vue')
+        path: '/danko', name: 'Danko', component: () => import('@/views/Corredora/components/AgregarPersona.vue')
     }, {
         path: '/Propiedades',
         name: 'Propiedades',
