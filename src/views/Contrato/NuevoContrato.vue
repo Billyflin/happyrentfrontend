@@ -28,7 +28,7 @@
                 <solicitar-datos-contrato />
 
                 <!--  Seccion arrendador-->
-                <arrendador-contrato />
+<!--                <arrendador-contrato />-->
       </div>
     </div>
   </div>

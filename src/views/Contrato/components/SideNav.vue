@@ -8,27 +8,21 @@
         </a>
       </li>
       <li class="nav-item pt-2">
-        <a class="nav-link text-dark d-flex" data-scroll href="#Arrendador">
-          <i class="material-icons text-lg me-2">person</i>
-          <span class="text-sm">Info Arrendador</span>
-        </a>
-      </li>
-      <li class="nav-item pt-2">
-        <a class="nav-link text-dark d-flex" data-scroll href="#Reajuste">
+        <a class="nav-link text-dark d-flex" data-scroll href="#Pagos">
           <i class="material-icons text-lg me-2">receipt_long</i>
-          <span class="text-sm">Pagos y Reajuste</span>
+          <span class="text-sm">Pagos</span>
         </a>
       </li>
       <li class="nav-item pt-2">
-        <a class="nav-link text-dark d-flex" data-scroll href="#2fa">
-          <i class="material-icons text-lg me-2">security</i>
-          <span class="text-sm">2FA</span>
+        <a class="nav-link text-dark d-flex" data-scroll href="#SolicitarDatos">
+          <i class="material-icons text-lg me-2">person</i>
+          <span class="text-sm">Solicitar Datos</span>
         </a>
       </li>
       <li class="nav-item pt-2">
-        <a class="nav-link text-dark d-flex" data-scroll href="#accounts">
-          <i class="material-icons text-lg me-2">badge</i>
-          <span class="text-sm">Accounts</span>
+        <a class="nav-link text-dark d-flex" data-scroll href="#OpcionesContrato">
+          <i class="material-icons text-lg me-2">gavel</i>
+          <span class="text-sm">Términos del contrato</span>
         </a>
       </li>
     </ul>

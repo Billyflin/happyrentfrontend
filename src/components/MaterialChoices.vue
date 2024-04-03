@@ -7,7 +7,6 @@
             :name="name"
             :id="id"
             :multiple="isMultiple"
-            @change="emitValue"
     />
   </div>
 </template>
@@ -17,7 +16,7 @@ import Choices from 'choices.js'
 
 export default {
   name: 'MaterialChoices',
-  emits: ['change', 'update:modelValue', 'update:value', 'update:text'],
+  emits: ['update:modelValue', 'update:value', 'update:text'],
   props: {
     id: {
       type: String,
@@ -78,6 +77,7 @@ export default {
     })
     this.choices.setChoices(this.options, 'value', 'label', true)
     this.disabled ? this.choices.disable() : this.choices.enable()
+    this.choices.passedElement.element.addEventListener('change', this.emitValue, false)
     this.emitValue()
   },
   watch: {
@@ -95,20 +95,29 @@ export default {
         this.choices.setChoiceByValue(this.options[0].value)
       }
       this.emitValue()
-    }
+    }, modelValue(newVal) {
+      // Comprueba si el nuevo valor es diferente del valor actualmente seleccionado
+      if (JSON.stringify(newVal) !== JSON.stringify(this.choices.getValue())) {
+        // Si es diferente, actualiza la selección
+        this.choices.setChoiceByValue(newVal);
+      }
+    },
   },
   beforeDestroy() {
+    this.choices.passedElement.element.removeEventListener('change', this.emitValue, false)
     this.choices.destroy()
   },
   methods: {
     emitValue() {
-      if (this.choices.getValue()) {
-        const selectedValue = this.choices.getValue()
-        const Value = this.choices.getValue(true)
-        const Label = this.choices.getValue(false)
-        this.$emit('update:modelValue', selectedValue)
-        this.$emit('update:value', Value)
-        this.$emit('update:text', Label.label)
+      const selectedValue = this.choices.getValue();
+      console.log(selectedValue)
+      console.log(JSON.stringify(selectedValue) !== JSON.stringify(this.modelValue))
+      if (JSON.stringify(selectedValue) !== JSON.stringify(this.modelValue)) {
+        const Value = this.choices.getValue(true);
+        const Label = this.choices.getValue(false).label;
+        this.$emit('update:modelValue', selectedValue);
+        this.$emit('update:value', Value);
+        this.$emit('update:text', Label);
       }
     }
   }

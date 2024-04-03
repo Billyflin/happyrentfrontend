@@ -15,7 +15,7 @@ function blockearInputs() {
 </script>
 
 <template>
-  <div id="Solicitar datos" class="card mt-5">
+  <div id="SolicitarDatos" class="card mt-5">
     <div class="card-header">
       <h5>Solicitar datos al arrendatario </h5>
       <p class="mb-0 text-sm">

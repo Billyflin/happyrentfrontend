@@ -1,58 +1,54 @@
-<script setup>
-
+<script>
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
-import { defineEmits, ref, watchEffect } from 'vue'
-import LocalidadForm from "@/views/Propiedades/components/LocalidadForm.vue";
+import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
 
-const propietarioNuevo = ref(true)
-const esEmpresa = ref(true)
-const propietario_existente = ref('')
-const propietarioEmpresa = ref({
-  rut: '',
-  rutRepresentante: '',
-  razonSocial: '',
-  giro: '',
-  nombreRepresentante: '',
-  apellidoPaternoRepresentante: '',
-  apellidoMaternoRepresentante: '',
-  emailRepresentante: '',
-  confirmEmailRepresentante: '',
-  numeroRepresentante: ''
-})
-const propietarioPersona = ref({
-  rut: '',
-  nombre: '',
-  apellidoPaterno: '',
-  apellidoMaterno: '',
-  email: '',
-  confirmEmail: '',
-  numero: ''
-})
-const direccion = ref({
-  pais: '',
-  region: '',
-  ciudad: '',
-  calle: '',
-  numero: ''
-})
-const emit = defineEmits(['update:propietario'])
-watchEffect(() => {
-  emit('update:propietario', {
-    propietarioNuevo: propietarioNuevo.value,
-    esEmpresa: esEmpresa.value,
-    propietario_existente: propietario_existente.value,
-    propietarioEmpresa: propietarioEmpresa.value,
-    propietarioPersona: propietarioPersona.value,
-    direccion: direccion.value
-  })
-})
-
+export default {
+  name: 'PropiedadAgregarPropietario',
+  components: {
+    MaterialSwitch,
+    MaterialInput,
+    MaterialChoices,
+    LocalidadForm
+  },
+  data() {
+    return {
+      propietarioNuevo: true,
+      esEmpresa: false,
+      propietario_existente: ''
+    }
+  },
+  emits: ['update:propietario'],
+  watch: {
+    propietarioNuevo() {
+      if (this.propietarioNuevo) {
+        this.esEmpresa = false
+      }
+    },
+    esEmpresa() {
+      if (this.esEmpresa) {
+        this.propietarioNuevo = false
+        this.$emit('update:propietario', {
+          propietarioNuevo: this.propietarioNuevo,
+          propietarioExistente: this.propietario_existente,
+          esEmpresa: this.esEmpresa
+        })
+      }
+    },
+    propietario_existente() {
+      this.$emit('update:propietario', {
+        propietarioNuevo: this.propietarioNuevo,
+        propietarioExistente: this.propietario_existente,
+        esEmpresa: this.esEmpresa
+      })
+    }
+  }
+}
 </script>
-
 <template>
   <div id="Propietario" class="card mt-5">
+    <button @click="console.log(propietario_existente)">log</button>
     <div class="card-header">
       <h5>Datos del Propietario</h5>
     </div>
@@ -68,7 +64,7 @@ watchEffect(() => {
         <div class="row mt-4" v-if="!propietarioNuevo">
 
           <div class="col-3">
-            <material-switch id="tipo_propietario" name="tipo_propietario" v-model:checked="esEmpresa" checked
+            <material-switch id="tipo_propietario" name="tipo_propietario" v-model:checked="esEmpresa"
                              label-class="mb-0 text-body text-truncate w-100">
               {{ esEmpresa ? 'Es empresa' : 'Es persona' }}
             </material-switch>
@@ -270,51 +266,16 @@ watchEffect(() => {
                                 v-model="propietario_existente"
                                 :options="[
                               {value:'1',label:'Acá van a estar los propietarios existentes'},
-                              {value:'2',label:'Pero de momento no se a implementado'},
+                              {value:'2',label:'Pero de momento no se a implementado',selected : true},
                               {value:'3',label:'Se los debemos :P'}
                               ]"
                                 name="propietario_existente" label="Selecciona un propietario existente"
-                                :search-enabled="false" />
+              />
             </div>
           </div>
-          <!--  Seccion RepresentanteLegal Empresa-->
-          <!--        generales propietario-->
-
         </div>
-
-<!--        <div class="row mt-4 text-start" v-if="!propietarioNuevo">-->
-<!--          <h5 class="mt-3 mb-3">Dirección</h5>-->
-<!--          <div class="mt-3 col-3">-->
-<!--            <MaterialChoices id="paisPropiedad"-->
-<!--                             label="País"-->
-<!--                             :options=" [-->
-<!--                             { value: 'Chile', text: 'Chile' },-->
-<!--                             { value: 'Peru', text: 'Perú' },-->
-<!--                             { value: 'Argentina', text: 'Argentina'},-->
-<!--                             { value: 'Brasil', text: 'Brasil'},-->
-<!--                              { value: 'Colombia', text: 'Colombia'}-->
-<!--                             ]"-->
-<!--                             name="pais" v-model="direccion.pais"  :disabled="true"/>-->
-<!--          </div>-->
-<!--          <div class="col-sm-3 mt-3 col-3 ms-auto">-->
-<!--            <MaterialChoices id="region" label="Región" :options="regiones" name="region" v-model="regionSeleccionada"-->
-<!--                             :is-disabled="!paisSeleccionado"-->
-<!--                             @change="console.log(regionSeleccionada , !regionSeleccionada, regionSeleccionada != null)" />-->
-<!--          </div>-->
-<!--          <div class="col-sm-3 mt-3 col-3 ms-auto">-->
-<!--            <MaterialChoices id="ciudad" label="Ciudad" :options="ciudades" name="ciudad" v-model="ciudadSeleccionada"-->
-<!--                             @change="console.log(ciudadSeleccionada)"-->
-<!--                             :is-disabled="!regionSeleccionada" />-->
-<!--          </div>-->
-<!--          <div class="mt-3 col-12 col-md-8 ms-auto">-->
-<!--            <material-input id="nombreCalle" variant="static" label="Nombre de la calle" v-model="direccion.calle" />-->
-<!--          </div>-->
-<!--          <div class="mt-3 col-12 col-md-4 ms-auto">-->
-<!--            <material-input id="numeroCalle" variant="static" label="Número de la calle" v-model="direccion.numero" />-->
-<!--          </div>-->
-<!--        </div>-->
         <h4>Direccion</h4>
-        <LocalidadForm></LocalidadForm>
+<!--        <LocalidadForm></LocalidadForm>-->
       </div>
     </div>
   </div>

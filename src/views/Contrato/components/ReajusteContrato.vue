@@ -29,7 +29,7 @@ const validateInput = (event) => {
           <MaterialChoices id="periodoContrato"
                            label="Periodicidad"
                            :options="[
-                             {value: 'Mensual', label: 'Mensual'},
+                             {value: 'Mensual', label: 'Mensual',selected: true},
                              {value: 'Semestral', label: 'Semestral'},
                              {value: 'Anual', label: 'Anual'},
                              {value: 'Trimestral', label: 'Trimestral'}]"
@@ -38,8 +38,7 @@ const validateInput = (event) => {
         </div>
         <div class="col-4">
           <MaterialChoices id="Pago" label="forma de pago"
-                           :options="[{value: 'Efectivo', label: 'Efectivo'},
-                                      {value: 'Transferencia', label: 'Transferencia'},
+                           :options="[                                      {value: 'Transferencia', label: 'Transferencia',selected: true},
                                       {value: 'Cheque', label: 'Cheque'},
                                       {value: 'Tarjeta', label: 'Tarjeta'}]"
                            name="formaPago"
@@ -57,7 +56,7 @@ const validateInput = (event) => {
         </div>
         <div class="col-4">
           <MaterialChoices id="moneda" label="Moneda"
-                           :options="[{value: 'CLP', label: 'CLP'},
+                           :options="[{value: 'CLP', label: 'CLP',selected: true},
                                       {value: 'USD', label: 'USD'},
                                       {value: 'EUR', label: 'EUR'},
                                       {value: 'Otra', label: 'Otra'}]"
@@ -66,7 +65,7 @@ const validateInput = (event) => {
         <div class="col-4">
           <MaterialChoices id="cuenta" label="tipo de cuenta"
                            :options="[{value:'vista',label:'Vista'},
-                           {value:'corriente',label:'Corriente'},
+                           {value:'corriente',label:'Corriente',selected:true},
                            {value:'ahorro',label:'Ahorro'},
                            {value:'otra',label:'Otra'}]"
                            name="cuenta" />
@@ -79,13 +78,13 @@ const validateInput = (event) => {
         <div class="col-4">
           <MaterialChoices id="tipoReajuste" label="Tipo Reajuste"
                            :options="[{value: 'Fijo', label: 'Fijo'},
-                                      {value: 'Variable', label: 'Variable'}]"
+                                      {value: 'Variable', label: 'Variable',selected:true}]"
                            name="tipoReajuste" />
 
         </div>
         <div class="col-4">
           <MaterialChoices id="reajuste" label="Reajuste"
-                           :options="[{value: 'IPC', label: 'IPC'},
+                           :options="[{value: 'IPC', label: 'IPC',selected:true},
                                       {value: 'UVT', label: 'UVT'},
                                       {value: 'Dolar', label: 'Dolar'},
                                       {value: 'Otra', label: 'Otra'}]"
