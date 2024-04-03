@@ -5,12 +5,13 @@ import axios from 'axios'
 
 import setTooltip from "@/assets/js/tooltip.js";
 import { useAppStore } from '@/store/index.js'
+import AgregarPersona from '@/views/Corredora/components/AgregarPersona.vue'
 
 const corredora = ref(null)
 const store = useAppStore()
 
 onMounted(async () => {
-  const response = await axios.get('http://localhost:8080/corredora')
+  const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/corredora`)
   corredora.value = response.data
   setTooltip(store.bootstrap);
 })
@@ -32,5 +33,7 @@ onMounted(async () => {
         icon: 'bold-down text-success', // Ajusta el icono según tus necesidades
       }))"
     />
+  <agregar-persona></agregar-persona>
   </div>
+
 </template>
