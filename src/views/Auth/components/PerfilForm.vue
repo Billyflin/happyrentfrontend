@@ -22,16 +22,7 @@
       </div>
       <div class="row mt-3">
         <div class="col-sm-6 col-6">
-          <material-choices id="estadoCivil" :options="[
-              {value: 'Anulado',label: 'Anulado',selected: true},
-              {value: 'Casado',label: 'Casado'},
-              {value: 'Conviviente',label: 'Conviviente'},
-              {value: 'Divorciado',label: 'Divorciado'},
-              {value: 'Separado',label: 'Separado'},
-              {value: 'Soltero',label: 'Soltero' },
-              {value: 'Viudo',label: 'Viudo'},
-              {value: 'Otro',label: 'Otro'}
-             ]"
+          <material-choices id="estadoCivil" :options="opcionsEstadoCivil"
                             name="estadoCivil"
                             label="Estado Civil"
                             v-model="estado"/>
@@ -97,6 +88,16 @@ export default {
         {value: 'Ecuatoriano',label: 'Ecuatoriano'},
 
       ] ,
+      opcionsEstadoCivil: [
+        {value: 'Anulado',label: 'Anulado'},
+        {value: 'Casado',label: 'Casado'},
+        {value: 'Conviviente',label: 'Conviviente'},
+        {value: 'Divorciado',label: 'Divorciado'},
+        {value: 'Separado',label: 'Separado'},
+        {value: 'Soltero',label: 'Soltero', selected: true},
+        {value: 'Viudo',label: 'Viudo'},
+        {value: 'Otro',label: 'Otro'}
+      ],
 
       estado: "",
       nacionalidad: "",

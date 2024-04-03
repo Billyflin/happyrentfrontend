@@ -11,24 +11,10 @@
     <div class="multisteps-form__content">
       <div class="row">
         <div class="col">
-          <MaterialChoices id="uwu" :options=" [
-        // bancos chilenos
-        { value: 1, label: 'Banco Estado', selected: true},
-        { value: 2, label: 'Banco de Chile' },
-        { value: 3, label: 'Santander' },
-        { value: 4, label: 'Vice' },
-        { value: 5, label: 'Scotiabank' },
-        { value: 6, label: 'Banco BCI' },
-      ]" name="bancos" v-model:value="banco" @change="console.log(banco)" />
+          <MaterialChoices id="Banco" :options="bancos" name="bancos" v-model:value="banco" @change="console.log(banco)" />
         </div>
         <div class="col">
-          <MaterialChoices id="TipoCuentaBanco" :options="[
-        { value: 'Corriente', text: 'Corriente',selected: true },
-        { value: 'Rut', text: 'Rut' },
-        { value: 'Chequera Electrónica', text: 'Chequera Electrónica' },
-        { value: 'Ahorro', text: 'Ahorro' },
-        { value: 'Vista', text: 'Vista' }
-      ]" name="cuenta" v-model:value="cuenta"
+          <MaterialChoices id="TipoCuentaBanco" :options="cuentas" name="cuenta" v-model:value="cuenta"
                            @change="console.log(cuenta)" />
         </div>
       </div>
@@ -59,9 +45,25 @@ export default defineComponent({
   components: { MaterialInput, MaterialChoices },
   data() {
     return {
+      bancos: [
+        // bancos chilenos
+        { value: 1, label: 'Banco Estado', selected: true },
+        { value: 2, label: 'Banco de Chile' },
+        { value: 3, label: 'Santander' },
+        { value: 4, label: 'Vice' },
+        { value: 5, label: 'Scotiabank' },
+        { value: 6, label: 'Banco BCI' },
+      ],
+      cuentas: [
+        { value: 'Corriente', text: 'Corriente', selected: true },
+        { value: 'Rut', text: 'Rut' },
+        { value: 'Chequera Electrónica', text: 'Chequera Electrónica' },
+        { value: 'Ahorro', text: 'Ahorro' },
+        { value: 'Vista', text: 'Vista' }
+      ],
       numeroCuenta: '',
       emailBanco: '',
-      banco: 1,
+      banco: '',
       cuenta: ''
     }
   }
