@@ -216,14 +216,18 @@
             </div>
           </div>
         </div>
-          </div>
-          <!--  Seccion RepresentanteLegal Empresa-->
-          <!--        generales propietario-->
-        </div>
-        <div class="row mt-4 text-start" v-if="!arrendatarioContrato">
-          <LocalidadForm></LocalidadForm>
-        </div>
+      </div>
+      <!--  Seccion RepresentanteLegal Empresa-->
+      <!--        generales propietario-->
+      <div class="row mt-4 text-start" v-if="!arrendatarioContrato">
+        <LocalidadForm></LocalidadForm>
+      </div>
     </div>
+    <div class="card-footer">
+
+      <material-button variant="success" size="lg" class="mt-2 " full-width>Enviar</material-button>
+    </div>
+  </div>
 
 </template>
 <script setup>
@@ -233,6 +237,7 @@ import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import { onMounted, onUnmounted, ref } from 'vue'
 import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
 import { useAppStore } from '@/store/index.js'
+import MaterialButton from '@/components/MaterialButton.vue'
 
 const arrendatarioContrato = ref(false)
 const esEmpresa = ref(true)

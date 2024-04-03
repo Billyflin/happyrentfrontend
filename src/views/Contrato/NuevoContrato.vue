@@ -25,10 +25,11 @@
                 <reajuste-contrato />
 
                 <!--  Seccion Enviar Correo-->
-                <solicitar-datos-contrato />
+<!--                <solicitar-datos-contrato />-->
 
                 <!--  Seccion arrendador-->
 <!--                <arrendador-contrato />-->
+        <material-button variant="success" size="lg" class="mt-6 mb-6" full-width @click="aer">Enviar</material-button>
       </div>
     </div>
   </div>
@@ -43,6 +44,7 @@ import ArrendadorContrato from '@/views/Contrato/components/ArrendadorContrato.v
 import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosContrato.vue'
 import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
 import FormularioPropiedadContrato from '@/views/Contrato/components/FormularioPropiedadContrato.vue'
+import MaterialButton from '@/components/MaterialButton.vue'
 
 const store = useAppStore()
 const { toggleEveryDisplay, toggleHideConfig } = store

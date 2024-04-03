@@ -30,10 +30,10 @@ onMounted(async () => {
         values: [propiedad.propietario.persona.nombres+' '+propiedad.propietario.persona.apellidoPaterno ,propiedad.tipoPropiedad.tipo, propiedad.arrendado ? 'Sí' : 'No'],
         info: `hola` , // Añade la información adicional que necesites aquí
         image: `data:image/png;base64,${propiedad.imagen.imageData}`,
-        icon: 'bold-down text-success', // Ajusta el icono según tus necesidades
+        icon: 'bold-up text-success', // Ajusta el icono según tus necesidades
       }))"
     />
-  <agregar-persona></agregar-persona>
+<!--  <agregar-persona></agregar-persona>-->
   </div>
 
 </template>

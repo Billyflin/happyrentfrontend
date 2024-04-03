@@ -19,15 +19,15 @@
       <hr class="my-1 horizontal dark" />
       <div class="pt-0 card-body pt-sm-3">
         <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
-        </div>
-        <a href="#" class="switch-trigger background-color">
-          <div class="my-2 badge-colors text-start">
-            <span class="badge filter bg-gradient-primary" data-color="primary" @click="sidebarColor('primary')"></span>
-            <span class="badge filter bg-gradient-success" data-color="success" @click="sidebarColor('success')"></span>
-          </div>
-        </a>
+<!--        <div>-->
+<!--          <h6 class="mb-0">Sidebar Colors</h6>-->
+<!--        </div>-->
+<!--        <a href="#" class="switch-trigger background-color">-->
+<!--          <div class="my-2 badge-colors text-start">-->
+<!--            <span class="badge filter bg-gradient-primary" data-color="primary" @click="sidebarColor('primary')"></span>-->
+<!--            <span class="badge filter bg-gradient-happyLight" data-color="happLight" @click="sidebarColor('happLight')"></span>-->
+<!--          </div>-->
+<!--        </a>-->
         <!-- Sidenav Type -->
         <div class="mt-3">
           <h6 class="mb-0">Tema</h6>
@@ -38,7 +38,7 @@
             ref="btnDark"
             class="px-3 mb-2 btn bg-gradient-dark"
             :class="{active: sidebarType === 'bg-gradient-dark'}"
-            @click="sidebar('bg-gradient-dark')"
+            @click="sidebar('bg-gradient-dark');sidebarColor('primary')"
           >
             Dark
           </button>
@@ -47,7 +47,7 @@
             ref="btnTransparent"
             class="px-3 mb-2 btn bg-gradient-dark ms-2"
             :class="{active: sidebarType === 'bg-transparent', disabled: isBtnDisabled}"
-            @click="sidebar('bg-transparent')"
+            @click="sidebar('bg-transparent');sidebarColor('happLight')"
           >
             Transparent
           </button>
@@ -56,7 +56,7 @@
             ref="btnWhite"
             class="px-3 mb-2 btn bg-gradient-dark ms-2"
             :class="{active: sidebarType === 'bg-white', disabled: isBtnDisabled}"
-            @click="sidebar('bg-white')"
+            @click="sidebar('bg-white');sidebarColor('happLight')"
           >
             White
           </button>
@@ -114,11 +114,12 @@ function darkMode() {
   if (store.isDarkMode) {
     store.isDarkMode = false
     deactivateDarkMode()
+    sidebar('bg-white');sidebarColor('happLight')
 
   } else {
     store.isDarkMode = true
     activateDarkMode()
-
+    sidebar('bg-gradient-dark');sidebarColor('primary')
   }
 }
 

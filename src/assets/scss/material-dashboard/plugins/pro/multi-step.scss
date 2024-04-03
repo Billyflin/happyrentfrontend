@@ -59,6 +59,12 @@
   }
 }
 
+.bg-gradient-happyLight{
+  .multisteps-form__progress-btn:before{
+    background-color: $multistep-progress-happyLight-color;
+  }
+}
+
 .bg-gradient-danger{
   .multisteps-form__progress-btn:before{
     background-color: $multistep-progress-danger-color;

@@ -70,6 +70,8 @@ $colors: (
 $primary:       $blue !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
+$happLight: #B1CD42 !default;
+$happDark: #135652 !default;
 $info:          $cyan !default;
 $warning:       $yellow !default;
 $danger:        $red !default;
@@ -82,6 +84,8 @@ $theme-colors: (
   "primary":    $primary,
   "secondary":  $secondary,
   "success":    $success,
+    "happLight":  $happLight,
+    "happDark":  $happDark,
   "info":       $info,
   "warning":    $warning,
   "danger":     $danger,
@@ -727,6 +731,8 @@ $table-variants: (
   "primary":    shift-color($primary, $table-bg-scale),
   "secondary":  shift-color($secondary, $table-bg-scale),
   "success":    shift-color($success, $table-bg-scale),
+        "happLight":  shift-color($happLight, $table-bg-scale),
+        "happDark":  shift-color($happDark, $table-bg-scale),
   "info":       shift-color($info, $table-bg-scale),
   "warning":    shift-color($warning, $table-bg-scale),
   "danger":     shift-color($danger, $table-bg-scale),

@@ -8,11 +8,11 @@ import * as process from 'echarts'
 
 export const useAppStore = defineStore({
   id: 'app', state: () => ({
-    hideConfigButton: false,
+    hideConfigButton: true,
     isPinned: true,
     showConfig: false,
-    sidebarType: 'bg-gradient-dark',
-    color: 'primary',
+    sidebarType: 'bg-white',
+    color: 'happLight',
     isNavFixed: false,
     isAbsolute: false,
     showNavs: true,
@@ -26,7 +26,9 @@ export const useAppStore = defineStore({
     bootstrap: null
   }), actions: {
     toggleConfigurator() {
+      this.hideConfigButton = !this.hideConfigButton
       this.showConfig = !this.showConfig
+
     }, navbarMinimize() {
       const sidenav_show = document.querySelector('.g-sidenav-show')
 
@@ -55,7 +57,8 @@ export const useAppStore = defineStore({
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorityDtoSet":[]}, rememberMe: false, isAdmin: false, propiedades: [],
-    propiedad: { }
+    propiedad: { },
+    personas: [],
   }), persist: true, actions: {
     async loginHandler(username, password) {
       await axios.post(`${import.meta.env.VITE_SERVER_URL}:8080/api/authenticate`, { username, password }, {

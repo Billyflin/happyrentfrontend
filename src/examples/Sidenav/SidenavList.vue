@@ -23,6 +23,14 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="Personas"
+                          navText="Personas">
+          <template v-slot:icon>
+            <span class="material-symbols-outlined  opacity-10 fs-5">groups</span>
+          </template>
+        </sidenav-collapse>
+      </li>
+      <li class="nav-item">
         <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="Propiedades"
                           navText="Propiedades">
           <template v-slot:icon>

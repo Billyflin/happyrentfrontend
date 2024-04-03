@@ -275,7 +275,7 @@ export default {
           </div>
         </div>
         <h4>Direccion</h4>
-<!--        <LocalidadForm></LocalidadForm>-->
+        <LocalidadForm></LocalidadForm>
       </div>
     </div>
   </div>

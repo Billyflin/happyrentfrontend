@@ -118,6 +118,11 @@ const routes = [{
         path: '/detallesCorredora',
         name: 'detallesCorredora',
         component: () => import('@/views/Corredora/DetallesCorredora.vue'),
+    },
+    {
+        path: '/Personas',
+        name: 'Personas',
+        component: () => import('@/views/Personas/Personas.vue'),
     }
 
 
