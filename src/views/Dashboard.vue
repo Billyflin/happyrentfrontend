@@ -17,7 +17,7 @@
                              title="Valor del Dólar"
                              subtitle="Últimos valores"
                              :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="success"
+                             color="happDark"
             >
               <LineChart :chart="DolarData" id="line-chart-1" :yAxisMin="Math.min(...DolarData.datasets.data)"
                          :y-axis-max="Math.max(...DolarData.datasets.data) "/>
@@ -53,7 +53,8 @@
             <ChartHolderCard
                 title="Website Views"
                 subtitle="Last Campaign Performance"
-                update="campaign sent 2 days ago"
+                :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
+                color="happLight"
             >
               <BarChart
                   :chart="{
@@ -135,7 +136,7 @@ function createStatisticsData(data) {
       'icon': {
         'name': 'attach_money',
         'color': 'white',
-        'background': 'success'
+        'background': 'happDark'
       }
     },
     {
@@ -147,7 +148,7 @@ function createStatisticsData(data) {
       'icon': {
         'name': 'UF',
         'color': 'white',
-        'background': 'primary'
+        'background': 'happDark'
       }
     },
     {
@@ -159,7 +160,7 @@ function createStatisticsData(data) {
       'icon': {
         'name': 'UTM',
         'color': 'white',
-        'background': 'secondary'
+        'background': 'dark'
       }
     },
     {
@@ -171,7 +172,7 @@ function createStatisticsData(data) {
       'icon': {
         'name': 'euro_symbol',
         'color': 'white',
-        'background': 'dark'
+        'background': 'secondary'
       }
     }
   ]
