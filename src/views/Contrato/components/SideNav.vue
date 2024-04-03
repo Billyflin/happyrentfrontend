@@ -14,9 +14,9 @@
         </a>
       </li>
       <li class="nav-item pt-2">
-        <a class="nav-link text-dark d-flex" data-scroll href="#SolicitarDatos">
+        <a class="nav-link text-dark d-flex" data-scroll href="#SeleccionArrendatario">
           <i class="material-icons text-lg me-2">person</i>
-          <span class="text-sm">Solicitar Datos</span>
+          <span class="text-sm">Seleccionar Arrendatario</span>
         </a>
       </li>
       <li class="nav-item pt-2">

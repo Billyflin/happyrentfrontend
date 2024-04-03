@@ -19,16 +19,20 @@
         <side-nav />
       </div>
       <div class="col-lg-10 mt-lg-0 mt-4">
-                        <formulario-propiedad-contrato />
+        <formulario-propiedad-contrato />
 
-                <!--  Seccion Reajuste-->
-                <reajuste-contrato />
+        <!--  Seccion Reajuste-->
+        <reajuste-contrato />
 
-                <!--  Seccion Enviar Correo-->
-<!--                <solicitar-datos-contrato />-->
+        <seleccionar-arrendatario />
 
-                <!--  Seccion arrendador-->
-<!--                <arrendador-contrato />-->
+        <acuerdos-contrato />
+
+        <!--  Seccion Enviar Correo-->
+        <!--                <solicitar-datos-contrato />-->
+
+        <!--  Seccion arrendador-->
+        <!--                <arrendador-contrato />-->
         <material-button variant="success" size="lg" class="mt-6 mb-6" full-width @click="aer">Enviar</material-button>
       </div>
     </div>
@@ -40,22 +44,24 @@
 import SideNav from './components/SideNav.vue'
 import { useAppStore, useAuthStore } from '@/store/index.js'
 import { onMounted, onUnmounted, ref } from 'vue'
-import ArrendadorContrato from '@/views/Contrato/components/ArrendadorContrato.vue'
+import ArrendadorContrato from '@/views/Personas/components/AgregarPersona.vue'
 import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosContrato.vue'
 import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
 import FormularioPropiedadContrato from '@/views/Contrato/components/FormularioPropiedadContrato.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
+import SeleccionarArrendatario from '@/views/Contrato/components/SeleccionarArrendatario.vue'
+import AcuerdosContrato from '@/views/Contrato/components/AcuerdosContrato.vue'
 
 const store = useAppStore()
 const { toggleEveryDisplay, toggleHideConfig } = store
 
 onMounted(() => {
   toggleEveryDisplay()
-  toggleHideConfig()
+  // toggleHideConfig()
 })
 
 onUnmounted(() => {
   toggleEveryDisplay()
-  toggleHideConfig()
+  // toggleHideConfig()
 })
 </script>

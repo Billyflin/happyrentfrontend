@@ -12,18 +12,11 @@ const propietario_elegido = ref(null)
 </script>
 
 <template>
-  <div id="Propietario" class="card mt-5">
+  <div id="Agregar Persona" class="card">
     <div class="card-header">
-      <h5>Datos del propietario</h5>
+      <h5>Datos de la persona</h5>
     </div>
     <div class="card-body pt-0">
-      <div class="row">
-        <div class="col-4 mt-3">
-          <material-switch class="" id="existente" name="existente" v-model:checked="propietarioContrato"
-                           label-class="mb-0 text-body text-truncate w-100"> Propietario existente
-          </material-switch>
-        </div>
-      </div>
       <div class="row">
         <div class="row mt-4" v-if="!propietarioContrato">
 
