@@ -60,7 +60,7 @@ const routes = [{
     }, {
         path: '/formularioRegistro',
         name: 'FormularioRegistro',
-        component: () => import('@/views/Auth/components/FormularioRegistro.vue'),
+        component: () => import('@/views/Auth/FormularioRegistro.vue'),
         props: true
     },
 
@@ -139,7 +139,7 @@ const router = createRouter({
 
 router.beforeEach(async (to, from, next) => {
     const authStore = useAuthStore()
-    console.log(to)
+    // console.log(to)
     if (to.matched.some(record => record.meta.requiresAuth)) {
         if (!authStore.isLoggedIn) {
             next({ name: 'SignIn' })
