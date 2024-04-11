@@ -1,4 +1,3 @@
-<!--ESTE ES EL REAL-->
 <template>
   <div class="form-group" :class="`input-group-${variant}`">
     <label class="form-label" :for="id">{{ label }}</label>
@@ -7,6 +6,7 @@
             :name="name"
             :id="id"
             :multiple="isMultiple"
+            v-model="selectedValue"
     />
   </div>
 </template>
@@ -50,12 +50,6 @@ export default {
       type: Array,
       required: true
     },
-    value: {
-      type: [String, Number]
-    },
-    text: {
-      type: [String, Number]
-    },
     modelValue: {
       type: [String, Number, Object, null]
     },
@@ -68,6 +62,11 @@ export default {
       default: false
     }
   },
+  data() {
+    return {
+      selectedValue: this.modelValue
+    }
+  },
   mounted() {
     this.choices = new Choices(this.$refs.choicesElement, {
       allowHTML: false,
@@ -75,7 +74,13 @@ export default {
       duplicateItemsAllowed: this.duplicateItemsAllowed,
       noChoicesText: 'No hay opciones para elegir'
     })
-    this.choices.setChoices(this.options, 'value', 'label', true)
+    if (this.options.length > 0) {
+
+      this.choices.setChoices(this.options, 'value', 'label', true)
+      if (!this.choices.getValue()) {
+        this.choices.setChoiceByValue(this.options[0].value)
+      }
+    }
     this.disabled ? this.choices.disable() : this.choices.enable()
     this.choices.passedElement.element.addEventListener('change', this.emitValue, false)
     this.emitValue()
@@ -95,13 +100,17 @@ export default {
         this.choices.setChoiceByValue(this.options[0].value)
       }
       this.emitValue()
-    }, modelValue(newVal) {
+    },
+    modelValue(newVal) {
       // Comprueba si el nuevo valor es diferente del valor actualmente seleccionado
       if (JSON.stringify(newVal) !== JSON.stringify(this.choices.getValue())) {
         // Si es diferente, actualiza la selección
-        this.choices.setChoiceByValue(newVal);
+        this.choices.setChoiceByValue(newVal)
       }
     },
+    selectedValue(newVal) {
+      this.$emit('update:modelValue', newVal)
+    }
   },
   beforeDestroy() {
     this.choices.passedElement.element.removeEventListener('change', this.emitValue, false)
@@ -109,15 +118,9 @@ export default {
   },
   methods: {
     emitValue() {
-      const selectedValue = this.choices.getValue();
-      console.log(selectedValue)
-      console.log(JSON.stringify(selectedValue) !== JSON.stringify(this.modelValue))
+      const selectedValue = this.choices.getValue()
       if (JSON.stringify(selectedValue) !== JSON.stringify(this.modelValue)) {
-        const Value = this.choices.getValue(true);
-        const Label = this.choices.getValue(false).label;
-        this.$emit('update:modelValue', selectedValue);
-        this.$emit('update:value', Value);
-        this.$emit('update:text', Label);
+        this.selectedValue = selectedValue
       }
     }
   }

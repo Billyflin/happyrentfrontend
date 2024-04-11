@@ -12,12 +12,15 @@
             @update:active-step="activeStep = $event"
           />
 
+        </div>
+        <div class="card-body">
           <!--single form panel-->
           <component
             :is="steps[activeStep].component"
             v-if="activeStep < steps.length"
+            @update:authority="user.authority = $event;console.log(this.user)"
             @update:direccion="user.direccion = $event;console.log(this.user)"
-            @next-step="nextStep"
+            @next:step="nextStep"
           />
         </div>
       </div>
@@ -30,7 +33,6 @@ import MultiStepsFormProgress from './MultiStepsFormProgress.vue'
 import Cuenta from './Cuenta.vue'
 import Perfil from './Perfil.vue'
 import DatosBanca from './DatosBanca.vue'
-import { watch } from 'vue'
 // import other form panel components
 
 export default {
@@ -45,7 +47,13 @@ export default {
   data() {
     return {
       activeStep: 0,
-      user: {},
+      user: {
+        authority: [
+          {
+            authorityName: 'ROLE_PROPIETARIO'
+          }
+        ]
+      },
       steps: [
         { title: 'Cuenta', component: 'Cuenta' },
         { title: 'Perfil', component: 'Perfil' },
