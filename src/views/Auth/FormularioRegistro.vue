@@ -2,8 +2,8 @@
   <multi-steps-form/>
 </template>
 <script setup>
-import { useAppStore, useAuthStore } from '@/store/index.js'
-import { onMounted, onUnmounted, ref } from 'vue'
+import { useAppStore } from '@/store/index.js'
+import { onMounted, onUnmounted } from 'vue'
 import MultiStepsForm from '@/views/Auth/components/MultiStepsForm.vue'
 
 const store = useAppStore()

@@ -20,6 +20,7 @@
             v-if="activeStep < steps.length"
             @update:authority="user.authority = $event;console.log(this.user)"
             @update:direccion="user.direccion = $event;console.log(this.user)"
+            @update:user="user = $event;console.log(this.user)"
             @next:step="nextStep"
           />
         </div>
@@ -30,20 +31,25 @@
 
 <script>
 import MultiStepsFormProgress from './MultiStepsFormProgress.vue'
-import Cuenta from './Cuenta.vue'
-import Perfil from './Perfil.vue'
-import DatosBanca from './DatosBanca.vue'
-// import other form panel components
+import CuentaStep from './CuentaStep.vue'
+import PerfilStep from './PerfilStep.vue'
+import DatosBancaStep from './DatosBancaStep.vue'
+import RepresentanteStep from './RepresentanteStep.vue'
+
+/**
+ * import other form panel components
+ */
 
 export default {
   name: 'MultiStepsForm',
   components: {
     MultiStepsFormProgress,
-    Cuenta,
-    Perfil,
-    DatosBanca
-    // register other form panel components
+    CuentaStep,
+    PerfilStep,
+    RepresentanteStep,
+    DatosBancaStep
   },
+  emits: ['update:user', 'update:active-step', 'next:step', 'update:authority', 'update:direccion'  ],
   data() {
     return {
       activeStep: 0,
@@ -55,12 +61,28 @@ export default {
         ]
       },
       steps: [
-        { title: 'Cuenta', component: 'Cuenta' },
-        { title: 'Perfil', component: 'Perfil' },
-        { title: 'Datos Bancarios', component: 'DatosBanca' }
+        { title: 'Cuenta', component: 'CuentaStep' },
+        { title: 'Perfil', component: 'PerfilStep' },
+        { title: 'Datos Bancarios', component: 'DatosBancaStep' }
       ]
     }
   },
+  watch:{
+    'user.authority': {
+      deep: true,
+      handler(newVal) {
+        const representativeStep = { title: 'Representante', component: 'RepresentanteStep' };
+        const index = this.steps.findIndex(step => step.title === 'Representante');
+
+        if (newVal[0].authorityName === 'ROLE_CORREDOR' && index === -1) {
+          this.steps.splice(2, 0, representativeStep);
+        } else if (newVal[0].authorityName !== 'ROLE_CORREDOR' && index !== -1) {
+          this.steps.splice(index, 1);
+        }
+      }
+    }
+  }
+  ,
   methods: {
     nextStep() {
       this.activeStep++

@@ -40,7 +40,7 @@ export default {
       authorityDtoSet: []
     }
   },
-  emits: ['next:step'],
+  emits: ['next:step', 'update:authority' ],
   methods: {
     updateAuthority() {
       this.authorityDtoSet = [];

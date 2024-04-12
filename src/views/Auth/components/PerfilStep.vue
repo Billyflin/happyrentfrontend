@@ -24,7 +24,10 @@
 </template>
 <script>
 export default {
-  name: 'Perfil'
+  name: 'PerfilStep',
+  data() {
+    return {}
+  }
 
 }
 

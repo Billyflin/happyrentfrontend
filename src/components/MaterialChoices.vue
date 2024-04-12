@@ -1,12 +1,12 @@
 <template>
-  <div class="form-group" :class="`input-group-${variant}`">
-    <label class="form-label" :for="id">{{ label }}</label>
-    <select ref="choicesElement"
-            class="form-control"
-            :name="name"
-            :id="id"
-            :multiple="isMultiple"
+  <div :class="`input-group-${variant}`" class="form-group">
+    <label :for="id" class="form-label">{{ label }}</label>
+    <select :id="id"
+            ref="choicesElement"
             v-model="selectedValue"
+            :multiple="isMultiple"
+            :name="name"
+            class="form-control"
     />
   </div>
 </template>
@@ -112,7 +112,7 @@ export default {
       this.$emit('update:modelValue', newVal)
     }
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.choices.passedElement.element.removeEventListener('change', this.emitValue, false)
     this.choices.destroy()
   },
