@@ -29,10 +29,12 @@
     <div class="col-md-12 mt-4">
       <button type="submit" class="btn btn-primary">Enviar</button>
   </div>
+    <basura></basura>
   </form>
 </template>
 <script setup>
 import { reactive } from 'vue'
+import Basura from './Basura.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 
 const persona = reactive({

@@ -10,86 +10,125 @@
       class="form-control"
       :class="classes"
       :name="name"
-      :value="modelValue"
+      v-model="internalValue"
       :placeholder="placeholder"
       :required="isRequired"
       :disabled="disabled"
-      @input="$emit('update:modelValue', $event.target.value)"
     />
+    <p>{{ v$.internalValue.$error }}</p>
+    <p>{{ v$ }}</p>
   </div>
 </template>
 
 <script>
-import setMaterialInput from "@/assets/js/material-input.js";
+import setMaterialInput from '@/assets/js/material-input.js'
+import { useVuelidate } from '@vuelidate/core'
+import { helpers, required } from '@vuelidate/validators'
 
 export default {
-  name: "MaterialInput",
+  name: 'MaterialInput',
   props: {
     modelValue: {
-      type:  [Number, String],
-      default: "",
+      type: [Number, String],
+      default: ''
     },
     variant: {
       type: String,
-      default: "outline",
+      default: 'outline'
     },
     label: {
       type: String,
-      default: "",
+      default: ''
     },
     size: {
       type: String,
-      default: "default",
+      default: 'default'
     },
     success: {
       type: Boolean,
-      default: false,
+      default: false
     },
     error: {
       type: Boolean,
-      default: false,
+      default: false
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     name: {
       type: String,
-      default: "",
+      default: ''
     },
     id: {
       type: String,
-      required: true,
+      required: true
     },
     placeholder: {
       type: String,
-      default: "",
+      default: ''
     },
     type: {
       type: String,
-      default: "text",
+      default: 'text'
     },
     isRequired: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
+  data() {
+    return {
+      internalValue: this.modelValue
+    }
+  },
+  validations: {
+    internalValue: {
+      required,
+      // aca quiero hacer que este validador sea opcional, si el typo es rut, entonces se aplica
+      rutValidator: helpers.withMessage('Rut inválido',
+        helpers.regex(/^[0-9]+-[0-9kK]{1}$/)
+      )
+    }
+  }
+  ,
+  watch: {
+    modelValue(newValue) {
+      this.internalValue = newValue
+    }
+    ,
+    internalValue(newValue) {
+      this.$emit('update:modelValue', newValue)
+      this.v$.internalValue.$touch()
+    }
+  }
+  ,
   mounted() {
-    setMaterialInput();
-  },
+    setMaterialInput()
+  }
+  ,
+  setup() {
+    return { v$: useVuelidate() }
+  }
+  ,
   computed: {
     classes() {
-      return this.size ? `form-control-${this.size}` : null;
-    },
+      return this.size ? `form-control-${this.size}` : null
+    }
+    ,
     status() {
+      // acá ve si tiene v$.internalValue.$error
       if (this.success) {
-        return "is-valid";
+        return 'is-valid'
       } else if (this.error) {
-        return "is-invalid";
+        return 'is-invalid'
       } else {
-        return null;
+        return null
       }
-    },
-  },
-};
+    }
+
+  }
+
+}
+
 </script>
