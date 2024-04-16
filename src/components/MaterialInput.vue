@@ -1,26 +1,25 @@
 <template>
   <div
-      class="input-group"
-      :class="`input-group-${variant} ${getStatus(error, success)}`"
+    class="input-group"
+    :class="`input-group-${variant} ${status}`"
   >
     <label :class="variant === 'static' ? '' : 'form-label'">{{ label }}</label>
     <input
-        :id="id"
-        :type="type"
-        class="form-control"
-        :class="getClasses(size)"
-        :name="name"
-        :value="modelValue"
-        :placeholder="placeholder"
-        :isRequired="isRequired"
-        :disabled="disabled"
-        @input="$emit('update:modelValue', $event.target.value)"
+      :id="id"
+      :type="type"
+      class="form-control"
+      :class="classes"
+      :name="name"
+      :value="modelValue"
+      :placeholder="placeholder"
+      :required="isRequired"
+      :disabled="disabled"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
 
 <script>
-import { nextTick } from 'vue';
 import setMaterialInput from "@/assets/js/material-input.js";
 
 export default {
@@ -76,28 +75,20 @@ export default {
     },
   },
   mounted() {
-      setMaterialInput();
+    setMaterialInput();
   },
-  methods: {
-    getClasses: (size) => {
-      let sizeValue;
-
-      sizeValue = size ? `form-control-${size}` : null;
-
-      return sizeValue;
+  computed: {
+    classes() {
+      return this.size ? `form-control-${this.size}` : null;
     },
-    getStatus: (error, success) => {
-      let isValidValue;
-
-      if (success) {
-        isValidValue = "is-valid";
-      } else if (error) {
-        isValidValue = "is-invalid";
+    status() {
+      if (this.success) {
+        return "is-valid";
+      } else if (this.error) {
+        return "is-invalid";
       } else {
-        isValidValue = null;
+        return null;
       }
-
-      return isValidValue;
     },
   },
 };

@@ -14,17 +14,20 @@
     </div>
     <div class="multisteps-form__content">
       <div v-if=" $parent.$data.user.authority[0].authorityName === 'ROLE_PROPIETARIO'">
-        <h1>Propietario</h1>
+        <PropietarioForm/>
       </div>
       <div v-if=" $parent.$data.user.authority[0].authorityName === 'ROLE_CORREDOR'">
-        <h1>Corredora</h1>
+        <CorredoraForm/>
       </div>
     </div>
   </div>
 </template>
 <script>
+import PropietarioForm from '@/views/Auth/components/PropietarioForm.vue'
+import CorredoraForm from '@/views/Auth/components/CorredoraForm.vue'
 export default {
   name: 'PerfilStep',
+  components: { CorredoraForm, PropietarioForm },
   data() {
     return {}
   }
