@@ -18,6 +18,7 @@
           <component
             :is="steps[activeStep].component"
             v-if="activeStep < steps.length"
+            @update:persona="user.persona = $event;console.log($event);console.log(this.user)"
             @update:authority="user.authority = $event;console.log(this.user)"
             @update:direccion="user.direccion = $event;console.log(this.user)"
             @update:user="user = $event;console.log(this.user)"
@@ -30,11 +31,11 @@
 </template>
 
 <script>
-import MultiStepsFormProgress from './MultiStepsFormProgress.vue'
-import CuentaStep from './CuentaStep.vue'
-import PerfilStep from './PerfilStep.vue'
-import DatosBancaStep from './DatosBancaStep.vue'
-import RepresentanteStep from './RepresentanteStep.vue'
+import PerfilStep from '@/views/Auth/components/PerfilStep.vue'
+import MultiStepsFormProgress from '@/views/Auth/components/MultiStepsFormProgress.vue'
+import CuentaStep from '@/views/Auth/components/CuentaStep.vue'
+import RepresentanteStep from '@/views/Auth/components/RepresentanteStep.vue'
+import DatosBancaStep from '@/views/Auth/components/DatosBancaStep.vue'
 
 /**
  * import other form panel components
@@ -49,11 +50,12 @@ export default {
     RepresentanteStep,
     DatosBancaStep
   },
-  emits: ['update:user', 'update:active-step', 'next:step', 'update:authority', 'update:direccion'  ],
+  emits: ['update:user', 'update:active-step', 'next:step', 'update:authority', 'update:direccion', 'update:persona'],
   data() {
     return {
       activeStep: 0,
       user: {
+        persona: '',
         authority: [
           {
             authorityName: 'ROLE_PROPIETARIO'
@@ -67,17 +69,17 @@ export default {
       ]
     }
   },
-  watch:{
+  watch: {
     'user.authority': {
       deep: true,
       handler(newVal) {
-        const representativeStep = { title: 'Representante', component: 'RepresentanteStep' };
-        const index = this.steps.findIndex(step => step.title === 'Representante');
+        const representativeStep = { title: 'Representante', component: 'RepresentanteStep' }
+        const index = this.steps.findIndex(step => step.title === 'Representante')
 
         if (newVal[0].authorityName === 'ROLE_CORREDOR' && index === -1) {
-          this.steps.splice(2, 0, representativeStep);
+          this.steps.splice(2, 0, representativeStep)
         } else if (newVal[0].authorityName !== 'ROLE_CORREDOR' && index !== -1) {
-          this.steps.splice(index, 1);
+          this.steps.splice(index, 1)
         }
       }
     }

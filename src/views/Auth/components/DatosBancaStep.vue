@@ -1,7 +1,6 @@
 <template>
   <div>
     <!-- other form elements -->
-    <input v-model="direccion" placeholder="Enter your address">
     <material-choices id="sdaad"
                       v-model="selectedOption"
                       :options="opcions"

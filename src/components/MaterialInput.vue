@@ -1,7 +1,9 @@
 <template>
   <div
     class="input-group"
-    :class="`input-group-${variant} ${status}`"
+    :class="`input-group-${variant}
+     ${v$.internalValue.$error ? 'is-invalid' : ''}
+    ${!v$.internalValue.$error && v$.internalValue.$anyDirty ? 'is-valid' : ''} `"
   >
     <label :class="variant === 'static' ? '' : 'form-label'">{{ label }}</label>
     <input
@@ -15,15 +17,19 @@
       :required="isRequired"
       :disabled="disabled"
     />
-    <p>{{ v$.internalValue.$error }}</p>
-    <p>{{ v$ }}</p>
   </div>
+<!--    <p>{{ v$.internalValue}}</p>-->
+  <div v-for="v of v$.$errors" :key="v.$uid">
+    <p>{{ v.$message }}</p>
+  </div>
+<!--  <button @click="v$.internalValue.$touch()">Touch</button>-->
+<!--  <button @click="console.log(v$.internalValue)">sad</button>-->
 </template>
 
 <script>
 import setMaterialInput from '@/assets/js/material-input.js'
 import { useVuelidate } from '@vuelidate/core'
-import { helpers, required } from '@vuelidate/validators'
+import { email, helpers, required } from '@vuelidate/validators'
 
 export default {
   name: 'MaterialInput',
@@ -77,21 +83,66 @@ export default {
       default: false
     }
   },
+  validations() {
+    if (this.type === 'rut') {
+      return {
+        internalValue: {
+          required:helpers.withMessage('Rut es requerido',
+            required
+          ),
+          validRut: helpers.withMessage('Rut inválido',
+            value => {
+              // Elimina los puntos y valida el formato
+              let cleanValue = value.replace(/\./g, '');
+              if (!/^[0-9]+-[0-9kK]{1}$/.test(cleanValue)) return false;
+
+              let [rut, dv] = cleanValue.split('-');
+              let total = 0;
+              let factor = 2;
+              for (let i = rut.length - 1; i >= 0; i--) {
+                total += rut.charAt(i) * factor;
+                factor = factor === 7 ? 2 : factor + 1;
+              }
+              let expectedDv = 11 - (total % 11);
+              if (expectedDv === 11) expectedDv = '0';
+              if (expectedDv === 10) expectedDv = 'K';
+              return dv.toUpperCase() === expectedDv.toString();
+            }
+          )
+        }
+      }
+    }
+    if (this.type === 'email') {
+      return {
+        internalValue: {
+          required: helpers.withMessage('Email es requerido',
+            required
+          ),
+          validEmail: helpers.withMessage('Email inválido',
+            email
+          )
+        }
+      }
+    }
+    if (this.isRequired) {
+      return {
+        internalValue: {
+          required:{
+            $message: `${this.label} es requerido`
+          }
+        }
+      }
+    } else {
+      return {
+        internalValue: {}
+      }
+    }
+  },
   data() {
     return {
       internalValue: this.modelValue
     }
   },
-  validations: {
-    internalValue: {
-      required,
-      // aca quiero hacer que este validador sea opcional, si el typo es rut, entonces se aplica
-      rutValidator: helpers.withMessage('Rut inválido',
-        helpers.regex(/^[0-9]+-[0-9kK]{1}$/)
-      )
-    }
-  }
-  ,
   watch: {
     modelValue(newValue) {
       this.internalValue = newValue
@@ -115,20 +166,6 @@ export default {
     classes() {
       return this.size ? `form-control-${this.size}` : null
     }
-    ,
-    status() {
-      // acá ve si tiene v$.internalValue.$error
-      if (this.success) {
-        return 'is-valid'
-      } else if (this.error) {
-        return 'is-invalid'
-      } else {
-        return null
-      }
-    }
-
   }
-
 }
-
 </script>
