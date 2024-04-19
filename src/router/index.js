@@ -10,11 +10,11 @@ const routes = [{
     path: '/', name: '/', redirect: '/Propiedades'
 }, {
     path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: {
-        requiresAuth: true, roles: ['ROLE_ADMIN']
+        requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_PROPIETARIO']
     }
 }, {
     path: '/profile', name: 'Profile', component: Profile, meta: {
-        requiresAuth: true, roles: ['ROLE_USER']
+        requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO' ]
     }
 }, {
     path: '/sign-in', name: 'SignIn', component: SignIn
@@ -22,7 +22,7 @@ const routes = [{
     path: '/sign-up', name: 'SignUp', component: SignUp
 }, {
     path: '/misContratos', name: 'MisContratos', component: () => import('@/views/Contrato/MisContratos.vue'), meta: {
-        requiresAuth: true, roles: ['ROLE_USER']
+        requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
     }
 }, {
     path: '/nuevoContrato',
@@ -30,7 +30,7 @@ const routes = [{
     component: () => import('@/views/Contrato/NuevoContrato.vue'),
     props: true,
     meta: {
-        requiresAuth: true, roles: ['ROLE_USER']
+        requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
     }
 }, {
     // todo /formularioInvitado/:uuid
@@ -38,14 +38,14 @@ const routes = [{
     name: 'FormularioInvitado',
     component: () => import('@/views/Contrato/FormularioInvitado.vue'),
     meta: {
-        requiresAuth: true, roles: ['ROLE_USER']
+        requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
     }
 },  {
         path: '/agregarPropiedad/',
         name: 'AgregarPropiedad',
         component: () => import('@/views/Propiedades/AgregarPropiedad.vue'),
         meta: {
-            requiresAuth: true, roles: ['ROLE_USER']
+            requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
         }
     }, {
         path: '/propiedad/:id',
@@ -66,7 +66,7 @@ const routes = [{
 
     {
         path: '/contrato/:id', name: 'Contrato', component: () => import('@/views/Contrato/Contrato.vue'), meta: {
-            requiresAuth: true, roles: ['ROLE_USER']
+            requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
         }
     }, {
         path: '/rememberPassword',
@@ -108,7 +108,7 @@ const routes = [{
         name: 'Propiedades',
         component: () => import('@/views/Propiedades/Propiedades.vue'),
         meta: {
-            requiresAuth: true, roles: ['ROLE_USER']
+            requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
         }
     },{
         path: '/Corredora',

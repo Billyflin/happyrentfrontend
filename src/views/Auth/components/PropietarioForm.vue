@@ -17,7 +17,7 @@
                       v-model="persona.ocupacion" />
     </div>
     <div class="col-md-4 mt-4">
-      <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="String" />
+      <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="telefono" v-model="persona.telefono"/>
     </div>
     <div class="col-md-6 mt-4">
       <material-input id="email" variant="dynamic" label="Email" is-required type="text"
@@ -34,7 +34,12 @@
       <material-input id="apellidoMaterno" variant="dynamic" is-required label="Apellido Materno"
                       v-model="persona.apellidoMaterno" />
     </div>
-    <button class="mb-5" @click="emitData">Next</button>
+    <LocalidadForm v-model="persona.direccion" />
+  </div>
+  <div class="mt-4 button-row d-flex">
+    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="emitData">
+      Siguiente
+    </button>
   </div>
 </template>
 <script>
@@ -42,9 +47,11 @@ import { ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
+import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
 
 export default {
   components: {
+    LocalidadForm,
     MaterialInput,
     MaterialChoices
   },
@@ -57,6 +64,14 @@ export default {
       apellidoMaterno: '',
       telefono: '',
       ocupacion: '',
+      direccion: {
+        calle: '',
+        numero: '',
+        codigoPostal: '',
+        pais: '',
+        region: '',
+        ciudad: ''
+      },
       email: '',
       estadoCivil: ''
     })
@@ -77,7 +92,7 @@ export default {
       ]
     }
   },
-  emits: ['update:persona'],
+  emits: ['update:persona', 'next:step'],
   methods: {
     emitData() {
       this.v$.$validate()
@@ -85,6 +100,7 @@ export default {
       // console.log(this.persona)
       if (!this.v$.$error) {
         this.$emit('update:persona', this.persona)
+        this.$emit('next:step')
       }
     }
   }

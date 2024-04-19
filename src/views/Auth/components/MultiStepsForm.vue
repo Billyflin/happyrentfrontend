@@ -19,10 +19,10 @@
             :is="steps[activeStep].component"
             v-if="activeStep < steps.length"
             @update:persona="user.persona = $event;console.log($event);console.log(this.user)"
-            @update:authority="user.authority = $event;console.log(this.user)"
+            @update:authority="user.authorityDtoSet = $event;console.log(this.user)"
             @update:direccion="user.direccion = $event;console.log(this.user)"
             @update:empresa="user.empresa = $event;console.log($event);console.log(this.user)"
-            @update:representante="user.representante = $event;console.log($event);console.log(this.user)"
+            @update:representante="user.empresa.representante = $event;console.log($event);console.log(this.user)"
             @next:step="nextStep"
             :user="user"
           />
@@ -61,8 +61,7 @@ export default {
       user: {
         persona: '',
         empresa: '',
-        representante: '',
-        authority: [
+        authorityDtoSet: [
           {
             authorityName: 'ROLE_PROPIETARIO'
           }
@@ -77,16 +76,18 @@ export default {
     }
   },
   watch: {
-    'user.authority': {
+    'user.authorityDtoSet': {
       deep: true,
       handler(newVal) {
         const representativeStep = { title: 'Representante', component: 'RepresentanteStep' }
         const index = this.steps.findIndex(step => step.title === 'Representante')
         if (newVal[0].authorityName === 'ROLE_CORREDOR' && index === -1) {
           this.user.persona = ''
+          this.user.empresa = null
           this.steps.splice(2, 0, representativeStep)
         } else if (newVal[0].authorityName !== 'ROLE_CORREDOR' && index !== -1) {
-          this.user.empresa = ''
+          this.user.empresa = null
+          this.user.persona = ''
           this.steps.splice(index, 1)
         }
       }

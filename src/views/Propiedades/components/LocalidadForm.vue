@@ -114,7 +114,6 @@ export default {
   },
   watch: {
     regionNum() {
-      console.log('Region: ', this.regionNum)
       axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/ciudad/${this.regionNum}`)
         .then(response => {
           this.ciudades = response.data.map(ciudad => ({

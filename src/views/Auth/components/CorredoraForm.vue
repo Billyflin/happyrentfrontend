@@ -33,13 +33,14 @@ export default {
     return { v$ }
   },
   watch: {},
-  emits: ['update:empresa'],
+  emits: ['update:empresa', 'next:step'],
   methods: {
     emitData() {
       console.log(this.empresa)
       this.v$.$validate()
       if (!this.v$.$error) {
         this.$emit('update:empresa', this.empresa)
+        this.$emit('next:step')
       }
     }
   }
@@ -100,5 +101,9 @@ export default {
       <LocalidadForm v-model="empresa.direccion" />
     </div>
   </div>
-  <button class="mb-5" @click="emitData">Next</button>
+  <div class="mt-4 button-row d-flex">
+    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="emitData">
+      Siguiente
+    </button>
+  </div>
 </template>

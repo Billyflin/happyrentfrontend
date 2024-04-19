@@ -112,6 +112,21 @@ export default {
         }
       }
     }
+    if (this.type === 'telefono') {
+      return {
+        internalValue: {
+          required: helpers.withMessage('Teléfono es requerido',
+            required
+          ),
+          validPhone: helpers.withMessage('Teléfono inválido',
+            value => {
+              let cleanValue = value.replace(/\s/g, '');
+              return /^[0-9]{9}$/.test(cleanValue);
+            }
+          )
+        }
+      }
+    }
     if (this.type === 'email') {
       return {
         internalValue: {

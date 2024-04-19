@@ -9,6 +9,9 @@ export default {
     MaterialChoices
   },
   name: 'RepresentanteStep',
+  props: {
+    user: Object
+  },
   setup() {
     const v$ = useVuelidate()
     return { v$ }
