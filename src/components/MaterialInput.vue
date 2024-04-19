@@ -165,7 +165,7 @@ export default {
   },
   data() {
     return {
-      internalValue: this.modelValue
+      internalValue: this.modelValue,
     }
   },
   watch: {

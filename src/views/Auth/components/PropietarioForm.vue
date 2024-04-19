@@ -1,25 +1,27 @@
 <template>
   <div class="row">
-    <div class="col-md-3 mt-5">
+    <div class="col-md-2 mt-5">
       <material-input id="rut" variant="dynamic" label="RUT" is-required type="rut"
                       v-model="persona.rut" />
     </div>
     <div class="col-md-3 mt-4">
       <MaterialChoices id="estadoCivil" :options="opcionsEstadoCivil"
-                       name="estadoCivil" label="Estado Civil" v-model="seleccion"
-      />
+                       name="estadoCivil" label="Estado Civil" v-model:text-choice="persona.estadoCivil" />
     </div>
     <div class="col-md-3 mt-4">
       <MaterialChoices id="nacionalidad" :options="nacionalidad" label="Nacionalidad"
-                      v-model="seleccionNacionalidad"  name="Nacionalidad"/>
+                       v-model:text-choice="persona.nacionalidad" name="Nacionalidad" />
+    </div>
+    <div class="col-md-4 mt-5">
+      <material-input id="ocupacion" variant="dynamic" label="Ocupación" is-required type="text"
+                      v-model="persona.ocupacion" />
     </div>
     <div class="col-md-4 mt-4">
-      <material-input id="telefono" variant="dynamic" label="Teléfono"   is-required type="String"
-                      v-model="persona.telefono" />
+      <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="String" />
     </div>
-    <div class="col-md-4 mt-4">
-      <material-input id="email" variant="dynamic" label="Email" is-required type="email"
-                      v-model="persona.email" success />
+    <div class="col-md-6 mt-4">
+      <material-input id="email" variant="dynamic" label="Email" is-required type="text"
+                      v-model="persona.email" />
     </div>
     <div class="col-md-4 mt-4">
       <material-input id="nombres" variant="dynamic" is-required label="Nombres" v-model="persona.nombres" />
@@ -32,17 +34,14 @@
       <material-input id="apellidoMaterno" variant="dynamic" is-required label="Apellido Materno"
                       v-model="persona.apellidoMaterno" />
     </div>
-    <div class="col-md-4 mt-4">
-      <material-input id="ocupacion" variant="dynamic" label="Ocupación" is-required type="String"
-                      v-model="persona.ocupacion" />
-    </div>
-  </div>
     <button class="mb-5" @click="emitData">Next</button>
+  </div>
 </template>
 <script>
+import { ref } from 'vue'
+import { useVuelidate } from '@vuelidate/core'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
-
 
 export default {
   components: {
@@ -50,7 +49,21 @@ export default {
     MaterialChoices
   },
   name: 'PropietarioForm',
-  data(){
+  setup() {
+    const persona = ref({
+      rut: '',
+      nombres: '',
+      apellidoPaterno: '',
+      apellidoMaterno: '',
+      telefono: '',
+      ocupacion: '',
+      email: '',
+      estadoCivil: ''
+    })
+    const v$ = useVuelidate()
+    return { persona, v$ }
+  },
+  data() {
     return {
       opcionsEstadoCivil: [
         { value: 'soltero', text: 'Soltero' },
@@ -60,37 +73,20 @@ export default {
       ],
       nacionalidad: [
         { value: 'chile', text: 'Chile' },
-        { value: 'argentina', text: 'Argentina' },
-      ],
-      persona: {
-        rut: '',
-        nombres: '',
-        apellidoPaterno: '',
-        apellidoMaterno: '',
-        telefono: '',
-        ocupacion: '',
-        email: '',
-        estadoCivil: '',
-        nacionalidad: ''
-      },
-      seleccion:'',
-      seleccionNacionalidad:''
-    }
-  },
-  watch: {
-    seleccion: function(value) {
-      this.persona.estadoCivil = value.label
-    },
-    seleccionNacionalidad: function(value) {
-      this.persona.nacionalidad = value.label
+        { value: 'argentina', text: 'Argentina' }
+      ]
     }
   },
   emits: ['update:persona'],
   methods: {
     emitData() {
-      console.log(this.persona)
-      this.$emit('update:persona', this.persona)
+      this.v$.$validate()
+      // console.log(this.v$)
+      // console.log(this.persona)
+      if (!this.v$.$error) {
+        this.$emit('update:persona', this.persona)
+      }
     }
-  },
+  }
 }
 </script>

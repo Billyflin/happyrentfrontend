@@ -1,6 +1,7 @@
 <script>
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
+import { useVuelidate } from '@vuelidate/core'
 
 export default {
   components: {
@@ -8,7 +9,11 @@ export default {
     MaterialChoices
   },
   name: 'RepresentanteStep',
-  data(){
+  setup() {
+    const v$ = useVuelidate()
+    return { v$ }
+  },
+  data() {
     return {
       opcionsEstadoCivil: [
         { value: 'soltero', text: 'Soltero' },
@@ -18,7 +23,7 @@ export default {
       ],
       nacionalidad: [
         { value: 'chile', text: 'Chile' },
-        { value: 'argentina', text: 'Argentina' },
+        { value: 'argentina', text: 'Argentina' }
       ],
       representante: {
         rut: '',
@@ -31,25 +36,18 @@ export default {
         estadoCivil: '',
         nacionalidad: ''
       },
-      seleccion:'',
-      seleccionNacionalidad:''
     }
   },
-  watch: {
-    seleccion: function(value) {
-      this.representante.estadoCivil = value.label
-    },
-    seleccionNacionalidad: function(value) {
-      this.representante.nacionalidad = value.label
-    }
-  },
-  emits: ['update:reresentante'],
+  emits: ['update:representante', 'next:step'],
   methods: {
     emitData() {
       console.log(this.representante)
-      this.$emit('update:reresentante', this.representante)
+      this.v$.$validate()
+      if (!this.v$.$error) {
+        this.$emit('update:representante', this.representante)
+      }
     }
-  },
+  }
 }
 </script>
 
@@ -84,12 +82,12 @@ export default {
         </div>
         <div class="col-md-3">
           <MaterialChoices id="estadoCivil" :options="opcionsEstadoCivil"
-                           name="estadoCivil" label="Estado Civil" v-model="seleccion"
+                           name="estadoCivil" label="Estado Civil" v-model:text-choice="representante.estadoCivil"
           />
         </div>
         <div class="col-md-3">
           <MaterialChoices id="nacionalidad" :options="nacionalidad" label="Nacionalidad"
-                           v-model="seleccionNacionalidad"  name="Nacionalidad"/>
+                           v-model:text-choice="representante.nacionalidad" name="Nacionalidad" />
         </div>
       </div>
       <div class="row mt-4">

@@ -46,8 +46,6 @@ const changeOptions = () => {
 <template>
   <button @click="changeOptions">cambiar</button>
   <button @click="disabled = !disabled">disabled</button>
-  <button @click="console.log(eleccion)">click</button>
-  <button @click="console.log(nacionalidad)">click</button>
   <div class="row mt-3">
 <!--    <div class="col-sm-6 col-6">-->
 <!--      <MaterialChoices-->

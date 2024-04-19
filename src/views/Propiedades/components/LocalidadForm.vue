@@ -5,6 +5,8 @@
         id="calleDirection"
         variant="static"
         label="Calle"
+        type="text"
+        is-required
         v-model="direccion.calle"
         placeholder="Calle"
       />
@@ -24,7 +26,7 @@
     <div class="col-2 mt-4">
       <material-input
         id="postal"
-        type="number"
+        type="postal"
         variant="static"
         v-model="direccion.codigoPostal"
         label="Postal"
@@ -36,8 +38,8 @@
     <material-choices class="col-3"
                       id="Pais"
                       :options="paises"
+                      v-model:text-choice="direccion.pais"
                       label="Pais"
-                      v-model:text="direccion.pais"
                       disabled
                       :is-multiple="false"
                       name="pais" />
@@ -45,15 +47,15 @@
                      id="Region"
                      :options="regiones"
                      label="Region"
-                     v-model:text="direccion.region"
-                     v-model:value="regionNum"
+                     v-model:text-choice="direccion.region"
+                     v-model:value-choice="regionNum"
                      :is-multiple="false"
                      name="region" />
     <MaterialChoices class="col-4"
                      id="Ciudad"
+                     v-model:text-choice="direccion.ciudad"
                      :options="ciudades"
                      label="Ciudad"
-                     v-model:text="direccion.ciudad"
                      :is-multiple="false"
                      name="ciudad"
     />
@@ -64,22 +66,29 @@
 import axios from 'axios'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
+import { useVuelidate } from '@vuelidate/core'
+import { ref, watch } from 'vue'
 
 export default {
   components: {
     MaterialChoices,
     MaterialInput
   },
+  props: {
+    modelValue: Object
+  },
+  emits: ['update:modelValue'],
+  setup(props, { emit }) {
+    const direccion = ref(props.modelValue)
+    watch(direccion, (newDireccion) => {
+      emit('update:modelValue', newDireccion)
+    })
+
+    const v$ = useVuelidate()
+    return { direccion, v$ }
+  },
   data() {
     return {
-      direccion: {
-        calle: '',
-        numero: '',
-        codigoPostal: '',
-        pais: '',
-        region: '',
-        ciudad: ''
-      },
       regiones: [],
       ciudades: [],
       regionNum: 1,
@@ -97,7 +106,7 @@ export default {
           label: region.nombre,
           selected: region.nombre === 'Región Metropolitana de Santiago' ? true : undefined
         }))
-        console.log('Regiones: ', this.regiones)
+        // console.log('Regiones: ', this.regiones)
       })
       .catch(error => {
         console.error(error)
@@ -105,13 +114,14 @@ export default {
   },
   watch: {
     regionNum() {
+      console.log('Region: ', this.regionNum)
       axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/ciudad/${this.regionNum}`)
         .then(response => {
           this.ciudades = response.data.map(ciudad => ({
             value: ciudad.nombre,
             label: ciudad.nombre
           }))
-          console.log('Ciudades: ', this.ciudades)
+          // console.log('Ciudades: ', this.ciudades)
         })
         .catch(error => {
           console.error(error)

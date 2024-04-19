@@ -21,10 +21,10 @@
             @update:persona="user.persona = $event;console.log($event);console.log(this.user)"
             @update:authority="user.authority = $event;console.log(this.user)"
             @update:direccion="user.direccion = $event;console.log(this.user)"
-            @update:user="user = $event;console.log(this.user)"
             @update:empresa="user.empresa = $event;console.log($event);console.log(this.user)"
             @update:representante="user.representante = $event;console.log($event);console.log(this.user)"
             @next:step="nextStep"
+            :user="user"
           />
         </div>
       </div>
@@ -37,6 +37,7 @@ import PerfilStep from '@/views/Auth/components/PerfilStep.vue'
 import MultiStepsFormProgress from '@/views/Auth/components/MultiStepsFormProgress.vue'
 import CuentaStep from '@/views/Auth/components/CuentaStep.vue'
 import RepresentanteStep from '@/views/Auth/components/RepresentanteStep.vue'
+import ResumenStep from '@/views/Auth/components/ResumenStep.vue'
 import DatosBancaStep from '@/views/Auth/components/DatosBancaStep.vue'
 
 /**
@@ -50,9 +51,10 @@ export default {
     CuentaStep,
     PerfilStep,
     RepresentanteStep,
-    DatosBancaStep
+    DatosBancaStep,
+    ResumenStep
   },
-  emits: ['update:user', 'update:active-step', 'next:step', 'update:authority', 'update:direccion', 'update:persona', 'update:empresa', 'update:representante'],
+  emits: ['update:active-step', 'next:step', 'update:authority', 'update:direccion', 'update:persona', 'update:empresa', 'update:representante'],
   data() {
     return {
       activeStep: 0,
@@ -69,7 +71,8 @@ export default {
       steps: [
         { title: 'Cuenta', component: 'CuentaStep' },
         { title: 'Perfil', component: 'PerfilStep' },
-        { title: 'Datos Bancarios', component: 'DatosBancaStep' }
+        { title: 'Datos Bancarios', component: 'DatosBancaStep' },
+        { title: 'Resumen', component: 'ResumenStep' }
       ]
     }
   },
@@ -79,10 +82,11 @@ export default {
       handler(newVal) {
         const representativeStep = { title: 'Representante', component: 'RepresentanteStep' }
         const index = this.steps.findIndex(step => step.title === 'Representante')
-
         if (newVal[0].authorityName === 'ROLE_CORREDOR' && index === -1) {
+          this.user.persona = ''
           this.steps.splice(2, 0, representativeStep)
         } else if (newVal[0].authorityName !== 'ROLE_CORREDOR' && index !== -1) {
+          this.user.empresa = ''
           this.steps.splice(index, 1)
         }
       }

@@ -2,6 +2,7 @@
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
+import { useVuelidate } from '@vuelidate/core'
 
 export default {
   components: {
@@ -15,17 +16,31 @@ export default {
       empresa: {
         rut: '',
         razonSocial: '',
-        Giro: ''
-      },
-      seleccion: ''
+        giro: '',
+        direccion: {
+          calle: '',
+          numero: '',
+          codigoPostal: '',
+          pais: '',
+          region: '',
+          ciudad: ''
+        }
+      }
     }
+  },
+  setup() {
+    const v$ = useVuelidate()
+    return { v$ }
   },
   watch: {},
   emits: ['update:empresa'],
   methods: {
     emitData() {
       console.log(this.empresa)
-      this.$emit('update:empresa', this.empresa)
+      this.v$.$validate()
+      if (!this.v$.$error) {
+        this.$emit('update:empresa', this.empresa)
+      }
     }
   }
 }
@@ -37,7 +52,17 @@ export default {
       <div class="row mt-4">
       </div>
       <div class="row mt-4">
-        <div class="col-sm-3">
+        <div class="col-sm-6">
+          <material-input id="nombreEmpresa"
+                          variant="static"
+                          type="text"
+                          is-required
+                          label="Nombre Empresa"
+                          placeholder="Nombre Empresa"
+                          v-model="empresa.nombre"
+          />
+        </div>
+        <div class="col-sm-6">
           <material-input
             id="rut"
             type="rut"
@@ -47,7 +72,7 @@ export default {
             v-model="empresa.rut"
           />
         </div>
-        <div class="col-sm-5">
+        <div class="col-sm-6 mt-4">
           <material-input
             id="razonSocial"
             variant="static"
@@ -58,7 +83,7 @@ export default {
             v-model="empresa.razonSocial"
           />
         </div>
-        <div class="col-sm-4">
+        <div class="col-sm-6 mt-4">
           <material-input
             id="Giro"
             variant="static"
@@ -66,13 +91,13 @@ export default {
             is-required
             label="Giro"
             placeholder="Giro"
-            v-model="empresa.Giro"
+            v-model="empresa.giro"
           />
         </div>
       </div>
     </div>
-    <div class="row mt-4 text-start">
-      <LocalidadForm></LocalidadForm>
+    <div class="row text-start">
+      <LocalidadForm v-model="empresa.direccion" />
     </div>
   </div>
   <button class="mb-5" @click="emitData">Next</button>

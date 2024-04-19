@@ -16,7 +16,7 @@ import Choices from 'choices.js'
 
 export default {
   name: 'MaterialChoices',
-  emits: ['update:modelValue', 'update:value', 'update:text'],
+  emits: ['update:modelValue', 'update:value-choice', 'update:text-choice'],
   props: {
     id: {
       type: String,
@@ -60,11 +60,21 @@ export default {
     removeItemButton: {
       type: Boolean,
       default: false
+    },
+    textChoice: {
+      type: String,
+      default: ''
+    },
+    valueChoice: {
+      type: [String, Number],
+      default: ''
     }
   },
   data() {
     return {
-      selectedValue: this.modelValue
+      selectedValue: this.modelValue,
+      selectedtextChoice: this.textChoice,
+      selectedvalueChoice: this.valueChoice
     }
   },
   mounted() {
@@ -110,6 +120,12 @@ export default {
     },
     selectedValue(newVal) {
       this.$emit('update:modelValue', newVal)
+    },
+    selectedvalueChoice(newVal) {
+      this.$emit('update:value-choice', newVal)
+    },
+    selectedtextChoice(newVal) {
+      this.$emit('update:text-choice', newVal)
     }
   },
   beforeUnmount() {
@@ -120,6 +136,10 @@ export default {
     emitValue() {
       const selectedValue = this.choices.getValue()
       if (JSON.stringify(selectedValue) !== JSON.stringify(this.modelValue)) {
+        if (selectedValue) {
+          this.selectedtextChoice = selectedValue.label
+          this.selectedvalueChoice = selectedValue.value
+        }
         this.selectedValue = selectedValue
       }
     }
