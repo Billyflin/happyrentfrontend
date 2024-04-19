@@ -72,11 +72,11 @@ export default {
       this.persona.estadoCivil = value.label
     }
   },
-  emits: ['update:user'],
+  emits: ['update:persona'],
   methods: {
     emitData() {
       console.log(this.persona)
-      this.$emit('update:user', this.persona)
+      this.$emit('update:persona', this.persona)
     }
   },
 }

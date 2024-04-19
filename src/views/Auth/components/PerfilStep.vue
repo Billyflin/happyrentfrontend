@@ -14,7 +14,7 @@
     </div>
     <div class="multisteps-form__content">
       <div v-if=" $parent.$data.user.authority[0].authorityName === 'ROLE_PROPIETARIO'">
-        <PropietarioForm/>
+        <PropietarioForm @update:persona="$emit('update:persona',$event)" />
       </div>
       <div v-if=" $parent.$data.user.authority[0].authorityName === 'ROLE_CORREDOR'">
         <CorredoraForm/>
@@ -29,7 +29,9 @@ export default {
   name: 'PerfilStep',
   components: { CorredoraForm, PropietarioForm },
   data() {
-    return {}
+    return {
+
+    }
   }
 
 }
