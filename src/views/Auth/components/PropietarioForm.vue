@@ -4,16 +4,20 @@
       <material-input id="rut" variant="dynamic" label="RUT" is-required type="rut"
                       v-model="persona.rut" />
     </div>
-    <div class="col-md-2 mt-4">
+    <div class="col-md-3 mt-4">
       <MaterialChoices id="estadoCivil" :options="opcionsEstadoCivil"
                        name="estadoCivil" label="Estado Civil" v-model="seleccion"
       />
     </div>
-    <div class="col-md-3 mt-5">
+    <div class="col-md-3 mt-4">
+      <MaterialChoices id="nacionalidad" :options="nacionalidad" label="Nacionalidad"
+                      v-model="seleccionNacionalidad"  name="Nacionalidad"/>
+    </div>
+    <div class="col-md-4 mt-4">
       <material-input id="telefono" variant="dynamic" label="Teléfono"   is-required type="String"
                       v-model="persona.telefono" />
     </div>
-    <div class="col-md-6 mt-4">
+    <div class="col-md-4 mt-4">
       <material-input id="email" variant="dynamic" label="Email" is-required type="email"
                       v-model="persona.email" success />
     </div>
@@ -54,6 +58,10 @@ export default {
         { value: 'divorciado', text: 'Divorciado' },
         { value: 'viudo', text: 'Viudo' }
       ],
+      nacionalidad: [
+        { value: 'chile', text: 'Chile' },
+        { value: 'argentina', text: 'Argentina' },
+      ],
       persona: {
         rut: '',
         nombres: '',
@@ -62,14 +70,19 @@ export default {
         telefono: '',
         ocupacion: '',
         email: '',
-        estadoCivil: ''
+        estadoCivil: '',
+        nacionalidad: ''
       },
-      seleccion:''
+      seleccion:'',
+      seleccionNacionalidad:''
     }
   },
   watch: {
     seleccion: function(value) {
       this.persona.estadoCivil = value.label
+    },
+    seleccionNacionalidad: function(value) {
+      this.persona.nacionalidad = value.label
     }
   },
   emits: ['update:persona'],

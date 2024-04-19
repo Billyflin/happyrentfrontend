@@ -22,6 +22,8 @@
             @update:authority="user.authority = $event;console.log(this.user)"
             @update:direccion="user.direccion = $event;console.log(this.user)"
             @update:user="user = $event;console.log(this.user)"
+            @update:empresa="user.empresa = $event;console.log($event);console.log(this.user)"
+            @update:representante="user.representante = $event;console.log($event);console.log(this.user)"
             @next:step="nextStep"
           />
         </div>
@@ -50,12 +52,14 @@ export default {
     RepresentanteStep,
     DatosBancaStep
   },
-  emits: ['update:user', 'update:active-step', 'next:step', 'update:authority', 'update:direccion', 'update:persona'],
+  emits: ['update:user', 'update:active-step', 'next:step', 'update:authority', 'update:direccion', 'update:persona', 'update:empresa', 'update:representante'],
   data() {
     return {
       activeStep: 0,
       user: {
         persona: '',
+        empresa: '',
+        representante: '',
         authority: [
           {
             authorityName: 'ROLE_PROPIETARIO'
