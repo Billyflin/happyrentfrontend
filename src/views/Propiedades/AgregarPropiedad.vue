@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-4">
     <!-- Seccion propiedad -->
-    <propiedad-agregar-propiedad :propiedad="propiedad" @update:propiedad="propiedad = $event" />
+<!--    <propiedad-agregar-propiedad :propiedad="propiedad" @update:propiedad="propiedad = $event" />-->
     <!-- Seccion Propietario -->
     <propiedad-agregar-propietario :propietario="propietario"/>
     <!-- INVENTARIO -->

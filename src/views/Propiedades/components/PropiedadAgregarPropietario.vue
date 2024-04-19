@@ -16,7 +16,18 @@ export default {
     return {
       propietarioNuevo: true,
       esEmpresa: false,
-      propietario_existente: ''
+      propietario_existente: '',
+      propietario: {
+        direccion: {
+          pais: '',
+          region: '',
+          comuna: '',
+          calle: '',
+          numero: '',
+          departamento: '',
+          codigoPostal: ''
+        }
+      }
     }
   },
   emits: ['update:propietario'],
@@ -274,8 +285,8 @@ export default {
             </div>
           </div>
         </div>
-        <h4>Direccion</h4>
-        <LocalidadForm></LocalidadForm>
+        <LocalidadForm  v-if="!propietarioNuevo"
+                        v-model="propietario.direccion"></LocalidadForm>
       </div>
     </div>
   </div>
