@@ -20,7 +20,7 @@
   </div>
 <!--    <p>{{ v$.internalValue}}</p>-->
   <div v-for="v of v$.$errors" :key="v.$uid">
-    <p>{{ v.$message }}</p>
+    <span class="badge badge-danger text-xxs mt-2">{{ v.$message }}</span>
   </div>
 <!--  <button @click="v$.internalValue.$touch()">Touch</button>-->
 <!--  <button @click="console.log(v$.internalValue)">sad</button>-->
@@ -124,12 +124,37 @@ export default {
         }
       }
     }
+    if (this.type === 'password') {
+      return {
+        internalValue: {
+          required: helpers.withMessage('Contraseña es requerida',
+            required
+          ),
+          minLength: helpers.withMessage('Contraseña debe tener al menos 6 caracteres',
+            value => value.length >= 6
+          )
+        }
+      }
+    }
+    if (this.type === 'number') {
+      return {
+        internalValue: {
+          required: helpers.withMessage('Número es requerido',
+            required
+          ),
+          isNumber: helpers.withMessage('Número inválido',
+            value => !isNaN(value)
+          )
+        }
+      }
+    }
     if (this.isRequired) {
       return {
         internalValue: {
-          required:{
-            $message: `${this.label} es requerido`
-          }
+          required:
+            helpers.withMessage(`${this.label} es requerido`,
+              required
+            )
         }
       }
     } else {

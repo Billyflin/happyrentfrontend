@@ -10,7 +10,7 @@
       />
     </div>
     <div class="col-md-3 mt-5">
-      <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="String"
+      <material-input id="telefono" variant="dynamic" label="Teléfono"   is-required type="String"
                       v-model="persona.telefono" />
     </div>
     <div class="col-md-6 mt-4">
