@@ -44,7 +44,7 @@
 import SideNav from './components/SideNav.vue'
 import { useAppStore, useAuthStore } from '@/store/index.js'
 import { onMounted, onUnmounted, ref } from 'vue'
-import ArrendadorContrato from '@/views/Personas/components/AgregarPersona.vue'
+import ArrendadorContrato from '@/views/Personas/components/AgregarPersonaForm.vue'
 import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosContrato.vue'
 import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
 import FormularioPropiedadContrato from '@/views/Contrato/components/FormularioPropiedadContrato.vue'

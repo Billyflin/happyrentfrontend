@@ -106,6 +106,7 @@ onMounted(() => {
             variant="static"
             label="Nombre Propiedad"
             placeholder="Casa de campo, etc"
+            is-required
             v-model="propiedad.nombre"
           />
         </div>
@@ -124,6 +125,7 @@ onMounted(() => {
           <material-input
             id="numBanos"
             type="number"
+            is-required
             variant="static"
             label="numero de baños"
             placeholder="1"
@@ -135,6 +137,7 @@ onMounted(() => {
           <material-input
             id="numPiezas"
             type="number"
+            is-required
             variant="static"
             label="numero de piezas"
             placeholder="1"
@@ -147,6 +150,7 @@ onMounted(() => {
             id="metrosCuadradosTerreno"
             type="number"
             variant="static"
+            is-required
             label="metros cuadrados terreno"
             placeholder="50"
             v-model="propiedad.metrosCuadradosTerreno"
@@ -155,6 +159,7 @@ onMounted(() => {
         </div>
         <div class="col-3">
           <material-input
+            is-required
             id="metrosCuadradosConstruidos"
             type="number"
             variant="static"

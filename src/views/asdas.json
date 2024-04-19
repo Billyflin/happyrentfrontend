@@ -1,5 +1,20 @@
 {
-  "imageId": 1,
-  "imageData": "/9j/4QAWRXhpZgAATU0AKgAAAAgAAAAAAAD/4gJASUNDX1BST0ZJTEUAAQEAAAIwQURCR... (204100 total length)",
-  "dataURL": "data:image/png;base64,����\u0000\u0016Exif\u0000\u0000MM\u0000*\u0000\u0000\u0000\b\u0000\u0000\u0000\u0000\u0000\u0000��\u0002@ICC_PROFILE���\u001a... (145208 total length)"
+  "rut": "19763564-9",
+  "nombres": "Andrea",
+  "apellidoPaterno": "Bravo",
+  "apellidoMaterno": "Gonzalez",
+  "nombreCompleto": "string",
+  "direccion": {
+    "calle": "calle",
+    "numero": 1,
+    "ciudad": "Temuco",
+    "region": "Araucania",
+    "pais": "Chile",
+    "codigoPostal": "8842413"
+  },
+  "telefono": "string",
+  "email": "string@sadasd.com",
+  "estadoCivil": "Soltera",
+  "ocupacion": "Veterinaria",
+  "nacionalidad": "Chilena"
 }

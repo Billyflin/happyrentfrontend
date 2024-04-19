@@ -159,6 +159,9 @@ export default {
           ),
           isNumber: helpers.withMessage('Número inválido',
             value => !isNaN(value)
+          ),
+          isPositive: helpers.withMessage('Número debe ser positivo o 0',
+            value => value >= -1
           )
         }
       }

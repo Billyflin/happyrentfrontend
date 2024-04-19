@@ -10,7 +10,7 @@ const validateInput = (event) => {
 </script>
 
 <template>
-  <div id="Reajuste" class="card mt-5">
+  <div id="Pagos" class="card mt-5">
     <div class="card-header">
       <h5>Pagos</h5>
     </div>

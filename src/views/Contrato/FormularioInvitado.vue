@@ -220,7 +220,7 @@
       <!--  Seccion RepresentanteLegal Empresa-->
       <!--        generales propietario-->
       <div class="row mt-4 text-start" v-if="!arrendatarioContrato">
-        <LocalidadForm></LocalidadForm>
+        <LocalidadForm v-model="persona.direccion"></LocalidadForm>
       </div>
     </div>
     <div class="card-footer">
@@ -241,7 +241,16 @@ import MaterialButton from '@/components/MaterialButton.vue'
 
 const arrendatarioContrato = ref(false)
 const esEmpresa = ref(true)
-
+const persona = ref({
+  direccion: {
+    pais: '',
+    region: '',
+    ciudad: '',
+    calle: '',
+    numero: '',
+    codigoPostal: ''
+  }
+})
 
 const store = useAppStore()
 const { toggleEveryDisplay, toggleHideConfig } = store

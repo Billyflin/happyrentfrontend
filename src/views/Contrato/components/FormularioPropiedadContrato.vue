@@ -56,6 +56,7 @@ const store = useAuthStore()
               <li v-for="estacionamiento in store.propiedad.estacionamientos"
                   class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg"
               >
+
                 <div class="d-flex flex-column">
                   <h6 class="mb-3 text-sm">{{ estacionamiento.descripcion }}</h6>
                   <div class="d-flex justify-content-between">
@@ -67,6 +68,11 @@ const store = useAuthStore()
                     </span>
                   </div>
                 </div>
+                <a
+                  class="mb-0 btn btn-link pe-3 ps-0 ms-auto"
+                  href="javascript:;"
+                ></a
+                >
               </li>
             </ul>
           </div>

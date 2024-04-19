@@ -56,7 +56,8 @@ export const useAppStore = defineStore({
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorityDtoSet":[]}, rememberMe: false, isAdmin: false, propiedades: [],
+    auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorityDtoSet":[]},
+    rememberMe: false, isAdmin: false, propiedades: [],
     propiedad: { },
     personas: [],
   }), persist: true, actions: {
@@ -112,7 +113,21 @@ export const useAuthStore = defineStore('auth', {
 
     }, setRememberMe(value) {  // Agrega este método
       this.rememberMe = value
-    }, async getPropiedades() {
+    },
+ async getPersonas() {
+      if (this.userInfo) {
+        await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/personas/all`)
+          .then((response) => {
+            this.personas = response.data
+            console.log(response.data)
+          })
+          .catch((err) => {
+            console.error(err)
+          })
+      }
+
+ }
+  , async getPropiedades() {
       if (this.userInfo) {
         const userId = this.userInfo.id
         await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/propiedad`)
