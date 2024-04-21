@@ -31,6 +31,15 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="Solicitudes"
+                          navText="Solicitudes">
+          <template v-slot:icon>
+            <i class="material-icons-round opacity-10 fs-5">contact_page</i>
+          </template>
+        </sidenav-collapse>
+
+      </li>
+      <li class="nav-item">
         <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="Propiedades"
                           navText="Propiedades">
           <template v-slot:icon>

@@ -5,7 +5,7 @@ import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosCo
 </script>
 
 <template>
-  <div class="row mb-4">
+  <div class="container-fluid mb-4">
     <solicitar-datos-contrato />
   </div>
 </template>

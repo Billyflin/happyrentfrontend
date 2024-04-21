@@ -46,18 +46,19 @@ function blockearInputs() {
           />
         </div>
         <div class="col-4">
-<!--          <MaterialButton class="mt-4" variant="gradient" color="primary" fullWidth @click="blockearInputs">Enviar</MaterialButton>-->
+          <!--          <MaterialButton class="mt-4" variant="gradient" color="primary" fullWidth @click="blockearInputs">Enviar</MaterialButton>-->
           <MaterialButton class="mt-4" variant="gradient" color="happDark" fullWidth @click="blockearInputs">Enviar</MaterialButton>
         </div>
       </div>
       <div v-if="isEmailDisabled" class="row mt-3">
         <span class="badge badge-success">Correo enviado</span>
-
       </div>
     </div>
   </div>
 </template>
-
 <style scoped>
 
 </style>
+
+
+

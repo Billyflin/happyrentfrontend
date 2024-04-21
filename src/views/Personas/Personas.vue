@@ -29,12 +29,8 @@ onMounted(async () => {
           tu lista de personas.
         </p>
       </div>
-
-
     </div>
-    <div class="row mb-4">
-      <solicitar-datos-contrato />
-    </div>
+
     <div class="row mb-6">
       <tabla-personas v-if="personas"
         :headers="['Nombre', 'Rut', 'Email','Persona o Empresa', 'Tipo Entidad', 'Accion']"

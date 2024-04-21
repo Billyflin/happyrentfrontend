@@ -130,9 +130,9 @@ const routes = [{
         component: () => import('@/views/Personas/AgregarPersona.vue'),
     }
     ,{
-    path: '/SolicitarDatos',
+    path: '/Solicitudes',
     name: 'SolicitarDatos',
-    component: () => import('@/views/Personas/SolicitarDatos.vue')
+    component: () => import('@/views/Solicitudes/SolicitarDatos.vue')
     }
 
 
