@@ -1,7 +1,7 @@
 <template>
   <div class="w-auto h-auto collapse navbar-collapse max-height-vh-100 h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav">
-      <li class="nav-item" v-if="authStore.isLoggedIn && authStore.userInfo.authorityDtoSet.some(item => item.authorityName === 'ROLE_PROPIETARIO') || authStore.isAdmin">
+      <li class="nav-item" v-if="authStore.isLoggedIn && authStore.userInfo.authorityDtoSet.some(item => item.authorityName === 'ROLE_PROPIETARIO')||authStore.isAdmin">
         <sidenav-collapse
           url="#"
           :aria-controls="''"
