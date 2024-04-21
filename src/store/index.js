@@ -109,6 +109,7 @@ export const useAuthStore = defineStore('auth', {
       this.isAdmin = false
       delete axios.defaults.headers.common['Authorization']
       this.propiedades = []
+      this.personas = []
       router.push({ name: 'SignIn' })
 
     }, setRememberMe(value) {  // Agrega este método

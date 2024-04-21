@@ -2,9 +2,11 @@
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import { useVuelidate } from '@vuelidate/core'
+import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
 
 export default {
   components: {
+    LocalidadForm,
     MaterialInput,
     MaterialChoices
   },
@@ -29,16 +31,26 @@ export default {
         { value: 'argentina', text: 'Argentina' }
       ],
       representante: {
-        rut: '',
-        nombres: '',
-        apellidoPaterno: '',
-        apellidoMaterno: '',
-        telefono: '',
-        ocupacion: '',
-        email: '',
-        estadoCivil: '',
-        nacionalidad: ''
-      },
+        persona: {
+          rut: '',
+          nombres: '',
+          apellidoPaterno: '',
+          apellidoMaterno: '',
+          telefono: '',
+          ocupacion: '',
+          email: '',
+          estadoCivil: '',
+          nacionalidad: '',
+          direccion: {
+            calle: '',
+            numero: '',
+            codigoPostal: '',
+            pais: '',
+            region: '',
+            ciudad: ''
+          }
+        }
+      }
     }
   },
   emits: ['update:representante', 'next:step'],
@@ -69,7 +81,7 @@ export default {
             variant="static"
             label="Rut Representante"
             placeholder="Con guión"
-            v-model="representante.rut"
+            v-model="representante.persona.rut"
           />
         </div>
         <div class="col-sm-3">
@@ -80,17 +92,18 @@ export default {
             variant="static"
             label="Ocupación Representante"
             placeholder="Ingeniero"
-            v-model="representante.ocupacion"
+            v-model="representante.persona.ocupacion"
           />
         </div>
         <div class="col-md-3">
           <MaterialChoices id="estadoCivil" :options="opcionsEstadoCivil"
-                           name="estadoCivil" label="Estado Civil" v-model:text-choice="representante.estadoCivil"
+                           name="estadoCivil" label="Estado Civil"
+                           v-model:text-choice="representante.persona.estadoCivil"
           />
         </div>
         <div class="col-md-3">
           <MaterialChoices id="nacionalidad" :options="nacionalidad" label="Nacionalidad"
-                           v-model:text-choice="representante.nacionalidad" name="Nacionalidad" />
+                           v-model:text-choice="representante.persona.nacionalidad" name="Nacionalidad" />
         </div>
       </div>
       <div class="row mt-4">
@@ -102,7 +115,7 @@ export default {
             type="text"
             label="Nombre Representante"
             placeholder="Nombre"
-            v-model="representante.nombres"
+            v-model="representante.persona.nombres"
           />
         </div>
         <div class="col-4">
@@ -113,7 +126,7 @@ export default {
             is-required
             label="Apellido Paterno Representante"
             placeholder="Apellido"
-            v-model="representante.apellidoPaterno"
+            v-model="representante.persona.apellidoPaterno"
           />
         </div>
         <div class="col-4">
@@ -124,7 +137,7 @@ export default {
             is-required
             label="Apellido Materno Representante"
             placeholder="Apellido"
-            v-model="representante.apellidoMaterno"
+            v-model="representante.persona.apellidoMaterno"
           />
         </div>
       </div>
@@ -136,7 +149,7 @@ export default {
             variant="static"
             label="Email Representante"
             placeholder="Email"
-            v-model="representante.email"
+            v-model="representante.persona.email"
           />
         </div>
         <div class="col-4 mt-4">
@@ -157,10 +170,13 @@ export default {
             variant="static"
             label="Numero de teléfono"
             placeholder="+569 xxxxxxxx"
-            v-model="representante.telefono"
+            v-model="representante.persona.telefono"
           />
         </div>
       </div>
+        <div class="row text-start">
+          <LocalidadForm v-model="representante.persona.direccion" />
+        </div>
     </div>
   </div>
   <button class="mb-5" @click="emitData">Next</button>

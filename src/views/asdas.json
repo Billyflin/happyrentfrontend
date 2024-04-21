@@ -1,20 +1,47 @@
 {
-  "rut": "19763564-9",
-  "nombres": "Andrea",
-  "apellidoPaterno": "Bravo",
-  "apellidoMaterno": "Gonzalez",
-  "nombreCompleto": "string",
-  "direccion": {
-    "calle": "calle",
-    "numero": 1,
-    "ciudad": "Temuco",
-    "region": "Araucania",
-    "pais": "Chile",
-    "codigoPostal": "8842413"
+  "corredora": {
+    "empresa": {
+      "rut": "20.331.763-8",
+      "razonSocial": "asdasd",
+      "giro": "asdas",
+      "direccion": {
+        "calle": "winkul pelehue",
+        "numero": 1151,
+        "codigoPostal": "7400000",
+        "pais": "Chile",
+        "region": "Región Metropolitana de Santiago",
+        "ciudad": "Alhué"
+      },
+      "nombre": "billyflin",
+      "representanteLegal": {
+        "persona": {
+          "rut": "20331763-8",
+          "nombres": "Billy",
+          "apellidoPaterno": "martinez",
+          "apellidoMaterno": "cofré",
+          "telefono": "945272297",
+          "ocupacion": "dev",
+          "email": "b.martinez10@ufromail.cl",
+          "estadoCivil": "soltero",
+          "nacionalidad": "chile",
+          "direccion": {
+            "calle": "winkul pelehue",
+            "numero": 1151,
+            "codigoPostal": "7400000",
+            "pais": "Chile",
+            "region": "Región Metropolitana de Santiago",
+            "ciudad": "Alhué"
+          }
+        }
+      }
+    }
   },
-  "telefono": "string",
-  "email": "string@sadasd.com",
-  "estadoCivil": "Soltera",
-  "ocupacion": "Veterinaria",
-  "nacionalidad": "Chilena"
+  "authorityDtoSet": [
+    {
+      "authorityName": "ROLE_CORREDOR"
+    },
+    {
+      "authorityName": "ROLE_USER"
+    }
+  ]
 }

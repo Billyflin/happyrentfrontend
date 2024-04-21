@@ -28,6 +28,11 @@ onMounted(async () => {
           Puedes agregarla manualmente o solicitarle al futuro arrendatario que complete un formulario para agregarla a
           tu lista de personas.
         </p>
+        <p v-for="persona in personas" >
+          {{ persona }}
+
+          {{persona.persona.nombres}}
+        </p>
       </div>
     </div>
 
