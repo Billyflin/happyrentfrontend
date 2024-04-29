@@ -121,7 +121,7 @@ export const useAuthStore = defineStore('auth', {
     },
  async getPersonas() {
       if (this.userInfo) {
-        await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/personas/all`)
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`)
           .then((response) => {
             this.personas = response.data
             console.log(response.data)

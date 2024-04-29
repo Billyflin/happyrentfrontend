@@ -181,6 +181,7 @@ export default {
       }
     }
   },
+  emits: ['update:modelValue','input'],
   data() {
     return {
       internalValue: this.modelValue,

@@ -5,6 +5,7 @@ import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 import Dropzone from 'dropzone'
 import MaterialButton from '@/components/MaterialButton.vue'
+import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
 
 let myDropzone = null
 
@@ -78,9 +79,9 @@ const opcionsTipoPropiedad = [
   { value: 'oficina', label: 'Oficina' },
   { value: 'estacionamiento', label: 'Estacionamiento' }
 ]
+const imagenPortadaData = ref('')
 const propiedad = ref({
   type: 'terreno',
-  // campos comunes a todas las propiedades
   direccion: {
     calle: 'string',
     numero: 0,
@@ -90,13 +91,14 @@ const propiedad = ref({
     pais: 'sdsadasd',
     codigoPostal: 'string'
   },
-  imagenPortada: {
-    contenido: null,
-    nombre: null
+  propietario: {
+    id: '',
+    type: ''
   },
   // inicialmente, asignamos los campos de 'terreno'
   ...tiposPropiedad.casa
 })
+
 
 watchEffect(() => {
   // Primero, obtenemos las propiedades del tipo seleccionado
@@ -104,7 +106,7 @@ watchEffect(() => {
 
   // Luego, eliminamos las propiedades antiguas del objeto 'propiedad'
   for (const key in propiedad.value) {
-    if (!(key in propiedadesTipo) && key !== 'type' && key !== 'direccion' && key !== 'imagenPortada') {
+    if (!(key in propiedadesTipo) && key !== 'type' && key !== 'direccion' && key !== 'imagenPortada' && key !== 'propietario') {
       delete propiedad.value[key]
     }
   }
@@ -126,12 +128,13 @@ const openDropzone = () => {
   myDropzone.hiddenFileInput.click()
 }
 const removeImage = () => {
-  propiedad.value.imagenPortada.contenido = ''
-  propiedad.value.imagenPortada.nombre = ''
+  myDropzone.removeAllFiles()
+  imagenPortadaData.value = null
+      emit('update:imagenPortada', null)
 }
 
 
-const emit = defineEmits(['update:propiedad'])
+const emit = defineEmits(['update:propiedad', 'update:imagenPortada'])
 watchEffect(() => {
   emit('update:propiedad', propiedad.value)
 })
@@ -154,21 +157,13 @@ onMounted(() => {
     if (myDropzone.files.length > 1) {
       myDropzone.removeFile(myDropzone.files[0])
     }
-
-    // Creamos un nuevo FileReader para leer este archivo
     const reader = new FileReader()
-
-    // Definimos un evento para cuando el archivo se haya leído
-    reader.addEventListener('load', (event) => {
-      propiedad.value.imagenPortada.contenido = event.target.result
-      propiedad.value.imagenPortada.nombre = file.name
-      console.log('Imagenes: ', propiedad.value.imagenPortada.contenido)
-      console.log('Propiedad: ', propiedad.value)
-      emit('update:propiedad', propiedad.value)
-    })
-
-    // Leemos el archivo como Data URL
+    reader.onload = (e) => {
+      imagenPortadaData.value = e.target.result
+      console.log(imagenPortadaData.value)
+    }
     reader.readAsDataURL(file)
+      emit('update:imagenPortada', file)
   })
 })
 </script>
@@ -187,12 +182,12 @@ onMounted(() => {
           <h5 class="font-weight-bolder">Imágen de portada</h5>
           <p>Sube una imágen de portada para tu propiedad</p>
           <img
-            v-if="propiedad.imagenPortada.contenido"
+            v-if="imagenPortadaData"
             class="w-100 border-radius-lg  mb-4 shadow-lg mx-auto"
-            :src="propiedad.imagenPortada.contenido"
+            :src="imagenPortadaData"
             alt="portada"
           />
-          <material-button class="mx-3" color="danger" v-if="propiedad.imagenPortada.contenido" @click="removeImage">Eliminar imagen</material-button>
+          <material-button class="mx-3" color="danger" v-if="imagenPortadaData" @click="removeImage">Eliminar imagen</material-button>
           <material-button @click="openDropzone">Subir imagen</material-button>
         </div>
         <div class="mx-4 col flex-grow">
@@ -413,7 +408,11 @@ onMounted(() => {
           ></material-input>
         </div>
       </div>
-    </div>
+
+
+          <LocalidadForm v-model="propiedad.direccion" />
+
+        </div>
   </div>
   </div>
   </div>

@@ -47,12 +47,14 @@ const routes = [{
         meta: {
             requiresAuth: true, roles: ['ROLE_ADMIN','ROLE_USER', 'ROLE_PROPIETARIO']
         }
-    }, {
-        path: '/propiedad/:id',
-        name: 'Propiedad',
-        component: () => import('@/views/Propiedades/Propiedad.vue'),
-        meta: {}
-    }, {
+    },
+    // {
+    //     path: '/propiedad/:id',
+    //     name: 'Propiedad',
+    //     component: () => import('@/views/Propiedades/Propiedad.vue'),
+    //     meta: {}
+    // },
+    {
         path: '/propiedad/edit/:id',
         name: 'PropiedadEdit',
         component: () => import('@/views/Propiedades/EditarPropiedad.vue'),
