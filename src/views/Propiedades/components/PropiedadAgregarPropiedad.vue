@@ -198,6 +198,7 @@ onMounted(() => {
         <div class="mx-4 col flex-grow">
         <h5 class="font-weight-bolder mb-6">Datos de la propiedad</h5>
 
+
           <material-choices id="tipo_propiedad"
                             :options="opcionsTipoPropiedad"
                             v-model:value-choice="propiedad.type"

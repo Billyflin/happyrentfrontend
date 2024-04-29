@@ -99,7 +99,7 @@ export default {
     }
   },
   mounted() {
-    axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/region/38`)
+    axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/region/38`)
       .then(response => {
         this.regiones = response.data.map(region => ({
           value: region.numero,
@@ -114,7 +114,7 @@ export default {
   },
   watch: {
     regionNum() {
-      axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/ciudad/${this.regionNum}`)
+      axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ciudad/${this.regionNum}`)
         .then(response => {
           this.ciudades = response.data.map(ciudad => ({
             value: ciudad.nombre,
