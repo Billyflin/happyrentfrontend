@@ -1,17 +1,12 @@
 <script setup>
-import { ref, watchEffect } from 'vue'
+import { onMounted, ref, watchEffect } from 'vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
+import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
+import Dropzone from 'dropzone'
+import MaterialButton from '@/components/MaterialButton.vue'
 
-const opcionsTipoPropiedad = [
-  { value: 'bodega', label: 'Bodega' },
-  { value: 'casa', label: 'Casa' },
-  { value: 'departamento', label: 'Departamento' },
-  { value: 'local', label: 'Local' },
-  { value: 'terreno', label: 'Terreno', selected: true },
-  { value: 'oficina', label: 'Oficina' },
-  { value: 'estacionamiento', label: 'Estacionamiento' }
-]
+let myDropzone = null
 
 const tiposPropiedad = {
   casa: {
@@ -74,7 +69,15 @@ const tiposPropiedad = {
     descripcion: null
   }
 }
-
+const opcionsTipoPropiedad = [
+  { value: 'bodega', label: 'Bodega' },
+  { value: 'casa', label: 'Casa', selected: true },
+  { value: 'departamento', label: 'Departamento' },
+  { value: 'local', label: 'Local' },
+  { value: 'terreno', label: 'Terreno' },
+  { value: 'oficina', label: 'Oficina' },
+  { value: 'estacionamiento', label: 'Estacionamiento' }
+]
 const propiedad = ref({
   type: 'terreno',
   // campos comunes a todas las propiedades
@@ -88,11 +91,11 @@ const propiedad = ref({
     codigoPostal: 'string'
   },
   imagenPortada: {
-    contenido: 'string',
-    nombre: 'string'
+    contenido: null,
+    nombre: null
   },
   // inicialmente, asignamos los campos de 'terreno'
-  ...tiposPropiedad.terreno
+  ...tiposPropiedad.casa
 })
 
 watchEffect(() => {
@@ -113,39 +116,130 @@ watchEffect(() => {
     }
   }
 })
-
-
 const validateInput = (event) => {
   if (event.target.value < 0) {
     event.target.value = 0
   }
 }
+
+const openDropzone = () => {
+  myDropzone.hiddenFileInput.click()
+}
+const removeImage = () => {
+  propiedad.value.imagenPortada.contenido = ''
+  propiedad.value.imagenPortada.nombre = ''
+}
+
+
+const emit = defineEmits(['update:propiedad'])
+watchEffect(() => {
+  emit('update:propiedad', propiedad.value)
+})
+
+onMounted(() => {
+  myDropzone = new Dropzone('#productImg', {
+    maxFiles: 1,
+    acceptedFiles: 'image/*',
+    autoProcessQueue: false,
+    addRemoveLinks: true,
+    dictRemoveFile: 'Eliminar',
+    dictDefaultMessage: 'Arrastra aquí tus imágenes',
+    dictFallbackMessage: 'Tu navegador no soporta arrastrar y soltar para subir archivos',
+    dictInvalidFileType: 'No puedes subir este tipo de archivo',
+    dictFileTooBig: 'El archivo es muy grande',
+    dictCancelUpload: 'Cancelar subida'
+  })
+
+  myDropzone.on('addedfile', (file) => {
+    if (myDropzone.files.length > 1) {
+      myDropzone.removeFile(myDropzone.files[0])
+    }
+
+    // Creamos un nuevo FileReader para leer este archivo
+    const reader = new FileReader()
+
+    // Definimos un evento para cuando el archivo se haya leído
+    reader.addEventListener('load', (event) => {
+      propiedad.value.imagenPortada.contenido = event.target.result
+      propiedad.value.imagenPortada.nombre = file.name
+      console.log('Imagenes: ', propiedad.value.imagenPortada.contenido)
+      console.log('Propiedad: ', propiedad.value)
+      emit('update:propiedad', propiedad.value)
+    })
+
+    // Leemos el archivo como Data URL
+    reader.readAsDataURL(file)
+  })
+})
 </script>
 
 
 <template>
   <div id="Agregar Propiedad" class="card mt-4">
     <div class="card-header">
-      <h4>Agregar Propiedad</h4>
+      <h4>Agregar {{propiedad.type}}</h4>
     </div>
     <div class="card-body pt-0">
-      <p>{{ propiedad }}</p>
       <div class="row">
-        <div class="col-4 mb-4">
+        <!--    Agregar imagenes-->
+
+        <div class="col-xl-4 col-lg-5">
+          <h5 class="font-weight-bolder">Imágen de portada</h5>
+          <p>Sube una imágen de portada para tu propiedad</p>
+          <img
+            v-if="propiedad.imagenPortada.contenido"
+            class="w-100 border-radius-lg  mb-4 shadow-lg mx-auto"
+            :src="propiedad.imagenPortada.contenido"
+            alt="portada"
+          />
+          <material-button class="mx-3" color="danger" v-if="propiedad.imagenPortada.contenido" @click="removeImage">Eliminar imagen</material-button>
+          <material-button @click="openDropzone">Subir imagen</material-button>
+        </div>
+        <div class="mx-4 col flex-grow">
+        <h5 class="font-weight-bolder mb-6">Datos de la propiedad</h5>
+
           <material-choices id="tipo_propiedad"
                             :options="opcionsTipoPropiedad"
                             v-model:value-choice="propiedad.type"
                             name="TipoPropiedad" label="Tipo Propiedad" :serach-enabled="false" />
-        </div>
-      </div>
+
+
       <div class="row" v-if="propiedad.type === 'casa'">
+        <div class="col-3 mt-3">
+          <material-checkbox
+            id="piscina"
+            label="Piscina"
+            v-model="propiedad.piscina"
+          >
+            ¿La propiedad tiene piscina?
+          </material-checkbox>
+        </div>
+        <div class="col-3 mt-3">
+          <material-checkbox
+            id="jardines"
+            label="Jardines"
+            v-model="propiedad.jardines"
+          >
+            ¿La propiedad tiene jardines?
+          </material-checkbox>
+        </div>
+        <div class="col-3 mb-2 mt-3">
+          <material-checkbox
+            id="patio"
+            label="Patio"
+            v-model="propiedad.patio"
+          >
+            ¿La propiedad tiene patio?
+          </material-checkbox>
+        </div>
+        <div class="col-3"></div>
         <div class="col-3">
           <material-input
-            id="numBanos"
+            id="numPisos"
             type="number"
             is-required
             variant="static"
-            label="numero de pisos"
+            label="Numero de pisos"
             placeholder="1"
             v-model="propiedad.numeroDePisos"
             @input="validateInput"
@@ -157,9 +251,69 @@ const validateInput = (event) => {
             type="number"
             is-required
             variant="static"
-            label="numero de piezas"
+            label="Numero de habitaciones"
             placeholder="1"
             v-model="propiedad.numeroDeHabitaciones"
+            @input="validateInput"
+          />
+        </div>
+        <div class="col-3">
+          <material-input
+            id="numBanos"
+            type="number"
+            is-required
+            variant="static"
+            label="Numero de baños"
+            placeholder="1"
+            v-model="propiedad.numeroDeBanios"
+            @input="validateInput"
+          />
+        </div>
+        <div class="col-3">
+          <material-input
+            id="numEstacionamientos"
+            type="number"
+            is-required
+            variant="static"
+            label="Numero de estacionamientos"
+            placeholder="1"
+            v-model="propiedad.estacionamientos"
+            @input="validateInput"
+          />
+        </div>
+        <div class="col-3">
+          <material-input
+            id="metrosCuadradosDeTerreno"
+            type="number"
+            is-required
+            variant="static"
+            label="Metros cuadrados de terreno"
+            placeholder="1"
+            v-model="propiedad.metrosCuadradosDeTerreno"
+            @input="validateInput"
+          />
+        </div>
+        <div class="col-3">
+          <material-input
+            id="metrosCuadradosDeConstruccion"
+            type="number"
+            is-required
+            variant="static"
+            label="Metros cuadrados de construccion"
+            placeholder="1"
+            v-model="propiedad.metrosCuadradosDeConstruccion"
+            @input="validateInput"
+          />
+        </div>
+        <div class="col-3">
+          <material-input
+            id="antiguedad"
+            type="number"
+            is-required
+            variant="static"
+            label="Antiguedad"
+            placeholder="1"
+            v-model="propiedad.antiguedad"
             @input="validateInput"
           />
         </div>
@@ -178,6 +332,96 @@ const validateInput = (event) => {
           />
         </div>
       </div>
+      <div class="row" v-if="propiedad.type==='oficina'">
+        <div class="col-3">
+          <material-input
+            id="numPisos"
+            type="number"
+            is-required
+            variant="static"
+            label="Numero de pisos"
+            placeholder="1"
+            v-model="propiedad.piso"
+          ></material-input>
+        </div>
+        <div class="col-3">
+          <material-input
+            id="numBanios"
+            type="number"
+            is-required
+            variant="static"
+            label="Numero de baños"
+            placeholder="1"
+            v-model="propiedad.banios"
+          ></material-input>
+
+        </div>
+        <div class="col-3">
+          <material-input
+            id="numCocinas"
+            type="number"
+            is-required
+            variant="static"
+            label="Numero de cocinas"
+            placeholder="1"
+            v-model="propiedad.cocinas"
+          ></material-input>
+        </div>
+        <div class="col-3">
+          <material-input
+            id="numOficinas"
+            type="number"
+            is-required
+            variant="static"
+            label="Numero de oficinas"
+            placeholder="1"
+            v-model="propiedad.numeroDeOficinas"
+          ></material-input>
+        </div>
+        <div class="col-3">
+          <material-input
+            id="numComedores"
+            type="number"
+            is-required
+            variant="static"
+            label="Numero de comedores"
+            placeholder="1"
+            v-model="propiedad.numeroDeComedores"
+          ></material-input>
+        </div>
+        <div class="col-3">
+          <material-input
+            id="numEstacionamientos"
+            type="number"
+            is-required
+            variant="static"
+            label="Numero de estacionamientos"
+            placeholder="1"
+            v-model="propiedad.numeroDeEstacionamientos"
+          ></material-input>
+        </div>
+        <div class="col-3">
+          <material-input
+            id="descripcion"
+            type="text"
+            is-required
+            variant="static"
+            label="Descripcion"
+            placeholder="Descripcion"
+            v-model="propiedad.descripcion"
+          ></material-input>
+        </div>
+      </div>
     </div>
   </div>
+  </div>
+  </div>
+    <div>
+      <div
+        id="productImg"
+        action="/file-upload"
+        class="form-control border dropzone"
+        style="display: none;"
+      ></div>
+    </div>
 </template>

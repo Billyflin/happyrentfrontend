@@ -3,7 +3,7 @@
     <!-- Seccion propiedad -->
     <propiedad-agregar-propiedad :propiedad="propiedad" @update:propiedad="propiedad = $event" />
     <!-- Seccion Propietario -->
-<!--    <propiedad-agregar-propietario :propietario="propietario"/>-->
+    <propiedad-agregar-propietario :propietario="propietario"/>
 <!--    &lt;!&ndash; INVENTARIO &ndash;&gt;-->
 <!--    <crear-inventario-form />-->
     <!-- Boton enviar! -->
