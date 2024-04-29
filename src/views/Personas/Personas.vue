@@ -7,8 +7,10 @@ import setTooltip from '@/assets/js/tooltip.js'
 import { useAppStore } from '@/store/index.js'
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
+import TablaEmpresas from '@/views/Personas/components/TablaEmpresas.vue'
 
 const personas = ref(null)
+const empresas = ref(null)
 const store = useAppStore()
 
 onMounted(async () => {
@@ -16,6 +18,10 @@ onMounted(async () => {
   personas.value = response.data
   console.log(personas.value)
   setTooltip(store.bootstrap)
+
+  const responseEmpresas = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/empresas`)
+  empresas.value = responseEmpresas.data
+  console.log(empresas.value)
 })
 </script>
 
@@ -38,14 +44,27 @@ onMounted(async () => {
 
     <div class="row mb-6">
       <tabla-personas v-if="personas"
-        :headers="['Nombre', 'Rut', 'Email','Persona o Empresa', 'Tipo Entidad', 'Accion']"
+        :headers="['Nombre', 'Rut', 'Email','Direccion', 'Tipo Entidad', 'Accion']"
         :lists="personas.map(persona => ({
         title: persona.persona.persona.nombres + ' ' + persona.persona.persona.apellidoPaterno,
         direccion: persona.persona.persona.direccion.ciudad,
         region:persona.persona.persona.direccion.region+ ', ' + persona.persona.persona.direccion.pais,
-          values: [persona.persona.persona.rut, persona.persona.persona.email, persona.persona.empresa ? 'Empresa' : 'Persona', persona.tipoPersona , persona.tipoEntidad, ''],
+          values: [persona.persona.persona.rut, persona.persona.persona.email,
+          persona.persona.persona.direccion.calle+' '+persona.persona.persona.direccion.numero , persona.tipoPersona , persona.tipoEntidad, ''],
         }))"
       />
+<!--        v-if="empresas"-->
+      <tabla-empresas
+        :headers="['Nombre', 'Rut', 'Giro','Direccion', 'Accion']"
+        :lists="empresas.map(empresa => ({
+        title: empresa.nombre,
+        direccion: empresa.direccion.ciudad,
+        region:empresa.direccion.region+ ', ' + empresa.direccion.pais,
+          values: [empresa.rut, empresa.giro,empresa.direccion.calle+' '+empresa.direccion.numero , ''],
+        }))"
+        }
+
+      ></tabla-empresas>
 
     </div>
   </div>

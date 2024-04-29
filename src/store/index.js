@@ -56,19 +56,21 @@ export const useAppStore = defineStore({
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorityDtoSet":[]},
+    auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorities":[]},
     rememberMe: false, isAdmin: false, propiedades: [],
     propiedad: { },
     personas: [],
   }), persist: true, actions: {
     async loginHandler(username, password) {
-      await axios.post(`${import.meta.env.VITE_SERVER_URL}:8080/api/authenticate`, { username, password }, {
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/authenticate`, { username, password }, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
         .then((response) => {
-          this.auth = response.data.token
+          console.log(response.data.access_token)
+          this.auth = response.data.access_token
+          axios.defaults.withCredentials = true;
           axios.defaults.headers.common['Authorization'] = `Bearer ${this.auth}`
           this.getCurrentUser()
           this.isLoggedIn = true
@@ -92,10 +94,12 @@ export const useAuthStore = defineStore('auth', {
     }, async getCurrentUser() {
       if (this.auth) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${this.auth}`
-        await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/api/user`, {})
+        await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/user`, {})
           .then((response) => {
+            console.log(response.data)
             this.userInfo = response.data
-            this.isAdmin = this.userInfo.authorityDtoSet.some(a => a.authorityName === 'ROLE_ADMIN')
+            this.isAdmin = this.userInfo.authorities.some(a => a.authority === 'ROLE_ADMIN')
+            console.log(this.isAdmin)
           })
           .catch((err) => {
             console.error(err)
@@ -117,7 +121,7 @@ export const useAuthStore = defineStore('auth', {
     },
  async getPersonas() {
       if (this.userInfo) {
-        await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/personas/all`)
+        await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/personas/all`)
           .then((response) => {
             this.personas = response.data
             console.log(response.data)
@@ -131,7 +135,7 @@ export const useAuthStore = defineStore('auth', {
   , async getPropiedades() {
       if (this.userInfo) {
         const userId = this.userInfo.id
-        await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/propiedad`)
+        await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/propiedad`)
           .then((response) => {
             this.propiedades = response.data
             console.log(response.data)
@@ -176,8 +180,8 @@ export const useRegisterFormStore = defineStore({
       },
       isActivated: true,
       email: '',
-      authorityDtoSet: [{
-        authorityName: ''
+      authorities: [{
+        authority: ''
       }],
       firstLogin: true,
       activated: true

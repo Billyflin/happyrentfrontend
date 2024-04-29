@@ -2,6 +2,7 @@
   <div class="card" data-animation="true">
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
       <a class="d-block blur-shadow-image">
+<!--    <p>{{img}}</p>-->
         <img
           :src="'data:image/png;base64,' + img"
           alt="img-blur-shadow"
@@ -42,7 +43,7 @@
         <a href="javascript:;">{{ propiedad.direccion.calle + ' ' + propiedad.direccion.numero }}</a>
       </h5>
       <p class="mb-0">
-        {{ propiedad.propietario.persona.nombreCompleto }}
+        {{ propiedad.propietario.nombre }}
       </p>
     </div>
     <hr class="dark horizontal my-0" />

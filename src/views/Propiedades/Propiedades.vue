@@ -17,7 +17,7 @@
     <div class="row mt-4">
       <div class="col-lg-4 col-md-6 mb-8" v-for="propiedad in auth.propiedades" :key="propiedad.id">
         <propiedades-card
-          :img="propiedad.imagen.imageData"
+          :img="propiedad.imagenPortada.contenido"
           :propiedad="propiedad"
 
         />

@@ -14,7 +14,7 @@ const routes = [{
     }
 }, {
     path: '/profile', name: 'Profile', component: Profile, meta: {
-        requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO' ]
+        requiresAuth: true, roles: ['ROLE_ADMIN','ROLE_USER', 'ROLE_PROPIETARIO' ]
     }
 }, {
     path: '/sign-in', name: 'SignIn', component: SignIn
@@ -22,7 +22,7 @@ const routes = [{
     path: '/sign-up', name: 'SignUp', component: SignUp
 }, {
     path: '/misContratos', name: 'MisContratos', component: () => import('@/views/Contrato/MisContratos.vue'), meta: {
-        requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
+        requiresAuth: true, roles: ['ROLE_ADMIN','ROLE_USER', 'ROLE_PROPIETARIO']
     }
 }, {
     path: '/nuevoContrato',
@@ -30,7 +30,7 @@ const routes = [{
     component: () => import('@/views/Contrato/NuevoContrato.vue'),
     props: true,
     meta: {
-        requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
+        requiresAuth: true, roles: ['ROLE_ADMIN','ROLE_USER', 'ROLE_PROPIETARIO']
     }
 }, {
     // todo /formularioInvitado/:uuid
@@ -38,14 +38,14 @@ const routes = [{
     name: 'FormularioInvitado',
     component: () => import('@/views/Contrato/FormularioInvitado.vue'),
     meta: {
-        requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
+        requiresAuth: true, roles: ['ROLE_ADMIN','ROLE_USER', 'ROLE_PROPIETARIO']
     }
 },  {
         path: '/agregarPropiedad/',
         name: 'AgregarPropiedad',
         component: () => import('@/views/Propiedades/AgregarPropiedad.vue'),
         meta: {
-            requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
+            requiresAuth: true, roles: ['ROLE_ADMIN','ROLE_USER', 'ROLE_PROPIETARIO']
         }
     }, {
         path: '/propiedad/:id',
@@ -66,7 +66,7 @@ const routes = [{
 
     {
         path: '/contrato/:id', name: 'Contrato', component: () => import('@/views/Contrato/Contrato.vue'), meta: {
-            requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
+            requiresAuth: true, roles: ['ROLE_ADMIN','ROLE_USER', 'ROLE_PROPIETARIO']
         }
     }, {
         path: '/rememberPassword',
@@ -108,7 +108,7 @@ const routes = [{
         name: 'Propiedades',
         component: () => import('@/views/Propiedades/Propiedades.vue'),
         meta: {
-            requiresAuth: true, roles: ['ROLE_USER', 'ROLE_PROPIETARIO']
+            requiresAuth: true, roles: ['ROLE_ADMIN','ROLE_USER', 'ROLE_PROPIETARIO']
         }
     },{
         path: '/Corredora',
@@ -150,9 +150,11 @@ router.beforeEach(async (to, from, next) => {
             next({ name: 'SignIn' })
         } else {
             const userHasRequiredRole = to.meta.roles.some(role =>
-                authStore.userInfo.authorityDtoSet.some(auth => auth.authorityName === role)
+                authStore.userInfo.authorities.some(auth => auth.authority === role)
             )
-            const userHasProvisionalRole = authStore.userInfo.authorityDtoSet.some(auth => auth.authorityName === 'ROLE_PROVICIONAL')
+            // console.log(to.meta.roles, authStore.userInfo.authorities)
+            // console.log(userHasRequiredRole,"Aer asdasd")
+            const userHasProvisionalRole = authStore.userInfo.authorities.some(auth => auth.authorityName === 'ROLE_PROVICIONAL')
             if (userHasRequiredRole) {
                 next()
             } else if (userHasProvisionalRole) {
@@ -165,23 +167,6 @@ router.beforeEach(async (to, from, next) => {
         next()
     }
 })
-
-// router.beforeEach(async (to, from, next) => {
-//     const authStore = useAuthStore()
-//     if (to.meta.requiresAuth && !authStore.isLoggedIn) return next({name: 'SignIn'})
-//     if (to.name === 'SignIn' && authStore.isLoggedIn) return next({name: 'Dashboard'})
-//     if (to.meta.roles) {
-//         const userRoles = authStore.userInfo.authorityDtoSet.map(a => a.authorityName)
-//         const hasRequiredRoles = to.meta.roles.every(role => userRoles.includes(role))
-//         if (!hasRequiredRoles) {
-//             if (userRoles.includes('ROLE_PROVICIONAL') && authStore.userInfo.persona == null) {
-//                 return next({name: 'FormularioRegistro'})
-//             }
-//             return next({name: 'Error'})
-//         }
-//     }
-//     next()
-// })
 
 
 export default router

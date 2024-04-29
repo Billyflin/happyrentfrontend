@@ -61,6 +61,10 @@ export default {
       type: Boolean,
       default: false
     },
+    serachEnabled: {
+      type: Boolean,
+      default: true
+    },
     textChoice: {
       type: String,
       default: ''
@@ -81,6 +85,7 @@ export default {
     this.choices = new Choices(this.$refs.choicesElement, {
       allowHTML: false,
       removeItemButton: this.removeItemButton,
+      searchEnabled: this.serachEnabled,
       duplicateItemsAllowed: this.duplicateItemsAllowed,
       noChoicesText: 'No hay opciones para elegir'
     })
@@ -129,7 +134,7 @@ export default {
     }
   },
   beforeUnmount() {
-    this.choices.passedElement.element.removeEventListener('change', this.emitValue, false)
+    // this.choices.passedElement.element.removeEventListener('change', this.emitValue, false)
     this.choices.destroy()
   },
   methods: {

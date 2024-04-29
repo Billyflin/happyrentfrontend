@@ -3,9 +3,9 @@
     <!-- Seccion propiedad -->
     <propiedad-agregar-propiedad :propiedad="propiedad" @update:propiedad="propiedad = $event" />
     <!-- Seccion Propietario -->
-    <propiedad-agregar-propietario :propietario="propietario"/>
-    <!-- INVENTARIO -->
-    <crear-inventario-form />
+<!--    <propiedad-agregar-propietario :propietario="propietario"/>-->
+<!--    &lt;!&ndash; INVENTARIO &ndash;&gt;-->
+<!--    <crear-inventario-form />-->
     <!-- Boton enviar! -->
     <material-button variant="success" size="lg" class="mt-4" full-width @click="emitData">Enviar</material-button>
   </div>
