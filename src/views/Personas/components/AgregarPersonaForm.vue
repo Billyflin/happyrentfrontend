@@ -32,7 +32,7 @@
                           v-model="persona.email" />
         </div>
         <div class="col-md-4 mt-4">
-          <material-input id="nombres" variant="dynamic" is-required label="Nombres" v-model="persona.nombres" />
+          <material-input id="nombres" variant="dynamic" is-required label="Nombres" v-model="persona.nombre" />
         </div>
         <div class="col-md-4 mt-4">
           <material-input id="apellidoPaterno" variant="dynamic" is-required label="Apellido Paterno"
@@ -70,8 +70,9 @@ export default {
   name: 'PropietarioForm',
   setup() {
     const persona = ref({
+      type: 'persona',
       rut: '',
-      nombres: '',
+      nombre: '',
       apellidoPaterno: '',
       apellidoMaterno: '',
       telefono: '',
@@ -111,7 +112,7 @@ export default {
       // console.log(this.v$)
       // console.log(this.persona)
       if (!this.v$.$error) {
-        axios.post('http://localhost:8080/personas', this.persona).then((response) => {
+        axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`, this.persona).then((response) => {
           console.log(response)
           router.push('/Personas')
         }).catch((error) => {

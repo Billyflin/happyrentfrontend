@@ -26,7 +26,7 @@
             </th>
           </tr>
           </thead>
-          <tbody>
+          <tbody v-if="lists">
           <tr
             v-for="(
                 { title: nombre, direccion,region ,values, info, icon }, index
@@ -62,7 +62,7 @@
                   {{ values[2] }}
                 </p>
                 <!--                <i class="mt-1 text-sm ms-1" :class="`ni ni-${icon}`"></i>-->
-<!--                                <material-button-->
+                <!--                                <material-button-->
                 <!--                  v-if="info"-->
                 <!--                  size="sm"-->
                 <!--                  color="secondary"-->
@@ -82,10 +82,30 @@
               </p>
             </td>
             <td class="align-middle text-center">
-              <div
-                class="text-center px-3 py-1 d-flex justify-content-center align-items-center"
-              >
-               <span class="material-symbols-outlined btn-outline-danger">person_remove</span>
+              <div class="text-center px-3 py-1 d-flex justify-content-center align-items-center">
+
+                <material-button
+                  color="primary"
+                  variant="gradient"
+                  size="sm"
+                  class="my-sm-auto mt-2 mb-0 mx-1 d-flex align-items-center"
+                  type="button"
+                  name="button"
+                >
+                  <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_edit</span> Editar
+                </material-button>
+                <material-button
+                  color="danger"
+                  variant="gradient"
+                  size="sm"
+                  class="my-sm-auto mt-2 mb-0 d-flex align-items-center"
+                  type="button"
+                  name="button"
+                  @click="removePersona(values[4])"
+                >
+                  <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_remove</span> Delete
+                </material-button>
+
               </div>
             </td>
           </tr>
@@ -124,6 +144,12 @@ export default {
       region: String,
       info: String,
       icon: String
+    }
+  },
+  methods: {
+    async removePersona(id) {
+      console.log(id)
+      // await axios.delete(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil/${id}`,)
     }
   }
 }

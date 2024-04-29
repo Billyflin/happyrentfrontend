@@ -23,10 +23,6 @@ onMounted(async () => {
           Puedes agregarla manualmente o solicitarle al futuro arrendatario que complete un formulario para agregarla a
           tu lista de personas.
         </p>
-<!--        <p v-for="persona in personas">-->
-<!--          {{ persona }}-->
-
-<!--        </p>-->
       </div>
     </div>
 
@@ -34,12 +30,12 @@ onMounted(async () => {
       <tabla-personas v-if="personas"
                       :headers="['Nombre', 'Rut', 'Email','Direccion', 'Tipo Entidad', 'Accion']"
                       :lists="personas.map(persona => ({
-                    title: persona.nombre,
-                    direccion: persona.direccion.ciudad,
-                    region: persona.direccion.region + ', ' + persona.direccion.pais,
-                    values: [persona.rut || persona.rutEmpresa, persona.email,
-                      persona.direccion.calle + ' ' + persona.direccion.numero, persona.type, ''],
-        }))"
+    title: persona.type === 'persona' ? `${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno}` : persona.nombre,
+    direccion: persona.direccion.ciudad,
+    region: persona.direccion.region + ', ' + persona.direccion.pais,
+    values: [persona.rut || persona.rutEmpresa, persona.email,
+      persona.direccion.calle + ' ' + persona.direccion.numero, persona.type.charAt(0).toUpperCase() + persona.type.slice(1), persona.id],
+  }))"
       />
     </div>
   </div>
