@@ -20,19 +20,22 @@
       </div>
       <div class="col-lg-10 mt-lg-0 mt-4">
         <formulario-propiedad-contrato />
+        <div class="row">
+          <div class="col-7">
 
-        <!--  Seccion Reajuste-->
-        <reajuste-contrato />
+            <seleccionar-arrendatario />
+          </div>
+          <div class="col">
+            <reajuste-contrato />
 
-        <seleccionar-arrendatario />
+          </div>
+        </div>
 
         <acuerdos-contrato />
 
-        <!--  Seccion Enviar Correo-->
-        <!--                <solicitar-datos-contrato />-->
+        <!--        <solicitar-datos-contrato />-->
 
-        <!--  Seccion arrendador-->
-        <!--                <arrendador-contrato />-->
+        <!--        <arrendador-contrato />-->
         <material-button variant="success" size="lg" class="mt-6 mb-6" full-width @click="aer">Enviar</material-button>
       </div>
     </div>
@@ -42,10 +45,8 @@
 <script setup>
 // import NavPill from "./components/NavPill.vue";
 import SideNav from './components/SideNav.vue'
-import { useAppStore, useAuthStore } from '@/store/index.js'
-import { onMounted, onUnmounted, ref } from 'vue'
-import ArrendadorContrato from '@/views/Personas/components/AgregarPersonaForm.vue'
-import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosContrato.vue'
+import { useAppStore } from '@/store/index.js'
+import { onMounted, onUnmounted } from 'vue'
 import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
 import FormularioPropiedadContrato from '@/views/Contrato/components/FormularioPropiedadContrato.vue'
 import MaterialButton from '@/components/MaterialButton.vue'

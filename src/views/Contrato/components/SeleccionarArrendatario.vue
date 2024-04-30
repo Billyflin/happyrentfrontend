@@ -32,7 +32,7 @@ export default {
     const formatPersonas = (personas) => {
       return personas.map(persona => ({
         value: persona,
-        label: `${persona.rut} - ${persona.nombres} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais}`
+        label: `${persona.rut} - ${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
       }))
     }
 
@@ -47,16 +47,15 @@ export default {
   <div id="SeleccionArrendatario" class="card mt-5">
     <div class="card-header">
       <h5>Seleccionar Arrendatario</h5>
-      <p> Acá puedes seleccionar de los arrendatarios previamente registrados, en caso de no tener ninguno debes ir a la
+      <p class="mx-2 mt-4"> Acá puedes seleccionar de los arrendatarios previamente registrados, en caso de no tener registrado a el arrendatario debes ir a la
         pestaña
         <router-link class="text-bold" to="/Personas">Personas</router-link>
-        para completar el registro
+        para completar el registro.
       </p>
     </div>
     <div class="card-body pt-0">
-      <div class="row mt-4">
-        <div class="row">
-          <div class="col mb-4">
+      <div class="row mx-4">
+        <div class="col-12  mb-4">
             <material-choices id="propietario_seleccionado"
                               v-model="propietario_existente"
                               :options="opcionsPersonas"
@@ -65,8 +64,8 @@ export default {
           </div>
 
         </div>
-        <!--          {{ opcionsPersonas }}-->
-        <div class="mx-4 col-7 " v-if="propietario_existente">
+        <div class="mx-4 col " v-if="propietario_existente">
+            <div v-if="propietario_existente.value.type==='persona'">
 
           <!--          mostrar datos del propietario seleccionado-->
           <div class="d-flex justify-content-between align-items-center">
@@ -75,7 +74,7 @@ export default {
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Nombre</h6>
-            <p class="text-bolder" v-if="propietario_existente.value.nombres">{{ propietario_existente.value.nombres }}
+            <p class="text-bolder" v-if="propietario_existente.value.nombre">{{ propietario_existente.value.nombre }}
               {{ propietario_existente.value.apellidoPaterno }} {{ propietario_existente.value.apellidoMaterno }}</p>
           </div>
           <div class="d-flex justify-content-between align-items-center">
@@ -108,11 +107,11 @@ export default {
               {{ propietario_existente.value.direccion.region }}, {{ propietario_existente.value.direccion.pais }}
             </p>
           </div>
+            </div>
 
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <style scoped>

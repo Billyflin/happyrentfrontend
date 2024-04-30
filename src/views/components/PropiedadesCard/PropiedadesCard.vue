@@ -2,7 +2,7 @@
   <div class="card" data-animation="true">
     <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
       <a class="d-block blur-shadow-image">
-<!--    <p>{{img}}</p>-->
+        <!--    <p>{{img}}</p>-->
         <img
           :src="'data:image/png;base64,' + img"
           alt="img-blur-shadow"
@@ -43,12 +43,17 @@
         <a href="javascript:;">{{ propiedad.direccion.calle + ' ' + propiedad.direccion.numero }}</a>
       </h5>
       <p class="mb-0">
-        {{ propiedad.propietario.nombre }}
+        {{ propiedad.propietario.nombre + ' ' + propiedad.propietario.apellidoPaterno + ' ' + propiedad.propietario.apellidoMaterno
+        }}
       </p>
+      <div class="d-flex justify-content-end mb-0 mt-0">
+
+        <p class="mb-0 mt-0 badge badge-success">{{ propiedad.type.toUpperCase() }}</p>
+      </div>
     </div>
     <hr class="dark horizontal my-0" />
     <div class="card-footer d-flex">
-      <p class="font-weight-normal my-auto">{{ propiedad.fechaCreacion }}</p>
+      <p class="font-weight-normal my-auto">{{ formatDate(propiedad.createDate) }}</p>
       <i class="material-icons position-relative ms-auto text-lg me-1 my-auto"
       >place</i
       >
@@ -73,6 +78,10 @@ const props = defineProps({
     required: true
   }
 })
+const formatDate = (date) => {
+  const options = { year: 'numeric', month: 'long', day: 'numeric' }
+  return new Date(date).toLocaleDateString('es-CL', options)
+}
 
 const irANuevoContrato = () => {
   store.propiedad = props.propiedad
