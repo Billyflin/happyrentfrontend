@@ -44,7 +44,7 @@ export default {
 </script>
 
 <template>
-  <div id="SeleccionArrendatario" class="card mt-5">
+  <div class="card">
     <div class="card-header">
       <h5>Seleccionar Arrendatario</h5>
       <p class="mx-2 mt-4"> Acá puedes seleccionar de los arrendatarios previamente registrados, en caso de no tener registrado a el arrendatario debes ir a la

@@ -1,6 +1,5 @@
 <template>
-
-  <div class="container-fluid mt-4">
+  <div class="container-fluid mt-4"  id="Propiedad">
     <div class="row align-items-center">
       <div class="col-lg-4 col-sm-8">
         <!--        <nav-pill />-->
@@ -20,8 +19,8 @@
       </div>
       <div class="col-lg-10 mt-lg-0 mt-4">
         <formulario-propiedad-contrato />
-        <div class="row">
-          <div class="col-7">
+        <div class="row  mt-5" >
+          <div class="col-7" id="SeleccionArrendatario">
 
             <seleccionar-arrendatario />
           </div>
