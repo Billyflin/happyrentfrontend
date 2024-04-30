@@ -36,22 +36,12 @@ export default {
   data() {
     return {
       selectedRole: '',
-      authorityDtoSet: []
-    }
-  },
-  props:{
-    user: {
-      type: Object
     }
   },
   emits: ['next:step', 'update:authority'],
   methods: {
     updateAuthority() {
-      this.authorityDtoSet = []
-      this.authorityDtoSet = [{
-        authorityName: this.selectedRole
-      }]
-      this.$emit('update:authority', this.authorityDtoSet)
+      this.$emit('update:authority',this.selectedRole)
       this.$emit('next:step')
     }
   }

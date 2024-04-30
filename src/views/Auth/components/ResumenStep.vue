@@ -6,25 +6,23 @@ import router from '@/router/index.js'
 export default {
   name: 'ResumenStep',
   props: {
-    user: {
+    perfil: {
       type: Object,
       required: true
     }
   },
   methods: {
     enviarFormulario() {
-      console.log(this.user)
-      if (!this.user.authorityDtoSet.includes('ROLE_USER')) {
-        this.user.authorityDtoSet.push({ authorityName: 'ROLE_USER' })
-      }
+      console.log(this.perfil)
       const store = useAuthStore()
-      axios.put('http://localhost:8080/api/completeUser', this.user)
+      axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/perfil`, this.perfil)
         .then((response) => {
           console.log('Usuario registrado')
           console.log(response.data)
-          store.userInfo.authorityDtoSet = response.data.authorityDtoSet
-          store.userInfo.persona = response.data.persona
-          router.push({ name: 'Propiedades' })
+          store.getCurrentUser().then(() => {
+              router.push({ name: 'Propiedades' })
+            }
+          )
         })
     }
   },
@@ -35,107 +33,107 @@ export default {
 <template>
   <div class="multisteps-form__title">Resumen</div>
   <div class="multisteps-form__body">
-    <div class="row" v-if="user.persona">
-      <div class="col-12" v-if="user.persona">
+    <div class="row" v-if="perfil.type === 'persona'">
+      <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Nombre</h6>
-          <p>{{ user.persona.nombres }} {{ user.persona.apellidoPaterno }} {{ user.persona.apellidoMaterno }}</p>
+          <p>{{ perfil.nombres }} {{ perfil.apellidoPaterno }} {{ perfil.apellidoMaterno }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Correo</h6>
-          <p>{{ user.persona.email }}</p>
+          <p>{{ perfil.email }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Telefono</h6>
-          <p>{{ user.persona.telefono }}</p>
+          <p>{{ perfil.telefono }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Ocupación</h6>
-          <p>{{ user.persona.ocupacion }}</p>
+          <p>{{ perfil.ocupacion }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Estado Civil</h6>
-          <p>{{ user.persona.estadoCivil }}</p>
+          <p>{{ perfil.estadoCivil }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Nacionalidad</h6>
-          <p>{{ user.persona.nacionalidad }}</p>
+          <p>{{ perfil.nacionalidad }}</p>
         </div>
       </div>
     </div>
-    <div class="row" v-if="user.corredora.empresa">
-      {{ user }}
+    <div class="row" v-if="perfil.type ==='empresa'">
+      {{ perfil }}
       <div class="col-12">
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Nombre Empresa</h6>
-          <p>{{ user.corredora.empresa.nombre }}</p>
+          <p>{{ perfil.nombre }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Rut Empresa</h6>
-          <p>{{ user.corredora.empresa.rut }}</p>
+          <p>{{ perfil.rut }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Giro</h6>
-          <p>{{ user.corredora.empresa.giro }}</p>
+          <p>{{ perfil.giro }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center" v-if="user.corredora.empresa.direccion">
+        <div class="d-flex justify-content-between align-items-center" v-if="perfil.direccion">
           <h6 class="font-weight-normal">Dirección</h6>
-          <p>{{ user.corredora.empresa.direccion.calle }} {{ user.corredora.empresa.direccion.numero }},
-            {{ user.corredora.empresa.direccion.region }}</p>
+          <p>{{ perfil.direccion.calle }} {{ perfil.direccion.numero }},
+            {{ perfil.direccion.region }}</p>
         </div>
       </div>
-      <div class="multisteps-form__title" v-if="user.corredora.empresa.representanteLegal.persona">Resumen Representante
+      <div class="multisteps-form__title" v-if="perfil.representante">Resumen Representante
         Legal
       </div>
-      <div class="col-12" v-if="user.corredora.empresa.representanteLegal.persona">
+      <div class="col-12" v-if="perfil.representante">
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Nombre</h6>
-          <p>{{ user.corredora.empresa.representanteLegal.persona.nombres }}
-            {{ user.corredora.empresa.representanteLegal.persona.apellidoPaterno }}
-            {{ user.corredora.empresa.representanteLegal.persona.apellidoMaterno }}</p>
+          <p>{{ perfil.representante.nombres }}
+            {{ perfil.representante.apellidoPaterno }}
+            {{ perfil.representante.apellidoMaterno }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Rut</h6>
-          <p v-if="user.corredora.empresa.representanteLegal.persona.rut">
-            {{ user.corredora.empresa.representanteLegal.persona.rut }}</p>
+          <p v-if="perfil.representante.rut">
+            {{ perfil.representante.rut }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center"
-             v-if="user.corredora.empresa.representanteLegal.persona.ocupacion">
-          <h6 class="font-weight-normal" v-if="user.corredora.empresa.representanteLegal.persona.ocupacion">
+             v-if="perfil.representante.ocupacion">
+          <h6 class="font-weight-normal" v-if="perfil.representante.ocupacion">
             Ocupación</h6>
-          <p>{{ user.corredora.empresa.representanteLegal.persona.ocupacion }}</p>
+          <p>{{ perfil.representante.ocupacion }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center"
-             v-if="user.corredora.empresa.representanteLegal.persona.estadoCivil">
+             v-if="perfil.representante.estadoCivil">
           <h6 class="font-weight-normal">Estado Civil</h6>
-          <p>{{ user.corredora.empresa.representanteLegal.persona.estadoCivil }}</p>
+          <p>{{ perfil.representante.estadoCivil }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Nacionalidad</h6>
-          <p v-if="user.corredora.empresa.representanteLegal.persona.nacionalidad">
-            {{ user.corredora.empresa.representanteLegal.persona.nacionalidad }}</p>
+          <p v-if="perfil.representante.nacionalidad">
+            {{ perfil.representante.nacionalidad }}</p>
           <p v-else class="alert-danger">vuelve al formulario</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Email</h6>
-          <p v-if="user.corredora.empresa.representanteLegal.persona.email ">
-            {{ user.corredora.empresa.representanteLegal.persona.email }}</p>
+          <p v-if="perfil.representante.email ">
+            {{ perfil.representante.email }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Telefono</h6>
-          <p v-if="user.corredora.empresa.representanteLegal.persona.telefono">
-            {{ user.corredora.empresa.representanteLegal.persona.telefono }}</p>
+          <p v-if="perfil.representante.telefono">
+            {{ perfil.representante.telefono }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center" v-if="user.corredora.empresa.direccion">
+        <div class="d-flex justify-content-between align-items-center" v-if="perfil.representante.direccion">
           <h6 class="font-weight-normal">Dirección</h6>
-          <p>{{ user.corredora.empresa.representanteLegal.persona.direccion.calle }}
-            {{ user.corredora.empresa.representanteLegal.persona.direccion.numero }},
-            {{ user.corredora.empresa.representanteLegal.persona.direccion.region }}</p>
+          <p>{{ perfil.representante.direccion.calle }}
+            {{ perfil.representante.direccion.numero }},
+            {{ perfil.representante.direccion.region }}</p>
         </div>
       </div>
     </div>
   </div>
-  <div class="button-row d-flex" v-if="user.corredora.empresa || user.persona">
+  <div class="button-row d-flex" v-if="perfil">
     <button class="btn bg-gradient-primary w-100 text-white" @click="enviarFormulario">Terminar Registro</button>
   </div>
 

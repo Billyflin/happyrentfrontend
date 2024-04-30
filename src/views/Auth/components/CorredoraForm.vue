@@ -14,6 +14,7 @@ export default {
   data() {
     return {
       empresa: {
+        type: 'empresa',
         rut: '',
         razonSocial: '',
         giro: '',

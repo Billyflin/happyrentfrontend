@@ -18,13 +18,12 @@
           <component
             :is="steps[activeStep].component"
             v-if="activeStep < steps.length"
-            @update:persona="user.persona = $event;console.log($event);console.log(this.user)"
-            @update:authority="user.authorityDtoSet = $event;console.log(this.user)"
-            @update:direccion="user.direccion = $event;console.log(this.user)"
-            @update:empresa="user.corredora.empresa = $event;console.log($event);console.log(this.user)"
-            @update:representante="user.corredora.empresa.representanteLegal = $event;console.log($event);console.log(this.user)"
-            @next:step="nextStep"
-            :user="user"
+            @update:persona="perfil = $event;console.log($event);console.log(this.perfil)"
+            @update:authority="formType = $event;console.log(this.perfil)"
+            @update:direccion="perfil.direccion = $event;console.log(this.perfil)"
+            @update:empresa="perfil = $event;console.log($event);console.log(this.perfil)"
+            @update:representante="perfil.representante = $event;console.log($event);console.log(this.perfil)"
+            @next:step="nextStep" :perfil="perfil"
           />
         </div>
       </div>
@@ -58,15 +57,9 @@ export default {
   data() {
     return {
       activeStep: 0,
-      user: {
-        persona: '',
-        corredora:{
-        },
-        authorityDtoSet: [
-          {
-            authorityName: 'ROLE_PROPIETARIO'
-          }
-        ]
+      formType: 'ROLE_PROPIETARIO',
+      perfil: {
+        type: 'persona',
       },
       steps: [
         { title: 'Cuenta', component: 'CuentaStep' },
@@ -77,18 +70,18 @@ export default {
     }
   },
   watch: {
-    'user.authorityDtoSet': {
+    formType: {
       deep: true,
       handler(newVal) {
         const representativeStep = { title: 'Representante', component: 'RepresentanteStep' }
         const index = this.steps.findIndex(step => step.title === 'Representante')
-        if (newVal[0].authorityName === 'ROLE_CORREDOR' && index === -1) {
-          delete this.user.persona
-          this.user.corredora.empresa = null
+        if (newVal === 'ROLE_CORREDOR' && index === -1) {
+          delete this.perfil
+          this.perfil = null
           this.steps.splice(2, 0, representativeStep)
-        } else if (newVal[0].authorityName !== 'ROLE_CORREDOR' && index !== -1) {
-          this.user.corredora.empresa = null
-          delete this.user.persona
+        } else if (newVal !== 'ROLE_CORREDOR' && index !== -1) {
+          this.perfil = null
+          delete this.perfil
           this.steps.splice(index, 1)
         }
       }

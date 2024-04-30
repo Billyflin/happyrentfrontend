@@ -31,24 +31,23 @@ export default {
         { value: 'argentina', text: 'Argentina' }
       ],
       representante: {
-        persona: {
-          rut: '',
-          nombres: '',
-          apellidoPaterno: '',
-          apellidoMaterno: '',
-          telefono: '',
-          ocupacion: '',
-          email: '',
-          estadoCivil: '',
-          nacionalidad: '',
-          direccion: {
-            calle: '',
-            numero: '',
-            codigoPostal: '',
-            pais: '',
-            region: '',
-            ciudad: ''
-          }
+        type: 'persona',
+        rut: '',
+        nombres: '',
+        apellidoPaterno: '',
+        apellidoMaterno: '',
+        telefono: '',
+        ocupacion: '',
+        email: '',
+        estadoCivil: '',
+        nacionalidad: '',
+        direccion: {
+          calle: '',
+          numero: '',
+          codigoPostal: '',
+          pais: '',
+          region: '',
+          ciudad: ''
         }
       }
     }
@@ -81,7 +80,7 @@ export default {
             variant="static"
             label="Rut Representante"
             placeholder="Con guión"
-            v-model="representante.persona.rut"
+            v-model="representante.rut"
           />
         </div>
         <div class="col-sm-3">
@@ -92,18 +91,18 @@ export default {
             variant="static"
             label="Ocupación Representante"
             placeholder="Ingeniero"
-            v-model="representante.persona.ocupacion"
+            v-model="representante.ocupacion"
           />
         </div>
         <div class="col-md-3">
           <MaterialChoices id="estadoCivil" :options="opcionsEstadoCivil"
                            name="estadoCivil" label="Estado Civil"
-                           v-model:text-choice="representante.persona.estadoCivil"
+                           v-model:text-choice="representante.estadoCivil"
           />
         </div>
         <div class="col-md-3">
           <MaterialChoices id="nacionalidad" :options="nacionalidad" label="Nacionalidad"
-                           v-model:text-choice="representante.persona.nacionalidad" name="Nacionalidad" />
+                           v-model:text-choice="representante.nacionalidad" name="Nacionalidad" />
         </div>
       </div>
       <div class="row mt-4">
@@ -115,7 +114,7 @@ export default {
             type="text"
             label="Nombre Representante"
             placeholder="Nombre"
-            v-model="representante.persona.nombres"
+            v-model="representante.nombres"
           />
         </div>
         <div class="col-4">
@@ -126,7 +125,7 @@ export default {
             is-required
             label="Apellido Paterno Representante"
             placeholder="Apellido"
-            v-model="representante.persona.apellidoPaterno"
+            v-model="representante.apellidoPaterno"
           />
         </div>
         <div class="col-4">
@@ -137,7 +136,7 @@ export default {
             is-required
             label="Apellido Materno Representante"
             placeholder="Apellido"
-            v-model="representante.persona.apellidoMaterno"
+            v-model="representante.apellidoMaterno"
           />
         </div>
       </div>
@@ -149,7 +148,7 @@ export default {
             variant="static"
             label="Email Representante"
             placeholder="Email"
-            v-model="representante.persona.email"
+            v-model="representante.email"
           />
         </div>
         <div class="col-4 mt-4">
@@ -170,13 +169,13 @@ export default {
             variant="static"
             label="Numero de teléfono"
             placeholder="+569 xxxxxxxx"
-            v-model="representante.persona.telefono"
+            v-model="representante.telefono"
           />
         </div>
       </div>
-        <div class="row text-start">
-          <LocalidadForm v-model="representante.persona.direccion" />
-        </div>
+      <div class="row text-start">
+        <LocalidadForm v-model="representante.direccion" />
+      </div>
     </div>
   </div>
   <button class="mb-5" @click="emitData">Next</button>

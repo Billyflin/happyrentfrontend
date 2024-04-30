@@ -24,7 +24,7 @@
                       v-model="persona.email" />
     </div>
     <div class="col-md-4 mt-4">
-      <material-input id="nombres" variant="dynamic" is-required label="Nombres" v-model="persona.nombres" />
+      <material-input id="nombres" variant="dynamic" is-required label="Nombres" v-model="persona.nombre" />
     </div>
     <div class="col-md-4 mt-4">
       <material-input id="apellidoPaterno" variant="dynamic" is-required label="Apellido Paterno"
@@ -58,8 +58,9 @@ export default {
   name: 'PropietarioForm',
   setup() {
     const persona = ref({
+      type: 'persona',
       rut: '',
-      nombres: '',
+      nombre: '',
       apellidoPaterno: '',
       apellidoMaterno: '',
       telefono: '',

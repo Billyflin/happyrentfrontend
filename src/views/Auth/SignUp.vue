@@ -118,15 +118,12 @@ const submitForm = () => {
     username: name.value,
     password: password.value,
     email: email.value,
-    authorityDtoSet: [
-      {
-        authorityName: "ROLE_PROVICIONAL"
-      }
-    ]
+    role: "PROVICIONAL"
+
   };
   loading.value = true;
 
-  axios.post(`${import.meta.env.VITE_SERVER_URL}:8080/api/signup`, user)
+  axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/register`, user)
       .then(response => {
         console.log(response.data);
         if (response.status === 200) {
