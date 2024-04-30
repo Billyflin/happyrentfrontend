@@ -39,7 +39,7 @@
           </button>
         </router-link>
       </div>
-      <h5 class="font-weight-normal mt-3">
+      <h5 class="font-weight-normal text-capitalize mt-3">
         <a href="javascript:;">{{ propiedad.direccion.calle + ' ' + propiedad.direccion.numero }}</a>
       </h5>
       <p class="mb-0">
