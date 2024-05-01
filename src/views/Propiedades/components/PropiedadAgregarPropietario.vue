@@ -33,7 +33,7 @@ export default {
     const formatPersonas = (personas) => {
       return personas.map(persona => {
         let label = persona.type === 'empresa'
-          ? `${persona.rutEmpresa} - ${persona.nombre} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
+          ? `${persona.rut} - ${persona.nombre} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
           : `${persona.rut} - ${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`;
 
         return {
@@ -95,11 +95,11 @@ export default {
           </div>
           <div v-if="propietario_existente.value.type" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Tipo</h6>
-            <p>{{ propietario_existente.value.type }}</p>
+            <p  class="text-capitalize">{{ propietario_existente.value.type }}</p>
           </div>
           <div v-if="propietario_existente.value.nombre" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Nombre</h6>
-            <p >{{ propietario_existente.value.nombre }}
+            <p  class="text-bolder">{{ propietario_existente.value.nombre }}
               {{ propietario_existente.value.apellidoPaterno }} {{ propietario_existente.value.apellidoMaterno }}</p>
           </div>
           <div v-if="propietario_existente.value.email" class="d-flex justify-content-between align-items-center">
@@ -112,20 +112,20 @@ export default {
           </div>
           <div v-if="propietario_existente.value.ocupacion" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Ocupación</h6>
-            <p >{{ propietario_existente.value.ocupacion }}</p>
+            <p  class="text-capitalize" >{{ propietario_existente.value.ocupacion }}</p>
           </div>
           <div v-if="propietario_existente.value.estadoCivil" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Estado Civil</h6>
-            <p >{{ propietario_existente.value.estadoCivil }}</p>
+            <p  class="text-capitalize">{{ propietario_existente.value.estadoCivil }}</p>
           </div>
           <div v-if="propietario_existente.value.nacionalidad" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Nacionalidad</h6>
-            <p>{{ propietario_existente.value.nacionalidad }}</p>
+            <p  class="text-capitalize">{{ propietario_existente.value.nacionalidad }}</p>
 
           </div>
           <div v-if="propietario_existente.value.direccion" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Dirección</h6>
-            <p>{{ propietario_existente.value.direccion.calle }}
+            <p  class="text-capitalize">{{ propietario_existente.value.direccion.calle }}
               {{ propietario_existente.value.direccion.numero }},
               {{ propietario_existente.value.direccion.ciudad }} ,
               {{ propietario_existente.value.direccion.region }}, {{ propietario_existente.value.direccion.pais }}
@@ -134,17 +134,17 @@ export default {
         </div>
         <div class="col" v-else-if="propietario_existente.value.type === 'empresa'">
 <!--          mostrar datos de la empresa seleccionada-->
-          <div v-if="propietario_existente.value.rutEmpresa" class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.rut" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Rut</h6>
-            <p>{{ propietario_existente.value.rutEmpresa }}</p>
+            <p>{{ propietario_existente.value.rut}}</p>
           </div>
           <div v-if="propietario_existente.value.type" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Tipo</h6>
-            <p>{{ propietario_existente.value.type }}</p>
+            <p  class="text-capitalize">{{ propietario_existente.value.type }}</p>
           </div>
           <div v-if="propietario_existente.value.nombre" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Nombre</h6>
-            <p>{{ propietario_existente.value.nombre }}</p>
+            <p  class="text-capitalize text-bold">{{ propietario_existente.value.nombre }}</p>
           </div>
           <div v-if="propietario_existente.value.email" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Correo</h6>
@@ -156,15 +156,15 @@ export default {
           </div>
           <div v-if="propietario_existente.value.giro" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Giro</h6>
-            <p>{{ propietario_existente.value.giro }}</p>
+            <p class="text-capitalize">{{ propietario_existente.value.giro }}</p>
           </div>
           <div v-if="propietario_existente.value.razonSocial" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Razón Social</h6>
-            <p>{{ propietario_existente.value.razonSocial }}</p>
+            <p  class="text-capitalize">{{ propietario_existente.value.razonSocial }}</p>
           </div>
           <div v-if="propietario_existente.value.direccion" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Dirección</h6>
-            <p>{{ propietario_existente.value.direccion.calle }}
+            <p  class="text-capitalize">{{ propietario_existente.value.direccion.calle }}
               {{ propietario_existente.value.direccion.numero }},
               {{ propietario_existente.value.direccion.ciudad }} ,
               {{ propietario_existente.value.direccion.region }}, {{ propietario_existente.value.direccion.pais }}
