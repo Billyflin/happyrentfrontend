@@ -76,7 +76,7 @@ export default {
           <h6 class="font-weight-normal">Rut Empresa</h6>
           <p>{{ perfil.rut }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center text-capitalize">
+        <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Correo</h6>
           <p>{{ perfil.email }}</p>
         </div>
@@ -126,7 +126,7 @@ export default {
             {{ perfil.representante.nacionalidad }}</p>
           <p v-else class="alert-danger">vuelve al formulario</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center text-capitalize">
+        <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Email</h6>
           <p v-if="perfil.representante.email ">
             {{ perfil.representante.email }}</p>

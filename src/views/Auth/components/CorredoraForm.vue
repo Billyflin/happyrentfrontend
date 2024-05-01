@@ -74,7 +74,7 @@ export default {
             v-model="empresa.rut"
           />
         </div>
-        <div class="col-sm-6 mt-4">
+        <div class="col-sm-4 mt-4">
           <material-input
             id="emailEmpresa"
             type="email"
@@ -84,7 +84,7 @@ export default {
             v-model="empresa.email"
           />
         </div>
-        <div class="col-sm-6 mt-4">
+        <div class="col-sm-4 mt-4">
           <material-input
             id="razonSocial"
             variant="static"
@@ -95,7 +95,7 @@ export default {
             v-model="empresa.razonSocial"
           />
         </div>
-        <div class="col-sm-6 mt-4">
+        <div class="col-sm-4 mt-4">
           <material-input
             id="Giro"
             variant="static"
