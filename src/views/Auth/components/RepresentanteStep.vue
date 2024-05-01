@@ -12,7 +12,7 @@ export default {
   },
   name: 'RepresentanteStep',
   props: {
-    user: Object
+    perfil: Object
   },
   setup() {
     const v$ = useVuelidate()
@@ -59,6 +59,7 @@ export default {
       this.v$.$validate()
       if (!this.v$.$error) {
         this.$emit('update:representante', this.representante)
+this.$emit('next:step')
       }
     }
   }
@@ -178,5 +179,10 @@ export default {
       </div>
     </div>
   </div>
-  <button class="mb-5" @click="emitData">Next</button>
+  <div class="mt-4 button-row d-flex">
+    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="emitData">
+      Siguiente
+    </button>
+  </div>
+<!--  <button class="mb-5" @click="emitData">Next</button>-->
 </template>

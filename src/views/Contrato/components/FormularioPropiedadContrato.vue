@@ -9,7 +9,7 @@ const formatDate = (date) => {
 
 </script>
 <template>
-  <div class="card mt-4">
+  <div class="card">
     <div class="card-header">
       <h5>Propiedad</h5>
     </div>
