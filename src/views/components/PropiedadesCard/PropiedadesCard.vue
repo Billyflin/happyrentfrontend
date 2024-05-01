@@ -48,7 +48,7 @@
       </p>
       <div class="d-flex justify-content-end mb-0 mt-0">
 
-        <p class="mb-0 mt-0 badge badge-success">{{ propiedad.type.toUpperCase() }}</p>
+        <p class="mb-0 mt-0 badge badge-success" v-if=" propiedad.type">{{ propiedad.type.toUpperCase() }}</p>
       </div>
     </div>
     <hr class="dark horizontal my-0" />

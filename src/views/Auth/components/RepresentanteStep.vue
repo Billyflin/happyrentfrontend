@@ -33,7 +33,7 @@ export default {
       representante: {
         type: 'persona',
         rut: '',
-        nombres: '',
+        nombre: '',
         apellidoPaterno: '',
         apellidoMaterno: '',
         telefono: '',
@@ -114,7 +114,7 @@ export default {
             type="text"
             label="Nombre Representante"
             placeholder="Nombre"
-            v-model="representante.nombres"
+            v-model="representante.nombre"
           />
         </div>
         <div class="col-4">

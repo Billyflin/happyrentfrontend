@@ -83,13 +83,13 @@ const imagenPortadaData = ref('')
 const propiedad = ref({
   type: 'terreno',
   direccion: {
-    calle: 'string',
+    calle: '',
     numero: 0,
-    comuna: 'string',
-    region: 'sadasdasd',
-    ciudad: 'string',
-    pais: 'sdsadasd',
-    codigoPostal: 'string'
+    comuna: '',
+    region: '',
+    ciudad: '',
+    pais: '',
+    codigoPostal: ''
   },
   propietario: {
     id: '',

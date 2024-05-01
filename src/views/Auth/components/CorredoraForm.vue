@@ -76,6 +76,16 @@ export default {
         </div>
         <div class="col-sm-6 mt-4">
           <material-input
+            id="emailEmpresa"
+            type="email"
+            variant="static"
+            label="Email Empresa"
+            placeholder="correo@empresa.cl"
+            v-model="empresa.email"
+          />
+        </div>
+        <div class="col-sm-6 mt-4">
+          <material-input
             id="razonSocial"
             variant="static"
             type="text"

@@ -31,11 +31,18 @@ export default {
     }
 
     const formatPersonas = (personas) => {
-      return personas.map(persona => ({
-        value: persona,
-        label: `${persona.rut} - ${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
-      }))
+      return personas.map(persona => {
+        let label = persona.type === 'empresa'
+          ? `${persona.rutEmpresa} - ${persona.nombre} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
+          : `${persona.rut} - ${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`;
+
+        return {
+          value: persona,
+          label: label
+        }
+      });
     }
+
 
     onMounted(fetchPersonas)
     return { store, opcionsPersonas }
@@ -67,6 +74,7 @@ export default {
       </p>
     </div>
     <div class="card-body pt-0">
+      {{ propietario_existente}}
 
       <div class="row">
         <div class="col-12 mb-4">
@@ -81,10 +89,15 @@ export default {
         <!--          {{propietario_existente.value.id}}-->
         <div class=" col " v-if="propietario_existente">
 
+          <div v-if="propietario_existente.value.rutEmpresa" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Rut Empresa</h6>
+            <p>{{ propietario_existente.value.rutEmpresa }}</p>
+          </div>
+
           <!--          mostrar datos del propietario seleccionado-->
-          <div class="d-flex justify-content-between align-items-center">
+          <div  v-if="propietario_existente.value.rut" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Rut</h6>
-            <p v-if="propietario_existente.value.rut">{{ propietario_existente.value.rut }}</p>
+            <p>{{ propietario_existente.value.rut }}</p>
           </div>
           <div class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Nombre</h6>

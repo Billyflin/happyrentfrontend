@@ -35,96 +35,108 @@ export default {
   <div class="multisteps-form__body">
     <div class="row" v-if="perfil.type === 'persona'">
       <div class="col-12">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Nombre</h6>
-          <p>{{ perfil.nombres }} {{ perfil.apellidoPaterno }} {{ perfil.apellidoMaterno }}</p>
+          <p>{{ perfil.nombre }} {{ perfil.apellidoPaterno }} {{ perfil.apellidoMaterno }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal">Correo</h6>
           <p>{{ perfil.email }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Telefono</h6>
           <p>{{ perfil.telefono }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Ocupación</h6>
           <p>{{ perfil.ocupacion }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Estado Civil</h6>
           <p>{{ perfil.estadoCivil }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Nacionalidad</h6>
           <p>{{ perfil.nacionalidad }}</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center text-capitalize" v-if="perfil.direccion">
+          <h6 class="font-weight-normal">Dirección</h6>
+          <p>{{ perfil.direccion.calle }} {{ perfil.direccion.numero }}, {{ perfil.direccion.ciudad}},
+            {{ perfil.direccion.region }}</p>
         </div>
       </div>
     </div>
     <div class="row" v-if="perfil.type ==='empresa'">
-      {{ perfil }}
       <div class="col-12">
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Nombre Empresa</h6>
           <p>{{ perfil.nombre }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Rut Empresa</h6>
           <p>{{ perfil.rut }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
+          <h6 class="font-weight-normal">Correo</h6>
+          <p>{{ perfil.email }}</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Giro</h6>
           <p>{{ perfil.giro }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center" v-if="perfil.direccion">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
+          <h6 class="font-weight-normal">Razon social</h6>
+          <p>{{ perfil.razonSocial }}</p>
+        </div>
+        <div class="d-flex justify-content-between align-items-center text-capitalize" v-if="perfil.direccion">
           <h6 class="font-weight-normal">Dirección</h6>
           <p>{{ perfil.direccion.calle }} {{ perfil.direccion.numero }},
             {{ perfil.direccion.region }}</p>
         </div>
       </div>
-      <div class="multisteps-form__title" v-if="perfil.representante">Resumen Representante
+      <div class="multisteps-form__title mt-4" v-if="perfil.representante">Resumen Representante
         Legal
       </div>
       <div class="col-12" v-if="perfil.representante">
         <div class="d-flex justify-content-between align-items-center">
-          <h6 class="font-weight-normal">Nombre</h6>
-          <p>{{ perfil.representante.nombres }}
+          <h6 class="font-weight-normal text-capitalize">Nombre</h6>
+          <p>{{ perfil.representante.nombre }}
             {{ perfil.representante.apellidoPaterno }}
             {{ perfil.representante.apellidoMaterno }}</p>
         </div>
         <div class="d-flex justify-content-between align-items-center">
-          <h6 class="font-weight-normal">Rut</h6>
+          <h6 class="font-weight-normal ">Rut</h6>
           <p v-if="perfil.representante.rut">
             {{ perfil.representante.rut }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center"
+        <div class="d-flex justify-content-between align-items-center text-capitalize"
              v-if="perfil.representante.ocupacion">
           <h6 class="font-weight-normal" v-if="perfil.representante.ocupacion">
             Ocupación</h6>
           <p>{{ perfil.representante.ocupacion }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center"
+        <div class="d-flex justify-content-between align-items-center text-capitalize"
              v-if="perfil.representante.estadoCivil">
           <h6 class="font-weight-normal">Estado Civil</h6>
           <p>{{ perfil.representante.estadoCivil }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Nacionalidad</h6>
           <p v-if="perfil.representante.nacionalidad">
             {{ perfil.representante.nacionalidad }}</p>
           <p v-else class="alert-danger">vuelve al formulario</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Email</h6>
           <p v-if="perfil.representante.email ">
             {{ perfil.representante.email }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center">
+        <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Telefono</h6>
           <p v-if="perfil.representante.telefono">
             {{ perfil.representante.telefono }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center" v-if="perfil.representante.direccion">
+        <div class="d-flex justify-content-between align-items-center text-capitalize" v-if="perfil.representante.direccion">
           <h6 class="font-weight-normal">Dirección</h6>
           <p>{{ perfil.representante.direccion.calle }}
             {{ perfil.representante.direccion.numero }},

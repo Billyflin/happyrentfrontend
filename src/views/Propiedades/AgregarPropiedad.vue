@@ -9,7 +9,9 @@
     <!--    &lt;!&ndash; INVENTARIO &ndash;&gt;-->
     <!--    <crear-inventario-form />-->
     <!-- Boton enviar! -->
-    <material-button :disabled="isSending" variant="success" size="lg" class="mt-4" full-width @click="emitData">Enviar</material-button>
+    <material-button :disabled="isSending" variant="success" size="lg" class="mt-4" full-width @click="emitData">
+      Enviar
+    </material-button>
 
   </div>
 </template>
@@ -36,14 +38,14 @@ export default {
     const propiedad = ref()
     const imagenPortada = ref()
     const v$ = useVuelidate()
-    return { propiedad,isSending, imagenPortada, v$ }
+    return { propiedad, isSending, imagenPortada, v$ }
   }, methods: {
     async emitData() {
       this.v$.$validate()
       console.log(this.propiedad)
       console.log(this.imagenPortada)
       if (!this.v$.$error) {
-        this.isSending = true; // Añade esta línea para deshabilitar el botón
+        this.isSending = true // Añade esta línea para deshabilitar el botón
         let formData = new FormData()
         formData.append('propiedad', new Blob([JSON.stringify(this.propiedad)], { type: 'application/json' }))
         formData.append('imagenPortada', this.imagenPortada)
@@ -59,13 +61,11 @@ export default {
         } catch (error) {
           console.log(error)
         } finally {
-          this.isSending = false; // Añade esta línea para habilitar el botón
+          this.isSending = false // Añade esta línea para habilitar el botón
         }
       }
     }
   }
-
-
 }
 
 </script>
