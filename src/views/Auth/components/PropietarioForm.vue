@@ -17,11 +17,16 @@
                       v-model="persona.ocupacion" />
     </div>
     <div class="col-md-4 mt-4">
-      <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="telefono" v-model="persona.telefono"/>
+      <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="telefono"
+                      v-model="persona.telefono" />
     </div>
     <div class="col-md-6 mt-4">
       <material-input id="email" variant="dynamic" label="Email" is-required type="text"
                       v-model="persona.email" />
+    </div>
+    <div class="col-md-2 mt-4">
+      <MaterialChoices id="pronombres" :options="pronombres" label="Pronombres"
+                       v-model:text-choice="persona.tratamiento" name="Pronombres" />
     </div>
     <div class="col-md-4 mt-4">
       <material-input id="nombres" variant="dynamic" is-required label="Nombres" v-model="persona.nombre" />
@@ -74,22 +79,31 @@ export default {
         ciudad: ''
       },
       email: '',
-      estadoCivil: ''
+      tratamiento: '',
+      estadoCivil: '',
     })
     const v$ = useVuelidate()
     return { persona, v$ }
   },
   data() {
     return {
+      pronombres: [
+        { value: 'Sr.', text: 'Sr.' },
+        { value: 'Sra.', text: 'Sra.' },
+        { value: 'Srta.', text: 'Srta.' }
+      ],
       opcionsEstadoCivil: [
-        { value: 'soltero', text: 'Soltero' },
-        { value: 'casado', text: 'Casado' },
-        { value: 'divorciado', text: 'Divorciado' },
-        { value: 'viudo', text: 'Viudo' }
+        { value: 'Soltero', text: 'Soltero' },
+        { value: 'Casado', text: 'Casado' },
+        { value: 'Divorciado', text: 'Divorciado' },
+        { value: 'Viudo', text: 'Viudo' },
+        { value: 'Separado', text: 'Separado' },
+        { value: 'Conviviente', text: 'Conviviente' }
       ],
       nacionalidad: [
-        { value: 'chile', text: 'Chile' },
-        { value: 'argentina', text: 'Argentina' }
+        { value: 'Chile', text: 'Chile' },
+        { value: 'Argentina', text: 'Argentina' },
+        { value: 'Perú', text: 'Perú' }
       ]
     }
   },

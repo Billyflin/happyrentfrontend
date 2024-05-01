@@ -25,36 +25,42 @@ const formatDate = (date) => {
         <div class="mx-4 col flex-grow">
           <h5 class="mb-0 text-capitalize">{{ store.propiedad.direccion.calle + ' ' + store.propiedad.direccion.numero
             }}</h5>
-          <h6 class="font-weight-normal mt-0 text-capitalize">{{ store.propiedad.direccion.ciudad + ', '+store.propiedad.direccion.region+ ', ' + store.propiedad.direccion.pais }}</h6>
+          <h6 class="font-weight-normal mt-0 text-capitalize">
+            {{ store.propiedad.direccion.ciudad + ', ' + store.propiedad.direccion.region + ', ' + store.propiedad.direccion.pais
+            }}</h6>
           <span v-if="!store.propiedad.arrendado" class="badge badge-success">Disponible</span>
           <span v-else class="badge badge-danger">Arrendado</span>
           <p class="mb-0 mt-6">
             <strong> Fecha de creación: </strong>
             &nbsp;{{ formatDate(store.propiedad.createDate) }}
           </p>
-          <p class="mb-0">
-            <strong> Pisos: </strong>
-            {{ store.propiedad.numeroDePisos }}
-          </p>
           <p class="mb-0 ">
             <strong> Tipo de propiedad:</strong>&nbsp;{{ store.propiedad.type.toUpperCase() }}
           </p>
-          <p class="mb-0">
-            <strong>Cantidad de baños:</strong>&nbsp;{{ store.propiedad.numeroDeBanios }}
-          </p>
-          <p class="mb-0">
-            <strong> Cantidad de dormitorios:</strong>&nbsp;{{ store.propiedad.numeroDeHabitaciones }}
-          </p>
-          <p class="mb-0">
-            <strong> Metros cuadrados del terreno:</strong>&nbsp;{{ store.propiedad.metrosCuadradosTerreno }}
-          </p>
-          <p class="mb-0">
-            <strong>Metros cuadrados construidos:</strong>&nbsp;{{ store.propiedad.metrosCuadradosConstruidos }}
-          </p>
+          <div>
+            <p class="mb-0">
+              <strong> Pisos: </strong>
+              {{ store.propiedad.numeroDePisos }}
+            </p>
+            <p class="mb-0">
+              <strong>Cantidad de baños:</strong>&nbsp;{{ store.propiedad.numeroDeBanios }}
+            </p>
+            <p class="mb-0">
+              <strong> Cantidad de dormitorios:</strong>&nbsp;{{ store.propiedad.numeroDeHabitaciones }}
+            </p>
+            <p class="mb-0">
+              <strong> Metros cuadrados del terreno:</strong>&nbsp;{{ store.propiedad.metrosCuadradosTerreno }}
+            </p>
+            <p class="mb-0">
+              <strong>Metros cuadrados construidos:</strong>&nbsp;{{ store.propiedad.metrosCuadradosConstruidos }}
+            </p>
+          </div>
         </div>
         <div class="col">
           <h5 class="font-weight-normal">Propietario</h5>
-          <p class="mb-0"><strong>Nombre:</strong> {{ store.propiedad.propietario.nombre  + ' ' + store.propiedad.propietario.apellidoPaterno + ' ' + store.propiedad.propietario.apellidoMaterno}}</p>
+          <p class="mb-0"><strong>Nombre:</strong>
+            {{ store.propiedad.propietario.nombre + ' ' + store.propiedad.propietario.apellidoPaterno + ' ' + store.propiedad.propietario.apellidoMaterno }}
+          </p>
           <p class="mb-0"><strong>Email:</strong> {{ store.propiedad.propietario.email }}</p>
           <p class="mb-0"><strong>Teléfono:</strong> {{ store.propiedad.propietario.telefono }}</p>
         </div>

@@ -20,21 +20,30 @@ export default {
   },
   data() {
     return {
+      pronombres: [
+        { value: 'Sr.', text: 'Sr.' },
+        { value: 'Sra.', text: 'Sra.' },
+        { value: 'Srta.', text: 'Srta.' }
+      ],
       opcionsEstadoCivil: [
-        { value: 'soltero', text: 'Soltero' },
-        { value: 'casado', text: 'Casado' },
-        { value: 'divorciado', text: 'Divorciado' },
-        { value: 'viudo', text: 'Viudo' }
+        { value: 'Soltero', text: 'Soltero' },
+        { value: 'Casado', text: 'Casado' },
+        { value: 'Divorciado', text: 'Divorciado' },
+        { value: 'Viudo', text: 'Viudo' },
+        { value: 'Separado', text: 'Separado' },
+        { value: 'Conviviente', text: 'Conviviente' }
       ],
       nacionalidad: [
-        { value: 'chile', text: 'Chile' },
-        { value: 'argentina', text: 'Argentina' }
+        { value: 'Chile', text: 'Chile' },
+        { value: 'Argentina', text: 'Argentina' },
+        { value: 'Perú', text: 'Perú' }
       ],
       representante: {
         type: 'persona',
         rut: '',
         nombre: '',
         apellidoPaterno: '',
+        tratamiento: '',
         apellidoMaterno: '',
         telefono: '',
         ocupacion: '',
@@ -74,39 +83,6 @@ this.$emit('next:step')
         <h5 class=" mt-3 mb-3">Representante Legal</h5>
       </div>
       <div class="row mt-4">
-        <div class="col-sm-3">
-          <material-input
-            id="Rut"
-            type="rut"
-            variant="static"
-            label="Rut Representante"
-            placeholder="Con guión"
-            v-model="representante.rut"
-          />
-        </div>
-        <div class="col-sm-3">
-          <material-input
-            id="Ocupacion"
-            type="text"
-            is-required
-            variant="static"
-            label="Ocupación Representante"
-            placeholder="Ingeniero"
-            v-model="representante.ocupacion"
-          />
-        </div>
-        <div class="col-md-3">
-          <MaterialChoices id="estadoCivil" :options="opcionsEstadoCivil"
-                           name="estadoCivil" label="Estado Civil"
-                           v-model:text-choice="representante.estadoCivil"
-          />
-        </div>
-        <div class="col-md-3">
-          <MaterialChoices id="nacionalidad" :options="nacionalidad" label="Nacionalidad"
-                           v-model:text-choice="representante.nacionalidad" name="Nacionalidad" />
-        </div>
-      </div>
-      <div class="row mt-4">
         <div class="col-4">
           <material-input
             id="NombreRepresentanteLegal"
@@ -141,7 +117,21 @@ this.$emit('next:step')
           />
         </div>
       </div>
-      <div class="row">
+      <div class="row mt-4">
+        <div class="col-md-1  mt-4">
+          <MaterialChoices id="pronombres" :options="pronombres" label="Pronombres"
+                           v-model:text-choice="representante.tratamiento" name="Pronombres" />
+        </div>
+        <div class="col-sm-3  mt-4">
+          <material-input
+            id="Rut"
+            type="rut"
+            variant="static"
+            label="Rut Representante"
+            placeholder="Con guión"
+            v-model="representante.rut"
+          />
+        </div>
         <div class="col-4 mt-4">
           <material-input
             id="emailRepresentanteLegal"
@@ -162,7 +152,31 @@ this.$emit('next:step')
 
           />
         </div>
-        <div class="col-3 mt-4">
+
+        </div>
+      <div class="row mt-4">
+        <div class="col-md-3">
+          <MaterialChoices id="estadoCivil" :options="opcionsEstadoCivil"
+                           name="estadoCivil" label="Estado Civil"
+                           v-model:text-choice="representante.estadoCivil"
+          />
+        </div>
+        <div class="col-md-3">
+          <MaterialChoices id="nacionalidad" :options="nacionalidad" label="Nacionalidad"
+                           v-model:text-choice="representante.nacionalidad" name="Nacionalidad" />
+        </div>
+        <div class="col-sm-3">
+          <material-input
+            id="Ocupacion"
+            type="text"
+            is-required
+            variant="static"
+            label="Ocupación Representante"
+            placeholder="Ingeniero"
+            v-model="representante.ocupacion"
+          />
+        </div>
+        <div class="col-sm-3">
           <material-input
             id="numeroRepresentanteLegal"
             type="String"
@@ -173,7 +187,9 @@ this.$emit('next:step')
             v-model="representante.telefono"
           />
         </div>
+
       </div>
+
       <div class="row text-start">
         <LocalidadForm v-model="representante.direccion" />
       </div>
