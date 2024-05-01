@@ -33,7 +33,7 @@ onMounted(async () => {
     title: persona.type === 'persona' ? `${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno}` : persona.nombre,
     direccion: persona.direccion.ciudad,
     region: persona.direccion.region + ', ' + persona.direccion.pais,
-    values: [persona.rut || persona.rutEmpresa, persona.email,
+    values: [persona.rut || persona.rut, persona.email,
       persona.direccion.calle + ' ' + persona.direccion.numero, persona.type.charAt(0).toUpperCase() + persona.type.slice(1), persona.id],
   }))"
       />
