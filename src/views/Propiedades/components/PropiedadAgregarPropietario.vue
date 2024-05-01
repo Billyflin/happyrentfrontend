@@ -43,7 +43,6 @@ export default {
       });
     }
 
-
     onMounted(fetchPersonas)
     return { store, opcionsPersonas }
   },
@@ -51,7 +50,7 @@ export default {
     propietario_existente: {
       handler: function (val) {
         if (val && val.value) {
-          console.log(val.value.id)
+          console.log(val.value)
           this.$emit('update:propietario', {id:val.value.id,type: val.value.type})
         }
       },
@@ -74,7 +73,6 @@ export default {
       </p>
     </div>
     <div class="card-body pt-0">
-      {{ propietario_existente}}
 
       <div class="row">
         <div class="col-12 mb-4">
@@ -85,50 +83,88 @@ export default {
           />
         </div>
 
-        <!--                    {{ opcionsPersonas }}-->
-        <!--          {{propietario_existente.value.id}}-->
-        <div class=" col " v-if="propietario_existente">
+        <div v-if="propietario_existente">
 
-          <div v-if="propietario_existente.value.rutEmpresa" class="d-flex justify-content-between align-items-center">
-            <h6 class="font-weight-normal">Rut Empresa</h6>
-            <p>{{ propietario_existente.value.rutEmpresa }}</p>
-          </div>
+
+        <div class=" col " v-if="propietario_existente.value.type === 'persona'">
 
           <!--          mostrar datos del propietario seleccionado-->
-          <div  v-if="propietario_existente.value.rut" class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.rut" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Rut</h6>
             <p>{{ propietario_existente.value.rut }}</p>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.type" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Tipo</h6>
+            <p>{{ propietario_existente.value.type }}</p>
+          </div>
+          <div v-if="propietario_existente.value.nombre" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Nombre</h6>
-            <p v-if="propietario_existente.value.nombre">{{ propietario_existente.value.nombre }}
+            <p >{{ propietario_existente.value.nombre }}
               {{ propietario_existente.value.apellidoPaterno }} {{ propietario_existente.value.apellidoMaterno }}</p>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.email" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Correo</h6>
-            <p v-if="propietario_existente.value.email">{{ propietario_existente.value.email }}</p>
+            <p >{{ propietario_existente.value.email }}</p>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.telefono" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Telefono</h6>
-            <p v-if="propietario_existente.value.telefono">{{ propietario_existente.value.telefono }}</p>
+            <p >{{ propietario_existente.value.telefono }}</p>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.ocupacion" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Ocupación</h6>
-            <p v-if="propietario_existente.value.ocupacion">{{ propietario_existente.value.ocupacion }}</p>
+            <p >{{ propietario_existente.value.ocupacion }}</p>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.estadoCivil" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Estado Civil</h6>
-            <p v-if="propietario_existente.value.estadoCivil">{{ propietario_existente.value.estadoCivil }}</p>
-
+            <p >{{ propietario_existente.value.estadoCivil }}</p>
           </div>
-          <div class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.nacionalidad" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Nacionalidad</h6>
-            <p v-if="propietario_existente.value.nacionalidad">{{ propietario_existente.value.nacionalidad }}</p>
+            <p>{{ propietario_existente.value.nacionalidad }}</p>
 
           </div>
-          <div class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value.direccion" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Dirección</h6>
-            <p v-if="propietario_existente.value.direccion">{{ propietario_existente.value.direccion.calle }}
+            <p>{{ propietario_existente.value.direccion.calle }}
+              {{ propietario_existente.value.direccion.numero }},
+              {{ propietario_existente.value.direccion.ciudad }} ,
+              {{ propietario_existente.value.direccion.region }}, {{ propietario_existente.value.direccion.pais }}
+            </p>
+          </div>
+        </div>
+        <div class="col" v-else-if="propietario_existente.value.type === 'empresa'">
+<!--          mostrar datos de la empresa seleccionada-->
+          <div v-if="propietario_existente.value.rutEmpresa" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Rut</h6>
+            <p>{{ propietario_existente.value.rutEmpresa }}</p>
+          </div>
+          <div v-if="propietario_existente.value.type" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Tipo</h6>
+            <p>{{ propietario_existente.value.type }}</p>
+          </div>
+          <div v-if="propietario_existente.value.nombre" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Nombre</h6>
+            <p>{{ propietario_existente.value.nombre }}</p>
+          </div>
+          <div v-if="propietario_existente.value.email" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Correo</h6>
+            <p>{{ propietario_existente.value.email }}</p>
+          </div>
+          <div v-if="propietario_existente.value.telefono" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Telefono</h6>
+            <p>{{ propietario_existente.value.telefono }}</p>
+          </div>
+          <div v-if="propietario_existente.value.giro" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Giro</h6>
+            <p>{{ propietario_existente.value.giro }}</p>
+          </div>
+          <div v-if="propietario_existente.value.razonSocial" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Razón Social</h6>
+            <p>{{ propietario_existente.value.razonSocial }}</p>
+          </div>
+          <div v-if="propietario_existente.value.direccion" class="d-flex justify-content-between align-items-center">
+            <h6 class="font-weight-normal">Dirección</h6>
+            <p>{{ propietario_existente.value.direccion.calle }}
               {{ propietario_existente.value.direccion.numero }},
               {{ propietario_existente.value.direccion.ciudad }} ,
               {{ propietario_existente.value.direccion.region }}, {{ propietario_existente.value.direccion.pais }}
@@ -136,6 +172,8 @@ export default {
           </div>
 
         </div>
+        </div>
+
       </div>
     </div>
   </div>
