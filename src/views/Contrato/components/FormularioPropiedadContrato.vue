@@ -153,7 +153,7 @@ const formatDate = (date) => {
             <p class="mb-0">
               <b> Numero de Cocinas:</b>{{ store.propiedad.cocinas}}
             </p>
-            <p>
+            <p class="mb-0">
               <b> Numero de Oficinas:</b>{{ store.propiedad.numeroDeOficinas}}
             </p>
             <p class="mb-0">
