@@ -70,6 +70,7 @@ watch(() => [store2.codeudor?.id, store2.arrendatario?.id, store2.propiedad?.pro
 
 onMounted(() => {
   toggleEveryDisplay()
+  store2.codeudor = null
   // toggleHideConfig()
 })
 
