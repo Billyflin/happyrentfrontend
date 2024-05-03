@@ -1,6 +1,6 @@
 <script>
 import { onMounted, onUnmounted } from 'vue'
-import { useAppStore } from '@/store/index.js'
+import { useAppStore, useAuthStore } from '@/store/index.js'
 import NavPill from '@/views/components/NavPill/NavPill.vue'
 import SideNav from '@/views/Contrato/components/SideNav.vue'
 
@@ -9,6 +9,7 @@ export default {
   components: { SideNav, NavPill },
   setup() {
     const store = useAppStore()
+    const storePropiedad = useAuthStore()
     const { toggleEveryDisplay } = store
     onMounted(() => {
       toggleEveryDisplay()
@@ -17,6 +18,7 @@ export default {
     onUnmounted(() => {
       toggleEveryDisplay()
     })
+    return { store, storePropiedad }
   }
 }
 </script>
@@ -37,7 +39,9 @@ export default {
             <div class="col-12">
               <div class="card">
                 <div class="card-body">
-                  <h5 id="#Clausula1" class="card-title text-center">Clausula 1</h5>
+                  <h4 class="card-title text-center">Clausula 1</h4>
+                  <h5 id="#Clausula1" class="card-title text-center">           {{storePropiedad.propiedad.direccion}}</h5>
+                  <h5 class="card-title text-center">Arrendador: {{storePropiedad.arrendatario}}</h5>
 
 
                 </div>

@@ -1,10 +1,10 @@
 import { defineStore } from 'pinia'
+import { watch } from 'vue'
 
 import axios from 'axios'
 
 import router from '@/router'
 import { createPersistedState } from 'pinia-plugin-persistedstate'
-import * as process from 'echarts'
 
 export const useAppStore = defineStore({
   id: 'app', state: () => ({
@@ -56,13 +56,24 @@ export const useAppStore = defineStore({
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
-    auth: null, isLoggedIn: false, errMsg: '', userInfo: {"authorities":[]},
-    rememberMe: false, isAdmin: false, propiedades: [],
-    propiedad: { },
+    auth: null,
+    isLoggedIn: false,
+    errMsg: '',
+    userInfo: { 'authorities': [] },
+    rememberMe: false,
+    isAdmin: false,
+    propiedades: [],
+    arrendatario: {},
+    codeudor: {},
+    propiedad: {},
     personas: [],
-  }), persist: true, actions: {
+    contratoError: '',
+  }), persist: true,
+  actions: {
     async loginHandler(username, password) {
-      await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/authenticate`, { username, password }, {
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/authenticate`, {
+        username, password
+      }, {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -70,7 +81,7 @@ export const useAuthStore = defineStore('auth', {
         .then((response) => {
           console.log(response.data.access_token)
           this.auth = response.data.access_token
-          axios.defaults.withCredentials = true;
+          axios.defaults.withCredentials = true
           axios.defaults.headers.common['Authorization'] = `Bearer ${this.auth}`
           this.getCurrentUser()
           this.isLoggedIn = true
@@ -118,8 +129,7 @@ export const useAuthStore = defineStore('auth', {
 
     }, setRememberMe(value) {  // Agrega este método
       this.rememberMe = value
-    },
- async getPersonas() {
+    }, async getPersonas() {
       if (this.userInfo) {
         const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`)
           .then((response) => {
@@ -131,8 +141,7 @@ export const useAuthStore = defineStore('auth', {
           })
       }
 
- }
-  , async getPropiedades() {
+    }, async getPropiedades() {
       if (this.userInfo) {
         const userId = this.userInfo.id
         await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/propiedad`)
@@ -153,67 +162,38 @@ export const useAuthStore = defineStore('auth', {
 
 export const useRegisterFormStore = defineStore({
   id: 'registerFormStore', state: () => ({
-    selectedCategory: null,
-    form: {
-      username: '',
-      password: '',
-      id: 0,
-      persona: {
-        id: 0,
-        nombres: '',
-        apellidoPaterno: '',
-        apellidoMaterno: '',
-        nombreCompleto: '',
-        direccion: {
-          id: 0,
-          calle: '',
-          numero: 1,
-          ciudad: '',
-          region: '',
-          pais: '',
-          codigoPostal: ''
-        },
-        telefono: '',
-        email: '',
-        estadoCivil: '',
-        nacionalidad: ''
-      },
-      isActivated: true,
-      email: '',
-      authorities: [{
+    selectedCategory: null, form: {
+      username: '', password: '', id: 0, persona: {
+        id: 0, nombres: '', apellidoPaterno: '', apellidoMaterno: '', nombreCompleto: '', direccion: {
+          id: 0, calle: '', numero: 1, ciudad: '', region: '', pais: '', codigoPostal: ''
+        }, telefono: '', email: '', estadoCivil: '', nacionalidad: ''
+      }, isActivated: true, email: '', authorities: [{
         authority: ''
-      }],
-      firstLogin: true,
-      activated: true
-    },
-    activeStep: 0,
-    formSteps: 4
+      }], firstLogin: true, activated: true
+    }, activeStep: 0, formSteps: 4
   }), getters: {
     activeClass: (state) => (index) => state.activeStep === index ? 'js-active position-relative' : ''
-  },actions: {
+  }, actions: {
     selectCategory(categoryId) {
-      this.selectedCategory = categoryId;
-      this.$set(this, 'formData', {});
+      this.selectedCategory = categoryId
+      this.$set(this, 'formData', {})
 
-    },
-    updateFormData(data) {
-      this.formData = {...this.formData, ...data};
-      this.formData.product.category.categoryId = this.selectedCategory;
-      this.formData.product.category.categoryName = this.categories[this.selectedCategory - 1].name;
-    },
-    nextStep() {
+    }, updateFormData(data) {
+      this.formData = { ...this.formData, ...data }
+      this.formData.product.category.categoryId = this.selectedCategory
+      this.formData.product.category.categoryName = this.categories[this.selectedCategory - 1].name
+    }, nextStep() {
       if (this.selectedCategory === null) {
-        alert('Por favor, selecciona una categoría antes de continuar.');
-        return;
+        alert('Por favor, selecciona una categoría antes de continuar.')
+        return
       }
       if (this.activeStep < this.formSteps) {
-        this.activeStep += 1;
+        this.activeStep += 1
       }
-    },
-    prevStep() {
+    }, prevStep() {
       if (this.activeStep > 0) {
-        this.activeStep -= 1;
+        this.activeStep -= 1
       }
     }
   }
-});
+})
