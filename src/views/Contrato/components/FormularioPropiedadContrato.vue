@@ -37,12 +37,6 @@ const formatDate = (date) => {
           </p>
 
 
-
-
-
-
-
-
           <div v-if="store.propiedad.type === 'departamento'">
             <p class="mb-0">
               <strong> Piso: </strong>
@@ -55,10 +49,31 @@ const formatDate = (date) => {
               <strong> Cantidad de dormitorios:</strong>&nbsp;{{ store.propiedad.habitaciones }}
             </p>
             <p class="mb-0">
+              <strong> Estacionamientos:</strong>{{ store.propiedad.estacionamientos}}
+            </p>
+            <p class="mb-0">
+              <strong> Bodegas:</strong>{{ store.propiedad.bodegas }}
+            </p>
+            <p class="mb-0">
               <strong> Metros cuadrados:</strong>&nbsp;{{ store.propiedad.metrosCuadrados }}
+            </p>
+            <p class="mb-0">
+              <strong> Descripción:</strong>&nbsp;{{ store.propiedad.descripcion}}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'casa'">
+            <p class="mb-0">
+              <b>Piscina</b>
+              {{store.propiedad.piscina}}
+            </p>
+            <p class="mb-0">
+              <b>Patio</b>
+              {{store.propiedad.patio}}
+            </p>
+            <p class="mb-0">
+              <b>Jardin</b>
+              {{store.propiedad.jardines}}
+            </p>
             <p class="mb-0">
               <strong> Pisos: </strong>
               {{ store.propiedad.numeroDePisos }}
@@ -70,59 +85,95 @@ const formatDate = (date) => {
               <strong> Cantidad de dormitorios:</strong>&nbsp;{{ store.propiedad.habitaciones }}
             </p>
             <p class="mb-0">
-              <strong> Metros cuadrados del terreno:</strong>&nbsp;{{ store.propiedad.metrosCuadradosTerreno }}
+              <strong> Antiguedad:</strong>{{ store.propiedad.antiguedad }}
             </p>
             <p class="mb-0">
-              <strong>Metros cuadrados construidos:</strong>&nbsp;{{ store.propiedad.metrosCuadradosConstruidos }}
+              <strong> Estacionamientos:</strong>{{ store.propiedad.estacionamientos }}
+            </p>
+            <p class="mb-0">
+              <strong> Metros cuadrados del terreno:</strong>&nbsp;{{ store.propiedad.metrosCuadradosDeTerreno}}
+            </p>
+            <p class="mb-0">
+              <strong>Metros cuadrados construidos:</strong>&nbsp;{{ store.propiedad.metrosCuadradosDeConstruccion}}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'local'">
             <p class="mb-0">
-              <strong> Cantidad de baños:</strong>&nbsp;{{ store.propiedad.banios }}
+              <strong> Pisos: </strong>
+              {{ store.propiedad.piso }}
             </p>
             <p class="mb-0">
-              <strong> Metros cuadrados:</strong>&nbsp;{{ store.propiedad.metrosCuadrados }}
+              <strong> Numero de locales:</strong>{{ store.propiedad.numero}}
+            </p>
+            <p class="mb-0">
+              <strong> Descripcion:</strong>{{ store.propiedad.descripcion}}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'terreno'">
             <p class="mb-0">
-              <strong> Metros cuadrados:</strong>&nbsp;{{ store.propiedad.metrosCuadrados }}
+              <b> Area:</b>{{ store.propiedad.area}}
+            </p>
+            <p class="mb-0">
+              <b> tipo de Terreno:</b>{{ store.propiedad.tipoTerreno}}
+            </p>
+            <p class="mb-0">
+              <b> Uso de suelo:</b>{{ store.propiedad.usoSuelo}}
+            </p>
+            <p class="mb-0">
+              <b> Topografia:</b>{{ store.propiedad.topografia}}
+            </p>
+            <p class="mb-0">
+              <b> Servicios:</b>{{ store.propiedad.servicios}}
+            </p>
+            <p class="mb-0">
+              <b> Forma de terreno:</b>{{ store.propiedad.formaTerreno}}
+            </p>
+            <p class="mb-0">
+              <b> Frente:</b>&nbsp;{{ store.propiedad.frente}}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'bodega'">
             <p class="mb-0">
-              <strong> Metros cuadrados:</strong>&nbsp;{{ store.propiedad.metrosCuadrados }}
+              <b> Numero de pisos:</b>{{ store.propiedad.numeroDePisos}}
+            </p>
+            <p class="mb-0">
+              <b> Numero:</b>{{ store.propiedad.numero}}
+            </p>
+            <p class="mb-0">
+              <b> Descripcion:</b>{{ store.propiedad.descripcion}}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'oficina'">
             <p class="mb-0">
-              <strong> Cantidad de baños:</strong>&nbsp;{{ store.propiedad.banios }}
+              <b> Numero de pisos:</b>{{ store.propiedad.piso}}
             </p>
             <p class="mb-0">
-              <strong> Metros cuadrados:</strong>&nbsp;{{ store.propiedad.metrosCuadrados }}
+              <b> Numero de baños:</b>&nbsp;{{ store.propiedad.banios }}
+            </p>
+            <p class="mb-0">
+              <b> Numero de Cocinas:</b>{{ store.propiedad.cocinas}}
+            </p>
+            <p>
+              <b> Numero de Oficinas:</b>{{ store.propiedad.numeroDeOficinas}}
+            </p>
+            <p class="mb-0">
+              <b> Numero de comedores:</b>{{ store.propiedad.numeroDeComedores}}
+            </p>
+            <p class="mb-0">
+              <b> Descripcion:</b>{{ store.propiedad.descripcion}}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'estacionamiento'">
             <p class="mb-0">
-              <strong> Metros cuadrados:</strong>&nbsp;{{ store.propiedad.metrosCuadrados }}
+              <b> Numero de pisos:</b>{{ store.propiedad.piso}}
+            </p>
+            <p class="mb-0">
+              <b> Numero:</b>{{ store.propiedad.numero}}
+            </p>
+            <p class="mb-0">
+              <b> Descripcion:</b>{{ store.propiedad.descripcion}}
             </p>
           </div>
-<!--          <p class="mb-0">-->
-<!--            <strong> Pisos: </strong>-->
-<!--            {{ store.propiedad.numeroDePisos }}-->
-<!--          </p>-->
-<!--          <p class="mb-0">-->
-<!--            <strong>Cantidad de baños:</strong>&nbsp;{{ store.propiedad.banios }}-->
-<!--          </p>-->
-<!--          <p class="mb-0">-->
-<!--            <strong> Cantidad de dormitorios:</strong>&nbsp;{{ store.propiedad.habitaciones }}-->
-<!--          </p>-->
-<!--          <p class="mb-0">-->
-<!--            <strong> Metros cuadrados del terreno:</strong>&nbsp;{{ store.propiedad.metrosCuadradosTerreno }}-->
-<!--          </p>-->
-<!--          <p class="mb-0">-->
-<!--            <strong>Metros cuadrados construidos:</strong>&nbsp;{{ store.propiedad.metrosCuadradosConstruidos }}-->
-<!--          </p>-->
 
         </div>
         <div class="col">
