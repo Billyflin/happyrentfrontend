@@ -4,29 +4,45 @@ import { useAppStore, useAuthStore } from '@/store/index.js'
 import NavPill from '@/views/components/NavPill/NavPill.vue'
 import SideNav from '@/views/Contrato/components/SideNav.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
+import MaterialSwitch from '@/components/MaterialSwitch.vue'
+import MaterialInput from '@/components/MaterialInput.vue'
+import MaterialBadge from '@/components/MaterialBadge.vue'
 
 export default {
   name: 'ClausulasNuevoContrato',
-  components: { MaterialChoices, SideNav, NavPill },
+  components: { MaterialBadge, MaterialInput, MaterialSwitch, MaterialChoices, SideNav, NavPill },
   data() {
     return {
       valorRenta: 0,
       valorRentaPalabras: '',
       reajusteContrato: '',
-      fechaInicioContrato: '',
-      duracionContrato: '',
+      fechaInicioContrato: Date.now(),
+      duracionContrato: 6,
+      periodoProrroga: 12,
       optionsClausula1: [
         { value: 'habitacional', label: 'Habitacional' },
         { value: 'comercial', label: 'Comercial' },
         { value: 'oficina', label: 'Oficina' }
       ],
+      optionsClausula4: [
+        { value: 'gastosComunes', label: 'Gastos comunes' },
+        { value: 'luz', label: 'Luz' },
+        { value: 'agua', label: 'Agua' },
+        { value: 'gas', label: 'Gas' },
+        { value: 'internet', label: 'Internet' },
+        { value: 'telefonia', label: 'Telefonía' },
+        { value: 'cable', label: 'Cable' }],
+      optionsClausula5periodos: [
+        {}
+      ],
+      clausulas4: [],
       clausulas1: []
+
     }
   },
   watch: {
     clausulas1: {
       handler: function(val) {
-
         console.log(val)
         console.log(this.clausulas1)
         console.log(this.$refs.Clausula1.innerText)
@@ -39,6 +55,11 @@ export default {
     const store2 = useAuthStore()
     const Comparecencia = ref(null)
     const Clausula1 = ref(null)
+    const Clausula4 = ref(null)
+    const Clausulas4 = ref(null)
+    const prorrogaAutomatica = ref(false)
+    const visitasPermitidas = ref(false)
+    const numeroVisitas = ref(0)
 
     const { toggleEveryDisplay } = store
     onMounted(() => {
@@ -59,7 +80,12 @@ export default {
       store2,
       formatDate,
       Clausula1,
-      Comparecencia
+      Clausula4,
+      Clausulas4,
+      Comparecencia,
+      visitasPermitidas,
+      prorrogaAutomatica,
+      numeroVisitas
 
 
     }
@@ -85,9 +111,10 @@ export default {
           <div class="row">
             <div class="card-body col-lg-10 mt-lg-0 mt-4 mx-5 text-center">
               <div class="row">
-                <div class="col-9">
+                <div class="col-9 mb-3">
                   <h1 class="text-center">Clausulas del contrato</h1>
-                  <p class="text-center">A continuación se presentan las clausulas del contrato</p>
+                  <material-badge class="badge badge-danger" > Esta es solo una vista preliminar.</material-badge>
+                  <p class="text-center">El documento final tendra una apariencia levemente diferente pero el contenido de las clausulas será exactamente el mismo.</p>
                 </div>
               </div>
               <div class="row">
@@ -188,7 +215,6 @@ export default {
                 </div>
               </div>
 
-
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula1" class="card-title text-center">Cláusula 1: PROPIEDAD</h5>
@@ -278,51 +304,111 @@ export default {
                   </div>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula4" class="card-title text-center">Clausula 4 OTROS PAGOS:</h5>
                   <div class="mb-3 mt-3">
-                    <p class="text-justifyr">
-                      La arrendataria estará obligada a pagar con toda puntualidad y a quién corresponda, los gastos
-                      comunes, los consumos de luz, extracción de basuras y demás consumos y servicios que puedan
-                      afectar al inmueble enviando copia de los pagos al siguiente email: [{correoPropietario}]. El
-                      atraso de un mes en cualquiera de los pagos indicados, dará derecho a la arrendadora para
-                      requerir
-                      de la compañía de servicios que corresponda, la suspensión del servicio respectivo.
+                    <p class="text-justify">
+                      <template v-if="Clausula4">
+                        La arrendataria asumirá la responsabilidad de pagar puntualmente y a la entidad correspondiente
+                        los siguientes servicios y gastos asociados al inmueble:
+                        <template v-for="(item, index) in Clausulas4">
+                          {{ item.label.toLowerCase() }}
+                          <template v-if="index !== Clausulas4.length - 1">,</template>
+                        </template>
+                        .
+                        Los comprobantes de pago deben ser enviados al siguiente correo electrónico:
+                        <template v-if="store2.propiedad.propietario.type=== 'persona'">
+                          {{ store2.propiedad.propietario.email }}.
+                        </template>
+                        <template v-else>
+                          {{ store2.propiedad.propietario.representante.email }}.
+                        </template>
+                        En caso de un atraso de un mes en cualquiera de estos pagos, la arrendadora tendrá el derecho de
+                        solicitar a la compañía de servicios correspondiente la suspensión del servicio en cuestión.
+                      </template>
+                      <template v-else>
+                        En este caso, el propietario se hará cargo de todos los gastos comunes y otros pagos
+                        relacionados con el inmueble. Esto incluye, pero no se limita a, los servicios de cable, agua,
+                        gas, internet, luz y telefonía. El propietario se compromete a mantener estos servicios en
+                        funcionamiento y a asumir cualquier costo asociado a ellos.
+                      </template>
                     </p>
                   </div>
                 </div>
+                <div class="col-3 mt-3">
+                  <material-switch id="Clausula4" name="Clausula4" label="" v-model:checked="Clausula4">¿Desea que el
+                    arrendatario pague los gastos comunes?
+                  </material-switch>
+                  <material-choices v-if="Clausula4" id="Clausulas4" label="¿Que debe pagar el arrendatario?"
+                                    :options="optionsClausula4" name="Clausulas4" is-multiple remove-item-button
+                                    v-model="Clausulas4"></material-choices>
+                </div>
               </div>
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula5" class="card-title text-center">Clausula 5 PLAZO:</h5>
                   <div class="mb-3 mt-3">
                     <p class="text-justify">
-                      El presente contrato comenzará a regir a partir [{fechaInicioContrato}], y tendrá una duración
-                      de
-                      [{duracionContrato}], que se prorrogará automática y sucesivamente por períodos de 12 meses
-                      cada
-                      uno, salvo que cualquiera de las partes diere a la otra aviso de su intención de no perseverar
-                      en
-                      el contrato, lo que deberá hacer por correo electrónico [{correoPropietario}], con a lo menos
-                      60
-                      días de anticipación al vencimiento del plazo original o de cualquiera de sus prórrogas, con
-                      copia
-                      al aval y codeudora solidaria y al corredor de propiedades que intervino en esta operación de
-                      arriendo.
+                      El presente contrato comenzará a regir a partir de {{ formatDate(fechaInicioContrato) }}, y tendrá
+                      una duración de {{ duracionContrato }} meses,
+                      <template v-if="prorrogaAutomatica">
+                        que se prorrogará automática y sucesivamente por períodos de <strong>
+
+                        {{ periodoProrroga }} meses cada uno,
+                      </strong>
+                      </template>
+                      salvo que cualquiera de las partes diere a la otra aviso de su intención de no perseverar en el
+                      contrato, lo que deberá hacer por correo electrónico a {{ store2.propiedad.propietario.email }} o
+                      delegando la notificacion al indicar el termino del contrato mediante la aplicacion web <strong>Happ
+                      Rent</strong>, con a lo menos 60 días de anticipación al vencimiento del plazo original o de
+                      cualquiera de sus prórrogas
+                      <template v-if="store2.codeudor">
+                        con copia al aval y codeudora solidaria y al corredor de propiedades que intervino en esta
+                        operación de arriendo.
+                      </template>
+                      <template v-else>
+                        .
+                      </template>
+
                       En el evento de que la arrendataria no restituyere la propiedad en la fecha de término de la
-                      vigencia del plazo original o de cualquiera de sus prórrogas, continuará obligada a pagar
-                      mensualmente la suma correspondiente a la renta convenida hasta que efectúe la restitución del
-                      inmueble (Art.6º Ley 18.101), sin perjuicio de que deberá pagar, además, mensualmente y
-                      durante
-                      todo el período de mora, a título de multa, una cantidad equivalente al 50% de la referida
-                      suma,
+                      vigencia del plazo original o de cualquiera de sus prórrogas,
+                      continuará obligada a pagar mensualmente la suma correspondiente a la renta convenida hasta que
+                      efectúe la restitución del inmueble (Art.6º Ley 18.101),
+                      sin perjuicio de que deberá pagar, además, mensualmente y durante todo el período de mora, a
+                      título de multa,
+                      una cantidad equivalente al 50% de la referida suma,
                       sin perjuicio de los derechos del arrendador para demandar la restitución del inmueble ante la
                       justicia ordinaria.
                     </p>
                   </div>
                 </div>
+                <div class="col-3 mt-3">
+                  <div class="mt-0">
+
+                    <material-input type="date" name="fecha" variant="static" size="sm" id="fechaInicioContrato"
+                                    label="Fecha de inicio del contrato" v-model="fechaInicioContrato"></material-input>
+                  </div>
+                  <div class="mt-3">
+                    <material-input id="duracionContrato" variant="static" size="sm"
+                                    label="Duración del contrato (en meses)"
+                                    v-model="duracionContrato"></material-input>
+                  </div>
+                  <div class="mt-3">
+                    <material-switch id="prorrogaAutomatica" label="" v-model="prorrogaAutomatica" name="clausula5">¿Se
+                      prorrogará automáticamente el contrato?
+                    </material-switch>
+                  </div>
+                  <div class="mt-3">
+                    <material-input class="mt-3" v-if="prorrogaAutomatica" variant="static" size="sm" type="number"
+                                    id="periodoProrroga" label="Período de prórroga (en meses)"
+                                    v-model="periodoProrroga"></material-input>
+                  </div>
+                </div>
               </div>
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula6" class="card-title text-center">Clausula 6 MULTA EN CASO DE MORA:</h5>
@@ -344,18 +430,36 @@ export default {
                   </div>
                 </div>
               </div>
+
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula7" class="card-title text-center">Clausula 7 VISITAS AL INMUEBLE:</h5>
                   <div class="mb-3 mt-3">
                     <p class="text-justify">
-                      En el último mes de vigencia del contrato, la arrendataria se obliga a dar las facilidades
-                      necesarias al arrendador o quien lo represente para mostrar la propiedad 1 vez por semana, por
-                      un
-                      máximo de 40 minutos cada vez, en horarios y días a convenir.</p>
+                      <template v-if="visitasPermitidas">
+                        La arrendataria permitirá la visita al inmueble por parte del arrendador o su representante, con
+                        el fin de verificar el estado y uso del mismo. Estas visitas se realizarán en horarios
+                        razonables y previo aviso, respetando siempre la privacidad y tranquilidad de la arrendataria.
+                        El arrendador podrá visitar el inmueble hasta {{ numeroVisitas }} veces al mes.
+                      </template>
+                      <template v-else>
+                        No se permitirán visitas al inmueble por parte del arrendador o su representante, salvo en casos
+                        de emergencia o reparaciones necesarias.
+                      </template>
+                    </p>
                   </div>
                 </div>
+                <div class="col-3 mt-3">
+                  <material-switch id="visitasPermitidas"
+                                   v-model="visitasPermitidas" name="uwu ">¿El propietario desea visitar el inmueble?</material-switch>
+                  <material-input v-if="visitasPermitidas" id="numeroVisitas" type="number" label="Número de visitas al mes" size="sm" variant="static"
+                                  v-model="numeroVisitas"></material-input>
+                  <!--                    <material-switch v-if="visitasPermitidas" id="visitasAceptadas" label="¿El arrendatario acepta las visitas?" v-model="visitasAceptadas"></material-switch>-->
+                </div>
               </div>
+
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula8" class="card-title text-center">Clausula 8 TERMINO ANTICIPADO:</h5>
@@ -386,6 +490,7 @@ export default {
                   </div>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula9" class="card-title text-center">Clausula 9 MEJORAS:</h5>
@@ -401,6 +506,7 @@ export default {
                   </div>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula10" class="card-title text-center">Clausula 10 MANTENCION DEL INMUEBLE:</h5>
@@ -423,6 +529,7 @@ export default {
                   </div>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula11" class="card-title text-center">Clausula 11 ROBOS Y PERJUICIOS:</h5>
@@ -437,6 +544,7 @@ export default {
                   </div>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula12" class="card-title text-center">Clausula 12 GARANTIA DE ARRIENDO:</h5>
@@ -472,6 +580,7 @@ export default {
                   </div>
                 </div>
               </div>
+
               <div class="row">
                 <div class="col-9">
                   <h5 id="Clausula13" class="card-title text-center">Clausula 13 ENTREGA Y RESTITUCION DEL
