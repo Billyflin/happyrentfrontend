@@ -23,6 +23,7 @@
             @update:direccion="perfil.direccion = $event;console.log(this.perfil)"
             @update:empresa="perfil = $event;console.log($event);console.log(this.perfil)"
             @update:representante="perfil.representante = $event;console.log($event);console.log(this.perfil)"
+            @update:banco="perfil.banco = $event;console.log($event);console.log(this.perfil)"
             @next:step="nextStep" :perfil="perfil"
           />
         </div>

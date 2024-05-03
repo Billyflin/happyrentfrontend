@@ -18,11 +18,11 @@
           <material-input id="email" variant="dynamic" label="Email" is-required type="text" v-model="bancario.email" />
         </div>
         <div class="col-4 mb-4">
-          <material-choices id="banco" name="banco" label="Banco" :options="bancos" v-model="bancario.banco" />
+          <material-choices id="banco" name="banco" label="Banco" :options="bancos" v-model:text-choice="bancario.banco" />
         </div>
         <div class="col-4 mb-4">
           <material-choices id="tipoCuenta" name="tipoCuenta" label="Tipo de cuenta" :options="cuentas"
-                            v-model="bancario.cuenta" />
+                            v-model:text-choice="bancario.cuenta" />
         </div>
       </div>
       <div class="mt-4 button-row d-flex">
