@@ -6,44 +6,67 @@
         <span class="material-symbols-outlined mx-1"> arrow_back </span> Volver
       </router-link>
       <div class="col-lg-12 mt-lg-0 mt-4">
-        <formulario-propiedad-contrato />
         <div class="row  mt-4">
-          <div class="col-7" id="SeleccionArrendatario">
+          <formulario-propiedad-contrato />
+        </div>
 
+        <div class="col-12 mt-4"  v-if="store2.contratoError">
+          <div class="alert alert-danger text-light text-center">{{ store2.contratoError }}</div>
+        </div>
+        <div class="row  mt-4">
+          <div :class="codeudor ? 'col-6' : 'col-10 col-xl-11 col-lg-11 flex-grow'" id="SeleccionArrendatario">
             <seleccionar-arrendatario />
           </div>
-          <div class="col">
-            <reajuste-contrato />
+          <div v-if="codeudor" class="col-6">
+            <seleccionar-codeudor  v-model="codeudor"/>
+          </div>
+          <div v-else class="col">
+              <material-button variant="success" size="lg" @click="codeudor = true">Agregar Codeudor</material-button>
 
           </div>
         </div>
-
-        <!--        <acuerdos-contrato />-->
-
-        <!--        <solicitar-datos-contrato />-->
-
-        <!--        <arrendador-contrato />-->
-        <material-button variant="success" size="lg" class="mt-4 mb-6" full-width @click="aer">Enviar</material-button>
+        <div class="row mt-4">
+          <div class="col">
+            <reajuste-contrato />
+          </div>
+        </div>
       </div>
+      <material-button variant="success" size="lg" class="mt-4 mb-6" full-width @click="aer">Enviar</material-button>
     </div>
   </div>
 </template>
 
 <script setup>
-import { useAppStore } from '@/store/index.js'
-import { onMounted, onUnmounted } from 'vue'
+import { useAppStore, useAuthStore } from '@/store/index.js'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
 import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
 import FormularioPropiedadContrato from '@/views/Contrato/components/FormularioPropiedadContrato.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
 import SeleccionarArrendatario from '@/views/Contrato/components/SeleccionarArrendatario.vue'
+import SeleccionarCodeudor from '@/views/Contrato/components/SeleccionarCodeudor.vue'
 import router from '@/router/index.js'
 
 const store = useAppStore()
+const store2 = useAuthStore()
 const { toggleEveryDisplay, toggleHideConfig } = store
+
+const codeudor = ref(false)
+
 
 const aer = () => {
   router.push('/clausulasNuevoContrato')
 }
+watch(() => [store2.codeudor?.id, store2.arrendatario?.id, store2.propiedad?.propietario.id], ([codeudorId, arrendatarioId, propietarioId]) => {
+  if (codeudorId === arrendatarioId) {
+    store2.contratoError = 'El codeudor no puede ser el mismo que el arrendatario';
+  } else if (codeudorId === propietarioId) {
+    store2.contratoError = 'El codeudor no puede ser el mismo que el propietario';
+  } else if (arrendatarioId === propietarioId) {
+    store2.contratoError = 'El arrendatario no puede ser el mismo que el propietario';
+  } else {
+    store2.contratoError = '';
+  }
+}, { deep: true })
 
 onMounted(() => {
   toggleEveryDisplay()

@@ -1,6 +1,6 @@
 <script>
 import { onMounted, onUnmounted } from 'vue'
-import { useAppStore, useAuthStore } from '@/store/index.js'
+import { useAppStore } from '@/store/index.js'
 import NavPill from '@/views/components/NavPill/NavPill.vue'
 import SideNav from '@/views/Contrato/components/SideNav.vue'
 

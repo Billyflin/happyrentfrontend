@@ -4,34 +4,29 @@ import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
 import { useAuthStore } from '@/store/index.js'
-import { onMounted, ref } from 'vue'
+import { onMounted, onUnmounted, ref, watch } from 'vue'
+import MaterialButton from '@/components/MaterialButton.vue'
 
 export default {
-  name: 'SeleccionarArrendatario',
+  name: 'SeleccionarCodeudor',
   components: {
+    MaterialButton,
     MaterialSwitch,
     MaterialInput,
     MaterialChoices,
     LocalidadForm
   },
-  props: {
-    modelValue: {
-      type: Boolean,
-      default: false
-    }
-  },
   data() {
     return {
-      propietario_existente: null,
-      error: null
+      propietario_existente: null
     }
   },
   watch: {
     propietario_existente: {
       handler: function(val) {
         if (val !== undefined) {
-        const store = useAuthStore()
-            store.arrendatario = val.value
+          const store = useAuthStore()
+          store.codeudor = val.value
         }
       },
       deep: true
@@ -40,6 +35,11 @@ export default {
   setup() {
     const store = useAuthStore()
     let opcionsPersonas = ref([])
+
+    watch(() => store.arrendatario, (newValue) => {
+      console.log(newValue, 'desde pinia')
+    }, { deep: true })
+
 
     const fetchPersonas = async () => {
       await store.getPersonas()
@@ -61,6 +61,9 @@ export default {
     }
 
     onMounted(fetchPersonas)
+    onUnmounted(() => {
+      store.codeudor = null
+    })
 
     return { store, opcionsPersonas }
   }
@@ -69,16 +72,21 @@ export default {
 
 <template>
   <div class="card">
-    <div class="card-header">
-
-      <h5>Seleccionar Arrendatario</h5>
-      <p class="mx-2 mt-4"> Acá puedes seleccionar de los arrendatarios previamente registrados, en caso de no tener
-        registrado a el arrendatario debes ir a la
-        pestaña
-        <router-link class="text-bold" to="/Personas">Personas</router-link>
-        para completar el registro.
-      </p>
+    <div class="card-header d-flex justify-content-between align-items-center">
+      <div>
+        <h5>Seleccionar Codeudor o Aval</h5>
+        <p class="mx-2 mt-4"> Acá puedes seleccionar al codeudor previamente registrados, en caso de no tener
+          registrado puedes agregar uno termporal o agregar uno nuevo en la pestaña
+          <strong class="text-primary">Personas</strong>.
+        </p>
+      </div>
+      <material-button color="danger" size="sm" @click="store.codeudor = null;this.$emit('update:modelValue',false)">
+        Sin Codeudor
+      </material-button>
     </div>
+
+
+
     <div class="card-body pt-0">
       <div class="row mx-4">
         <div class="col-12  mb-4">
@@ -90,7 +98,8 @@ export default {
         </div>
 
       </div>
-      <div class="mx-4 col " v-if="propietario_existente && !store.contratoError">
+<!--      <span v-if="error" class="text-danger">{{ error }}</span>-->
+      <div class="mx-4 col " v-if="propietario_existente">
 
 
         <div class=" col " v-if="propietario_existente.value.type === 'persona'">
