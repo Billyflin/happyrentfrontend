@@ -21,7 +21,7 @@
             <seleccionar-codeudor  v-model="codeudor"/>
           </div>
           <div v-else class="col">
-              <material-button variant="success" size="lg" @click="codeudor = true">Agregar Codeudor</material-button>
+              <material-button variant="success" size="md" @click="codeudor = true">Agregar Codeudor</material-button>
 
           </div>
         </div>

@@ -62,7 +62,6 @@ export default {
 
     onMounted(fetchPersonas)
     onUnmounted(() => {
-      store.codeudor = null
     })
 
     return { store, opcionsPersonas }
@@ -80,7 +79,7 @@ export default {
           <strong class="text-primary">Personas</strong>.
         </p>
       </div>
-      <material-button color="danger" size="sm" @click="store.codeudor = null;this.$emit('update:modelValue',false)">
+      <material-button class="col-2" color="danger" size="md" @click="store.codeudor = null;this.$emit('update:modelValue',false)">
         Sin Codeudor
       </material-button>
     </div>

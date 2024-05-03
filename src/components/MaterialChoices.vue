@@ -66,7 +66,7 @@ export default {
       default: true
     },
     textChoice: {
-      type: String,
+      type: [String, []],
       default: ''
     },
     valueChoice: {
