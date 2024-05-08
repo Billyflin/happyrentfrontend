@@ -11,6 +11,7 @@ let myDropzone = null
 
 const tiposPropiedad = {
   casa: {
+    rol:null,
     numeroDePisos: null,
     habitaciones: null,
     banios: null,
@@ -23,6 +24,7 @@ const tiposPropiedad = {
     antiguedad: null
   },
   terreno: {
+    rol:null,
     area: null,
     tipoTerreno: null,
     usoSuelo: null,
@@ -32,6 +34,7 @@ const tiposPropiedad = {
     frente: null
   },
   departamento: {
+    rol:null,
     type: 'departamento',
     piso: null,
     banios: null,
@@ -42,24 +45,28 @@ const tiposPropiedad = {
     descripcion: null
   },
   bodega: {
+    rol:null,
     type: 'bodega',
     piso: null,
     numero: null,
     descripcion: null
   },
   estacionamiento: {
+    rol:null,
     type: 'estacionamiento',
     piso: null,
     numero: null,
     descripcion: null
   },
   local: {
+    rol:null,
     type: 'local',
     piso: null,
     numero: null,
     descripcion: null
   },
   oficina: {
+    rol:null,
     type: 'oficina',
     piso: null,
     banios: null,
@@ -91,6 +98,7 @@ const propiedad = ref({
     pais: '',
     codigoPostal: ''
   },
+  rol: '',
   propietario: {
     id: '',
     type: ''
@@ -232,6 +240,17 @@ onMounted(() => {
             <div class="col-3"></div>
             <div class="col-3">
               <material-input
+                id="rol"
+                type="text"
+                is-required
+                variant="static"
+                label="Rol"
+                placeholder="1231512"
+                v-model="propiedad.rol"
+              />
+            </div>
+            <div class="col-3">
+              <material-input
                 id="numPisos"
                 type="number"
                 is-required
@@ -319,6 +338,17 @@ onMounted(() => {
           <div class="row" v-if="propiedad.type === 'terreno'">
             <div class="col-3">
               <material-input
+                id="rol"
+                type="text"
+                is-required
+                variant="static"
+                label="Rol"
+                placeholder="1231512"
+                v-model="propiedad.rol"
+              />
+            </div>
+            <div class="col-3">
+              <material-input
                 id="area"
                 type="number"
                 is-required
@@ -400,6 +430,17 @@ onMounted(() => {
           <div class="row" v-if="propiedad.type==='departamento'">
             <div class="col-3">
               <material-input
+                id="rol"
+                type="text"
+                is-required
+                variant="static"
+                label="Rol"
+                placeholder="1231512"
+                v-model="propiedad.rol"
+              />
+            </div>
+            <div class="col-3">
+              <material-input
                 id="numPisos"
                 type="number"
                 is-required
@@ -479,6 +520,17 @@ onMounted(() => {
           <div class="row" v-if="propiedad.type === 'bodega'">
             <div class="col-3">
               <material-input
+                id="rol"
+                type="text"
+                is-required
+                variant="static"
+                label="Rol"
+                placeholder="1231512"
+                v-model="propiedad.rol"
+              />
+            </div>
+            <div class="col-3">
+              <material-input
                 id="numPisos"
                 type="number"
                 is-required
@@ -514,6 +566,17 @@ onMounted(() => {
             </div>
           </div>
           <div class="row" v-if="propiedad.type==='oficina'">
+            <div class="col-3">
+              <material-input
+                id="rol"
+                type="text"
+                is-required
+                variant="static"
+                label="Rol"
+                placeholder="1231512"
+                v-model="propiedad.rol"
+              />
+            </div>
             <div class="col-3">
               <material-input
                 id="numPisos"
@@ -596,6 +659,17 @@ onMounted(() => {
           <div class="row" v-if="propiedad.type === 'local'">
             <div class="col-3">
               <material-input
+                id="rol"
+                type="text"
+                is-required
+                variant="static"
+                label="Rol"
+                placeholder="1231512"
+                v-model="propiedad.rol"
+              />
+            </div>
+            <div class="col-3">
+              <material-input
                 id="numPisos"
                 type="number"
                 is-required
@@ -631,6 +705,17 @@ onMounted(() => {
           <div class="row" v-if="propiedad.type === 'estacionamiento'">
             <div class="col-3">
               <material-input
+                id="rol"
+                type="text"
+                is-required
+                variant="static"
+                label="Rol"
+                placeholder="1231512"
+                v-model="propiedad.rol"
+              />
+            </div>
+            <div class="col-3">
+              <material-input
                 id="numPisos"
                 type="number"
                 is-required
@@ -640,7 +725,7 @@ onMounted(() => {
                 v-model="propiedad.piso"
               ></material-input>
             </div>
-            <div class="col-3">
+            <div class="col-4">
               <material-input
                 id="numEstacionamientos"
                 type="number"

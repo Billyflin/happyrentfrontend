@@ -39,6 +39,9 @@ const formatDate = (date) => {
 
           <div v-if="store.propiedad.type === 'departamento'">
             <p class="mb-0">
+              <b> Rol:</b>{{ store.propiedad.rol }}
+            </p>
+            <p class="mb-0">
               <strong> Piso: </strong>
               {{ store.propiedad.piso }}
             </p>
@@ -62,6 +65,9 @@ const formatDate = (date) => {
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'casa'">
+            <p class="mb-0">
+              <b> Rol:</b>{{ store.propiedad.rol }}
+            </p>
             <p class="mb-0">
               <b>Piscina</b>
               {{store.propiedad.piscina}}
@@ -99,6 +105,9 @@ const formatDate = (date) => {
           </div>
           <div v-else-if="store.propiedad.type === 'local'">
             <p class="mb-0">
+              <b> Rol:</b>{{ store.propiedad.rol }}
+            </p>
+            <p class="mb-0">
               <strong> Pisos: </strong>
               {{ store.propiedad.piso }}
             </p>
@@ -110,6 +119,9 @@ const formatDate = (date) => {
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'terreno'">
+            <p class="mb-0">
+              <b> Rol:</b>{{ store.propiedad.rol }}
+            </p>
             <p class="mb-0">
               <b> Area:</b>{{ store.propiedad.area}}
             </p>
@@ -134,6 +146,9 @@ const formatDate = (date) => {
           </div>
           <div v-else-if="store.propiedad.type === 'bodega'">
             <p class="mb-0">
+              <b> Rol:</b>{{ store.propiedad.rol }}
+            </p>
+            <p class="mb-0">
               <b> Numero de pisos:</b>{{ store.propiedad.numeroDePisos}}
             </p>
             <p class="mb-0">
@@ -144,6 +159,9 @@ const formatDate = (date) => {
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'oficina'">
+            <p class="mb-0">
+              <b> Rol:</b>{{ store.propiedad.rol }}
+            </p>
             <p class="mb-0">
               <b> Numero de pisos:</b>{{ store.propiedad.piso}}
             </p>
@@ -164,6 +182,9 @@ const formatDate = (date) => {
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'estacionamiento'">
+            <p class="mb-0">
+              <b> Rol:</b>{{ store.propiedad.rol }}
+            </p>
             <p class="mb-0">
               <b> Numero de pisos:</b>{{ store.propiedad.piso}}
             </p>
