@@ -113,8 +113,9 @@ export default {
               <div class="row">
                 <div class="col-9 mb-3">
                   <h1 class="text-center">Clausulas del contrato</h1>
-                  <material-badge class="badge badge-danger" > Esta es solo una vista preliminar.</material-badge>
-                  <p class="text-center">El documento final tendra una apariencia levemente diferente pero el contenido de las clausulas será exactamente el mismo.</p>
+                  <material-badge class="badge badge-danger"> Esta es solo una vista preliminar.</material-badge>
+                  <p class="text-center">El documento final tendra una apariencia levemente diferente pero el contenido
+                    de las clausulas será exactamente el mismo.</p>
                 </div>
               </div>
               <div class="row">
@@ -130,15 +131,17 @@ export default {
                         {{ capitalize(store2.propiedad.propietario.apellidoPaterno) }}
                         {{ capitalize(store2.propiedad.propietario.apellidoMaterno) }},
                         cédula nacional de identidad n° {{ store2.propiedad.propietario.rut }},
-                        {{ capitalize(store2.propiedad.propietario.nacionalidad) }},
+                        nacionalidad {{ capitalize(store2.propiedad.propietario.nacionalidad) }},
                         {{ capitalize(store2.propiedad.propietario.estadoCivil) }},
                         <template v-if="store2.propiedad.propietario.tratamiento==='Sr.'">domiciliado</template>
                         <template v-else>domiciliada</template>
                         en
                         {{ store2.propiedad.propietario.direccion.calle }},
                         {{ store2.propiedad.propietario.direccion.numero }},
-                        correo: {{ store2.propiedad.propietario.email }}, celular
-                        {{ store2.propiedad.propietario.telefono }}
+                        comuna de {{ store2.propiedad.propietario.direccion.ciudad }},
+                        {{ store2.propiedad.propietario.direccion.region }},
+                        celular {{ store2.propiedad.propietario.telefono }},
+                        correo: {{ store2.propiedad.propietario.email }}
                       </template>
                       <template v-else>
                         empresa <strong>{{ capitalize(store2.propiedad.propietario.nombre) }} </strong>,
@@ -156,21 +159,20 @@ export default {
                         {{ store2.propiedad.propietario.representante.direccion.numero }},
                         correo: {{ store2.propiedad.propietario.representante.email }}, celular
                         {{ store2.propiedad.propietario.representante.telefono }}
-                      </template>
-
-                      , en adelante la parte
+                      </template>, en adelante la parte
                       “propietaria” y <strong>ARRENDATARIO </strong>
                       <template v-if="store2.arrendatario.type === 'persona'">
                         {{ capitalize(store2.arrendatario.tratamiento) }}
                         {{ capitalize(store2.arrendatario.nombre) }}
                         {{ capitalize(store2.arrendatario.apellidoPaterno) }}
                         {{ capitalize(store2.arrendatario.apellidoMaterno) }} cédula de identidad
-                        n° {{ store2.arrendatario.rut }}, {{ capitalize(store2.arrendatario.nacionalidad) }},
+                        n° {{ store2.arrendatario.rut }},
+                        nacionalidad {{ capitalize(store2.arrendatario.nacionalidad) }},
                         {{ capitalize(store2.arrendatario.estadoCivil) }},
                         <template v-if="store2.arrendatario.tratamiento==='Sr.'">domiciliado</template>
                         <template v-else>domiciliada</template>
                         en {{ store2.arrendatario.direccion.calle }} {{ store2.arrendatario.direccion.numero }},
-                        comuna {{ store2.arrendatario.direccion.ciudad }},
+                        comuna de {{ store2.arrendatario.direccion.ciudad }},
                         {{ store2.arrendatario.direccion.region }}, celular {{ store2.arrendatario.telefono }},
                         email: {{ store2.arrendatario.email }},
 
@@ -452,8 +454,10 @@ export default {
                 </div>
                 <div class="col-3 mt-3">
                   <material-switch id="visitasPermitidas"
-                                   v-model="visitasPermitidas" name="uwu ">¿El propietario desea visitar el inmueble?</material-switch>
-                  <material-input v-if="visitasPermitidas" id="numeroVisitas" type="number" label="Número de visitas al mes" size="sm" variant="static"
+                                   v-model="visitasPermitidas" name="uwu ">¿El propietario desea visitar el inmueble?
+                  </material-switch>
+                  <material-input v-if="visitasPermitidas" id="numeroVisitas" type="number"
+                                  label="Número de visitas al mes" size="sm" variant="static"
                                   v-model="numeroVisitas"></material-input>
                   <!--                    <material-switch v-if="visitasPermitidas" id="visitasAceptadas" label="¿El arrendatario acepta las visitas?" v-model="visitasAceptadas"></material-switch>-->
                 </div>

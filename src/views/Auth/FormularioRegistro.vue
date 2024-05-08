@@ -1,6 +1,9 @@
 <template>
-  <multi-steps-form/>
+  <div class="full-screen">
+    <multi-steps-form/>
+  </div>
 </template>
+
 <script setup>
 import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
@@ -19,3 +22,10 @@ onUnmounted(() => {
   // toggleHideConfig()
 })
 </script>
+
+<style scoped>
+.full-screen {
+  width: 100vw;
+  height: 100vh;
+}
+</style>
