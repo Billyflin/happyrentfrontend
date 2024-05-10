@@ -45,5 +45,16 @@ export default defineConfig({
                 rewrite: (path) => path.replace(/^\/api/, '')
             },
         }
+    },
+    build: {
+        outDir: 'dist',
+        assetsDir: 'assets',
+        manifest: true,
+        rollupOptions: {
+            input: {
+                main: fileURLToPath(new URL('./index.html', import.meta.url)),
+                '404': fileURLToPath(new URL('./404.html', import.meta.url))
+            }
+        }
     }
 })
