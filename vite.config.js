@@ -1,6 +1,7 @@
 import {fileURLToPath, URL} from 'node:url'
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
+import * as fs from 'node:fs'
 
 export default defineConfig({
     plugins: [vue()],
@@ -10,6 +11,13 @@ export default defineConfig({
         }
     },
     server: {
+        host: '0.0.0.0',
+        port: '443',
+        https: {
+            key: fs.readFileSync('ssl-cert/key.pem'),
+            cert: fs.readFileSync('ssl-cert/cert.pem')
+        },
+
         proxy: {
             '/api/dolar': {
                 target: 'https://mindicador.cl/api/dolar',
