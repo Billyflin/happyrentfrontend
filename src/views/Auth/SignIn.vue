@@ -4,36 +4,35 @@
     :style="`background-image: url(${BackPerfilFoto}); background-size: contain; background-position: center; background-repeat: no-repeat;`"
   >
     <span class="mask bg-gradient-dark opacity-6"></span>
-
     <div class="container my-auto">
       <div class="row">
         <div class="col-lg-4 col-md-8 col-12 mx-auto">
           <div class="card z-index-0 fadeIn3 fadeInBottom">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-primary shadow-success border-radius-lg py-3 pe-1">
-                <div class="row mt-3 d-flex justify-content-center align-items-center">
-                  <img class="btn btn-link px-3" src="../../assets/LogoHapp.svg" alt="Logo" width="98"
-                       height="98" />
+                <div class="d-flex justify-content-center align-items-center">
+                  <div class="row mt-3">
+                    <img class="btn btn-link px-3" src="../../assets/LogoHapp.svg" alt="Logo" width="150" height="90"/>
+                  </div>
                 </div>
+
                 <!--                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0"></h4>-->
               </div>
             </div>
             <div class="card-body">
               <form role="form" class="text-start mt-3" @submit.prevent="loginHandler">
                 <div class="mb-3">
-                  <material-input v-model="username" id="username" type="text" label="Username" name="username" />
+                  <material-input v-model="username" id="username" type="text" label="Usuario o correo" name="username" />
                 </div>
                 <div class="mb-3">
-                  <material-input v-model="password" id="password" type="password" label="Password" name="password" />
+                  <material-input v-model="password" id="password" type="password" label="Contraseña" name="password" />
                 </div>
-                <material-switch v-model=rememberMe id="rememberMe" name="rememberMe">Remember me</material-switch>
+                <material-switch v-model=rememberMe  id="rememberMe" name="rememberMe" >Recuerdame</material-switch>
                 <div class="text-center">
-                  <material-button type="submit" class="my-4 mb-2" variant="gradient" color="primary" fullWidth>Sign
-                    in
-                  </material-button>
+                  <material-button type="submit" class="my-4 mb-2" variant="gradient" color="primary" fullWidth>Ingresar</material-button>
                 </div>
                 <p class="mt-4 text-xs text-center">
-                  <span class="text-danger">{{ auth.errMsg }}</span>
+                  <span class="text-danger">{{auth.errMsg}}</span>
                 </p>
                 <p class="mt-4 text-sm text-center">
                   No tienes una cuenta?
@@ -47,7 +46,7 @@
                   >Olvidaste tu contraseña?
                   </router-link
                   >
-                </p>
+                  </p>
               </form>
             </div>
           </div>
