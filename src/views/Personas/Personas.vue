@@ -24,6 +24,7 @@ onMounted(async () => {
           tu lista de personas.
         </p>
       </div>
+
     </div>
 
     <div class="row mb-6">

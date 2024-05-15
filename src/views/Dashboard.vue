@@ -2,7 +2,28 @@
   <div class="py-4 container-fluid">
     <div class="row mb-4">
       <div class="col-lg-12 position-relative z-index-2">
-        <div class="row mt-4">
+        <div class="row">
+          <mini-statistics-card v-if="DOLARData"
+            title="Dólar"
+            :data="DOLARData"
+            :icon="{ name: 'attach_money', color: 'text-white', background: 'success' }"
+          />
+          <mini-statistics-card v-if="UTMData"
+            title="UTM"
+            :data="UTMData"
+            :icon="{ name: 'attach_money', color: 'text-white', background: 'happLight' }"
+          />
+          <mini-statistics-card v-if="UFData"
+            title="UF"
+            :data="UFData"
+            :icon="{ name: 'attach_money', color: 'text-white', background: 'primary' }"/>
+          <mini-statistics-card v-if="IPCData"
+            title="IPC"
+            :data="IPCData"
+            :icon="{ name: 'attach_money', color: 'text-white', background: 'secondary' }"
+          />
+        </div>
+        <div class="row">
           <div class="col-lg-6 col-md-6 mt-6">
             <ChartHolderCard v-if="DOLARData"
                              title="Valor del Dólar"
@@ -48,24 +69,24 @@
                          :y-axis-max="Math.max(...IPCData.map(obs => parseFloat(obs.value)))" />
             </ChartHolderCard>
           </div>
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard
-              title="Website Views"
-              subtitle="Last Campaign Performance"
-              :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-              color="happLight"
-            >
-              <BarChart
-                :chart="{
-                              xAxislDatas: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],
-                              datasets: {
-                                label: 'Sales',
-                                data: [50, 20, 10, 22, 50, 10, 40],
-                              },
-                            }"
-              />
-            </ChartHolderCard>
-          </div>
+<!--          <div class="col-lg-6 col-md-6 mt-6">-->
+<!--            <ChartHolderCard-->
+<!--              title="Website Views"-->
+<!--              subtitle="Last Campaign Performance"-->
+<!--              :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"-->
+<!--              color="happLight"-->
+<!--            >-->
+<!--              <BarChart-->
+<!--                :chart="{-->
+<!--                              xAxislDatas: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],-->
+<!--                              datasets: {-->
+<!--                                label: 'Sales',-->
+<!--                                data: [50, 20, 10, 22, 50, 10, 40],-->
+<!--                              },-->
+<!--                            }"-->
+<!--              />-->
+<!--            </ChartHolderCard>-->
+<!--          </div>-->
         </div>
       </div>
     </div>
@@ -78,6 +99,7 @@ import axios from 'axios'
 import LineChart from '@/examples/Charts/LineChart.vue'
 import ChartHolderCard from '@/views/components/ChartHolderCard.vue'
 import BarChart from '@/examples/Charts/BarChart.vue'
+import MiniStatisticsCard from '@/views/components/MiniStatisticsCard/MiniStatisticsCard.vue'
 
 
 let UTMData = ref(null)
