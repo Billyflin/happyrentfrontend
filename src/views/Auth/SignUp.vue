@@ -51,6 +51,9 @@
                         >Términos y Condiciones</a
                         >
                       </material-checkbox>
+                      <div v-if="acceptVerification" class="row mb-3 mt-3">
+                        <span class="badge badge-danger">Acepta los términos y condiciones para continuar</span>
+                      </div>
                       <div class="text-center">
                         <material-button class="mt-4" variant="gradient" color="primary" fullWidth size="lg"
                         >Registrarse
@@ -100,6 +103,7 @@ const email = ref('')
 const password = ref('')
 const passwordConfirm = ref('')
 const passwordMismatch = ref(false)
+const acceptVerification = ref(false)
 const accept = ref(false)
 const err = ref('')
 
@@ -112,8 +116,10 @@ const submitForm = () => {
   }
   if (!accept.value) {
     console.log('Debes aceptar los términos y condiciones');
+    acceptVerification.value = true;
     return;
   }
+  acceptVerification.value = false;
   const user = {
     username: name.value,
     password: password.value,
