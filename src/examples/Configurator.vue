@@ -37,7 +37,7 @@
             id="btn-dark"
             ref="btnDark"
             class="px-3 mb-2 btn bg-gradient-dark"
-            :class="{active: sidebarType === 'bg-gradient-dark'}"
+            :class="{active: sidebarType === 'bg-gradient-dark', disabled: isBtnDisabled}"
             @click="sidebar('bg-gradient-dark');sidebarColor('primary')"
           >
             Dark
@@ -61,14 +61,15 @@
             White
           </button>
         </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+<!--        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>-->
 
         <!-- Navbar Fixed -->
         <hr class="horizontal dark my-3" />
         <div class="mt-2 d-flex">
           <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
+          <div class="form-check form-switch ps-0 ms-auto my-auto" >
             <input
+              :disabled="isBtnDisabled"
               class="form-check-input mt-1 ms-auto"
               type="checkbox"
               :checked="store.isDarkMode"

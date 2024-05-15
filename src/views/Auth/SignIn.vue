@@ -3,7 +3,7 @@
     class="page-header align-items-start min-vh-100 bg-gradient-secondary"
     :style="`background-image: url(${BackPerfilFoto}); background-size: contain; background-position: center; background-repeat: no-repeat;`"
   >
-    <span class="mask bg-gradient-dark opacity-6"></span>
+    <span class="mask bg-gradient-faded-dark-vertical opacity-6"></span>
     <div class="container my-auto">
       <div class="row">
         <div class="col-lg-4 col-md-8 col-12 mx-auto">

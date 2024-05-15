@@ -43,12 +43,16 @@
         <a href="javascript:;">{{ propiedad.direccion.calle + ' ' + propiedad.direccion.numero }}</a>
       </h5>
       <p class="mb-0">
-        {{ propiedad.propietario.nombre + ' ' + propiedad.propietario.apellidoPaterno + ' ' + propiedad.propietario.apellidoMaterno
+        {{
+          propiedad.propietario.type === 'persona'
+            ? propiedad.propietario.nombre + ' ' + propiedad.propietario.apellidoPaterno + ' ' + propiedad.propietario.apellidoMaterno
+            : propiedad.propietario.nombre
         }}
       </p>
-      <div class="d-flex justify-content-end mb-0 mt-0">
 
-        <span class="mb-0 mt-0 badge badge-success" v-if=" propiedad.type">{{ propiedad.type.toUpperCase() }}</span>
+      <div class="d-flex justify-content-end mb-0 mt-0">
+        <span class="mb-0 mt-0 badge badge-success" v-if=" propiedad.propietario.type ">{{ propiedad.propietario.type.toUpperCase() }}</span>
+        <span class="mb-0 mx-1 mt-0 badge badge-success" v-if=" propiedad.type">{{ propiedad.type.toUpperCase() }}</span>
       </div>
     </div>
     <hr class="dark horizontal my-0" />

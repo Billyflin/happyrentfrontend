@@ -50,6 +50,7 @@
       </li>
       <li class="nav-item">
         <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="Corredora"
+                          v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_CORREDOR')||authStore.isAdmin"
                           navText="Corredora">
           <template v-slot:icon>
            <span class="material-symbols-outlined opacity-10 fs-5">apartment</span>
