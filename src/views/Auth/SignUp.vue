@@ -66,7 +66,7 @@
                     <p class="mx-auto mb-4 text-sm">
                       Tienes una cuenta?
                       <router-link :to="{name: 'SignIn'}" class="text-primary text-gradient font-weight-bold"
-                      >Sign In
+                      >Iniciar Sesión
                       </router-link
                       >
                     </p>
@@ -156,13 +156,13 @@ watchEffect(() => {
 
 onBeforeMount(() => {
   toggleEveryDisplay()
-  toggleHideConfig()
+  // toggleHideConfig()
   body.classList.remove('bg-gray-100')
 })
 
 onBeforeUnmount(() => {
   toggleEveryDisplay()
-  toggleHideConfig()
+  // toggleHideConfig()
   body.classList.add('bg-gray-100')
 })
 </script>
