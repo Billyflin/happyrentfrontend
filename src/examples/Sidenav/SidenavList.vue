@@ -1,7 +1,7 @@
 <template>
   <div class="w-auto h-auto collapse navbar-collapse max-height-vh-100 h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav">
-      <li class="nav-item" v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_PROPIETARIO')||authStore.isAdmin">
+      <li class="nav-item" v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => (item.authority === 'ROLE_CORREDOR'|| 'ROLE_PROPIETARIO'))||authStore.isAdmin">
         <sidenav-collapse
           url="#"
           :aria-controls="''"
@@ -32,6 +32,7 @@
       </li>
       <li class="nav-item">
         <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="Solicitudes"
+                          v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_CORREDOR')||authStore.isAdmin"
                           navText="Solicitudes">
           <template v-slot:icon>
             <i class="material-icons-round opacity-10 fs-5">contact_page</i>

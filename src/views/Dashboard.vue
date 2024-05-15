@@ -122,10 +122,11 @@ async function fetchData(url, dataRef) {
 }
 
 onBeforeMount(async () => {
-  await fetchData('https://localhost:8443/utm', UTMData)
-  await fetchData('https://localhost:8443/dolar', DOLARData)
-  await fetchData('https://localhost:8443/uf', UFData)
-  await fetchData('https://localhost:8443/ipc', IPCData)
+
+  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/utm`, UTMData)
+  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/dolar`, DOLARData)
+  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/uf`, UFData)
+  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ipc`, IPCData)
 })
 function getMinutesSinceLastUpdate() {
   let now = new Date()
