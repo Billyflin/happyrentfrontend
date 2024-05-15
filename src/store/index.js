@@ -87,6 +87,7 @@ export const useAuthStore = defineStore('auth', {
           this.isLoggedIn = true
         })
         .catch((err) => {
+          console.log(err.response.status)
           switch (err.response.status) {
             case 400:
               this.errMsg = 'Invalid username or password'
@@ -94,11 +95,11 @@ export const useAuthStore = defineStore('auth', {
             case 401:
               this.errMsg = 'Invalid username or password'
               break
+            case 403:
+              this.errMsg = 'Contraseña o usuario incorrecto'
+              break
             case 404:
               this.errMsg = 'No account found with that username'
-              break
-            default:
-              this.errMsg = 'An error occurred'
               break
           }
         })
