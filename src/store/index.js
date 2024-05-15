@@ -58,7 +58,7 @@ export const useAuthStore = defineStore('auth', {
   state: () => ({
     auth: null,
     isLoggedIn: false,
-    errMsg: '',
+    errMsg: null,
     userInfo: { 'authorities': [] },
     rememberMe: false,
     isAdmin: false,
@@ -98,9 +98,6 @@ export const useAuthStore = defineStore('auth', {
             case 403:
               this.errMsg = 'Contraseña o usuario incorrecto'
               break
-            case 404:
-              this.errMsg = 'No account found with that username'
-              break
           }
         })
     }, async getCurrentUser() {
@@ -123,9 +120,11 @@ export const useAuthStore = defineStore('auth', {
       this.isLoggedIn = false
       this.userInfo = null
       this.rememberMe = false
+      this.errMsg = null
       this.isAdmin = false
       delete axios.defaults.headers.common['Authorization']
       this.propiedades = []
+      this.propiedad = []
       this.personas = []
       router.push({ name: 'SignIn' })
 
