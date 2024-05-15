@@ -1,7 +1,8 @@
 <template>
   <div class="w-auto h-auto collapse navbar-collapse max-height-vh-100 h-100" id="sidenav-collapse-main">
     <ul class="navbar-nav">
-      <li class="nav-item" v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => (item.authority === 'ROLE_CORREDOR'|| 'ROLE_PROPIETARIO'))||authStore.isAdmin">
+      <li class="nav-item"
+          v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => (item.authority === 'ROLE_CORREDOR'|| 'ROLE_PROPIETARIO'))||authStore.isAdmin">
         <sidenav-collapse
           url="#"
           :aria-controls="''"
@@ -33,9 +34,9 @@
       <li class="nav-item">
         <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="Solicitudes"
                           v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_CORREDOR')||authStore.isAdmin"
-                          navText="Solicitudes">
+                          navText="Solicitar Datos">
           <template v-slot:icon>
-            <i class="material-icons-round opacity-10 fs-5">contact_page</i>
+            <i class="material-icons-round opacity-10 fs-5">forward_to_inbox</i>
           </template>
         </sidenav-collapse>
 
@@ -53,38 +54,38 @@
                           v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_CORREDOR')||authStore.isAdmin"
                           navText="Corredora">
           <template v-slot:icon>
-           <span class="material-symbols-outlined opacity-10 fs-5">apartment</span>
+            <span class="material-symbols-outlined opacity-10 fs-5">apartment</span>
           </template>
         </sidenav-collapse>
       </li>
-<!--      <li class="nav-item">-->
-<!--        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="principalPlanes"-->
-<!--                          navText="LandingPage">-->
-<!--          <template v-slot:icon>-->
-<!--            <i class="material-icons-round opacity-10 fs-5">house</i>-->
-<!--          </template>-->
-<!--        </sidenav-collapse>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="formularioRegistro"-->
-<!--                          navText="FirstLogin">-->
-<!--          <template v-slot:icon>-->
-<!--            <i class="material-icons-round opacity-10 fs-5">house</i>-->
-<!--          </template>-->
-<!--        </sidenav-collapse>-->
-<!--      </li>-->
-<!--      <li class="nav-item">-->
-<!--        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="formularioInvitado"-->
-<!--                          navText="Formulario invitado">-->
-<!--          <template v-slot:icon>-->
-<!--            <i class="material-icons-round opacity-10 fs-5">house</i>-->
-<!--          </template>-->
-<!--        </sidenav-collapse>-->
-<!--      </li>-->
+      <!--      <li class="nav-item">-->
+      <!--        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="principalPlanes"-->
+      <!--                          navText="LandingPage">-->
+      <!--          <template v-slot:icon>-->
+      <!--            <i class="material-icons-round opacity-10 fs-5">house</i>-->
+      <!--          </template>-->
+      <!--        </sidenav-collapse>-->
+      <!--      </li>-->
+      <!--      <li class="nav-item">-->
+      <!--        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="formularioRegistro"-->
+      <!--                          navText="FirstLogin">-->
+      <!--          <template v-slot:icon>-->
+      <!--            <i class="material-icons-round opacity-10 fs-5">house</i>-->
+      <!--          </template>-->
+      <!--        </sidenav-collapse>-->
+      <!--      </li>-->
+      <!--      <li class="nav-item">-->
+      <!--        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="formularioInvitado"-->
+      <!--                          navText="Formulario invitado">-->
+      <!--          <template v-slot:icon>-->
+      <!--            <i class="material-icons-round opacity-10 fs-5">house</i>-->
+      <!--          </template>-->
+      <!--        </sidenav-collapse>-->
+      <!--      </li>-->
 
 
       <li class="mt-3 nav-item">
-        <h6 class="text-xs ps-4 text-uppercase font-weight-bolder text-white ms-2">ACCOUNT PAGES</h6>
+        <h6 class="text-xs ps-4 text-uppercase font-weight-bolder text-white ms-2">CUENTA</h6>
       </li>
       <li class="nav-item" v-if="authStore.isLoggedIn">
         <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="profile" navText="Perfil">
@@ -95,10 +96,11 @@
       </li>
 
       <li class="nav-item">
-        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="" navText="Log out"
+        <sidenav-collapse url="#" :aria-controls="''" v-bind:collapse="false" collapseRef="" navText="Cerrar Sesión"
+                          v-if="authStore.isLoggedIn"
                           @click="authStore.userSignOut()">
           <template v-slot:icon>
-            <i class="material-symbols-outlined opacity-10 fs-5">logout</i>
+            <i class="material-symbols-outlined opacity-10 fs-5" style="color: #f44335 !important;">logout</i>
           </template>
         </sidenav-collapse>
       </li>

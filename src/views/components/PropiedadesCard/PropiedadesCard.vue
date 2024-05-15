@@ -50,7 +50,7 @@
         }}
       </p>
 
-      <div class="d-flex justify-content-end mb-0 mt-0">
+      <div class="d-flex justify-content-end mb-0 mt-1">
         <span class="mb-0 mt-0 badge badge-success" v-if=" propiedad.propietario.type ">{{ propiedad.propietario.type.toUpperCase() }}</span>
         <span class="mb-0 mx-1 mt-0 badge badge-success" v-if=" propiedad.type">{{ propiedad.type.toUpperCase() }}</span>
       </div>

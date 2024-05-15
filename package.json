@@ -19,6 +19,7 @@
     "@vuelidate/validators": "^2.0.4",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.2",
     "choices.js": "^10.2.0",
     "dropzone": "6.0.0-beta.2",
     "echarts": "^5.5.0",

@@ -9,10 +9,10 @@
     v-bind="$attrs"
     @click="isExpanded = !isExpanded"
   >
-    <div class="text-center d-flex align-items-center justify-content-center me-2">
-      <slot name="icon"></slot>
+    <div  class="text-center d-flex align-items-center justify-content-center me-2">
+      <slot  name="icon"></slot>
     </div>
-    <span class="nav-link-text ms-1">{{ navText }}</span>
+    <span  :style="textColor" class="nav-link-text ms-1" >{{ navText }}</span>
   </router-link>
   <div :class="isExpanded ? 'collapse show' : 'collapse'">
     <slot name="list"></slot>
@@ -29,7 +29,7 @@ const store = useAppStore()
 
 let isExpanded = ref(false)
 
-defineProps({
+const props = defineProps({
   collapseRef: {
     type: String,
     required: true,
@@ -48,6 +48,9 @@ function getRoute() {
   const routeArr = route.path.split('/')
   return routeArr[1]
 }
+const textColor = computed(() => {
+  return props.navText === 'Cerrar Sesión' ? 'color: #f44335 !important;' : ''
+})
 
 const color = computed(() => {
   return store.color

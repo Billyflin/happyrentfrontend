@@ -3,34 +3,48 @@ import TablaPersonas from '@/views/Personas/components/TablaPersonas.vue'
 
 import { onMounted, ref } from 'vue'
 import axios from 'axios'
+import DefaultStatisticsCard from '@/examples/Cards/DefaultStatisticsCard.vue'
 
+const perfiles = ref(null)
 const personas = ref(null)
+const empresas = ref(null)
 
 onMounted(async () => {
   const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`)
-  personas.value = response.data
-  console.log(personas.value)
-
+  perfiles.value = response.data
+  personas.value = response.data.filter(persona => persona.type === 'persona')
+  empresas.value = response.data.filter(persona => persona.type === 'empresa')
 })
 </script>
 
 <template>
   <div class="container-fluid mt-4">
-    <div class="row mb-2">
-      <div class="col-lg-9">
+    <div class="row mb-4">
+      <div class="col-lg-8">
         <h4>Acá puedes gestionar las personas, puedes utilizarlos para crear contratos</h4>
         <p>
           Puedes agregarla manualmente o solicitarle al futuro arrendatario que complete un formulario para agregarla a
           tu lista de personas.
         </p>
       </div>
-
-    </div>
+          <default-statistics-card
+            title="Total Personas"
+            description="Total de personas"
+            :count="personas ? personas.length : 0"
+            icon="people"
+          />
+          <default-statistics-card
+            title="Total Empresas"
+            description="Total de empresas"
+            icon="business"
+            :count="empresas ? empresas.length : 0"
+          />
+      </div>
 
     <div class="row mb-6">
-      <tabla-personas v-if="personas"
+      <tabla-personas v-if="perfiles"
                       :headers="['Nombre', 'Rut', 'Email','Direccion', 'Tipo Entidad', 'Accion']"
-                      :lists="personas.map(persona => ({
+                      :lists="perfiles.map(persona => ({
     title: persona.type === 'persona' ? `${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno}` : persona.nombre,
     direccion: persona.direccion.ciudad,
     region: persona.direccion.region + ', ' + persona.direccion.pais,

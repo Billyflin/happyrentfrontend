@@ -10,7 +10,7 @@
           <formulario-propiedad-contrato />
         </div>
 
-        <div class="col-12 mt-4"  v-if="store2.contratoError">
+        <div class="col-12 mt-4" v-if="store2.contratoError">
           <div class="alert alert-danger text-light text-center">{{ store2.contratoError }}</div>
         </div>
         <div class="row  mt-4">
@@ -18,10 +18,10 @@
             <seleccionar-arrendatario />
           </div>
           <div v-if="codeudor" class="col-6">
-            <seleccionar-codeudor  v-model="codeudor"/>
+            <seleccionar-codeudor v-model="codeudor" />
           </div>
           <div v-else class="col">
-              <material-button variant="success" size="md" @click="codeudor = true">Agregar Codeudor</material-button>
+            <material-button variant="success" size="md" @click="codeudor = true">Agregar Codeudor</material-button>
 
           </div>
         </div>
@@ -31,7 +31,10 @@
           </div>
         </div>
       </div>
-      <material-button variant="success" size="lg" class="mt-4 mb-6" full-width @click="aer">Enviar</material-button>
+      <router-link to="/clausulasNuevoContrato">
+        <material-button variant="success" size="lg" class="mt-4 mb-6" full-width>Crear Contrato</material-button>
+
+      </router-link>
     </div>
   </div>
 </template>
@@ -58,13 +61,13 @@ const aer = () => {
 }
 watch(() => [store2.codeudor?.id, store2.arrendatario?.id, store2.propiedad?.propietario.id], ([codeudorId, arrendatarioId, propietarioId]) => {
   if (codeudorId === arrendatarioId) {
-    store2.contratoError = 'El codeudor no puede ser el mismo que el arrendatario';
+    store2.contratoError = 'El codeudor no puede ser el mismo que el arrendatario'
   } else if (codeudorId === propietarioId) {
-    store2.contratoError = 'El codeudor no puede ser el mismo que el propietario';
+    store2.contratoError = 'El codeudor no puede ser el mismo que el propietario'
   } else if (arrendatarioId === propietarioId) {
-    store2.contratoError = 'El arrendatario no puede ser el mismo que el propietario';
+    store2.contratoError = 'El arrendatario no puede ser el mismo que el propietario'
   } else {
-    store2.contratoError = '';
+    store2.contratoError = ''
   }
 }, { deep: true })
 

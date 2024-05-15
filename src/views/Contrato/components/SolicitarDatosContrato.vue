@@ -3,9 +3,14 @@
 import MaterialButton from '@/components/MaterialButton.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import { ref } from 'vue'
+import MaterialSwitch from '@/components/MaterialSwitch.vue'
 
 const isEmailDisabled = ref(false)
 const isConfirmEmailDisabled = ref(false)
+const pedirDocumentos = ref(false)
+const carnet = ref(false)
+const contrato = ref(false)
+const boletas = ref(false)
 
 function blockearInputs() {
   isEmailDisabled.value = true
@@ -24,30 +29,48 @@ function blockearInputs() {
       </p>
     </div>
     <div class="card-body pt-0">
-      <div class="row">
+      <material-switch id="pedirDocumentos" name="documentos" v-model:checked="pedirDocumentos">Pedir documentos?
+      </material-switch>
+      <div class="row mt-4" v-if="pedirDocumentos">
+        <p> Que documentos quieres pedir?</p>
         <div class="col-4">
+          <h6>Carnet de identidad</h6>
+          <material-switch id="carnet" name="carnet" v-model:checked="carnet">Pedir Carnet</material-switch>
+        </div>
+        <div class="col-4">
+          <h6>Contrato de trabajo</h6>
+          <material-switch id="contrato" name="contrato"  v-model:checked="contrato">Pedir Contrato</material-switch>
+        </div>
+        <div class="col-4">
+          <h6>Liquidaciones de sueldo</h6>
+          <material-switch id="boletas" name="boletas"  v-model:checked="boletas">Pedir Boletas</material-switch>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-4">
+          <h6 class="mb-0">Email</h6>
           <material-input
             id="email"
             type="email"
             variant="static"
-            label="Email"
             placeholder="Email"
             :disabled="isEmailDisabled"
           />
         </div>
         <div class="col-4">
+          <h6 class="mb-0">Confirmar Email</h6>
           <material-input
             id="confirmEmail"
             type="email"
             variant="static"
-            label="Confimar Email"
             placeholder="Confirma Email"
             :disabled="isConfirmEmailDisabled"
           />
         </div>
         <div class="col-4">
           <!--          <MaterialButton class="mt-4" variant="gradient" color="primary" fullWidth @click="blockearInputs">Enviar</MaterialButton>-->
-          <MaterialButton class="mt-4" variant="gradient" color="happDark" fullWidth @click="blockearInputs">Enviar</MaterialButton>
+          <MaterialButton class="mt-4" variant="gradient" color="happDark" fullWidth @click="blockearInputs">Enviar
+          </MaterialButton>
         </div>
       </div>
       <div v-if="isEmailDisabled" class="row mt-3">
