@@ -113,6 +113,7 @@ export const useAuthStore = defineStore('auth', {
             console.log(this.isAdmin)
           })
           .catch((err) => {
+            this.userSignOut()
             console.error(err)
           })
       }

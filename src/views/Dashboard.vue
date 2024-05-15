@@ -1,8 +1,14 @@
 <template>
   <div class="py-4 container-fluid">
     <div class="row mb-4">
+
       <div class="col-lg-12 position-relative z-index-2">
-        <div class="row">
+        <div v-if="isLoading" class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+          <div class="spinner-border text-primary" style="width:4rem; height: 4rem;" role="status">
+            <span class="visually-hidden">Cargando...</span>
+          </div>
+          </div>
+        <div v-else class="row">
           <mini-statistics-card v-if="DOLARData"
             title="Dólar"
             :data="DOLARData"
@@ -69,24 +75,6 @@
                          :y-axis-max="Math.max(...IPCData.map(obs => parseFloat(obs.value)))" />
             </ChartHolderCard>
           </div>
-<!--          <div class="col-lg-6 col-md-6 mt-6">-->
-<!--            <ChartHolderCard-->
-<!--              title="Website Views"-->
-<!--              subtitle="Last Campaign Performance"-->
-<!--              :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"-->
-<!--              color="happLight"-->
-<!--            >-->
-<!--              <BarChart-->
-<!--                :chart="{-->
-<!--                              xAxislDatas: ['L', 'M', 'M', 'J', 'V', 'S', 'D'],-->
-<!--                              datasets: {-->
-<!--                                label: 'Sales',-->
-<!--                                data: [50, 20, 10, 22, 50, 10, 40],-->
-<!--                              },-->
-<!--                            }"-->
-<!--              />-->
-<!--            </ChartHolderCard>-->
-<!--          </div>-->
         </div>
       </div>
     </div>
@@ -98,7 +86,6 @@ import { onBeforeMount, ref } from 'vue'
 import axios from 'axios'
 import LineChart from '@/examples/Charts/LineChart.vue'
 import ChartHolderCard from '@/views/components/ChartHolderCard.vue'
-import BarChart from '@/examples/Charts/BarChart.vue'
 import MiniStatisticsCard from '@/views/components/MiniStatisticsCard/MiniStatisticsCard.vue'
 
 
@@ -107,6 +94,7 @@ let DOLARData = ref(null)
 let UFData = ref(null)
 let IPCData = ref(null)
 let lastUpdated = new Date()
+let isLoading = ref(true)
 
 
 async function fetchData(url, dataRef) {
@@ -127,6 +115,7 @@ onBeforeMount(async () => {
   await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/dolar`, DOLARData)
   await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/uf`, UFData)
   await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ipc`, IPCData)
+  isLoading.value = false
 })
 function getMinutesSinceLastUpdate() {
   let now = new Date()
