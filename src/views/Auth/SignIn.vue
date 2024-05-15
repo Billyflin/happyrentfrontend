@@ -1,9 +1,10 @@
 <template>
   <div
-      class="page-header align-items-start min-vh-100 bg-gradient-secondary"
-
+    class="page-header align-items-start min-vh-100 bg-gradient-secondary"
+    :style="`background-image: url(${BackPerfilFoto}); background-size: contain; background-position: center; background-repeat: no-repeat;`"
   >
     <span class="mask bg-gradient-dark opacity-6"></span>
+
     <div class="container my-auto">
       <div class="row">
         <div class="col-lg-4 col-md-8 col-12 mx-auto">
@@ -12,9 +13,9 @@
               <div class="bg-gradient-primary shadow-success border-radius-lg py-3 pe-1">
                 <div class="row mt-3 d-flex justify-content-center align-items-center">
                   <img class="btn btn-link px-3" src="../../assets/LogoHapp.svg" alt="Logo" width="98"
-                       height="98"/>
+                       height="98" />
                 </div>
-<!--                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0"></h4>-->
+                <!--                <h4 class="text-white font-weight-bolder text-center mt-2 mb-0"></h4>-->
               </div>
             </div>
             <div class="card-body">
@@ -25,12 +26,14 @@
                 <div class="mb-3">
                   <material-input v-model="password" id="password" type="password" label="Password" name="password" />
                 </div>
-                <material-switch v-model=rememberMe  id="rememberMe" name="rememberMe" >Remember me</material-switch>
+                <material-switch v-model=rememberMe id="rememberMe" name="rememberMe">Remember me</material-switch>
                 <div class="text-center">
-                  <material-button type="submit" class="my-4 mb-2" variant="gradient" color="primary" fullWidth>Sign in</material-button>
+                  <material-button type="submit" class="my-4 mb-2" variant="gradient" color="primary" fullWidth>Sign
+                    in
+                  </material-button>
                 </div>
                 <p class="mt-4 text-xs text-center">
-                  <span class="text-danger">{{auth.errMsg}}</span>
+                  <span class="text-danger">{{ auth.errMsg }}</span>
                 </p>
                 <p class="mt-4 text-sm text-center">
                   No tienes una cuenta?
@@ -44,7 +47,7 @@
                   >Olvidaste tu contraseña?
                   </router-link
                   >
-                  </p>
+                </p>
               </form>
             </div>
           </div>
@@ -67,13 +70,13 @@
 </template>
 
 <script setup>
-import {onBeforeMount, onBeforeUnmount, watch} from 'vue'
+import { onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
-import {useAppStore, useAuthStore} from '@/store/index.js'
-import {ref} from 'vue'
-import router from "@/router/index.js";
+import { useAppStore, useAuthStore } from '@/store/index.js'
+import router from '@/router/index.js'
+import BackPerfilFoto from '@/assets/img/illustrations/pattern-tree.svg'
 
 
 const auth = useAuthStore()
@@ -82,16 +85,16 @@ const password = ref('')
 const rememberMe = ref(false)
 
 const loginHandler = async () => {
-    auth.setRememberMe(document.getElementById("rememberMe").value)
-    await auth.loginHandler(document.getElementById("username").value, document.getElementById("password").value)
+  auth.setRememberMe(document.getElementById('rememberMe').value)
+  await auth.loginHandler(document.getElementById('username').value, document.getElementById('password').value)
 }
 
 const store = useAppStore()
-const {toggleEveryDisplay, toggleHideConfig} = store
+const { toggleEveryDisplay, toggleHideConfig } = store
 watch(() => auth.userInfo, (value) => {
-    if (value) {
-        router.push({name: 'Dashboard'})
-    }
+  if (value) {
+    router.push({ name: 'Dashboard' })
+  }
 })
 
 onBeforeMount(() => {
