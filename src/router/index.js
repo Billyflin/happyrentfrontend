@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Dashboard from '../views/Dashboard.vue'
-import Profile from '../views/Profile.vue'
+import Profile from '../views/Perfil/Profile.vue'
 import SignIn from '../views/Auth/SignIn.vue'
 import SignUp from '../views/Auth/SignUp.vue'
 import { useAuthStore } from '@/store'

@@ -56,8 +56,8 @@
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-12 col-md-6 my-auto">
             <div class="copyright text-center text-sm text-white text-lg-start">
-              © {{ new Date().getFullYear() }} HappyRent <i class="fa fa-heart" aria-hidden="true"></i> by
-              <a href="https://github.com/Billyflin" class="font-weight-bold text-white" target="_blank">Billyflin</a>
+              © {{ new Date().getFullYear() }}, HappRent <i class="fa fa-heart" aria-hidden="true"></i> by
+              <a class="font-weight-bold text-white" target="_blank">Happy Services SpA</a>
             </div>
           </div>
         </div>
@@ -96,11 +96,11 @@ watch(() => auth.userInfo, (value) => {
 
 onBeforeMount(() => {
   toggleEveryDisplay()
-  toggleHideConfig()
+  // toggleHideConfig()
 })
 
 onBeforeUnmount(() => {
   toggleEveryDisplay()
-  toggleHideConfig()
+  // toggleHideConfig()
 })
 </script>
