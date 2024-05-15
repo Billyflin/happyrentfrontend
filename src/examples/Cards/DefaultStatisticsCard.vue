@@ -13,7 +13,6 @@
             <div class="dropdown text-end">
               <a
                 id="dropdownUsers1"
-                href="javascript:;"
                 class="cursor-pointer text-secondary"
                 :class="{ show: showMenu }"
                 data-bs-toggle="dropdown"
@@ -27,13 +26,15 @@
                 :class="{ show: showMenu }"
                 aria-labelledby="dropdownUsers1"
               >
-                <li v-for="(drop, index) in dropdown" :key="index">
-                  <a
-                    class="dropdown-item border-radius-md"
-                    :href="drop.route"
-                    >{{ drop.label }}</a
-                  >
+                <li v-for="(drop, index) in dropdown" :key="index" class="d-flex align-items-center">
+                  <a class="dropdown-item border-radius-md d-flex align-items-center" @click="drop.action">
+                    {{ drop.label }}
+                    <span class="material-symbols-outlined mx-2 ml-2">{{ drop.icon }}</span>
+                  </a>
                 </li>
+
+
+
               </ul>
             </div>
           </div>
@@ -44,39 +45,44 @@
 </template>
 
 <script>
+
 export default {
-  name: "DefaultStatisticsCard",
+  name: 'DefaultStatisticsCard',
   props: {
     title: {
       type: String,
-      default: "Default Statistics Card",
+      default: 'Default Statistics Card'
     },
     count: {
       type: Number,
-      default: "",
+      default: ''
     },
     menu: {
       type: String,
-      default: "",
+      default: ''
+    },
+    lista: {
+      type: Array,
+      default: () => []
     },
     percentage: {
       type: Object,
-      default: () => {},
-      color: "dark",
-      value: "0",
-      label: " ",
+      default: () => {
+      },
+      color: 'dark',
+      value: '0',
+      label: ' '
     },
     dropdown: {
       type: Array,
       default: () => [],
-      label: String,
-      route: String,
-    },
+      label: 'Hola'
+    }
   },
   data() {
     return {
-      showMenu: false,
-    };
-  },
-};
+      showMenu: false
+    }
+  }
+}
 </script>

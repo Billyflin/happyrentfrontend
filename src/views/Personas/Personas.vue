@@ -1,19 +1,74 @@
 <script setup>
-import TablaPersonas from '@/views/Personas/components/TablaPersonas.vue'
-
 import { onMounted, ref } from 'vue'
-import axios from 'axios'
+import TablaPersonas from '@/views/Personas/components/TablaPersonas.vue'
 import DefaultStatisticsCard from '@/examples/Cards/DefaultStatisticsCard.vue'
+import axios from 'axios'
+import * as XLSX from 'xlsx'
+import FileSave from 'file-saver'
 
 const perfiles = ref(null)
 const personas = ref(null)
 const empresas = ref(null)
 
+function s2ab(s) {
+  var buf = new ArrayBuffer(s.length)
+  var view = new Uint8Array(buf)
+  for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF
+  return buf
+}
+function flattenObject(ob) {
+  var toReturn = {}
+
+  for (var i in ob) {
+    if (!ob.hasOwnProperty(i)) continue
+
+    // Excluye los campos que no quieres incluir
+    if (i === 'id' || i === 'createdBy' || i === 'lastModifiedBy'|| i === 'type') continue
+
+    if ((typeof ob[i]) == 'object' && ob[i] !== null) {
+      var flatObject = flattenObject(ob[i])
+      for (var x in flatObject) {
+        if (!flatObject.hasOwnProperty(x)) continue
+
+        // Excluye los campos que no quieres incluir
+        if (x === 'id' || x === 'createdBy' || x === 'lastModifiedBy'|| i === 'type') continue
+
+        toReturn[i + '_' + x] = flatObject[x]
+      }
+    } else {
+      toReturn[i] = ob[i]
+    }
+  }
+  return toReturn
+}
+
+
+function downloadExcel(data, filename) {
+  const wb = XLSX.utils.book_new()
+  const ws = XLSX.utils.json_to_sheet(data)
+  XLSX.utils.book_append_sheet(wb, ws)
+  const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' })
+  FileSave.saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), filename)
+}
+let flattenedPersonas = ref(null)
+let flattenedEmpresas = ref(null)
 onMounted(async () => {
   const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`)
   perfiles.value = response.data
-  personas.value = response.data.filter(persona => persona.type === 'persona')
-  empresas.value = response.data.filter(persona => persona.type === 'empresa')
+  personas.value = response.data
+    .filter(persona => persona.type === 'persona')
+    .map(({ id, createdBy, lastModifiedBy, type, nombre, ...rest }) => {
+      return {nombre, ...rest }
+    })
+  empresas.value = response.data
+    .filter(persona => persona.type === 'empresa')
+    .map(({ id, createdBy, lastModifiedBy, type, representante,nombre, ...rest }) => {
+      return {nombre, ...rest, representante }
+    })
+
+// Aplana los objetos en tus datos
+   flattenedPersonas = personas.value.map(persona => flattenObject(persona))
+  flattenedEmpresas = empresas.value.map(empresa => flattenObject(empresa))
 })
 </script>
 
@@ -27,19 +82,33 @@ onMounted(async () => {
           tu lista de personas.
         </p>
       </div>
-          <default-statistics-card
-            title="Total Personas"
-            description="Total de personas"
-            :count="personas ? personas.length : 0"
-            icon="people"
-          />
-          <default-statistics-card
-            title="Total Empresas"
-            description="Total de empresas"
-            icon="business"
-            :count="empresas ? empresas.length : 0"
-          />
-      </div>
+      <default-statistics-card
+        title="Total Personas"
+        description="Total de personas"
+        :count="personas ? personas.length : 0"
+        menu="Descargar"
+        :dropdown=" [
+              { label: 'Descargar Excel',
+                icon:'file_download',
+                action: () => downloadExcel(flattenedPersonas, 'personas.xlsx')
+              }
+            ]"
+      />
+      <default-statistics-card
+        title="Total Empresas"
+        description="Total de empresas"
+        icon="business"
+        :count="empresas ? empresas.length : 0"
+        :lista="empresas"
+        menu="Descargar"
+        :dropdown=" [
+              { label: 'Descargar Excel',
+                icon:'file_download',
+                action: () => downloadExcel(flattenedEmpresas, 'empresas.xlsx')
+              }
+            ]"
+      />
+    </div>
 
     <div class="row mb-6">
       <tabla-personas v-if="perfiles"
