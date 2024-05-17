@@ -353,9 +353,17 @@ export default {
 
               <div class="row">
                 <div class="col-9">
-                  <h5 id="Clausula3" class="card-title text-center">Clausula 3 REAJUSTE:</h5>
+                  <div class="row">
+                    <div class="col-2">
+
+                    </div>
+                    <h5 id="Clausula3" class=" col-8 card-title text-center">Clausula 3 REAJUSTE:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula2" v-model="clausulas3edit">Editar</material-checkbox>
+                    </div>
+                  </div>
                   <div class="mb-3 mt-3">
-                    <p class="text-justify">
+                    <p :contenteditable="clausulas3edit" class="text-justify">
                       La renta se reajustará [{reajusteContrato}] en el mismo porcentaje que haya
                       variado el IPC (índice de precios del consumidor). En caso de IPC negativo se mantendrá
                       la renta del período inmediatamente anterior con el mínimo de [{valorRenta}].-
