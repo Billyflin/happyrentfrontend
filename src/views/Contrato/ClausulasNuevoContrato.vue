@@ -10,6 +10,7 @@ import MaterialBadge from '@/components/MaterialBadge.vue'
 import MaterialTextarea from '@/components/MaterialTextarea.vue'
 import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
+import axios from 'axios'
 
 export default {
   name: 'ClausulasNuevoContrato',
@@ -51,6 +52,8 @@ export default {
       clausula4: false,
       clausulas4: [],
       clausulas1: [],
+
+      reporteID:0,
 
 
       comparecenciaEdit: false,
@@ -162,26 +165,75 @@ export default {
       if (typeof text !== 'string') return ''
       return text.charAt(0).toUpperCase() + text.slice(1)
     },
+    getDoc ()    {
+      axios.get(`https://localhost:8443/api/v1/contrato/reporte/${this.reporteID}`, { responseType: 'blob' })
+        .then((response) => {
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          const link = document.createElement('a');
+          link.href = url;
+          link.setAttribute('download', `contrato_${this.reporteID}.pdf`); // o cualquier otro nombre de archivo
+          document.body.appendChild(link);
+          link.click();
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+    },
     enviarContrato() {
-      console.log(this.Comparecencia.innerText)
-      console.log(this.Clausula1.innerText)
-      console.log(this.Clausula2.innerText)
-      console.log(this.Clausula3.innerText)
-      console.log(this.Clausula4.innerText)
-      console.log(this.Clausula5.innerText)
-      console.log(this.Clausula6.innerText)
-      console.log(this.Clausula7.innerText)
-      console.log(this.Clausula8.innerText)
-      console.log(this.Clausula9.innerText)
-      console.log(this.Clausula10.innerText)
-      console.log(this.Clausula11.innerText)
-      console.log(this.Clausula12.innerText)
-      console.log(this.Clausula13.innerText)
-      console.log(this.Clausula14.innerText)
-      console.log(this.Clausula15.innerText)
-      console.log(this.Clausula16.innerText)
-      console.log(this.Clausula17.innerText)
-      console.log(this.Clausula18.innerText)
+      let response = axios.post(
+        `${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato`,
+        {
+          comparecencia: this.Comparecencia.innerText,
+          clausula1: this.Clausula1.innerText,
+          clausula2: this.Clausula2.innerText,
+          clausula3: this.Clausula3.innerText,
+          clausula4: this.Clausula4.innerText,
+          clausula5: this.Clausula5.innerText,
+          clausula6: this.Clausula6.innerText,
+          clausula7: this.Clausula7.innerText,
+          clausula8: this.Clausula8.innerText,
+          clausula9: this.Clausula9.innerText,
+          clausula10: this.Clausula10.innerText,
+          clausula11: this.Clausula11.innerText,
+          clausula12: this.Clausula12.innerText,
+          clausula13: this.Clausula13.innerText,
+          clausula14: this.Clausula14.innerText,
+          clausula15: this.Clausula15.innerText,
+          clausula16: this.Clausula16.innerText,
+          clausula17: this.Clausula17.innerText,
+          clausula18: this.Clausula18.innerText,
+          comparecenciaEdit: this.comparecenciaEdit,
+          clausula1Edit: this.clausula1edit,
+          clausula2Edit: this.clausula2edit,
+          clausula3Edit: this.clausula3edit,
+          clausula4Edit: this.clausula4edit,
+          clausula5Edit: this.clausula5edit,
+          clausula6Edit: this.clausula6edit,
+          clausula7Edit: this.clausula7edit,
+          clausula8Edit: this.clausula8edit,
+          clausula9Edit: this.clausula9edit,
+          clausula10Edit: this.clausula10edit,
+          clausula11Edit: this.clausula11edit,
+          clausula12Edit: this.clausula12edit,
+          clausula13Edit: this.clausula13edit,
+          clausula14Edit: this.clausula14edit,
+          clausula15Edit: this.clausula15edit,
+          clausula16Edit: this.clausula16edit,
+          clausula17Edit: this.clausula17edit,
+          clausula18Edit: this.clausula18edit,
+          propiedadId: this.store2.propiedad.id,
+          arrendatarioId: this.store2.arrendatario.id,
+          arrendadorId: this.store2.propiedad.propietario.id,
+          // codeudorId: this.store2.codeudor.id,
+          // fechaInicio: this.fechaInicioContrato,
+        }
+      ).catch((error) => {
+        console.log(error)
+      }).then((response) => {
+        console.log(response)
+        this.reporteID = response.data.clausulas.id
+      })
     }
   }
 }
@@ -895,7 +947,8 @@ export default {
             </div>
           </div>
         </div>
-          <material-button variant="success" size="lg" class="mt-4 mb-6" full-width @click="enviarContrato">Crear Contrato</material-button>
+          <material-button variant="success" size="lg" class="mt-4" full-width @click="enviarContrato">Crear Contrato</material-button>
+          <material-button v-if="reporteID" color="happLight" size="lg" class="mt-4 mb-6" full-width @click="getDoc">Ver documento provicional</material-button>
         </div>
     </div>
   </div>
