@@ -163,7 +163,7 @@ export default {
                       <material-checkbox id="editComparecencia" v-model="comparecenciaEdit">Editar</material-checkbox>
                     </div>
                   </div>
-                  <div class="mb-3 mt-3">
+                  <div class="mb-3 mt-3 ms-3">
                     <p class="text-justify" :contenteditable="comparecenciaEdit" ref="Comparecencia">
                       En Santiago, a {{ formatDate(Date.now()) }}, comparecen: por una parte,
                       <strong> PROPIETARIA </strong>
@@ -320,16 +320,16 @@ export default {
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row align-items-center">
                 <div class="col-9">
                   <div class="row">
                     <div class="col-2" />
-                    <h5 id="Clausula2" class="card-title text-center">Cláusula 2: RENTA</h5>
+                    <h5 id="Clausula2" class="col-8 card-title text-center">Cláusula 2: RENTA</h5>
                     <div class="col-2">
                       <material-checkbox id="editClausula2" v-model="clausulas2edit">Editar</material-checkbox>
                     </div>
                   </div>
-                  <div class="mb-3 mt-3">
+                  <div class="mb-3 mt-3 ms-3">
                     <p :contenteditable="clausulas2edit" class="text-justify">
                       La renta mensual de arrendamiento por los inmuebles individualizados en la cláusula primera
                       precedente es y será la suma de <strong>CONTRATO</strong> $
@@ -351,18 +351,16 @@ export default {
                 </div>
               </div>
 
-              <div class="row">
+              <div class="row align-items-center">
                 <div class="col-9">
                   <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula3" class="col-8 card-title text-center">Clausula 3 REAJUSTE:</h5>
                     <div class="col-2">
-
-                    </div>
-                    <h5 id="Clausula3" class=" col-8 card-title text-center">Clausula 3 REAJUSTE:</h5>
-                    <div class="col-2">
-                      <material-checkbox id="editClausula2" v-model="clausulas3edit">Editar</material-checkbox>
+                      <material-checkbox id="editClausula3" v-model="clausulas3edit">Editar</material-checkbox>
                     </div>
                   </div>
-                  <div class="mb-3 mt-3">
+                  <div class="mb-3 mt-3 ms-3">
                     <p :contenteditable="clausulas3edit" class="text-justify">
                       La renta se reajustará [{reajusteContrato}] en el mismo porcentaje que haya
                       variado el IPC (índice de precios del consumidor). En caso de IPC negativo se mantendrá
@@ -372,12 +370,18 @@ export default {
                   </div>
                 </div>
               </div>
-
-              <div class="row">
+              <div class="row align-items-center">
                 <div class="col-9">
-                  <h5 id="Clausula4" class="card-title text-center">Clausula 4 OTROS PAGOS:</h5>
-                  <div class="mb-3 mt-3">
-                    <p class="text-justify">
+
+                  <div class="row">
+                    <div class="col-2"></div>
+                    <h5 id="Clausula4" class=" col-8 card-title text-center">Clausula 4 OTROS PAGOS:</h5>
+                    <div class="col-2">
+                      <material-checkbox   id="editClausula4" v-model="clausulas4edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p :contenteditable="clausulas4edit" class="text-justify">
                       <template v-if="Clausula4">
                         La arrendataria asumirá la responsabilidad de pagar puntualmente y a la entidad correspondiente
                         los siguientes servicios y gastos asociados al inmueble:
@@ -403,6 +407,7 @@ export default {
                         funcionamiento y a asumir cualquier costo asociado a ellos.
                       </template>
                     </p>
+
                   </div>
                 </div>
                 <div class="col-3 mt-3">
