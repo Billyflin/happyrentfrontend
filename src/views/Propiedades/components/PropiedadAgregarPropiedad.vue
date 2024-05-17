@@ -445,7 +445,7 @@ onMounted(() => {
                 type="number"
                 is-required
                 variant="static"
-                label="Numero de pisos"
+                label="Numero de piso"
                 placeholder="1"
                 v-model="propiedad.piso"
               ></material-input>
