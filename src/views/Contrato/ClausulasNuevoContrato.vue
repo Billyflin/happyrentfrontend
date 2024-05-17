@@ -9,10 +9,12 @@ import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialBadge from '@/components/MaterialBadge.vue'
 import MaterialTextarea from '@/components/MaterialTextarea.vue'
 import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
+import MaterialButton from '@/components/MaterialButton.vue'
 
 export default {
   name: 'ClausulasNuevoContrato',
   components: {
+    MaterialButton,
     MaterialCheckbox,
     MaterialTextarea,
     MaterialBadge,
@@ -46,6 +48,7 @@ export default {
       optionsClausula5periodos: [
         {}
       ],
+      clausula4: false,
       clausulas4: [],
       clausulas1: [],
 
@@ -87,7 +90,25 @@ export default {
     const store2 = useAuthStore()
     const Comparecencia = ref(null)
     const Clausula1 = ref(null)
+    const Clausula2 = ref(null)
+    const Clausula3 = ref(null)
     const Clausula4 = ref(null)
+    const Clausula5 = ref(null)
+    const Clausula6 = ref(null)
+    const Clausula7 = ref(null)
+    const Clausula8 = ref(null)
+    const Clausula9 = ref(null)
+    const Clausula10 = ref(null)
+    const Clausula11 = ref(null)
+    const Clausula12 = ref(null)
+    const Clausula13 = ref(null)
+    const Clausula14 = ref(null)
+    const Clausula15 = ref(null)
+    const Clausula16 = ref(null)
+    const Clausula17 = ref(null)
+    const Clausula18 = ref(null)
+
+
     const Clausulas4 = ref(null)
     const prorrogaAutomatica = ref(false)
     const visitasPermitidas = ref(true)
@@ -113,7 +134,23 @@ export default {
       store2,
       formatDate,
       Clausula1,
+      Clausula2,
+      Clausula3,
       Clausula4,
+      Clausula5,
+      Clausula6,
+      Clausula7,
+      Clausula8,
+      Clausula9,
+      Clausula10,
+      Clausula11,
+      Clausula12,
+      Clausula13,
+      Clausula14,
+      Clausula15,
+      Clausula16,
+      Clausula17,
+      Clausula18,
       Clausulas4,
       Comparecencia,
       visitasPermitidas,
@@ -126,6 +163,10 @@ export default {
     capitalize(text) {
       if (typeof text !== 'string') return ''
       return text.charAt(0).toUpperCase() + text.slice(1)
+    },
+    enviarContrato() {
+      console.log(this.Comparecencia.innerText)
+      console.log(this.Clausula4.innerText)
     }
   }
 }
@@ -139,8 +180,8 @@ export default {
       </div>
 
       <div class="col-lg-10 mt-lg-0 mt-4">
-        <div class=" card">
-
+        <div class="
+         card">
           <div class="row">
             <div class="card-body col-lg-10 mt-lg-0 mt-4 text-center">
               <!--              titulo-->
@@ -370,6 +411,7 @@ export default {
                   </div>
                 </div>
               </div>
+
               <div class="row align-items-center">
                 <div class="col-9">
 
@@ -377,12 +419,12 @@ export default {
                     <div class="col-2"></div>
                     <h5 id="Clausula4" class=" col-8 card-title text-center">Clausula 4 OTROS PAGOS:</h5>
                     <div class="col-2">
-                      <material-checkbox   id="editClausula4" v-model="clausulas4edit">Editar</material-checkbox>
+                      <material-checkbox id="editClausula4" v-model="clausulas4edit">Editar</material-checkbox>
                     </div>
                   </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausulas4edit" class="text-justify">
-                      <template v-if="Clausula4">
+                    <p :contenteditable="clausulas4edit" class="text-justify" ref="Clausula4">
+                      <template v-if="clausula4">
                         La arrendataria asumirá la responsabilidad de pagar puntualmente y a la entidad correspondiente
                         los siguientes servicios y gastos asociados al inmueble:
                         <template v-for="(item, index) in Clausulas4">
@@ -411,10 +453,10 @@ export default {
                   </div>
                 </div>
                 <div class="col-3 mt-3">
-                  <material-switch id="Clausula4" name="Clausula4" label="" v-model:checked="Clausula4">¿Desea que el
+                  <material-switch id="Clausula4" name="Clausula4" label="" v-model:checked="clausula4">¿Desea que el
                     arrendatario pague los gastos comunes?
                   </material-switch>
-                  <material-choices v-if="Clausula4" id="Clausulas4" label="¿Que debe pagar el arrendatario?"
+                  <material-choices v-if="clausula4" id="Clausulas4" label="¿Que debe pagar el arrendatario?"
                                     :options="optionsClausula4" name="Clausulas4" is-multiple remove-item-button
                                     v-model="Clausulas4"></material-choices>
                 </div>
@@ -754,7 +796,8 @@ export default {
             </div>
           </div>
         </div>
-      </div>
+          <material-button variant="success" size="lg" class="mt-4 mb-6" full-width @click="enviarContrato">Crear Contrato</material-button>
+        </div>
     </div>
   </div>
 </template>
