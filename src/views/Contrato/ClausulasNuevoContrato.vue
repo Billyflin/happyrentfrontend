@@ -166,7 +166,7 @@ export default {
       return text.charAt(0).toUpperCase() + text.slice(1)
     },
     getDoc ()    {
-      axios.get(`https://localhost:8443/api/v1/contrato/reporte/${this.reporteID}`, { responseType: 'blob' })
+      axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato/reporte/${this.reporteID}`, { responseType: 'blob' })
         .then((response) => {
           const url = window.URL.createObjectURL(new Blob([response.data]));
           const link = document.createElement('a');
