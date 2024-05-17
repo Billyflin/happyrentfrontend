@@ -7,10 +7,21 @@ import MaterialChoices from '@/components/MaterialChoices.vue'
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialBadge from '@/components/MaterialBadge.vue'
+import MaterialTextarea from '@/components/MaterialTextarea.vue'
+import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 
 export default {
   name: 'ClausulasNuevoContrato',
-  components: { MaterialBadge, MaterialInput, MaterialSwitch, MaterialChoices, SideNav, NavPill },
+  components: {
+    MaterialCheckbox,
+    MaterialTextarea,
+    MaterialBadge,
+    MaterialInput,
+    MaterialSwitch,
+    MaterialChoices,
+    SideNav,
+    NavPill
+  },
   data() {
     return {
       valorRenta: 0,
@@ -36,7 +47,28 @@ export default {
         {}
       ],
       clausulas4: [],
-      clausulas1: []
+      clausulas1: [],
+
+
+      comparecenciaEdit: false,
+      clausulas1edit: false,
+      clausulas2edit: false,
+      clausulas3edit: false,
+      clausulas4edit: false,
+      clausulas5edit: false,
+      clausulas6edit: false,
+      clausulas7edit: false,
+      clausulas8edit: false,
+      clausulas9edit: false,
+      clausulas10edit: false,
+      clausulas11edit: false,
+      clausulas12edit: false,
+      clausulas13edit: false,
+      clausulas14edit: false,
+      clausulas15edit: false,
+      clausulas16edit: false,
+      clausulas17edit: false,
+      clausulas18edit: false
 
     }
   },
@@ -58,13 +90,14 @@ export default {
     const Clausula4 = ref(null)
     const Clausulas4 = ref(null)
     const prorrogaAutomatica = ref(false)
-    const visitasPermitidas = ref(false)
+    const visitasPermitidas = ref(true)
     const numeroVisitas = ref(0)
 
     const { toggleEveryDisplay } = store
     onMounted(() => {
       toggleEveryDisplay()
       console.log(Comparecencia.value.innerText)
+      console.log(Clausula1)
     })
 
     const formatDate = (date) => {
@@ -109,8 +142,9 @@ export default {
         <div class=" card">
 
           <div class="row">
-            <div class="card-body col-lg-10 mt-lg-0 mt-4 mx-5 text-center">
-              <div class="row">
+            <div class="card-body col-lg-10 mt-lg-0 mt-4 text-center">
+              <!--              titulo-->
+              <div class="row align-items-center">
                 <div class="col-9 mb-3">
                   <h1 class="text-center">Clausulas del contrato</h1>
                   <material-badge class="badge badge-danger"> Esta es solo una vista preliminar.</material-badge>
@@ -118,11 +152,19 @@ export default {
                     de las clausulas será exactamente el mismo.</p>
                 </div>
               </div>
-              <div class="row">
+
+              <!--             Comparecencia-->
+              <div class="row align-items-center">
                 <div class="col-9">
-                  <h5 id="Comparecencia" class="card-title text-center">Comparecencia:</h5>
+                  <div class="row">
+                    <div class="col-2 " />
+                    <h5 id="Comparecencia" class="col-8 card-title text-center">Comparecencia:</h5>
+                    <div class="col-2 ">
+                      <material-checkbox id="editComparecencia" v-model="comparecenciaEdit">Editar</material-checkbox>
+                    </div>
+                  </div>
                   <div class="mb-3 mt-3">
-                    <p class="text-justify" ref="Comparecencia">
+                    <p class="text-justify" :contenteditable="comparecenciaEdit" ref="Comparecencia">
                       En Santiago, a {{ formatDate(Date.now()) }}, comparecen: por una parte,
                       <strong> PROPIETARIA </strong>
                       <template v-if="store2.propiedad.propietario.type === 'persona'">
@@ -159,7 +201,8 @@ export default {
                         {{ store2.propiedad.propietario.representante.direccion.numero }},
                         correo: {{ store2.propiedad.propietario.representante.email }}, celular
                         {{ store2.propiedad.propietario.representante.telefono }}
-                      </template>, en adelante la parte
+                      </template>
+                      , en adelante la parte
                       “propietaria” y <strong>ARRENDATARIO </strong>
                       <template v-if="store2.arrendatario.type === 'persona'">
                         {{ capitalize(store2.arrendatario.tratamiento) }}
@@ -217,11 +260,20 @@ export default {
                 </div>
               </div>
 
-              <div class="row">
+
+              <!--              Clausula 1-->
+              <div class="row align-items-center"> <!-- Añade la clase 'align-items-center' -->
                 <div class="col-9">
-                  <h5 id="Clausula1" class="card-title text-center">Cláusula 1: PROPIEDAD</h5>
-                  <div class="mb-3 mt-3">
-                    <p class="text-justify" ref="Clausula1">
+                  <div class="row">
+                    <div class="col-2 " />
+                    <h5 id="Clausula1" class="col-8 justify-content-center card-title text-center">Cláusula 1:
+                      PROPIEDAD</h5>
+                    <div class="col-2 ">
+                      <material-checkbox id="editClausula1" v-model="clausulas1edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p class="text-justify" :contenteditable="clausulas1edit" ref="Clausula1">
                       La arrendadora,
                       <template v-if="store2.propiedad.propietario.type === 'persona'">
                         {{ capitalize(store2.propiedad.propietario.tratamiento) }}
@@ -243,16 +295,16 @@ export default {
 
                       Esta propiedad se da en arrendamiento
                       a la arrendataria, quien acepta su uso exclusivo para fines
-                      <template v-if="clausulas1.length === 0">de habitación.</template>
+                      <template v-if="clausulas1.length === 0">de habitación</template>
                       <template v-else>
                         <template v-for="(item, index) in clausulas1">
                           <template v-if="item.value === 'habitacional'">habitacionales</template>
                           <template v-else-if="item.value === 'oficina'">de oficina</template>
                           <template v-else-if="item.value === 'comercial'">comerciales</template>
                           <template v-if="index !== clausulas1.length - 1">,</template>
-                          <template v-else>.</template>
                         </template>
                       </template>
+                      .
                     </p>
                   </div>
                 </div>
@@ -270,9 +322,15 @@ export default {
 
               <div class="row">
                 <div class="col-9">
-                  <h5 id="Clausula2" class="card-title text-center">Cláusula 2: RENTA</h5>
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula2" class="card-title text-center">Cláusula 2: RENTA</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula2" v-model="clausulas2edit">Editar</material-checkbox>
+                    </div>
+                  </div>
                   <div class="mb-3 mt-3">
-                    <p class="text-justify">
+                    <p :contenteditable="clausulas2edit" class="text-justify">
                       La renta mensual de arrendamiento por los inmuebles individualizados en la cláusula primera
                       precedente es y será la suma de <strong>CONTRATO</strong> $
                       <!--                      {{ store2.contrato.valorRenta }}.- -->
