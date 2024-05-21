@@ -17,7 +17,8 @@
                       v-model="persona.ocupacion" />
     </div>
     <div class="col-md-4 mt-4">
-      <material-input id="telefono" variant="dynamic" label="Teléfono" is-required type="telefono"
+      <material-input id="telefono" variant="static" label="Teléfono" is-required type="telefono"
+                      placeholder="9 xxxxxxxx"
                       v-model="persona.telefono" />
     </div>
     <div class="col-md-6 mt-4">

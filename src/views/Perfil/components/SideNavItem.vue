@@ -4,13 +4,19 @@ import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
 import { useAuthStore } from '@/store/index.js'
 import MaterialButton from '@/components/MaterialButton.vue'
+import MaterialChoices from '@/components/MaterialChoices.vue'
 
 export default {
   name: 'SideNavItem',
-  components: { MaterialButton, MaterialInput, MaterialSwitch, MaterialAvatar },
+  components: { MaterialChoices, MaterialButton, MaterialInput, MaterialSwitch, MaterialAvatar },
   setup() {
     const store = useAuthStore()
-    return {  store }
+    return { store }
+  },
+  data() {
+    return {
+      genero: [{value:'hombre', text:'Hombre'},{value:'mujer', text:'Mujer'}]
+    }
   }
 }
 </script>
@@ -24,39 +30,37 @@ export default {
       <div class="row">
         <div class="col-6">
           <material-input
-            id="firstName"
+            id="Nombre"
             variant="static"
-            label="First Name"
-            placeholder="Alec"
+            label="Nombre"
+            placeholder="Nombre"
           />
         </div>
         <div class="col-6">
           <material-input
-            id="lastName"
+            id="Apellido"
             variant="static"
-            label="Last Name"
-            placeholder="Thompson"
+            label="Apellido"
+            placeholder="Apellido"
           />
         </div>
       </div>
       <div class="row">
         <div class="col-sm-4 col-6">
-          <label class="form-label mt-4 ms-0">I'm</label>
-          <select
-            id="choices-gender"
-            class="form-control"
-            name="choices-gender"
-          >
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-          </select>
+          <material-choices class="col-4"
+                            id="Genero"
+                            :options="genero"
+                            label="Soy"
+                            name="genero" />
+
         </div>
         <div class="col-sm-8">
           <div class="row">
             <div class="col-sm-5 col-5">
-              <label class="form-label mt-4 ms-0">Birth Date</label>
+              <label class="form-label mt-4 ms-0">Fecha de Nacimiento
+              </label>
               <select
-                id="choices-month"
+                id="months"
                 class="form-control"
                 name="choices-month"
               ></select>

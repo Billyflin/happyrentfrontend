@@ -53,6 +53,7 @@ export default {
         direccion: {
           calle: '',
           numero: '',
+          numeroOficina: '',
           codigoPostal: '',
           pais: '',
           region: '',
@@ -80,7 +81,7 @@ this.$emit('next:step')
     <div class="row mt-4">
       <!--  Seccion Empresa-->
       <div class="row mt-4">
-        <h5 class=" mt-3 mb-3">Representante Legal</h5>
+        <h5 class=" mt-3 mb-3">REPRESENTANTE LEGAL</h5>
       </div>
       <div class="row mt-4">
         <div class="col-4">
@@ -89,7 +90,7 @@ this.$emit('next:step')
             variant="static"
             is-required
             type="text"
-            label="Nombre Representante"
+            label="Nombre"
             placeholder="Nombre"
             v-model="representante.nombre"
           />
@@ -100,7 +101,7 @@ this.$emit('next:step')
             variant="static"
             type="text"
             is-required
-            label="Apellido Paterno Representante"
+            label="Apellido Paterno"
             placeholder="Apellido"
             v-model="representante.apellidoPaterno"
           />
@@ -111,7 +112,7 @@ this.$emit('next:step')
             variant="static"
             type="text"
             is-required
-            label="Apellido Materno Representante"
+            label="Apellido Materno"
             placeholder="Apellido"
             v-model="representante.apellidoMaterno"
           />
@@ -122,12 +123,13 @@ this.$emit('next:step')
           <MaterialChoices id="pronombres" :options="pronombres" label="Pronombres"
                            v-model:text-choice="representante.tratamiento" name="Pronombres" />
         </div>
-        <div class="col-sm-3  mt-4">
+        <div class = "col-1"/>
+        <div class="col-sm-2  mt-4">
           <material-input
             id="Rut"
             type="rut"
             variant="static"
-            label="Rut Representante"
+            label="Rut"
             placeholder="Con guión"
             v-model="representante.rut"
           />
@@ -137,7 +139,7 @@ this.$emit('next:step')
             id="emailRepresentanteLegal"
             type="email"
             variant="static"
-            label="Email Representante"
+            label="Email"
             placeholder="Email"
             v-model="representante.email"
           />
@@ -147,7 +149,7 @@ this.$emit('next:step')
             id="confirmEmailRepresentanteLegal"
             type="email"
             variant="static"
-            label="Confimar Email Representante"
+            label="Confimar Email"
             placeholder="Confirma Email"
 
           />
@@ -171,7 +173,7 @@ this.$emit('next:step')
             type="text"
             is-required
             variant="static"
-            label="Ocupación Representante"
+            label="Ocupación "
             placeholder="Ingeniero"
             v-model="representante.ocupacion"
           />
@@ -179,11 +181,11 @@ this.$emit('next:step')
         <div class="col-sm-3">
           <material-input
             id="numeroRepresentanteLegal"
-            type="String"
+            type="telefono"
             is-required
             variant="static"
-            label="Numero de teléfono"
-            placeholder="+569 xxxxxxxx"
+            label="teléfono"
+            placeholder="9 xxxxxxxx"
             v-model="representante.telefono"
           />
         </div>

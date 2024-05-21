@@ -12,7 +12,7 @@
       />
     </div>
     <div class="col-1"></div>
-    <div class="col-1 mt-4">
+    <div class="col-2 mt-4">
       <material-input
         id="numeroDirection"
         type="number"
@@ -22,7 +22,7 @@
         placeholder="n°"
       />
     </div>
-    <div class="col-2"></div>
+    <div class="col-1"></div>
     <div class="col-2 mt-4">
       <material-input
         id="postal"
@@ -55,7 +55,7 @@
                      id="Ciudad"
                      v-model:text-choice="direccion.ciudad"
                      :options="ciudades"
-                     label="Ciudad"
+                     label="Comuna"
                      :is-multiple="false"
                      name="ciudad"
     />

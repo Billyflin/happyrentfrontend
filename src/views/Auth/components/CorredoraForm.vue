@@ -59,7 +59,7 @@ export default {
                           variant="static"
                           type="text"
                           is-required
-                          label="Nombre Empresa"
+                          label="Nombre Comercial"
                           placeholder="Nombre Empresa"
                           v-model="empresa.nombre"
           />
@@ -106,6 +106,7 @@ export default {
             v-model="empresa.giro"
           />
         </div>
+
       </div>
     </div>
     <div class="row text-start">

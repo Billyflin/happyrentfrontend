@@ -1,6 +1,7 @@
 <script setup>
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
+import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 
 const validateInput = (event) => {
   if (event.target.value < 0) {
@@ -12,11 +13,18 @@ const validateInput = (event) => {
 <template>
   <div id="Pagos" class="card">
     <div class="card-header">
-      <h5>Pagos</h5>
+      <h5>Condiciones generales del contrato</h5>
     </div>
     <div class="card-body pt-0">
       <div class="row">
-        <div class="col-5">
+        <div class="col-2">
+         ¿Arriendo Mensual?
+          <material-checkbox id="arriendoMensual"
+                             label="Arriendo mensual"
+                             name="arriendoMensual"
+          />
+        </div>
+        <div class="col-3">
           <material-input id="renta"
                           type="number"
                           variant="static"
@@ -25,8 +33,28 @@ const validateInput = (event) => {
                           @input="validateInput"
           />
         </div>
-
+        <div class="col-3">
+          <MaterialChoices id="garantia"
+                           label="Garantía"
+                           :options="[
+                             {value: '1', label: '1 mes',selected: true},
+                             {value: '2', label: '2 meses'}
+                             ]"
+                           name="Garantía"
+          />
+        </div>
+        <div class="col-3">
+          <MaterialChoices id="fechaAviso"
+                           label="Fecha de aviso"
+                           :options="[
+                             {value: '1', label: '60 dias',selected: true},
+                             {value: '2', label: '30 dias'}
+                             ]"
+                           name="fechaAviso"
+          />
+        </div>
       </div>
+
       <div class="row mt-2">
         <div class="col-4">
           <MaterialChoices id="periodoContrato"
@@ -44,7 +72,7 @@ const validateInput = (event) => {
                            :options="[{value: 'CLP', label: 'CLP',selected: true},
                                       {value: 'USD', label: 'USD'},
                                       {value: 'EUR', label: 'EUR'},
-                                      {value: 'Otra', label: 'Otra'}]"
+                                      {value: 'UF' , label: 'UF'}]"
                            name="moneda" />
         </div>
       </div>

@@ -13,9 +13,9 @@
     <div class="container py-10 postion-relative z-index-2">
       <div class="row">
         <div class="col-md-6 mx-auto text-center">
-          <h2 class="text-white">Tu Correo a sido verificado con exito</h2>
+          <h2 class="text-white">Tu Correo ha sido verificado con exito</h2>
           <p class="text-white">
-            Bienvenido a HappyRent tu mejor compañía para rentar y vender
+            Bienvenido a HappRent tu mejor compañía para rentar y vender
           </p>
         </div>
       </div>
