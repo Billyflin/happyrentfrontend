@@ -12,7 +12,7 @@
     </div>
     <div class="card-body p-3 mb-0">
       <ul class="list-group">
-        <invoice-card-item v-for="{id, date, amount} of InvoiceData" :key="id" :date="date" :id="id" :amount="amount" />
+        <invoice-card-item v-for="{id, date, amount} of InvoiceData" :id="id" :key="id" :amount="amount" :date="date" />
       </ul>
     </div>
   </div>
@@ -20,7 +20,7 @@
 
 <script setup>
 import InvoiceCardItem from './InvoiceCardItem.vue'
-import {data} from './InvoiceData.json'
+import { data } from './InvoiceData.json'
 import MaterialButton from '@/components/MaterialButton.vue'
 
 const InvoiceData = data

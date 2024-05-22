@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <div :id="id" class="chart-canvas" :style="{width: '100%', height: height + 'px'}"></div>
+    <div :id="id" :style="{width: '100%', height: height + 'px'}" class="chart-canvas"></div>
   </div>
 </template>
 

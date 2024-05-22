@@ -1,10 +1,10 @@
 <template>
   <li class="nav-item">
     <a
+      :href="`#${refer}`"
+      aria-expanded="false"
       class="nav-link text-white"
       data-bs-toggle="collapse"
-      aria-expanded="false"
-      :href="`#${refer}`"
       @click="isExpanded = !isExpanded"
     >
       <span class="sidenav-mini-icon"> {{ miniIcon }} </span>
@@ -19,22 +19,22 @@
 </template>
 
 <script setup>
-import {ref} from 'vue'
+import { ref } from 'vue'
 
 let isExpanded = ref(false)
 
 defineProps({
   refer: {
     type: String,
-    required: true,
+    required: true
   },
   miniIcon: {
     type: String,
-    required: true,
+    required: true
   },
   text: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 })
 </script>

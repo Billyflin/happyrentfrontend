@@ -15,7 +15,7 @@ export default {
   },
   data() {
     return {
-      genero: [{value:'hombre', text:'Hombre'},{value:'mujer', text:'Mujer'}]
+      genero: [{ value: 'hombre', text: 'Hombre' }, { value: 'mujer', text: 'Mujer' }]
     }
   }
 }
@@ -31,25 +31,25 @@ export default {
         <div class="col-6">
           <material-input
             id="Nombre"
-            variant="static"
             label="Nombre"
             placeholder="Nombre"
+            variant="static"
           />
         </div>
         <div class="col-6">
           <material-input
             id="Apellido"
-            variant="static"
             label="Apellido"
             placeholder="Apellido"
+            variant="static"
           />
         </div>
       </div>
       <div class="row">
         <div class="col-sm-4 col-6">
-          <material-choices class="col-4"
-                            id="Genero"
+          <material-choices id="Genero"
                             :options="genero"
+                            class="col-4"
                             label="Soy"
                             name="genero" />
 
@@ -88,19 +88,19 @@ export default {
         <div class="col-6">
           <material-input
             id="email"
-            type="email"
-            variant="static"
             label="Email"
             placeholder="example@email.com"
+            type="email"
+            variant="static"
           />
         </div>
         <div class="col-6">
           <material-input
             id="confirmEmail"
-            type="email"
-            variant="static"
             label="Confirm Email"
             placeholder="example@email.com"
+            type="email"
+            variant="static"
           />
         </div>
       </div>
@@ -108,19 +108,19 @@ export default {
         <div class="col-6">
           <material-input
             id="location"
-            type="text"
-            variant="static"
             label="Your Location"
             placeholder="Sydney, A"
+            type="text"
+            variant="static"
           />
         </div>
         <div class="col-6">
           <material-input
             id="phoneNumber"
-            type="phone"
-            variant="static"
             label="Phone Number"
             placeholder="+40 745 765 439"
+            type="phone"
+            variant="static"
           />
         </div>
       </div>
@@ -142,11 +142,11 @@ export default {
           <input
             id="choices-skills"
             class="form-control"
-            type="text"
-            value="vuejs, angular, react"
-            placeholder="Enter something"
             onfocus="focused(this)"
             onfocusout="defocused(this)"
+            placeholder="Enter something"
+            type="text"
+            value="vuejs, angular, react"
           />
         </div>
       </div>
@@ -160,23 +160,23 @@ export default {
       <div class="mb-3">
         <material-input
           id="currentPassword"
-          type="password"
           label="Current Password"
+          type="password"
         />
       </div>
       <div class="mb-3">
-        <material-input id="newPassword" type="password" label="New Password" />
+        <material-input id="newPassword" label="New Password" type="password" />
       </div>
       <div class="mb-3">
         <material-input
           id="confirmPassword"
-          type="password"
           label="Confirm password"
+          type="password"
         />
       </div>
       <h5 class="mt-5">Requerimientos de la contraseña</h5>
       <p class="text-muted mb-2">
-       Asegurate que tu contraseña cumpla con los siguientes requerimientos:
+        Asegurate que tu contraseña cumpla con los siguientes requerimientos:
       </p>
       <ul class="text-muted ps-4 mb-0 float-start">
         <li>
@@ -195,9 +195,10 @@ export default {
       <material-button
         class="float-end mt-6 mb-0"
         color="dark"
-        variant="gradient"
         size="sm"
-      >Update password</material-button
+        variant="gradient"
+      >Update password
+      </material-button
       >
     </div>
   </div>
@@ -205,7 +206,8 @@ export default {
     <div class="card-header">
       <h5>Eliminar Cuenta</h5>
       <p class="text-sm mb-0">
-        Si eliminas tu cuenta, perderás todos tus datos y no podrás recuperarlos. Por favor, asegúrate de que deseas eliminar tu cuenta.
+        Si eliminas tu cuenta, perderás todos tus datos y no podrás recuperarlos. Por favor, asegúrate de que deseas
+        eliminar tu cuenta.
       </p>
     </div>
     <div class="card-body d-sm-flex pt-0">
@@ -217,24 +219,27 @@ export default {
           <span class="text-dark font-weight-bold d-block text-sm"
           >Confirmar</span
           >
-          <span class="text-xs d-block">Quiero borrar mi cuenta, estoy en conocimiento que esta acción es permanente</span>
+          <span
+            class="text-xs d-block">Quiero borrar mi cuenta, estoy en conocimiento que esta acción es permanente</span>
         </div>
       </div>
       <material-button
-        color="secondary"
-        variant="outline"
         class="mb-0 ms-auto"
-        type="button"
+        color="secondary"
         name="button"
-      >Desactivar</material-button
+        type="button"
+        variant="outline"
+      >Desactivar
+      </material-button
       >
       <material-button
-        color="danger"
-        variant="gradient"
         class="mb-0 ms-2"
-        type="button"
+        color="danger"
         name="button"
-      >Eliminar Cuenta</material-button
+        type="button"
+        variant="gradient"
+      >Eliminar Cuenta
+      </material-button
       >
     </div>
   </div>

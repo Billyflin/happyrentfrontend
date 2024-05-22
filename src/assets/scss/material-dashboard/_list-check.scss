@@ -2,24 +2,24 @@
 // contains the checklist entry info and checkbox
 
 .checklist-item {
-    &:before {
-        content: "";
-        position: absolute;
-        width: 3px;
-        height: 100%;
-        top: 0;
-        left: 0;
-        background-color: $primary;
-        border-radius: $border-radius-sm;
-    }
+  &:before {
+    content: "";
+    position: absolute;
+    width: 3px;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: $primary;
+    border-radius: $border-radius-sm;
+  }
 }
 
 // Color variations
 
 @each $color, $value in $theme-colors {
-    .checklist-item-#{$color} {
-        &:before {
-            background-color: $value;
-        }
+  .checklist-item-#{$color} {
+    &:before {
+      background-color: $value;
     }
+  }
 }

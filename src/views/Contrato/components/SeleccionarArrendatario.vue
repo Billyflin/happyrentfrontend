@@ -30,8 +30,8 @@ export default {
     propietario_existente: {
       handler: function(val) {
         if (val !== undefined) {
-        const store = useAuthStore()
-            store.arrendatario = val.value
+          const store = useAuthStore()
+          store.arrendatario = val.value
         }
       },
       deep: true
@@ -85,15 +85,15 @@ export default {
           <material-choices id="propietario_seleccionado"
                             v-model="propietario_existente"
                             :options="opcionsPersonas"
-                            name="propietario_existente" label="Selecciona un arrendatario existente"
+                            label="Selecciona un arrendatario existente" name="propietario_existente"
           />
         </div>
 
       </div>
-      <div class="mx-4 col " v-if="propietario_existente && !store.contratoError">
+      <div v-if="propietario_existente && !store.contratoError" class="mx-4 col ">
 
 
-        <div class=" col " v-if="propietario_existente.value.type === 'persona'">
+        <div v-if="propietario_existente.value.type === 'persona'" class=" col ">
 
           <!--          mostrar datos del propietario seleccionado-->
           <div v-if="propietario_existente.value.rut" class="d-flex justify-content-between align-items-center">
@@ -140,7 +140,7 @@ export default {
             </p>
           </div>
         </div>
-        <div class="col" v-else-if="propietario_existente.value.type === 'empresa'">
+        <div v-else-if="propietario_existente.value.type === 'empresa'" class="col">
           <!--          mostrar datos de la empresa seleccionada-->
           <div v-if="propietario_existente.value.rut" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Rut</h6>

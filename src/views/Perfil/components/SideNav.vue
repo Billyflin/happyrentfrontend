@@ -23,9 +23,9 @@ export default {
           <material-avatar
             :img="img"
             alt="bruce"
-            size="xl"
-            shadow="sm"
             border-radius="lg"
+            shadow="sm"
+            size="xl"
           />
         </div>
         <div class="col-sm-auto col-8 my-auto">

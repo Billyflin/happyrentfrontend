@@ -1,91 +1,91 @@
 <template>
   <div
-      class="input-group"
-      :class="`input-group-${variant} ${getStatus(error, success)}`"
+    :class="`input-group-${variant} ${getStatus(error, success)}`"
+    class="input-group"
   >
     <textarea
-        :id="id"
-        class="form-control"
-        :rows="rows"
-        :name="name"
-        :value="modelValue"
-        :placeholder="placeholder"
-        :isRequired="isRequired"
-        :disabled="disabled"
-        @input="$emit('update:modelValue', $event.target.value)"
-        :style="{ resize: resizable ? 'auto' : 'none' }"
+      :id="id"
+      :disabled="disabled"
+      :isRequired="isRequired"
+      :name="name"
+      :placeholder="placeholder"
+      :rows="rows"
+      :style="{ resize: resizable ? 'auto' : 'none' }"
+      :value="modelValue"
+      class="form-control"
+      @input="$emit('update:modelValue', $event.target.value)"
     ></textarea>
   </div>
 </template>
 <script>
-import setMaterialInput from "@/assets/js/material-input.js";
+import setMaterialInput from '@/assets/js/material-input.js'
 
 export default {
-  name: "MaterialTextarea",
+  name: 'MaterialTextarea',
   props: {
     modelValue: {
       type: String,
-      default: "",
+      default: ''
     },
     variant: {
       type: String,
-      default: "outline",
+      default: 'outline'
     },
     id: {
       type: String,
-      required: true,
+      required: true
     },
     name: {
       type: String,
-      default: "",
+      default: ''
     },
     value: {
       type: String,
-      default: "",
+      default: ''
     },
     placeholder: {
       type: String,
-      default: "Your text here...",
+      default: 'Your text here...'
     },
     isRequired: Boolean,
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     rows: {
       type: Number,
-      default: 5,
+      default: 5
     },
     success: {
       type: Boolean,
-      default: false,
+      default: false
     },
     error: {
       type: Boolean,
-      default: false,
+      default: false
     },
     resizable: {
       type: Boolean,
-      default: true,
-    },
+      default: true
+    }
   },
   mounted() {
-    setMaterialInput();
+    setMaterialInput()
   },
   methods: {
     getStatus: (error, success) => {
-      let isValidValue;
+      let isValidValue
 
       if (success) {
-        isValidValue = "is-valid";
+        isValidValue = 'is-valid'
       } else if (error) {
-        isValidValue = "is-invalid";
+        isValidValue = 'is-invalid'
       } else {
-        isValidValue = null;
+        isValidValue = null
       }
 
-      return isValidValue;
-    },
-  },
-};
+      return isValidValue
+    }
+  }
+}
 </script>

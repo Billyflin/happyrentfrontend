@@ -16,6 +16,7 @@ function s2ab(s) {
   for (var i = 0; i < s.length; i++) view[i] = s.charCodeAt(i) & 0xFF
   return buf
 }
+
 function flattenObject(ob) {
   var toReturn = {}
 
@@ -23,7 +24,7 @@ function flattenObject(ob) {
     if (!ob.hasOwnProperty(i)) continue
 
     // Excluye los campos que no quieres incluir
-    if (i === 'id' || i === 'createdBy' || i === 'lastModifiedBy'|| i === 'type') continue
+    if (i === 'id' || i === 'createdBy' || i === 'lastModifiedBy' || i === 'type') continue
 
     if ((typeof ob[i]) == 'object' && ob[i] !== null) {
       var flatObject = flattenObject(ob[i])
@@ -31,7 +32,7 @@ function flattenObject(ob) {
         if (!flatObject.hasOwnProperty(x)) continue
 
         // Excluye los campos que no quieres incluir
-        if (x === 'id' || x === 'createdBy' || x === 'lastModifiedBy'|| i === 'type') continue
+        if (x === 'id' || x === 'createdBy' || x === 'lastModifiedBy' || i === 'type') continue
 
         toReturn[i + '_' + x] = flatObject[x]
       }
@@ -50,6 +51,7 @@ function downloadExcel(data, filename) {
   const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' })
   FileSave.saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), filename)
 }
+
 let flattenedPersonas = ref(null)
 let flattenedEmpresas = ref(null)
 onMounted(async () => {
@@ -58,16 +60,16 @@ onMounted(async () => {
   personas.value = response.data
     .filter(persona => persona.type === 'persona')
     .map(({ id, createdBy, lastModifiedBy, type, nombre, ...rest }) => {
-      return {nombre, ...rest }
+      return { nombre, ...rest }
     })
   empresas.value = response.data
     .filter(persona => persona.type === 'empresa')
-    .map(({ id, createdBy, lastModifiedBy, type, representante,nombre, ...rest }) => {
-      return {nombre, ...rest, representante }
+    .map(({ id, createdBy, lastModifiedBy, type, representante, nombre, ...rest }) => {
+      return { nombre, ...rest, representante }
     })
 
 // Aplana los objetos en tus datos
-   flattenedPersonas = personas.value.map(persona => flattenObject(persona))
+  flattenedPersonas = personas.value.map(persona => flattenObject(persona))
   flattenedEmpresas = empresas.value.map(empresa => flattenObject(empresa))
 })
 </script>
@@ -83,30 +85,30 @@ onMounted(async () => {
         </p>
       </div>
       <default-statistics-card
-        title="Total Personas"
-        description="Total de personas"
         :count="personas ? personas.length : 0"
-        menu="Descargar"
         :dropdown=" [
               { label: 'Descargar Excel',
                 icon:'file_download',
                 action: () => downloadExcel(flattenedPersonas, 'personas.xlsx')
               }
             ]"
+        description="Total de personas"
+        menu="Descargar"
+        title="Total Personas"
       />
       <default-statistics-card
-        title="Total Empresas"
-        description="Total de empresas"
-        icon="business"
         :count="empresas ? empresas.length : 0"
-        :lista="empresas"
-        menu="Descargar"
         :dropdown=" [
               { label: 'Descargar Excel',
                 icon:'file_download',
                 action: () => downloadExcel(flattenedEmpresas, 'empresas.xlsx')
               }
             ]"
+        :lista="empresas"
+        description="Total de empresas"
+        icon="business"
+        menu="Descargar"
+        title="Total Empresas"
       />
     </div>
 

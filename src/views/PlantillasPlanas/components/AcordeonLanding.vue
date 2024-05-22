@@ -17,8 +17,8 @@ import AccordionItem from '@/views/components/AccordionItem.vue'
       <div id="accordionRental" class="accordion">
         <accordion-item
           accordion-id="headingOne"
-          collapse-id="collapseOne"
           active
+          collapse-id="collapseOne"
         >
           <template #question>How do I order?</template>
           <template #answer>

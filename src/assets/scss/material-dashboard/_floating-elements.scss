@@ -5,18 +5,23 @@
 .fadeIn1 {
   animation-duration: $fade-in-1-animation-duration;
 }
+
 .fadeIn2 {
   animation-duration: $fade-in-2-animation-duration;
 }
+
 .fadeIn3 {
   animation-duration: $fade-in-3-animation-duration;
 }
+
 .fadeIn4 {
   animation-duration: $fade-in-4-animation-duration;
 }
+
 .fadeIn5 {
   animation-duration: $fade-in-5-animation-duration;
 }
+
 .fadeIn1,
 .fadeIn2,
 .fadeIn3,
@@ -24,6 +29,7 @@
 .fadeIn5 {
   animation-fill-mode: both;
 }
+
 .fadeInBottom {
   animation-name: $fade-in-animation-name;
 }
@@ -37,8 +43,6 @@
     opacity: 1
   }
 }
-
-
 
 
 // Headers

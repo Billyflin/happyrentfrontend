@@ -1,12 +1,12 @@
 <template>
   <div class="form-check p-0">
     <input
-        :id="id"
-        class="form-check-input"
-        type="checkbox"
-        :name="name"
-        :checked="modelValue"
-        @change="$emit('update:modelValue', $event.target.checked)"
+      :id="id"
+      :checked="modelValue"
+      :name="name"
+      class="form-check-input"
+      type="checkbox"
+      @change="$emit('update:modelValue', $event.target.checked)"
     />
     <label :for="id" class="custom-control-label">
       <slot />
@@ -16,17 +16,17 @@
 
 <script>
 export default {
-  name: "MaterialCheckbox",
+  name: 'MaterialCheckbox',
   props: {
     name: {
       type: String,
-      default: "",
+      default: ''
     },
     id: {
       type: String,
-      default: "",
+      default: ''
     },
-    modelValue: Boolean,
-  },
-};
+    modelValue: Boolean
+  }
+}
 </script>

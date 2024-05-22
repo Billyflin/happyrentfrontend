@@ -3,18 +3,18 @@
     <div class="d-flex align-items-center">
       <material-button
         :color="color"
-        variant="outline"
-        size="sm"
         class="btn-icon-only btn-rounded mb-0 me-3 d-flex align-items-center justify-content-center"
+        size="sm"
+        variant="outline"
       >
-        <i class="fas" :class="icon" aria-hidden="true"></i>
+        <i :class="icon" aria-hidden="true" class="fas"></i>
       </material-button>
       <div class="d-flex flex-column">
         <h6 class="mb-1 text-dark text-sm">{{ trader }}</h6>
         <span class="text-xs">{{ date }}</span>
       </div>
     </div>
-    <div class="d-flex align-items-center text-gradient text-sm font-weight-bold" :class="`text-${color}`">
+    <div :class="`text-${color}`" class="d-flex align-items-center text-gradient text-sm font-weight-bold">
       {{ transactionAmount }}
     </div>
   </li>
@@ -22,25 +22,26 @@
 
 <script setup>
 import MaterialButton from '@/components/MaterialButton.vue'
+
 defineProps({
   color: {
     type: String,
-    default: 'dark',
+    default: 'dark'
   },
   icon: {
-    type: String,
+    type: String
   },
   trader: {
     type: String,
-    default: 'Laulou',
+    default: 'Laulou'
   },
   date: {
     type: String,
-    default: '5 July 2021, at 12:30 PM',
+    default: '5 July 2021, at 12:30 PM'
   },
   transactionAmount: {
     type: String,
-    default: 'Pending',
-  },
+    default: 'Pending'
+  }
 })
 </script>

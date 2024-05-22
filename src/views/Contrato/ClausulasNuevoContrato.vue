@@ -53,7 +53,7 @@ export default {
       clausulas4: [],
       clausulas1: [],
 
-      reporteID:0,
+      reporteID: 0,
 
 
       comparecenciaEdit: false,
@@ -165,19 +165,19 @@ export default {
       if (typeof text !== 'string') return ''
       return text.charAt(0).toUpperCase() + text.slice(1)
     },
-    getDoc ()    {
+    getDoc() {
       axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato/reporte/${this.reporteID}`, { responseType: 'blob' })
         .then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]));
-          const link = document.createElement('a');
-          link.href = url;
-          link.setAttribute('download', `contrato_${this.reporteID}.pdf`); // o cualquier otro nombre de archivo
-          document.body.appendChild(link);
-          link.click();
+          const url = window.URL.createObjectURL(new Blob([response.data]))
+          const link = document.createElement('a')
+          link.href = url
+          link.setAttribute('download', `contrato_${this.reporteID}.pdf`) // o cualquier otro nombre de archivo
+          document.body.appendChild(link)
+          link.click()
         })
         .catch((error) => {
-          console.error(error);
-        });
+          console.error(error)
+        })
 
     },
     enviarContrato() {
@@ -224,7 +224,7 @@ export default {
           clausula18Edit: this.clausula18edit,
           propiedadId: this.store2.propiedad.id,
           arrendatarioId: this.store2.arrendatario.id,
-          arrendadorId: this.store2.propiedad.propietario.id,
+          arrendadorId: this.store2.propiedad.propietario.id
           // codeudorId: this.store2.codeudor.id,
           // fechaInicio: this.fechaInicioContrato,
         }
@@ -272,7 +272,7 @@ export default {
                     </div>
                   </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p class="text-justify" :contenteditable="comparecenciaEdit" ref="Comparecencia">
+                    <p ref="Comparecencia" :contenteditable="comparecenciaEdit" class="text-justify">
                       En Santiago, a {{ formatDate(Date.now()) }}, comparecen: por una parte,
                       <strong> PROPIETARIA </strong>
                       <template v-if="store2.propiedad.propietario.type === 'persona'">
@@ -381,7 +381,7 @@ export default {
                     </div>
                   </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p class="text-justify" :contenteditable="clausula1edit" ref="Clausula1">
+                    <p ref="Clausula1" :contenteditable="clausula1edit" class="text-justify">
                       La arrendadora,
                       <template v-if="store2.propiedad.propietario.type === 'persona'">
                         {{ capitalize(store2.propiedad.propietario.tratamiento) }}
@@ -418,12 +418,12 @@ export default {
                 </div>
                 <div class="col-3">
                   <material-choices id="clausula1"
-                                    :options="optionsClausula1"
-                                    name="ChoiseClausula1"
                                     v-model:model-value="clausulas1"
+                                    :options="optionsClausula1"
                                     is-multiple
-                                    remove-item-button
                                     label="Selecciona el uso de la propiedad"
+                                    name="ChoiseClausula1"
+                                    remove-item-button
                   />
                 </div>
               </div>
@@ -438,7 +438,7 @@ export default {
                     </div>
                   </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula2edit" class="text-justify" ref="Clausula2">
+                    <p ref="Clausula2" :contenteditable="clausula2edit" class="text-justify">
                       La renta mensual de arrendamiento por los inmuebles individualizados en la cláusula primera
                       precedente es y será la suma de <strong>CONTRATO</strong> $
                       <!--                      {{ store2.contrato.valorRenta }}.- -->
@@ -469,7 +469,7 @@ export default {
                     </div>
                   </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula3edit" class="text-justify" ref="Clausula3">
+                    <p ref="Clausula3" :contenteditable="clausula3edit" class="text-justify">
                       La renta se reajustará [{reajusteContrato}] en el mismo porcentaje que haya
                       variado el IPC (índice de precios del consumidor). En caso de IPC negativo se mantendrá
                       la renta del período inmediatamente anterior con el mínimo de [{valorRenta}].-
@@ -490,7 +490,7 @@ export default {
                     </div>
                   </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula4edit" class="text-justify" ref="Clausula4">
+                    <p ref="Clausula4" :contenteditable="clausula4edit" class="text-justify">
                       <template v-if="clausula4">
                         La arrendataria asumirá la responsabilidad de pagar puntualmente y a la entidad correspondiente
                         los siguientes servicios y gastos asociados al inmueble:
@@ -520,26 +520,26 @@ export default {
                   </div>
                 </div>
                 <div class="col-3 mt-3">
-                  <material-switch id="Clausula4" name="Clausula4" label="" v-model:checked="clausula4">¿Desea que el
+                  <material-switch id="Clausula4" v-model:checked="clausula4" label="" name="Clausula4">¿Desea que el
                     arrendatario pague los gastos comunes?
                   </material-switch>
-                  <material-choices v-if="clausula4" id="Clausulas4" label="¿Que debe pagar el arrendatario?"
-                                    :options="optionsClausula4" name="Clausulas4" is-multiple remove-item-button
-                                    v-model="Clausulas4"></material-choices>
+                  <material-choices v-if="clausula4" id="Clausulas4" v-model="Clausulas4"
+                                    :options="optionsClausula4" is-multiple label="¿Que debe pagar el arrendatario?" name="Clausulas4"
+                                    remove-item-button></material-choices>
                 </div>
               </div>
 
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula5" class="col-8 card-title text-center">Clausula 5 PLAZO:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula5" v-model="clausula5edit">Editar</material-checkbox>
-                </div>
-              </div>
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula5" class="col-8 card-title text-center">Clausula 5 PLAZO:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula5" v-model="clausula5edit">Editar</material-checkbox>
+                    </div>
+                  </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula5edit" class="text-justify" ref="Clausula5">
+                    <p ref="Clausula5" :contenteditable="clausula5edit" class="text-justify">
                       El presente contrato comenzará a regir a partir de {{ formatDate(fechaInicioContrato) }}, y tendrá
                       una duración de {{ duracionContrato }} meses,
                       <template v-if="prorrogaAutomatica">
@@ -570,29 +570,29 @@ export default {
                       una cantidad equivalente al 50% de la referida suma,
                       sin perjuicio de los derechos del arrendador para demandar la restitución del inmueble ante la
                       justicia ordinaria.
-                    </p >
+                    </p>
                   </div>
                 </div>
                 <div class="col-3 mt-3">
                   <div class="mt-0">
 
-                    <material-input type="date" name="fecha" variant="static" size="sm" id="fechaInicioContrato"
-                                    label="Fecha de inicio del contrato" v-model="fechaInicioContrato"></material-input>
+                    <material-input id="fechaInicioContrato" v-model="fechaInicioContrato" label="Fecha de inicio del contrato" name="fecha" size="sm"
+                                    type="date" variant="static"></material-input>
                   </div>
                   <div class="mt-3">
-                    <material-input id="duracionContrato" variant="static" size="sm"
-                                    label="Duración del contrato (en meses)"
-                                    v-model="duracionContrato"></material-input>
+                    <material-input id="duracionContrato" v-model="duracionContrato" label="Duración del contrato (en meses)"
+                                    size="sm"
+                                    variant="static"></material-input>
                   </div>
                   <div class="mt-3">
-                    <material-switch id="prorrogaAutomatica" label="" v-model="prorrogaAutomatica" name="clausula5">¿Se
+                    <material-switch id="prorrogaAutomatica" v-model="prorrogaAutomatica" label="" name="clausula5">¿Se
                       prorrogará automáticamente el contrato?
                     </material-switch>
                   </div>
                   <div class="mt-3">
-                    <material-input class="mt-3" v-if="prorrogaAutomatica" variant="static" size="sm" type="number"
-                                    id="periodoProrroga" label="Período de prórroga (en meses)"
-                                    v-model="periodoProrroga"></material-input>
+                    <material-input v-if="prorrogaAutomatica" id="periodoProrroga" v-model="periodoProrroga" class="mt-3" label="Período de prórroga (en meses)"
+                                    size="sm" type="number"
+                                    variant="static"></material-input>
                   </div>
                 </div>
               </div>
@@ -600,14 +600,14 @@ export default {
               <div class="row align-items-center">
                 <div class="col-9">
                   <div class="row">
-                    <div class="col-2"/>
-                  <h5 id="Clausula6" class="col-8 card-title text-center">Clausula 6 MULTA EN CASO DE MORA:</h5>
-                  <div class="col-2">
-                    <material-checkbox id="editClausula6" v-model="clausula6edit">Editar</material-checkbox>
-                  </div>
+                    <div class="col-2" />
+                    <h5 id="Clausula6" class="col-8 card-title text-center">Clausula 6 MULTA EN CASO DE MORA:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula6" v-model="clausula6edit">Editar</material-checkbox>
+                    </div>
                   </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula6edit" class="text-justify" ref="Clausula6">
+                    <p ref="Clausula6" :contenteditable="clausula6edit" class="text-justify">
                       En caso de no pago oportuno de la renta de arrendamiento, la suma a pagar por los arrendadores
                       devengará, a título de multa en favor del arrendador, la cantidad que resulte al aplicar la
                       tasa
@@ -628,15 +628,15 @@ export default {
 
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula7" class="col-8 card-title text-center">Clausula 7 VISITAS AL INMUEBLE:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula7" v-model="clausula7edit">Editar</material-checkbox>
-                </div>
-              </div>
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula7" class="col-8 card-title text-center">Clausula 7 VISITAS AL INMUEBLE:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula7" v-model="clausula7edit">Editar</material-checkbox>
+                    </div>
+                  </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula7edit" class="text-justify" ref="Clausula7">
+                    <p ref="Clausula7" :contenteditable="clausula7edit" class="text-justify">
                       <template v-if="visitasPermitidas">
                         La arrendataria permitirá la visita al inmueble por parte del arrendador o su representante, con
                         el fin de verificar el estado y uso del mismo. Estas visitas se realizarán en horarios
@@ -654,9 +654,9 @@ export default {
                   <material-switch id="visitasPermitidas"
                                    v-model="visitasPermitidas" name="uwu ">¿El propietario desea visitar el inmueble?
                   </material-switch>
-                  <material-input v-if="visitasPermitidas" id="numeroVisitas" type="number"
-                                  label="Número de visitas al mes" size="sm" variant="static"
-                                  v-model="numeroVisitas"></material-input>
+                  <material-input v-if="visitasPermitidas" id="numeroVisitas" v-model="numeroVisitas"
+                                  label="Número de visitas al mes" size="sm" type="number"
+                                  variant="static"></material-input>
                   <!--                    <material-switch v-if="visitasPermitidas" id="visitasAceptadas" label="¿El arrendatario acepta las visitas?" v-model="visitasAceptadas"></material-switch>-->
                 </div>
               </div>
@@ -664,15 +664,15 @@ export default {
 
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula8" class="col-8 card-title text-center">Clausula 8 TERMINO ANTICIPADO:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula8" v-model="clausula8edit">Editar</material-checkbox>
-                </div>
-              </div>
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula8" class="col-8 card-title text-center">Clausula 8 TERMINO ANTICIPADO:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula8" v-model="clausula8edit">Editar</material-checkbox>
+                    </div>
+                  </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula8edit" class="text-justify" ref="Clausula8">
+                    <p ref="Clausula8" :contenteditable="clausula8edit" class="text-justify">
                       Queda prohibido a la arrendataria y su infracción dará derecho a la arrendadora para demandar
                       el
                       término ipso-facto del presente contrato, notificando a la arrendataria, al aval y codeudor
@@ -701,15 +701,15 @@ export default {
 
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula9" class="col-8 card-title text-center">Clausula 9 MEJORAS:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula9" v-model="clausula9edit">Editar</material-checkbox>
-                </div>
-              </div>
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula9" class="col-8 card-title text-center">Clausula 9 MEJORAS:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula9" v-model="clausula9edit">Editar</material-checkbox>
+                    </div>
+                  </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula9edit" class="text-justify" ref="Clausula9">
+                    <p ref="Clausula9" :contenteditable="clausula9edit" class="text-justify">
                       La arrendadora no tendrá obligación de hacer mejoras en el inmueble. Las mejoras de carácter
                       estructural que pueda efectuar la arrendataria, deberán contar con la debida autorización
                       otorgada
@@ -723,15 +723,15 @@ export default {
 
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula10" class="col-8 card-title text-center">Clausula 10 MANTENCION DEL INMUEBLE:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula10" v-model="clausula10edit">Editar</material-checkbox>
-                </div>
-              </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula10edit" class="text-justify" ref="Clausula10">
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula10" class="col-8 card-title text-center">Clausula 10 MANTENCION DEL INMUEBLE:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula10" v-model="clausula10edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula10" :contenteditable="clausula10edit" class="text-justify">
                       Será obligación de la arrendadora mantener la propiedad arrendada en estado de servir para el
                       fin
                       a que ha sido arrendada, haciendo durante el arrendamiento las reparaciones que sean
@@ -752,15 +752,15 @@ export default {
 
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula11" class="col-8 card-title text-center">Clausula 11 ROBOS Y PERJUICIOS:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula11" v-model="clausula11edit">Editar</material-checkbox>
-                </div>
-                </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula11edit" class="text-justify" ref="Clausula11">
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula11" class="col-8 card-title text-center">Clausula 11 ROBOS Y PERJUICIOS:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula11" v-model="clausula11edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula11" :contenteditable="clausula11edit" class="text-justify">
                       La arrendadora no responderá de manera alguna por robos que puedan ocurrir en la propiedad
                       arrendada o por perjuicios que puedan producirse por incendios, inundaciones, filtraciones,
                       rotura
@@ -773,15 +773,15 @@ export default {
 
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula12" class="col-8 card-title text-center">Clausula 12 GARANTIA DE ARRIENDO:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula12" v-model="clausula12edit">Editar</material-checkbox>
-                </div>
-                </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula12edit" class="text-justify" ref="Clausula12">
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula12" class="col-8 card-title text-center">Clausula 12 GARANTIA DE ARRIENDO:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula12" v-model="clausula12edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula12" :contenteditable="clausula12edit" class="text-justify">
                       A fin de garantizar la conservación de la propiedad y su restitución en el mismo estado en que
                       la
                       recibe, la devolución y conservación de las especies y artefactos que se indicarán en el
@@ -815,16 +815,16 @@ export default {
 
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula13" class="col-8 card-title text-center">Clausula 13 ENTREGA Y RESTITUCION DEL
-                    INMUEBLE:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula13" v-model="clausula13edit">Editar</material-checkbox>
-                </div>
-                </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula13edit" class="text-justify" ref="Clausula13">
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula13" class="col-8 card-title text-center">Clausula 13 ENTREGA Y RESTITUCION DEL
+                      INMUEBLE:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula13" v-model="clausula13edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula13" :contenteditable="clausula13edit" class="text-justify">
                       La arrendataria se obliga a restituir inmediatamente que termine este contrato, en el mismo
                       estado, tomándose en consideración el deterioro ocasionado por el paso del tiempo y el uso
                       legítimo de ella. La entrega deberá hacerse mediante la desocupación total de la propiedad,
@@ -841,15 +841,15 @@ export default {
               </div>
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula14" class="col-8 card-title text-center">Clausula 14 ARBITRAJE:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula14" v-model="clausula14edit">Editar</material-checkbox>
-                </div>
-                </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula14edit" class="text-justify" ref="Clausula14" >
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula14" class="col-8 card-title text-center">Clausula 14 ARBITRAJE:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula14" v-model="clausula14edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula14" :contenteditable="clausula14edit" class="text-justify">
                       Toda y cualquier controversia, dificultad o diferencia que se produzca entre las partes y que
                       tenga su origen en la interpretación, cumplimiento, aplicación, validez, ejecución, nulidad,
                       efectos o vigencia del presente contrato, cualquiera de sus cláusulas o efectos, siendo la
@@ -861,15 +861,15 @@ export default {
               </div>
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula15" class="col-8 card-title text-center">Clausula 15 CODEUDOR SOLIDARIO:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula15" v-model="clausula15edit">Editar</material-checkbox>
-                </div>
-                </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula15edit" class="text-justify" ref="Clausula15">
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula15" class="col-8 card-title text-center">Clausula 15 CODEUDOR SOLIDARIO:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula15" v-model="clausula15edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula15" :contenteditable="clausula15edit" class="text-justify">
                       Por el presente a este acto don David Alberto Roig Salgado y, declaran que se constituyen como
                       aval y codeudor solidario de las obligaciones contraídas en este acto por el arrendatario don
                       Nicolás Alberto Pérez Pérez, aceptando, desde luego las variaciones en la renta de
@@ -881,15 +881,15 @@ export default {
               </div>
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula16" class="col-8 card-title text-center">Clausula 16 COMISION:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula16" v-model="clausula16edit">Editar</material-checkbox>
-                </div>
-                </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula16edit" class="text-justify" ref="Clausula16">
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula16" class="col-8 card-title text-center">Clausula 16 COMISION:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula16" v-model="clausula16edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula16" :contenteditable="clausula16edit" class="text-justify">
                       Las partes pagarán una comisión de corretaje por un monto equivalente al 50% de un mes de
                       arriendo
                       al momento de la firma de contrato a la corredora de propiedades Alejandra Solis Pradenas, rut
@@ -900,15 +900,15 @@ export default {
               </div>
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula17" class="col-8 card-title text-center">Clausula 17 OTRAS CONDICIONES:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula17" v-model="clausula17edit">Editar</material-checkbox>
-                </div>
-                </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula17edit" class="text-justify" ref="Clausula17">
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula17" class="col-8 card-title text-center">Clausula 17 OTRAS CONDICIONES:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula17" v-model="clausula17edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula17" :contenteditable="clausula17edit" class="text-justify">
                       En caso de que una de las partes quisiera dar término al presente contrato, antes del primer
                       año
                       estipulado se cancelará un mes de arriendo como indemnización que las partes establecen como
@@ -922,15 +922,15 @@ export default {
               </div>
               <div class="row align-items-center">
                 <div class="col-9">
-              <div class="row">
-                <div class="col-2"/>
-                  <h5 id="Clausula18" class="col-8 card-title text-center">Clausula 18 DOMICILIO:</h5>
-                <div class="col-2">
-                  <material-checkbox id="editClausula18" v-model="clausula18edit">Editar</material-checkbox>
-                </div>
-                </div>
-                <div class="mb-3 mt-3 ms-3">
-                    <p :contenteditable="clausula18edit" class="text-justify" ref="Clausula18">
+                  <div class="row">
+                    <div class="col-2" />
+                    <h5 id="Clausula18" class="col-8 card-title text-center">Clausula 18 DOMICILIO:</h5>
+                    <div class="col-2">
+                      <material-checkbox id="editClausula18" v-model="clausula18edit">Editar</material-checkbox>
+                    </div>
+                  </div>
+                  <div class="mb-3 mt-3 ms-3">
+                    <p ref="Clausula18" :contenteditable="clausula18edit" class="text-justify">
                       Las partes fijan domicilio convencional en la ciudad y comuna de Santiago para todos los
                       efectos
                       legales que pudieren emanar del presente instrumento y se someten a la competencia y
@@ -947,9 +947,12 @@ export default {
             </div>
           </div>
         </div>
-          <material-button variant="success" size="lg" class="mt-4" full-width @click="enviarContrato">Crear Contrato</material-button>
-          <material-button v-if="reporteID" color="happLight" size="lg" class="mt-4 mb-6" full-width @click="getDoc">Ver documento provicional</material-button>
-        </div>
+        <material-button class="mt-4" full-width size="lg" variant="success" @click="enviarContrato">Crear Contrato
+        </material-button>
+        <material-button v-if="reporteID" class="mt-4 mb-6" color="happLight" full-width size="lg" @click="getDoc">Ver
+          documento provicional
+        </material-button>
+      </div>
     </div>
   </div>
 </template>

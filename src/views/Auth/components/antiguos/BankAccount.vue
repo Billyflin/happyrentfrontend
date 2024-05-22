@@ -12,7 +12,8 @@
       <div class="row">
       </div>
       <div class="mt-4 button-row d-flex">
-        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="this.$parent.nextStep" >
+        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" title="Next" type="button"
+                @click="this.$parent.nextStep">
           Next
         </button>
 
@@ -37,7 +38,7 @@ export default defineComponent({
         { value: 3, label: 'Santander' },
         { value: 4, label: 'Vice' },
         { value: 5, label: 'Scotiabank' },
-        { value: 6, label: 'Banco BCI' },
+        { value: 6, label: 'Banco BCI' }
       ],
       cuentas: [
         { value: 'Corriente', text: 'Corriente', selected: true },

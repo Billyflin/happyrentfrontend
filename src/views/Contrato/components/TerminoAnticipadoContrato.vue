@@ -8,15 +8,15 @@ import MaterialInput from '@/components/MaterialInput.vue'
     <div class="card-header">
       <h5>Termino Anticipado</h5>
     </div>
-     <div class="card-body pt-0">
+    <div class="card-body pt-0">
       <div class="row">
         <div class="col-4">
           <material-input
             id="CausalTerminoAnticipado"
-            type="String"
-            variant="static"
             label="Causal"
             placeholder="Causal Termino Anticipado"
+            type="String"
+            variant="static"
           />
         </div>
       </div>

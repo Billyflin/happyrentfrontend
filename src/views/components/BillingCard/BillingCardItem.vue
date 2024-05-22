@@ -1,5 +1,5 @@
 <template>
-  <li class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg" :class="{'mt-3': !isFisrt}">
+  <li :class="{'mt-3': !isFisrt}" class="list-group-item border-0 d-flex p-4 mb-2 bg-gray-100 border-radius-lg">
     <div class="d-flex flex-column">
       <h6 class="mb-3 text-sm">{{ name }}</h6>
       <span class="mb-2 text-xs">
@@ -17,10 +17,10 @@
     </div>
     <div class="ms-auto text-end">
       <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;">
-        <i class="far fa-trash-alt me-2" aria-hidden="true"></i>Delete
+        <i aria-hidden="true" class="far fa-trash-alt me-2"></i>Delete
       </a>
       <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;">
-        <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit
+        <i aria-hidden="true" class="fas fa-pencil-alt text-dark me-2"></i>Edit
       </a>
     </div>
   </li>
@@ -30,23 +30,23 @@
 defineProps({
   isFisrt: {
     type: Boolean,
-    default: false,
+    default: false
   },
   name: {
     type: String,
-    default: 'Laulou',
+    default: 'Laulou'
   },
   companyName: {
     type: String,
-    default: 'No company',
+    default: 'No company'
   },
   emailAddress: {
     type: String,
-    default: 'No email',
+    default: 'No email'
   },
   VATNumber: {
     type: String,
-    default: 'No VAT',
-  },
+    default: 'No VAT'
+  }
 })
 </script>

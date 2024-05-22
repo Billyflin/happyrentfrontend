@@ -36,7 +36,7 @@ export default {
       this.v$.$validate()
 
       // console.log(this.v$)
-      console.log(data,'desde agregarsadas grande padre')
+      console.log(data, 'desde agregarsadas grande padre')
       // console.log(this.persona)
       console.log(this.persona)
       if (!this.v$.$error) {
@@ -49,21 +49,21 @@ export default {
 </script>
 <template>
 
-<div class="container-fluid">
-<div class="row justify-content-end">
-  <div class="col-lg-2 d-flex justify-content-end mt-4">
-    <router-link to="/Personas"
-                 class="btn btn-simple d-flex align-items-center">
+  <div class="container-fluid">
+    <div class="row justify-content-end">
+      <div class="col-lg-2 d-flex justify-content-end mt-4">
+        <router-link class="btn btn-simple d-flex align-items-center"
+                     to="/Personas">
           <span class="material-symbols-outlined mx-2">
             arrow_back
           </span>
-      Volver
-    </router-link>
-  </div>
-</div>
-<div class="row">
-  <agregar-persona-form></agregar-persona-form>
-</div>
+          Volver
+        </router-link>
+      </div>
+    </div>
+    <div class="row">
+      <agregar-persona-form></agregar-persona-form>
+    </div>
 
-</div>
+  </div>
 </template>

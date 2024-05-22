@@ -9,7 +9,7 @@
     <!--    &lt;!&ndash; INVENTARIO &ndash;&gt;-->
     <!--    <crear-inventario-form />-->
     <!-- Boton enviar! -->
-    <material-button :disabled="isSending" variant="success" size="lg" class="mt-4" full-width @click="emitData">
+    <material-button :disabled="isSending" class="mt-4" full-width size="lg" variant="success" @click="emitData">
       Enviar
     </material-button>
 

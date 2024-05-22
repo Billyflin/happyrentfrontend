@@ -1,6 +1,6 @@
 <template>
   <div class="full-screen">
-    <multi-steps-form/>
+    <multi-steps-form />
   </div>
 </template>
 

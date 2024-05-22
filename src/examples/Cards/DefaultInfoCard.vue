@@ -5,9 +5,9 @@
         :class="typeof icon === 'object' ? icon.background : 'bg-gradient-success'"
         class="icon icon-shape icon-lg shadow text-center border-radius-lg"
       >
-        <i class="material-icons opacity-10" aria-hidden="true">{{
+        <i aria-hidden="true" class="material-icons opacity-10">{{
           typeof icon === 'string' ? icon : icon.component
-        }}</i>
+          }}</i>
       </div>
     </div>
     <div class="p-3 pt-0 text-center card-body">
@@ -25,26 +25,26 @@ defineProps({
     type: [String, Object],
     required: true,
     component: {
-      type: String,
+      type: String
     },
     background: {
-      type: String,
+      type: String
     },
     default: () => ({
-      background: 'bg-white',
-    }),
+      background: 'bg-white'
+    })
   },
   title: {
     type: String,
-    required: true,
+    required: true
   },
   description: {
     type: String,
-    default: '',
+    default: ''
   },
   value: {
     type: [String, Number],
-    default: '',
-  },
+    default: ''
+  }
 })
 </script>

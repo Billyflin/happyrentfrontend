@@ -1,14 +1,14 @@
 <template>
   <nav aria-label="breadcrumb">
     <ol class="px-0 pt-1 pb-0 mb-0 bg-transparent breadcrumb me-sm-6">
-      <li class="text-sm breadcrumb-item" :class="color">
+      <li :class="color" class="text-sm breadcrumb-item">
         <a :class="color" class="opacity-8" href="#">Pages</a>
       </li>
-      <li class="text-sm breadcrumb-item active" :class="color" aria-current="page">
+      <li :class="color" aria-current="page" class="text-sm breadcrumb-item active">
         {{ currentPage }}
       </li>
     </ol>
-    <h6 class="mb-0 font-weight-bolder" :class="color">
+    <h6 :class="color" class="mb-0 font-weight-bolder">
       {{ currentPage }}
     </h6>
   </nav>
@@ -18,11 +18,11 @@
 defineProps({
   currentPage: {
     type: String,
-    required: '',
+    required: ''
   },
   color: {
     type: String,
-    default: 'text-dark',
-  },
+    default: 'text-dark'
+  }
 })
 </script>

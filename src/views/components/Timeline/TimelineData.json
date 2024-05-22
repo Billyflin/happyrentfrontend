@@ -1,7 +1,7 @@
 {
   "data": [
     {
-      "icon":{
+      "icon": {
         "component": "notifications",
         "color": "text-success"
       },
@@ -9,7 +9,7 @@
       "dateTime": "22 DEC 7:20 PM"
     },
     {
-      "icon":{
+      "icon": {
         "component": "code",
         "color": "text-danger"
       },
@@ -17,7 +17,7 @@
       "dateTime": "21 DEC 11 PM"
     },
     {
-      "icon":{
+      "icon": {
         "component": "shopping_cart",
         "color": "text-info"
       },
@@ -25,7 +25,7 @@
       "dateTime": "21 DEC 9:34 PM"
     },
     {
-      "icon":{
+      "icon": {
         "component": "credit_card",
         "color": "text-warning"
       },
@@ -33,7 +33,7 @@
       "dateTime": "20 DEC 2:20 AM"
     },
     {
-      "icon":{
+      "icon": {
         "component": "vpn_key",
         "color": "text-primary"
       },

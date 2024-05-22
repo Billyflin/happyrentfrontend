@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import { watch } from 'vue'
 
 import axios from 'axios'
 
@@ -67,7 +66,7 @@ export const useAuthStore = defineStore('auth', {
     codeudor: {},
     propiedad: {},
     personas: [],
-    contratoError: '',
+    contratoError: ''
   }), persist: true,
   actions: {
     async loginHandler(username, password) {

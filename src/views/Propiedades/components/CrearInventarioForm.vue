@@ -35,8 +35,8 @@ async function enviar() {
     formData.append('inventario', new Blob([JSON.stringify(inventario)], { type: 'application/json' }))
 
     item.fotos.forEach((foto) => {
-      const blob = dataURLtoBlob(foto.dataURL);
-      formData.append('imagenes', blob, foto.upload.filename);
+      const blob = dataURLtoBlob(foto.dataURL)
+      formData.append('imagenes', blob, foto.upload.filename)
     })
 
     try {
@@ -51,13 +51,14 @@ async function enviar() {
     }
   }
 }
+
 function dataURLtoBlob(dataurl) {
   var arr = dataurl.split(','), mime = 'image/jpg',
-    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n);
-  while(n--){
-    u8arr[n] = bstr.charCodeAt(n);
+    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n)
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n)
   }
-  return new Blob([u8arr], {type:mime});
+  return new Blob([u8arr], { type: mime })
 }
 
 
@@ -108,45 +109,45 @@ watch(agregarInventario, (newValue) => {
     <div class="card-body pt-0">
       <div class="row mt-4">
         <div class="col-3">
-          <material-switch id="agregar_inventario" name="agregar_inventario" v-model:checked="agregarInventario" checked
-                           label-class="mb-0 text-body text-truncate w-100">
+          <material-switch id="agregar_inventario" v-model:checked="agregarInventario" checked label-class="mb-0 text-body text-truncate w-100"
+                           name="agregar_inventario">
             {{ agregarInventario ? 'Agregar Inventario' : 'Sin inventario' }}
           </material-switch>
         </div>
       </div>
-      <div class="row mt-4" v-if="agregarInventario">
+      <div v-if="agregarInventario" class="row mt-4">
         <div class="row mt-4">
           <h5>Agregar Item</h5>
-          <form @submit.prevent="agregarItem" class="row mt-2">
+          <form class="row mt-2" @submit.prevent="agregarItem">
             <div class="col-4 mt-3">
-              <material-switch id="modificable" name="modificable" v-model:checked="modificable" checked>
+              <material-switch id="modificable" v-model:checked="modificable" checked name="modificable">
                 {{ modificable ? 'Es modificable' : 'No es modificable' }}
               </material-switch>
             </div>
             <div class="col-4">
               <MaterialInput
                 id="nombre"
-                size="lg"
-                label="Nombre del objeto"
                 v-model="nuevoItem.nombre"
                 isRequired
+                label="Nombre del objeto"
+                size="lg"
               />
             </div>
             <div class="col-4">
               <MaterialInput
                 id="estado"
-                label="Estado"
                 v-model="nuevoItem.estado"
                 isRequired
+                label="Estado"
               />
             </div>
             <div class="col-12 mt-2">
               <MaterialTextarea
                 id="descripcion"
-                placeholder="Añade una descripción..."
                 v-model="nuevoItem.descripcion"
-                isRequired
                 :resizable="false"
+                isRequired
+                placeholder="Añade una descripción..."
               />
             </div>
             <div class="row mt-2 ">
@@ -168,13 +169,13 @@ watch(agregarInventario, (newValue) => {
               </div>
             </div>
             <div class="col-12 mt-4 mb-4">
-              <material-button type="submit" color="success">Agregar</material-button>
+              <material-button color="success" type="submit">Agregar</material-button>
             </div>
           </form>
         </div>
       </div>
       <div class="row mt-4">
-        <div class="table-responsive" v-if="agregarInventario">
+        <div v-if="agregarInventario" class="table-responsive">
           <table id="datatable-search2" class="table table-flush">
             <thead class="thead-light">
             <tr>

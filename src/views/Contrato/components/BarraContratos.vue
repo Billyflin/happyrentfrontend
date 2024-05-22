@@ -1,25 +1,25 @@
 <script setup>
 
-import MaterialButton from "@/components/MaterialButton.vue";
+import MaterialButton from '@/components/MaterialButton.vue'
 </script>
 
 <template>
   <div class="d-flex">
     <div class="dropdown d-inline">
       <material-button
-          id="navbarDropdownMenuLink2"
-          color="dark"
-          variant="outline"
-          class="dropdown-toggle"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
+        id="navbarDropdownMenuLink2"
+        aria-expanded="false"
+        class="dropdown-toggle"
+        color="dark"
+        data-bs-toggle="dropdown"
+        variant="outline"
       >Filters
       </material-button
       >
       <ul
-          class="dropdown-menu dropdown-menu-lg-start px-2 py-3"
-          aria-labelledby="navbarDropdownMenuLink2"
-          style
+        aria-labelledby="navbarDropdownMenuLink2"
+        class="dropdown-menu dropdown-menu-lg-start px-2 py-3"
+        style
       >
         <li>
           <a class="dropdown-item border-radius-md" href="javascript:;"
@@ -41,19 +41,19 @@ import MaterialButton from "@/components/MaterialButton.vue";
         </li>
         <li>
           <a
-              class="dropdown-item border-radius-md text-danger"
-              href="javascript:;"
+            class="dropdown-item border-radius-md text-danger"
+            href="javascript:;"
           >Remove Filter</a
           >
         </li>
       </ul>
     </div>
     <material-button
-        class="btn-icon ms-2 export"
-        size
-        color="dark"
-        variant="outline"
-        data-type="csv"
+      class="btn-icon ms-2 export"
+      color="dark"
+      data-type="csv"
+      size
+      variant="outline"
     >
           <span class="btn-inner--icon">
             <i class="ni ni-archive-2"></i>

@@ -15,6 +15,7 @@
 
   &[type="checkbox"] {
     background-image: none;
+
     &:after {
       transition: opacity $form-check-transition-time ease-in-out;
       font-family: "FontAwesome";
@@ -32,6 +33,7 @@
 
     &:checked {
       background: $success;
+
       &:after {
         opacity: 1;
       }
@@ -50,7 +52,7 @@
       height: $form-check-radio-after-width;
       border-radius: 50%;
       background-image: escape-svg($form-check-radio-checked-bg-image),
-        var(--#{$variable-prefix}gradient);
+      var(--#{$variable-prefix}gradient);
       opacity: 0;
       left: 0;
       right: 0;

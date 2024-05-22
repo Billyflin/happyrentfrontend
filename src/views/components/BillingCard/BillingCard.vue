@@ -8,11 +8,11 @@
         <billing-card-item
           v-for="{name, companyName, emailAddres, VATNumber, index} of BillingData"
           :key="index"
-          :isFirst="index === 0"
-          :name="name"
+          :VATNumber="VATNumber"
           :companyName="companyName"
           :emailAddress="emailAddres"
-          :VATNumber="VATNumber"
+          :isFirst="index === 0"
+          :name="name"
         />
       </ul>
     </div>
@@ -21,6 +21,7 @@
 
 <script setup>
 import BillingCardItem from './BillingCardItem.vue'
-import {data} from './BillingData.json'
+import { data } from './BillingData.json'
+
 const BillingData = data
 </script>

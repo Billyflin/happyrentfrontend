@@ -17,18 +17,18 @@
         <td class="text-sm font-weight-bold text-center align-middle">
           <div class="d-flex align-items-center justify-content-center">
             <material-button v-if="item.activo === true"
+                             class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
                              color="success"
                              variant="outline"
-                             class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
             >
-              <i class="fas fa-check" aria-hidden="true"></i>
+              <i aria-hidden="true" class="fas fa-check"></i>
             </material-button>
             <material-button v-else
+                             class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
                              color="danger"
-                             variant="outline"
-                             class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center">
+                             variant="outline">
 
-              <i class="fas fa-times" aria-hidden="true"></i>
+              <i aria-hidden="true" class="fas fa-times"></i>
             </material-button>
             <span>{{ item.activo ? 'Activo' : 'Inactivo' }}</span>
           </div>
@@ -39,12 +39,12 @@
         <td class="text-sm font-weight-normal text-center">{{ item.fechaTermino }}</td>
         <td class="text-sm font-weight-normal text-center">{{ item.renta }}</td>
         <td class="d-flex align-items-center text-sm">
-          <a @click="getReport(item.id)" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4">
-            <i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i>
+          <a class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" @click="getReport(item.id)">
+            <i aria-hidden="true" class="fas fa-file-pdf text-lg me-1"></i>
             PDF
           </a>
-          <a @click="verDetalles(item.uuid)" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4">
-            <i class="fa fa-eye text-lg me-1" aria-hidden="true"></i>
+          <a class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" @click="verDetalles(item.uuid)">
+            <i aria-hidden="true" class="fa fa-eye text-lg me-1"></i>
             Ver
           </a>
         </td>

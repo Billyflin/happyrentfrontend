@@ -1,7 +1,8 @@
-html *{
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+html * {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
 body {
   font-weight: $font-weight-normal;
   line-height: $p-line-height;
@@ -99,6 +100,7 @@ a {
 .text-sm {
   line-height: $text-sm-line-height;
 }
+
 .text-xs {
   line-height: $text-xs-line-height;
 }
@@ -106,21 +108,27 @@ a {
 p, .p {
   @include font-size($p-font-size);
 }
+
 .lead {
   @include font-size($lead-font-size);
 }
+
 .text-lg {
   @include font-size($font-size-lg !important);
 }
+
 .text-md {
   @include font-size($p-font-size !important);
 }
+
 .text-sm {
   @include font-size($font-size-sm !important);
 }
+
 .text-xs {
   @include font-size($font-size-xs !important);
 }
+
 .text-xxs {
   @include font-size($font-size-xxs !important);
 }
@@ -137,6 +145,7 @@ p {
 .text-sans-serif {
   font-family: $font-family-sans-serif !important;
 }
+
 .text-monospace {
   font-family: $font-family-monospace !important;
 }
@@ -182,6 +191,7 @@ p {
 .font-italic {
   font-style: italic !important;
 }
+
 // Contextual colors
 
 .text-gradient {
@@ -194,18 +204,23 @@ p {
   &.text-primary {
     background-image: $text-gradient-bg-primary;
   }
+
   &.text-info {
     background-image: $text-gradient-bg-info;
   }
+
   &.text-success {
     background-image: $text-gradient-bg-success;
   }
+
   &.text-warning {
     background-image: $text-gradient-bg-warning;
   }
+
   &.text-danger {
     background-image: $text-gradient-bg-danger;
   }
+
   &.text-dark {
     background-image: $text-gradient-bg-dark;
   }
@@ -213,6 +228,7 @@ p {
 
 .blockquote {
   border-left: 3px solid $text-muted;
+
   > span {
     font-style: italic;
   }
@@ -237,6 +253,7 @@ p {
 .text-break {
   word-wrap: break-word !important;
 }
+
 // Reset
 .text-reset {
   color: inherit !important;
@@ -247,9 +264,11 @@ p {
 .letter-wider {
   letter-spacing: $letter-wider;
 }
+
 .letter-normal {
   letter-spacing: $letter-normal;
 }
+
 .letter-tighter {
   letter-spacing: $letter-tighter;
 }
@@ -259,15 +278,19 @@ p {
 .text-lighter {
   font-weight: $font-weight-lighter;
 }
+
 .text-light {
   font-weight: $font-weight-light;
 }
+
 .text-normal {
   font-weight: $font-weight-normal;
 }
+
 .text-bold {
   font-weight: $font-weight-bold;
 }
+
 .text-bolder {
   font-weight: $font-weight-bolder;
 }
@@ -278,24 +301,31 @@ p {
 .text-2xl {
   font-size: $font-size-2xl;
 }
+
 .text-3xl {
   font-size: $font-size-3xl;
 }
+
 .text-4xl {
   font-size: $font-size-4xl;
 }
+
 .text-5xl {
   font-size: $font-size-5xl;
 }
+
 .text-6xl {
   font-size: $font-size-6xl;
 }
+
 .text-7xl {
   font-size: $font-size-7xl;
 }
+
 .text-8xl {
   font-size: $font-size-8xl;
 }
+
 .text-9xl {
   font-size: $font-size-9xl;
 }

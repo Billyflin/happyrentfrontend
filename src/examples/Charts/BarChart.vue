@@ -1,21 +1,21 @@
 <template>
   <div class="chart">
-    <div :id="id" class="chart-canvas" :style="{width: '100%', height: height + 'px'}"></div>
+    <div :id="id" :style="{width: '100%', height: height + 'px'}" class="chart-canvas"></div>
   </div>
 </template>
 
 <script setup>
-import {onMounted} from 'vue'
+import { onMounted } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps({
   id: {
     type: String,
-    default: 'bar-chart',
+    default: 'bar-chart'
   },
   height: {
     type: [Number, String],
-    default: '170',
+    default: '170'
   },
   chart: {
     type: Object,
@@ -23,9 +23,9 @@ const props = defineProps({
     xAxislDatas: Array,
     datasets: {
       label: String,
-      data: Array,
-    },
-  },
+      data: Array
+    }
+  }
 })
 
 onMounted(() => {
@@ -42,27 +42,27 @@ onMounted(() => {
       right: '8',
       bottom: '8%',
       top: '16%',
-      containLabel: true,
+      containLabel: true
     },
     tooltip: {
       trigger: 'axis',
       backgroundColor: 'rgba(0, 0, 0, 0.8)',
       textStyle: {
-        color: '#fff',
+        color: '#fff'
       },
       borderWidth: 0,
       axisPointer: {
-        type: 'none',
-      },
+        type: 'none'
+      }
     },
     xAxis: {
       type: 'category',
       data: xAxislDatas,
       axisLine: {
-        show: false, // 隐藏X轴线
+        show: false // 隐藏X轴线
       },
       axisTick: {
-        show: false, // 隐藏X轴刻度线
+        show: false // 隐藏X轴刻度线
       },
       axisLabel: {
         color: '#f8f9fa',
@@ -70,24 +70,24 @@ onMounted(() => {
         fontSize: 14,
         fontWeight: 300,
         fontFamily: 'Roboto',
-        lineHeight: 2,
+        lineHeight: 2
       },
       splitLine: {
         show: true, // 显示X轴网格线
         lineStyle: {
           color: 'rgba(255, 255, 255, .2)',
-          type: 'dashed',
-        },
-      },
+          type: 'dashed'
+        }
+      }
     },
     yAxis: {
       type: 'value',
       splitNumber: 3, // Y轴分段数
       axisLine: {
-        show: false, // 隐藏Y轴线
+        show: false // 隐藏Y轴线
       },
       axisTick: {
-        show: false, // 隐藏Y轴刻度线
+        show: false // 隐藏Y轴刻度线
       },
       axisLabel: {
         color: '#fff',
@@ -95,17 +95,17 @@ onMounted(() => {
         fontSize: 14,
         fontWeight: 300,
         fontFamily: 'Roboto',
-        lineHeight: 2,
+        lineHeight: 2
       },
       splitLine: {
         show: true, // 显示Y轴网格线
         lineStyle: {
           color: 'rgba(255, 255, 255, .2)',
-          type: 'dashed',
-        },
+          type: 'dashed'
+        }
       },
       min: 0,
-      max: Math.max(...data) < 100 ? Math.max(...data) + 10 : Math.ceil(Math.max(...data) / 100) * 100,
+      max: Math.max(...data) < 100 ? Math.max(...data) + 10 : Math.ceil(Math.max(...data) / 100) * 100
     },
     series: [
       {
@@ -116,10 +116,10 @@ onMounted(() => {
         itemStyle: {
           borderWidth: 0,
           borderRadius: 4,
-          color: 'rgba(255, 255, 255, .8)',
-        },
-      },
-    ],
+          color: 'rgba(255, 255, 255, .8)'
+        }
+      }
+    ]
   }
   options && echart.setOption(options)
 })
@@ -133,6 +133,7 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
 }
+
 .chart-canvas {
   width: 100%;
 }

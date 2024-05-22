@@ -15,18 +15,18 @@
           {{ description }}
         </p>
         <div class="d-flex align-items-center justify-content-between">
-          <button type="button" class="mb-0 btn btn-sm" :class="`btn-outline-${action.color}`">
+          <button :class="`btn-outline-${action.color}`" class="mb-0 btn btn-sm" type="button">
             {{ action.label }}
           </button>
           <div class="mt-2 avatar-group">
             <a
               v-for="({image: authorImage, name}, index) of authors"
               :key="index"
-              href="javascript:;"
-              class="avatar avatar-xs rounded-circle"
-              data-bs-toggle="tooltip"
-              data-bs-placement="bottom"
               :title="name"
+              class="avatar avatar-xs rounded-circle"
+              data-bs-placement="bottom"
+              data-bs-toggle="tooltip"
+              href="javascript:;"
             >
               <img :alt="authorImage" :src="authorImage" />
             </a>
@@ -41,32 +41,33 @@
 defineProps({
   image: {
     type: String,
-    default: '',
+    default: ''
   },
   label: {
     type: String,
-    default: '',
+    default: ''
   },
   title: {
     type: String,
-    default: 'Default Project Card',
+    default: 'Default Project Card'
   },
   description: {
     type: String,
-    default: '',
+    default: ''
   },
   action: {
     type: Object,
     route: String,
     color: String,
     label: String,
-    default: () => {},
+    default: () => {
+    }
   },
   authors: {
     type: Array,
     image: String,
     name: String,
-    default: () => [],
-  },
+    default: () => []
+  }
 })
 </script>

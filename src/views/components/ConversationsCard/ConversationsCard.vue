@@ -1,6 +1,6 @@
 <template>
   <li class="px-0 mb-2 border-0 list-group-item d-flex align-items-center">
-    <material-avatar class="me-3" :img="avatar" alt="kal" border-radius="lg" shadow="regular" />
+    <material-avatar :img="avatar" alt="kal" border-radius="lg" class="me-3" shadow="regular" />
     <div class="d-flex align-items-start flex-column justify-content-center">
       <h6 class="mb-0 text-sm">{{ name }}</h6>
       <p class="mb-0 text-xs">{{ info }}.</p>
@@ -11,18 +11,19 @@
 
 <script setup>
 import MaterialAvatar from '@/components/MaterialAvatar.vue'
+
 defineProps({
   avatar: {
     type: String,
-    default: '',
+    default: ''
   },
   name: {
     type: String,
-    default: '',
+    default: ''
   },
   info: {
     type: String,
-    default: '',
-  },
+    default: ''
+  }
 })
 </script>

@@ -1,10 +1,10 @@
 <template>
   <div class="col-lg-3 col-md-6 col-sm-6 mt-lg-0 mt-4">
-    <div class="card mb-2" :class="directionReverse ? reverseDirection : ''">
+    <div :class="directionReverse ? reverseDirection : ''" class="card mb-2">
       <div class="card-header p-3 pt-2">
         <div
-          class="icon icon-lg icon-shape shadow text-white text-center border-radius-xl mt-n4 position-absolute d-flex align-items-center justify-content-center"
           :class="`bg-gradient-${icon.background} shadow-${icon.background}`"
+          class="icon icon-lg icon-shape shadow text-white text-center border-radius-xl mt-n4 position-absolute d-flex align-items-center justify-content-center"
           style="font-family: 'Roboto', sans-serif; font-size: larger"
         >
           {{ title }}

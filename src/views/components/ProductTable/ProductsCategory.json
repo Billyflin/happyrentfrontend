@@ -41,13 +41,19 @@
     "stock": 0,
     "images": [
       {
-        "imageData":imagen en base64
+        "imageData": imagen
+        en
+        base64
       },
       {
-        "imageData":imagen en base64
+        "imageData": imagen
+        en
+        base64
       },
       {
-        "imageData":imagen en base64
+        "imageData": imagen
+        en
+        base64
       }
     ]
   }

@@ -9,10 +9,14 @@
     <div class="multisteps-form__content">
       <div class="row">
         <pricing-card
-            color="dark"
-            :badge="{ color: 'success', label: 'Crecimiento' }"
-            :price="{ currency: '$', value: '0,8 UF', charged: 'Mes + iva' }"
-            :specifications="[
+          :action="{
+                  color: 'light',
+                  route: 'javascript:;',
+                  label: 'Obtener',
+                }"
+          :badge="{ color: 'success', label: 'Crecimiento' }"
+          :price="{ currency: '$', value: '0,8 UF', charged: 'Mes + iva' }"
+          :specifications="[
                   { label: 'Desde 1 a 10 Propiedades', includes: true },
                   { label: 'Organizador de cartera', includes: true },
                   { label: 'Envío Automático de mails y cobranzas', includes: true },
@@ -24,18 +28,18 @@
                   { label: 'Perfil del corredor', includes: false },
                   { label: 'Perfil del propietario', includes: false },
                 ]"
-            :action="{
-                  color: 'light',
+          color="dark"
+          dark-mode
+        />
+        <pricing-card
+          :action="{
+                  color: 'success',
                   route: 'javascript:;',
                   label: 'Obtener',
                 }"
-            dark-mode
-        />
-        <pricing-card
-            color="dark"
-            :badge="{ color: 'success', label: 'Desarrollo' }"
-            :price="{ currency: '$', value: '1,4 UF', charged: 'Mes + iva' }"
-            :specifications="[
+          :badge="{ color: 'success', label: 'Desarrollo' }"
+          :price="{ currency: '$', value: '1,4 UF', charged: 'Mes + iva' }"
+          :specifications="[
                   { label: 'Hasta 20 Propiedades', includes: true },
                   { label: 'Organizador de cartera', includes: true },
                   { label: 'Envío Automático de mails y cobranzas', includes: true },
@@ -47,19 +51,18 @@
                   { label: 'Perfil del corredor', includes: false },
                   { label: 'Perfil del propietario', includes: false },
                 ]"
-            :action="{
-                  color: 'success',
+          color="dark"
+          dark-mode
+        />
+        <pricing-card
+          :action="{
+                  color: 'light',
                   route: 'javascript:;',
                   label: 'Obtener',
                 }"
-            dark-mode
-        />
-        <pricing-card
-            dark-mode
-            color="dark"
-            :badge="{ color: 'success', label: 'Avance' }"
-            :price="{ currency: '$', value: '3,0 UF', charged: 'Mes + iva' }"
-            :specifications="[
+          :badge="{ color: 'success', label: 'Avance' }"
+          :price="{ currency: '$', value: '3,0 UF', charged: 'Mes + iva' }"
+          :specifications="[
                   { label: 'Hasta 80 Propiedades', includes: true },
                   { label: 'Organizador de cartera', includes: true },
                   { label: 'Envío Automático de mails y cobranzas', includes: true },
@@ -71,15 +74,12 @@
                   { label: 'Perfil del corredor', includes: true },
                   { label: 'Perfil del propietario', includes: true },
                 ]"
-            :action="{
-                  color: 'light',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
+          color="dark"
+          dark-mode
         />
       </div>
       <div class="mt-3 button-row d-flex">
-        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next btn-lg" type="button" title="Omitir" @click="ruta">
+        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next btn-lg" title="Omitir" type="button" @click="ruta">
           Omitir y Guardar
         </button>
       </div>
@@ -87,11 +87,11 @@
   </div>
 </template>
 <script>
-import {defineComponent} from "vue";
-import PricingCard from "@/views/components/PricingCard.vue";
+import { defineComponent } from 'vue'
+import PricingCard from '@/views/components/PricingCard.vue'
 
 export default defineComponent({
-  components: {PricingCard},
+  components: { PricingCard },
   methods: {
     ruta() {
       this.$emit('update-cuenta')

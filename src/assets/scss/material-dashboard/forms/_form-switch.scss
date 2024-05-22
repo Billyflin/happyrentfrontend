@@ -1,5 +1,5 @@
-.form-switch{
-  .form-check-input{
+.form-switch {
+  .form-check-input {
     position: relative;
     background-color: $form-switch-bg-color;
     height: $form-switch-height;
@@ -28,14 +28,16 @@
     &:checked {
       border-color: $dark-gradient;
       background-color: $dark-gradient;
-      &:active{
-        &:after{
+
+      &:active {
+        &:after {
           box-shadow: $form-switch-check-active-checked-after-shadow;
         }
       }
     }
-    &:active{
-      &:after{
+
+    &:active {
+      &:after {
         box-shadow: $form-switch-check-active-after-shadow;
       }
     }

@@ -1,8 +1,8 @@
 <script setup>
 
-import MaterialButton from "@/components/MaterialButton.vue";
-import MaterialCheckbox from "@/components/MaterialCheckbox.vue";
-import MaterialAvatar from "@/components/MaterialAvatar.vue";
+import MaterialButton from '@/components/MaterialButton.vue'
+import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
+import MaterialAvatar from '@/components/MaterialAvatar.vue'
 </script>
 
 <template>
@@ -42,11 +42,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -54,11 +54,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-avatar
-                        :img="img1"
-                        class="me-2"
-                        size="xs"
-                        circular
-                        alt="user image"
+                      :img="img1"
+                      alt="user image"
+                      circular
+                      class="me-2"
+                      size="xs"
                     />
                     <span>Orlando Imieto</span>
                   </div>
@@ -83,11 +83,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -95,11 +95,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-avatar
-                        :img="img1"
-                        size="xs"
-                        circular
-                        class="me-2"
-                        alt="user image"
+                      :img="img1"
+                      alt="user image"
+                      circular
+                      class="me-2"
+                      size="xs"
                     />
                     <span>Alice Murinho</span>
                   </div>
@@ -124,11 +124,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="dark"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="dark"
+                      variant="outline"
                     >
-                      <i class="fas fa-undo" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-undo"></i>
                     </material-button>
                     <span>Reembolsado</span>
                   </div>
@@ -136,12 +136,12 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-avatar
-                          :img="img1"
-                          size="xs"
-                          class="me-2"
-                          circular
-                          alt="user image"
-                      />
+                      :img="img1"
+                      alt="user image"
+                      circular
+                      class="me-2"
+                      size="xs"
+                    />
                     <span>Michael Mirra</span>
                   </div>
                 </td>
@@ -168,11 +168,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -181,11 +181,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                   <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                       <material-avatar
-                          :img="img1"
-                          size="xs"
-                          class="me-2"
-                          circular
-                          alt="user image"
+                        :img="img1"
+                        alt="user image"
+                        circular
+                        class="me-2"
+                        size="xs"
                       />
                       <span>Andrew Nichel</span>
                     </div>
@@ -211,11 +211,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="danger"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="danger"
+                      variant="outline"
                     >
-                      <i class="fas fa-times" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-times"></i>
                     </material-button>
                     <span>Cancelado</span>
                   </div>
@@ -224,11 +224,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                   <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                       <material-avatar
-                          :img="img1"
-                          size="xs"
-                          circular
-                          class="me-2"
-                          alt="user image"
+                        :img="img1"
+                        alt="user image"
+                        circular
+                        class="me-2"
+                        size="xs"
                       />
                       <span>Sebastian Koga</span>
                     </div>
@@ -257,11 +257,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -269,12 +269,12 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-avatar
-                          :img="img1"
-                          size="xs"
-                          class="me-2"
-                          circular
-                          alt="user image"
-                      />
+                      :img="img1"
+                      alt="user image"
+                      circular
+                      class="me-2"
+                      size="xs"
+                    />
                     <span>Laur Gilbert</span>
                   </div>
                 </td>
@@ -298,11 +298,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -310,12 +310,12 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-avatar
-                          :img="img1"
-                          size="xs"
-                          class="me-2"
-                          circular
-                          alt="user image"
-                      />
+                      :img="img1"
+                      alt="user image"
+                      circular
+                      class="me-2"
+                      size="xs"
+                    />
                     <span>Iryna Innda</span>
                   </div>
                 </td>
@@ -339,11 +339,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -351,12 +351,12 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-avatar
-                          :img="img1"
-                          size="xs"
-                          class="me-2"
-                          circular
-                          alt="user image"
-                      />
+                      :img="img1"
+                      alt="user image"
+                      circular
+                      class="me-2"
+                      size="xs"
+                    />
                     <span>Arrias Liunda</span>
                   </div>
                 </td>
@@ -380,11 +380,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -393,11 +393,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                   <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                       <material-avatar
-                          :img="img1"
-                          size="xs"
-                          circular
-                          class="me-2"
-                          alt="user image"
+                        :img="img1"
+                        alt="user image"
+                        circular
+                        class="me-2"
+                        size="xs"
                       />
                       <span>Rugna Ilpio</span>
                     </div>
@@ -423,11 +423,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="dark"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="dark"
+                      variant="outline"
                     >
-                      <i class="fas fa-undo" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-undo"></i>
                     </material-button>
                     <span>Reembolsado</span>
                   </div>
@@ -436,11 +436,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                   <div class="d-flex align-items-center">
                     <div class="d-flex align-items-center">
                       <material-avatar
-                          :img="img1"
-                          size="xs"
-                          class="me-2"
-                          circular
-                          alt="user image"
+                        :img="img1"
+                        alt="user image"
+                        circular
+                        class="me-2"
+                        size="xs"
                       />
                       <span>Anna Landa</span>
                     </div>
@@ -468,11 +468,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -480,12 +480,12 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-avatar
-                          :img="img1"
-                          size="xs"
-                          class="me-2"
-                          circular
-                          alt="user image"
-                      />
+                      :img="img1"
+                      alt="user image"
+                      circular
+                      class="me-2"
+                      size="xs"
+                    />
                     <span>Karl Innas</span>
                   </div>
                 </td>
@@ -509,11 +509,11 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-button
-                        color="success"
-                        variant="outline"
-                        class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
+                      color="success"
+                      variant="outline"
                     >
-                      <i class="fas fa-check" aria-hidden="true"></i>
+                      <i aria-hidden="true" class="fas fa-check"></i>
                     </material-button>
                     <span>Aprobado</span>
                   </div>
@@ -521,12 +521,12 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
                 <td class="text-xs font-weight-bold">
                   <div class="d-flex align-items-center">
                     <material-avatar
-                          :img="img1"
-                          size="xs"
-                          class="me-2"
-                          circular
-                          alt="user image"
-                      />
+                      :img="img1"
+                      alt="user image"
+                      circular
+                      class="me-2"
+                      size="xs"
+                    />
                     <span>Oana Kilas</span>
                   </div>
                 </td>
@@ -550,18 +550,19 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
       <div class="d-flex">
         <div class="dropdown d-inline">
           <material-button
-              id="navbarDropdownMenuLink2"
-              color="dark"
-              variant="outline"
-              class="dropdown-toggle"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-          >filtros</material-button
+            id="navbarDropdownMenuLink2"
+            aria-expanded="false"
+            class="dropdown-toggle"
+            color="dark"
+            data-bs-toggle="dropdown"
+            variant="outline"
+          >filtros
+          </material-button
           >
           <ul
-              class="dropdown-menu dropdown-menu-lg-start px-2 py-3"
-              aria-labelledby="navbarDropdownMenuLink2"
-              style
+            aria-labelledby="navbarDropdownMenuLink2"
+            class="dropdown-menu dropdown-menu-lg-start px-2 py-3"
+            style
           >
             <li>
               <a class="dropdown-item border-radius-md" href="javascript:"
@@ -583,19 +584,19 @@ import MaterialAvatar from "@/components/MaterialAvatar.vue";
             </li>
             <li>
               <a
-                  class="dropdown-item border-radius-md text-danger"
-                  href="javascript:"
+                class="dropdown-item border-radius-md text-danger"
+                href="javascript:"
               >Remover Filtro</a
               >
             </li>
           </ul>
         </div>
         <material-button
-            class="btn-icon ms-2 export"
-            size
-            color="dark"
-            variant="outline"
-            data-type="csv"
+          class="btn-icon ms-2 export"
+          color="dark"
+          data-type="csv"
+          size
+          variant="outline"
         >
           <span class="btn-inner--icon">
             <i class="ni ni-archive-2"></i>

@@ -10,8 +10,8 @@
         />
       </a>
       <div
-        class="colored-shadow"
         :style="`background-image: url('data:image/png;base64,' + img)`"
+        class="colored-shadow"
       ></div>
     </div>
     <div class="card-body text-center">
@@ -20,8 +20,8 @@
 
         <button
           class="btn btn-link text-primary border-0 d-flex align-items-center justify-content-center"
-          data-bs-toggle="tooltip"
           data-bs-placement="bottom"
+          data-bs-toggle="tooltip"
           title="Crear contrato"
           @click="irANuevoContrato"
         >
@@ -31,8 +31,8 @@
         <router-link :to="'/propiedad/edit/'+propiedad.id">
           <button
             class="btn btn-link text-primary border-0 d-flex align-items-center justify-content-center"
-            data-bs-toggle="tooltip"
             data-bs-placement="bottom"
+            data-bs-toggle="tooltip"
             title="Editar Propiedad"
           >
             <span class="material-symbols-outlined text-lg">edit</span> Editar
@@ -51,8 +51,10 @@
       </p>
 
       <div class="d-flex justify-content-end mb-0 mt-1">
-        <span class="mb-0 mt-0 badge badge-success" v-if=" propiedad.propietario.type ">{{ propiedad.propietario.type.toUpperCase() }}</span>
-        <span class="mb-0 mx-1 mt-0 badge badge-success" v-if=" propiedad.type">{{ propiedad.type.toUpperCase() }}</span>
+        <span v-if=" propiedad.propietario.type "
+              class="mb-0 mt-0 badge badge-success">{{ propiedad.propietario.type.toUpperCase() }}</span>
+        <span v-if=" propiedad.type" class="mb-0 mx-1 mt-0 badge badge-success">{{ propiedad.type.toUpperCase()
+          }}</span>
       </div>
     </div>
     <hr class="dark horizontal my-0" />

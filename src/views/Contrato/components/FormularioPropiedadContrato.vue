@@ -17,15 +17,17 @@ const formatDate = (date) => {
       <div class="row">
         <div class="col-xl-5 col-lg-5 text-center">
           <img
-            class="w-100 border-radius-lg shadow-lg mx-auto"
             :src="'data:image/png;base64,'+ store.propiedad.imagenPortada.contenido"
             alt="chair"
+            class="w-100 border-radius-lg shadow-lg mx-auto"
           />
         </div>
         <div class="mx-4 col flex-grow">
           <h5 class="mb-0 text-capitalize">{{ store.propiedad.direccion.calle + ' ' + store.propiedad.direccion.numero
             }}</h5>
-          <h6 class="font-weight-normal mt-0 text-capitalize">{{ store.propiedad.direccion.ciudad + ', '+store.propiedad.direccion.region+ ', ' + store.propiedad.direccion.pais }}</h6>
+          <h6 class="font-weight-normal mt-0 text-capitalize">
+            {{ store.propiedad.direccion.ciudad + ', ' + store.propiedad.direccion.region + ', ' + store.propiedad.direccion.pais
+            }}</h6>
           <span v-if="!store.propiedad.arrendado" class="badge badge-success">Disponible</span>
           <span v-else class="badge badge-danger">Arrendado</span>
           <p class="mb-0 mt-6">
@@ -52,7 +54,7 @@ const formatDate = (date) => {
               <strong> Cantidad de dormitorios:</strong>&nbsp;{{ store.propiedad.habitaciones }}
             </p>
             <p class="mb-0">
-              <strong> Estacionamientos:</strong>{{ store.propiedad.estacionamientos}}
+              <strong> Estacionamientos:</strong>{{ store.propiedad.estacionamientos }}
             </p>
             <p class="mb-0">
               <strong> Bodegas:</strong>{{ store.propiedad.bodegas }}
@@ -61,7 +63,7 @@ const formatDate = (date) => {
               <strong> Metros cuadrados:</strong>&nbsp;{{ store.propiedad.metrosCuadrados }}
             </p>
             <p class="mb-0">
-              <strong> Descripción:</strong>&nbsp;{{ store.propiedad.descripcion}}
+              <strong> Descripción:</strong>&nbsp;{{ store.propiedad.descripcion }}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'casa'">
@@ -70,15 +72,15 @@ const formatDate = (date) => {
             </p>
             <p class="mb-0">
               <b>Piscina</b>
-              {{store.propiedad.piscina}}
+              {{ store.propiedad.piscina }}
             </p>
             <p class="mb-0">
               <b>Patio</b>
-              {{store.propiedad.patio}}
+              {{ store.propiedad.patio }}
             </p>
             <p class="mb-0">
               <b>Jardin</b>
-              {{store.propiedad.jardines}}
+              {{ store.propiedad.jardines }}
             </p>
             <p class="mb-0">
               <strong> Pisos: </strong>
@@ -97,10 +99,10 @@ const formatDate = (date) => {
               <strong> Estacionamientos:</strong>{{ store.propiedad.estacionamientos }}
             </p>
             <p class="mb-0">
-              <strong> Metros cuadrados del terreno:</strong>&nbsp;{{ store.propiedad.metrosCuadradosDeTerreno}}
+              <strong> Metros cuadrados del terreno:</strong>&nbsp;{{ store.propiedad.metrosCuadradosDeTerreno }}
             </p>
             <p class="mb-0">
-              <strong>Metros cuadrados construidos:</strong>&nbsp;{{ store.propiedad.metrosCuadradosDeConstruccion}}
+              <strong>Metros cuadrados construidos:</strong>&nbsp;{{ store.propiedad.metrosCuadradosDeConstruccion }}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'local'">
@@ -112,10 +114,10 @@ const formatDate = (date) => {
               {{ store.propiedad.piso }}
             </p>
             <p class="mb-0">
-              <strong> Numero de locales:</strong>{{ store.propiedad.numero}}
+              <strong> Numero de locales:</strong>{{ store.propiedad.numero }}
             </p>
             <p class="mb-0">
-              <strong> Descripcion:</strong>{{ store.propiedad.descripcion}}
+              <strong> Descripcion:</strong>{{ store.propiedad.descripcion }}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'terreno'">
@@ -123,25 +125,25 @@ const formatDate = (date) => {
               <b> Rol:</b>{{ store.propiedad.rol }}
             </p>
             <p class="mb-0">
-              <b> Area:</b>{{ store.propiedad.area}}
+              <b> Area:</b>{{ store.propiedad.area }}
             </p>
             <p class="mb-0">
-              <b> tipo de Terreno:</b>{{ store.propiedad.tipoTerreno}}
+              <b> tipo de Terreno:</b>{{ store.propiedad.tipoTerreno }}
             </p>
             <p class="mb-0">
-              <b> Uso de suelo:</b>{{ store.propiedad.usoSuelo}}
+              <b> Uso de suelo:</b>{{ store.propiedad.usoSuelo }}
             </p>
             <p class="mb-0">
-              <b> Topografia:</b>{{ store.propiedad.topografia}}
+              <b> Topografia:</b>{{ store.propiedad.topografia }}
             </p>
             <p class="mb-0">
-              <b> Servicios:</b>{{ store.propiedad.servicios}}
+              <b> Servicios:</b>{{ store.propiedad.servicios }}
             </p>
             <p class="mb-0">
-              <b> Forma de terreno:</b>{{ store.propiedad.formaTerreno}}
+              <b> Forma de terreno:</b>{{ store.propiedad.formaTerreno }}
             </p>
             <p class="mb-0">
-              <b> Frente:</b>&nbsp;{{ store.propiedad.frente}}
+              <b> Frente:</b>&nbsp;{{ store.propiedad.frente }}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'bodega'">
@@ -149,13 +151,13 @@ const formatDate = (date) => {
               <b> Rol:</b>{{ store.propiedad.rol }}
             </p>
             <p class="mb-0">
-              <b> Numero de pisos:</b>{{ store.propiedad.numeroDePisos}}
+              <b> Numero de pisos:</b>{{ store.propiedad.numeroDePisos }}
             </p>
             <p class="mb-0">
-              <b> Numero:</b>{{ store.propiedad.numero}}
+              <b> Numero:</b>{{ store.propiedad.numero }}
             </p>
             <p class="mb-0">
-              <b> Descripcion:</b>{{ store.propiedad.descripcion}}
+              <b> Descripcion:</b>{{ store.propiedad.descripcion }}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'oficina'">
@@ -163,22 +165,22 @@ const formatDate = (date) => {
               <b> Rol:</b>{{ store.propiedad.rol }}
             </p>
             <p class="mb-0">
-              <b> Numero de pisos:</b>{{ store.propiedad.piso}}
+              <b> Numero de pisos:</b>{{ store.propiedad.piso }}
             </p>
             <p class="mb-0">
               <b> Numero de baños:</b>&nbsp;{{ store.propiedad.banios }}
             </p>
             <p class="mb-0">
-              <b> Numero de Cocinas:</b>{{ store.propiedad.cocinas}}
+              <b> Numero de Cocinas:</b>{{ store.propiedad.cocinas }}
             </p>
             <p class="mb-0">
-              <b> Numero de Oficinas:</b>{{ store.propiedad.numeroDeOficinas}}
+              <b> Numero de Oficinas:</b>{{ store.propiedad.numeroDeOficinas }}
             </p>
             <p class="mb-0">
-              <b> Numero de comedores:</b>{{ store.propiedad.numeroDeComedores}}
+              <b> Numero de comedores:</b>{{ store.propiedad.numeroDeComedores }}
             </p>
             <p class="mb-0">
-              <b> Descripcion:</b>{{ store.propiedad.descripcion}}
+              <b> Descripcion:</b>{{ store.propiedad.descripcion }}
             </p>
           </div>
           <div v-else-if="store.propiedad.type === 'estacionamiento'">
@@ -186,20 +188,22 @@ const formatDate = (date) => {
               <b> Rol:</b>{{ store.propiedad.rol }}
             </p>
             <p class="mb-0">
-              <b> Numero de pisos:</b>{{ store.propiedad.piso}}
+              <b> Numero de pisos:</b>{{ store.propiedad.piso }}
             </p>
             <p class="mb-0">
-              <b> Numero:</b>{{ store.propiedad.numero}}
+              <b> Numero:</b>{{ store.propiedad.numero }}
             </p>
             <p class="mb-0">
-              <b> Descripcion:</b>{{ store.propiedad.descripcion}}
+              <b> Descripcion:</b>{{ store.propiedad.descripcion }}
             </p>
           </div>
 
         </div>
         <div class="col">
           <h5 class="font-weight-normal">Propietario</h5>
-          <p class="mb-0"><strong>Nombre:</strong> {{ store.propiedad.propietario.nombre  + ' ' + store.propiedad.propietario.apellidoPaterno + ' ' + store.propiedad.propietario.apellidoMaterno}}</p>
+          <p class="mb-0"><strong>Nombre:</strong>
+            {{ store.propiedad.propietario.nombre + ' ' + store.propiedad.propietario.apellidoPaterno + ' ' + store.propiedad.propietario.apellidoMaterno }}
+          </p>
           <p class="mb-0"><strong>Email:</strong> {{ store.propiedad.propietario.email }}</p>
           <p class="mb-0"><strong>Teléfono:</strong> {{ store.propiedad.propietario.telefono }}</p>
         </div>

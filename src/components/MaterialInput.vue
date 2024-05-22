@@ -1,29 +1,29 @@
 <template>
   <div
-    class="input-group"
     :class="`input-group-${variant}
      ${v$.internalValue.$error ? 'is-invalid' : ''}
     ${!v$.internalValue.$error && v$.internalValue.$anyDirty ? 'is-valid' : ''} `"
+    class="input-group"
   >
     <label :class="variant === 'static' ? '' : 'form-label'">{{ label }}</label>
     <input
       :id="id"
-      :type="type"
-      class="form-control"
-      :class="classes"
-      :name="name"
       v-model="internalValue"
+      :class="classes"
+      :disabled="disabled"
+      :name="name"
       :placeholder="placeholder"
       :required="isRequired"
-      :disabled="disabled"
+      :type="type"
+      class="form-control"
     />
   </div>
-<!--    <p>{{ v$.internalValue}}</p>-->
+  <!--    <p>{{ v$.internalValue}}</p>-->
   <div v-for="v of v$.$errors" :key="v.$uid">
     <span class="badge badge-danger text-xxs mt-2">{{ v.$message }}</span>
   </div>
-<!--  <button @click="v$.internalValue.$touch()">Touch</button>-->
-<!--  <button @click="console.log(v$.internalValue)">sad</button>-->
+  <!--  <button @click="v$.internalValue.$touch()">Touch</button>-->
+  <!--  <button @click="console.log(v$.internalValue)">sad</button>-->
 </template>
 
 <script>
@@ -87,26 +87,26 @@ export default {
     if (this.type === 'rut') {
       return {
         internalValue: {
-          required:helpers.withMessage('Rut es requerido',
+          required: helpers.withMessage('Rut es requerido',
             required
           ),
           validRut: helpers.withMessage('Rut inválido',
             value => {
               // Elimina los puntos y valida el formato
-              let cleanValue = value.replace(/\./g, '');
-              if (!/^[0-9]+-[0-9kK]{1}$/.test(cleanValue)) return false;
+              let cleanValue = value.replace(/\./g, '')
+              if (!/^[0-9]+-[0-9kK]{1}$/.test(cleanValue)) return false
 
-              let [rut, dv] = cleanValue.split('-');
-              let total = 0;
-              let factor = 2;
+              let [rut, dv] = cleanValue.split('-')
+              let total = 0
+              let factor = 2
               for (let i = rut.length - 1; i >= 0; i--) {
-                total += rut.charAt(i) * factor;
-                factor = factor === 7 ? 2 : factor + 1;
+                total += rut.charAt(i) * factor
+                factor = factor === 7 ? 2 : factor + 1
               }
-              let expectedDv = 11 - (total % 11);
-              if (expectedDv === 11) expectedDv = '0';
-              if (expectedDv === 10) expectedDv = 'K';
-              return dv.toUpperCase() === expectedDv.toString();
+              let expectedDv = 11 - (total % 11)
+              if (expectedDv === 11) expectedDv = '0'
+              if (expectedDv === 10) expectedDv = 'K'
+              return dv.toUpperCase() === expectedDv.toString()
             }
           )
         }
@@ -120,8 +120,8 @@ export default {
           ),
           validPhone: helpers.withMessage('Teléfono inválido',
             value => {
-              let cleanValue = value.replace(/\s/g, '');
-              return /^[0-9]{9}$/.test(cleanValue);
+              let cleanValue = value.replace(/\s/g, '')
+              return /^[0-9]{9}$/.test(cleanValue)
             }
           )
         }
@@ -181,10 +181,10 @@ export default {
       }
     }
   },
-  emits: ['update:modelValue','input'],
+  emits: ['update:modelValue', 'input'],
   data() {
     return {
-      internalValue: this.modelValue,
+      internalValue: this.modelValue
     }
   },
   watch: {

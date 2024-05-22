@@ -3,60 +3,60 @@
     <div class="col-6 mt-4">
       <material-input
         id="calleDirection"
-        variant="static"
-        label="Calle"
-        type="text"
-        is-required
         v-model="direccion.calle"
+        is-required
+        label="Calle"
         placeholder="Calle"
+        type="text"
+        variant="static"
       />
     </div>
     <div class="col-1"></div>
     <div class="col-2 mt-4">
       <material-input
         id="numeroDirection"
+        v-model="direccion.numero"
+        label="Número"
+        placeholder="n°"
         type="number"
         variant="static"
-        label="Número"
-        v-model="direccion.numero"
-        placeholder="n°"
       />
     </div>
     <div class="col-1"></div>
     <div class="col-2 mt-4">
       <material-input
         id="postal"
-        type="postal"
-        variant="static"
         v-model="direccion.codigoPostal"
         label="Postal"
         placeholder="Postal"
+        type="postal"
+        variant="static"
       />
     </div>
   </div>
   <div class="row mt-4">
-    <material-choices class="col-3"
-                      id="Pais"
-                      :options="paises"
+    <material-choices id="Pais"
                       v-model:text-choice="direccion.pais"
-                      label="Pais"
-                      disabled
                       :is-multiple="false"
+                      :options="paises"
+                      class="col-3"
+                      disabled
+                      label="Pais"
                       name="pais" />
-    <MaterialChoices class="col-5"
-                     id="Region"
-                     :options="regiones"
-                     label="Region"
+    <MaterialChoices id="Region"
                      v-model:text-choice="direccion.region"
                      v-model:value-choice="regionNum"
                      :is-multiple="false"
+                     :options="regiones"
+                     class="col-5"
+                     label="Region"
                      name="region" />
-    <MaterialChoices class="col-4"
-                     id="Ciudad"
+    <MaterialChoices id="Ciudad"
                      v-model:text-choice="direccion.ciudad"
-                     :options="ciudades"
-                     label="Comuna"
                      :is-multiple="false"
+                     :options="ciudades"
+                     class="col-4"
+                     label="Comuna"
                      name="ciudad"
     />
   </div>

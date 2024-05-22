@@ -14,8 +14,7 @@
         "icon": "fa-github"
       }
     ],
-    "action":
-    {
+    "action": {
       "route": "javascript:;",
       "tooltip": "Edit Profile"
     }

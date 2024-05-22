@@ -2,12 +2,12 @@
   <div class="mb-3 accordion-item">
     <h5 :id="accordionId" class="accordion-header">
       <button
-        class="accordion-button border-bottom font-weight-bold"
-        type="button"
-        data-bs-toggle="collapse"
-        :data-bs-target="`#${collapseId}`"
-        :aria-expanded="active ? 'true' : 'false'"
         :aria-controls="collapseId"
+        :aria-expanded="active ? 'true' : 'false'"
+        :data-bs-target="`#${collapseId}`"
+        class="accordion-button border-bottom font-weight-bold"
+        data-bs-toggle="collapse"
+        type="button"
       >
         <slot name="question" />
         <i
@@ -20,9 +20,9 @@
     </h5>
     <div
       :id="collapseId"
-      class="accordion-collapse collapse"
-      :class="active ? 'show' : ''"
       :aria-labelledby="accordionId"
+      :class="active ? 'show' : ''"
+      class="accordion-collapse collapse"
       data-bs-parent="#accordionRental"
     >
       <div class="text-sm accordion-body opacity-8">
@@ -34,20 +34,20 @@
 
 <script>
 export default {
-  name: "AccordionItem",
+  name: 'AccordionItem',
   props: {
     accordionId: {
       type: String,
-      default: "",
+      default: ''
     },
     collapseId: {
       type: String,
-      default: "",
+      default: ''
     },
     active: {
       type: Boolean,
-      default: false,
-    },
-  },
-};
+      default: false
+    }
+  }
+}
 </script>

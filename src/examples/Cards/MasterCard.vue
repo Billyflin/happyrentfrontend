@@ -1,14 +1,14 @@
 <template>
   <div class="card bg-transparent shadow-xl">
     <div
-      class="overflow-hidden position-relative border-radius-xl"
       :style="{
         backgroundImage: 'url(\'src/assets/img/curved14.jpg\')',
       }"
+      class="overflow-hidden position-relative border-radius-xl"
     >
-      <span class="mask" :class="`bg-gradient-${card.background}`"></span>
+      <span :class="`bg-gradient-${card.background}`" class="mask"></span>
       <div class="card-body position-relative z-index-1 p-3">
-        <i class="fas fa-wifi text-white p-2" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-wifi text-white p-2"></i>
         <h5 class="text-white mt-4 mb-5 pb-2">
           {{ card.number }}
         </h5>
@@ -28,7 +28,7 @@
             </div>
           </div>
           <div class="w-20 d-flex align-items-end justify-content-end ms-auto">
-            <material-avatar class="w-60 mt-2" :img="img1" alt="logo" />
+            <material-avatar :img="img1" alt="logo" class="w-60 mt-2" />
           </div>
         </div>
       </div>
@@ -55,8 +55,8 @@ defineProps({
       expiryDate: '11/22',
       holderText: 'Card Holder',
       expiryText: 'Expires',
-      background: 'dark',
-    }),
-  },
+      background: 'dark'
+    })
+  }
 })
 </script>

@@ -13,18 +13,18 @@
             <div class="dropdown text-end">
               <a
                 id="dropdownUsers1"
-                class="cursor-pointer text-secondary"
                 :class="{ show: showMenu }"
-                data-bs-toggle="dropdown"
                 aria-expanded="false"
+                class="cursor-pointer text-secondary"
+                data-bs-toggle="dropdown"
                 @click="showMenu = !showMenu"
               >
                 <span class="text-xs text-secondary">{{ menu }}</span>
               </a>
               <ul
-                class="px-2 py-3 dropdown-menu dropdown-menu-end"
                 :class="{ show: showMenu }"
                 aria-labelledby="dropdownUsers1"
+                class="px-2 py-3 dropdown-menu dropdown-menu-end"
               >
                 <li v-for="(drop, index) in dropdown" :key="index" class="d-flex align-items-center">
                   <a class="dropdown-item border-radius-md d-flex align-items-center" @click="drop.action">
@@ -32,7 +32,6 @@
                     <span class="material-symbols-outlined mx-2 ml-2">{{ drop.icon }}</span>
                   </a>
                 </li>
-
 
 
               </ul>

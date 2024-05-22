@@ -1,26 +1,26 @@
 <template>
   <div class="col-lg-4 mb-lg-0 mb-4">
-    <div class="card shadow-lg" :class="`bg-gradient-${color}`">
+    <div :class="`bg-gradient-${color}`" class="card shadow-lg">
       <span
-        class="badge rounded-pill w-30 mt-n2 mx-auto"
         :class="[`bg-${badge.color}`, darkMode ? 'text-white' : 'text-dark']"
-        >{{ badge.label }}</span
+        class="badge rounded-pill w-30 mt-n2 mx-auto"
+      >{{ badge.label }}</span
       >
       <div class="card-header text-center pt-4 pb-3 bg-transparent">
         <h1
-          class="font-weight-bold mt-2"
           :class="darkMode ? 'text-white' : 'text-dark'"
+          class="font-weight-bold mt-2"
         >
           <small class="text-lg align-top">{{ price.currency }}</small>
           <!--  eslint-disable-next-line prettier/prettier -->
-          {{price.value}}
+          {{ price.value }}
           <!--  eslint-disable-next-line prettier/prettier -->
-          <small class="text-lg">/{{price.charged}}</small>
+          <small class="text-lg">/{{ price.charged }}</small>
         </h1>
       </div>
       <div
-        class="card-body text-lg-start text-center pt-0"
         :class="darkMode ? 'text-white' : 'text-dark'"
+        class="card-body text-lg-start text-center pt-0"
       >
         <div
           v-for="({ label, includes }, index) of specifications"
@@ -28,14 +28,14 @@
           class="p-2 d-flex justify-content-lg-start justify-content-center"
         >
           <i class="material-icons my-auto">{{
-            includes === true ? "done" : "remove"
-          }}</i>
+              includes === true ? 'done' : 'remove'
+            }}</i>
           <span class="ps-3">{{ label }}</span>
         </div>
         <a
+          :class="`bg-gradient-${action.color}`"
           :href="action.route"
           class="mt-3 mb-0 btn btn-icon d-lg-block"
-          :class="`bg-gradient-${action.color}`"
         >
           {{ action.label }}
           <i class="fas fa-arrow-right ms-1"></i>
@@ -47,30 +47,30 @@
 
 <script>
 export default {
-  name: "PricingCard",
+  name: 'PricingCard',
   props: {
     color: {
       type: String,
-      default: "",
+      default: ''
     },
     badge: {
       type: Object,
       color: String,
       label: String,
-      required: true,
+      required: true
     },
     price: {
       type: Object,
       currency: String,
       value: String,
       charged: String,
-      required: true,
+      required: true
     },
     specifications: {
       type: Array,
       label: String,
       includes: Boolean,
-      required: true,
+      required: true
     },
     action: {
       type: Object,
@@ -78,15 +78,15 @@ export default {
       label: String,
       color: String,
       default: () => ({
-        route: "/",
-        label: "Join",
-        color: "success",
-      }),
+        route: '/',
+        label: 'Join',
+        color: 'success'
+      })
     },
     darkMode: {
       type: Boolean,
-      default: false,
-    },
-  },
-};
+      default: false
+    }
+  }
+}
 </script>

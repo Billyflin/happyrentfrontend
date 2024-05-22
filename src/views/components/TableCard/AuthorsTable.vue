@@ -11,56 +11,56 @@
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
               <thead>
-                <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Status
-                  </th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                    Employed
-                  </th>
-                  <th class="text-secondary opacity-7"></th>
-                </tr>
+              <tr>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
+                <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Function</th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                  Status
+                </th>
+                <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+                  Employed
+                </th>
+                <th class="text-secondary opacity-7"></th>
+              </tr>
               </thead>
               <tbody>
-                <tr v-for="{id, avatar, name, email, career, duty, status, employed} of AuthorsData" :key="id">
-                  <td>
-                    <div class="d-flex px-2 py-1">
-                      <div>
-                        <img :src="avatar" class="avatar avatar-sm me-3 border-radius-lg" :alt="{name}" />
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="mb-0 text-sm">{{ name }}</h6>
-                        <p class="text-xs text-secondary mb-0">{{ email }}</p>
-                      </div>
+              <tr v-for="{id, avatar, name, email, career, duty, status, employed} of AuthorsData" :key="id">
+                <td>
+                  <div class="d-flex px-2 py-1">
+                    <div>
+                      <img :alt="{name}" :src="avatar" class="avatar avatar-sm me-3 border-radius-lg" />
                     </div>
-                  </td>
-                  <td>
-                    <p class="text-xs font-weight-bold mb-0">{{ career }}</p>
-                    <p class="text-xs text-secondary mb-0">{{ duty }}</p>
-                  </td>
-                  <td class="align-middle text-center text-sm">
+                    <div class="d-flex flex-column justify-content-center">
+                      <h6 class="mb-0 text-sm">{{ name }}</h6>
+                      <p class="text-xs text-secondary mb-0">{{ email }}</p>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <p class="text-xs font-weight-bold mb-0">{{ career }}</p>
+                  <p class="text-xs text-secondary mb-0">{{ duty }}</p>
+                </td>
+                <td class="align-middle text-center text-sm">
                     <span
-                      class="badge badge-sm"
                       :class="status === 'online' ? 'bg-gradient-success' : 'bg-gradient-secondary'"
-                      >{{ status }}</span
+                      class="badge badge-sm"
+                    >{{ status }}</span
                     >
-                  </td>
-                  <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">{{ employed }}</span>
-                  </td>
-                  <td class="align-middle">
-                    <a
-                      href="javascript:"
-                      class="text-secondary font-weight-bold text-xs"
-                      data-toggle="tooltip"
-                      data-original-title="Edit user"
-                    >
-                      Edit
-                    </a>
-                  </td>
-                </tr>
+                </td>
+                <td class="align-middle text-center">
+                  <span class="text-secondary text-xs font-weight-bold">{{ employed }}</span>
+                </td>
+                <td class="align-middle">
+                  <a
+                    class="text-secondary font-weight-bold text-xs"
+                    data-original-title="Edit user"
+                    data-toggle="tooltip"
+                    href="javascript:"
+                  >
+                    Edit
+                  </a>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>
@@ -71,6 +71,7 @@
 </template>
 
 <script setup>
-import {data} from './AuthorsData.json'
+import { data } from './AuthorsData.json'
+
 const AuthorsData = data
 </script>

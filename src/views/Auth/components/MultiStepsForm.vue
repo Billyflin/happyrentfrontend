@@ -18,13 +18,13 @@
           <component
             :is="steps[activeStep].component"
             v-if="activeStep < steps.length"
+            :perfil="perfil"
             @update:persona="perfil = $event;console.log($event);console.log(this.perfil)"
             @update:authority="formType = $event;console.log(this.perfil)"
             @update:direccion="perfil.direccion = $event;console.log(this.perfil)"
             @update:empresa="perfil = $event;console.log($event);console.log(this.perfil)"
             @update:representante="perfil.representante = $event;console.log($event);console.log(this.perfil)"
-            @update:banco="perfil.banco = $event;console.log($event);console.log(this.perfil)"
-            @next:step="nextStep" :perfil="perfil"
+            @update:banco="perfil.banco = $event;console.log($event);console.log(this.perfil)" @next:step="nextStep"
           />
         </div>
       </div>
@@ -60,7 +60,7 @@ export default {
       activeStep: 0,
       formType: 'ROLE_PROPIETARIO',
       perfil: {
-        type: 'persona',
+        type: 'persona'
       },
       steps: [
         { title: 'Cuenta', component: 'CuentaStep' },

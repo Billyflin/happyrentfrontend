@@ -1,5 +1,4 @@
 <script setup>
-import MaterialChoices from '@/components/MaterialChoices.vue'
 import { ref } from 'vue'
 import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
 
@@ -47,29 +46,29 @@ const changeOptions = () => {
   <button @click="changeOptions">cambiar</button>
   <button @click="disabled = !disabled">disabled</button>
   <div class="row mt-3">
-<!--    <div class="col-sm-6 col-6">-->
-<!--      <MaterialChoices-->
-<!--        :options="options"-->
-<!--        id="asdsad"-->
-<!--        name="asdasd"-->
-<!--        @change="console.log(eleccion)"-->
-<!--        v-model="eleccion"-->
-<!--        :isMultiple="false"-->
-<!--        :disabled="disabled"-->
-<!--        label="Hola"-->
+    <!--    <div class="col-sm-6 col-6">-->
+    <!--      <MaterialChoices-->
+    <!--        :options="options"-->
+    <!--        id="asdsad"-->
+    <!--        name="asdasd"-->
+    <!--        @change="console.log(eleccion)"-->
+    <!--        v-model="eleccion"-->
+    <!--        :isMultiple="false"-->
+    <!--        :disabled="disabled"-->
+    <!--        label="Hola"-->
 
-<!--      ></MaterialChoices>-->
+    <!--      ></MaterialChoices>-->
 
-<!--    </div>-->
-<!--    <div class="col-sm-6 col-6">-->
-<!--      <material-choices id="nacionalidad"-->
-<!--                        :options="opcionNacionalidad"-->
-<!--                        name="nacionalidad"-->
-<!--                        :isMultiple="false"-->
-<!--                        label="Nacionalidad"-->
-<!--                        v-model="nacionalidad"-->
-<!--      />-->
-<!--    </div>-->
+    <!--    </div>-->
+    <!--    <div class="col-sm-6 col-6">-->
+    <!--      <material-choices id="nacionalidad"-->
+    <!--                        :options="opcionNacionalidad"-->
+    <!--                        name="nacionalidad"-->
+    <!--                        :isMultiple="false"-->
+    <!--                        label="Nacionalidad"-->
+    <!--                        v-model="nacionalidad"-->
+    <!--      />-->
+    <!--    </div>-->
     <LocalidadForm></LocalidadForm>
   </div>
 </template>

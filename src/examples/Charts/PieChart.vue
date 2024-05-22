@@ -1,21 +1,21 @@
 <template>
   <div class="chart">
-    <canvas :id="id" class="chart-canvas" :height="height"></canvas>
+    <canvas :id="id" :height="height" class="chart-canvas"></canvas>
   </div>
 </template>
 <script>
-import Chart from "chart.js/auto";
+import Chart from 'chart.js/auto'
 
 export default {
-  name: "PieChart",
+  name: 'PieChart',
   props: {
     id: {
       type: String,
-      default: "chart-pie",
+      default: 'chart-pie'
     },
     height: {
       type: [String, Number],
-      default: "200",
+      default: '200'
     },
     chart: {
       type: Object,
@@ -24,20 +24,20 @@ export default {
       datasets: {
         type: Object,
         label: String,
-        data: Array,
-      },
-    },
+        data: Array
+      }
+    }
   },
   mounted() {
-    var pieChart = document.getElementById(this.id).getContext("2d");
+    var pieChart = document.getElementById(this.id).getContext('2d')
 
-    let chartStatus = Chart.getChart(this.id);
+    let chartStatus = Chart.getChart(this.id)
     if (chartStatus != undefined) {
-      chartStatus.destroy();
+      chartStatus.destroy()
     }
 
     new Chart(pieChart, {
-      type: "pie",
+      type: 'pie',
       data: {
         labels: this.chart.labels,
         datasets: [
@@ -48,23 +48,23 @@ export default {
             tension: 0.9,
             pointRadius: 2,
             borderWidth: 2,
-            backgroundColor: ["#03A9F4", "#e91e63", "#3A416F", "#a8b8d8"],
+            backgroundColor: ['#03A9F4', '#e91e63', '#3A416F', '#a8b8d8'],
             data: this.chart.datasets.data,
-            fill: false,
-          },
-        ],
+            fill: false
+          }
+        ]
       },
       options: {
         responsive: true,
         maintainAspectRatio: false,
         plugins: {
           legend: {
-            display: false,
-          },
+            display: false
+          }
         },
         interaction: {
           intersect: false,
-          mode: "index",
+          mode: 'index'
         },
         scales: {
           y: {
@@ -72,26 +72,26 @@ export default {
               drawBorder: false,
               display: false,
               drawOnChartArea: false,
-              drawTicks: false,
+              drawTicks: false
             },
             ticks: {
-              display: false,
-            },
+              display: false
+            }
           },
           x: {
             grid: {
               drawBorder: false,
               display: false,
               drawOnChartArea: false,
-              drawTicks: false,
+              drawTicks: false
             },
             ticks: {
-              display: false,
-            },
-          },
-        },
-      },
-    });
-  },
-};
+              display: false
+            }
+          }
+        }
+      }
+    })
+  }
+}
 </script>

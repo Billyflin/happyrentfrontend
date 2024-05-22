@@ -69,7 +69,7 @@ export default {
       this.v$.$validate()
       if (!this.v$.$error) {
         this.$emit('update:representante', this.representante)
-this.$emit('next:step')
+        this.$emit('next:step')
       }
     }
   }
@@ -87,106 +87,106 @@ this.$emit('next:step')
         <div class="col-4">
           <material-input
             id="NombreRepresentanteLegal"
-            variant="static"
+            v-model="representante.nombre"
             is-required
-            type="text"
             label="Nombre"
             placeholder="Nombre"
-            v-model="representante.nombre"
+            type="text"
+            variant="static"
           />
         </div>
         <div class="col-4">
           <material-input
             id="ApellidoPaternoRepresentanteLegal"
-            variant="static"
-            type="text"
+            v-model="representante.apellidoPaterno"
             is-required
             label="Apellido Paterno"
             placeholder="Apellido"
-            v-model="representante.apellidoPaterno"
+            type="text"
+            variant="static"
           />
         </div>
         <div class="col-4">
           <material-input
             id="ApellidoMaternoRepresentanteLegal"
-            variant="static"
-            type="text"
+            v-model="representante.apellidoMaterno"
             is-required
             label="Apellido Materno"
             placeholder="Apellido"
-            v-model="representante.apellidoMaterno"
+            type="text"
+            variant="static"
           />
         </div>
       </div>
       <div class="row mt-4">
         <div class="col-md-1  mt-4">
-          <MaterialChoices id="pronombres" :options="pronombres" label="Pronombres"
-                           v-model:text-choice="representante.tratamiento" name="Pronombres" />
+          <MaterialChoices id="pronombres" v-model:text-choice="representante.tratamiento" :options="pronombres"
+                           label="Pronombres" name="Pronombres" />
         </div>
-        <div class = "col-1"/>
+        <div class="col-1" />
         <div class="col-sm-2  mt-4">
           <material-input
             id="Rut"
-            type="rut"
-            variant="static"
+            v-model="representante.rut"
             label="Rut"
             placeholder="Con guión"
-            v-model="representante.rut"
+            type="rut"
+            variant="static"
           />
         </div>
         <div class="col-4 mt-4">
           <material-input
             id="emailRepresentanteLegal"
-            type="email"
-            variant="static"
+            v-model="representante.email"
             label="Email"
             placeholder="Email"
-            v-model="representante.email"
+            type="email"
+            variant="static"
           />
         </div>
         <div class="col-4 mt-4">
           <material-input
             id="confirmEmailRepresentanteLegal"
-            type="email"
-            variant="static"
             label="Confimar Email"
             placeholder="Confirma Email"
+            type="email"
+            variant="static"
 
           />
         </div>
 
-        </div>
+      </div>
       <div class="row mt-4">
         <div class="col-md-3">
-          <MaterialChoices id="estadoCivil" :options="opcionsEstadoCivil"
-                           name="estadoCivil" label="Estado Civil"
-                           v-model:text-choice="representante.estadoCivil"
+          <MaterialChoices id="estadoCivil" v-model:text-choice="representante.estadoCivil"
+                           :options="opcionsEstadoCivil" label="Estado Civil"
+                           name="estadoCivil"
           />
         </div>
         <div class="col-md-3">
-          <MaterialChoices id="nacionalidad" :options="nacionalidad" label="Nacionalidad"
-                           v-model:text-choice="representante.nacionalidad" name="Nacionalidad" />
+          <MaterialChoices id="nacionalidad" v-model:text-choice="representante.nacionalidad" :options="nacionalidad"
+                           label="Nacionalidad" name="Nacionalidad" />
         </div>
         <div class="col-sm-3">
           <material-input
             id="Ocupacion"
-            type="text"
+            v-model="representante.ocupacion"
             is-required
-            variant="static"
             label="Ocupación "
             placeholder="Ingeniero"
-            v-model="representante.ocupacion"
+            type="text"
+            variant="static"
           />
         </div>
         <div class="col-sm-3">
           <material-input
             id="numeroRepresentanteLegal"
-            type="telefono"
+            v-model="representante.telefono"
             is-required
-            variant="static"
             label="teléfono"
             placeholder="9 xxxxxxxx"
-            v-model="representante.telefono"
+            type="telefono"
+            variant="static"
           />
         </div>
 
@@ -198,9 +198,9 @@ this.$emit('next:step')
     </div>
   </div>
   <div class="mt-4 button-row d-flex">
-    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="emitData">
+    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" title="Next" type="button" @click="emitData">
       Siguiente
     </button>
   </div>
-<!--  <button class="mb-5" @click="emitData">Next</button>-->
+  <!--  <button class="mb-5" @click="emitData">Next</button>-->
 </template>

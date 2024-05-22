@@ -15,7 +15,7 @@
     <div class="multisteps-form__content">
       <div class="mt-4 row">
         <div class="col-sm-3 ms-auto">
-          <input id="btncheck1" type="checkbox" class="btn-check" />
+          <input id="btncheck1" class="btn-check" type="checkbox" />
           <label
             class="btn btn-lg btn-outline-success border-2 px-6 py-5"
             for="btncheck1"
@@ -25,7 +25,7 @@
           <h6>Design</h6>
         </div>
         <div class="col-sm-3">
-          <input id="btncheck2" type="checkbox" class="btn-check" />
+          <input id="btncheck2" class="btn-check" type="checkbox" />
           <label
             class="btn btn-lg btn-outline-success border-2 px-6 py-5"
             for="btncheck2"
@@ -35,7 +35,7 @@
           <h6>Code</h6>
         </div>
         <div class="col-sm-3 me-auto">
-          <input id="btncheck3" type="checkbox" class="btn-check" />
+          <input id="btncheck3" class="btn-check" type="checkbox" />
           <label
             class="btn btn-lg btn-outline-success border-2 px-6 py-5"
             for="btncheck3"
@@ -48,16 +48,16 @@
       <div class="mt-4 button-row d-flex">
         <button
           class="mb-0 btn bg-gradient-light js-btn-prev"
-          type="button"
           title="Prev"
+          type="button"
           @click="this.$parent.prevStep"
         >
           Prev
         </button>
         <button
           class="mb-0 btn bg-gradient-dark ms-auto js-btn-next"
-          type="button"
           title="Next"
+          type="button"
           @click="this.$parent.nextStep"
         >
           Next
@@ -69,6 +69,6 @@
 
 <script>
 export default {
-  name: "Account",
-};
+  name: 'Account'
+}
 </script>

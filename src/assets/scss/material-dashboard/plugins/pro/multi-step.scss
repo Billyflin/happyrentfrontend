@@ -36,7 +36,7 @@
   height: 13px;
   content: '';
   -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
+  transform: translateX(-50%);
   transition: all 0.15s linear 0s, -webkit-transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
   transition: all 0.15s linear 0s, transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
   transition: all 0.15s linear 0s, transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s, -webkit-transform 0.15s cubic-bezier(0.05, 1.09, 0.16, 1.4) 0s;
@@ -47,56 +47,56 @@
   z-index: 3;
 }
 
-.bg-gradient-primary{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-primary {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-primary-color;
   }
 }
 
-.bg-gradient-success{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-success {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-success-color;
   }
 }
 
-.bg-gradient-happyLight{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-happyLight {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-happyLight-color;
   }
 }
 
-.bg-gradient-danger{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-danger {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-danger-color;
   }
 }
 
-.bg-gradient-warning{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-warning {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-warning-color;
   }
 }
 
-.bg-gradient-info{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-info {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-info-color;
   }
 }
 
-.bg-gradient-dark{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-dark {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-dark-color;
   }
 }
 
-.bg-gradient-secondary{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-secondary {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-secondary-color;
   }
 }
 
-.bg-gradient-light{
-  .multisteps-form__progress-btn:before{
+.bg-gradient-light {
+  .multisteps-form__progress-btn:before {
     background-color: $multistep-progress-light-color;
   }
 }
@@ -123,14 +123,15 @@
 
 .multisteps-form__progress-btn.js-active {
   color: $white;
-  span{
+
+  span {
     color: rgba($white, .7);
   }
 }
 
 .multisteps-form__progress-btn.js-active:before {
   -webkit-transform: translateX(-50%) scale(1.2);
-          transform: translateX(-50%) scale(1.2);
+  transform: translateX(-50%) scale(1.2);
   background-color: currentColor;
 }
 
@@ -156,7 +157,7 @@
 
 .multisteps-form__panel[data-animation="scaleIn"] {
   -webkit-transform: scale(0.9);
-          transform: scale(0.9);
+  transform: scale(0.9);
 }
 
 .multisteps-form__panel[data-animation="scaleIn"].js-active {
@@ -165,7 +166,7 @@
   transition-timing-function: linear;
   transition-delay: 0s;
   -webkit-transform: scale(1);
-          transform: scale(1);
+  transform: scale(1);
 }
 
 // CT Styling
@@ -177,6 +178,7 @@
     .btn-outline-primary:active {
       color: $white;
     }
+
     .is-filled.is-focused,
     .is-focused,
     .is-filled {

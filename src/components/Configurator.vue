@@ -23,7 +23,7 @@
         <div>
           <h6 class="mb-0">Sidebar Colors</h6>
         </div>
-        <a href="#" class="switch-trigger background-color">
+        <a class="switch-trigger background-color" href="#">
           <div class="my-2 badge-colors text-start">
             <span class="badge filter bg-gradient-primary" data-color="primary" @click="sidebarColor('primary')"></span>
             <span class="badge filter bg-gradient-dark" data-color="dark" @click="sidebarColor('dark')"></span>
@@ -38,8 +38,8 @@
           <button
             id="btn-dark"
             ref="btnDark"
-            class="px-3 mb-2 btn bg-gradient-dark"
             :class="{active: sidebarType === 'bg-gradient-dark'}"
+            class="px-3 mb-2 btn bg-gradient-dark"
             @click="sidebar('bg-gradient-dark')"
           >
             Dark
@@ -47,8 +47,8 @@
           <button
             id="btn-transparent"
             ref="btnTransparent"
-            class="px-3 mb-2 btn bg-gradient-dark ms-2"
             :class="{active: sidebarType === 'bg-transparent', disabled: isBtnDisabled}"
+            class="px-3 mb-2 btn bg-gradient-dark ms-2"
             @click="sidebar('bg-transparent')"
           >
             Transparent
@@ -56,8 +56,8 @@
           <button
             id="btn-white"
             ref="btnWhite"
-            class="px-3 mb-2 btn bg-gradient-dark ms-2"
             :class="{active: sidebarType === 'bg-white', disabled: isBtnDisabled}"
+            class="px-3 mb-2 btn bg-gradient-dark ms-2"
             @click="sidebar('bg-white')"
           >
             White
@@ -71,9 +71,9 @@
           <h6 class="mb-0">Light / Dark</h6>
           <div class="form-check form-switch ps-0 ms-auto my-auto">
             <input
+              :checked="store.isDarkMode"
               class="form-check-input mt-1 ms-auto"
               type="checkbox"
-              :checked="store.isDarkMode"
               @click="darkMode"
             />
           </div>
@@ -85,17 +85,17 @@
 </template>
 
 <script setup>
-import {computed, ref, onBeforeMount} from 'vue'
-import {useRoute} from 'vue-router'
-import {storeToRefs} from 'pinia'
-import {useAppStore} from '@/store/index.js'
-import {activateDarkMode, deactivateDarkMode} from '@/assets/js/dark-mode'
+import { computed, ref, onBeforeMount } from 'vue'
+import { useRoute } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useAppStore } from '@/store/index.js'
+import { activateDarkMode, deactivateDarkMode } from '@/assets/js/dark-mode'
 
 const props = defineProps(['toggle'])
 const route = useRoute()
 const store = useAppStore()
-let {isNavFixed} = storeToRefs(store)
-const {setColor} = store
+let { isNavFixed } = storeToRefs(store)
+const { setColor } = store
 
 function sidebarColor(color = 'success') {
   document.querySelector('#sidenav-main').setAttribute('data-color', color)
@@ -147,6 +147,7 @@ onBeforeMount(() => {
 .bg-gradient-dark {
   border: 1px solid transparent !important;
 }
+
 .fixed-plugin-button {
   bottom: 220px !important;
 }

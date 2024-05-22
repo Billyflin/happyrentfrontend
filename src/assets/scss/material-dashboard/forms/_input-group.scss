@@ -40,6 +40,7 @@
         border-left: 0;
         padding-left: 0;
       }
+
       &:not(:last-child) {
         border-right: 0;
         padding-right: 0;
@@ -81,9 +82,11 @@
       .form-label {
         top: $form-label-top-focused;
       }
+
       label {
         color: $success;
       }
+
       &.is-valid {
         label {
           color: $success;
@@ -97,6 +100,7 @@
           }
         }
       }
+
       &.is-invalid {
         label {
           color: $danger;
@@ -207,7 +211,7 @@
         border-color: $success !important;
         border-top-color: transparent !important;
         box-shadow: inset 1px 0 $success, inset -1px 0 $success,
-          inset 0 -1px $success;
+        inset 0 -1px $success;
       }
 
       .form-label {
@@ -238,14 +242,16 @@
         background-position: right $input-height-inner-quarter center;
         background-size: $input-height-inner-half $input-height-inner-half;
       }
+
       &.is-focused,
       &.is-filled {
         .form-label + .form-control {
           border-color: $success !important;
           box-shadow: inset 1px 0 $success, inset -1px 0 $success,
-            inset 0 -1px $success;
+          inset 0 -1px $success;
           border-top-color: transparent !important;
         }
+
         .form-label {
           color: $success;
 
@@ -265,14 +271,16 @@
         background-position: right $input-height-inner-quarter center;
         background-size: $input-height-inner-half $input-height-inner-half;
       }
+
       &.is-focused,
       &.is-filled {
         .form-label + .form-control {
           border-color: $danger !important;
           box-shadow: inset 1px 0 $danger, inset -1px 0 $danger,
-            inset 0 -1px $danger;
+          inset 0 -1px $danger;
           border-top-color: transparent !important;
         }
+
         .form-label {
           color: $danger;
 
@@ -295,6 +303,7 @@
         font-size: $input-group-sm-font-size;
       }
     }
+
     &.input-group-lg {
       .form-label,
       label {
@@ -307,6 +316,7 @@
     .form-control {
       width: 100%;
     }
+
     label {
       margin-left: 0;
       margin-bottom: 0;

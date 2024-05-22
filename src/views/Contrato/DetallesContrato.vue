@@ -1,8 +1,8 @@
 <template>
   <div class="row mt-3">
     <div class="col-lg-3">
-      <router-link to="/"
-                   class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0">
+      <router-link class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
+                   to="/">
   <span class="material-symbols-outlined mx-2">
     arrow_back
   </span>
@@ -53,7 +53,7 @@
     </div>
   </div>
   <!--propiedad-->
-  <div id="Propiedad" class="card mt-4" v-if="detalleContrato.propiedad">
+  <div v-if="detalleContrato.propiedad" id="Propiedad" class="card mt-4">
     <div class="card-header">
       <h5>Propiedad</h5>
     </div>
@@ -106,7 +106,7 @@
     </div>
   </div>
   <!--propietario persona-->
-  <div id="Propietario" class="card mt-4" v-if="detalleContrato.propiedad.propietario">
+  <div v-if="detalleContrato.propiedad.propietario" id="Propietario" class="card mt-4">
     <div class="card-header">
       <h5>Propietario Persona</h5>
     </div>
@@ -156,7 +156,7 @@
     </div>
   </div>
   <!--empresa-->
-  <div id="Empresa" class="card mt-4" v-if="detalleContrato.empresa">
+  <div v-if="detalleContrato.empresa" id="Empresa" class="card mt-4">
     <div class="card-header">
       <h5>Empresa</h5>
     </div>
@@ -229,7 +229,7 @@
     </div>
   </div>
   <!--Arrendatario-->
-  <div id="Arrendatario" class="card mt-4" v-if="detalleContrato.arrendatario">
+  <div v-if="detalleContrato.arrendatario" id="Arrendatario" class="card mt-4">
     <div class="card-header">
       <h5>Arrendatario</h5>
     </div>
@@ -282,7 +282,7 @@
     </div>
   </div>
   <!-- Codeudor -->
-  <div id="Codeudor" class="card mt-4" v-if="detalleContrato.codeudor">
+  <div v-if="detalleContrato.codeudor" id="Codeudor" class="card mt-4">
     <div class="card-header">
       <h5>Codeudor</h5>
     </div>
@@ -332,7 +332,7 @@
     </div>
   </div>
   <!--Tipo Reajuste-->
-  <div id="TipoReajuste" class="card mt-4" v-if="detalleContrato.tipoReajuste">
+  <div v-if="detalleContrato.tipoReajuste" id="TipoReajuste" class="card mt-4">
     <div class="card-header">
       <h5>Tipo de Reajuste</h5>
     </div>

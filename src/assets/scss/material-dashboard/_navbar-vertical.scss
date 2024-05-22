@@ -8,6 +8,7 @@
     max-width: 100%;
     max-height: 2rem;
   }
+
   // Navbar navigaton
   .navbar-nav {
     // Navbar link
@@ -23,6 +24,7 @@
         line-height: ($font-size-base * $line-height-base);
         text-align: center;
       }
+
       // Dropdown
       .dropdown-menu {
         border: none;
@@ -31,6 +33,7 @@
           margin-left: $dropdown-item-padding-x * 0.5;
         }
       }
+
       .avatar {
         width: $font-size-3xl;
         height: $font-size-3xl;
@@ -43,12 +46,14 @@
       }
     }
   }
+
   // Navbar navigation
   .navbar-nav .nav-link {
     display: flex;
     align-items: center;
     white-space: nowrap;
   }
+
   // Navbar heading
   .navbar-heading {
     padding-top: $nav-link-padding-y;
@@ -57,6 +62,7 @@
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
+
   // Expanded navbar specific styles
   &.navbar-expand {
     @each $breakpoint, $dimension in $grid-breakpoints {
@@ -85,7 +91,7 @@
             padding-left: 0;
             padding-right: 0; // Target IE 10 & 11
             @media all and (-ms-high-contrast: none),
-              (-ms-high-contrast: active) {
+            (-ms-high-contrast: active) {
               min-height: none;
               height: 100%;
             }
@@ -146,6 +152,7 @@
             > span.sidenav-normal {
               transition: all 0.1s ease 0s;
             }
+
             &.active {
               padding-top: $navbar-vertical-nav-link-padding-y;
               padding-bottom: $navbar-vertical-nav-link-padding-y;
@@ -167,22 +174,24 @@
           .nav-item.active {
             .nav-link.active {
               @include gradient-directional(
-                nth(#{$value}, 1) 0%,
-                nth(#{$value}, -1) 100%,
-                $deg: 195deg
+                              nth(#{$value}, 1) 0%,
+                              nth(#{$value}, -1) 100%,
+                      $deg: 195deg
               );
             }
           }
+
           .nav-item {
             .nav-link.active {
               background-color: $navbar-vertical-hover-bg-color;
+
               & + .collapse {
                 .nav-item {
                   .nav-link.active {
                     @include gradient-directional(
-                      nth(#{$value}, 1) 0%,
-                      nth(#{$value}, -1) 100%,
-                      $deg: 195deg
+                                    nth(#{$value}, 1) 0%,
+                                    nth(#{$value}, -1) 100%,
+                            $deg: 195deg
                     );
                   }
                 }
@@ -194,12 +203,14 @@
     }
   }
 }
+
 // Sidenav + Main content transition
 
 .main-content,
 .sidenav {
   transition: $transition-base;
 }
+
 //
 // Sidenav
 //
@@ -211,6 +222,7 @@
   .navbar-heading {
     display: block;
   }
+
   @include media-breakpoint-up(xl) {
     &:hover {
       max-width: $navbar-vertical-open-width;
@@ -240,6 +252,7 @@
   .navbar-brand {
     padding: 1.5rem 2rem;
   }
+
   .collapse {
     .nav-item {
       .nav-link {
@@ -254,6 +267,7 @@
     }
   }
 }
+
 body:not(.dark-version) {
   .sidenav {
     &.bg-white,
@@ -287,6 +301,7 @@ body:not(.dark-version) {
     }
   }
 }
+
 // Sidenav states
 
 .g-sidenav-show {
@@ -301,6 +316,7 @@ body:not(.dark-version) {
       opacity: 1;
     }
   }
+
   &.rtl {
     .navbar-vertical {
       .navbar-nav .nav-link[data-bs-toggle="collapse"] {
@@ -311,6 +327,7 @@ body:not(.dark-version) {
     }
   }
 }
+
 // Media fixes for iPhone 5 like resolutions
 @include media-breakpoint-down(xl) {
   .g-sidenav-show {
@@ -377,30 +394,34 @@ body:not(.dark-version) {
     border-right-width: 0;
     border-bottom-width: 0;
     background-color: $navbar-vertical-hover-bg-color;
+
     & + .collapse,
     & + .collapsing {
       .nav-item.active {
         .nav-link.active {
           @include gradient-directional(
-            nth($success, 1) 0%,
-            nth($success, -1) 100%,
-            $deg: 195deg
+                          nth($success, 1) 0%,
+                          nth($success, -1) 100%,
+                  $deg: 195deg
           );
+
           span {
             color: $white;
           }
         }
       }
+
       .nav-item {
         .nav-link.active {
           background-color: $navbar-vertical-hover-bg-color;
+
           & + .collapse {
             .nav-item {
               .nav-link.active {
                 @include gradient-directional(
-                  nth($success, 1) 0%,
-                  nth($success, -1) 100%,
-                  $deg: 195deg
+                                nth($success, 1) 0%,
+                                nth($success, -1) 100%,
+                        $deg: 195deg
                 );
               }
             }
@@ -413,7 +434,7 @@ body:not(.dark-version) {
 
 .navbar-main {
   transition: box-shadow $transition-base-time ease-in,
-    background-color $transition-base-time ease-in;
+  background-color $transition-base-time ease-in;
 
   &.fixed-top {
     width: calc(100% - (#{$navbar-vertical-open-width} + #{$spacer * 1.5} * 3));
@@ -423,6 +444,7 @@ body:not(.dark-version) {
     margin-top: 7.1875rem !important;
   }
 }
+
 // Navbar Vertical Extend
 .navbar-vertical {
   .navbar-nav .nav-link[data-bs-toggle="collapse"] {
@@ -439,6 +461,7 @@ body:not(.dark-version) {
       color: rgba($light-gradient-state, 0.7);
       @include transition($transition-base);
     }
+
     // Expanded
     &[aria-expanded="true"] {
       &:after {
@@ -493,6 +516,7 @@ body:not(.dark-version) {
     }
   }
 }
+
 // Styles for minimized sidenav
 .navbar-vertical {
   .navbar-brand {
@@ -531,6 +555,7 @@ body:not(.dark-version) {
             > .nav-link {
               margin-top: 1.5px;
               margin-bottom: 1.5px;
+
               + .collapse,
               + .collapsing {
                 .nav {
@@ -547,6 +572,7 @@ body:not(.dark-version) {
         }
       }
     }
+
     &:hover {
       .nav-link {
         background-color: $navbar-vertical-hover-bg-color;
@@ -561,6 +587,7 @@ body:not(.dark-version) {
                   border-radius: $navbar-nav-link-border-radius;
                 }
               }
+
               + .collapse {
                 .nav {
                   .nav-item {
@@ -592,6 +619,7 @@ body:not(.dark-version) {
         &:hover {
           max-width: $navbar-vertical-open-width !important;
         }
+
         .nav-item {
           .nav-link {
             .material-icons-round {
@@ -683,6 +711,7 @@ body:not(.dark-version) {
           height: 0;
         }
       }
+
       // Hover style on sidenav minimized
       &:hover {
         max-width: $navbar-vertical-open-width !important;

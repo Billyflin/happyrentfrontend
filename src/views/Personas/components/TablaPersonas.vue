@@ -2,8 +2,8 @@
   <div class="mb-4 card">
     <div class="pb-0 card-header d-flex align-items-center justify-content-between">
       <h5>Personas</h5>
-      <router-link to="/agregarPersona"
-                   class="mt-2 mb-2 btn btn-happLight ml-auto d-flex align-items-center">
+      <router-link class="mt-2 mb-2 btn btn-happLight ml-auto d-flex align-items-center"
+                   to="/agregarPersona">
         Agregar persona
         <span class="material-symbols-outlined mx-2">
         person_add
@@ -85,25 +85,27 @@
               <div class="text-center px-3 py-1 d-flex justify-content-center align-items-center">
 
                 <material-button
-                  color="primary"
-                  variant="gradient"
-                  size="sm"
                   class="my-sm-auto mt-2 mb-0 mx-1 d-flex align-items-center"
-                  type="button"
+                  color="primary"
                   name="button"
+                  size="sm"
+                  type="button"
+                  variant="gradient"
                 >
-                  <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_edit</span> Editar
+                  <span class="material-symbols-outlined mr-3"
+                        style="font-size: 16px; margin-right: 10px;;">person_edit</span> Editar
                 </material-button>
                 <material-button
-                  color="danger"
-                  variant="gradient"
-                  size="sm"
                   class="my-sm-auto mt-2 mb-0 d-flex align-items-center"
-                  type="button"
+                  color="danger"
                   name="button"
+                  size="sm"
+                  type="button"
+                  variant="gradient"
                   @click="removePersona(values[4])"
                 >
-                  <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_remove</span> Delete
+                  <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_remove</span>
+                  Delete
                 </material-button>
 
               </div>

@@ -1,5 +1,5 @@
 <template>
-  <li class="page-item" :class="getClasses(active, disabled)">
+  <li :class="getClasses(active, disabled)" class="page-item">
     <a class="page-link" href="javascript:">
       {{ prev || next ? null : label }}
       <i v-if="prev" class="fa fa-angle-left"></i>
@@ -10,38 +10,38 @@
 
 <script>
 export default {
-  name: "MaterialPaginationItem",
+  name: 'MaterialPaginationItem',
   props: {
-    label:  {
+    label: {
       type: String,
-      default: "",
+      default: ''
     },
     active: {
       type: Boolean,
-      default: false,
+      default: false
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     prev: {
       type: Boolean,
-      default: false,
+      default: false
     },
     next: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   methods: {
     getClasses: (active, disabled) => {
-      let activeValue, disabledValue;
+      let activeValue, disabledValue
 
-      activeValue = active ? "active" : null;
-      disabledValue = disabled ? "disabled" : null;
+      activeValue = active ? 'active' : null
+      disabledValue = disabled ? 'disabled' : null
 
-      return `${activeValue} ${disabledValue}`;
-    },
-  },
-};
+      return `${activeValue} ${disabledValue}`
+    }
+  }
+}
 </script>

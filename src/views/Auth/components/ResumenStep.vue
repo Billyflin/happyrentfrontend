@@ -33,7 +33,7 @@ export default {
 <template>
   <div class="multisteps-form__title">Resumen</div>
   <div class="multisteps-form__body">
-    <div class="row" v-if="perfil.type === 'persona'">
+    <div v-if="perfil.type === 'persona'" class="row">
       <div class="col-12">
         <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Nombre</h6>
@@ -59,14 +59,14 @@ export default {
           <h6 class="font-weight-normal">Nacionalidad</h6>
           <p>{{ perfil.nacionalidad }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center text-capitalize" v-if="perfil.direccion">
+        <div v-if="perfil.direccion" class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Dirección</h6>
-          <p>{{ perfil.direccion.calle }} {{ perfil.direccion.numero }}, {{ perfil.direccion.ciudad}},
+          <p>{{ perfil.direccion.calle }} {{ perfil.direccion.numero }}, {{ perfil.direccion.ciudad }},
             {{ perfil.direccion.region }}</p>
         </div>
       </div>
     </div>
-    <div class="row" v-if="perfil.type ==='empresa'">
+    <div v-if="perfil.type ==='empresa'" class="row">
       <div class="col-12">
         <div class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Nombre Empresa</h6>
@@ -88,16 +88,16 @@ export default {
           <h6 class="font-weight-normal">Razon social</h6>
           <p>{{ perfil.razonSocial }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center text-capitalize" v-if="perfil.direccion">
+        <div v-if="perfil.direccion" class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Dirección</h6>
           <p>{{ perfil.direccion.calle }} {{ perfil.direccion.numero }},
             {{ perfil.direccion.region }}</p>
         </div>
       </div>
-      <div class="multisteps-form__title mt-4" v-if="perfil.representante">Resumen Representante
+      <div v-if="perfil.representante" class="multisteps-form__title mt-4">Resumen Representante
         Legal
       </div>
-      <div class="col-12" v-if="perfil.representante">
+      <div v-if="perfil.representante" class="col-12">
         <div class="d-flex justify-content-between align-items-center">
           <h6 class="font-weight-normal text-capitalize">Nombre</h6>
           <p>{{ perfil.representante.nombre }}
@@ -109,14 +109,14 @@ export default {
           <p v-if="perfil.representante.rut">
             {{ perfil.representante.rut }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center text-capitalize"
-             v-if="perfil.representante.ocupacion">
-          <h6 class="font-weight-normal" v-if="perfil.representante.ocupacion">
+        <div v-if="perfil.representante.ocupacion"
+             class="d-flex justify-content-between align-items-center text-capitalize">
+          <h6 v-if="perfil.representante.ocupacion" class="font-weight-normal">
             Ocupación</h6>
           <p>{{ perfil.representante.ocupacion }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center text-capitalize"
-             v-if="perfil.representante.estadoCivil">
+        <div v-if="perfil.representante.estadoCivil"
+             class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Estado Civil</h6>
           <p>{{ perfil.representante.estadoCivil }}</p>
         </div>
@@ -136,7 +136,8 @@ export default {
           <p v-if="perfil.representante.telefono">
             {{ perfil.representante.telefono }}</p>
         </div>
-        <div class="d-flex justify-content-between align-items-center text-capitalize" v-if="perfil.representante.direccion">
+        <div v-if="perfil.representante.direccion"
+             class="d-flex justify-content-between align-items-center text-capitalize">
           <h6 class="font-weight-normal">Dirección</h6>
           <p>{{ perfil.representante.direccion.calle }}
             {{ perfil.representante.direccion.numero }},
@@ -145,7 +146,7 @@ export default {
       </div>
     </div>
   </div>
-  <div class="button-row d-flex" v-if="perfil">
+  <div v-if="perfil" class="button-row d-flex">
     <button class="btn bg-gradient-primary w-100 text-white" @click="enviarFormulario">Terminar Registro</button>
   </div>
 

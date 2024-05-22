@@ -13,15 +13,15 @@
         <div class="col-sm-3 ms-auto">
           <input
             :id="'perfilSelection_Corredor_'"
-            type="radio"
+            v-model="selectedRole"
             class="btn-check"
             name="profileSelection"
+            type="radio"
             value="ROLE_CORREDOR"
-            v-model="selectedRole"
           />
           <label
-            class="btn btn-lg btn-outline-success border-2 px-6 py-5"
             :for="'perfilSelection_Corredor_'"
+            class="btn btn-lg btn-outline-success border-2 px-6 py-5"
           >
             <i class="material-icons">brush</i>
           </label>
@@ -30,15 +30,15 @@
         <div class="col-sm-3 me-auto">
           <input
             :id="'perfilSelection_Propietario_'"
-            type="radio"
+            v-model="selectedRole"
             class="btn-check"
             name="profileSelection"
+            type="radio"
             value="ROLE_PROPIETARIO"
-            v-model="selectedRole"
           />
           <label
-            class="btn btn-lg btn-outline-success border-2 px-6 py-5"
             :for="'perfilSelection_Propietario_' "
+            class="btn btn-lg btn-outline-success border-2 px-6 py-5"
           >
             <i class="material-icons">integration_instructions</i>
           </label>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="mt-4 button-row d-flex">
-        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next"
+        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" title="Next" type="button"
                 @click="this.$parent.nextStep">
           Next
         </button>

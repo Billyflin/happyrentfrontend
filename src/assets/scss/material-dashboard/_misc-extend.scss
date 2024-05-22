@@ -1,4 +1,3 @@
-
 // Perspective effect
 .change-perspective {
   transform: $transform-perspective;
@@ -7,6 +6,7 @@
 .change-perspective-inverse {
   transform: $transform-perspective-inverse;
 }
+
 // Device Wrapper
 .device-wrapper {
   border-radius: $device-wrapper-radius;
@@ -26,6 +26,7 @@
 .z-index2 {
   z-index: $z-index2;
 }
+
 @keyframes gradient {
   0% {
     background-position: 0 50%;
@@ -39,6 +40,7 @@
     background-position: 0 50%;
   }
 }
+
 // Colored Shadow on Cards images
 .colored-shadow {
   transform: scale($colored-shadow-scale);
@@ -119,6 +121,7 @@
 .animated-blur-4 {
   animation: animation-blur-two 5s infinite;
 }
+
 @keyframes animation-blur-one {
   0% {
     transform: scale(.8);
@@ -140,6 +143,7 @@
     transform: scale(.8);
   }
 }
+
 @keyframes animation-blur-two {
   0% {
     transform: scale(1.2);
@@ -166,11 +170,11 @@
     vertical-align: $text-border-vertical-align;
   }
 
-  &:after{
+  &:after {
     background: $text-border-bg-color-after;
   }
 
-  &:before{
+  &:before {
     background: $text-border-bg-color-before;
   }
 
@@ -185,9 +189,10 @@
   }
 }
 
-a[data-scroll]{
+a[data-scroll] {
   border-radius: $border-radius-md;
-   &:hover{
+
+  &:hover {
     background: $gray-200;
     color: $h-color;
   }
@@ -227,6 +232,7 @@ round-slider.scaling:hover {
     }
   }
 }
+
 @include media-breakpoint-down(sm) {
   .page-headers-sections {
     .container {
@@ -238,6 +244,7 @@ round-slider.scaling:hover {
     }
   }
 }
+
 // Coming Soon Page
 .transform-rotate {
   transform: $coming-rotate-transform;

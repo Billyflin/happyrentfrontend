@@ -2,12 +2,12 @@
   <div class="form-check">
     <input
       :id="id"
+      :checked="checked"
+      :name="name"
       class="form-check-input"
       type="radio"
-      :name="name"
-      :checked="checked"
     />
-    <label class="custom-control-label" :for="id">
+    <label :for="id" class="custom-control-label">
       <slot />
     </label>
   </div>
@@ -15,20 +15,20 @@
 
 <script>
 export default {
-  name: "MaterialRadio",
+  name: 'MaterialRadio',
   props: {
     name: {
       type: String,
-      required: true,
+      required: true
     },
     id: {
       type: String,
-      required: true,
+      required: true
     },
     checked: {
       type: Boolean,
-      default: false,
-    },
-  },
-};
+      default: false
+    }
+  }
+}
 </script>

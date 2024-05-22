@@ -8,10 +8,10 @@
         <div class="col-md-4 text-end">
           <a :href="action.route">
             <i
-              class="text-sm fas fa-user-edit text-secondary"
-              data-bs-toggle="tooltip"
-              data-bs-placement="top"
               :title="action.tooltip"
+              class="text-sm fas fa-user-edit text-secondary"
+              data-bs-placement="top"
+              data-bs-toggle="tooltip"
             ></i>
           </a>
         </div>
@@ -39,7 +39,7 @@
         </li>
         <li class="pb-0 border-0 list-group-item ps-0">
           <strong class="text-sm text-dark">Social:</strong> &nbsp;
-          <a v-for="({icon, link}, index) of social" :key="index" class="py-0 mb-0 btn-simple ps-1 pe-2" :href="link">
+          <a v-for="({icon, link}, index) of social" :key="index" :href="link" class="py-0 mb-0 btn-simple ps-1 pe-2">
             <i :class="`fa fa-brands ${icon}`"></i>
           </a>
         </li>
@@ -52,11 +52,11 @@
 defineProps({
   title: {
     type: String,
-    default: '',
+    default: ''
   },
   description: {
     type: String,
-    default: '',
+    default: ''
   },
   info: {
     type: Object,
@@ -64,21 +64,22 @@ defineProps({
     mobile: String,
     email: String,
     location: String,
-    default: () => {},
+    default: () => {
+    }
   },
   social: {
     type: Array,
     link: String,
     icon: String,
-    default: () => [],
+    default: () => []
   },
   action: {
     type: Object,
     route: String,
     tooltip: String,
     default: () => ({
-      route: 'javascript:;',
-    }),
-  },
+      route: 'javascript:;'
+    })
+  }
 })
 </script>

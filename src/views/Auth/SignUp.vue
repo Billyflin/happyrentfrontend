@@ -11,8 +11,8 @@
               <div
                 class="col-6 d-lg-flex d-none h-100 my-auto pe-0 ps-0 position-absolute top-0 start-0 text-center justify-content-center flex-column"
               >
-                <div class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center"
-                     :style="{ 'backgroundImage': 'url(' + Image + ')' }">
+                <div :style="{ 'backgroundImage': 'url(' + Image + ')' }"
+                     class="position-relative h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center">
                 </div>
 
               </div>
@@ -25,29 +25,29 @@
                   <div class="card-body">
                     <form role="form" @submit.prevent="submitForm">
                       <div v-if="err" class="row mb-3 mt-3">
-                        <span class="badge badge-danger">{{err}}</span>
+                        <span class="badge badge-danger">{{ err }}</span>
                       </div>
                       <div class="mb-3">
-                        <material-input id="name" type="text" label="Nombre Usuario" name="name" size="lg"
-                                        v-model="name" />
+                        <material-input id="name" v-model="name" label="Nombre Usuario" name="name" size="lg"
+                                        type="text" />
                       </div>
                       <div class="mb-3">
-                        <material-input id="email" type="email" label="Correo" name="email" size="lg" v-model="email" />
+                        <material-input id="email" v-model="email" label="Correo" name="email" size="lg" type="email" />
                       </div>
                       <div class="mb-3">
-                        <material-input id="password" type="password" label="Contraseña" name="password" size="lg"
-                                        v-model="password" />
+                        <material-input id="password" v-model="password" label="Contraseña" name="password" size="lg"
+                                        type="password" />
                       </div>
                       <div class="mb-3">
-                        <material-input id="passwordConfirm" type="password" label="Confirma tu contraseña"
-                                        name="passwordConfirm" size="lg" v-model="passwordConfirm" />
+                        <material-input id="passwordConfirm" v-model="passwordConfirm" label="Confirma tu contraseña"
+                                        name="passwordConfirm" size="lg" type="password" />
                       </div>
                       <div v-if="passwordMismatch" class="row mb-3 mt-3">
                         <span class="badge badge-danger">Las contraseñas no coinciden</span>
                       </div>
-                      <material-checkbox v-model="accept" id="flexCheckDefault" class="font-weight-light" checked>
+                      <material-checkbox id="flexCheckDefault" v-model="accept" checked class="font-weight-light">
                         Acepto los
-                        <a href="" class="text-dark font-weight-bolder"
+                        <a class="text-dark font-weight-bolder" href=""
                         >Términos y Condiciones</a
                         >
                       </material-checkbox>
@@ -55,7 +55,7 @@
                         <span class="badge badge-danger">Acepta los términos y condiciones para continuar</span>
                       </div>
                       <div class="text-center">
-                        <material-button class="mt-4" variant="gradient" color="primary" fullWidth size="lg"
+                        <material-button class="mt-4" color="primary" fullWidth size="lg" variant="gradient"
                         >Registrarse
                         </material-button
                         >
@@ -87,7 +87,7 @@ import MaterialInput from '@/components/MaterialInput.vue'
 import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 import MaterialButton from '@/components/MaterialButton.vue'
 import Image from '@/assets/img/illustrations/illustration-signin.jpg'
-import { useAppStore,useRegisterFormStore } from '@/store/index.js'
+import { useAppStore, useRegisterFormStore } from '@/store/index.js'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
 
@@ -111,38 +111,38 @@ const router = useRouter()
 const loading = ref(false)
 const submitForm = () => {
   if (passwordMismatch.value) {
-    console.log('Las contraseñas no coinciden');
-    return;
+    console.log('Las contraseñas no coinciden')
+    return
   }
   if (!accept.value) {
-    console.log('Debes aceptar los términos y condiciones');
-    acceptVerification.value = true;
-    return;
+    console.log('Debes aceptar los términos y condiciones')
+    acceptVerification.value = true
+    return
   }
-  acceptVerification.value = false;
+  acceptVerification.value = false
   const user = {
     username: name.value,
     password: password.value,
     email: email.value,
-    role: "PROVICIONAL"
+    role: 'PROVICIONAL'
 
-  };
-  loading.value = true;
+  }
+  loading.value = true
 
   axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/register`, user)
-      .then(response => {
-        console.log(response.data);
-        if (response.status === 200) {
-          router.push({name: 'RegistroExitoso'});
-        }
-        loading.value = false;
-      })
-      .catch(error => {
-        console.error(error);
-        err.value = error.response.data.message;
-        loading.value = false;
-      });
-};
+    .then(response => {
+      console.log(response.data)
+      if (response.status === 200) {
+        router.push({ name: 'RegistroExitoso' })
+      }
+      loading.value = false
+    })
+    .catch(error => {
+      console.error(error)
+      err.value = error.response.data.message
+      loading.value = false
+    })
+}
 
 
 watch([password, passwordConfirm], () => {

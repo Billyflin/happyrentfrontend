@@ -3,10 +3,12 @@
     .card-body {
       padding: $card-pricing-body-padding;
     }
+
     .table {
       tr {
         border-image: $card-pricing-border-color;
       }
+
       td {
         .badge {
           padding: $card-pricing-badge-padding;
@@ -16,6 +18,7 @@
         }
       }
     }
+
     &[data-feature="icon"] {
 
       .icon {
@@ -37,10 +40,12 @@
       i {
         font-size: $card-pricing-icon-font-size;
       }
+
       .card-category {
         text-transform: uppercase;
       }
     }
+
     .icon-lg i {
       font-size: $card-pricing-icon-lg-font-size;
     }

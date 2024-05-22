@@ -25,15 +25,15 @@
                 <div class="mb-3">
                   <material-input
                     id="email"
-                    type="email"
                     label="Email"
-                    placeholder="john@email.com"
                     name="email"
+                    placeholder="john@email.com"
+                    type="email"
                     variant="static"
                   />
                 </div>
                 <div class="text-center">
-                  <material-button class="mt-4" variant="gradient" color="warning" full-width>Enviar</material-button>
+                  <material-button class="mt-4" color="warning" full-width variant="gradient">Enviar</material-button>
                 </div>
               </form>
             </div>
@@ -56,7 +56,7 @@ const submitForm = () => {
 const body = document.getElementsByTagName('body')[0]
 
 const store = useAppStore()
-const {toggleEveryDisplay, toggleHideConfig} = store
+const { toggleEveryDisplay, toggleHideConfig } = store
 
 onBeforeMount(() => {
   toggleEveryDisplay()

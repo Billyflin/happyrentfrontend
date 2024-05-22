@@ -25,9 +25,10 @@
   margin-bottom: 0;
 }
 
-.swal2-close{
+.swal2-close {
   outline: none;
-  &:focus{
+
+  &:focus {
     outline: none;
     box-shadow: none;
   }
@@ -60,7 +61,7 @@
   color: $warning;
 }
 
-.swal2-icon.swal2-question{
+.swal2-icon.swal2-question {
   border-color: $secondary;
   color: $secondary;
 }

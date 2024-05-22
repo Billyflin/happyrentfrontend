@@ -1,59 +1,59 @@
 <template>
-  <div class="avatar" :class="getSize(size)">
+  <div :class="getSize(size)" class="avatar">
     <img
-      :src="img"
       :alt="alt"
       :class="[getClasses(shadow, circular, borderRadius)]"
+      :src="img"
     />
   </div>
 </template>
 
 <script>
 export default {
-  name: "MaterialAvatar",
+  name: 'MaterialAvatar',
   props: {
     img: {
-      type: String,
-      required: true,
+      type: [String, Object],
+      required: true
     },
     alt: {
       type: String,
-      default: "",
+      default: ''
     },
-    size:  {
+    size: {
       type: String,
-      default: "",
+      default: ''
     },
     shadow: {
       type: String,
-      default: "",
+      default: ''
     },
-    borderRadius:  {
+    borderRadius: {
       type: String,
-      default: "",
+      default: ''
     },
-    circular:  {
+    circular: {
       type: Boolean,
-      default: false,
-    },
+      default: false
+    }
   },
   methods: {
     getSize: (size) => (size ? `avatar-${size}` : null),
     getClasses: (shadow, circular, borderRadius) => {
-      let shadowValue, circularValue, borderRadiusValue;
+      let shadowValue, circularValue, borderRadiusValue
 
       if (shadow) {
-        shadowValue = shadow === "regular" ? "shadow" : `shadow-${shadow}`;
+        shadowValue = shadow === 'regular' ? 'shadow' : `shadow-${shadow}`
       } else {
-        shadowValue = null;
+        shadowValue = null
       }
 
-      circularValue = circular ? "rounded-circle" : null;
+      circularValue = circular ? 'rounded-circle' : null
 
-      borderRadiusValue = borderRadius ? `border-radius-${borderRadius}` : null;
+      borderRadiusValue = borderRadius ? `border-radius-${borderRadius}` : null
 
-      return `${shadowValue} ${circularValue} ${borderRadiusValue}`;
-    },
-  },
-};
+      return `${shadowValue} ${circularValue} ${borderRadiusValue}`
+    }
+  }
+}
 </script>

@@ -8,25 +8,26 @@
     <div class="multisteps-form__content">
       <div class="row mt-3">
         <div class="col-4 mb-4">
-          <material-input id="rut" variant="dynamic" label="Rut" is-required type="rut" v-model="bancario.rut" />
+          <material-input id="rut" v-model="bancario.rut" is-required label="Rut" type="rut" variant="dynamic" />
         </div>
         <div class="col-4 mb-4">
-          <material-input id="numeroCuenta" variant="dynamic" label="Número de cuenta" is-required type="String"
-                          v-model="bancario.numeroCuenta" />
+          <material-input id="numeroCuenta" v-model="bancario.numeroCuenta" is-required label="Número de cuenta" type="String"
+                          variant="dynamic" />
         </div>
         <div class="col-4 mb-4">
-          <material-input id="email" variant="dynamic" label="Email" is-required type="text" v-model="bancario.email" />
+          <material-input id="email" v-model="bancario.email" is-required label="Email" type="text" variant="dynamic" />
         </div>
         <div class="col-4 mb-4">
-          <material-choices id="banco" name="banco" label="Banco" :options="bancos" v-model:text-choice="bancario.banco" />
+          <material-choices id="banco" v-model:text-choice="bancario.banco" :options="bancos" label="Banco"
+                            name="banco" />
         </div>
         <div class="col-4 mb-4">
-          <material-choices id="tipoCuenta" name="tipoCuenta" label="Tipo de cuenta" :options="cuentas"
-                            v-model:text-choice="bancario.cuenta" />
+          <material-choices id="tipoCuenta" v-model:text-choice="bancario.cuenta" :options="cuentas" label="Tipo de cuenta"
+                            name="tipoCuenta" />
         </div>
       </div>
       <div class="mt-4 button-row d-flex">
-        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next"
+        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" title="Next" type="button"
                 @click="nexStep">
           Siguiente
         </button>

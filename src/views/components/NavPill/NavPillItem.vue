@@ -1,7 +1,7 @@
 <template>
   <li class="nav-item">
-    <a class="nav-link mb-0 px-0 py-1 active active" data-bs-toggle="tab" :href="link" role="tab" aria-selected="true"
-      >{{ tab }}
+    <a :href="link" aria-selected="true" class="nav-link mb-0 px-0 py-1 active active" data-bs-toggle="tab" role="tab"
+    >{{ tab }}
     </a>
   </li>
 </template>
@@ -10,15 +10,15 @@
 defineProps({
   ariaSelected: {
     type: Boolean,
-    default: false,
+    default: false
   },
   tab: {
     type: String,
-    required: true,
+    required: true
   },
   link: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 })
 </script>

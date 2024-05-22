@@ -1,71 +1,73 @@
 <template>
-  <div class="toast fade show p-2 mt-2" :class="getColor(color)">
+  <div :class="getColor(color)" class="toast fade show p-2 mt-2">
     <div class="toast-header bg-transparent border-0">
-      <i class="material-icons me-2" :class="getIcon(icon.color)">{{
+      <i :class="getIcon(icon.color)" class="material-icons me-2">{{
         icon.component
-      }}</i>
-      <span class="me-auto font-weight-bold" :class="getTextColor(color)">
+        }}</i>
+      <span :class="getTextColor(color)" class="me-auto font-weight-bold">
         {{ title }}
       </span>
       <small :class="getTextColor(color)">{{ date }}</small>
       <i
-        class="fas fa-times text-md ms-3 cursor-pointer"
         :class="getTextColor(color)"
+        class="fas fa-times text-md ms-3 cursor-pointer"
         @click="closeHandler"
       />
     </div>
-    <hr class="horizontal dark m-0" :class="getHrColor(color)" />
-    <div class="toast-body" :class="getTextColor(color)">{{ description }}</div>
+    <hr :class="getHrColor(color)" class="horizontal dark m-0" />
+    <div :class="getTextColor(color)" class="toast-body">{{ description }}</div>
   </div>
 </template>
 
 <script>
 export default {
-  name: "MaterialSnackbar",
+  name: 'MaterialSnackbar',
   props: {
     title: {
       type: String,
-      required: true,
+      required: true
     },
     date: {
       type: String,
-      default: "",
+      default: ''
     },
     description: {
       type: String,
-      default: "",
+      default: ''
     },
     icon: {
       type: Object,
       component: String,
       color: String,
-      default: () => {},
+      default: () => {
+      }
     },
     color: {
       type: String,
-      default: "success",
+      default: 'success'
     },
 
     closeHandler: {
       type: Function,
-      default: () => {},
-    },
+      default: () => {
+      }
+    }
   },
   methods: {
     getColor: (color) => {
-      let colorValue;
+      let colorValue
 
-      if (color === "white") {
-        colorValue = "bg-white";
+      if (color === 'white') {
+        colorValue = 'bg-white'
       } else {
-        colorValue = `bg-gradient-${color}`;
+        colorValue = `bg-gradient-${color}`
       }
 
-      return colorValue;
+      return colorValue
     },
     getIcon: (iconColor) => (iconColor ? `text-${iconColor}` : null),
-    getTextColor: (color) => (color === "white" ? "text-dark" : "text-white"),
-    getHrColor: (color) => (color === "white" ? "dark" : "light"),
-  },
-};
+    getTextColor: (color) => (color === 'white' ? 'text-dark' : 'text-white'),
+    getHrColor: (color) => (color === 'white' ? 'dark' : 'light')
+  }
+}
 </script>

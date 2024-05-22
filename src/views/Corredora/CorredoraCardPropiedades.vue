@@ -29,16 +29,16 @@
               <div class="px-3 py-1 d-flex">
                 <material-avatar
                   :img="image"
+                  alt="avatar image"
+                  border-radius="lg"
                   class="me-3"
                   size="xl"
-                  border-radius="lg"
-                  alt="avatar image"
                 />
                 <div class="d-flex flex-column justify-content-center">
                   <h6 class="mb-0 text-sm">{{ listTitle }}</h6>
                   <p class="mb-0 text-sm font-weight-bold text-secondary">
                     <span class="text-success">{{ direccion }}</span>
-                    {{region}}
+                    {{ region }}
                   </p>
                 </div>
               </div>
@@ -60,18 +60,18 @@
                 <p class="mb-0 text-sm font-weight-bold">
                   {{ values[2] }}
                 </p>
-                <i class="mt-1 text-sm ms-1" :class="`ni ni-${icon}`"></i>
+                <i :class="`ni ni-${icon}`" class="mt-1 text-sm ms-1"></i>
                 <material-button
                   v-if="info"
-                  size="sm"
-                  color="secondary"
-                  variant="outline"
-                  class="btn-icon-only btn-rounded mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center ms-3"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="bottom"
                   :data-bs-original-title="info"
+                  class="btn-icon-only btn-rounded mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center ms-3"
+                  color="secondary"
+                  data-bs-placement="bottom"
+                  data-bs-toggle="tooltip"
+                  size="sm"
+                  variant="outline"
                 >
-                  <i class="fas fa-info" aria-hidden="true"></i>
+                  <i aria-hidden="true" class="fas fa-info"></i>
                 </material-button>
               </div>
             </td>
@@ -84,22 +84,23 @@
 </template>
 
 <script>
-import MaterialAvatar from "@/components/MaterialAvatar.vue";
-import MaterialButton from "@/components/MaterialButton.vue";
+import MaterialAvatar from '@/components/MaterialAvatar.vue'
+import MaterialButton from '@/components/MaterialButton.vue'
+
 export default {
-  name: "CorredoraCardPropiedades",
+  name: 'CorredoraCardPropiedades',
   components: {
     MaterialAvatar,
-    MaterialButton,
+    MaterialButton
   },
   props: {
     title: {
       type: String,
-      default: "",
+      default: ''
     },
     headers: {
       type: Array,
-      default: () => [],
+      default: () => []
     },
     lists: {
       type: Array,
@@ -110,8 +111,8 @@ export default {
       region: String,
       info: String,
       image: String,
-      icon: String,
-    },
-  },
-};
+      icon: String
+    }
+  }
+}
 </script>

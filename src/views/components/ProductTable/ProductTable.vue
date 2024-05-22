@@ -1,12 +1,5 @@
 <script setup>
-import {defineProps} from 'vue'
-
-import GraphicsCard from "@/views/components/ProductCard/GraphicsCard.vue";
-import ProcessorsCard from "@/views/components/ProductCard/ProcessorsCard.vue";
-import RamCard from "@/views/components/ProductCard/RamCard.vue";
-import StorageCard from "@/views/components/ProductCard/StorageCard.vue";
-import PowerSupplyCard from "@/views/components/ProductCard/PowerSupplyCard.vue";
-import CoolingCard from "@/views/components/ProductDetailCard/CoolingDetails.vue";
+import { defineProps } from 'vue'
 
 defineProps({
   category: {

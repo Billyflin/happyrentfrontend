@@ -1,6 +1,6 @@
 <template>
   <div class="col-md-6">
-    <default-info-card icon="account_balance" title="Salary" description="Belong Interactive" value="+$2000" />
+    <default-info-card description="Belong Interactive" icon="account_balance" title="Salary" value="+$2000" />
   </div>
 </template>
 

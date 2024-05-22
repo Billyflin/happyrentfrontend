@@ -7,7 +7,7 @@
     <div class="d-flex align-items-center text-sm">
       {{ amount }}
       <button class="btn btn-link text-dark text-sm mb-0 px-0 ms-4">
-        <i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i>
+        <i aria-hidden="true" class="fas fa-file-pdf text-lg me-1"></i>
         PDF
       </button>
     </div>
@@ -18,15 +18,15 @@
 defineProps({
   date: {
     type: String,
-    required: true,
+    required: true
   },
   id: {
     type: String,
-    required: true,
+    required: true
   },
   amount: {
     type: String,
-    required: true,
-  },
+    required: true
+  }
 })
 </script>

@@ -11,84 +11,84 @@ import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
     </div>
     <div class="card-body pt-0">
       <div class="row">
-          <div class="row" >
-            <h6 class="mb-3">Persona</h6>
-            <div class="col-sm-3">
-              <material-input
-                id="RutPersona"
-                type="text"
-                variant="static"
-                label="Rut"
-                placeholder="Con guión"
-              />
-            </div>
-            <div class="col-4">
-              <material-input
-                id="NombrePersona"
-                variant="static"
-                label="Nombre"
-                placeholder="Nombre"
-              />
-            </div>
-            <div class="col-4">
-              <material-input
-                id="ApellidoPaternoPersona"
-                variant="static"
-                label="Apellido Paterno"
-                placeholder="Apellido"
-              />
-            </div>
-            <div class="col-4">
-              <material-input
-                id="ApellidoMaternoPersona"
-                variant="static"
-                label="Apellido Materno"
-                placeholder="Apellido"
-              />
-            </div>
-            <div class="col-sm-3">
-              <material-input
-                id="OcupacionPersona"
-                type="text"
-                variant="static"
-                label="Ocupación"
-                placeholder="Ingenieria"
-              />
-            </div>
+        <div class="row">
+          <h6 class="mb-3">Persona</h6>
+          <div class="col-sm-3">
+            <material-input
+              id="RutPersona"
+              label="Rut"
+              placeholder="Con guión"
+              type="text"
+              variant="static"
+            />
           </div>
-          <div class="row mt-3" >
-            <h5 class="mt-3 mb-3">Contacto</h5>
-            <div class="col-4 mt-4">
-              <material-input
-                id="emailPersona"
-                type="email"
-                variant="static"
-                label="Email"
-                placeholder="Email"
-              />
-            </div>
-            <div class="col-4 mt-4">
-              <material-input
-                id="confirmEmailPersona"
-                type="email"
-                variant="static"
-                label="Confimar Email"
-                placeholder="Confirmar Email"
-              />
-            </div>
-            <div class="col-3 mt-4">
-              <material-input
-                id="numeroPersona"
-                type="phone"
-                variant="static"
-                label="Numero de teléfono"
-                placeholder="+569 xxxxxxxx"
-              />
-            </div>
+          <div class="col-4">
+            <material-input
+              id="NombrePersona"
+              label="Nombre"
+              placeholder="Nombre"
+              variant="static"
+            />
           </div>
+          <div class="col-4">
+            <material-input
+              id="ApellidoPaternoPersona"
+              label="Apellido Paterno"
+              placeholder="Apellido"
+              variant="static"
+            />
+          </div>
+          <div class="col-4">
+            <material-input
+              id="ApellidoMaternoPersona"
+              label="Apellido Materno"
+              placeholder="Apellido"
+              variant="static"
+            />
+          </div>
+          <div class="col-sm-3">
+            <material-input
+              id="OcupacionPersona"
+              label="Ocupación"
+              placeholder="Ingenieria"
+              type="text"
+              variant="static"
+            />
+          </div>
+        </div>
+        <div class="row mt-3">
+          <h5 class="mt-3 mb-3">Contacto</h5>
+          <div class="col-4 mt-4">
+            <material-input
+              id="emailPersona"
+              label="Email"
+              placeholder="Email"
+              type="email"
+              variant="static"
+            />
+          </div>
+          <div class="col-4 mt-4">
+            <material-input
+              id="confirmEmailPersona"
+              label="Confimar Email"
+              placeholder="Confirmar Email"
+              type="email"
+              variant="static"
+            />
+          </div>
+          <div class="col-3 mt-4">
+            <material-input
+              id="numeroPersona"
+              label="Numero de teléfono"
+              placeholder="+569 xxxxxxxx"
+              type="phone"
+              variant="static"
+            />
+          </div>
+        </div>
         <h5 class="mt-3">Direccion</h5>
         <LocalidadForm></LocalidadForm>
-        </div>
+      </div>
     </div>
   </div>
 </template>

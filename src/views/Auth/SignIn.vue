@@ -1,7 +1,7 @@
 <template>
   <div
-    class="page-header align-items-start min-vh-100 bg-gradient-secondary"
     :style="`background-image: url(${BackPerfilFoto}); background-size: contain; background-position: center; background-repeat: no-repeat;`"
+    class="page-header align-items-start min-vh-100 bg-gradient-secondary"
   >
     <span class="mask bg-gradient-faded-dark-vertical opacity-6"></span>
     <div class="container my-auto">
@@ -12,7 +12,7 @@
               <div class="bg-gradient-primary shadow-success border-radius-lg py-3 pe-1">
                 <div class="d-flex justify-content-center align-items-center">
                   <div class="row mt-3">
-                    <img class="btn btn-link px-3" src="../../assets/LogoHapp.svg" alt="Logo" width="150" height="90"/>
+                    <img alt="Logo" class="btn btn-link px-3" height="90" src="../../assets/LogoHapp.svg" width="150" />
                   </div>
                 </div>
 
@@ -20,19 +20,22 @@
               </div>
             </div>
             <div class="card-body">
-              <form role="form" class="text-start mt-3" @submit.prevent="loginHandler">
+              <form class="text-start mt-3" role="form" @submit.prevent="loginHandler">
                 <div class="mb-3">
-                  <material-input v-model="username" id="username" type="text" label="Usuario o correo" name="username" />
+                  <material-input id="username" v-model="username" label="Usuario o correo" name="username"
+                                  type="text" />
                 </div>
                 <div class="mb-3">
-                  <material-input v-model="password" id="password" type="password" label="Contraseña" name="password" />
+                  <material-input id="password" v-model="password" label="Contraseña" name="password" type="password" />
                 </div>
-                <material-switch v-model=rememberMe  id="rememberMe" name="rememberMe" >Recuerdame</material-switch>
+                <material-switch id="rememberMe" v-model=rememberMe name="rememberMe">Recuerdame</material-switch>
                 <div class="text-center">
-                  <material-button type="submit" class="my-4 mb-2" variant="gradient" color="primary" fullWidth>Ingresar</material-button>
+                  <material-button class="my-4 mb-2" color="primary" fullWidth type="submit" variant="gradient">
+                    Ingresar
+                  </material-button>
                 </div>
                 <p class="mt-4 text-xs text-center">
-                  <span class="text-danger">{{auth.errMsg}}</span>
+                  <span class="text-danger">{{ auth.errMsg }}</span>
                 </p>
                 <p class="mt-4 text-sm text-center">
                   No tienes una cuenta?
@@ -46,7 +49,7 @@
                   >Olvidaste tu contraseña?
                   </router-link
                   >
-                  </p>
+                </p>
               </form>
             </div>
           </div>
@@ -58,7 +61,7 @@
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-12 col-md-6 my-auto">
             <div class="copyright text-center text-sm text-white text-lg-start">
-              © {{ new Date().getFullYear() }}, HappRent <i class="fa fa-heart" aria-hidden="true"></i> by
+              © {{ new Date().getFullYear() }}, HappRent <i aria-hidden="true" class="fa fa-heart"></i> by
               <a class="font-weight-bold text-white" target="_blank">Happy Services SpA</a>
             </div>
           </div>

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="140px" height="140px" viewBox="0 0 140 140" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="140px" height="140px" viewBox="0 0 140 140" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
     <title>devto</title>
     <g id="devto" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g transform="translate(15.000000, 17.000000)" fill="#000000" fill-rule="nonzero" id="Shape">

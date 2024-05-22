@@ -1,20 +1,21 @@
 <template>
-    <router-link to="/Propiedades"
-                 class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0">
-      <span class="material-symbols-outlined mx-1"> arrow_back </span> Volver
-    </router-link>
+  <router-link class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
+               to="/Propiedades">
+    <span class="material-symbols-outlined mx-1"> arrow_back </span> Volver
+  </router-link>
   <div class="card position-sticky top-1 mt-4">
     <ul class="nav flex-column bg-white border-radius-lg p-3">
       <li class="nav-item">
-        <a class="nav-link align-items-center text-dark d-flex" :data-scroll="'#Comparecencia'" href="#Comparecencia">
+        <a :data-scroll="'#Comparecencia'" class="nav-link align-items-center text-dark d-flex" href="#Comparecencia">
           <i class="material-symbols-outlined text-xl me-2">contract_edit</i>
           <span class="text-xs">Comparecencia</span>
         </a>
       </li>
 
       <!-- Clausulas -->
-      <li class="nav-item pt-2" v-for="(clausula, i) in clausulas" :key="i">
-        <a class="nav-link nav-link align-items-center text-dark d-flex" :data-scroll="'#' + clausula.id" :href="'#' + clausula.id">
+      <li v-for="(clausula, i) in clausulas" :key="i" class="nav-item pt-2">
+        <a :data-scroll="'#' + clausula.id" :href="'#' + clausula.id"
+           class="nav-link nav-link align-items-center text-dark d-flex">
           <i class="material-symbols-outlined text-xl me-2">{{ iconos[i] }}</i>
           <span class="text-xs text-capitalize">{{ clausula.nombre }}</span>
         </a>

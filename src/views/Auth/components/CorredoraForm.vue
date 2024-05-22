@@ -56,54 +56,54 @@ export default {
       <div class="row mt-4">
         <div class="col-sm-6">
           <material-input id="nombreEmpresa"
-                          variant="static"
-                          type="text"
+                          v-model="empresa.nombre"
                           is-required
                           label="Nombre Comercial"
                           placeholder="Nombre Empresa"
-                          v-model="empresa.nombre"
+                          type="text"
+                          variant="static"
           />
         </div>
         <div class="col-sm-6">
           <material-input
             id="rut"
-            type="rut"
-            variant="static"
+            v-model="empresa.rut"
             label="Rut Empresa"
             placeholder="Con guión"
-            v-model="empresa.rut"
+            type="rut"
+            variant="static"
           />
         </div>
         <div class="col-sm-4 mt-4">
           <material-input
             id="emailEmpresa"
-            type="email"
-            variant="static"
+            v-model="empresa.email"
             label="Email Empresa"
             placeholder="correo@empresa.cl"
-            v-model="empresa.email"
+            type="email"
+            variant="static"
           />
         </div>
         <div class="col-sm-4 mt-4">
           <material-input
             id="razonSocial"
-            variant="static"
-            type="text"
+            v-model="empresa.razonSocial"
             is-required
             label="Razón Social"
             placeholder="Razón Social"
-            v-model="empresa.razonSocial"
+            type="text"
+            variant="static"
           />
         </div>
         <div class="col-sm-4 mt-4">
           <material-input
             id="Giro"
-            variant="static"
-            type="text"
+            v-model="empresa.giro"
             is-required
             label="Giro"
             placeholder="Giro"
-            v-model="empresa.giro"
+            type="text"
+            variant="static"
           />
         </div>
 
@@ -114,7 +114,7 @@ export default {
     </div>
   </div>
   <div class="mt-4 button-row d-flex">
-    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" type="button" title="Next" @click="emitData">
+    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" title="Next" type="button" @click="emitData">
       Siguiente
     </button>
   </div>

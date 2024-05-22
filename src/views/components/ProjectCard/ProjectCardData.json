@@ -2,49 +2,84 @@
   "data": {
     "title": "Projects",
     "description": "<i class='fa fa-check text-info' aria-hidden='true'></i> <span class='font-weight-bold ms-1'>30 done</span> this month",
-    "headers": ["Companies", "Members", "Budget", "Progress"],
+    "headers": [
+      "Companies",
+      "Members",
+      "Budget",
+      "Progress"
+    ],
     "projects": [
       {
         "logo": "src/assets/img/small-logos/logo-xd.svg",
         "title": "Material XD Material XD Version",
-        "members": ["src/assets/img/Laulou.png"],
+        "members": [
+          "src/assets/img/Laulou.png"
+        ],
         "budget": "$14,000",
-        "progress": {"percentage": 60, "color": "info"}
+        "progress": {
+          "percentage": 60,
+          "color": "info"
+        }
       },
       {
         "logo": "src/assets/img/small-logos/logo-atlassian.svg",
         "title": "Add Progress Track",
-        "members": ["src/assets/img/Laulou.png"],
+        "members": [
+          "src/assets/img/Laulou.png"
+        ],
         "budget": "$3,000",
-        "progress": {"percentage": 10, "color": "danger"}
+        "progress": {
+          "percentage": 10,
+          "color": "danger"
+        }
       },
       {
         "logo": "src/assets/img/small-logos/logo-slack.svg",
         "title": "Fix Platform Errors",
-        "members": ["src/assets/img/Laulou.png"],
+        "members": [
+          "src/assets/img/Laulou.png"
+        ],
         "budget": "Not set",
-        "progress": {"percentage": 100, "color": "success"}
+        "progress": {
+          "percentage": 100,
+          "color": "success"
+        }
       },
       {
         "logo": "src/assets/img/small-logos/logo-spotify.svg",
         "title": "Launch our Mobile App",
-        "members": ["src/assets/img/Laulou.png"],
+        "members": [
+          "src/assets/img/Laulou.png"
+        ],
         "budget": "$20,500",
-        "progress": {"percentage": 100, "color": "success"}
+        "progress": {
+          "percentage": 100,
+          "color": "success"
+        }
       },
       {
         "logo": "src/assets/img/small-logos/logo-jira.svg",
         "title": "Add the New Pricing Page",
-        "members": ["src/assets/img/Laulou.png"],
+        "members": [
+          "src/assets/img/Laulou.png"
+        ],
         "budget": "$500",
-        "progress": {"percentage": 25, "color": "danger"}
+        "progress": {
+          "percentage": 25,
+          "color": "danger"
+        }
       },
       {
         "logo": "src/assets/img/small-logos/logo-jira.svg",
         "title": "Redesign New Online Shop",
-        "members": ["src/assets/img/Laulou.png"],
+        "members": [
+          "src/assets/img/Laulou.png"
+        ],
         "budget": "$2,000",
-        "progress": {"percentage": 40, "color": "info"}
+        "progress": {
+          "percentage": 40,
+          "color": "info"
+        }
       }
     ]
   }

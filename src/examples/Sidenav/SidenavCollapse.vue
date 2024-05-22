@@ -1,18 +1,18 @@
 <template>
   <router-link
-    :data-bs-toggle="collapse ? 'collapse' : ''"
-    :to="`/${collapseRef}`"
     :aria-controls="collapseRef"
     :aria-expanded="isExpanded"
-    class="nav-link"
     :class="getRoute() === collapseRef ? `active bg-gradient-${color}` : ''"
+    :data-bs-toggle="collapse ? 'collapse' : ''"
+    :to="`/${collapseRef}`"
+    class="nav-link"
     v-bind="$attrs"
     @click="isExpanded = !isExpanded"
   >
-    <div  class="text-center d-flex align-items-center justify-content-center me-2">
-      <slot  name="icon"></slot>
+    <div class="text-center d-flex align-items-center justify-content-center me-2">
+      <slot name="icon"></slot>
     </div>
-    <span  :style="textColor" class="nav-link-text ms-1" >{{ navText }}</span>
+    <span :style="textColor" class="nav-link-text ms-1">{{ navText }}</span>
   </router-link>
   <div :class="isExpanded ? 'collapse show' : 'collapse'">
     <slot name="list"></slot>
@@ -20,9 +20,9 @@
 </template>
 
 <script setup>
-import {ref, computed} from 'vue'
-import {useRoute} from 'vue-router'
-import {useAppStore} from '@/store/index.js'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { useAppStore } from '@/store/index.js'
 
 const route = useRoute()
 const store = useAppStore()
@@ -32,22 +32,23 @@ let isExpanded = ref(false)
 const props = defineProps({
   collapseRef: {
     type: String,
-    required: true,
+    required: true
   },
   navText: {
     type: String,
-    required: true,
+    required: true
   },
   collapse: {
     type: Boolean,
-    default: true,
-  },
+    default: true
+  }
 })
 
 function getRoute() {
   const routeArr = route.path.split('/')
   return routeArr[1]
 }
+
 const textColor = computed(() => {
   return props.navText === 'Cerrar Sesión' ? 'color: #f44335 !important;' : ''
 })

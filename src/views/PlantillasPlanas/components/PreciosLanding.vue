@@ -16,24 +16,24 @@ import PricingCard from '@/views/components/PricingCard.vue'
             <li class="nav-item">
               <a
                 id="tabs-iconpricing-tab-1"
+                aria-controls="Personal"
+                aria-selected="true"
                 class="nav-link mb-0 active"
                 data-bs-toggle="tab"
                 href="#personal"
                 role="tab"
-                aria-controls="Personal"
-                aria-selected="true"
               >Personal</a
               >
             </li>
             <li class="nav-item">
               <a
                 id="tabs-iconpricing-tab-2"
+                aria-controls="ejecutivo"
+                aria-selected="false"
                 class="nav-link mb-0"
                 data-bs-toggle="tab"
                 href="#ejecutivo"
                 role="tab"
-                aria-controls="ejecutivo"
-                aria-selected="false"
               >Ejecutivo</a
               >
             </li>
@@ -45,6 +45,11 @@ import PricingCard from '@/views/components/PricingCard.vue'
       <div id="personal" class="tab-pane active">
         <div class="row">
           <pricing-card
+            :action="{
+                  color: 'dark',
+                  route: 'javascript:;',
+                  label: 'Obtener',
+                }"
             :badge="{ color: 'light', label: 'Crecimiento' }"
             :price="{ currency: '$', value: '0,8 UF', charged: 'Mes + iva' }"
             :specifications="[
@@ -59,14 +64,13 @@ import PricingCard from '@/views/components/PricingCard.vue'
                   { label: 'Perfil del corredor', includes: false },
                   { label: 'Perfil del propietario', includes: false },
                 ]"
+          />
+          <pricing-card
             :action="{
-                  color: 'dark',
+                  color: 'success',
                   route: 'javascript:;',
                   label: 'Obtener',
                 }"
-          />
-          <pricing-card
-            color="dark"
             :badge="{ color: 'success', label: 'Desarrollo' }"
             :price="{ currency: '$', value: '1,4 UF', charged: 'Mes + iva' }"
             :specifications="[
@@ -81,14 +85,15 @@ import PricingCard from '@/views/components/PricingCard.vue'
                   { label: 'Perfil del corredor', includes: false },
                   { label: 'Perfil del propietario', includes: false },
                 ]"
-            :action="{
-                  color: 'success',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
+            color="dark"
             dark-mode
           />
           <pricing-card
+            :action="{
+                  color: 'dark',
+                  route: 'javascript:;',
+                  label: 'Obtener',
+                }"
             :badge="{ color: 'light', label: 'Avance' }"
             :price="{ currency: '$', value: '3,0 UF', charged: 'Mes + iva' }"
             :specifications="[
@@ -103,17 +108,17 @@ import PricingCard from '@/views/components/PricingCard.vue'
                   { label: 'Perfil del corredor', includes: true },
                   { label: 'Perfil del propietario', includes: true },
                 ]"
-            :action="{
-                  color: 'dark',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
           />
         </div>
       </div>
       <div id="ejecutivo" class="tab-pane">
         <div class="row">
           <pricing-card
+            :action="{
+                  color: 'dark',
+                  route: 'javascript:;',
+                  label: 'Obtener',
+                }"
             :badge="{ color: 'light', label: 'Consolidado' }"
             :price="{ currency: '$', value: '4,0 UF', charged: 'Mes + iva' }"
             :specifications="[
@@ -128,14 +133,13 @@ import PricingCard from '@/views/components/PricingCard.vue'
                   { label: 'Perfil del corredor', includes: false },
                   { label: 'Perfil del propietario', includes: false },
                 ]"
+          />
+          <pricing-card
             :action="{
-                  color: 'dark',
+                  color: 'success',
                   route: 'javascript:;',
                   label: 'Obtener',
                 }"
-          />
-          <pricing-card
-            color="dark"
             :badge="{ color: 'success', label: 'Infinito' }"
             :price="{ currency: '$', value: '9,0 UF', charged: 'Mes + iva' }"
             :specifications="[
@@ -150,11 +154,7 @@ import PricingCard from '@/views/components/PricingCard.vue'
                   { label: 'Perfil del corredor', includes: false },
                   { label: 'Perfil del propietario', includes: false },
                 ]"
-            :action="{
-                  color: 'success',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
+            color="dark"
             dark-mode
           />
         </div>

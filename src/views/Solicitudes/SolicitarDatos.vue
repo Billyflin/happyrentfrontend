@@ -1,7 +1,6 @@
 <script setup>
 
 import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosContrato.vue'
-
 </script>
 
 <template>
