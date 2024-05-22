@@ -145,8 +145,20 @@ export default {
           required: helpers.withMessage('Contraseña es requerida',
             required
           ),
-          minLength: helpers.withMessage('Contraseña debe tener al menos 6 caracteres',
-            value => value.length >= 6
+          passwordUppercase: helpers.withMessage('Contraseña debe tener al menos una letra mayúscula',
+            value => /[A-Z]/.test(value)
+          ),
+          passwordLowercase: helpers.withMessage('Contraseña debe tener al menos una letra minúscula',
+            value => /[a-z]/.test(value)
+          ),
+          passwordDigit: helpers.withMessage('Contraseña debe tener al menos un dígito',
+            value => /[0-9]/.test(value)
+          ),
+          passwordSpecial: helpers.withMessage('Contraseña debe tener al menos un carácter especial',
+            value => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)
+          ),
+          minLength: helpers.withMessage('Contraseña debe tener al menos 8 caracteres',
+            value => value.length >= 8
           )
         }
       }

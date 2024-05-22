@@ -17,6 +17,11 @@ const routes = [{
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
   }
 }, {
+  path: '/forgot-password',
+  name: 'forgot-password',
+  component: () => import( '@/views/Auth/ForgotPassword.vue'),
+  props: route => ({ token: route.query.token })
+}, {
   path: '/sign-in', name: 'SignIn', component: SignIn
 }, {
   path: '/sign-up', name: 'SignUp', component: SignUp
