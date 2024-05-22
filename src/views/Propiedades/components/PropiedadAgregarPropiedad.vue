@@ -49,7 +49,10 @@ const tiposPropiedad = {
     metrosCuadradosUtiles: null,
     metrosCuadradosTotales: null,
     descripcion: null,
-    orientacion: null
+    orientacion: null,
+    terraza: null,
+    contribuciones: null,
+    aseo: null
   },
   bodega: {
     amoblado: null,
@@ -57,14 +60,19 @@ const tiposPropiedad = {
     type: 'bodega',
     piso: null,
     numero: null,
-    descripcion: null
+    descripcion: null,
+    uso: null,
+    metrosCuadradosUtiles: null,
+    metrosCuadradosTotales: null,
   },
   estacionamiento: {
     rol: null,
     type: 'estacionamiento',
     piso: null,
+    pisos: null,
     numero: null,
-    descripcion: null
+    descripcion: null,
+    gastosComunes: null
   },
   local: {
     amoblado: null,
@@ -97,7 +105,7 @@ const opcionsTipoPropiedad = [
   { value: 'estacionamiento', label: 'Estacionamiento' }
 ]
 const orientaciones = [
-  { value: 'Norte', label: 'Norte' },
+  { value: 'Norte', label: 'Norte', selected: true },
   { value: 'Sur', label: 'Sur' },
   { value: 'Este', label: 'Este' },
   { value: 'Oeste', label: 'Oeste' }
@@ -211,21 +219,21 @@ onMounted(() => {
           <p>1. Sube una imagen para identificar fácilmente la propiedad</p>
           <img
             v-if="imagenPortadaData"
+            class="w-100 border-radius-lg  mb-4 shadow-lg mx-auto"
             :src="imagenPortadaData"
             alt="portada"
-            class="w-100 border-radius-lg  mb-4 shadow-lg mx-auto"
           />
-          <material-button v-if="imagenPortadaData" class="mx-3" color="danger" @click="removeImage">Eliminar imagen
+          <material-button class="mx-3" color="danger" v-if="imagenPortadaData" @click="removeImage">Eliminar imagen
           </material-button>
           <material-button @click="openDropzone">Subir imagen</material-button>
         </div>
         <div class="mx-4 col flex-grow">
           <h5 class="font-weight-bolder mb-3">Datos de la propiedad</h5>
-          <div v-if="['casa', 'departamento', 'oficina', 'bodega', 'local'].includes(propiedad.type)" class="col-2">
+          <div class="col-2" v-if="['casa', 'departamento', 'oficina', 'bodega', 'local'].includes(propiedad.type)">
             <material-checkbox
               id="amoblado"
-              v-model="propiedad.amoblado"
               label="Amoblado"
+              v-model="propiedad.amoblado"
             >
               ¿AMOBLADO?
             </material-checkbox>
@@ -233,17 +241,17 @@ onMounted(() => {
 
 
           <material-choices id="tipo_propiedad"
-                            v-model:value-choice="propiedad.type"
                             :options="opcionsTipoPropiedad"
-                            :serach-enabled="false" label="Tipo Propiedad" name="TipoPropiedad" />
+                            v-model:value-choice="propiedad.type"
+                            name="TipoPropiedad" label="Tipo Propiedad" :serach-enabled="false" />
 
 
-          <div v-if="propiedad.type === 'casa'" class="row">
+          <div class="row" v-if="propiedad.type === 'casa'">
             <div class="col-2 mt-3">
               <material-checkbox
                 id="piscina"
-                v-model="propiedad.piscina"
                 label="Piscina"
+                v-model="propiedad.piscina"
               >
                 ¿piscina?
               </material-checkbox>
@@ -251,8 +259,8 @@ onMounted(() => {
             <div class="col-2 mt-3">
               <material-checkbox
                 id="jardines"
-                v-model="propiedad.jardines"
                 label="Jardines"
+                v-model="propiedad.jardines"
               >
                 ¿jardines?
               </material-checkbox>
@@ -260,8 +268,8 @@ onMounted(() => {
             <div class="col-2 mb-2 mt-3">
               <material-checkbox
                 id="patio"
-                v-model="propiedad.patio"
                 label="Patio"
+                v-model="propiedad.patio"
               >
                 ¿patio?
               </material-checkbox>
@@ -269,8 +277,8 @@ onMounted(() => {
             <div class="col-3 mb-2 mt-3">
               <material-checkbox
                 id="gastosComunes"
-                v-model="propiedad.gastosComunes"
                 label="gastos comunes"
+                v-model="propiedad.gastosComunes"
               >
                 ¿Gastos comunes?
               </material-checkbox>
@@ -278,17 +286,17 @@ onMounted(() => {
             <div class="col-3 mb-2 mt-3">
               <material-checkbox
                 id="contribuciones"
-                v-model="propiedad.contribuciones"
                 label="Contribuciones"
+                v-model="propiedad.contribuciones"
               >
                 ¿Contribuciones?
               </material-checkbox>
             </div>
-            <div v-if="!propiedad.contribuciones" class="col-2 mb-3 mt-3">
+            <div class="col-2 mb-3 mt-3" v-if="!propiedad.contribuciones">
               <material-checkbox
                 id="aseo"
-                v-model="propiedad.aseo"
                 label="aseo"
+                v-model="propiedad.aseo"
               >
                 ¿ASEO?
               </material-checkbox>
@@ -296,536 +304,603 @@ onMounted(() => {
             <div class="col-3">
               <material-input
                 id="rol"
-                v-model="propiedad.rol"
+                type="text"
                 is-required
+                variant="static"
                 label="Rol"
                 placeholder="1231512"
-                type="text"
-                variant="static"
+                v-model="propiedad.rol"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numPisos"
-                v-model="propiedad.numeroDePisos"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de pisos"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.numeroDePisos"
                 @input="validateInput"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numPiezas"
-                v-model="propiedad.habitaciones"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de habitaciones"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.habitaciones"
                 @input="validateInput"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numBanos"
-                v-model="propiedad.banios"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de baños"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.banios"
                 @input="validateInput"
               />
             </div>
             <div class="col-3 mt-3">
               <material-input
                 id="antiguedad"
-                v-model="propiedad.antiguedad"
+                type="number"
                 is-required
+                variant="static"
                 label="Antiguedad"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.antiguedad"
                 @input="validateInput"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numEstacionamientos"
-                v-model="propiedad.estacionamientos"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de estacionamientos"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.estacionamientos"
                 @input="validateInput"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="metrosCuadradosDeTerreno"
-                v-model="propiedad.metrosCuadradosDeTerreno"
+                type="number"
                 is-required
+                variant="static"
                 label="Metros cuadrados de terreno"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.metrosCuadradosDeTerreno"
                 @input="validateInput"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="metrosCuadradosDeConstruccion"
-                v-model="propiedad.metrosCuadradosDeConstruccion"
+                type="number"
                 is-required
+                variant="static"
                 label="Metros cuadrados de construccion"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.metrosCuadradosDeConstruccion"
                 @input="validateInput"
               />
             </div>
 
           </div>
-          <div v-if="propiedad.type === 'terreno'" class="row">
+          <div class="row" v-if="propiedad.type === 'terreno'">
             <div class="col-3">
               <material-input
                 id="rol"
-                v-model="propiedad.rol"
+                type="text"
                 is-required
+                variant="static"
                 label="Rol"
                 placeholder="1231512"
-                type="text"
-                variant="static"
+                v-model="propiedad.rol"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="area"
-                v-model="propiedad.area"
+                type="number"
                 is-required
+                variant="static"
                 label="Area"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.area"
                 @input="validateInput"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="tipoTerreno"
-                v-model="propiedad.tipoTerreno"
+                type="text"
                 is-required
+                variant="static"
                 label="Tipo de terreno"
                 placeholder="Tipo de terreno"
-                type="text"
-                variant="static"
+                v-model="propiedad.tipoTerreno"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="usoSuelo"
-                v-model="propiedad.usoSuelo"
+                type="text"
                 is-required
+                variant="static"
                 label="Uso de suelo"
                 placeholder="Uso de suelo"
-                type="text"
-                variant="static"
+                v-model="propiedad.usoSuelo"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="topografia"
-                v-model="propiedad.topografia"
+                type="text"
                 is-required
+                variant="static"
                 label="Topografia"
                 placeholder="Topografia"
-                type="text"
-                variant="static"
+                v-model="propiedad.topografia"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="servicios"
-                v-model="propiedad.servicios"
+                type="text"
                 is-required
+                variant="static"
                 label="Servicios"
                 placeholder="Servicios"
-                type="text"
-                variant="static"
+                v-model="propiedad.servicios"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="formaTerreno"
-                v-model="propiedad.formaTerreno"
+                type="text"
                 is-required
+                variant="static"
                 label="Forma de terreno"
                 placeholder="Forma de terreno"
-                type="text"
-                variant="static"
+                v-model="propiedad.formaTerreno"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="frente"
-                v-model="propiedad.frente"
+                type="number"
                 is-required
+                variant="static"
                 label="Frente"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.frente"
                 @input="validateInput"
               />
             </div>
           </div>
-          <div v-if="propiedad.type==='departamento'" class="row">
+          <div class="row" v-if="propiedad.type==='departamento'">
             <div class="col-2 mt-3">
               <material-checkbox
                 id="terraza"
-                v-model="propiedad.terraza"
                 label="Terraza"
+                v-model="propiedad.terraza"
               >
-                ¿piscina?
+                ¿Terraza?
+              </material-checkbox>
+            </div>
+            <div class="col-3 mb-2 mt-3">
+              <material-checkbox
+                id="contribuciones"
+                label="Contribuciones"
+                v-model="propiedad.contribuciones"
+              >
+                ¿Contribuciones?
+              </material-checkbox>
+            </div>
+            <div class="col-2 mb-3 mt-3" v-if="!propiedad.contribuciones">
+              <material-checkbox
+                id="aseo"
+                label="aseo"
+                v-model="propiedad.aseo"
+              >
+                ¿ASEO?
               </material-checkbox>
             </div>
             <div class="col-3">
               <material-input
                 id="rol"
-                v-model="propiedad.rol"
+                type="text"
                 is-required
+                variant="static"
                 label="Rol"
                 placeholder="1231512"
-                type="text"
-                variant="static"
+                v-model="propiedad.rol"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numPisos"
-                v-model="propiedad.piso"
+                type="number"
                 is-required
+                variant="static"
                 label="N° de piso"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.piso"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numBanios"
-                v-model="propiedad.banios"
+                type="number"
                 is-required
+                variant="static"
                 label="N° de baños"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.banios"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numHabitaciones"
-                v-model="propiedad.habitaciones"
+                type="number"
                 is-required
+                variant="static"
                 label="N° habitaciones"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.habitaciones"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numEstacionamientos"
-                v-model="propiedad.estacionamientos"
+                type="number"
                 is-required
+                variant="static"
                 label="N° estacionamientos"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.estacionamientos"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numBodegas"
-                v-model="propiedad.bodegas"
+                type="number"
                 is-required
+                variant="static"
                 label="N° de bodegas"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.bodegas"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="metrosCuadrados"
-                v-model="propiedad.metrosCuadradosUtiles"
+                type="number"
                 is-required
+                variant="static"
                 label="Metros² útiles"
                 placeholder="10"
-                type="number"
-                variant="static"
+                v-model="propiedad.metrosCuadradosUtiles"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="metrosCuadradosTotales"
-                v-model="propiedad.metrosCuadradosTotales"
+                type="number"
                 is-required
+                variant="static"
                 label="Metros² totales"
                 placeholder="10"
-                type="number"
-                variant="static"
+                v-model="propiedad.metrosCuadradosTotales"
               ></material-input>
             </div>
             <div class="col-6">
               <material-input
                 id="descripcion"
-                v-model="propiedad.descripcion"
+                type="text"
                 is-required
+                variant="static"
                 label="Descripcion"
                 placeholder="Descripcion"
-                type="text"
-                variant="static"
+                v-model="propiedad.descripcion"
               ></material-input>
             </div>
             <div class="col-3">
               <material-choices id="orientacion"
-                                v-model:value-choice="propiedad.orientacion"
                                 :options="orientaciones"
-                                :serach-enabled="false" label="Orientación" name="orientacion" />
+                                v-model:value-choice="propiedad.orientacion"
+                                name="orientacion" label="Orientación" :serach-enabled="false" />
             </div>
           </div>
-          <div v-if="propiedad.type === 'bodega'" class="row">
+          <div class="row" v-if="propiedad.type === 'bodega'">
+            <div class="col-3">
+              <material-choices id="uso" label="Uso" :options="[
+                { value: 'comercial', label: 'Comercial' , selected: true},
+                { value: 'industrial', label: 'Industrial' }
+                ]" v-model:value-choice="propiedad.uso">
+              </material-choices>
+            </div>
             <div class="col-3">
               <material-input
                 id="rol"
-                v-model="propiedad.rol"
+                type="text"
                 is-required
+                variant="static"
                 label="Rol"
                 placeholder="1231512"
-                type="text"
-                variant="static"
+                v-model="propiedad.rol"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numPisos"
-                v-model="propiedad.numeroDePisos"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de pisos"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.numeroDePisos"
                 @input="validateInput"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numBodegas"
-                v-model="propiedad.numero"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de bodegas"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.numero"
                 @input="validateInput"
               />
             </div>
             <div class="col-6">
               <material-input
                 id="descripcion"
-                v-model="propiedad.descripcion"
+                type="text"
                 is-required
+                variant="static"
                 label="Descripcion"
                 placeholder="Descripcion"
-                type="text"
+                v-model="propiedad.descripcion"
+              ></material-input>
+            </div>
+            <div class="col-3">
+              <material-input
+                id="metrosCuadrados"
+                type="number"
+                is-required
                 variant="static"
+                label="Metros² útiles"
+                placeholder="10"
+                v-model="propiedad.metrosCuadradosUtiles"
+              ></material-input>
+            </div>
+            <div class="col-3">
+              <material-input
+                id="metrosCuadradosTotales"
+                type="number"
+                is-required
+                variant="static"
+                label="Metros² totales"
+                placeholder="10"
+                v-model="propiedad.metrosCuadradosTotales"
               ></material-input>
             </div>
           </div>
-          <div v-if="propiedad.type==='oficina'" class="row">
+          <div class="row" v-if="propiedad.type==='oficina'">
             <div class="col-3">
               <material-input
                 id="rol"
-                v-model="propiedad.rol"
+                type="text"
                 is-required
+                variant="static"
                 label="Rol"
                 placeholder="1231512"
-                type="text"
-                variant="static"
+                v-model="propiedad.rol"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numPisos"
-                v-model="propiedad.piso"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de pisos"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.piso"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numBanios"
-                v-model="propiedad.banios"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de baños"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.banios"
               ></material-input>
 
             </div>
             <div class="col-3">
               <material-input
                 id="numCocinas"
-                v-model="propiedad.cocinas"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de cocinas"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.cocinas"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numOficinas"
-                v-model="propiedad.numeroDeOficinas"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de oficinas"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.numeroDeOficinas"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numComedores"
-                v-model="propiedad.numeroDeComedores"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de comedores"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.numeroDeComedores"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="descripcion"
-                v-model="propiedad.descripcion"
+                type="text"
                 is-required
+                variant="static"
                 label="Descripcion"
                 placeholder="Descripcion"
-                type="text"
-                variant="static"
+                v-model="propiedad.descripcion"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numEstacionamientos"
-                v-model="propiedad.numeroDeEstacionamientos"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de estacionamientos"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.numeroDeEstacionamientos"
               ></material-input>
             </div>
           </div>
-          <div v-if="propiedad.type === 'local'" class="row">
+          <div class="row" v-if="propiedad.type === 'local'">
             <div class="col-3">
               <material-input
                 id="rol"
-                v-model="propiedad.rol"
+                type="text"
                 is-required
+                variant="static"
                 label="Rol"
                 placeholder="1231512"
-                type="text"
-                variant="static"
+                v-model="propiedad.rol"
               />
             </div>
             <div class="col-3">
               <material-input
                 id="numPisos"
-                v-model="propiedad.piso"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de pisos"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.piso"
               ></material-input>
             </div>
             <div class="col-3">
               <material-input
                 id="numLocales"
-                v-model="propiedad.numero"
+                type="number"
                 is-required
+                variant="static"
                 label="Numero de locales"
                 placeholder="1"
-                type="number"
-                variant="static"
+                v-model="propiedad.numero"
               ></material-input>
             </div>
             <div class="col-6">
               <material-input
                 id="descripcion"
-                v-model="propiedad.descripcion"
+                type="text"
                 is-required
+                variant="static"
                 label="Descripcion"
                 placeholder="Descripcion"
-                type="text"
-                variant="static"
+                v-model="propiedad.descripcion"
               ></material-input>
             </div>
           </div>
-          <div v-if="propiedad.type === 'estacionamiento'" class="row">
+          <div class="row" v-if="propiedad.type === 'estacionamiento'">
+            <div class="col-3 mb-2 mt-3">
+              <material-checkbox
+                id="gastosComunes"
+                label="gastos comunes"
+                v-model="propiedad.gastosComunes"
+              >
+                ¿Gastos comunes?
+              </material-checkbox>
+            </div>
             <div class="col-3">
               <material-input
                 id="rol"
-                v-model="propiedad.rol"
+                type="text"
                 is-required
+                variant="static"
                 label="Rol"
                 placeholder="1231512"
-                type="text"
-                variant="static"
+                v-model="propiedad.rol"
               />
             </div>
-            <div class="col-3">
+            <div class="col-2">
               <material-input
                 id="numPisos"
-                v-model="propiedad.piso"
-                is-required
-                label="Numero de pisos"
-                placeholder="1"
                 type="number"
+                is-required
                 variant="static"
+                label="Numero de pisos"
+                placeholder="5"
+                v-model="propiedad.pisos"
               ></material-input>
             </div>
-            <div class="col-4">
+            <div class="col-2">
+              <material-input
+                id="numPisos"
+                type="number"
+                is-required
+                variant="static"
+                label="Numero de piso"
+                placeholder="1"
+                v-model="propiedad.piso"
+              ></material-input>
+            </div>
+            <div class="col-2">
               <material-input
                 id="numEstacionamientos"
-                v-model="propiedad.numero"
-                is-required
-                label="Numero de estacionamientos"
-                placeholder="1"
                 type="number"
+                is-required
                 variant="static"
+                label="N° estacionamientos"
+                placeholder="1"
+                v-model="propiedad.numero"
               ></material-input>
             </div>
             <div class="col-6">
               <material-input
                 id="descripcion"
-                v-model="propiedad.descripcion"
+                type="text"
                 is-required
+                variant="static"
                 label="Descripcion"
                 placeholder="Descripcion"
-                type="text"
-                variant="static"
+                v-model="propiedad.descripcion"
               ></material-input>
             </div>
           </div>
