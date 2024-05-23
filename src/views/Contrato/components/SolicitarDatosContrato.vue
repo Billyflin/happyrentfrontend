@@ -79,9 +79,6 @@ function blockearInputs() {
     </div>
   </div>
 </template>
-<style scoped>
-
-</style>
 
 
 
