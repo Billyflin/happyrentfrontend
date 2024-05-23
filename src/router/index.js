@@ -158,7 +158,13 @@ const routes = [{
     name: 'SolicitudDetails',
     component: () => import('@/views/Solicitudes/SolicitudDetails.vue'),
     props: true
-  }
+  },
+  {
+    path: '/Solicitud',
+    name: 'Solicitud',
+    component: () => import( '@/views/Solicitudes/Solicitud.vue'),
+    props: route => ({ token: route.query.token })
+  },
 
 
 ]

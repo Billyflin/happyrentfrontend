@@ -5,6 +5,7 @@
       :checked="checked"
       :class="$attrs.class"
       :name="name"
+      :disabled="disabled"
       class="form-check-input"
       type="checkbox"
       @change="updateValue"
@@ -22,6 +23,10 @@ export default {
     name: {
       type: String,
       required: true
+    },
+    disabled: {
+      type: Boolean,
+      default: false
     },
     id: {
       type: String,
