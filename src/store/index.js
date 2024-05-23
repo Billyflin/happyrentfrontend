@@ -66,6 +66,8 @@ export const useAuthStore = defineStore('auth', {
     codeudor: {},
     propiedad: {},
     personas: [],
+    solicitud: {},
+    solicitudes: {},
     contratoError: ''
   }), persist: true,
   actions: {
@@ -143,7 +145,6 @@ export const useAuthStore = defineStore('auth', {
 
     }, async getPropiedades() {
       if (this.userInfo) {
-        const userId = this.userInfo.id
         await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/propiedad`)
           .then((response) => {
             this.propiedades = response.data
@@ -153,6 +154,16 @@ export const useAuthStore = defineStore('auth', {
             console.error(err)
           })
       }
+    },
+    async getSolicitudes() {
+      await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/temporal`)
+        .then((response) => {
+          console.log(response.data)
+          this.solicitudes = response.data
+        })
+        .catch((err) => {
+          console.error(err)
+        })
     }
   }, plugins: [createPersistedState({
     storage: window.localStorage, filter: (mutation, state) => state.rememberMe

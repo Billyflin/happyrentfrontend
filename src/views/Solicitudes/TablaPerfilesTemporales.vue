@@ -1,9 +1,17 @@
 <script>
 import MaterialButton from '@/components/MaterialButton.vue'
+import SolicitudDetails from '@/views/Solicitudes/SolicitudDetails.vue'
+import { useAuthStore } from '@/store/index.js'
+import { onMounted } from 'vue'
 
 export default {
   name: 'TablaPerfilesTemporales',
-  components: { MaterialButton },
+  computed: {
+    SolicitudDetails() {
+      return SolicitudDetails
+    }
+  },
+  components: { SolicitudDetails, MaterialButton },
   props: {
     headers: {
       type: Array,
@@ -16,6 +24,12 @@ export default {
       default: () => []
     }
   },
+  data() {
+    return {
+      auth: useAuthStore()
+    }
+  }
+  ,
   methods: {
     removeSolicitud(id) {
       console.log(id)
@@ -54,16 +68,17 @@ export default {
             v-for="list  in lists"
             :key="list"
           >
-            <td @click="console.log(list)">
+            <td @click="console.log(list); auth.solicitud=list.perfil">
               <div class="px-3 py-1 d-flex">
                 <div class="d-flex flex-column justify-content-center">
-                  <!--                  <router-link to="/">-->
-                  <h6 class="mb-0 text-sm">{{ list.perfil.nombre }}</h6>
-                  <p class="mb-0 text-sm font-weight-bold text-secondary">
-                    <span class="text-success">{{ list.perfil.direccion.ciudad }}</span>
-                    {{ list.perfil.direccion.region + ', ' + list.perfil.direccion.pais }}
-                  </p>
-                  <!--                  </router-link>-->
+                  <router-link
+                    :to="{name:'SolicitudDetails'}">
+                    <h6 class="mb-0 text-sm text-capitalize">{{ list.perfil.nombre }}</h6>
+                    <p class="mb-0 text-sm font-weight-bold text-secondary">
+                      <span class="text-success">{{ list.perfil.direccion.ciudad }}</span>
+                      {{ list.perfil.direccion.region + ', ' + list.perfil.direccion.pais }}
+                    </p>
+                  </router-link>
                 </div>
               </div>
             </td>

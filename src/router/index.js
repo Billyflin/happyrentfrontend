@@ -6,6 +6,7 @@ import SignUp from '../views/Auth/SignUp.vue'
 import { useAuthStore } from '@/store'
 
 
+
 const routes = [{
   path: '/', name: '/', redirect: '/Propiedades'
 }, {
@@ -151,6 +152,12 @@ const routes = [{
     path: '/Solicitudes',
     name: 'SolicitarDatos',
     component: () => import('@/views/Solicitudes/SolicitarDatos.vue')
+  },
+  {
+    path: '/SolicitudDetails',
+    name: 'SolicitudDetails',
+    component: () => import('@/views/Solicitudes/SolicitudDetails.vue'),
+    props: true
   }
 
 
