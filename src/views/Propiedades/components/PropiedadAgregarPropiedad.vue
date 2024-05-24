@@ -29,6 +29,7 @@ const tiposPropiedad = {
   },
   terreno: {
     rol: null,
+    type: 'terreno',
     tipoTerreno: null,
     topografia: null,
     formaTerreno: null,
