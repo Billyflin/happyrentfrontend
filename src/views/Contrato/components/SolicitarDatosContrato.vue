@@ -2,20 +2,42 @@
 
 import MaterialButton from '@/components/MaterialButton.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
+import axios from 'axios'
 
-const isEmailDisabled = ref(false)
-const isConfirmEmailDisabled = ref(false)
+const email = ref('')
+const emailConfirm = ref('')
+const emailMismatch = computed(() => email.value !== emailConfirm.value)
+const sending = ref(false)
 const pedirDocumentos = ref(false)
 const carnet = ref(false)
 const contrato = ref(false)
 const boletas = ref(false)
+const enviado = ref(false)
+const error = ref('')
 
-function blockearInputs() {
-  isEmailDisabled.value = true
-  isConfirmEmailDisabled.value = true
+const submitForm = async () => {
+  if (emailMismatch.value || sending.value) return
+  sending.value = true
+  try {
+    await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/perfil-temporal`,
+      email.value
+    ).then(() => {
+        enviado.value = true
+      }
+    ).catch(() => {
+        error.value = 'Hubo un error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.'
+      }
+    ).finally(() => {
+        sending.value = false
+      }
+    )
+
+  } catch (err) {
+  }
 }
+
 
 </script>
 
@@ -29,21 +51,28 @@ function blockearInputs() {
       </p>
     </div>
     <div class="card-body pt-0">
-      <material-switch id="pedirDocumentos" v-model:checked="pedirDocumentos" name="documentos">Pedir documentos?
+      <material-switch id="pedirDocumentos" :disabled="sending||enviado" v-model:checked="pedirDocumentos"
+                       name="documentos">Pedir documentos?
       </material-switch>
       <div v-if="pedirDocumentos" class="row mt-4">
         <p> Que documentos quieres pedir?</p>
         <div class="col-4">
           <h6>Carnet de identidad</h6>
-          <material-switch id="carnet" v-model:checked="carnet" name="carnet">Pedir Carnet</material-switch>
+          <material-switch id="carnet" :disabled="sending||enviado" v-model:checked="carnet" name="carnet">Pedir
+            Carnet
+          </material-switch>
         </div>
         <div class="col-4">
           <h6>Contrato de trabajo</h6>
-          <material-switch id="contrato" v-model:checked="contrato" name="contrato">Pedir Contrato</material-switch>
+          <material-switch id="contrato" :disabled="sending||enviado" v-model:checked="contrato" name="contrato">Pedir
+            Contrato
+          </material-switch>
         </div>
         <div class="col-4">
           <h6>Liquidaciones de sueldo</h6>
-          <material-switch id="boletas" v-model:checked="boletas" name="boletas">Pedir Boletas</material-switch>
+          <material-switch id="boletas" :disabled="sending||enviado" v-model:checked="boletas" name="boletas">Pedir
+            Boletas
+          </material-switch>
         </div>
       </div>
       <div class="row mt-4">
@@ -51,7 +80,8 @@ function blockearInputs() {
           <h6 class="mb-0">Email</h6>
           <material-input
             id="email"
-            :disabled="isEmailDisabled"
+            :disabled="sending||enviado"
+            v-model="email"
             placeholder="Email"
             type="email"
             variant="static"
@@ -61,7 +91,8 @@ function blockearInputs() {
           <h6 class="mb-0">Confirmar Email</h6>
           <material-input
             id="confirmEmail"
-            :disabled="isConfirmEmailDisabled"
+            v-model="emailConfirm"
+            :disabled="sending||enviado"
             placeholder="Confirma Email"
             type="email"
             variant="static"
@@ -69,11 +100,12 @@ function blockearInputs() {
         </div>
         <div class="col-4">
           <!--          <MaterialButton class="mt-4" variant="gradient" color="primary" fullWidth @click="blockearInputs">Enviar</MaterialButton>-->
-          <MaterialButton class="mt-4" color="happDark" fullWidth variant="gradient" @click="blockearInputs">Enviar
+          <MaterialButton :disabled="sending||enviado" class="mt-4" color="happDark" fullWidth variant="gradient"
+                          @click="submitForm">Enviar
           </MaterialButton>
         </div>
       </div>
-      <div v-if="isEmailDisabled" class="row mt-3">
+      <div v-if="enviado" class="row mt-3">
         <span class="badge badge-success">Correo enviado</span>
       </div>
     </div>

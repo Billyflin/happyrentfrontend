@@ -2,15 +2,9 @@
 import MaterialButton from '@/components/MaterialButton.vue'
 import SolicitudDetails from '@/views/Solicitudes/SolicitudDetails.vue'
 import { useAuthStore } from '@/store/index.js'
-import { onMounted } from 'vue'
 
 export default {
   name: 'TablaPerfilesTemporales',
-  computed: {
-    SolicitudDetails() {
-      return SolicitudDetails
-    }
-  },
   components: { SolicitudDetails, MaterialButton },
   props: {
     headers: {
