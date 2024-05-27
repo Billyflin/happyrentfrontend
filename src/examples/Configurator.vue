@@ -84,7 +84,7 @@
 </template>
 
 <script setup>
-import { computed, ref, onBeforeMount } from 'vue'
+import { computed, ref, onBeforeMount, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAppStore } from '@/store/index.js'
@@ -112,19 +112,19 @@ function setNavbarFixed() {
 }
 
 function darkMode() {
-  if (store.isDarkMode) {
-    store.isDarkMode = false
-    deactivateDarkMode()
-    sidebar('bg-white')
-    sidebarColor('happLight')
+  store.isDarkMode = !store.isDarkMode;
 
+  if (store.isDarkMode) {
+    activateDarkMode();
+    sidebar('bg-gradient-dark');
+    sidebarColor('primary');
   } else {
-    store.isDarkMode = true
-    activateDarkMode()
-    sidebar('bg-gradient-dark')
-    sidebarColor('primary')
+    deactivateDarkMode();
+    sidebar('bg-white');
+    sidebarColor('happLight');
   }
 }
+
 
 const btnTransparent = ref(null)
 const isBtnDisabled = ref(false)
@@ -137,6 +137,15 @@ function sidenavTypeOnResize() {
 const sidebarType = computed(() => {
   return store.sidebarType
 })
+
+onMounted(() => {
+  const currentHour = new Date().getHours();
+  const isLateNight = currentHour >= 20 || currentHour < 8; // 8 PM or earlier than 8 AM
+
+  if (isLateNight) {
+    darkMode();
+  }
+});
 
 onBeforeMount(() => {
   setNavbarFixed()
