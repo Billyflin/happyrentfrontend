@@ -1,102 +1,70 @@
 <template>
-  <div class="table-responsive">
-    <table ref="datatableSearch" class="table table-flush">
+  <div>
+    <div class="table-responsive">
+    <table ref="dataTable" class="table table-flush">
       <thead class="thead-light">
       <tr>
-        <th class="text-center">Estado</th>
-        <th class="text-center">Tipo Propiedad</th>
-        <th class="text-center">Fecha Creación</th>
-        <th class="text-center">Fecha Inicio</th>
-        <th class="text-center">Fecha Término</th>
-        <th class="text-center">Renta</th>
-        <th class="text-center">Acciones</th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+          Name
+        </th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+          Age
+        </th>
+        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
+          City
+        </th>
       </tr>
       </thead>
-      <tbody v-if="items">
-      <tr v-for="item in items" :key="item.id">
-        <td class="text-sm font-weight-bold text-center align-middle">
-          <div class="d-flex align-items-center justify-content-center">
-            <material-button v-if="item.activo === true"
-                             class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
-                             color="success"
-                             variant="outline"
-            >
-              <i aria-hidden="true" class="fas fa-check"></i>
-            </material-button>
-            <material-button v-else
-                             class="btn-icon-only btn-rounded mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"
-                             color="danger"
-                             variant="outline">
-
-              <i aria-hidden="true" class="fas fa-times"></i>
-            </material-button>
-            <span>{{ item.activo ? 'Activo' : 'Inactivo' }}</span>
-          </div>
+      <tbody>
+      <tr v-for="user in users" :key="user.id">
+        <td>
+          <router-link :to="user.url" class="text-sm font-weight-normal">{{ user.name }}</router-link>
         </td>
-        <td class="text-sm font-weight-normal text-center">{{ item.propiedad.tipoPropiedad.tipo }}</td>
-        <td class="text-sm font-weight-normal text-center">{{ item.fechaCreacion }}</td>
-        <td class="text-sm font-weight-normal text-center">{{ item.fechaInicio }}</td>
-        <td class="text-sm font-weight-normal text-center">{{ item.fechaTermino }}</td>
-        <td class="text-sm font-weight-normal text-center">{{ item.renta }}</td>
-        <td class="d-flex align-items-center text-sm">
-          <a class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" @click="getReport(item.id)">
-            <i aria-hidden="true" class="fas fa-file-pdf text-lg me-1"></i>
-            PDF
-          </a>
-          <a class="btn btn-link text-dark text-sm mb-0 px-0 ms-4" @click="verDetalles(item.uuid)">
-            <i aria-hidden="true" class="fa fa-eye text-lg me-1"></i>
-            Ver
-          </a>
-        </td>
-
+        <td>{{ user.age }}</td>
+        <td>{{ user.city }}</td>
       </tr>
       </tbody>
     </table>
   </div>
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
-import MaterialButton from '@/components/MaterialButton.vue'
+import { onMounted, ref } from 'vue'
+import { DataTable } from 'simple-datatables'
 
 export default {
-  name: 'TablaContratos',
-  components: { MaterialButton },
-  data() {
+  name: 'DataTableComponent',
+  setup() {
+    const dataTable = ref(null)
+    const users = ref([
+      { id: 1, name: 'John Doe', age: 30, city: 'New York', url: '/profile/1' },
+      { id: 2, name: 'Jane Smith', age: 25, city: 'Los Angeles', url: '/profile/2' },
+      { id: 3, name: 'Mike Johnson', age: 35, city: 'Chicago', url: '/profile/3' },
+      { id: 4, name: 'Sarah Silverman', age: 28, city: 'Miami', url: '/profile/4' },
+      { id: 5, name: 'Tom Wright', age: 29, city: 'Las Vegas', url: '/profile/5' },
+      { id: 6, name: 'Laura Croft', age: 27, city: 'San Francisco', url: '/profile/6' }
+    ])
+
+    onMounted(() => {
+      dataTable.value = new DataTable(dataTable.value,{
+        perPage: 5,
+        labels: {
+          placeholder: "Buscar...",
+          searchTitle: "Buscar en la tabla",
+          pageTitle: "Pag {page}",
+          perPage: "Datos por página",
+          noRows: "No se encontraron resultados",
+          info: "Mostrando {start} a {end} de {rows} entradas",
+          noResults: "No se encontraron resultados para la búsqueda",
+        }
+      })
+    })
+
     return {
-      items: [],
-      reportUrl: `${import.meta.env.VITE_SERVER_URL}:8080/contrato/reporte/`
+      dataTable,
+      users
     }
-  },
-  methods: {
-    verDetalles(uuid) {
-      console.log(uuid)
-      this.$router.push({ name: 'detallesContrato', params: { uuid: uuid } })
-    }
-
-
-    , async getReport(id) {
-      try {
-        const response = await axios.get(`${this.reportUrl}${id}`, { responseType: 'blob' })
-        const file = new Blob([response.data], { type: 'application/pdf' })
-        const fileURL = URL.createObjectURL(file)
-        window.open(fileURL)
-      } catch (e) {
-        console.error(e)
-      }
-    },
-    async fetchItems() {
-      try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/contrato`)
-        console.log(response.data)
-        this.items = response.data
-      } catch (e) {
-        console.error(e)
-      }
-    }
-  },
-  async beforeMount() {
-    await this.fetchItems()
   }
 }
 </script>

@@ -1,17 +1,5 @@
 <template>
   <div class="py-4 container-fluid">
-    <div class="d-sm-flex justify-content-between">
-
-      <!--      todo boton de crear contrato -->
-      <!--      <div>-->
-      <!--        <router-link to="/nuevoContrato">-->
-      <!--          <material-button color="success" variant="gradient">Nuevo Contrato</material-button>-->
-      <!--        </router-link>-->
-      <!--      </div>-->
-
-      <barra-contratos></barra-contratos>
-    </div>
-    <div class="mt-4 row">
       <div class="col-12">
         <div class="card">
 
@@ -26,7 +14,6 @@
           <TablaContratos></TablaContratos>
         </div>
       </div>
-    </div>
   </div>
 </template>
 

@@ -5,11 +5,33 @@ Github: https://github.com/fiduswriter/Simple-DataTables
 
 // Creative Tim Changes
 
-.dataTable-wrapper {
-  .dataTable-top {
+.datatable-wrapper {
+  &.datatable-loading {
+    // Estilos para el estado de carga
+  }
+
+  &.no-footer {
+    .datatable-container {
+      border-bottom: 0;
+    }
+  }
+
+  &.sortable {
+    // Estilos para las tablas ordenables
+  }
+
+  &.searchable {
+    // Estilos para las tablas con búsqueda
+  }
+
+  &.fixed-columns {
+    // Estilos para las tablas con columnas fijas
+  }
+
+  .datatable-top {
     padding: $card-header-padding;
 
-    .dataTable-dropdown {
+    .datatable-dropdown {
       float: left;
 
       label {
@@ -18,14 +40,14 @@ Github: https://github.com/fiduswriter/Simple-DataTables
         color: $secondary;
         font-weight: $font-weight-normal;
 
-        .dataTable-selector {
+        .datatable-selector {
           border-color: $gray-200;
           border-radius: $border-radius-md;
         }
       }
     }
 
-    .dataTable-search {
+    .datatable-search {
       input {
         font-size: $font-size-sm;
         color: $input-color;
@@ -39,8 +61,8 @@ Github: https://github.com/fiduswriter/Simple-DataTables
     }
   }
 
-  .dataTable-container {
-    .table {
+  .datatable-container {
+    .datatable-table {
       thead {
         tr {
           th {
@@ -50,6 +72,22 @@ Github: https://github.com/fiduswriter/Simple-DataTables
             color: $secondary;
             text-transform: uppercase;
             font-size: $font-size-xxs;
+
+            .datatable-sorter {
+              background: none;
+              border: none;
+              color: inherit;
+              font: inherit;
+              cursor: pointer;
+              padding: 0;
+              text-align: left;
+              width: 100%;
+
+              &:hover, &:focus {
+                text-decoration: underline;
+                outline: none;
+              }
+            }
           }
         }
       }
@@ -58,25 +96,37 @@ Github: https://github.com/fiduswriter/Simple-DataTables
         tr {
           td {
             padding: $table-head-spacer-y $table-head-spacer-x;
+
+            a {
+              color: $link-color;
+              font-size: $font-size-sm;
+              font-weight: $font-weight-normal;
+              text-decoration: none;
+
+              &:hover, &:focus {
+                text-decoration: underline;
+                outline: none;
+              }
+            }
           }
         }
       }
     }
   }
 
-  .dataTable-bottom {
+  .datatable-bottom {
     padding: $card-header-padding;
     padding-top: 0;
 
-    .dataTable-info {
+    .datatable-info {
       color: $secondary;
       font-size: $font-size-sm;
     }
 
-    .dataTable-pagination {
-      .dataTable-pagination-list {
-        li {
-          a {
+    .datatable-pagination {
+      .datatable-pagination-list {
+        .datatable-pagination-list-item {
+          .datatable-pagination-list-item-link {
             display: $page-link-display;
             align-items: $page-link-align-items;
             justify-content: $page-link-justify-content;
@@ -94,34 +144,44 @@ Github: https://github.com/fiduswriter/Simple-DataTables
               background: $gray-200;
             }
           }
-        }
 
-        .active {
-          a {
-            background: transparent;
-            @include gradient-directional(nth($primary-gradient, 1) 0%, nth($primary-gradient-state, -1) 100%, $deg: 195deg);
-            box-shadow: $pagination-active-box-shadow;
-            color: $white;
-            border: none;
-            border-radius: $page-link-radius !important;
-
-            &:hover {
+          &.datatable-active {
+            .datatable-pagination-list-item-link {
+              background: transparent;
               @include gradient-directional(nth($primary-gradient, 1) 0%, nth($primary-gradient-state, -1) 100%, $deg: 195deg);
+              box-shadow: $pagination-active-box-shadow;
+              color: $white;
+              border: none;
+              border-radius: $page-link-radius !important;
+
+              &:hover {
+                @include gradient-directional(nth($primary-gradient, 1) 0%, nth($primary-gradient-state, -1) 100%, $deg: 195deg);
+              }
+            }
+          }
+
+          &.datatable-hidden {
+            display: none;
+          }
+
+          &.datatable-disabled {
+            .datatable-pagination-list-item-link {
+              color: $gray-500;
+              cursor: not-allowed;
+
+              &:hover {
+                background: none;
+              }
             }
           }
         }
       }
     }
   }
-
-  &.no-footer {
-    .dataTable-container {
-      border-bottom: 0;
-    }
-  }
 }
 
-.dataTable-table {
+
+.datatable-table {
   thead,
   tbody,
   tfoot {
@@ -133,7 +193,7 @@ Github: https://github.com/fiduswriter/Simple-DataTables
 }
 
 @include media-breakpoint-down(sm) {
-  .dataTable-top > div:last-child {
+  .datatable-top > div:last-child {
     float: left;
     margin-top: $spacer;
   }

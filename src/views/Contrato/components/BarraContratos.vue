@@ -52,7 +52,7 @@ import MaterialButton from '@/components/MaterialButton.vue'
       class="btn-icon ms-2 export"
       color="dark"
       data-type="csv"
-      size
+      size=""
       variant="outline"
     >
           <span class="btn-inner--icon">
