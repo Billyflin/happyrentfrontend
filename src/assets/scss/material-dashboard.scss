@@ -1,5 +1,5 @@
 // Bootstrap Functions
-@import "material-dashboard/bootstrap/functions";
+@import "bootstrap/scss/functions";
 
 // Custom Variables
 @import "material-dashboard/custom/variables";
@@ -8,7 +8,7 @@
 @import "material-dashboard/variables";
 
 // Bootstrap Core
-@import "material-dashboard/bootstrap/bootstrap";
+@import "bootstrap/scss/bootstrap";
 
 // Theme Core
 @import "material-dashboard/theme-pro";
