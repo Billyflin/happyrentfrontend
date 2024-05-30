@@ -64,6 +64,7 @@ export const useAuthStore = defineStore('auth', {
     propiedades: [],
     arrendatario: {},
     codeudor: {},
+    contrato: {},
     propiedad: {},
     personas: [],
     solicitud: {},
@@ -160,6 +161,16 @@ export const useAuthStore = defineStore('auth', {
         .then((response) => {
           console.log(response.data)
           this.solicitudes = response.data
+        })
+        .catch((err) => {
+          console.error(err)
+        })
+    },
+    async getContratos(){
+      await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato`)
+        .then((response) => {
+          console.log(response.data)
+          this.contratos = response.data
         })
         .catch((err) => {
           console.error(err)

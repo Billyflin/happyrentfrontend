@@ -1,70 +1,79 @@
 <template>
   <div>
     <div class="table-responsive">
-    <table ref="dataTable" class="table table-flush">
-      <thead class="thead-light">
-      <tr>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-          Name
-        </th>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-          Age
-        </th>
-        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-          City
-        </th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr v-for="user in users" :key="user.id">
-        <td>
-          <router-link :to="user.url" class="text-sm font-weight-normal">{{ user.name }}</router-link>
-        </td>
-        <td>{{ user.age }}</td>
-        <td>{{ user.city }}</td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
+      <table ref="dataTable" class="table table-flush">
+        <thead class="thead-light">
+        <tr>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Inicio</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Término</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duración (Meses)</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Renta</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plazo Aviso (Días)</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Garantía</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Activo</th>
+          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Creación</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-if="auth.contratos" v-for="contrato in auth.contratos" :key="contrato.id">
+          <td>{{ contrato.id }}</td>
+          <td>{{ contrato.fechaInicio }}</td>
+          <td>{{ contrato.fechaTermino }}</td>
+          <td>{{ contrato.duracionMeses }}</td>
+          <td>{{ contrato.renta }}</td>
+          <td>{{ contrato.plazoAvisoDias }}</td>
+          <td>{{ contrato.garantia }}</td>
+          <td>{{ contrato.activo }}</td>
+          <td>{{ formatFecha(contrato.createDate) }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
-<script>
-import { onMounted, ref } from 'vue'
+<script setup>
+import { nextTick, onBeforeMount, onMounted, ref } from 'vue'
 import { DataTable } from 'simple-datatables'
+import { useAuthStore } from '@/store/index.js'
 
-export default {
-  name: 'DataTableComponent',
-  setup() {
-    const dataTable = ref(null)
-    const users = ref([
-      { id: 1, name: 'John Doe', age: 30, city: 'New York', url: '/profile/1' },
-      { id: 2, name: 'Jane Smith', age: 25, city: 'Los Angeles', url: '/profile/2' },
-      { id: 3, name: 'Mike Johnson', age: 35, city: 'Chicago', url: '/profile/3' },
-      { id: 4, name: 'Sarah Silverman', age: 28, city: 'Miami', url: '/profile/4' },
-      { id: 5, name: 'Tom Wright', age: 29, city: 'Las Vegas', url: '/profile/5' },
-      { id: 6, name: 'Laura Croft', age: 27, city: 'San Francisco', url: '/profile/6' }
-    ])
+const auth = useAuthStore()
+const dataTable = ref(null)
+const loading = ref(true)
 
-    onMounted(() => {
-      dataTable.value = new DataTable(dataTable.value,{
-        perPage: 5,
-        labels: {
-          placeholder: "Buscar...",
-          searchTitle: "Buscar en la tabla",
-          pageTitle: "Pag {page}",
-          perPage: "Datos por página",
-          noRows: "No se encontraron resultados",
-          info: "Mostrando {start} a {end} de {rows} entradas",
-          noResults: "No se encontraron resultados para la búsqueda",
-        }
-      })
-    })
-
-    return {
-      dataTable,
-      users
-    }
+onBeforeMount(async () => {
+  try {
+    await auth.getContratos()
+    loading.value = false
+  } catch (error) {
+    console.error('Error fetching contratos:', error)
+    loading.value = false
   }
+})
+onMounted(async () => {
+  await nextTick()
+  dataTable.value = new DataTable(dataTable.value, {
+
+    perPage: 5,
+    labels: {
+      placeholder: 'Buscar...',
+      searchTitle: 'Buscar en la tabla',
+      pageTitle: 'Pag {page}',
+      perPage: 'Datos por página',
+      noRows: 'No se encontraron resultados',
+      info: 'Mostrando {start} a {end} de {rows} entradas',
+      noResults: 'No se encontraron resultados para la búsqueda'
+    }
+  })
+})
+function formatFecha(fecha) {
+  if (!fecha) return ''
+  const date = new Date(fecha)
+  return date.toLocaleDateString('es-CL', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  })
 }
 </script>

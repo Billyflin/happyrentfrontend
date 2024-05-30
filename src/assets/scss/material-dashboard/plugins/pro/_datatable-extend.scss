@@ -37,15 +37,28 @@ Github: https://github.com/fiduswriter/Simple-DataTables
       label {
         margin-bottom: 0;
         margin-left: 0;
-        color: $secondary;
-        font-weight: $font-weight-normal;
+        color: #6c757d; /* Puedes cambiar esto a tu variable $secondary */
+        font-weight: 400; /* Puedes cambiar esto a tu variable $font-weight-normal */
 
         .datatable-selector {
-          border-color: $gray-200;
-          border-radius: $border-radius-md;
+          border-color: #dee2e6; /* Puedes cambiar esto a tu variable $gray-200 */
+          border-radius: .375rem; /* Puedes cambiar esto a tu variable $border-radius-md */
+
+          select {
+            color: #495057; /* Puedes cambiar esto a tu variable $input-color */
+            font-size: .875rem; /* Puedes cambiar esto a tu variable $font-size-sm */
+            border: 1px solid #dee2e6; /* Puedes cambiar esto a tu variable $gray-200 */
+            border-radius: .375rem; /* Puedes cambiar esto a tu variable $input-border-radius */
+            padding: .375rem .75rem; /* Añadido para un mejor espaciado */
+
+            &:focus-visible {
+              outline: none;
+            }
+          }
         }
       }
     }
+
 
     .datatable-search {
       input {
