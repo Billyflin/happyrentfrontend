@@ -9,7 +9,7 @@
     />
     <router-link to="/">
       <img alt="logo-Happ" class="position-absolute z-index-3 top-3 start-1" height="150"
-           src="../../assets/LogoHappGrandeBlanco.svg" />
+           src="../../assets/img/logos/LogoHappGrandeBlanco.svg" />
     </router-link>
     <span class="mask bg-gradient-dark opacity-2"></span>
     <div class="container py-10 postion-relative z-index-2">

@@ -8,7 +8,7 @@
       src="../../assets/img/bg-pricing.jpg"
     />
     <img alt="logo-Happ" class="position-absolute top-3 start-1" height="150"
-         src="../../assets/LogoHappGrandeBlanco.svg" />
+         src="../../assets/img/logos/LogoHappGrandeBlanco.svg" />
 
     <span class="mask bg-gradient-dark opacity-2"></span>
     <div class="container py-10 postion-relative z-index-2">

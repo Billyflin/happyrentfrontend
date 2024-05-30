@@ -26,7 +26,7 @@
     "file-saver": "^2.0.5",
     "pinia": "2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
-    "simple-datatables": "3.2.0",
+    "simple-datatables": "9.0.3",
     "src": "^1.1.2",
     "uuid": "^9.0.1",
     "vue": "^3.4.27",
