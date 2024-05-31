@@ -281,13 +281,64 @@
   }
 
   // Datatable changes
-  .dataTable-sorter::after {
+  .datatable-sorter::after {
     border-bottom-color: $white;
   }
 
-  .dataTable-sorter::before {
+  .datatable-sorter::before {
     border-top-color: $white;
   }
+
+  .datatable-sorter {
+    color: $white;
+  }
+
+  .datatable-selector {
+    color: $white;
+    background-color: transparent;
+  }
+
+  .datatable-search {
+    background-color: transparent;
+    color: $input-color;
+
+    input {
+      background-color: transparent;
+      color: $white !important;
+    }
+
+    input::placeholder {
+      font-weight: $font-weight-normal;
+      color: $input-placeholder-color;
+    }
+  }
+
+  .datatable-pagination-list-item-link {
+    color: $white !important;
+    background-color: transparent;
+    border: 1px solid $gray-300;
+    font-size: $font-size-sm;
+
+    &:hover {
+      color: $primary !important;
+      background: $dark-version-card-bg-color;
+    }
+
+    .datatable-active {
+        background: transparent;
+        @include gradient-directional(nth($happLight-gradient, 1) 0%, nth($happLight-gradient-state, -1) 100%, $deg: 195deg);
+        box-shadow: $pagination-active-box-shadow;
+        color: $white;
+        border: none;
+        border-radius: $page-link-radius !important;
+
+        &:hover {
+          @include gradient-directional(nth($happLight-gradient, 1) 0%, nth($happLight-gradient-state, -1) 100%, $deg: 195deg);
+        }
+    }
+  }
+
+
 
   // Quill changes
   .ql-snow .ql-stroke {

@@ -4,19 +4,19 @@
       <table ref="dataTable" class="table table-flush">
         <thead class="thead-light">
         <tr>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Inicio</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Término</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Duración (Meses)</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Renta</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Plazo Aviso (Días)</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Garantía</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Activo</th>
-          <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Fecha Creación</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">ID</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">Fecha Inicio</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">Fecha Término</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">Duración (Meses)</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">Renta</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">Plazo Aviso (Días)</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">Garantía</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">Estado</th>
+          <th class="text-uppercase text-xs font-weight-bolder opacity-7">Fecha Creación</th>
         </tr>
         </thead>
         <tbody>
-        <tr v-if="auth.contratos" v-for="contrato in auth.contratos" :key="contrato.id">
+        <tr v-if="auth.contratos" v-for="contrato in auth.contratos" class="text-sm text-center" :key="contrato.id">
           <td>{{ contrato.id }}</td>
           <td>{{ contrato.fechaInicio }}</td>
           <td>{{ contrato.fechaTermino }}</td>
@@ -24,7 +24,12 @@
           <td>{{ contrato.renta }}</td>
           <td>{{ contrato.plazoAvisoDias }}</td>
           <td>{{ contrato.garantia }}</td>
-          <td>{{ contrato.activo }}</td>
+          <td v-if="contrato.activo">
+            <span class="badge badge-success">Activo</span>
+          </td>
+          <td v-else>
+            <span class="badge badge-danger">Inactivo</span>
+          </td>
           <td>{{ formatFecha(contrato.createDate) }}</td>
         </tr>
         </tbody>
@@ -40,6 +45,7 @@ import { useAuthStore } from '@/store/index.js'
 
 const auth = useAuthStore()
 const dataTable = ref(null)
+const tableRef = ref(null)
 const loading = ref(true)
 
 onBeforeMount(async () => {
@@ -51,22 +57,25 @@ onBeforeMount(async () => {
     loading.value = false
   }
 })
+
 onMounted(async () => {
   await nextTick()
-  dataTable.value = new DataTable(dataTable.value, {
-
-    perPage: 5,
-    labels: {
-      placeholder: 'Buscar...',
-      searchTitle: 'Buscar en la tabla',
-      pageTitle: 'Pag {page}',
-      perPage: 'Datos por página',
-      noRows: 'No se encontraron resultados',
-      info: 'Mostrando {start} a {end} de {rows} entradas',
-      noResults: 'No se encontraron resultados para la búsqueda'
-    }
-  })
+  if (tableRef.value) {
+    dataTable.value = new DataTable(tableRef.value, {
+      perPage: 5,
+      labels: {
+        placeholder: 'Buscar...',
+        searchTitle: 'Buscar en la tabla',
+        pageTitle: 'Pag {page}',
+        perPage: 'Datos por página',
+        noRows: 'No se encontraron resultados',
+        info: 'Mostrando {start} a {end} de {rows} entradas',
+        noResults: 'No se encontraron resultados para la búsqueda'
+      }
+    })
+  }
 })
+
 function formatFecha(fecha) {
   if (!fecha) return ''
   const date = new Date(fecha)

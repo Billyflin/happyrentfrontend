@@ -19,3 +19,117 @@
     "lastModifiedBy": null
   }
 ]
+
+
+const prueba = ref([
+  {
+    id: 1,
+    fechaInicio: '2021-01-01',
+    fechaTermino: '2021-12-31',
+    duracionMeses: 12,
+    renta: 1001300,
+    plazoAvisoDias: 30,
+    garantia: 1200000,
+    activo: true,
+    createDate: '2021-01-01'
+  },
+  {
+    id: 2,
+    fechaInicio: '2021-01-01',
+    fechaTermino: '2021-12-31',
+    duracionMeses: 12,
+    renta: 1001300,
+    plazoAvisoDias: 60,
+    garantia: 1200000,
+    activo: true,
+    createDate: '2021-01-01'
+  },
+  {
+    id: 3,
+    fechaInicio: '2021-01-01',
+    fechaTermino: '2021-12-31',
+    duracionMeses: 12,
+    renta: 1001300,
+    plazoAvisoDias: 60,
+    garantia: 12003000,
+    activo: true,
+    createDate: '2021-03-02'
+  },
+  {
+    id: 4,
+    fechaInicio: '2021-03-02',
+    fechaTermino: null,
+    duracionMeses: 12,
+    renta: 10401300,
+    plazoAvisoDias: 60,
+    garantia: 1200000,
+    activo: false,
+    createDate: '2021-03-02'
+  },
+  {
+    id: 5,
+    fechaInicio: '2021-03-01',
+    fechaTermino: null,
+    duracionMeses: 12,
+    renta: 1001300,
+    plazoAvisoDias: 60,
+    garantia: 12000200,
+    activo: false,
+    createDate: '2021-03-01'
+  },
+  {
+    id: 6,
+    fechaInicio: '2022-01-01',
+    fechaTermino: null,
+    duracionMeses: 12,
+    renta: 1001300,
+    plazoAvisoDias: 30,
+    garantia: 12000200,
+    activo: false,
+    createDate: '2022-01-01'
+  },
+  {
+    id: 7,
+    fechaInicio: '2022-01-01',
+    fechaTermino: null,
+    duracionMeses: 12,
+    renta: 10340000,
+    plazoAvisoDias: 30,
+    garantia: 2003000,
+    activo: false,
+    createDate: '2022-01-01'
+  },
+  {
+    id: 8,
+    fechaInicio: '2024-12-01',
+    fechaTermino: null,
+    duracionMeses: 12,
+    renta: 100000,
+    plazoAvisoDias: 90,
+    garantia: 2003000,
+    activo: false,
+    createDate: '2022-01-01'
+  },
+  {
+    id: 9,
+    fechaInicio: '2024-12-01',
+    fechaTermino: null,
+    duracionMeses: 12,
+    renta: 100576000,
+    plazoAvisoDias: 90,
+    garantia: 2003000,
+    activo: true,
+    createDate: '2021-01-01'
+  },
+  {
+    id: 10,
+    fechaInicio: '2021-01-01',
+    fechaTermino: null,
+    duracionMeses: 12,
+    renta: 10130000,
+    plazoAvisoDias: 30,
+    garantia: 2030000,
+    activo: true,
+    createDate: '2021-01-01'
+  }
+])

@@ -3,11 +3,9 @@ Simple-DataTables
 Github: https://github.com/fiduswriter/Simple-DataTables
 */
 
-// Creative Tim Changes
-
 .datatable-wrapper {
   &.datatable-loading {
-    // Estilos para el estado de carga
+
   }
 
   &.no-footer {
@@ -36,19 +34,19 @@ Github: https://github.com/fiduswriter/Simple-DataTables
 
       label {
         margin-bottom: 0;
-        margin-left: 0;
-        color: #6c757d; /* Puedes cambiar esto a tu variable $secondary */
-        font-weight: 400; /* Puedes cambiar esto a tu variable $font-weight-normal */
+        color: $input-color; /* Puedes cambiar esto a tu variable $secondary */
+        font-weight:$font-weight-normal; /* Puedes cambiar esto a tu variable $font-weight-normal */
 
         .datatable-selector {
-          border-color: #dee2e6; /* Puedes cambiar esto a tu variable $gray-200 */
-          border-radius: .375rem; /* Puedes cambiar esto a tu variable $border-radius-md */
+          border-color:$gray-200; /* Puedes cambiar esto a tu variable $gray-200 */
+          border-radius: $border-radius-md; /* Puedes cambiar esto a tu variable $border-radius-md */
+          margin-right: 0.5rem ;
 
-          select {
-            color: #495057; /* Puedes cambiar esto a tu variable $input-color */
-            font-size: .875rem; /* Puedes cambiar esto a tu variable $font-size-sm */
-            border: 1px solid #dee2e6; /* Puedes cambiar esto a tu variable $gray-200 */
-            border-radius: .375rem; /* Puedes cambiar esto a tu variable $input-border-radius */
+          option {
+            color:  $input-color; /* Puedes cambiar esto a tu variable $input-color */
+            font-size:$font-size-sm; /* Puedes cambiar esto a tu variable $font-size-sm */
+            border: 1px solid $input-border-color ; /* Puedes cambiar esto a tu variable $gray-200 */
+            border-radius: $input-border-radius; /* Puedes cambiar esto a tu variable $input-border-radius */
             padding: .375rem .75rem; /* Añadido para un mejor espaciado */
 
             &:focus-visible {
@@ -61,7 +59,10 @@ Github: https://github.com/fiduswriter/Simple-DataTables
 
 
     .datatable-search {
+      background-color: transparent;
+      color: $input-color;
       input {
+        background-color: transparent;
         font-size: $font-size-sm;
         color: $input-color;
         border: 1px solid $gray-200;
@@ -70,6 +71,10 @@ Github: https://github.com/fiduswriter/Simple-DataTables
         &:focus-visible {
           outline: none;
         }
+      }
+      input::placeholder {
+        font-weight: $font-weight-normal;
+        color: $input-placeholder-color;
       }
     }
   }
@@ -82,7 +87,7 @@ Github: https://github.com/fiduswriter/Simple-DataTables
             padding: $table-head-spacer-y $table-head-spacer-x;
             opacity: .7;
             font-weight: bolder;
-            color: $secondary;
+            color: inherit;
             text-transform: uppercase;
             font-size: $font-size-xxs;
 
@@ -105,25 +110,30 @@ Github: https://github.com/fiduswriter/Simple-DataTables
         }
       }
 
-      tbody {
-        tr {
-          td {
-            padding: $table-head-spacer-y $table-head-spacer-x;
-
-            a {
-              color: $link-color;
-              font-size: $font-size-sm;
-              font-weight: $font-weight-normal;
-              text-decoration: none;
-
-              &:hover, &:focus {
-                text-decoration: underline;
-                outline: none;
-              }
-            }
-          }
-        }
-      }
+      //tbody {
+      //  tr {
+      //    td {
+      //      color: $link-color;
+      //      font-size: $font-size-sm;
+      //      font-weight: $font-weight-normal;
+      //      text-decoration: none;
+      //      padding: $table-head-spacer-y $table-head-spacer-x;
+      //
+      //
+      //      a {
+      //        color: $link-color;
+      //        font-size: $font-size-sm;
+      //        font-weight: $font-weight-normal;
+      //        text-decoration: none;
+      //
+      //        &:hover, &:focus {
+      //          text-decoration: underline;
+      //          outline: none;
+      //        }
+      //      }
+      //    }
+      //  }
+      //}
     }
   }
 
@@ -131,10 +141,11 @@ Github: https://github.com/fiduswriter/Simple-DataTables
     padding: $card-header-padding;
     padding-top: 0;
 
-    .datatable-info {
-      color: $secondary;
-      font-size: $font-size-sm;
-    }
+    //.datatable-info {
+    //  color: $input-color;
+    //  font-weight:$font-weight-normal;
+    //  font-size: $font-size-sm;
+    //}
 
     .datatable-pagination {
       .datatable-pagination-list {
