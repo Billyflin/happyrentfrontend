@@ -90,7 +90,6 @@ export default {
       noChoicesText: 'No hay opciones para elegir'
     })
     if (this.options.length > 0) {
-
       this.choices.setChoices(this.options, 'value', 'label', true)
       if (!this.choices.getValue()) {
         this.choices.setChoiceByValue(this.options[0].value)
