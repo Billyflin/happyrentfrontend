@@ -3,10 +3,7 @@
     <div class="row mb-5">
       <div class="col-lg-6">
         <h4>Estas son las propiedades a las que tienes acceso</h4>
-        <p>
-          Si no eres el propietario de alguna de estas propiedades, cualquier cambio que hagas será notificado al
-          propietario y deberá ser aprobado por el mismo antes de que surta efecto.
-        </p>
+
       </div>
       <div
         class="text-right col-lg-6 d-flex flex-column justify-content-center"

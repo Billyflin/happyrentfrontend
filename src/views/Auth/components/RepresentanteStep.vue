@@ -119,7 +119,7 @@ export default {
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-md-1  mt-4">
+        <div class="col-md-2  mt-4">
           <MaterialChoices id="pronombres" v-model:text-choice="representante.tratamiento" :options="pronombres"
                            label="Pronombres" name="Pronombres" />
         </div>
@@ -134,7 +134,7 @@ export default {
             variant="static"
           />
         </div>
-        <div class="col-4 mt-4">
+        <div class="col-3 mt-4">
           <material-input
             id="emailRepresentanteLegal"
             v-model="representante.email"
@@ -144,7 +144,7 @@ export default {
             variant="static"
           />
         </div>
-        <div class="col-4 mt-4">
+        <div class="col-3 mt-4">
           <material-input
             id="confirmEmailRepresentanteLegal"
             label="Confimar Email"

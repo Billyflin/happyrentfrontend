@@ -12,8 +12,10 @@ const emailMismatch = computed(() => email.value !== emailConfirm.value)
 const sending = ref(false)
 const pedirDocumentos = ref(false)
 const carnet = ref(false)
-const contrato = ref(false)
-const boletas = ref(false)
+const liquidaciones = ref(false)
+const certificadoAFP = ref(false)
+const certificadoDicom = ref(false)
+const carpetaTributaria = ref(false)
 const enviado = ref(false)
 const error = ref('')
 
@@ -57,21 +59,33 @@ const submitForm = async () => {
       <div v-if="pedirDocumentos" class="row mt-4">
         <p> Que documentos quieres pedir?</p>
         <div class="col-4">
-          <h6>Carnet de identidad</h6>
+          <h6>Cédula de identidad</h6>
           <material-switch id="carnet" :disabled="sending||enviado" v-model:checked="carnet" name="carnet">Pedir
-            Carnet
-          </material-switch>
-        </div>
-        <div class="col-4">
-          <h6>Contrato de trabajo</h6>
-          <material-switch id="contrato" :disabled="sending||enviado" v-model:checked="contrato" name="contrato">Pedir
-            Contrato
+            Cedula
           </material-switch>
         </div>
         <div class="col-4">
           <h6>Liquidaciones de sueldo</h6>
-          <material-switch id="boletas" :disabled="sending||enviado" v-model:checked="boletas" name="boletas">Pedir
-            Boletas
+          <material-switch id="liquidaciones" :disabled="sending||enviado" v-model:checked="liquidaciones" name="liquidaciones">Pedir
+            Liquidaciones
+          </material-switch>
+        </div>
+        <div class="col-4">
+          <h6>Certificado AFP</h6>
+          <material-switch id="certificadoAFP" :disabled="sending||enviado" v-model:checked="certificadoAFP" name="cerficadoAFP">Pedir
+            Certificado AFP
+          </material-switch>
+        </div>
+        <div class="col-4 mt-2">
+          <h6>Certificado dicom platinum</h6>
+          <material-switch id="certificadoDicom" :disabled="sending||enviado" v-model:checked="certificadoDicom" name="cerficadoDicom">Pedir
+            Certificado Dicom
+          </material-switch>
+        </div>
+        <div class="col-4 mt-2">
+          <h6>Carpeta tributaria 2 últimos años</h6>
+          <material-switch id="carpetaTributaria" :disabled="sending||enviado" v-model:checked="carpetaTributaria" name="carpetaTributaria">Pedir
+            Carpeta Tributaria
           </material-switch>
         </div>
       </div>
