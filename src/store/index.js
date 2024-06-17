@@ -65,6 +65,7 @@ export const useAuthStore = defineStore('auth', {
     arrendatario: {},
     codeudor: {},
     contrato: {},
+    contratos: {},
     propiedad: {},
     personas: [],
     solicitud: {},
