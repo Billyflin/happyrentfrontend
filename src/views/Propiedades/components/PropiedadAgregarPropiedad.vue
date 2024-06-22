@@ -995,6 +995,28 @@ onMounted(() => {
                 v-model="propiedad.numero"
               ></material-input>
             </div>
+            <div class="col-3">
+              <material-input
+                id="metrosCuadrados"
+                type="number"
+                is-required
+                variant="static"
+                label="Metros² útiles"
+                placeholder="10"
+                v-model="propiedad.metrosCuadradosUtiles"
+              ></material-input>
+            </div>
+            <div class="col-3">
+              <material-input
+                id="metrosCuadradosTotales"
+                type="number"
+                is-required
+                variant="static"
+                label="Metros² totales"
+                placeholder="10"
+                v-model="propiedad.metrosCuadradosTotales"
+              ></material-input>
+            </div>
             <div class="col-6">
               <material-input
                 id="descripcion"
