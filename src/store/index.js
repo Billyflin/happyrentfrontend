@@ -188,7 +188,7 @@ export const useRegisterFormStore = defineStore({
     selectedCategory: null, form: {
       username: '', password: '', id: 0, persona: {
         id: 0, nombres: '', apellidoPaterno: '', apellidoMaterno: '', nombreCompleto: '', direccion: {
-          id: 0, calle: '', numero: 1, ciudad: '', region: '', pais: '', codigoPostal: ''
+          id: 0, calle: '', numero: 1,detalle:'', ciudad: '', region: '', pais: '', codigoPostal: ''
         }, telefono: '', email: '', estadoCivil: '', nacionalidad: ''
       }, isActivated: true, email: '', authorities: [{
         authority: ''

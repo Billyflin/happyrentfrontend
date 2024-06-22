@@ -66,6 +66,8 @@
                             variant="static" />
           </div>
           <LocalidadForm v-model="persona.direccion" />
+
+
         </div>
         <div class="row" v-else>
           <div class="col-12 text-center">
@@ -172,6 +174,7 @@ export default {
       direccion: {
         calle: '',
         numero: '',
+        detalle:'',
         codigoPostal: '',
         pais: '',
         region: '',

@@ -248,6 +248,7 @@ const persona = ref({
     ciudad: '',
     calle: '',
     numero: '',
+    detalle: '',
     codigoPostal: ''
   }
 })

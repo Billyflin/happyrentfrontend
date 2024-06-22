@@ -19,6 +19,7 @@ export default {
       direccion: {
         calle: '',
         numero: '',
+        detalle:'',
         codigoPostal: '',
         pais: '',
         region: '',

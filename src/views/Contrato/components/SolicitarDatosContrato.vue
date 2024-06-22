@@ -16,6 +16,7 @@ const liquidaciones = ref(false)
 const certificadoAFP = ref(false)
 const certificadoDicom = ref(false)
 const carpetaTributaria = ref(false)
+const contratoTrabajo = ref(false)
 const enviado = ref(false)
 const error = ref('')
 
@@ -95,6 +96,12 @@ const submitForm = async () => {
           <h6>Carpeta tributaria 2 últimos años</h6>
           <material-switch id="carpetaTributaria" :disabled="sending||enviado" v-model:checked="carpetaTributaria" name="carpetaTributaria">Pedir
             Carpeta Tributaria
+          </material-switch>
+        </div>
+        <div class="col-4 mt-2">
+          <h6>Contrato de trabajo</h6>
+          <material-switch id="contratoTrabajo" :disabled="sending||enviado" v-model:checked="contratoTrabajo" name="contratoTrabajo">Pedir
+            Contrato de Trabajo
           </material-switch>
         </div>
       </div>

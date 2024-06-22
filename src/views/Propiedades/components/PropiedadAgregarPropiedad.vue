@@ -154,6 +154,7 @@ const propiedad = ref({
   direccion: {
     calle: '',
     numero: 0,
+    detalle:'',
     comuna: '',
     region: '',
     ciudad: '',

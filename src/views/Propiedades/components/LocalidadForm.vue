@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-6 mt-4">
+    <div class="col-5 mt-4">
       <material-input
         id="calleDirection"
         v-model="direccion.calle"
@@ -11,7 +11,6 @@
         variant="static"
       />
     </div>
-    <div class="col-1"></div>
     <div class="col-2 mt-4">
       <material-input
         id="numeroDirection"
@@ -22,7 +21,16 @@
         variant="static"
       />
     </div>
-    <div class="col-1"></div>
+    <div class="col-3 mt-4">
+      <material-input
+        id="detalleDirection"
+        v-model="direccion.detalle"
+        label="Detalle"
+        placeholder="Edificio H"
+        type="String"
+        variant="static"
+      />
+    </div>
     <div class="col-2 mt-4">
       <material-input
         id="postal"
