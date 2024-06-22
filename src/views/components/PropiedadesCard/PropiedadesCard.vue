@@ -49,12 +49,28 @@
             : propiedad.propietario.nombre
         }}
       </p>
-
-      <div class="d-flex justify-content-end mb-0 mt-1">
-        <span v-if=" propiedad.propietario.type "
-              class="mb-0 mt-0 badge badge-success">{{ propiedad.propietario.type.toUpperCase() }}</span>
-        <span v-if=" propiedad.type" class="mb-0 mx-1 mt-0 badge badge-success">{{ propiedad.type.toUpperCase()
-          }}</span>
+      <div>
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="d-flex justify-content-start mb-0 mt-1">
+        <span v-if="propiedad.propietario.type" class="mb-0 mt-0 badge badge-success">
+          {{ propiedad.propietario.type.toUpperCase() }}
+        </span>
+            <span v-if="propiedad.type" class="mb-0 mx-1 mt-0 badge badge-success">
+          {{ propiedad.type.toUpperCase() }}
+        </span>
+          </div>
+          <div class="d-flex justify-content-end">
+            <button
+              class="btn btn-primary btn-sm mb-0 mt-1"
+              data-bs-placement="bottom"
+              data-bs-toggle="tooltip"
+              title="Crear contrato"
+              @click="irANuevoContrato"
+            >
+              Crear Contrato
+            </button>
+          </div>
+        </div>
       </div>
     </div>
     <hr class="dark horizontal my-0" />
