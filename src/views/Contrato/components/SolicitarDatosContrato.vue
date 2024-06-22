@@ -24,9 +24,18 @@ const submitForm = async () => {
   sending.value = true
   try {
     await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/perfil-temporal`,
-      email.value
+      {
+        email:email.value,
+        carnet: carnet.value,
+        liquidaciones: liquidaciones.value,
+        certificadoAFP: certificadoAFP.value,
+        certificadoDicom: certificadoDicom.value,
+        carpetaTributaria: carpetaTributaria.value,
+      },
+
     ).then(() => {
         enviado.value = true
+
       }
     ).catch(() => {
         error.value = 'Hubo un error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.'
