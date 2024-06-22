@@ -4,6 +4,7 @@ import Profile from '../views/Perfil/Profile.vue'
 import SignIn from '../views/Auth/SignIn.vue'
 import SignUp from '../views/Auth/SignUp.vue'
 import { useAuthStore } from '@/store'
+import { ref } from 'vue'
 
 
 
@@ -163,7 +164,15 @@ const routes = [{
     path: '/Solicitud',
     name: 'Solicitud',
     component: () => import( '@/views/Solicitudes/Solicitud.vue'),
-    props: route => ({ token: route.query.token })
+    props: route => ({
+      token: route.query.token,
+      carnet: route.query.carnet === 'true',
+      liquidaciones: route.query.liquidaciones === 'true',
+      certificadoAFP: route.query.certificadoAFP === 'true',
+      certificadoDicom: route.query.certificadoDicom === 'true',
+      carpetaTributaria: route.query.carpetaTributaria === 'true',
+      contratoTrabajo: route.query.contratoTrabajo === 'true',
+    }),
   },
 
 

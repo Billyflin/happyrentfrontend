@@ -81,11 +81,17 @@
     <material-button :disabled="sending" class="mt-4 " @click="emitData" full-width size="lg" variant="success">Enviar
     </material-button>
   </div>
-  <p>{{ token }}</p>
-  <p>{{ isTokenValid }}</p>
-  https://localhost:8443/temporal?idUsuario=
 
+  <div v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo">
+<!--    dropzone para documentos -->
+    <div class="file-dropzone">
+      <label for="idDropzone">Documentos</label>
+      <div id="idDropzone" class="dropzone"></div>
+    </div>
 
+  </div>
+
+  <button @click="console.log(files)">Log Files</button>
 </template>
 
 <script>
@@ -99,14 +105,21 @@ import { useVuelidate } from '@vuelidate/core'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import { validate as isValidUUID } from 'uuid'
 import axios from 'axios'
+import Dropzone from 'dropzone';
 
 export default {
   name: 'Solicitud',
   components: { MaterialChoices, LocalidadForm, MaterialSwitch, MaterialButton, MaterialInput },
   props: {
-    token: String,
-    required: true
-  }, data() {
+    token: { type: String, required: true },
+    carnet: Boolean,
+    liquidaciones: Boolean,
+    certificadoAFP: Boolean,
+    certificadoDicom: Boolean,
+    carpetaTributaria: Boolean,
+    contratoTrabajo: Boolean
+  },
+  data() {
     return {
       pronombres: [
         { value: 'Sr.', text: 'Sr.' },
@@ -125,7 +138,9 @@ export default {
         { value: 'Chile', text: 'Chile' },
         { value: 'Argentina', text: 'Argentina' },
         { value: 'Perú', text: 'Perú' }
-      ]
+      ],
+      files: [], // Asegúrate de inicializar `files` como un array
+      sending: false,
     }
   },
   methods: {
@@ -133,31 +148,34 @@ export default {
       this.v$.$validate()
       if (!this.v$.$error) {
         this.sending = true
+        const formData = new FormData();
+        formData.append('persona', new Blob([JSON.stringify(this.persona)], { type: "application/json" }));
+        this.files.forEach(file => formData.append('files', file));
         try {
           await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/temporal?idUsuario=${this.token}`,
-            this.persona
-          ).then((it) => {
-              console.log(it)
-              this.$router.push({ name: 'Dashboard' })
-            }
-          ).catch((err) => {
-              console.error(err)
-              if (err.response && err.response.status === 500 && err.response.data === 'Token Invalido.') {
-                this.isTokenValid = false
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data'
               }
-              console.error(err)
             }
-          ).finally(() => {
-              this.sending = false
+          ).then((it) => {
+            console.log(it)
+            this.$router.push({ name: 'Dashboard' })
+          }).catch((err) => {
+            console.error(err)
+            if (err.response && err.response.status === 500 && err.response.data === 'Token Invalido.') {
+              this.isTokenValid = false
             }
-          )
+            console.error(err)
+          }).finally(() => {
+            this.sending = false
+          })
         } catch (error) {
           console.error(error)
         }
       }
-    }
-
-  },
+    }},
   setup(props) {
     const store = useAppStore()
     const sending = ref(false)
@@ -174,7 +192,7 @@ export default {
       direccion: {
         calle: '',
         numero: '',
-        detalle:'',
+        detalle: '',
         codigoPostal: '',
         pais: '',
         region: '',
@@ -185,20 +203,42 @@ export default {
       estadoCivil: ''
     })
     const v$ = useVuelidate()
-
+    const dropzone = ref(null);
+    const files = ref([]) // Mantén `files` como un array reactivo
 
     onMounted(() => {
       toggleEveryDisplay()
+      if (props.carnet || props.liquidaciones || props.certificadoAFP|| props.carpetaTributaria||props.certificadoDicom || props.contratoTrabajo){
+
+
+      dropzone.value = new Dropzone('#idDropzone', {
+        url: '/',
+        autoProcessQueue: false,
+        acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx',
+      });
+      dropzone.value.on('addedfile', (file) => {
+        files.value.push(file)
+      });
+      dropzone.value.on('removedfile', (file) => {
+        files.value = files.value.filter(f => f !== file)
+      });
+    }
     })
 
     onUnmounted(() => {
       toggleEveryDisplay()
+      if (dropzone.value) {
+        dropzone.value.destroy();
+      }
     })
+
     return {
       persona,
       v$,
       isTokenValid,
-      sending
+      sending,
+      dropzone,
+      files
     }
   }
 }
