@@ -2,6 +2,7 @@
 import MaterialButton from '@/components/MaterialButton.vue'
 import SolicitudDetails from '@/views/Solicitudes/SolicitudDetails.vue'
 import { useAuthStore } from '@/store/index.js'
+import axios from 'axios'
 
 export default {
   name: 'TablaPerfilesTemporales',
@@ -20,13 +21,36 @@ export default {
   },
   data() {
     return {
-      auth: useAuthStore()
+      auth: useAuthStore(),
+      sending: false
     }
   }
   ,
   methods: {
     removeSolicitud(id) {
       console.log(id)
+    },
+    aceptarSolicitud(id) {
+      try {
+        this.sending = true
+        axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/temporal/real`,
+          {
+            idUsuario: id
+      }      )
+          .then((it) => {
+            console.log(it)
+            this.sending = false
+          })
+          .catch((err) => {
+            console.error(err)
+            if (err.response && err.response.status === 500 && err.response.data === 'Token Invalido.') {
+              this.isTokenValid = false
+            }
+            console.error(err)
+          })
+      } catch (e) {
+        console.error(e)
+      }
     }
   }
 }
@@ -110,6 +134,7 @@ export default {
                   size="sm"
                   type="button"
                   variant="gradient"
+                  @click="aceptarSolicitud(list.id)"
                 >
                   <span class="material-symbols-outlined mr-3"
                         style="font-size: 16px; margin-right: 10px;;">person_add</span> Aceptar

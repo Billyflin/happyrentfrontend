@@ -32,8 +32,8 @@ const submitForm = async () => {
         certificadoAFP: certificadoAFP.value,
         certificadoDicom: certificadoDicom.value,
         carpetaTributaria: carpetaTributaria.value,
+        contratoTrabajo: contratoTrabajo.value,
       },
-
     ).then(() => {
         enviado.value = true
 
