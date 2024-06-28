@@ -36,7 +36,7 @@ export default {
         axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/temporal/real`,
           {
             idUsuario: id
-      }      )
+          })
           .then((it) => {
             console.log(it)
             this.sending = false
