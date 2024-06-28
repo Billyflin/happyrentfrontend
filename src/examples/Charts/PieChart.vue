@@ -3,8 +3,9 @@
     <canvas :id="id" :height="height" class="chart-canvas"></canvas>
   </div>
 </template>
+
 <script>
-import Chart from 'chart.js/auto'
+import Chart from 'chart.js/auto';
 
 export default {
   name: 'PieChart',
@@ -19,79 +20,66 @@ export default {
     },
     chart: {
       type: Object,
-      required: true,
-      labels: Array,
-      datasets: {
-        type: Object,
-        label: String,
-        data: Array
-      }
+      required: true
     }
   },
   mounted() {
-    var pieChart = document.getElementById(this.id).getContext('2d')
-
-    let chartStatus = Chart.getChart(this.id)
-    if (chartStatus != undefined) {
-      chartStatus.destroy()
-    }
-
-    new Chart(pieChart, {
-      type: 'pie',
-      data: {
-        labels: this.chart.labels,
-        datasets: [
-          {
-            label: this.chart.datasets.label,
-            weight: 9,
-            cutout: 0,
-            tension: 0.9,
-            pointRadius: 2,
-            borderWidth: 2,
-            backgroundColor: ['#03A9F4', '#e91e63', '#3A416F', '#a8b8d8'],
-            data: this.chart.datasets.data,
-            fill: false
-          }
-        ]
+    this.renderChart();
+  },
+  watch: {
+    chart: {
+      handler() {
+        this.renderChart();
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index'
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false
-            },
-            ticks: {
-              display: false
+      deep: true
+    }
+  },
+  methods: {
+    renderChart() {
+      const pieChart = document.getElementById(this.id).getContext('2d');
+
+      // Destroy any existing chart instance
+      const existingChart = Chart.getChart(this.id);
+      if (existingChart) {
+        existingChart.destroy();
+      }
+
+      // Function to generate random color
+      const getRandomColor = () => {
+        const letters = '0123456789ABCDEF';
+        let color = '#';
+        for (let i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+      };
+
+      // Generate random colors for each data point
+      const backgroundColors = this.chart.datasets.data.map(() => getRandomColor());
+
+      new Chart(pieChart, {
+        type: 'pie',
+        data: {
+          labels: this.chart.labels,
+          datasets: [
+            {
+              label: this.chart.datasets.label,
+              data: this.chart.datasets.data,
+              backgroundColor: backgroundColors
             }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false
-            },
-            ticks: {
-              display: false
+          ]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true
             }
           }
         }
-      }
-    })
+      });
+    }
   }
-}
+};
 </script>

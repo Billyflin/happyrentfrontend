@@ -16,6 +16,21 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
+        <sidenav-collapse
+          :aria-controls="''"
+          collapseRef="Indicadores"
+          navText="Indicadores"
+          url="#"
+          v-bind:collapse="false"
+        >
+          <template v-slot:icon>
+            <span class="material-symbols-outlined  opacity-10 fs-5">account_balance</span>
+          </template>
+        </sidenav-collapse>
+      </li>
+
+
+      <li class="nav-item">
         <sidenav-collapse :aria-controls="''" collapseRef="MisContratos" navText="Mis Contratos" url="#"
                           v-bind:collapse="false">
           <template v-slot:icon>

@@ -1,62 +1,16 @@
 <template>
   <div v-if="tableData.length > 0" class="table-responsive">
-    <table ref="dataTable" class="table table-flush">
+    <table ref="dataTable" class="table table-flush table-hover">
       <thead>
       <tr>
-        <th v-for="header in headers"  class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
+        <th v-for="header in headers" :key="header.key" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
           {{ header.title }}
         </th>
-        <th v-if="deletable||editable" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">Acciones</th>
+        <th v-if="deletable || editable" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">Acciones</th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="row in tableData" :key="row.id" class="text-sm text-center text-capitalize align-middle">
-        <td v-for="header in headers" :key="header.key">
-          <template v-if="header.key === 'estado'">
-            <span v-if="row[header.key] === true" class="mb-0 mt-0 badge badge-success">Activo</span>
-            <span v-else-if="row[header.key] === false" class="mb-0 mt-0 badge badge-danger">Inactivo</span>
-            <span v-else>{{ row[header.key] }}</span>
-          </template>
-          <template v-else-if="header.key === 'nombre'">
-            {{ row[header.key]}} {{ row.apellidoPaterno}} {{ row.apellidoMaterno}}
-          </template>
-          <template v-else-if="header.key === 'direccion'">
-            {{ row[header.key].calle}} {{ row[header.key].numero}}, {{ row[header.key].ciudad}}, {{ row[header.key].region}}
-          </template>
-          <template v-else-if="header.key === 'archivos'">
-            {{ row[header.key].length}}
-          </template>
-          <template v-else>
-            {{ row[header.key] }}
-          </template>
-        </td>
-        <td v-if="deletable||editable" class="align-middle">
-          <material-button
-            class="my-sm-auto mt-2 mb-0"
-            color="primary"
-            name="button"
-            size="sm"
-            type="button"
-            variant="gradient"
-            v-if="editable" @click="$emit('edit', row)"
-          >
-             <span class="material-symbols-outlined mr-3"
-                   style="font-size: 16px; margin-right: 10px;;">person_edit</span>
-            Editar
-          </material-button>
-          <material-button
-            class="my-sm-auto mt-2 mb-0 ms-2"
-            color="danger"
-            name="button"
-            size="sm"
-            type="button"
-            variant="gradient" v-if="deletable" @click="$emit('delete', row)"
-          >
-            <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_remove</span>
-            Eliminar
-          </material-button>
-        </td>
-      </tr>
+      <!-- El contenido del cuerpo de la tabla será llenado dinámicamente -->
       </tbody>
     </table>
   </div>
@@ -75,34 +29,36 @@
 </template>
 
 <script>
+import { createApp, h } from 'vue';
 import { DataTable } from 'simple-datatables';
-import { nextTick } from 'vue';
-import MaterialButton from '@/components/MaterialButton.vue'
+import MaterialButton from '@/components/MaterialButton.vue';
+import { useAuthStore } from '@/store/index.js';
+import _ from 'lodash';
 
 export default {
   name: 'MyDataTablePersonas',
   components: { MaterialButton },
   props: {
     headers: {
-      Array,
-      default: [],
+      type: Array,
+      default: () => [],
       required: true,
     },
-    tableData:{
-      Array,
-      default: {},
+    tableData: {
+      type: Array,
+      default: () => [],
       required: true,
     },
     editable: {
-      Boolean,
+      type: Boolean,
       default: false,
     },
     deletable: {
-      Boolean,
+      type: Boolean,
       default: false,
     },
     isLoading: {
-      Boolean,
+      type: Boolean,
       default: true,
       required: true,
     },
@@ -110,24 +66,138 @@ export default {
   data() {
     return {
       dataTable: null,
-      error: null, //
+      error: null,
+      auth: useAuthStore(),
     };
   },
   watch: {
     tableData: {
       handler() {
-        this.$nextTick(this.initializeDataTable); // Use $nextTick
+        this.$nextTick(this.populateTable);
       },
       deep: true,
-      immediate: true
-    }
+      immediate: true,
+    },
   },
   methods: {
-    initializeDataTable() {
+    logRowData(row) {
+      console.log(row);
+    },
+    verPersona(persona) {
+      this.auth.persona = persona;
+      if (_.isEqual(this.auth.persona.archivos, persona.archivos)) {
+        this.$router.push({ name: 'PersonaDetails' });
+      } else {
+        console.log('Los archivos no son iguales.');
+      }
+    },
+    handleEdit(row) {
+      this.$emit('edit', row);
+      console.log('Edit:', row);
+    },
+    handleDelete(row) {
+      this.$emit('delete', row);
+      console.log('Delete:', row);
+    },
+    populateTable() {
       if (this.dataTable) {
         this.dataTable.destroy();
       }
 
+      const tbody = this.$refs.dataTable.querySelector('tbody');
+      tbody.innerHTML = ''; // Clear existing rows
+
+      this.tableData.forEach(row => {
+        const tr = document.createElement('tr');
+        tr.className = 'text-sm text-center text-capitalize align-middle';
+
+        this.headers.forEach(header => {
+          const td = document.createElement('td');
+
+          if (header.key === 'type') {
+            if (row[header.key] === 'persona') {
+              td.innerHTML = '<span class="mb-0 mt-0 badge badge-info">Persona</span>';
+            } else if (row[header.key] === 'empresa') {
+              td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Empresa</span>';
+            } else {
+              td.textContent = row[header.key];
+            }
+          } else if (header.key === 'nombre') {
+            const a = document.createElement('a');
+            a.className = 'font-weight-bold';
+            a.textContent = `${row[header.key]}${row.apellidoPaterno ? ' ' + row.apellidoPaterno : ''}${row.apellidoMaterno ? ' ' + row.apellidoMaterno : ''}`;
+            a.addEventListener('click', () => this.verPersona(row));
+            td.appendChild(a);
+          } else if (header.key === 'direccion') {
+            td.innerHTML = `
+              <p class="mb-0 text-sm font-weight-bold text-secondary">
+                ${row[header.key].calle} ${row[header.key].numero}, ${row[header.key].ciudad},
+                <span class="text-success">${row[header.key].region}</span>
+              </p>
+            `;
+          } else if (header.key === 'email') {
+            const a = document.createElement('a');
+            a.href = `mailto:${row[header.key]}`;
+            a.className = 'mb-0 text-sm';
+            a.textContent = row[header.key];
+            td.appendChild(a);
+          } else if (header.key === 'archivos') {
+            td.textContent = row[header.key].length;
+          } else {
+            td.textContent = row[header.key];
+          }
+
+          tr.appendChild(td);
+        });
+
+        if (this.deletable || this.editable) {
+          const actionTd = document.createElement('td');
+          actionTd.className = 'align-middle';
+
+          const actionContainer = document.createElement('div');
+          actionContainer.className = 'd-flex justify-content-center';
+
+          if (this.editable) {
+            const editContainer = document.createElement('div');
+            editContainer.className = 'my-sm-auto mt-2 mb-0';
+            this.mountButton(editContainer, 'primary', 'Editar', () => this.handleEdit(row), 'person_edit');
+            actionContainer.appendChild(editContainer);
+          }
+
+          if (this.deletable) {
+            const deleteContainer = document.createElement('div');
+            deleteContainer.className = 'my-sm-auto mt-2 mb-0 ms-2';
+            this.mountButton(deleteContainer, 'danger', 'Eliminar', () => this.handleDelete(row), 'person_remove');
+            actionContainer.appendChild(deleteContainer);
+          }
+
+          actionTd.appendChild(actionContainer);
+          tr.appendChild(actionTd);
+        }
+
+        tbody.appendChild(tr);
+      });
+
+      this.initializeDataTable();
+    },
+    mountButton(container, color, text, onClick, icon) {
+      createApp({
+        render() {
+          return h(MaterialButton, {
+            color,
+            size: 'sm',
+            variant: 'gradient',
+            onClick,
+          }, {
+            default: () => [
+              h('span', { class: 'material-symbols-outlined mr-3', style: 'font-size: 16px; margin-right: 10px;' }, icon),
+              text
+            ]
+          });
+        }
+      }).mount(container);
+    },
+    initializeDataTable() {
       if (this.$refs.dataTable) {
         this.dataTable = new DataTable(this.$refs.dataTable, {
           searchable: true,
@@ -139,11 +209,12 @@ export default {
             perPage: 'Datos por página',
             noRows: 'No se encontraron resultados',
             info: 'Mostrando {start} a {end} de {rows} entradas',
-            noResults: 'No se encontraron resultados para la búsqueda'
+            noResults: 'No se encontraron resultados para la búsqueda',
           },
         });
       }
-    }
+    },
   },
 };
 </script>
+

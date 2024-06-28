@@ -1,160 +1,160 @@
 <template>
-  <div class="py-4 container-fluid">
-    <div class="row mb-4">
-
-      <div class="col-lg-12 position-relative z-index-2">
-        <div v-if="isLoading" class="d-flex justify-content-center align-items-center" style="height: 50vh;">
-
-          <div class="spinner-border text-primary" role="status" style="width:4rem; height: 4rem;">
-            <span class="visually-hidden">Cargando...</span>
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Propiedades por región -->
+      <div class="col-12 col-md-6 mb-4" v-if="propiedadesPorRegionChart.labels.length">
+        <div class="card h-100 shadow-sm">
+          <div class="p-3 pb-0 card-header text-white">
+            <div class="d-flex justify-content-between">
+              <h6 class="mb-0">Propiedades por Región</h6>
+            </div>
           </div>
-        </div>
-        <div v-else class="row">
-          <mini-statistics-card v-if="DOLARData"
-                                :data="DOLARData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'success' }"
-                                title="Dólar"
-          />
-          <mini-statistics-card v-if="UTMData"
-                                :data="UTMData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'happLight' }"
-                                title="UTM"
-          />
-          <mini-statistics-card v-if="UFData"
-                                :data="UFData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'primary' }"
-                                title="UF" />
-          <mini-statistics-card v-if="IPCData"
-                                :data="IPCData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'secondary' }"
-                                title="IPC"
-          />
-        </div>
-        <div class="row">
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard v-if="DOLARData"
-                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="success"
-                             subtitle="Últimos valores"
-                             title="Valor del Dólar"
-            >
-              <LineChart id="line-chart-dolar" :data="DOLARData"
-                         :y-axis-max="Math.max(...DOLARData.map(obs => parseFloat(obs.value)))"
-                         :yAxisMin="Math.min(...DOLARData.map(obs => parseFloat(obs.value)))" />
-            </ChartHolderCard>
-          </div>
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard v-if="UTMData"
-                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="happLight"
-                             subtitle="Últimos valores"
-                             title="Valor del UTM"
-            >
-              <LineChart id="line-chart-3" :data="UTMData"
-                         :y-axis-max="Math.max(...UTMData.map(obs => parseFloat(obs.value)))"
-                         :yAxisMin="Math.min(...UTMData.map(obs => parseFloat(obs.value)))" />
-
-            </ChartHolderCard>
-          </div>
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard v-if="UFData"
-                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="primary"
-                             subtitle="Últimos valores"
-                             title="Valor del UF"
-            >
-              <LineChart id="line-chart-4" :data="UFData"
-                         :y-axis-max="Math.max(...UFData.map(obs => parseFloat(obs.value)))"
-                         :yAxisMin="Math.min(...UFData.map(obs => parseFloat(obs.value)))" />
-            </ChartHolderCard>
-          </div>
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard v-if="IPCData"
-                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="secondary"
-                             subtitle="Últimos valores"
-                             title="Valor del IPC"
-            >
-              <LineChart id="line-chart-5" :data="IPCData"
-                         :y-axis-max="Math.max(...IPCData.map(obs => parseFloat(obs.value)))"
-                         :yAxisMin="Math.min(...IPCData.map(obs => parseFloat(obs.value)))" />
-            </ChartHolderCard>
+          <div class="p-3 pb-0 mt-4 mb-4 card-body">
+            <pie-chart :id="'chart-region'" :chart="propiedadesPorRegionChart" />
+            <h6 class="mt-4">Propiedades por Región</h6>
+            <p>
+              Como no se que poner, aca va un texto de relleno
+            </p>
           </div>
         </div>
       </div>
-      <div class="col-lg-12 position-relative z-index-2 mt-4">
-        <div class="card card-body">
-          <div class="row justify-content-center align-items-center">
-            <div class="col-sm-auto col-4">
-              <material-avatar
-                :img="logoBancoCentral"
-                alt="bruce"
-              />
+      <!-- Propiedades por tipo de propietario -->
+      <div class="col-12 col-md-6 mb-4" v-if="propiedadesPorTipoPropietarioChart.labels.length">
+        <div class="card h-100 shadow-sm">
+          <div class="p-3 pb-0 card-header text-white">
+            <div class="d-flex justify-content-between">
+              <h6 class="mb-0">Propiedades por Tipo de Propietario</h6>
             </div>
-            <div class="col-sm-auto col-8 my-auto">
-              <div class="h-100">
-                <p class="mb-0 font-weight-bold text-sm text-capitalize">fuente</p>
-                <h5 class="mb-1 font-weight-bolder">Banco Central de Chile</h5>
-              </div>
+          </div>
+          <div class="p-3 pb-0 mt-4 mb-4 card-body">
+            <pie-chart :id="'chart-propietario'" :chart="propiedadesPorTipoPropietarioChart" />
+            <h6 class="mt-4">Propiedades por Tipo de Propietario</h6>
+            <p>
+              aca puede ir texto de relleno
+            </p>
             </div>
-            <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
-              <p class="text-end mx-6"> Todos los datos fueron recopilados utilizando la api del <strong>
-                Banco
-                Central de Chile</strong> el dia
-                {{ lastUpdated.toLocaleString('es-CL', { timeZone: 'America/Santiago' }) }}</p>
+        </div>
+      </div>
+      <!-- Propiedades arrendadas o no -->
+      <div class="col-12 col-md-6 mb-4" v-if="propiedadesArrendadasChart.labels.length">
+        <div class="card h-100 shadow-sm">
+          <div class="p-3 pb-0 card-header text-white">
+            <div class="d-flex justify-content-between">
+              <h6 class="mb-0">Propiedades Arrendadas</h6>
             </div>
+          </div>
+          <div class="p-3 pb-0 mt-4 mb-4 card-body">
+            <pie-chart :id="'chart-arrendadas'" :chart="propiedadesArrendadasChart" />
           </div>
         </div>
       </div>
-
+  <!-- Tipos de propiedad -->
+  <div class="col-12 col-md-6 mb-4" v-if="tiposDePropiedadChart.labels.length">
+    <div class="card h-100 shadow-sm">
+      <div class="p-3 pb-0 card-header text-white">
+        <div class="d-flex justify-content-between">
+          <h6 class="mb-0">Tipos de Propiedad</h6>
+        </div>
+      </div>
+      <div class="p-3 pb-0 mt-4 mb-4 card-body">
+        <pie-chart :id="'chart-tipos'" :chart="tiposDePropiedadChart" />
+      </div>
     </div>
   </div>
-
+  </div>
+  </div>
 </template>
 
-<script setup>
-import { onBeforeMount, ref } from 'vue'
-import axios from 'axios'
-import LineChart from '@/examples/Charts/LineChart.vue'
-import ChartHolderCard from '@/views/components/ChartHolderCard.vue'
-import MiniStatisticsCard from '@/views/components/MiniStatisticsCard/MiniStatisticsCard.vue'
-import logoBancoCentral from '@/assets/img/logos/layout_set_logo.svg'
-import MaterialAvatar from '@/components/MaterialAvatar.vue'
+<script>
+import axios from 'axios';
+import PieChart from '@/examples/Charts/PieChart.vue';
 
+export default {
+  name: 'ChartsView',
+  components: {
+    PieChart
+  },
+  data() {
+    return {
+      propiedadesData: [],
+    };
+  },
+  computed: {
+    propiedadesPorRegionChart() {
+      const data = this.propiedadesData.reduce((acc, item) => {
+        acc[item.direccion_region] = (acc[item.direccion_region] || 0) + 1;
+        return acc;
+      }, {});
 
-let UTMData = ref(null)
-let DOLARData = ref(null)
-let UFData = ref(null)
-let IPCData = ref(null)
-let lastUpdated = new Date()
-let isLoading = ref(true)
+      return {
+        labels: Object.keys(data),
+        datasets: {
+          label: 'Propiedades por Región',
+          data: Object.values(data)
+        }
+      };
+    },
+    propiedadesPorTipoPropietarioChart() {
+      const data = this.propiedadesData.reduce((acc, item) => {
+        acc[item.propietario_tipo] = (acc[item.propietario_tipo] || 0) + 1;
+        return acc;
+      }, {});
 
+      return {
+        labels: Object.keys(data),
+        datasets: {
+          label: 'Propiedades por Tipo de Propietario',
+          data: Object.values(data)
+        }
+      };
+    },
+    propiedadesArrendadasChart() {
+      const data = this.propiedadesData.reduce((acc, item) => {
+        const key = item.propiedad_arrendado ? 'Arrendado' : 'No Arrendado';
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+      }, {});
 
-async function fetchData(url, dataRef) {
-  const response = await axios.get(url, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Content-Type': 'application/json'
+      return {
+        labels: Object.keys(data),
+        datasets: {
+          label: 'Propiedades Arrendadas',
+          data: Object.values(data)
+        }
+      };
+    },
+    tiposDePropiedadChart() {
+      const data = this.propiedadesData.reduce((acc, item) => {
+        acc[item.propiedad_tipo] = (acc[item.propiedad_tipo] || 0) + 1;
+        return acc;
+      }, {});
+
+      return {
+        labels: Object.keys(data),
+        datasets: {
+          label: 'Tipos de Propiedad',
+          data: Object.values(data)
+        }
+      };
     }
-  })
-  dataRef.value = response.data.Series.Obs.filter(obs => obs.value !== 'NaN')
-}
-
-onBeforeMount(async () => {
-
-  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/utm`, UTMData)
-  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/dolar`, DOLARData)
-  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/uf`, UFData)
-  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ipc`, IPCData)
-  isLoading.value = false
-})
-
-function getMinutesSinceLastUpdate() {
-  let now = new Date()
-  let difference = now - lastUpdated
-  return Math.floor(difference / 1000 / 60)
-}
-
+  },
+  methods: {
+    async fetchData() {
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/resumenPropiedades`);
+        this.propiedadesData = response.data;
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  },
+  mounted() {
+    this.fetchData();
+  }
+};
 </script>
+
+
+<!--import PieChart from '@/examples/Charts/PieChart.vue';-->
+<!--import BarChart from '@/examples/Charts/BarChart.vue';-->
+<!--import LineChart from '@/examples/Charts/LineChart.vue';-->

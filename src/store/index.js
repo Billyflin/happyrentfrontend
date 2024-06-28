@@ -68,6 +68,7 @@ export const useAuthStore = defineStore('auth', {
     contratos: {},
     propiedad: {},
     personas: [],
+    persona: {},
     solicitud: {},
     solicitudes: {},
     contratoError: ''

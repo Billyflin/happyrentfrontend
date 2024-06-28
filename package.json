@@ -24,6 +24,7 @@
     "dropzone": "6.0.0-beta.2",
     "echarts": "^5.5.0",
     "file-saver": "^2.0.5",
+    "lodash": "^4.17.21",
     "pinia": "2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
     "simple-datatables": "9.0.3",

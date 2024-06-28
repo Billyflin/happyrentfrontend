@@ -14,6 +14,11 @@ const routes = [{
   path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
   }
+},{
+  path: '/Indicadores', name: 'Indicadores', component: () => import('@/views/Indicadores/Indicador.vue'), meta: {
+    requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
+  }
+
 }, {
   path: '/profile', name: 'Profile', component: Profile, meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
@@ -143,6 +148,11 @@ const routes = [{
     path: '/Personas',
     name: 'Personas',
     component: () => import('@/views/Personas/Personas.vue')
+  },
+  {
+    path: '/PersonaDetails',
+    name: 'PersonaDetails',
+    component: () => import('@/views/Personas/PersonaDetails.vue'),
   },
   {
     path: '/AgregarPersona',

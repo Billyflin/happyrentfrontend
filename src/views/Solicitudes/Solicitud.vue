@@ -76,22 +76,23 @@
             </div>
           </div>
         </div>
+      <div v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo">
+        <!--    dropzone para documentos -->
+        <div class="file-dropzone">
+          <label for="idDropzone">Documentos</label>
+          <div id="idDropzone" class="dropzone"></div>
+        </div>
       </div>
     </div>
+    </div>
+
     <material-button :disabled="sending" class="mt-4 " @click="emitData" full-width size="lg" variant="success">Enviar
     </material-button>
   </div>
 
-  <div v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo">
-<!--    dropzone para documentos -->
-    <div class="file-dropzone">
-      <label for="idDropzone">Documentos</label>
-      <div id="idDropzone" class="dropzone"></div>
-    </div>
 
-  </div>
 
-  <button @click="console.log(files)">Log Files</button>
+<!--  <button @click="console.log(files)">Log Files</button>-->
 </template>
 
 <script>
@@ -215,6 +216,9 @@ export default {
         url: '/',
         autoProcessQueue: false,
         acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx',
+
+
+
       });
       dropzone.value.on('addedfile', (file) => {
         files.value.push(file)
