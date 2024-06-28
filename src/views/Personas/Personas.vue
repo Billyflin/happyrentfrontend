@@ -5,10 +5,13 @@ import DefaultStatisticsCard from '@/examples/Cards/DefaultStatisticsCard.vue'
 import axios from 'axios'
 import * as XLSX from 'xlsx'
 import FileSave from 'file-saver'
+import MyDataTable from '@/views/Contrato/components/MyDataTable.vue'
+import MyDataTablePersonas from '@/views/Personas/components/TablaPersonas.vue'
 
-const perfiles = ref(null)
+const perfiles = ref({ })
 const personas = ref(null)
 const empresas = ref(null)
+const isLoading = ref(true)
 
 function s2ab(s) {
   var buf = new ArrayBuffer(s.length)
@@ -55,7 +58,13 @@ function downloadExcel(data, filename) {
 let flattenedPersonas = ref(null)
 let flattenedEmpresas = ref(null)
 onMounted(async () => {
-  const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`)
+  isLoading.value = true
+  const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`).then(
+    response => {
+      isLoading.value = false
+      return response
+    }
+  )
   perfiles.value = response.data
   personas.value = response.data
     .filter(persona => persona.type === 'persona')
@@ -71,7 +80,16 @@ onMounted(async () => {
 // Aplana los objetos en tus datos
   flattenedPersonas = personas.value.map(persona => flattenObject(persona))
   flattenedEmpresas = empresas.value.map(empresa => flattenObject(empresa))
+
 })
+function handleEdit(row) {
+  console.log('Edit Row:', row) // Log the row data for editing
+}
+
+function handleDelete(row) {
+  console.log('Delete Row:', row) // Log the row data for deletion
+}
+
 </script>
 
 <template>
@@ -111,18 +129,37 @@ onMounted(async () => {
         title="Total Empresas"
       />
     </div>
-
     <div class="row mb-6">
-      <tabla-personas v-if="perfiles"
-                      :headers="['Nombre', 'Rut', 'Email','Direccion', 'Tipo Entidad', 'Accion']"
-                      :lists="perfiles.map(persona => ({
-    title: persona.type === 'persona' ? `${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno}` : persona.nombre,
-    direccion: persona.direccion.ciudad,
-    region: persona.direccion.region + ', ' + persona.direccion.pais,
-    values: [persona.rut || persona.rut, persona.email,
-      persona.direccion.calle + ' ' + persona.direccion.numero, persona.type.charAt(0).toUpperCase() + persona.type.slice(1), persona.id],
-  }))"
-      />
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="pb-0 card-header d-flex align-items-center justify-content-between">
+            <h5>Contratos</h5>
+            <router-link class="mt-2 mb-2 btn btn-happLight ml-auto d-flex align-items-center"
+                         to="/agregarPersona">
+              Agregar persona
+              <span class="material-symbols-outlined mx-2">
+                person_add
+              </span>
+            </router-link>
+</div>
+              <MyDataTablePersonas
+                :headers="[
+                { key: 'nombre', title: 'Nombre' },
+                { key: 'rut', title: 'RUT' },
+                { key: 'email', title: 'Email' },
+                { key: 'direccion', title: 'Dirección' },
+                { key: 'type', title: 'Tipo Entidad' },
+                { key: 'archivos', title: 'Archivos'}
+              ]"
+                :tableData="perfiles"
+                :isLoading="isLoading"
+                @edit="handleEdit"
+                @delete="handleDelete"
+                :editable="true"
+                :deletable="true"
+              />
+        </div>
+      </div>
     </div>
   </div>
 </template>

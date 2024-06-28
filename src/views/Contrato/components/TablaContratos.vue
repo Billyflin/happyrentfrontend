@@ -5,7 +5,7 @@
                  :deletable="true"
 
     />
-     </div>
+  </div>
 </template>
 
 <script setup>

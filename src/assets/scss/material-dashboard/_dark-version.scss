@@ -353,8 +353,41 @@
   .ql-toolbar.ql-snow .ql-picker-label {
     color: $light;
   }
-}
 
-body.dark-version {
-  color: $dark-version-body-color !important;
+
+  body.dark-version {
+    color: $dark-version-body-color !important;
+  }
+
+// Estilos para el modal en modo oscuro
+  .modal-content {
+    background: $dark-version-card-bg-color !important;
+    color: $white !important;
+    box-shadow: $dark-version-card-box-shadow !important;
+    border-color: $modal-content-border-color !important;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid $modal-content-border-color !important;
+  }
+
+  .modal-footer {
+    border-top: 1px solid $modal-content-border-color !important;
+  }
+
+  .modal-backdrop {
+    background-color: $modal-backdrop-bg !important;
+    opacity: $modal-backdrop-opacity !important;
+  }
+
+  // Opcional: Si deseas que los botones también tengan estilo oscuro
+  .modal-footer .btn {
+    color: $white !important;
+    background-color: $dark-version-card-bg-color !important;
+    border-color: $modal-content-border-color !important;
+  }
+
+  .modal-footer .btn:hover {
+    background-color: lighten($dark-version-card-bg-color, 10%) !important;
+  }
 }

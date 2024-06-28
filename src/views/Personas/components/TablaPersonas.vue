@@ -1,158 +1,149 @@
 <template>
-  <div class="mb-4 card">
-    <div class="pb-0 card-header d-flex align-items-center justify-content-between">
-      <h5>Personas</h5>
-      <router-link class="mt-2 mb-2 btn btn-happLight ml-auto d-flex align-items-center"
-                   to="/agregarPersona">
-        Agregar persona
-        <span class="material-symbols-outlined mx-2">
-        person_add
-      </span>
-      </router-link>
-    </div>
-
-    <div class="px-0 pt-0 pb-2 card-body">
-      <div class="p-0 table-responsive">
-        <table class="table mb-0 align-items-center">
-          <thead>
-          <tr>
-            <th
-              v-for="(header, index) of headers"
-              :key="index"
-              :class="index >= 1 ? 'text-center ps-2' : ''"
-              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-            >
-              {{ header }}
-            </th>
-          </tr>
-          </thead>
-          <tbody v-if="lists">
-          <tr
-            v-for="(
-                { title: nombre, direccion,region ,values, info, icon }, index
-              ) in lists"
-            :key="index"
+  <div v-if="tableData.length > 0" class="table-responsive">
+    <table ref="dataTable" class="table table-flush">
+      <thead>
+      <tr>
+        <th v-for="header in headers"  class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
+          {{ header.title }}
+        </th>
+        <th v-if="deletable||editable" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">Acciones</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="row in tableData" :key="row.id" class="text-sm text-center text-capitalize align-middle">
+        <td v-for="header in headers" :key="header.key">
+          <template v-if="header.key === 'estado'">
+            <span v-if="row[header.key] === true" class="mb-0 mt-0 badge badge-success">Activo</span>
+            <span v-else-if="row[header.key] === false" class="mb-0 mt-0 badge badge-danger">Inactivo</span>
+            <span v-else>{{ row[header.key] }}</span>
+          </template>
+          <template v-else-if="header.key === 'nombre'">
+            {{ row[header.key]}} {{ row.apellidoPaterno}} {{ row.apellidoMaterno}}
+          </template>
+          <template v-else-if="header.key === 'direccion'">
+            {{ row[header.key].calle}} {{ row[header.key].numero}}, {{ row[header.key].ciudad}}, {{ row[header.key].region}}
+          </template>
+          <template v-else-if="header.key === 'archivos'">
+            {{ row[header.key].length}}
+          </template>
+          <template v-else>
+            {{ row[header.key] }}
+          </template>
+        </td>
+        <td v-if="deletable||editable" class="align-middle">
+          <material-button
+            class="my-sm-auto mt-2 mb-0"
+            color="primary"
+            name="button"
+            size="sm"
+            type="button"
+            variant="gradient"
+            v-if="editable" @click="$emit('edit', row)"
           >
-            <td>
-              <div class="px-3 py-1 d-flex">
-                <div class="d-flex flex-column justify-content-center">
-                  <h6 class="mb-0 text-sm">{{ nombre }}</h6>
-                  <p class="mb-0 text-sm font-weight-bold text-secondary">
-                    <span class="text-success">{{ direccion }}</span>
-                    {{ region }}
-                  </p>
-                </div>
-              </div>
-            </td>
-            <td>
-              <p class="text-center mb-0 text-sm font-weight-bold">
-                {{ values[0] }}
-              </p>
-            </td>
-            <td class="text-sm align-middle">
-              <p class="text-center mb-0 text-sm font-weight-bold">
-                {{ values[1] }}
-              </p>
-            </td>
-            <td class="align-middle text-center">
-              <div
-                class="text-center px-3 py-1 d-flex justify-content-center align-items-center"
-              >
-                <p class="mb-0 text-sm font-weight-bold">
-                  {{ values[2] }}
-                </p>
-                <!--                <i class="mt-1 text-sm ms-1" :class="`ni ni-${icon}`"></i>-->
-                <!--                                <material-button-->
-                <!--                  v-if="info"-->
-                <!--                  size="sm"-->
-                <!--                  color="secondary"-->
-                <!--                  variant="outline"-->
-                <!--                  class="btn-icon-only btn-rounded mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center ms-3"-->
-                <!--                  data-bs-toggle="tooltip"-->
-                <!--                  data-bs-placement="bottom"-->
-                <!--                  :data-bs-original-title="info"-->
-                <!--                >-->
-                <!--                  <i class="fas fa-info" aria-hidden="true"></i>-->
-                <!--                </material-button>-->
-              </div>
-            </td>
-            <td class="text-sm align-middle">
-              <p class="text-center mb-0 text-sm font-weight-bold">
-                {{ values[3] }}
-              </p>
-            </td>
-            <td class="align-middle text-center">
-              <div class="text-center px-3 py-1 d-flex justify-content-center align-items-center">
-
-                <material-button
-                  class="my-sm-auto mt-2 mb-0 mx-1 d-flex align-items-center"
-                  color="primary"
-                  name="button"
-                  size="sm"
-                  type="button"
-                  variant="gradient"
-                >
-                  <span class="material-symbols-outlined mr-3"
-                        style="font-size: 16px; margin-right: 10px;;">person_edit</span> Editar
-                </material-button>
-                <material-button
-                  class="my-sm-auto mt-2 mb-0 d-flex align-items-center"
-                  color="danger"
-                  name="button"
-                  size="sm"
-                  type="button"
-                  variant="gradient"
-                  @click="removePersona(values[4])"
-                >
-                  <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_remove</span>
-                  Delete
-                </material-button>
-
-              </div>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </div>
+             <span class="material-symbols-outlined mr-3"
+                   style="font-size: 16px; margin-right: 10px;;">person_edit</span>
+            Editar
+          </material-button>
+          <material-button
+            class="my-sm-auto mt-2 mb-0 ms-2"
+            color="danger"
+            name="button"
+            size="sm"
+            type="button"
+            variant="gradient" v-if="deletable" @click="$emit('delete', row)"
+          >
+            <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_remove</span>
+            Eliminar
+          </material-button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+  <div v-else-if="isLoading" class="text-center mt-7 mb-6">
+    <h6>Cargando datos...</h6>
+    <div class="spinner-border text-primary" role="status" style="width:4rem; height: 4rem;">
+      <span class="visually-hidden">Cargando...</span>
     </div>
+  </div>
+  <div v-else-if="error" class="text-center mt-7 mb-6">
+    <h6>Error al cargar los datos.</h6>
+  </div>
+  <div v-else class="text-center mt-7 mb-6">
+    <h6>No hay datos para mostrar.</h6>
   </div>
 </template>
 
 <script>
-import MaterialAvatar from '@/components/MaterialAvatar.vue'
+import { DataTable } from 'simple-datatables';
+import { nextTick } from 'vue';
 import MaterialButton from '@/components/MaterialButton.vue'
 
 export default {
-  name: 'TablaPersonas',
-  components: {
-    MaterialAvatar,
-    MaterialButton
-  },
+  name: 'MyDataTablePersonas',
+  components: { MaterialButton },
   props: {
-    title: {
-      type: String,
-      default: ''
-    },
     headers: {
-      type: Array,
-      default: () => []
+      Array,
+      default: [],
+      required: true,
     },
-    lists: {
-      type: Array,
-      default: () => [],
-      values: Array,
-      title: String,
-      nombre: String,
-      region: String,
-      info: String,
-      icon: String
+    tableData:{
+      Array,
+      default: {},
+      required: true,
+    },
+    editable: {
+      Boolean,
+      default: false,
+    },
+    deletable: {
+      Boolean,
+      default: false,
+    },
+    isLoading: {
+      Boolean,
+      default: true,
+      required: true,
+    },
+  },
+  data() {
+    return {
+      dataTable: null,
+      error: null, //
+    };
+  },
+  watch: {
+    tableData: {
+      handler() {
+        this.$nextTick(this.initializeDataTable); // Use $nextTick
+      },
+      deep: true,
+      immediate: true
     }
   },
   methods: {
-    async removePersona(id) {
-      console.log(id)
-      // await axios.delete(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil/${id}`,)
+    initializeDataTable() {
+      if (this.dataTable) {
+        this.dataTable.destroy();
+      }
+
+      if (this.$refs.dataTable) {
+        this.dataTable = new DataTable(this.$refs.dataTable, {
+          searchable: true,
+          perPage: 5,
+          labels: {
+            placeholder: 'Buscar...',
+            searchTitle: 'Buscar en la tabla',
+            pageTitle: 'Pag {page}',
+            perPage: 'Datos por página',
+            noRows: 'No se encontraron resultados',
+            info: 'Mostrando {start} a {end} de {rows} entradas',
+            noResults: 'No se encontraron resultados para la búsqueda'
+          },
+        });
+      }
     }
-  }
-}
+  },
+};
 </script>

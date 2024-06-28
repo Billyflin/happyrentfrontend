@@ -143,7 +143,6 @@ onMounted(() => {
   const isLateNight = currentHour >= 20 || currentHour < 8; // 8 PM or earlier than 8 AM
 
   if (isLateNight) {
-  // if (true) {
     darkMode();
   }
 });
