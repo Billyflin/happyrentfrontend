@@ -1,11 +1,11 @@
 <template>
   <div class="chart">
-    <div :id="id" :style="{ width: '100%', height: height + 'px' }" class="chart-canvas"></div>
+    <div :id="id" :style="{width: '100%', height: height + 'px'}" class="chart-canvas"></div>
   </div>
 </template>
 
 <script setup>
-import { onMounted, watch } from 'vue'
+import { onMounted } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps({
@@ -26,38 +26,22 @@ const props = defineProps({
     default: null
   },
   data: {
-    type: [Array, Object],
+    type: Object,
     required: true
   }
 })
 
-let echart;
+onMounted(() => {
+  console.log(props.data)
+  const chartDom = document.getElementById(props.id)
+  const echart = echarts.init(chartDom)
+  window.addEventListener('resize', () => setTimeout(echart.resize, 200))
 
-const renderChart = () => {
-  let xAxislDatas = [];
-  let chartData = [];
+  const xAxislDatas = props.data.map(obs => obs.indexDateString)
+  const chartData = props.data.map(obs => parseFloat(obs.value))
+  console.log(xAxislDatas)
+  console.log(chartData)
 
-  if (Array.isArray(props.data)) {
-    // Si los datos son un array, procesarlos directamente
-    xAxislDatas = props.data.map(obs => obs.indexDateString);
-    chartData = props.data.map(obs => parseFloat(obs.value));
-  } else if (typeof props.data === 'object') {
-    // Si los datos son un objeto, asumir que están en el formato adecuado
-    if (props.data.xAxislDatas && props.data.datasets && Array.isArray(props.data.datasets.data)) {
-      xAxislDatas = props.data.xAxislDatas;
-      chartData = props.data.datasets.data;
-    } else {
-      console.error("Invalid data format for LineChart");
-      return;
-    }
-  } else {
-    console.error("Invalid data type for LineChart");
-    return;
-  }
-
-  const chartDom = document.getElementById(props.id);
-  echart = echarts.init(chartDom);
-  window.addEventListener('resize', () => setTimeout(echart.resize, 200));
 
   const option = {
     grid: {
@@ -81,12 +65,12 @@ const renderChart = () => {
     xAxis: {
       type: 'category',
       data: xAxislDatas,
-      boundaryGap: false,
+      boundaryGap: false, // 坐标轴两边留白策略
       axisLine: {
-        show: false
+        show: false // 隐藏X轴线
       },
       axisTick: {
-        show: false
+        show: false // 隐藏X轴刻度线
       },
       axisLabel: {
         color: '#f8f9fa',
@@ -98,7 +82,7 @@ const renderChart = () => {
         lineHeight: 2
       },
       splitLine: {
-        show: false,
+        show: false, // 显示X轴网格线
         lineStyle: {
           color: 'rgba(255, 255, 255, .2)',
           type: 'dashed'
@@ -107,12 +91,12 @@ const renderChart = () => {
     },
     yAxis: {
       type: 'value',
-      splitNumber: 3,
+      splitNumber: 3, // Y轴分段数
       axisLine: {
-        show: false
+        show: false // 隐藏Y轴线
       },
       axisTick: {
-        show: false
+        show: false // 隐藏Y轴刻度线
       },
       axisLabel: {
         color: '#fff',
@@ -123,7 +107,7 @@ const renderChart = () => {
         lineHeight: 2
       },
       splitLine: {
-        show: true,
+        show: true, // 显示Y轴网格线
         lineStyle: {
           color: 'rgba(255, 255, 255, .4)',
           type: 'dashed'
@@ -131,6 +115,7 @@ const renderChart = () => {
       },
       min: props.yAxisMin,
       max: props.yAxisMax !== null ? props.yAxisMax : Math.max(...chartData) < 100 ? Math.max(...chartData) + 10 : (Math.ceil(Math.max(...chartData) / 100) + 1) * 100
+
     },
     series: [
       {
@@ -152,22 +137,14 @@ const renderChart = () => {
           color: 'transparent'
         },
         emphasis: {
-          scale: 0.8
+          scale: 0.8 // 鼠标移动到数据点时，将数据点缩小为初始大小的90%
         }
       }
     ]
   }
 
-  echart.setOption(option);
-}
-
-onMounted(() => {
-  renderChart();
+  option && echart.setOption(option)
 })
-
-watch(() => props.data, () => {
-  renderChart();
-}, { deep: true });
 </script>
 
 <style scoped>
@@ -175,5 +152,4 @@ watch(() => props.data, () => {
   width: 100%;
 }
 </style>
-
 

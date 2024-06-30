@@ -80,19 +80,6 @@
           </div>
         </div>
       </div>
-      <!-- Comparación de tipos de propiedades (gráfico de radar) -->
-      <div class="col-12 col-md-6 mb-4" v-if="radarChartData.indicator.length">
-        <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Comparación de Tipos de Propiedades</h6>
-          </div>
-          <div class="card-body p-3 mt-4 mb-4">
-            <radar-chart :id="'chart-radar'" :data="radarChartData" />
-            <h6 class="mt-4">Comparación de Tipos de Propiedades</h6>
-            <p>Análisis comparativo de diferentes tipos de propiedades.</p>
-          </div>
-        </div>
-      </div>
       <!-- Contratos por mes (gráfico de barras) -->
       <div class="col-12 col-md-6 mb-4" v-if="contratosPorMesChart.xAxislDatas.length">
         <div class="card h-100 shadow-sm">
@@ -116,7 +103,6 @@
 <script>
 import axios from 'axios';
 import PieChart from '@/examples/Charts/PieChart.vue';
-import RadarChart from '@/examples/Charts/RadarChart.vue'
 import BarChart from '@/examples/Charts/BarChart.vue'
 import LineChart from '@/examples/Charts/LineChart.vue'
 import BarChartDashboard from '@/examples/Charts/BarChartDashboard.vue'
@@ -127,7 +113,6 @@ export default {
     BarChartDashboard,
     LineChart,
     BarChart,
-    RadarChart,
     PieChart
   },
   data() {
@@ -237,26 +222,7 @@ export default {
         data: Object.values(data)
       }
     };
-  },
-    radarChartData() {
-      const data = this.propiedadesData.reduce((acc, item) => {
-        if (!acc[item.propiedadTipo]) {
-          acc[item.propiedadTipo] = { max: 0, count: 0 };
-        }
-        acc[item.propiedadTipo].count++;
-        acc[item.propiedadTipo].max = Math.max(acc[item.propiedadTipo].max, acc[item.propiedadTipo].count);
-        return acc;
-      }, {});
-
-      const indicator = Object.keys(data).map(key => ({ name: key, max: data[key].max }));
-      const series = [{ value: Object.values(data).map(item => item.count), name: 'Propiedades' }];
-
-      return {
-        name: 'Tipos de Propiedades',
-        indicator,
-        series
-      };
-    }
+  }
   },
   methods: {
     async fetchPropiedadesData() {
