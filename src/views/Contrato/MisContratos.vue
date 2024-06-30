@@ -21,5 +21,5 @@
 
 <script setup>
 
-import TablaContratos from '@/views/Contrato/components/TablaContratos.vue'
+import TablaContratos from '@/views/Contrato/TablaContratos.vue'
 </script>

@@ -133,7 +133,7 @@ function handleDelete(row) {
       <div class="col-lg-12">
         <div class="card">
           <div class="pb-0 card-header d-flex align-items-center justify-content-between">
-            <h5>Contratos</h5>
+            <h5>Personas</h5>
             <router-link class="mt-2 mb-2 btn btn-happLight ml-auto d-flex align-items-center"
                          to="/agregarPersona">
               Agregar persona
