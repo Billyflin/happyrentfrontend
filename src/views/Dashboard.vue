@@ -14,7 +14,6 @@
           </div>
         </div>
       </div>
-
       <!-- Propiedades por región -->
       <div class="col-12 col-md-6 mb-4" v-if="propiedadesPorRegionChart.labels.length">
         <div class="card h-100 shadow-sm">
@@ -25,6 +24,19 @@
             <pie-chart :id="'chart-region'" :chart="propiedadesPorRegionChart" />
             <h6 class="mt-4">Propiedades por Región</h6>
             <p>Información sobre la distribución de propiedades por región.</p>
+          </div>
+        </div>
+      </div>
+      <!-- Contratos activos -->
+      <div class="col-12 col-md-6 mb-4" v-if="contratosActivosChart.labels.length">
+        <div class="card h-100 shadow-sm">
+          <div class="card-header p-3 text-white d-flex justify-content-between">
+            <h6 class="mb-0">Contratos Activos</h6>
+          </div>
+          <div class="card-body p-3 mt-4 mb-4">
+            <pie-chart :id="'chart-contratos-activos'" :chart="contratosActivosChart" is-boolean-chart/>
+            <h6 class="mt-4">Estado de los Contratos</h6>
+            <p>Comparación entre contratos activos e inactivos.</p>
           </div>
         </div>
       </div>
@@ -67,19 +79,7 @@
           </div>
         </div>
       </div>
-      <!-- Contratos activos -->
-      <div class="col-12 col-md-6 mb-4" v-if="contratosActivosChart.labels.length">
-        <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Contratos Activos</h6>
-          </div>
-          <div class="card-body p-3 mt-4 mb-4">
-            <pie-chart :id="'chart-contratos-activos'" :chart="contratosActivosChart" is-boolean-chart/>
-            <h6 class="mt-4">Estado de los Contratos</h6>
-            <p>Comparación entre contratos activos e inactivos.</p>
-          </div>
-        </div>
-      </div>
+
       <!-- Contratos por mes (gráfico de barras) -->
       <div class="col-12 col-md-6 mb-4" v-if="contratosPorMesChart.xAxislDatas.length">
         <div class="card h-100 shadow-sm">
