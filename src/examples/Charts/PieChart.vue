@@ -21,6 +21,10 @@ export default {
     chart: {
       type: Object,
       required: true
+    },
+    isBooleanChart: {
+      type: Boolean,
+      default: false
     }
   },
   mounted() {
@@ -76,11 +80,16 @@ export default {
         return array;
       };
 
-      // Shuffle theme colors
-      const shuffledColors = shuffleArray([...themeColors]);
-
-      // Get theme colors for each data point
-      const backgroundColors = shuffledColors.slice(0, this.chart.datasets.data.length);
+      // Set colors based on isBooleanChart prop
+      let backgroundColors;
+      if (this.isBooleanChart) {
+        backgroundColors = this.chart.labels.map(label =>
+          label.toLowerCase() === 'activo' || label.toLowerCase() === 'sí' || label.toLowerCase()==='arrendado' ? '#4caf50' : '#f44335'
+        );
+      } else {
+        const shuffledColors = shuffleArray([...themeColors]);
+        backgroundColors = shuffledColors.slice(0, this.chart.datasets.data.length);
+      }
 
       new Chart(pieChart, {
         type: 'pie',
@@ -108,3 +117,9 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.chart-canvas {
+  width: 100%;
+}
+</style>

@@ -48,7 +48,7 @@
             <h6 class="mb-0">Propiedades Arrendadas</h6>
           </div>
           <div class="card-body p-3 mt-4 mb-4">
-            <pie-chart :id="'chart-arrendadas'" :chart="propiedadesArrendadasChart" />
+            <pie-chart :id="'chart-arrendadas'" :chart="propiedadesArrendadasChart" is-boolean-chart/>
             <h6 class="mt-4">Propiedades Arrendadas vs No Arrendadas</h6>
             <p>Comparación de propiedades arrendadas y no arrendadas.</p>
           </div>
@@ -74,7 +74,7 @@
             <h6 class="mb-0">Contratos Activos</h6>
           </div>
           <div class="card-body p-3 mt-4 mb-4">
-            <pie-chart :id="'chart-contratos-activos'" :chart="contratosActivosChart" />
+            <pie-chart :id="'chart-contratos-activos'" :chart="contratosActivosChart" is-boolean-chart/>
             <h6 class="mt-4">Estado de los Contratos</h6>
             <p>Comparación entre contratos activos e inactivos.</p>
           </div>

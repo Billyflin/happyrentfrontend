@@ -25,6 +25,32 @@ const props = defineProps({
 
 let echart;
 
+const themeColors = [
+  '#63b3ed', // blue
+  '#596cff', // indigo
+  '#6f42c1', // purple
+  '#d63384', // pink
+  '#f56565', // red
+  '#e91e63', // rose
+  '#fd7e14', // orange
+  '#ffe533', // yellow
+  '#81e6d9', // green
+  '#20c997', // teal
+  '#0dcaf0', // cyan
+  '#13505B', // primary
+  '#6f6f67', // secondary
+  '#1a73e8', // info
+  '#4caf50', // success
+  '#bedc4b', // happLight
+  '#135652', // happDark
+  '#fb8c00', // warning
+  '#f44335', // danger
+];
+
+const getRandomColor = () => {
+  return themeColors[Math.floor(Math.random() * themeColors.length)];
+};
+
 const renderChart = () => {
   if (!props.chart.datasets || !Array.isArray(props.chart.datasets.data)) {
     console.error("Invalid data format for BarChartDashboard");
@@ -125,7 +151,9 @@ const renderChart = () => {
         itemStyle: {
           borderWidth: 0,
           borderRadius: 4,
-          color: 'rgba(0, 123, 255, 0.8)'
+          color: function(params) {
+            return getRandomColor();
+          }
         }
       }
     ]
