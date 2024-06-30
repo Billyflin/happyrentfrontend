@@ -53,7 +53,7 @@ export default {
         direccion: {
           calle: '',
           numero: '',
-          detalle:'',
+          detalle: '',
           numeroOficina: '',
           codigoPostal: '',
           pais: '',

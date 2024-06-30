@@ -168,7 +168,7 @@ export const useAuthStore = defineStore('auth', {
           console.error(err)
         })
     },
-    async getContratos(){
+    async getContratos() {
       await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato`)
         .then((response) => {
           console.log(response.data)
@@ -189,7 +189,7 @@ export const useRegisterFormStore = defineStore({
     selectedCategory: null, form: {
       username: '', password: '', id: 0, persona: {
         id: 0, nombres: '', apellidoPaterno: '', apellidoMaterno: '', nombreCompleto: '', direccion: {
-          id: 0, calle: '', numero: 1,detalle:'', ciudad: '', region: '', pais: '', codigoPostal: ''
+          id: 0, calle: '', numero: 1, detalle: '', ciudad: '', region: '', pais: '', codigoPostal: ''
         }, telefono: '', email: '', estadoCivil: '', nacionalidad: ''
       }, isActivated: true, email: '', authorities: [{
         authority: ''

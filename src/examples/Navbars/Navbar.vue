@@ -10,7 +10,7 @@
       <breadcrumbs :color="color" :currentPage="currentRouteName" />
       <div id="navbar" class="mt-2 collapse navbar-collapse mt-sm-0 me-md-0 me-sm-4">
         <div class="pe-md-3 d-flex align-items-center ms-md-auto">
-<!--          <material-input id="search" label="Search here" />-->
+          <!--          <material-input id="search" label="Search here" />-->
         </div>
         <ul class="navbar-nav justify-content-end">
           <li class="nav-item d-flex align-items-center">

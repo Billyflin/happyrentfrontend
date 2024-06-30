@@ -1,8 +1,9 @@
 <template>
   <div id="sidenav-collapse-main" class="w-auto h-auto collapse navbar-collapse max-height-vh-100 h-100">
     <ul class="navbar-nav">
-      <li v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => (item.authority === 'ROLE_CORREDOR'|| 'ROLE_PROPIETARIO'))||authStore.isAdmin"
-          class="nav-item">
+      <li
+        v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => (item.authority === 'ROLE_CORREDOR'|| 'ROLE_PROPIETARIO'))||authStore.isAdmin"
+        class="nav-item">
         <sidenav-collapse
           :aria-controls="''"
           collapseRef="dashboard"
@@ -47,9 +48,11 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_CORREDOR')||authStore.isAdmin" :aria-controls="''" collapseRef="Solicitudes" navText="Solicitar Datos"
-                          url="#"
-                          v-bind:collapse="false">
+        <sidenav-collapse
+          v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_CORREDOR')||authStore.isAdmin"
+          :aria-controls="''" collapseRef="Solicitudes" navText="Solicitar Datos"
+          url="#"
+          v-bind:collapse="false">
           <template v-slot:icon>
             <i class="material-icons-round opacity-10 fs-5">forward_to_inbox</i>
           </template>
@@ -65,9 +68,11 @@
         </sidenav-collapse>
       </li>
       <li class="nav-item">
-        <sidenav-collapse v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_CORREDOR')||authStore.isAdmin" :aria-controls="''" collapseRef="Corredora" navText="Corredora"
-                          url="#"
-                          v-bind:collapse="false">
+        <sidenav-collapse
+          v-if="authStore.isLoggedIn && authStore.userInfo.authorities.some(item => item.authority === 'ROLE_CORREDOR')||authStore.isAdmin"
+          :aria-controls="''" collapseRef="Corredora" navText="Corredora"
+          url="#"
+          v-bind:collapse="false">
           <template v-slot:icon>
             <span class="material-symbols-outlined opacity-10 fs-5">apartment</span>
           </template>

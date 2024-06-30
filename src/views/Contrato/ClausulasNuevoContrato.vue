@@ -524,7 +524,8 @@ export default {
                     arrendatario pague los gastos comunes?
                   </material-switch>
                   <material-choices v-if="clausula4" id="Clausulas4" v-model="Clausulas4"
-                                    :options="optionsClausula4" is-multiple label="¿Que debe pagar el arrendatario?" name="Clausulas4"
+                                    :options="optionsClausula4" is-multiple label="¿Que debe pagar el arrendatario?"
+                                    name="Clausulas4"
                                     remove-item-button></material-choices>
                 </div>
               </div>
@@ -576,11 +577,13 @@ export default {
                 <div class="col-3 mt-3">
                   <div class="mt-0">
 
-                    <material-input id="fechaInicioContrato" v-model="fechaInicioContrato" label="Fecha de inicio del contrato" name="fecha" size="sm"
+                    <material-input id="fechaInicioContrato" v-model="fechaInicioContrato"
+                                    label="Fecha de inicio del contrato" name="fecha" size="sm"
                                     type="date" variant="static"></material-input>
                   </div>
                   <div class="mt-3">
-                    <material-input id="duracionContrato" v-model="duracionContrato" label="Duración del contrato (en meses)"
+                    <material-input id="duracionContrato" v-model="duracionContrato"
+                                    label="Duración del contrato (en meses)"
                                     size="sm"
                                     variant="static"></material-input>
                   </div>
@@ -590,7 +593,8 @@ export default {
                     </material-switch>
                   </div>
                   <div class="mt-3">
-                    <material-input v-if="prorrogaAutomatica" id="periodoProrroga" v-model="periodoProrroga" class="mt-3" label="Período de prórroga (en meses)"
+                    <material-input v-if="prorrogaAutomatica" id="periodoProrroga" v-model="periodoProrroga"
+                                    class="mt-3" label="Período de prórroga (en meses)"
                                     size="sm" type="number"
                                     variant="static"></material-input>
                   </div>

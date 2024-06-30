@@ -7,8 +7,8 @@
     <div class="container">
       <div class="row mt-lg-n7 mt-md-n7 mt-n7 justify-content-center">
         <div class="col-lg-8 col-md-7 mb-3">
-          <div class="card" v-if="!error">
-            <div class="card-header" v-if="!state">
+          <div v-if="!error" class="card">
+            <div v-if="!state" class="card-header">
               <div class="text-center">
                 <h1 class="mb-3">Recuperar contraseña</h1>
                 <p> La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una minúscula, un
@@ -16,13 +16,13 @@
                   "!" . </p>
               </div>
             </div>
-            <div class="card-header" v-else>
+            <div v-else class="card-header">
               <div class="text-center">
                 <h1 class="mb-3">¡Listo! </h1>
                 <h3> Contraseña cambiada </h3>
               </div>
             </div>
-            <div class="card-body" v-if="state">
+            <div v-if="state" class="card-body">
               <p class="text-center"> Ya puedes volver a iniciar sesión</p>
               <router-link to="/sign-in">
                 <material-button
@@ -35,12 +35,12 @@
                 </material-button>
               </router-link>
             </div>
-            <form class="card-body" @submit.prevent="submitForm" v-if="!state">
+            <form v-if="!state" class="card-body" @submit.prevent="submitForm">
               <div>
                 <material-input
+                  id="password"
                   v-model="password"
                   :disabled="sending"
-                  id="password"
                   label="Ingresa tu nueva contraseña"
                   type="password"
                 />
@@ -48,11 +48,11 @@
 
               <div class="mt-4">
                 <material-input
-                  class="mt-4"
                   id="passwordConfirm"
                   v-model="passwordConfirm"
-                  label="Confirma tu nueva contraseña"
                   :disabled="sending"
+                  class="mt-4"
+                  label="Confirma tu nueva contraseña"
                   type="password"
                 />
               </div>
@@ -71,7 +71,7 @@
               </div>
             </form>
           </div>
-          <div class="card" v-else>
+          <div v-else class="card">
             <div class="card-body">
               <h2 class="text-center">{{ error }}</h2>
             </div>
@@ -80,7 +80,7 @@
       </div>
     </div>
   </main>
-  <main class="mt-0 main-content main-content-bg" v-else>
+  <main v-else class="mt-0 main-content main-content-bg">
     <div class="container">
       <div class="row mt-lg-10 mt-md-10 mt-10 justify-content-center">
         <div class="col-lg-8 col-md-7 mb-3">

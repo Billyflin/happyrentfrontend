@@ -7,14 +7,13 @@ import { useAuthStore } from '@/store'
 import { ref } from 'vue'
 
 
-
 const routes = [{
   path: '/', name: '/', redirect: '/Propiedades'
 }, {
   path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
   }
-},{
+}, {
   path: '/Indicadores', name: 'Indicadores', component: () => import('@/views/Indicadores/Indicador.vue'), meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
   }
@@ -152,7 +151,7 @@ const routes = [{
   {
     path: '/PersonaDetails',
     name: 'PersonaDetails',
-    component: () => import('@/views/Personas/PersonaDetails.vue'),
+    component: () => import('@/views/Personas/PersonaDetails.vue')
   },
   {
     path: '/AgregarPersona',
@@ -181,9 +180,9 @@ const routes = [{
       certificadoAFP: route.query.certificadoAFP === 'true',
       certificadoDicom: route.query.certificadoDicom === 'true',
       carpetaTributaria: route.query.carpetaTributaria === 'true',
-      contratoTrabajo: route.query.contratoTrabajo === 'true',
-    }),
-  },
+      contratoTrabajo: route.query.contratoTrabajo === 'true'
+    })
+  }
 
 
 ]

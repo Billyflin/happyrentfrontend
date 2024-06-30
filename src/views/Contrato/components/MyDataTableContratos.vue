@@ -119,19 +119,19 @@ export default {
             } else {
               td.textContent = row[header.key]
             }
-          } else if (header.key === 'activo'){
+          } else if (header.key === 'activo') {
             if (row[header.key] === true) {
               td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Activo</span>'
             } else {
               td.innerHTML = '<span class="mb-0 mt-0 badge badge-danger">Inactivo</span>'
             }
-          } else if (header.key === 'propiedadArrendado'){
+          } else if (header.key === 'propiedadArrendado') {
             if (row[header.key] === true) {
               td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Arrendado</span>'
             } else {
               td.innerHTML = '<span class="mb-0 mt-0 badge badge-danger">No Arrendado</span>'
             }
-          } else if (header.key === 'propiedadTipo'){
+          } else if (header.key === 'propiedadTipo') {
             if (row[header.key] === 'departamento') {
               td.innerHTML = '<span class="mb-0 mt-0 badge badge-info">Departamento</span>'
             } else if (row[header.key] === 'casa') {
@@ -147,8 +147,7 @@ export default {
             td.textContent = `$${row[header.key].toLocaleString()}`
           } else if (header.key === 'duracionMeses') {
             td.textContent = `${row[header.key]} Meses`
-          }
-          else if (header.key === 'propietarioNombre') {
+          } else if (header.key === 'propietarioNombre') {
             const a = document.createElement('a')
             a.className = 'font-weight-bold'
             a.textContent = `${row[header.key]}${row.propietarioApellido ? ' ' + row.propietarioApellido : ''}${row.propietarioMaterno ? ' ' + row.propietarioMaterno : ''}`

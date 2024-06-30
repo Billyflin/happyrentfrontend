@@ -1,11 +1,12 @@
 <template>
-  <div class="container-fluid mt-4" v-if="isTokenValid">
+  <div v-if="isTokenValid" class="container-fluid mt-4">
     <div class="row mt-3 align-items-center">
       <div class="col-5">
         <router-link to="/">
           <div class="d-flex">
             <div class="row mt-3">
-              <img alt="Logo" class="btn btn-link px-3" height="90" src="../../assets/img/logos/LogoHapp.svg" width="100" />
+              <img alt="Logo" class="btn btn-link px-3" height="90" src="../../assets/img/logos/LogoHapp.svg"
+                   width="100" />
             </div>
           </div>
         </router-link>
@@ -20,7 +21,7 @@
       </div>
       <div class="card-body pt-0">
         <!--        Contenido?-->
-        <div class="row" v-if="!sending">
+        <div v-if="!sending" class="row">
           <div class="col-md-2 mt-4">
             <material-input id="rut" v-model="persona.rut" is-required label="RUT" type="rut"
                             variant="static" />
@@ -69,30 +70,29 @@
 
 
         </div>
-        <div class="row" v-else>
+        <div v-else class="row">
           <div class="col-12 text-center">
             <div class="spinner-border text-primary" role="status">
               <span class="visually-hidden">Enviando...</span>
             </div>
           </div>
         </div>
-      <div v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo">
-        <!--    dropzone para documentos -->
-        <div class="file-dropzone">
-          <label for="idDropzone">Documentos</label>
-          <div id="idDropzone" class="dropzone"></div>
+        <div v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo">
+          <!--    dropzone para documentos -->
+          <div class="file-dropzone">
+            <label for="idDropzone">Documentos</label>
+            <div id="idDropzone" class="dropzone"></div>
+          </div>
         </div>
       </div>
     </div>
-    </div>
 
-    <material-button :disabled="sending" class="mt-4 " @click="emitData" full-width size="lg" variant="success">Enviar
+    <material-button :disabled="sending" class="mt-4 " full-width size="lg" variant="success" @click="emitData">Enviar
     </material-button>
   </div>
 
 
-
-<!--  <button @click="console.log(files)">Log Files</button>-->
+  <!--  <button @click="console.log(files)">Log Files</button>-->
 </template>
 
 <script>
@@ -106,7 +106,7 @@ import { useVuelidate } from '@vuelidate/core'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 import { validate as isValidUUID } from 'uuid'
 import axios from 'axios'
-import Dropzone from 'dropzone';
+import Dropzone from 'dropzone'
 
 export default {
   name: 'Solicitud',
@@ -141,7 +141,7 @@ export default {
         { value: 'Perú', text: 'Perú' }
       ],
       files: [], // Asegúrate de inicializar `files` como un array
-      sending: false,
+      sending: false
     }
   },
   methods: {
@@ -149,9 +149,9 @@ export default {
       this.v$.$validate()
       if (!this.v$.$error) {
         this.sending = true
-        const formData = new FormData();
-        formData.append('persona', new Blob([JSON.stringify(this.persona)], { type: "application/json" }));
-        this.files.forEach(file => formData.append('files', file));
+        const formData = new FormData()
+        formData.append('persona', new Blob([JSON.stringify(this.persona)], { type: 'application/json' }))
+        this.files.forEach(file => formData.append('files', file))
         try {
           await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/temporal?idUsuario=${this.token}`,
             formData,
@@ -176,7 +176,8 @@ export default {
           console.error(error)
         }
       }
-    }},
+    }
+  },
   setup(props) {
     const store = useAppStore()
     const sending = ref(false)
@@ -204,35 +205,34 @@ export default {
       estadoCivil: ''
     })
     const v$ = useVuelidate()
-    const dropzone = ref(null);
+    const dropzone = ref(null)
     const files = ref([]) // Mantén `files` como un array reactivo
 
     onMounted(() => {
       toggleEveryDisplay()
-      if (props.carnet || props.liquidaciones || props.certificadoAFP|| props.carpetaTributaria||props.certificadoDicom || props.contratoTrabajo){
+      if (props.carnet || props.liquidaciones || props.certificadoAFP || props.carpetaTributaria || props.certificadoDicom || props.contratoTrabajo) {
 
 
-      dropzone.value = new Dropzone('#idDropzone', {
-        url: '/',
-        autoProcessQueue: false,
-        acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx',
+        dropzone.value = new Dropzone('#idDropzone', {
+          url: '/',
+          autoProcessQueue: false,
+          acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx'
 
 
-
-      });
-      dropzone.value.on('addedfile', (file) => {
-        files.value.push(file)
-      });
-      dropzone.value.on('removedfile', (file) => {
-        files.value = files.value.filter(f => f !== file)
-      });
-    }
+        })
+        dropzone.value.on('addedfile', (file) => {
+          files.value.push(file)
+        })
+        dropzone.value.on('removedfile', (file) => {
+          files.value = files.value.filter(f => f !== file)
+        })
+      }
     })
 
     onUnmounted(() => {
       toggleEveryDisplay()
       if (dropzone.value) {
-        dropzone.value.destroy();
+        dropzone.value.destroy()
       }
     })
 

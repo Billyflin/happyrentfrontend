@@ -10,24 +10,24 @@
           <div class="card mt-8 mb-4">
             <div class="card-header p-0 position-relative mt-n4 mx-3 z-index-2">
               <div class="bg-gradient-warning shadow-warning border-radius-lg py-3 pe-1 text-center py-4">
-                <h4 class="font-weight-bolder text-white mt-1" v-if="!state">Olvidó su contraseña</h4>
-                <h3 class="font-weight-bolder text-white mt-1" v-else>Correo enviado</h3>
-                <p class="mb-1 text-white text-sm" v-if="!state">Ingresa tus datos para continuar</p>
+                <h4 v-if="!state" class="font-weight-bolder text-white mt-1">Olvidó su contraseña</h4>
+                <h3 v-else class="font-weight-bolder text-white mt-1">Correo enviado</h3>
+                <p v-if="!state" class="mb-1 text-white text-sm">Ingresa tus datos para continuar</p>
               </div>
             </div>
             <div class="card-body pb-3">
               <form role="form" @submit.prevent="submitForm">
-                <div class="mb-3" v-if="state">
+                <div v-if="state" class="mb-3">
                   <h3 class="text-center">¡Listo! Revisa tu correo.</h3>
                 </div>
-                <div class="mb-3" v-if="!state">
+                <div v-if="!state" class="mb-3">
                   <material-input
                     id="email"
+                    v-model="emailValue"
+                    :disabled="sending"
                     label="Email"
                     name="email"
                     placeholder="john@email.com"
-                    :disabled="sending"
-                    v-model="emailValue"
                     type="email"
                     variant="static"
                   />
@@ -35,7 +35,7 @@
                 <div v-if="err" class="row mb-3 mt-3">
                   <span class="badge badge-danger">{{ err }}</span>
                 </div>
-                <div class="text-center" v-if="!state">
+                <div v-if="!state" class="text-center">
                   <material-button :disabled="sending" class="mt-4" color="warning" full-width variant="gradient">
                     Enviar
                   </material-button>
@@ -45,11 +45,11 @@
           </div>
           <router-link to="/sign-in">
             <material-button
+              v-if="state"
               class=" mb-4"
               color="warning"
               full-width
               variant="gradient"
-              v-if="state"
             >
               Volver
             </material-button>

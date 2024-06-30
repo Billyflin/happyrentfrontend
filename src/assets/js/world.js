@@ -24,7 +24,7 @@
           i = e.length;
         --i >= 0 && e.item(i) !== this;
       )
-      return i > -1
+        return i > -1
     }),
   Object.assign ||
   Object.defineProperty(Object, 'assign', {

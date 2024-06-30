@@ -109,7 +109,8 @@ watch(agregarInventario, (newValue) => {
     <div class="card-body pt-0">
       <div class="row mt-4">
         <div class="col-3">
-          <material-switch id="agregar_inventario" v-model:checked="agregarInventario" checked label-class="mb-0 text-body text-truncate w-100"
+          <material-switch id="agregar_inventario" v-model:checked="agregarInventario" checked
+                           label-class="mb-0 text-body text-truncate w-100"
                            name="agregar_inventario">
             {{ agregarInventario ? 'Agregar Inventario' : 'Sin inventario' }}
           </material-switch>

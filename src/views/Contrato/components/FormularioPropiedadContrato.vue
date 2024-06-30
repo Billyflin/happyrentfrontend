@@ -53,37 +53,37 @@ const formatDate = (date) => {
             <p class="mb-0">
               <strong> Orientación:</strong>{{ store.propiedad.orientacion }}
             </p>
-              <p class="mb-0">
-                <strong> Cantidad de baños:</strong>&nbsp;{{ store.propiedad.banios }}
-              </p>
-              <p class="mb-0">
-                <strong> Cantidad de dormitorios:</strong>&nbsp;{{ store.propiedad.habitaciones }}
-              </p>
-              <p class="mb-0">
-                <strong> Estacionamientos:</strong>{{ store.propiedad.estacionamientos }}
-              </p>
-              <p class="mb-0">
-                <strong> Bodegas:</strong>{{ store.propiedad.bodegas }}
-              </p>
-              <p class="mb-0">
-                <strong> Metros cuadrados totales:</strong>&nbsp;{{ store.propiedad.metrosCuadradosTotales }}
-              </p>
-              <p class="mb-0">
-                <strong> Metros cuadrados utiles:</strong>&nbsp;{{ store.propiedad.metrosCuadradosUtiles }}
-              </p>
-              <p class="mb-0">
-                <strong> Contribuciones :</strong>{{ store.propiedad.contribuciones }}
-              </p>
-              <p class="mb-0">
-                <strong> ASEO :</strong>{{ store.propiedad.aseo }}
-              </p>
-              <p class="mb-0">
-                <strong> Terraza :</strong>{{ store.propiedad.terraza }}
-              </p>
+            <p class="mb-0">
+              <strong> Cantidad de baños:</strong>&nbsp;{{ store.propiedad.banios }}
+            </p>
+            <p class="mb-0">
+              <strong> Cantidad de dormitorios:</strong>&nbsp;{{ store.propiedad.habitaciones }}
+            </p>
+            <p class="mb-0">
+              <strong> Estacionamientos:</strong>{{ store.propiedad.estacionamientos }}
+            </p>
+            <p class="mb-0">
+              <strong> Bodegas:</strong>{{ store.propiedad.bodegas }}
+            </p>
+            <p class="mb-0">
+              <strong> Metros cuadrados totales:</strong>&nbsp;{{ store.propiedad.metrosCuadradosTotales }}
+            </p>
+            <p class="mb-0">
+              <strong> Metros cuadrados utiles:</strong>&nbsp;{{ store.propiedad.metrosCuadradosUtiles }}
+            </p>
+            <p class="mb-0">
+              <strong> Contribuciones :</strong>{{ store.propiedad.contribuciones }}
+            </p>
+            <p class="mb-0">
+              <strong> ASEO :</strong>{{ store.propiedad.aseo }}
+            </p>
+            <p class="mb-0">
+              <strong> Terraza :</strong>{{ store.propiedad.terraza }}
+            </p>
 
-              <p class="mb-0">
-                <strong> Descripción:</strong>&nbsp;{{ store.propiedad.descripcion }}
-              </p>
+            <p class="mb-0">
+              <strong> Descripción:</strong>&nbsp;{{ store.propiedad.descripcion }}
+            </p>
           </div>
           <div v-else-if="store.propiedad.type === 'casa'">
             <p class="mb-0">
@@ -241,88 +241,11 @@ const formatDate = (date) => {
             </p>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
           </div>
           <div v-else-if="store.propiedad.type === 'oficina'">
-           <p class="mb-0">
-  <b> Amoblado:</b>{{ store.propiedad.amoblado }}
-           </p>
+            <p class="mb-0">
+              <b> Amoblado:</b>{{ store.propiedad.amoblado }}
+            </p>
             <p class="mb-0">
               <b> Rol:</b>{{ store.propiedad.rol }}
             </p>
@@ -397,7 +320,7 @@ const formatDate = (date) => {
               <b> Orientacion:</b>{{ store.propiedad.orientacion }}
             </p>
             <p class="mb-0">
-            <b> Subterraneo:</b>{{ store.propiedad.subterraneo }}
+              <b> Subterraneo:</b>{{ store.propiedad.subterraneo }}
             </p>
             <p class="mb-0">
               <b> Metros cuadrados Totales:</b>{{ store.propiedad.metrosCuadradosTotales }}

@@ -6,8 +6,8 @@ import { onMounted } from 'vue'
 import { useAuthStore } from '@/store/index.js'
 
 
-const auth= useAuthStore()
-onMounted(()=>{
+const auth = useAuthStore()
+onMounted(() => {
   auth.getSolicitudes()
 })
 </script>

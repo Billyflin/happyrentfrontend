@@ -112,16 +112,16 @@ function setNavbarFixed() {
 }
 
 function darkMode() {
-  store.isDarkMode = !store.isDarkMode;
+  store.isDarkMode = !store.isDarkMode
 
   if (store.isDarkMode) {
-    activateDarkMode();
-    sidebar('bg-gradient-dark');
-    sidebarColor('primary');
+    activateDarkMode()
+    sidebar('bg-gradient-dark')
+    sidebarColor('primary')
   } else {
-    deactivateDarkMode();
-    sidebar('bg-white');
-    sidebarColor('happLight');
+    deactivateDarkMode()
+    sidebar('bg-white')
+    sidebarColor('happLight')
   }
 }
 
@@ -139,13 +139,13 @@ const sidebarType = computed(() => {
 })
 
 onMounted(() => {
-  const currentHour = new Date().getHours();
-  const isLateNight = currentHour >= 20 || currentHour < 8; // 8 PM or earlier than 8 AM
+  const currentHour = new Date().getHours()
+  const isLateNight = currentHour >= 20 || currentHour < 8 // 8 PM or earlier than 8 AM
 
   if (isLateNight) {
-    darkMode();
+    darkMode()
   }
-});
+})
 
 onBeforeMount(() => {
   setNavbarFixed()

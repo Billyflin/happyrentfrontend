@@ -35,17 +35,17 @@ Github: https://github.com/fiduswriter/Simple-DataTables
       label {
         margin-bottom: 0;
         color: $input-color; /* Puedes cambiar esto a tu variable $secondary */
-        font-weight:$font-weight-normal; /* Puedes cambiar esto a tu variable $font-weight-normal */
+        font-weight: $font-weight-normal; /* Puedes cambiar esto a tu variable $font-weight-normal */
 
         .datatable-selector {
-          border-color:$gray-200; /* Puedes cambiar esto a tu variable $gray-200 */
+          border-color: $gray-200; /* Puedes cambiar esto a tu variable $gray-200 */
           border-radius: $border-radius-md; /* Puedes cambiar esto a tu variable $border-radius-md */
-          margin-right: 0.5rem ;
+          margin-right: 0.5rem;
 
           option {
-            color:  $input-color; /* Puedes cambiar esto a tu variable $input-color */
-            font-size:$font-size-sm; /* Puedes cambiar esto a tu variable $font-size-sm */
-            border: 1px solid $input-border-color ; /* Puedes cambiar esto a tu variable $gray-200 */
+            color: $input-color; /* Puedes cambiar esto a tu variable $input-color */
+            font-size: $font-size-sm; /* Puedes cambiar esto a tu variable $font-size-sm */
+            border: 1px solid $input-border-color; /* Puedes cambiar esto a tu variable $gray-200 */
             border-radius: $input-border-radius; /* Puedes cambiar esto a tu variable $input-border-radius */
             padding: .375rem .75rem; /* Añadido para un mejor espaciado */
 
@@ -61,6 +61,7 @@ Github: https://github.com/fiduswriter/Simple-DataTables
     .datatable-search {
       background-color: transparent;
       color: $input-color;
+
       input {
         background-color: transparent;
         font-size: $font-size-sm;
@@ -72,6 +73,7 @@ Github: https://github.com/fiduswriter/Simple-DataTables
           outline: none;
         }
       }
+
       input::placeholder {
         font-weight: $font-weight-normal;
         color: $input-placeholder-color;

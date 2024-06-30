@@ -325,19 +325,18 @@
     }
 
     .datatable-active {
-        background: transparent;
-        @include gradient-directional(nth($happLight-gradient, 1) 0%, nth($happLight-gradient-state, -1) 100%, $deg: 195deg);
-        box-shadow: $pagination-active-box-shadow;
-        color: $white;
-        border: none;
-        border-radius: $page-link-radius !important;
+      background: transparent;
+      @include gradient-directional(nth($happLight-gradient, 1) 0%, nth($happLight-gradient-state, -1) 100%, $deg: 195deg);
+      box-shadow: $pagination-active-box-shadow;
+      color: $white;
+      border: none;
+      border-radius: $page-link-radius !important;
 
-        &:hover {
-          @include gradient-directional(nth($happLight-gradient, 1) 0%, nth($happLight-gradient-state, -1) 100%, $deg: 195deg);
-        }
+      &:hover {
+        @include gradient-directional(nth($happLight-gradient, 1) 0%, nth($happLight-gradient-state, -1) 100%, $deg: 195deg);
+      }
     }
   }
-
 
 
   // Quill changes
@@ -359,7 +358,7 @@
     color: $dark-version-body-color !important;
   }
 
-// Estilos para el modal en modo oscuro
+  // Estilos para el modal en modo oscuro
   .modal-content {
     background: $dark-version-card-bg-color !important;
     color: $white !important;

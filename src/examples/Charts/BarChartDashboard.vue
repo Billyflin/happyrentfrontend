@@ -23,7 +23,7 @@ const props = defineProps({
   }
 })
 
-let echart;
+let echart
 
 const themeColors = [
   '#63b3ed', // blue
@@ -44,26 +44,26 @@ const themeColors = [
   '#bedc4b', // happLight
   '#135652', // happDark
   '#fb8c00', // warning
-  '#f44335', // danger
-];
+  '#f44335' // danger
+]
 
 const getRandomColor = () => {
-  return themeColors[Math.floor(Math.random() * themeColors.length)];
-};
+  return themeColors[Math.floor(Math.random() * themeColors.length)]
+}
 
 const renderChart = () => {
   if (!props.chart.datasets || !Array.isArray(props.chart.datasets.data)) {
-    console.error("Invalid data format for BarChartDashboard");
-    return;
+    console.error('Invalid data format for BarChartDashboard')
+    return
   }
 
   const chartDom = document.getElementById(props.id)
   echart = echarts.init(chartDom)
   window.addEventListener('resize', () => setTimeout(echart.resize, 200))
 
-  const xAxislDatas = props.chart.xAxislDatas;
-  const data = props.chart.datasets.data;
-  const label = props.chart.datasets.label;
+  const xAxislDatas = props.chart.xAxislDatas
+  const data = props.chart.datasets.data
+  const label = props.chart.datasets.label
 
   const option = {
     grid: {
@@ -152,7 +152,7 @@ const renderChart = () => {
           borderWidth: 0,
           borderRadius: 4,
           color: function(params) {
-            return getRandomColor();
+            return getRandomColor()
           }
         }
       }
@@ -163,12 +163,12 @@ const renderChart = () => {
 }
 
 onMounted(() => {
-  renderChart();
+  renderChart()
 })
 
 watch(() => props.chart, () => {
-  renderChart();
-}, { deep: true });
+  renderChart()
+}, { deep: true })
 </script>
 
 <style scoped>

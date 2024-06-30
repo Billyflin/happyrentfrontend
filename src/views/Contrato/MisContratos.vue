@@ -5,7 +5,7 @@
         <div class="pb-0 card-header d-flex align-items-center justify-content-between">
           <h5>Contratos</h5>
         </div>
-        <TablaContratos/>
+        <TablaContratos />
       </div>
     </div>
   </div>

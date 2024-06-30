@@ -128,7 +128,8 @@ export default {
             <div v-if="propietario_existente.value.direccion" class="d-flex justify-content-between align-items-center">
               <h6 class="font-weight-normal">Dirección</h6>
               <p class="text-capitalize">{{ propietario_existente.value.direccion.calle }},
-                {{ propietario_existente.value.direccion.numero }}, {{ propietario_existente.value.direccion.detalle }}, {{ propietario_existente.value.direccion.ciudad }},
+                {{ propietario_existente.value.direccion.numero }}, {{ propietario_existente.value.direccion.detalle }},
+                {{ propietario_existente.value.direccion.ciudad }},
                 {{ propietario_existente.value.direccion.region }}, {{ propietario_existente.value.direccion.pais }}
               </p>
             </div>

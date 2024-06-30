@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Chart from 'chart.js/auto';
+import Chart from 'chart.js/auto'
 
 export default {
   name: 'PieChart',
@@ -28,24 +28,24 @@ export default {
     }
   },
   mounted() {
-    this.renderChart();
+    this.renderChart()
   },
   watch: {
     chart: {
       handler() {
-        this.renderChart();
+        this.renderChart()
       },
       deep: true
     }
   },
   methods: {
     renderChart() {
-      const pieChart = document.getElementById(this.id).getContext('2d');
+      const pieChart = document.getElementById(this.id).getContext('2d')
 
       // Destroy any existing chart instance
-      const existingChart = Chart.getChart(this.id);
+      const existingChart = Chart.getChart(this.id)
       if (existingChart) {
-        existingChart.destroy();
+        existingChart.destroy()
       }
 
       // Define the theme colors
@@ -68,27 +68,27 @@ export default {
         '#bedc4b', // happLight
         '#135652', // happDark
         '#fb8c00', // warning
-        '#f44335', // danger
-      ];
+        '#f44335' // danger
+      ]
 
       // Function to shuffle array
       const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
+          [array[i], array[j]] = [array[j], array[i]]
         }
-        return array;
-      };
+        return array
+      }
 
       // Set colors based on isBooleanChart prop
-      let backgroundColors;
+      let backgroundColors
       if (this.isBooleanChart) {
         backgroundColors = this.chart.labels.map(label =>
-          label.toLowerCase() === 'activo' || label.toLowerCase() === 'sí' || label.toLowerCase()==='arrendado' ? '#4caf50' : '#f44335'
-        );
+          label.toLowerCase() === 'activo' || label.toLowerCase() === 'sí' || label.toLowerCase() === 'arrendado' ? '#4caf50' : '#f44335'
+        )
       } else {
-        const shuffledColors = shuffleArray([...themeColors]);
-        backgroundColors = shuffledColors.slice(0, this.chart.datasets.data.length);
+        const shuffledColors = shuffleArray([...themeColors])
+        backgroundColors = shuffledColors.slice(0, this.chart.datasets.data.length)
       }
 
       new Chart(pieChart, {
@@ -112,10 +112,10 @@ export default {
             }
           }
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 
 <style scoped>

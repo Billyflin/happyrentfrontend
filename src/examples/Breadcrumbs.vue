@@ -17,7 +17,7 @@
 <script setup>
 defineProps({
   currentPage: {
-    type: [String,Symbol],
+    type: [String, Symbol],
     required: ''
   },
   color: {

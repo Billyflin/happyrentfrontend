@@ -1,14 +1,12 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import TablaPersonas from '@/views/Personas/components/TablaPersonas.vue'
+import MyDataTablePersonas from '@/views/Personas/components/TablaPersonas.vue'
 import DefaultStatisticsCard from '@/examples/Cards/DefaultStatisticsCard.vue'
 import axios from 'axios'
 import * as XLSX from 'xlsx'
 import FileSave from 'file-saver'
-import MyDataTable from '@/views/Contrato/components/MyDataTable.vue'
-import MyDataTablePersonas from '@/views/Personas/components/TablaPersonas.vue'
 
-const perfiles = ref({ })
+const perfiles = ref({})
 const personas = ref(null)
 const empresas = ref(null)
 const isLoading = ref(true)
@@ -82,6 +80,7 @@ onMounted(async () => {
   flattenedEmpresas = empresas.value.map(empresa => flattenObject(empresa))
 
 })
+
 function handleEdit(row) {
   console.log('Edit Row:', row) // Log the row data for editing
 }
@@ -141,9 +140,11 @@ function handleDelete(row) {
                 person_add
               </span>
             </router-link>
-</div>
-              <MyDataTablePersonas
-                :headers="[
+          </div>
+          <MyDataTablePersonas
+            :deletable="true"
+            :editable="true"
+            :headers="[
                 { key: 'nombre', title: 'Nombre' },
                 { key: 'rut', title: 'RUT' },
                 { key: 'email', title: 'Email' },
@@ -151,13 +152,11 @@ function handleDelete(row) {
                 { key: 'type', title: 'Tipo Entidad' },
                 { key: 'archivos', title: 'Archivos'}
               ]"
-                :tableData="perfiles"
-                :isLoading="isLoading"
-                @edit="handleEdit"
-                @delete="handleDelete"
-                :editable="true"
-                :deletable="true"
-              />
+            :isLoading="isLoading"
+            :tableData="perfiles"
+            @delete="handleDelete"
+            @edit="handleEdit"
+          />
         </div>
       </div>
     </div>

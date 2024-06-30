@@ -21,7 +21,8 @@
         <div v-if="!arrendatarioContrato" class="row mt-4">
 
           <div class="col-3">
-            <material-switch id="tipo_arrendatario" v-model:checked="esEmpresa" checked label-class="mb-0 text-body text-truncate w-100"
+            <material-switch id="tipo_arrendatario" v-model:checked="esEmpresa" checked
+                             label-class="mb-0 text-body text-truncate w-100"
                              name="tipo_arrendatario">
               {{ esEmpresa ? 'Es empresa' : 'Es persona' }}
             </material-switch>

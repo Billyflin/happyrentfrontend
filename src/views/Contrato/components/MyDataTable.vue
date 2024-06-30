@@ -3,10 +3,12 @@
     <table ref="dataTable" class="table table-flush">
       <thead>
       <tr>
-        <th v-for="header in headers"  class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
+        <th v-for="header in headers" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
           {{ header.title }}
         </th>
-        <th v-if="deletable||editable" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">Acciones</th>
+        <th v-if="deletable||editable" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
+          Acciones
+        </th>
       </tr>
       </thead>
       <tbody>
@@ -23,27 +25,28 @@
         </td>
         <td v-if="deletable||editable" class="align-middle">
           <material-button
+            v-if="editable"
             class="my-sm-auto mt-2 mb-0"
             color="primary"
             name="button"
             size="sm"
             type="button"
-            variant="gradient"
-            v-if="editable" @click="$emit('edit', row)"
+            variant="gradient" @click="$emit('edit', row)"
           >
              <span class="material-symbols-outlined mr-3"
                    style="font-size: 16px; margin-right: 10px;;">person_edit</span>
             Editar
           </material-button>
           <material-button
+            v-if="deletable"
             class="my-sm-auto mt-2 mb-0 ms-2"
             color="danger"
             name="button"
             size="sm"
-            type="button"
-            variant="gradient" v-if="deletable" @click="$emit('delete', row)"
+            type="button" variant="gradient" @click="$emit('delete', row)"
           >
-            <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;;">person_remove</span>
+            <span class="material-symbols-outlined mr-3"
+                  style="font-size: 16px; margin-right: 10px;;">person_remove</span>
             Eliminar
           </material-button>
         </td>
@@ -66,8 +69,7 @@
 </template>
 
 <script>
-import { DataTable } from 'simple-datatables';
-import { nextTick } from 'vue';
+import { DataTable } from 'simple-datatables'
 import MaterialButton from '@/components/MaterialButton.vue'
 
 export default {
@@ -77,37 +79,37 @@ export default {
     headers: {
       Array,
       default: [],
-      required: true,
+      required: true
     },
-    tableData:{
+    tableData: {
       Array,
       default: {},
-      required: true,
-  },
+      required: true
+    },
     editable: {
       Boolean,
-      default: false,
+      default: false
     },
     deletable: {
       Boolean,
-      default: false,
+      default: false
     },
     isLoading: {
       Boolean,
       default: true,
-      required: true,
-    },
+      required: true
+    }
   },
   data() {
     return {
       dataTable: null,
-      error: null, //
-    };
+      error: null //
+    }
   },
   watch: {
     tableData: {
       handler() {
-        this.$nextTick(this.initializeDataTable); // Use $nextTick
+        this.$nextTick(this.initializeDataTable) // Use $nextTick
       },
       deep: true,
       immediate: true
@@ -116,7 +118,7 @@ export default {
   methods: {
     initializeDataTable() {
       if (this.dataTable) {
-        this.dataTable.destroy();
+        this.dataTable.destroy()
       }
 
       if (this.$refs.dataTable) {
@@ -131,10 +133,10 @@ export default {
             noRows: 'No se encontraron resultados',
             info: 'Mostrando {start} a {end} de {rows} entradas',
             noResults: 'No se encontraron resultados para la búsqueda'
-          },
-        });
+          }
+        })
       }
     }
-  },
-};
+  }
+}
 </script>

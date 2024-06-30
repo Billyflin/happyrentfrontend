@@ -59,13 +59,21 @@ export default {
               <h5 class="mb-3">Datos de Persona</h5>
               <ul class="list-group mb-3">
                 <li class="list-group-item text-start"><strong>Nombre:</strong> {{ auth.persona.nombre }}</li>
-                <li class="list-group-item text-start"><strong>Apellido Paterno:</strong> {{ auth.persona.apellidoPaterno }}</li>
-                <li class="list-group-item text-start"><strong>Apellido Materno:</strong> {{ auth.persona.apellidoMaterno }}</li>
+                <li class="list-group-item text-start"><strong>Apellido Paterno:</strong>
+                  {{ auth.persona.apellidoPaterno }}
+                </li>
+                <li class="list-group-item text-start"><strong>Apellido Materno:</strong>
+                  {{ auth.persona.apellidoMaterno }}
+                </li>
                 <li class="list-group-item text-start"><strong>Tratamiento:</strong> {{ auth.persona.tratamiento }}</li>
                 <li class="list-group-item text-start"><strong>Ocupación:</strong> {{ auth.persona.ocupacion }}</li>
-                <li class="list-group-item text-start"><strong>Estado Civil:</strong> {{ auth.persona.estadoCivil }}</li>
-                <li class="list-group-item text-start"><strong>Nacionalidad:</strong> {{ auth.persona.nacionalidad }}</li>
-                <li class="list-group-item text-start"><strong>Fecha de Nacimiento:</strong> {{ auth.persona.fechaNacimiento }}</li>
+                <li class="list-group-item text-start"><strong>Estado Civil:</strong> {{ auth.persona.estadoCivil }}
+                </li>
+                <li class="list-group-item text-start"><strong>Nacionalidad:</strong> {{ auth.persona.nacionalidad }}
+                </li>
+                <li class="list-group-item text-start"><strong>Fecha de Nacimiento:</strong>
+                  {{ auth.persona.fechaNacimiento }}
+                </li>
                 <li class="list-group-item text-start"><strong>Email:</strong> {{ auth.persona.email }}</li>
                 <li class="list-group-item text-start"><strong>Teléfono:</strong> {{ auth.persona.telefono }}</li>
                 <li class="list-group-item text-start"><strong>RUT:</strong> {{ auth.persona.rut }}</li>
@@ -77,28 +85,33 @@ export default {
               <ul class="list-group mb-3">
                 <li class="list-group-item text-start"><strong>Calle:</strong> {{ auth.persona.direccion.calle }}</li>
                 <li class="list-group-item text-start"><strong>Número:</strong> {{ auth.persona.direccion.numero }}</li>
-                <li class="list-group-item text-start"><strong>Detalle:</strong> {{ auth.persona.direccion.detalle }}</li>
+                <li class="list-group-item text-start"><strong>Detalle:</strong> {{ auth.persona.direccion.detalle }}
+                </li>
                 <li class="list-group-item text-start"><strong>Región:</strong> {{ auth.persona.direccion.region }}</li>
                 <li class="list-group-item text-start"><strong>Ciudad:</strong> {{ auth.persona.direccion.ciudad }}</li>
                 <li class="list-group-item text-start"><strong>País:</strong> {{ auth.persona.direccion.pais }}</li>
-                <li class="list-group-item text-start"><strong>Código Postal:</strong> {{ auth.persona.direccion.codigoPostal }}</li>
+                <li class="list-group-item text-start"><strong>Código Postal:</strong>
+                  {{ auth.persona.direccion.codigoPostal }}
+                </li>
               </ul>
             </div>
 
-            <div class="col-lg-5" v-if="auth.persona.archivos && auth.persona.archivos.length > 0">
+            <div v-if="auth.persona.archivos && auth.persona.archivos.length > 0" class="col-lg-5">
               <h5 class="mb-3">Archivos adjuntos</h5>
               <ul class="list-group mb-3">
-                <li v-for="archivo in auth.persona.archivos" :key="archivo.id" class="list-group-item d-flex align-items-center">
+                <li v-for="archivo in auth.persona.archivos" :key="archivo.id"
+                    class="list-group-item d-flex align-items-center">
                   <span class="material-symbols-outlined mx-2">insert_drive_file</span>
-                  <a :href="archivo.url" target="_blank" class="text-sm" >{{ archivo.nombre }}</a>
+                  <a :href="archivo.url" class="text-sm" target="_blank">{{ archivo.nombre }}</a>
                   <div class="ms-auto">
-                    <MaterialButton @click="previsualizarArchivo(archivo)" class="btn btn-link">Previsualizar</MaterialButton>
-                    <MaterialButton @click="descargarArchivo(archivo)" class="btn btn-link">Descargar</MaterialButton>
+                    <MaterialButton class="btn btn-link" @click="previsualizarArchivo(archivo)">Previsualizar
+                    </MaterialButton>
+                    <MaterialButton class="btn btn-link" @click="descargarArchivo(archivo)">Descargar</MaterialButton>
                   </div>
                 </li>
               </ul>
             </div>
-            <div class="col-lg-2" v-else>
+            <div v-else class="col-lg-2">
               <h5 class="mb-3">Sin archivos adjuntos</h5>
             </div>
           </div>
@@ -107,15 +120,15 @@ export default {
     </div>
 
     <!-- Modal para la previsualización -->
-    <div v-if="mostrarModal" class="modal fade show" tabindex="-1" style="display: block;">
+    <div v-if="mostrarModal" class="modal fade show" style="display: block;" tabindex="-1">
       <div class="modal-dialog modal-xl">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Previsualización de Archivo</h5>
-            <button type="button" class="btn-close" @click="cerrarModal" aria-label="Close"></button>
+            <button aria-label="Close" class="btn-close" type="button" @click="cerrarModal"></button>
           </div>
           <div class="modal-body">
-            <iframe :src="archivoPrevisualizado" width="100%" height="800px"></iframe>
+            <iframe :src="archivoPrevisualizado" height="800px" width="100%"></iframe>
           </div>
         </div>
       </div>

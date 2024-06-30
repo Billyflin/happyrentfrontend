@@ -26,14 +26,14 @@ const submitForm = async () => {
   try {
     await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/perfil-temporal`,
       {
-        email:email.value,
+        email: email.value,
         carnet: carnet.value,
         liquidaciones: liquidaciones.value,
         certificadoAFP: certificadoAFP.value,
         certificadoDicom: certificadoDicom.value,
         carpetaTributaria: carpetaTributaria.value,
-        contratoTrabajo: contratoTrabajo.value,
-      },
+        contratoTrabajo: contratoTrabajo.value
+      }
     ).then(() => {
         enviado.value = true
 
@@ -63,44 +63,49 @@ const submitForm = async () => {
       </p>
     </div>
     <div class="card-body pt-0">
-      <material-switch id="pedirDocumentos" :disabled="sending||enviado" v-model:checked="pedirDocumentos"
+      <material-switch id="pedirDocumentos" v-model:checked="pedirDocumentos" :disabled="sending||enviado"
                        name="documentos">Pedir documentos?
       </material-switch>
       <div v-if="pedirDocumentos" class="row mt-4">
         <p> Que documentos quieres pedir?</p>
         <div class="col-4">
           <h6>Cédula de identidad</h6>
-          <material-switch id="carnet" :disabled="sending||enviado" v-model:checked="carnet" name="carnet">Pedir
+          <material-switch id="carnet" v-model:checked="carnet" :disabled="sending||enviado" name="carnet">Pedir
             Cedula
           </material-switch>
         </div>
         <div class="col-4">
           <h6>Liquidaciones de sueldo</h6>
-          <material-switch id="liquidaciones" :disabled="sending||enviado" v-model:checked="liquidaciones" name="liquidaciones">Pedir
+          <material-switch id="liquidaciones" v-model:checked="liquidaciones" :disabled="sending||enviado"
+                           name="liquidaciones">Pedir
             Liquidaciones
           </material-switch>
         </div>
         <div class="col-4">
           <h6>Certificado AFP</h6>
-          <material-switch id="certificadoAFP" :disabled="sending||enviado" v-model:checked="certificadoAFP" name="cerficadoAFP">Pedir
+          <material-switch id="certificadoAFP" v-model:checked="certificadoAFP" :disabled="sending||enviado"
+                           name="cerficadoAFP">Pedir
             Certificado AFP
           </material-switch>
         </div>
         <div class="col-4 mt-2">
           <h6>Certificado dicom platinum</h6>
-          <material-switch id="certificadoDicom" :disabled="sending||enviado" v-model:checked="certificadoDicom" name="cerficadoDicom">Pedir
+          <material-switch id="certificadoDicom" v-model:checked="certificadoDicom" :disabled="sending||enviado"
+                           name="cerficadoDicom">Pedir
             Certificado Dicom
           </material-switch>
         </div>
         <div class="col-4 mt-2">
           <h6>Carpeta tributaria 2 últimos años</h6>
-          <material-switch id="carpetaTributaria" :disabled="sending||enviado" v-model:checked="carpetaTributaria" name="carpetaTributaria">Pedir
+          <material-switch id="carpetaTributaria" v-model:checked="carpetaTributaria" :disabled="sending||enviado"
+                           name="carpetaTributaria">Pedir
             Carpeta Tributaria
           </material-switch>
         </div>
         <div class="col-4 mt-2">
           <h6>Contrato de trabajo</h6>
-          <material-switch id="contratoTrabajo" :disabled="sending||enviado" v-model:checked="contratoTrabajo" name="contratoTrabajo">Pedir
+          <material-switch id="contratoTrabajo" v-model:checked="contratoTrabajo" :disabled="sending||enviado"
+                           name="contratoTrabajo">Pedir
             Contrato de Trabajo
           </material-switch>
         </div>
@@ -110,8 +115,8 @@ const submitForm = async () => {
           <h6 class="mb-0">Email</h6>
           <material-input
             id="email"
-            :disabled="sending||enviado"
             v-model="email"
+            :disabled="sending||enviado"
             placeholder="Email"
             type="email"
             variant="static"

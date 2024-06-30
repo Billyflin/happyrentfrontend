@@ -3,7 +3,7 @@
 // Variables should follow the `$component-state-property-size` formula for
 // consistent naming. Ex: $nav-link-disabled-color and $modal-content-box-shadow-xs.
 
- $soft-background-color: #fbfbfb !default;
+$soft-background-color: #fbfbfb !default;
 //$soft-background-color: #ffffff !default; // Testing
 $font-color: #7b809a !default;
 $h-color: #344767 !default;
@@ -205,7 +205,7 @@ $pink-100: tint-color($pink, 8%) !default;
 $pink-200: tint-color($pink, 6%) !default;
 $pink-300: tint-color($pink, 4%) !default;
 $pink-400: tint-color($pink, 2%) !default;
-$pink-500: $pink  !default;
+$pink-500: $pink !default;
 $pink-600: shade-color($pink, 2%) !default;
 $pink-700: shade-color($pink, 4%) !default;
 $pink-800: shade-color($pink, 6%) !default;

@@ -1,16 +1,16 @@
 <template>
   <MyDataTableContratos
-    :headers="headers"
-    :tableData="tableData"
-    :editable="true"
     :deletable="true"
+    :editable="true"
+    :headers="headers"
     :isLoading="isLoading"
+    :tableData="tableData"
   />
 </template>
 
 <script>
-import MyDataTableContratos from '@/views/Contrato/components/MyDataTableContratos.vue';
-import axios from 'axios';
+import MyDataTableContratos from '@/views/Contrato/components/MyDataTableContratos.vue'
+import axios from 'axios'
 
 export default {
   components: { MyDataTableContratos },
@@ -27,27 +27,27 @@ export default {
         { key: 'propietarioTipo', title: 'Tipo de Propietario' },
         { key: 'propiedadTipo', title: 'Tipo de Propiedad' },
         { key: 'propiedadArrendado', title: 'Propiedad Arrendada' },
-        { key: 'createDate', title: 'Fecha de Creación' },
+        { key: 'createDate', title: 'Fecha de Creación' }
       ],
       tableData: [], // Aquí se asignarán los datos de la API
-      isLoading: true,
-    };
+      isLoading: true
+    }
   },
   created() {
-    this.fetchData();
+    this.fetchData()
   },
   methods: {
     async fetchData() {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato/contratos`);
-        this.tableData = response.data;
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato/contratos`)
+        this.tableData = response.data
       } catch (error) {
-        console.error(error);
+        console.error(error)
       } finally {
-        this.isLoading = false;
+        this.isLoading = false
       }
-    },
-  },
-};
+    }
+  }
+}
 
 </script>
