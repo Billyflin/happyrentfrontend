@@ -82,7 +82,7 @@ export default {
   computed: {
     propiedadesPorRegionChart() {
       const data = this.propiedadesData.reduce((acc, item) => {
-        acc[item.direccion_region] = (acc[item.direccion_region] || 0) + 1;
+        acc[item.direccionRegion] = (acc[item.direccionRegion] || 0) + 1;
         return acc;
       }, {});
 
@@ -96,7 +96,7 @@ export default {
     },
     propiedadesPorTipoPropietarioChart() {
       const data = this.propiedadesData.reduce((acc, item) => {
-        acc[item.propietario_tipo] = (acc[item.propietario_tipo] || 0) + 1;
+        acc[item.propietarioTipo] = (acc[item.propietarioTipo] || 0) + 1;
         return acc;
       }, {});
 
@@ -110,7 +110,7 @@ export default {
     },
     propiedadesArrendadasChart() {
       const data = this.propiedadesData.reduce((acc, item) => {
-        const key = item.propiedad_arrendado ? 'Arrendado' : 'No Arrendado';
+        const key = item.propiedadArrendado ? 'Arrendado' : 'No Arrendado';
         acc[key] = (acc[key] || 0) + 1;
         return acc;
       }, {});
@@ -125,7 +125,7 @@ export default {
     },
     tiposDePropiedadChart() {
       const data = this.propiedadesData.reduce((acc, item) => {
-        acc[item.propiedad_tipo] = (acc[item.propiedad_tipo] || 0) + 1;
+        acc[item.propiedadTipo] = (acc[item.propiedadTipo] || 0) + 1;
         return acc;
       }, {});
 

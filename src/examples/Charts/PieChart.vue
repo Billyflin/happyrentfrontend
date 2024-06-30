@@ -44,18 +44,43 @@ export default {
         existingChart.destroy();
       }
 
-      // Function to generate random color
-      const getRandomColor = () => {
-        const letters = '0123456789ABCDEF';
-        let color = '#';
-        for (let i = 0; i < 6; i++) {
-          color += letters[Math.floor(Math.random() * 16)];
+      // Define the theme colors
+      const themeColors = [
+        '#63b3ed', // blue
+        '#596cff', // indigo
+        '#6f42c1', // purple
+        '#d63384', // pink
+        '#f56565', // red
+        '#e91e63', // rose
+        '#fd7e14', // orange
+        '#ffe533', // yellow
+        '#81e6d9', // green
+        '#20c997', // teal
+        '#0dcaf0', // cyan
+        '#13505B', // primary
+        '#6f6f67', // secondary
+        '#1a73e8', // info
+        '#4caf50', // success
+        '#bedc4b', // happLight
+        '#135652', // happDark
+        '#fb8c00', // warning
+        '#f44335', // danger
+      ];
+
+      // Function to shuffle array
+      const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
         }
-        return color;
+        return array;
       };
 
-      // Generate random colors for each data point
-      const backgroundColors = this.chart.datasets.data.map(() => getRandomColor());
+      // Shuffle theme colors
+      const shuffledColors = shuffleArray([...themeColors]);
+
+      // Get theme colors for each data point
+      const backgroundColors = shuffledColors.slice(0, this.chart.datasets.data.length);
 
       new Chart(pieChart, {
         type: 'pie',
