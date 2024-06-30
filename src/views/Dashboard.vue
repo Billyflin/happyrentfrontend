@@ -1,5 +1,5 @@
 <template>
-  <div class="container mt-5">
+  <div class="container-fluid mt-5">
     <div class="row">
       <!-- Renta por región (gráfico de barras) -->
       <div class="col-12 mb-4" v-if="rentaPorRegionChart.xAxislDatas.length">
