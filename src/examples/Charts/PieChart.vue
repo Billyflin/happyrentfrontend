@@ -66,20 +66,33 @@ export default {
         '#1a73e8', // info
         '#4caf50', // success
         '#bedc4b', // happLight
-        '#135652', // happDark
         '#fb8c00', // warning
         '#f44335' // danger
       ]
 
-      // Function to shuffle array
-      const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]]
-        }
-        return array
-      }
+// Crear una lista ponderada de colores para aumentar la probabilidad de primary y happLight
+      const weightedColors = [
+        '#13505B', '#13505B', '#13505B', // primary más probable
+        '#bedc4b', '#bedc4b', '#bedc4b', // happLight más probable
+        ...themeColors
+      ]
 
+      let lastColor = '';
+      const getRandomColor = () => {
+        let color;
+        let colorIndex;
+
+        do {
+          colorIndex = Math.floor(Math.random() * weightedColors.length);
+          color = weightedColors[colorIndex];
+        }while (
+          (color === lastColor )
+          );
+
+        lastColor = color;
+
+        return color;
+      };
       // Set colors based on isBooleanChart prop
       let backgroundColors
       if (this.isBooleanChart) {
@@ -87,8 +100,7 @@ export default {
           label.toLowerCase() === 'activo' || label.toLowerCase() === 'sí' || label.toLowerCase() === 'arrendado' ? '#4caf50' : '#f44335'
         )
       } else {
-        const shuffledColors = shuffleArray([...themeColors])
-        backgroundColors = shuffledColors.slice(0, this.chart.datasets.data.length)
+        backgroundColors = this.chart.labels.map(() => getRandomColor())
       }
 
       new Chart(pieChart, {

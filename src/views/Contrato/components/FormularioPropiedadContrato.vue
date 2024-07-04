@@ -15,10 +15,17 @@ const formatDate = (date) => {
     </div>
     <div class="card-body pt-0">
       <div class="row">
+        <h5 class="font-weight-normal">Propietario</h5>
+        <p class="mb-0"><strong>Nombre:</strong>
+          {{store.propiedad.propietario.type ==='persona' ? store.propiedad.propietario.nombre + ' ' + store.propiedad.propietario.apellidoPaterno + ' ' + store.propiedad.propietario.apellidoMaterno : store.propiedad.propietario.nombre
+          }}
+        </p>
+        <p v-if="store.propiedad.propietario.email" class="mb-0"><strong>Email:</strong> {{ store.propiedad.propietario.email }}</p>
+        <p v-if=" store.propiedad.propietario.telefono" class="mb-0"><strong>Teléfono:</strong> {{ store.propiedad.propietario.telefono }}</p>
         <div class="col-xl-5 col-lg-5 text-center">
           <img
             :src="'data:image/png;base64,'+ store.propiedad.imagenPortada.contenido"
-            alt="chair"
+            alt="portada"
             class="w-100 border-radius-lg shadow-lg mx-auto"
           />
         </div>
@@ -335,15 +342,7 @@ const formatDate = (date) => {
           </div>
 
         </div>
-        <div class="col">
-          <h5 class="font-weight-normal">Propietario</h5>
-          <p class="mb-0"><strong>Nombre:</strong>
-            {{ store.propiedad.propietario.nombre + ' ' + store.propiedad.propietario.apellidoPaterno + ' ' + store.propiedad.propietario.apellidoMaterno
-            }}
-          </p>
-          <p class="mb-0"><strong>Email:</strong> {{ store.propiedad.propietario.email }}</p>
-          <p class="mb-0"><strong>Teléfono:</strong> {{ store.propiedad.propietario.telefono }}</p>
-        </div>
+
       </div>
     </div>
   </div>

@@ -15,8 +15,8 @@ onMounted(() => {
 <template>
   <div class="container-fluid mb-4">
     <solicitar-datos-contrato />
+
     <tabla-perfiles-temporales
-      v-if="auth.solicitudes"
       :lists="auth.solicitudes"
     />
   </div>

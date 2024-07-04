@@ -52,11 +52,14 @@
       <div>
         <div class="d-flex justify-content-between align-items-center">
           <div class="d-flex justify-content-start mb-0 mt-1">
-        <span v-if="propiedad.propietario.type" class="mb-0 mt-0 badge badge-success">
+        <span v-if="propiedad.propietario.type" class="mb-0 mt-0 badge badge-warning">
           {{ propiedad.propietario.type.toUpperCase() }}
         </span>
-            <span v-if="propiedad.type" class="mb-0 mx-1 mt-0 badge badge-success">
+            <span v-if="propiedad.type" class="mb-0 mx-1 mt-0 badge badge-info">
           {{ propiedad.type.toUpperCase() }}
+        </span>
+            <span v-if="propiedad.arrendado" class="mb-0 mt-0 badge badge-success">
+          ARRENDADO
         </span>
           </div>
           <div class="d-flex justify-content-end">

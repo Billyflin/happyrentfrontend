@@ -117,7 +117,7 @@ export default {
             } else if (row[header.key] === 'empresa') {
               td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Empresa</span>'
             } else {
-              td.textContent = row[header.key]
+              td.textContent = row[header.key] ? row[header.key] : 'N/A'
             }
           } else if (header.key === 'activo') {
             if (row[header.key] === true) {
@@ -137,7 +137,7 @@ export default {
             } else if (row[header.key] === 'casa') {
               td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Casa</span>'
             } else {
-              td.textContent = row[header.key]
+              td.textContent = row[header.key] ? row[header.key] : 'N/A'
             }
           } else if (header.key === 'createDate') {
             td.textContent = new Date(row[header.key]).toLocaleDateString()
@@ -161,7 +161,7 @@ ${row.direccionCalle} ${row.direccionNumero}, ${row.direccionCiudad},
 </p>
 `
           } else {
-            td.textContent = row[header.key]
+            td.textContent = row[header.key] ? row[header.key] : 'N/A'
           }
 
           tr.appendChild(td)

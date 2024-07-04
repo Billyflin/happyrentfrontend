@@ -47,9 +47,32 @@ const themeColors = [
   '#f44335' // danger
 ]
 
+// Crear una lista ponderada de colores para aumentar la probabilidad de primary y happLight
+const weightedColors = [
+  '#13505B', '#13505B', '#13505B','#13505B','#13505B','#13505B', // primary más probable
+  '#bedc4b', '#bedc4b', '#bedc4b','#bedc4b','#bedc4b','#bedc4b', // happLight más probable
+  ...themeColors
+]
+
+let lastColor = '';
+let secondLastColor = '';
 const getRandomColor = () => {
-  return themeColors[Math.floor(Math.random() * themeColors.length)]
-}
+  let color;
+  let colorIndex;
+
+  do {
+    colorIndex = Math.floor(Math.random() * weightedColors.length);
+    color = weightedColors[colorIndex];
+  } while (
+  (color === lastColor )
+  );
+
+
+  secondLastColor = lastColor;
+  lastColor = color;
+
+  return color;
+};
 
 const renderChart = () => {
   if (!props.chart.datasets || !Array.isArray(props.chart.datasets.data)) {
@@ -69,15 +92,13 @@ const renderChart = () => {
     grid: {
       left: '8',
       right: '8',
-      bottom: '8%',
-      top: '16%',
+      bottom: '2%',
+      top: '2%',
       containLabel: true
     },
     tooltip: {
       trigger: 'axis',
-      backgroundColor: 'rgba(0, 0, 0, 0.8)',
       textStyle: {
-        color: '#fff'
       },
       borderWidth: 0,
       axisPointer: {
@@ -90,14 +111,12 @@ const renderChart = () => {
       axisLine: {
         show: true,
         lineStyle: {
-          color: '#f8f9fa'
         }
       },
       axisTick: {
         show: false
       },
       axisLabel: {
-        color: '#f8f9fa',
         padding: 10,
         fontSize: 14,
         fontWeight: 300,
@@ -107,7 +126,6 @@ const renderChart = () => {
       splitLine: {
         show: false,
         lineStyle: {
-          color: 'rgba(255, 255, 255, .2)',
           type: 'dashed'
         }
       }
@@ -118,14 +136,12 @@ const renderChart = () => {
       axisLine: {
         show: true,
         lineStyle: {
-          color: '#f8f9fa'
         }
       },
       axisTick: {
         show: false
       },
       axisLabel: {
-        color: '#fff',
         padding: 5,
         fontSize: 14,
         fontWeight: 300,
@@ -135,7 +151,6 @@ const renderChart = () => {
       splitLine: {
         show: true,
         lineStyle: {
-          color: 'rgba(255, 255, 255, .2)',
           type: 'dashed'
         }
       },

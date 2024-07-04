@@ -57,13 +57,18 @@ export default {
 </script>
 
 <template>
-  <div class="mt-4 card">
+  <div v-if="lists.length ===0" >
+    <div class="mt-4">
+          <div class="alert alert-info text-light text-center">No hay solicitudes entrantes</div>
+    </div>
+  </div>
+  <div class="mt-4 card" v-else>
     <div class="pb-0 card-header d-flex align-items-center justify-content-between">
       <h5>Solicitudes Entrantes</h5>
-      <p class="mb-0 text-sm">
-        <span class="text-success me-2"> <i class="fas fa-arrow-up"></i> 3.48%</span>
-        <span class="text-nowrap">Desde el mes pasado</span>
-      </p>
+<!--      <p class="mb-0 text-sm">-->
+<!--        <span class="text-success me-2"> <i class="fas fa-arrow-up"></i> 3.48%</span>-->
+<!--        <span class="text-nowrap">Desde el mes pasado</span>-->
+<!--      </p>-->
     </div>
 
     <div class="px-0 pt-0 pb-2 card-body">

@@ -62,7 +62,7 @@ const submitForm = async () => {
         Estos pueden ser verificados por el arrendador cuando sean completados.
       </p>
     </div>
-    <div class="card-body pt-0">
+    <div class="card-body pt-0" v-if="!enviado">
       <material-switch id="pedirDocumentos" v-model:checked="pedirDocumentos" :disabled="sending||enviado"
                        name="documentos">Pedir documentos?
       </material-switch>
@@ -110,7 +110,9 @@ const submitForm = async () => {
           </material-switch>
         </div>
       </div>
-      <div class="row mt-4">
+      </div>
+      <div class="card-footer">
+      <div class="row">
         <div class="col-4">
           <h6 class="mb-0">Email</h6>
           <material-input
@@ -133,6 +135,7 @@ const submitForm = async () => {
             variant="static"
           />
         </div>
+
         <div class="col-4">
           <!--          <MaterialButton class="mt-4" variant="gradient" color="primary" fullWidth @click="blockearInputs">Enviar</MaterialButton>-->
           <MaterialButton :disabled="sending||enviado" class="mt-4" color="happDark" fullWidth variant="gradient"
@@ -144,7 +147,7 @@ const submitForm = async () => {
         <span class="badge badge-success">Correo enviado</span>
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 

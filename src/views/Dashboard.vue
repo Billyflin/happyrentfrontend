@@ -1,15 +1,16 @@
 <template>
   <div class="container-fluid mt-5">
+    {{ store.isDarkMode ? 'Dark Mode' : 'Light Mode'}}
     <div class="row">
       <!-- Renta por región (gráfico de barras) -->
       <div v-if="rentaPorRegionChart.xAxislDatas.length" class="col-12 mb-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Renta por Región</h6>
+        <div class="card shadow-sm">
+          <div class="card-header text-center">
+            <h4 class="mb-0">Renta por Región</h4>
           </div>
-          <div class="card-body p-3 mt-4 mb-4">
-            <bar-chart-dashboard :id="'chart-renta-region'" :chart="rentaPorRegionChart" />
-            <h6 class="mt-4">Renta por Región</h6>
+          <div class="card-body">
+            <bar-chart-dashboard :id="'chart-renta-region'" :chart="rentaPorRegionChart"/>
+            <h6>Renta por Región</h6>
             <p>Renta generada por propiedades en diferentes regiones.</p>
           </div>
         </div>
@@ -94,7 +95,9 @@
         </div>
       </div>
     </div>
-    propiedadesData: {{ propiedadesData }}, contratosData: {{ contratosData }}
+    <div class="row" v-if="propiedadesData.length===0 && contratosData===0 ">
+      <div class="alert alert-info text-light text-center">No hay datos para mostrar</div>
+    </div>
   </div>
 </template>
 
@@ -105,6 +108,7 @@ import PieChart from '@/examples/Charts/PieChart.vue'
 import BarChart from '@/examples/Charts/BarChart.vue'
 import LineChart from '@/examples/Charts/LineChart.vue'
 import BarChartDashboard from '@/examples/Charts/BarChartDashboard.vue'
+import { useAppStore } from '@/store/index.js'
 
 export default {
   name: 'Dashboard',
@@ -244,6 +248,10 @@ export default {
   mounted() {
     this.fetchPropiedadesData()
     this.fetchContratosData()
+  },
+  setup() {
+    const store = useAppStore()
+    return { store }
   }
 }
 
