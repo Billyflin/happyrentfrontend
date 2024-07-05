@@ -77,10 +77,9 @@
             </div>
           </div>
         </div>
-        <div v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo">
+        <div class="mt-4" v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo">
           <!--    dropzone para documentos -->
           <div class="file-dropzone">
-            <label for="idDropzone">Documentos</label>
             <div id="idDropzone" class="dropzone"></div>
           </div>
         </div>
@@ -211,20 +210,59 @@ export default {
     onMounted(() => {
       toggleEveryDisplay()
       if (props.carnet || props.liquidaciones || props.certificadoAFP || props.carpetaTributaria || props.certificadoDicom || props.contratoTrabajo) {
-
-
         dropzone.value = new Dropzone('#idDropzone', {
-          url: '/',
+          url: '/', // URL de destino para la carga
           autoProcessQueue: false,
-          acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx'
-
-
-        })
-        dropzone.value.on('addedfile', (file) => {
-          files.value.push(file)
-        })
-        dropzone.value.on('removedfile', (file) => {
-          files.value = files.value.filter(f => f !== file)
+          acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx',
+          dictDefaultMessage: "Arrastra los archivos aquí o haz clic para subir documentos",
+          maxFilesize: 5, // Tamaño máximo del archivo en MB
+          previewTemplate: `
+            <div class="dz-preview dz-file-preview card">
+              <div class="card-body d-flex align-items-center row">
+                <div class="dz-thumbnail col-12 d-flex justify-content-center">
+                  <i class="fas fa-file-alt fa-3x" data-dz-thumbnail></i>
+                </div>
+                <div class="dz-info flex-grow-1 col-12">
+                  <div class="dz-filename font-weight-bold"><span data-dz-name></span></div>
+                  <div class="dz-size text-muted" data-dz-size></div>
+                  <div class="dz-error-message text-danger mt-2"><span data-dz-errormessage></span></div>
+                </div>
+                <div class="dz-remove col-12">
+                  <button class="btn btn-danger btn-sm" data-dz-remove>Eliminar</button>
+                </div>
+              </div>
+            </div>
+          `,
+          init: function() {
+            this.on('addedfile', (file) => {
+              files.value.push(file)
+              // Cambiar el icono del thumbnail según la extensión del archivo
+              const iconElement = file.previewElement.querySelector('[data-dz-thumbnail]')
+              const fileType = file.name.split('.').pop().toLowerCase()
+              switch (fileType) {
+                case 'pdf':
+                  iconElement.className = 'fas fa-file-pdf fa-3x'
+                  break
+                case 'doc':
+                case 'docx':
+                  iconElement.className = 'fas fa-file-word fa-3x'
+                  break
+                case 'xls':
+                case 'xlsx':
+                  iconElement.className = 'fas fa-file-excel fa-3x'
+                  break
+                default:
+                  iconElement.className = 'fas fa-file-alt fa-3x'
+              }
+            })
+            this.on('removedfile', (file) => {
+              files.value = files.value.filter(f => f !== file)
+            })
+            this.on('error', (file, message) => {
+              alert(message); // Mostrar mensaje de error
+              this.removeFile(file); // Eliminar archivo de la lista
+            })
+          }
         })
       }
     })
@@ -247,3 +285,12 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.file-dropzone {
+  border: 2px dashed #13505B;
+  border-radius: 5px;
+  text-align: center;
+  cursor: pointer;
+}
+</style>

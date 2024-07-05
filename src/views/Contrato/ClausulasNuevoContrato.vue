@@ -247,17 +247,23 @@ export default {
       </div>
 
       <div class="col-lg-10 mt-lg-0 mt-4">
-        <div class=" card">
+        <div class="contrato card">
 
           <div class="row">
             <div class="card-body col-lg-10 mt-lg-0 mt-4 text-center">
               <!--              titulo-->
               <div class="row align-items-center">
                 <div class="col-9 mb-3">
-                  <h1 class="text-center">Clausulas del contrato</h1>
-                  <material-badge class="badge badge-danger"> Esta es solo una vista preliminar.</material-badge>
-                  <p class="text-center">El documento final tendra una apariencia levemente diferente pero el contenido
-                    de las clausulas será exactamente el mismo.</p>
+                  <div class="row">
+                    <div class="col-12">
+                      <h1 class="text-center titulo-contrato">Clausulas del contrato</h1>
+                      <material-badge class="badge badge-warning mb-4"> Esta es solo una vista preliminar.</material-badge>
+                      <p class="text-center clase">El documento final tendra una apariencia levemente diferente pero el contenido
+                        de las clausulas será exactamente el mismo. Para editar el contenido de una clausula,
+                        puedes hacer click en editar y luego hacer click en el texto que quieres editar.
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
 
@@ -272,7 +278,7 @@ export default {
                     </div>
                   </div>
                   <div class="mb-3 mt-3 ms-3">
-                    <p ref="Comparecencia" :contenteditable="comparecenciaEdit" class="text-justify">
+                    <p ref="Comparecencia" :contenteditable="comparecenciaEdit" class="text-justify clase">
                       En Santiago, a {{ formatDate(Date.now()) }}, comparecen: por una parte,
                       <strong> PROPIETARIA </strong>
                       <template v-if="store2.propiedad.propietario.type === 'persona'">

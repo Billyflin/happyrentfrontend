@@ -42,19 +42,19 @@ export default {
 
       <ul class="nav flex-column bg-white border-radius-lg p-3">
         <li class="nav-item">
-          <a class="nav-link text-dark d-flex" data-scroll href="#profile">
+          <a class="nav-link d-flex" data-scroll href="#profile">
             <i class="material-icons text-lg me-2">person</i>
             <span class="text-sm">Perfil</span>
           </a>
         </li>
         <li class="nav-item pt-2">
-          <a class="nav-link text-dark d-flex" data-scroll href="#basic-info">
+          <a class="nav-link d-flex" data-scroll href="#basic-info">
             <i class="material-icons text-lg me-2">receipt_long</i>
             <span class="text-sm">Basic Info</span>
           </a>
         </li>
         <li class="nav-item pt-2">
-          <a class="nav-link text-dark d-flex" data-scroll href="#password">
+          <a class="nav-link d-flex" data-scroll href="#password">
             <i class="material-icons text-lg me-2">lock</i>
             <span class="text-sm">Change Password</span>
           </a>

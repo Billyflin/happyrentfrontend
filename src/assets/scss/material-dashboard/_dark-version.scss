@@ -82,14 +82,55 @@
     }
 
     &.bg-white {
-      .collapse {
         .nav-item {
           .nav-link {
-            &.active.text-dark {
+              color: $white !important;
+
+            &.active {
               i,
               .nav-link-text {
                 color: $dark !important;
               }
+            }
+          }
+      }
+    }
+  }
+
+  .nav {
+    &.bg-white {
+      .nav-item {
+        .nav-link {
+          color: $dark-version-body-color; // Establece el color del enlace normal
+
+          i {
+            color: $dark-version-body-color; // Establece el color del icono normal
+          }
+
+          span {
+            color: $dark-version-body-color; // Establece el color del texto normal
+          }
+
+          &:hover {
+            color: $dark; // Establece el color del enlace al pasar el ratón
+            i {
+              color: $dark; // Establece el color del icono al pasar el ratón
+            }
+            span {
+              color: $dark; // Establece el color del texto al pasar el ratón
+            }
+          }
+
+          &.active {
+            color: $white !important; // Establece el color del enlace activo
+            i {
+              color: $white !important; // Establece el color del icono activo
+            }
+            .nav-link-text {
+              color: $white !important; // Establece el color del texto del enlace activo
+            }
+            span {
+              color: $white !important; // Establece el color del texto activo
             }
           }
         }
@@ -140,6 +181,9 @@
     }
   }
 
+
+
+
   .card,
   .swal2-popup,
   .dropdown .dropdown-menu,
@@ -152,8 +196,19 @@
     }
 
     p {
-      color: $white !important;
-      opacity: 0.6;
+      color: $white ;
+    }
+
+    h1.titulo-contrato {
+      color:  $happLight !important;
+    }
+
+    .clase {
+      color: $white ;
+      text-align: justify; // Ejemplo de alineación de texto, puedes cambiar esto según tus necesidades
+      strong {
+        color: $happLight !important;
+      }
     }
   }
 
@@ -163,8 +218,7 @@
   }
 
   .swal2-html-container {
-    color: $white !important;
-    opacity: 0.6;
+    color: $dark-version-body-color !important;
   }
 
   h1,
@@ -182,7 +236,7 @@
   a:not(.dropdown-item):not(.choices__item):not(.leaflet-control-zoom-in):not(.leaflet-control-zoom-out):not(.btn):not(.nav-link):not(.fixed-plugin-button),
   .table thead tr th,
   .kanban-title-board {
-    color: $white !important;
+    color: $dark-version-body-color !important;
   }
 
   .input-group {
@@ -191,6 +245,8 @@
       .form-control {
         background-image: $dark-version-input-bg-image !important;
         background-size: 0 100%, 100% 100%;
+        color: $white;
+
 
         &:focus {
           background-size: 100% 100%, 100% 100%;
@@ -224,7 +280,7 @@
   }
 
   label {
-    color: $dark-version-body-color !important;
+    color: $dark-version-label-color !important;
   }
 
   .list-group-item,
@@ -262,6 +318,14 @@
   }
 
   .choices {
+    .choices__inner.is-disabled {
+      color: $dark-version-label-color;
+    }
+
+    .choices__inner {
+      color: $white;
+    }
+
     .choices__input {
       background-color: transparent !important;
       border-bottom: 1px solid $dark-version-border-color;
@@ -270,9 +334,24 @@
 
     .choices__list.choices__list--dropdown {
       background: $dark-version-card-bg-color;
-      box-shadow: $dark-version-card-box-shadow;
+      color: $white;
+    }
+
+    .choices__list--multiple .choices__item {
+      background-color: $dark-version-card-bg-color;
+      color: $white;
+      border: 1px solid $dark-version-border-color;
+      border-radius: 4px;
+      margin: 0.2rem;
+      padding: 0.2rem 0.5rem;
+    }
+
+
+    .choices__item.choices__item--disabled {
+      color: $dark-version-label-color;
     }
   }
+
 
   // Fullcalendar changes
   .fc-theme-standard td,
@@ -379,14 +458,10 @@
     opacity: $modal-backdrop-opacity !important;
   }
 
-  // Opcional: Si deseas que los botones también tengan estilo oscuro
-  .modal-footer .btn {
-    color: $white !important;
-    background-color: $dark-version-card-bg-color !important;
-    border-color: $modal-content-border-color !important;
-  }
 
-  .modal-footer .btn:hover {
-    background-color: lighten($dark-version-card-bg-color, 10%) !important;
+  .dropzone{
+    background-color: $dark-version-bg-color !important;
+    color: $white !important;
+    border-color: $dark-version-border-color !important;
   }
 }
