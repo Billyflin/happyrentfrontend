@@ -87,28 +87,29 @@ export default {
     if (this.type === 'rut') {
       return {
         internalValue: {
-          required: helpers.withMessage('Rut es requerido',
-            required
-          ),
-          validRut: helpers.withMessage('Rut inválido',
-            value => {
-              // Elimina los puntos y valida el formato
-              let cleanValue = value.replace(/\./g, '')
-              if (!/^[0-9]+-[0-9kK]{1}$/.test(cleanValue)) return false
+          required: helpers.withMessage('Rut es requerido', required),
+          validRut: helpers.withMessage('Rut inválido', value => {
+            let cleanValue = value.replace(/\./g, '').replace(/-/g, '');
+            if (!/^[0-9]+[0-9kK]{1}$/.test(cleanValue)) return false
 
-              let [rut, dv] = cleanValue.split('-')
-              let total = 0
-              let factor = 2
-              for (let i = rut.length - 1; i >= 0; i--) {
-                total += rut.charAt(i) * factor
-                factor = factor === 7 ? 2 : factor + 1
-              }
-              let expectedDv = 11 - (total % 11)
-              if (expectedDv === 11) expectedDv = '0'
-              if (expectedDv === 10) expectedDv = 'K'
-              return dv.toUpperCase() === expectedDv.toString()
+            let rut = cleanValue.slice(0, -1);
+            let dv = cleanValue.slice(-1);
+
+            let total = 0;
+            let factor = 2;
+            for (let i = rut.length - 1; i >= 0; i--) {
+              total += rut.charAt(i) * factor;
+              factor = factor === 7 ? 2 : factor + 1;
             }
-          )
+            let expectedDv = 11 - (total % 11);
+            if (expectedDv === 11) expectedDv = '0';
+            if (expectedDv === 10) expectedDv = 'K';
+            if (dv.toUpperCase() !== expectedDv.toString()) return false;
+
+            // Formatear y asignar el valor del RUT
+            this.internalValue = formatRut(cleanValue);
+            return true;
+          })
         }
       }
     }
@@ -223,5 +224,20 @@ export default {
       return this.size ? `form-control-${this.size}` : null
     }
   }
+}
+function formatRut(value) {
+  let cleanValue = value.replace(/\./g, '').replace(/-/g, '');
+
+  let dv = cleanValue.slice(-1);
+  let rut = cleanValue.slice(0, -1);
+
+  let formattedRut = '';
+  while (rut.length > 3) {
+    formattedRut = '.' + rut.slice(-3) + formattedRut;
+    rut = rut.slice(0, -3);
+  }
+  formattedRut = rut + formattedRut + '-' + dv.toUpperCase();
+
+  return formattedRut;
 }
 </script>

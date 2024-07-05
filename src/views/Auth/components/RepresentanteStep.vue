@@ -21,9 +21,8 @@ export default {
   data() {
     return {
       pronombres: [
-        { value: 'Sr.', text: 'Sr.' },
-        { value: 'Sra.', text: 'Sra.' },
-        { value: 'Srta.', text: 'Srta.' }
+        { value: 'Don.', text: 'Don' },
+        { value: 'Doña.', text: 'Doña' }
       ],
       opcionsEstadoCivil: [
         { value: 'Soltero', text: 'Soltero' },
@@ -47,6 +46,7 @@ export default {
         apellidoMaterno: '',
         telefono: '',
         ocupacion: '',
+        fechaNacimiento: '',
         email: '',
         estadoCivil: '',
         nacionalidad: '',
@@ -124,7 +124,6 @@ export default {
           <MaterialChoices id="pronombres" v-model:text-choice="representante.tratamiento" :options="pronombres"
                            label="Pronombres" name="Pronombres" />
         </div>
-        <div class="col-1" />
         <div class="col-sm-2  mt-4">
           <material-input
             id="Rut"
@@ -135,7 +134,7 @@ export default {
             variant="static"
           />
         </div>
-        <div class="col-3 mt-4">
+        <div class="col-4 mt-4">
           <material-input
             id="emailRepresentanteLegal"
             v-model="representante.email"
@@ -145,7 +144,7 @@ export default {
             variant="static"
           />
         </div>
-        <div class="col-3 mt-4">
+        <div class="col-4 mt-4">
           <material-input
             id="confirmEmailRepresentanteLegal"
             label="Confimar Email"
@@ -158,15 +157,26 @@ export default {
 
       </div>
       <div class="row mt-4">
-        <div class="col-md-3">
+        <div class="col-md-2">
           <MaterialChoices id="estadoCivil" v-model:text-choice="representante.estadoCivil"
                            :options="opcionsEstadoCivil" label="Estado Civil"
                            name="estadoCivil"
           />
         </div>
-        <div class="col-md-3">
+        <div class="col-md-2">
           <MaterialChoices id="nacionalidad" v-model:text-choice="representante.nacionalidad" :options="nacionalidad"
                            label="Nacionalidad" name="Nacionalidad" />
+        </div>
+        <div class="col-md-2">
+          <material-input
+            id="FechaNacimientoRepresentanteLegal"
+            v-model="representante.fechaNacimiento"
+            is-required
+            label="Fecha de Nacimiento"
+            placeholder="dd/mm/aaaa"
+            type="date"
+            variant="static"
+          />
         </div>
         <div class="col-sm-3">
           <material-input

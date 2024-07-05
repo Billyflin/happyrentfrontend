@@ -7,21 +7,23 @@
     </div>
     <div class="card-body pt-4 p-3">
       <div class="row">
-        <div class="col-md-4 mt-4">
+        <div class="col-md-3 mt-4">
           <material-input id="nombres" v-model="persona.nombre" is-required label="Nombres" variant="dynamic" />
         </div>
-        <div class="col-md-4 mt-4">
+        <div class="col-md-3 mt-4">
           <material-input id="apellidoPaterno" v-model="persona.apellidoPaterno" is-required label="Apellido Paterno"
                           variant="dynamic" />
         </div>
-        <div class="col-md-4 mt-4">
+        <div class="col-md-3 mt-4">
           <material-input id="apellidoMaterno" v-model="persona.apellidoMaterno" is-required label="Apellido Materno"
                           variant="dynamic" />
         </div>
-        <div class="col-md-2 mt-5">
+        <div class="col-md-3 mt-4">
           <material-input id="rut" v-model="persona.rut" is-required label="RUT" type="rut"
                           variant="dynamic" />
         </div>
+        </div>
+        <div class="row mt-4">
         <div class="col-md-3 mt-4">
           <MaterialChoices id="estadoCivil" v-model:text-choice="persona.estadoCivil"
                            :options="opcionsEstadoCivil" label="Estado Civil" name="estadoCivil" />
@@ -34,15 +36,40 @@
           <material-input id="ocupacion" v-model="persona.ocupacion" is-required label="Ocupación" type="text"
                           variant="dynamic" />
         </div>
-        <div class="col-md-4 mt-2">
+          <div class="col-md-2  mt-4">
+            <MaterialChoices id="pronombres" v-model:text-choice="persona.tratamiento" :options="pronombres"
+                             label="Pronombres" name="Pronombres" />
+          </div>
+        <div class="col-md-2 mt-4">
           <material-input id="telefono" v-model="persona.telefono" is-required label="Teléfono" placeholder="9 xxxxxxxx"
                           type="telefono"
                           variant="static" />
         </div>
-        <div class="col-md-6 mt-4">
+          <div class="col-md-2 mt-4">
+            <material-input
+              id="FechaNacimientoRepresentanteLegal"
+              v-model="persona.fechaNacimiento"
+              is-required
+              label="Fecha de Nacimiento"
+              placeholder="dd/mm/aaaa"
+              type="date"
+              variant="static"
+            />
+          </div>
+        <div class="col-md-4 mt-4">
           <material-input id="email" v-model="persona.email" is-required label="Email" type="text"
-                          variant="dynamic" />
+                          variant="static" />
         </div>
+          <div class="col-4 mt-4">
+            <material-input
+              id="confirmEmailRepresentanteLegal"
+              label="Confimar Email"
+              placeholder="Confirma Email"
+              type="email"
+              variant="static"
+
+            />
+          </div>
         <LocalidadForm v-model="persona.direccion" />
       </div>
     </div>
@@ -96,6 +123,10 @@ export default {
   },
   data() {
     return {
+      pronombres: [
+        { value: 'Don.', text: 'Don' },
+        { value: 'Doña.', text: 'Doña' }
+      ],
       opcionsEstadoCivil: [
         { value: 'soltero', text: 'Soltero' },
         { value: 'casado', text: 'Casado' },
