@@ -14,7 +14,7 @@ export default {
     const auth = useAuthStore()
     const archivoPrevisualizado = ref(null)
     const mostrarModal = ref(false)
-    const mostrarModalConfirmacion = ref(true)
+    const mostrarModalConfirmacion = ref(false)
     const archivoSeleccionado = ref(null)
 
     const previsualizarArchivo = (archivo) => {
