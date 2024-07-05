@@ -1,7 +1,53 @@
 <template>
   <div class="container-fluid mt-5">
-    {{ store.isDarkMode ? 'Dark Mode' : 'Light Mode'}}
     <div class="row">
+      <!-- Propiedades arrendadas o no -->
+      <div v-if="propiedadesArrendadasChart.labels.length" class="col-12 col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header text-center">
+            <h4 class="mb-0">Propiedades Arrendadas</h4>
+          </div>
+          <div class="card-body p-3 mb-4">
+            <div class="row">
+                <pie-chart :id="'chart-arrendadas'" :chart="propiedadesArrendadasChart" is-boolean-chart />
+
+                <h6 class="mt-4 text-sm">Propiedades Arrendadas vs No Arrendadas</h6>
+                <p class="text-sm">Comparación de propiedades arrendadas y no arrendadas.
+                </p>
+              </div>
+          </div>
+        </div>
+      </div>
+      <!-- Contratos activos -->
+      <div v-if="contratosActivosChart.labels.length" class="col-12 col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header text-center">
+            <h4 class="mb-0">Contratos Activos</h4>
+          </div>
+          <div class="card-body p-3 mb-4">
+                <pie-chart :id="'chart-contratos-activos'" :chart="contratosActivosChart" is-boolean-chart />
+
+                <h6 class="mt-4 text-sm">Estado de los Contratos</h6>
+                <p class="text-sm">Comparación entre contratos activos e inactivos.
+                  Esto indica los contratos que estan vigentes y los que ya han finalizado.
+                </p>
+          </div>
+        </div>
+      </div>
+      <!-- Propiedades por región -->
+      <div v-if="propiedadesPorRegionChart.labels.length" class="col-12 col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header text-center">
+            <h4 class="mb-0">Propiedades por Región</h4>
+          </div>
+          <div class="card-body p-3">
+            <pie-chart :id="'chart-region'" :chart="propiedadesPorRegionChart" />
+            <h6 class="mt-4 text-sm">Propiedades por Región</h6>
+            <p class="text-sm">Información sobre la distribución de propiedades por región.</p>
+          </div>
+        </div>
+      </div>
+
       <!-- Renta por región (gráfico de barras) -->
       <div v-if="rentaPorRegionChart.xAxislDatas.length" class="col-12 mb-4">
         <div class="card shadow-sm">
@@ -15,65 +61,29 @@
           </div>
         </div>
       </div>
-      <!-- Propiedades por región -->
-      <div v-if="propiedadesPorRegionChart.labels.length" class="col-12 col-md-6 mb-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Propiedades por Región</h6>
-          </div>
-          <div class="card-body p-3 mt-4 mb-4">
-            <pie-chart :id="'chart-region'" :chart="propiedadesPorRegionChart" />
-            <h6 class="mt-4">Propiedades por Región</h6>
-            <p>Información sobre la distribución de propiedades por región.</p>
-          </div>
-        </div>
-      </div>
-      <!-- Contratos activos -->
-      <div v-if="contratosActivosChart.labels.length" class="col-12 col-md-6 mb-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Contratos Activos</h6>
-          </div>
-          <div class="card-body p-3 mt-4 mb-4">
-            <pie-chart :id="'chart-contratos-activos'" :chart="contratosActivosChart" is-boolean-chart />
-            <h6 class="mt-4">Estado de los Contratos</h6>
-            <p>Comparación entre contratos activos e inactivos.</p>
-          </div>
-        </div>
-      </div>
+
       <!-- Propiedades por tipo de propietario -->
-      <div v-if="propiedadesPorTipoPropietarioChart.labels.length" class="col-12 col-md-6 mb-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Propiedades por Tipo de Propietario</h6>
+      <div v-if="propiedadesPorTipoPropietarioChart.labels.length" class="col-12 col-md-4 mb-4">
+        <div class="card shadow-sm">
+          <div class="card-header text-center">
+            <h4 class="mb-0">Propiedades por Tipo de Propietario</h4>
           </div>
-          <div class="card-body p-3 mt-4 mb-4">
+          <div class="card-body p-3">
             <pie-chart :id="'chart-propietario'" :chart="propiedadesPorTipoPropietarioChart" />
             <h6 class="mt-4">Propiedades por Tipo de Propietario</h6>
             <p>Distribución de propiedades según el tipo de propietario.</p>
           </div>
         </div>
       </div>
-      <!-- Propiedades arrendadas o no -->
-      <div v-if="propiedadesArrendadasChart.labels.length" class="col-12 col-md-6 mb-4">
-        <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Propiedades Arrendadas</h6>
-          </div>
-          <div class="card-body p-3 mt-4 mb-4">
-            <pie-chart :id="'chart-arrendadas'" :chart="propiedadesArrendadasChart" is-boolean-chart />
-            <h6 class="mt-4">Propiedades Arrendadas vs No Arrendadas</h6>
-            <p>Comparación de propiedades arrendadas y no arrendadas.</p>
-          </div>
-        </div>
-      </div>
+
+
       <!-- Tipos de propiedad -->
-      <div v-if="tiposDePropiedadChart.labels.length" class="col-12 col-md-6 mb-4">
+      <div v-if="tiposDePropiedadChart.labels.length" class="col-12 col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Tipos de Propiedad</h6>
+          <div class="card-header text-center">
+            <h4 class="mb-0">Tipos de Propiedad</h4>
           </div>
-          <div class="card-body p-3 mt-4 mb-4">
+          <div class="card-body p-3 mb-4">
             <pie-chart :id="'chart-tipos'" :chart="tiposDePropiedadChart" />
             <h6 class="mt-4">Distribución por Tipo de Propiedad</h6>
             <p>Tipos de propiedades y su distribución.</p>
@@ -82,21 +92,21 @@
       </div>
 
       <!-- Contratos por mes (gráfico de barras) -->
-      <div v-if="contratosPorMesChart.xAxislDatas.length" class="col-12 col-md-6 mb-4">
+      <div v-if="contratosPorMesChart.xAxislDatas.length" class="col-12 col-md-4 mb-4">
         <div class="card h-100 shadow-sm">
-          <div class="card-header p-3 text-white d-flex justify-content-between">
-            <h6 class="mb-0">Contratos por Mes</h6>
+          <div class="card-header text-center">
+            <h4 class="mb-0">Contratos por Mes</h4>
           </div>
-          <div class="card-body p-3 mt-4 mb-4">
-            <bar-chart-dashboard :id="'chart-contratos-mes'" :chart="contratosPorMesChart" />
+          <div class="card-body p-3 mb-4">
+            <bar-chart-dashboard :id="'chart-contratos-mes'" :chart="contratosPorMesChart" height="200"/>
             <h6 class="mt-4">Contratos por Mes</h6>
             <p>Distribución mensual de los contratos.</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="row" v-if="propiedadesData.length===0 && contratosData===0 ">
-      <div class="alert alert-info text-light text-center">No hay datos para mostrar</div>
+    <div class="row" v-if="propiedadesData.length>=0 && contratosData>=0 ">
+      <div class="alert alert-primary text-light text-center">No hay datos para mostrar</div>
     </div>
   </div>
 </template>

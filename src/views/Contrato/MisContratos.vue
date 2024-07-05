@@ -5,13 +5,13 @@
         <div class="pb-0 card-header d-flex align-items-center justify-content-between">
           <h5>Contratos</h5>
         </div>
-        <MyDataTableContratos
-          :deletable="true"
-          :editable="true"
-          :headers="headers"
-          :isLoading="isLoading"
-          :tableData="tableData"
-        />
+          <MyDataTableContratos
+            :deletable="true"
+            :editable="true"
+            :headers="headers"
+            :isLoading="isLoading"
+            :tableData="tableData"
+          />
       </div>
     </div>
   </div>

@@ -60,6 +60,10 @@ export default {
       type: Boolean,
       default: false
     },
+    details: {
+      type: Boolean,
+      default: false
+    },
     isLoading: {
       type: Boolean,
       default: true,
@@ -101,6 +105,10 @@ export default {
     handleDelete(row) {
       this.$emit('delete', row)
       console.log('Delete:', row)
+    },
+    handleDetails(row) {
+      this.$emit('details', row)
+      console.log('Details:', row)
     },
     populateTable() {
       if (this.dataTable) {
@@ -153,7 +161,7 @@ export default {
           tr.appendChild(td)
         })
 
-        if (this.deletable || this.editable) {
+        if (this.deletable || this.editable || this.details) {
           const actionTd = document.createElement('td')
           actionTd.className = 'align-middle'
 
@@ -162,16 +170,23 @@ export default {
 
           if (this.editable) {
             const editContainer = document.createElement('div')
-            editContainer.className = 'my-sm-auto mt-2 mb-0'
+            editContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
             this.mountButton(editContainer, 'primary', 'Editar', () => this.handleEdit(row), 'person_edit')
             actionContainer.appendChild(editContainer)
           }
 
           if (this.deletable) {
             const deleteContainer = document.createElement('div')
-            deleteContainer.className = 'my-sm-auto mt-2 mb-0 ms-2'
+            deleteContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
             this.mountButton(deleteContainer, 'danger', 'Eliminar', () => this.handleDelete(row), 'person_remove')
             actionContainer.appendChild(deleteContainer)
+          }
+
+          if (this.details) {
+            const detailsContainer = document.createElement('div')
+            detailsContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
+            this.mountButton(detailsContainer, 'primary', 'Detalles', () => this.verPersona(row), 'visibility')
+            actionContainer.appendChild(detailsContainer)
           }
 
           actionTd.appendChild(actionContainer)
@@ -190,6 +205,7 @@ export default {
             color,
             size: 'sm',
             variant: 'gradient',
+            class: 'd-flex align-items-center justify-content-center', // Alineación centrada
             onClick
           }, {
             default: () => [

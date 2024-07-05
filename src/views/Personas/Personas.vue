@@ -89,6 +89,10 @@ function handleDelete(row) {
   console.log('Delete Row:', row) // Log the row data for deletion
 }
 
+function handleDetails(row) {
+  console.log('Details Row:', row) // Log the row data for details
+}
+
 </script>
 
 <template>
@@ -130,7 +134,7 @@ function handleDelete(row) {
     </div>
     <div class="row mb-6">
       <div class="col-lg-12">
-        <div class="card">
+        <div class="card p-3">
           <div class="pb-0 card-header d-flex align-items-center justify-content-between">
             <h5>Personas</h5>
             <router-link class="mt-2 mb-2 btn btn-happLight ml-auto d-flex align-items-center"
@@ -142,8 +146,7 @@ function handleDelete(row) {
             </router-link>
           </div>
           <MyDataTablePersonas
-            :deletable="true"
-            :editable="true"
+            :details="true"
             :headers="[
                 { key: 'nombre', title: 'Nombre' },
                 { key: 'rut', title: 'RUT' },
@@ -154,8 +157,7 @@ function handleDelete(row) {
               ]"
             :isLoading="isLoading"
             :tableData="perfiles"
-            @delete="handleDelete"
-            @edit="handleEdit"
+            @details="handleDetails"
           />
         </div>
       </div>

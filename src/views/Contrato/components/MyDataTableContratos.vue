@@ -1,5 +1,5 @@
 <template>
-  <div v-if="tableData.length > 0" class="table-responsive">
+  <div v-if="tableData.length > 0" class="table-responsive p-3">
     <table ref="dataTable" class="table table-flush table-hover">
       <thead>
       <tr>
@@ -167,25 +167,33 @@ ${row.direccionCalle} ${row.direccionNumero}, ${row.direccionCiudad},
           tr.appendChild(td)
         })
 
-        if (this.deletable || this.editable) {
+        if (this.deletable || this.editable|| this.details) {
           const actionTd = document.createElement('td')
           actionTd.className = 'align-middle'
 
           const actionContainer = document.createElement('div')
           actionContainer.className = 'd-flex justify-content-center'
 
+
           if (this.editable) {
             const editContainer = document.createElement('div')
-            editContainer.className = 'my-sm-auto mt-2 mb-0'
+            editContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
             this.mountButton(editContainer, 'primary', 'Editar', () => this.handleEdit(row), 'person_edit')
             actionContainer.appendChild(editContainer)
           }
 
           if (this.deletable) {
             const deleteContainer = document.createElement('div')
-            deleteContainer.className = 'my-sm-auto mt-2 mb-0 ms-2'
+            deleteContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
             this.mountButton(deleteContainer, 'danger', 'Eliminar', () => this.handleDelete(row), 'person_remove')
             actionContainer.appendChild(deleteContainer)
+          }
+
+          if (this.details) {
+            const detailsContainer = document.createElement('div')
+            detailsContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
+            this.mountButton(detailsContainer, 'primary', 'Detalles', () => this.handleDetails(row), 'visibility')
+            actionContainer.appendChild(detailsContainer)
           }
 
           actionTd.appendChild(actionContainer)
@@ -204,6 +212,7 @@ ${row.direccionCalle} ${row.direccionNumero}, ${row.direccionCiudad},
             color,
             size: 'sm',
             variant: 'gradient',
+            class: 'd-flex align-items-center justify-content-center', // Alineación centrada
             onClick
           }, {
             default: () => [
@@ -217,6 +226,7 @@ ${row.direccionCalle} ${row.direccionNumero}, ${row.direccionCiudad},
         }
       }).mount(container)
     },
+
     initializeDataTable() {
       if (this.$refs.dataTable) {
         this.dataTable = new DataTable(this.$refs.dataTable, {

@@ -19,7 +19,7 @@
     </div>
     <div class="row mt-4">
       <div v-if="auth.propiedades.length === 0" class="col-12">
-        <div class="alert alert-info text-light text-center">No tienes propiedades registradas</div>
+        <div class="alert alert-primary text-light text-center">No tienes propiedades registradas</div>
       </div>
       <div v-for="propiedad in auth.propiedades" :key="propiedad.id" class="col-lg-4 col-md-6 mb-8">
         <propiedades-card

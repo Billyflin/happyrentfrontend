@@ -15,7 +15,7 @@ const props = defineProps({
   },
   height: {
     type: [Number, String],
-    default: '400'
+    default: '300'
   },
   chart: {
     type: Object,
@@ -93,7 +93,7 @@ const renderChart = () => {
       left: '8',
       right: '8',
       bottom: '2%',
-      top: '2%',
+      top: '4%',
       containLabel: true
     },
     tooltip: {
