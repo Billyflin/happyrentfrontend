@@ -1,5 +1,6 @@
 <template>
-  <div v-if="mostrarModalConfirmacion" class="modal fade show" style="display: block;" tabindex="-1">
+  <div v-if="mostrarModalConfirmacion" class="modal-backdrop" style="z-index: 10000"></div>
+  <div v-if="mostrarModalConfirmacion" class="modal fade show " style="display: block;" tabindex="-1">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">

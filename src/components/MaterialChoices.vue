@@ -1,6 +1,6 @@
 <template>
-  <div :class="`input-group-${variant}`" class="form-group">
-    <label :for="id" class="form-label">{{ label }}</label>
+  <div :class="`input-group-${variant} input-group`" class="form-group">
+    <label v-if="showLabel" :for="id" :class="variant === 'static' ? '' : 'form-label'">{{ label }}</label>
     <select :id="id"
             ref="choicesElement"
             v-model="selectedValue"
@@ -29,6 +29,10 @@ export default {
     label: {
       type: String,
       default: ''
+    },
+    showLabel: {
+      type: Boolean,
+      default: true
     },
     variant: {
       type: String,

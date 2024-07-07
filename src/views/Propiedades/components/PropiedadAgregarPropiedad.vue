@@ -6,6 +6,7 @@ import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 import Dropzone from 'dropzone'
 import MaterialButton from '@/components/MaterialButton.vue'
 import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
+import Casa from '@/views/Propiedades/components/Casa.vue'
 
 let myDropzone = null
 
