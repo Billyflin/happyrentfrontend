@@ -2,34 +2,71 @@
   <div class="col-lg-4">
     <h5 class="mb-3">Datos de Persona</h5>
     <ul class="list-group">
-      <li class="list-group-item text-start"><strong>Nombre:</strong> {{ auth.persona.nombre }}</li>
-      <li class="list-group-item text-start"><strong>Apellido Paterno:</strong>
-        {{ auth.persona.apellidoPaterno }}
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Nombre:</strong>
+        <span v-if="!editMode">{{ auth.persona.nombre }}</span>
+        <input v-else v-model="auth.persona.nombre" class="form-control w-60" />
       </li>
-      <li class="list-group-item text-start"><strong>Apellido Materno:</strong>
-        {{ auth.persona.apellidoMaterno }}
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Apellido Paterno:</strong>
+        <span v-if="!editMode">{{ auth.persona.apellidoPaterno }}</span>
+        <input v-else v-model="auth.persona.apellidoPaterno" class="form-control w-60" />
       </li>
-      <li class="list-group-item text-start"><strong>Tratamiento:</strong> {{ auth.persona.tratamiento }}
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Apellido Materno:</strong>
+        <span v-if="!editMode">{{ auth.persona.apellidoMaterno }}</span>
+        <input v-else v-model="auth.persona.apellidoMaterno" class="form-control w-60" />
       </li>
-      <li class="list-group-item text-start"><strong>Ocupación:</strong> {{ auth.persona.ocupacion }}</li>
-      <li class="list-group-item text-start"><strong>Estado Civil:</strong> {{ auth.persona.estadoCivil }}
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Tratamiento:</strong>
+        <span v-if="!editMode">{{ auth.persona.tratamiento }}</span>
+        <input v-else v-model="auth.persona.tratamiento" class="form-control w-60" />
       </li>
-      <li class="list-group-item text-start"><strong>Nacionalidad:</strong> {{ auth.persona.nacionalidad }}
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Ocupación:</strong>
+        <span v-if="!editMode">{{ auth.persona.ocupacion }}</span>
+        <input v-else v-model="auth.persona.ocupacion" class="form-control w-60" />
       </li>
-      <li class="list-group-item text-start"><strong>Fecha de Nacimiento:</strong>
-        {{ auth.persona.fechaNacimiento }}
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Estado Civil:</strong>
+        <span v-if="!editMode">{{ auth.persona.estadoCivil }}</span>
+        <input v-else v-model="auth.persona.estadoCivil" class="form-control w-60" />
       </li>
-      <li class="list-group-item text-start"><strong>Email:</strong> {{ auth.persona.email }}</li>
-      <li class="list-group-item text-start"><strong>Teléfono:</strong> {{ auth.persona.telefono }}</li>
-      <li class="list-group-item text-start"><strong>RUT:</strong> {{ auth.persona.rut }}</li>
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Nacionalidad:</strong>
+        <span v-if="!editMode">{{ auth.persona.nacionalidad }}</span>
+        <input v-else v-model="auth.persona.nacionalidad" class="form-control w-60" />
+      </li>
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Fecha de Nacimiento:</strong>
+        <span v-if="!editMode">{{ auth.persona.fechaNacimiento }}</span>
+        <input v-else v-model="auth.persona.fechaNacimiento" class="form-control w-60" type="date"/>
+      </li>
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Email:</strong>
+        <span v-if="!editMode">{{ auth.persona.email }}</span>
+        <input v-else v-model="auth.persona.email" class="form-control w-60" />
+      </li>
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">Teléfono:</strong>
+        <span v-if="!editMode">{{ auth.persona.telefono }}</span>
+        <input v-else v-model="auth.persona.telefono" class="form-control w-60" />
+      </li>
+      <li class="list-group-item text-start d-flex justify-content-between align-items-center">
+        <strong class="me-2">RUT:</strong>
+        <span v-if="!editMode">{{ auth.persona.rut }}</span>
+        <input v-else v-model="auth.persona.rut" class="form-control w-60" />
+      </li>
     </ul>
   </div>
 </template>
+
 <script>
 export default {
   name: 'ListaDatosPersona',
   props: {
-    auth: {}
+    auth: Object,
+    editMode: Boolean
   }
 }
 </script>

@@ -464,4 +464,10 @@
     color: $white !important;
     border-color: $dark-version-border-color !important;
   }
+
+  .form-control {
+    background-color: $dark-version-bg-color;
+    color: $white ;
+    border-color: $dark-version-border-color ;
+  }
 }
