@@ -129,8 +129,8 @@
 </template>
 
 <script setup>
-import { useAuthStore } from '@/store'
 import SidenavCollapse from './SidenavCollapse.vue'
+import { useAuthStore } from '@/store/authStore.js'
 
 const authStore = useAuthStore()
 defineProps({

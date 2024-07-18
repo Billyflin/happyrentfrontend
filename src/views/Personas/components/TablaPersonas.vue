@@ -43,13 +43,13 @@ export default {
   components: { MaterialButton },
   props: {
     headers: {
-      type: Array,
-      default: () => [],
+      type: Object,
+      default: () => {},
       required: true
     },
     tableData: {
-      type: Array,
-      default: () => [],
+      type: Object,
+      default: () => {},
       required: true
     },
     editable: {
@@ -115,8 +115,7 @@ export default {
         this.dataTable.destroy()
       }
 
-      const tbody = this.$refs.dataTable.querySelector('tbody')
-      tbody.innerHTML = '' // Clear existing rows
+      const tbody = this.$refs.dataTable
 
       this.tableData.forEach(row => {
         const tr = document.createElement('tr')

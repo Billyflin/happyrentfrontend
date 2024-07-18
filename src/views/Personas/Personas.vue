@@ -6,7 +6,7 @@ import axios from 'axios'
 import * as XLSX from 'xlsx'
 import FileSave from 'file-saver'
 
-const perfiles = ref({})
+const perfiles = ref([])
 const personas = ref(null)
 const empresas = ref(null)
 const isLoading = ref(true)
@@ -57,9 +57,10 @@ let flattenedPersonas = ref(null)
 let flattenedEmpresas = ref(null)
 onMounted(async () => {
   isLoading.value = true
-  const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`).then(
+  const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil/info`).then(
     response => {
       isLoading.value = false
+      console.log(response.data)
       return response
     }
   )
@@ -81,13 +82,6 @@ onMounted(async () => {
 
 })
 
-function handleEdit(row) {
-  console.log('Edit Row:', row) // Log the row data for editing
-}
-
-function handleDelete(row) {
-  console.log('Delete Row:', row) // Log the row data for deletion
-}
 
 function handleDetails(row) {
   console.log('Details Row:', row) // Log the row data for details

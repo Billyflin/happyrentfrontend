@@ -118,7 +118,7 @@ import PieChart from '@/examples/Charts/PieChart.vue'
 import BarChart from '@/examples/Charts/BarChart.vue'
 import LineChart from '@/examples/Charts/LineChart.vue'
 import BarChartDashboard from '@/examples/Charts/BarChartDashboard.vue'
-import { useAppStore } from '@/store/index.js'
+import { useAppStore } from '@/store/appStore.js'
 
 export default {
   name: 'Dashboard',
