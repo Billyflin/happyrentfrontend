@@ -1,5 +1,5 @@
 <template>
-  <div class="pt-3 bg-white multisteps-form__Panel" data-animation="FadeIn">
+  <div class="row">
     <div class="text-center row">
       <div class="mx-auto col-10">
         <h5 class="font-weight-normal">Datos bancarios</h5>
@@ -8,24 +8,24 @@
     <div class="multisteps-form__content">
       <div class="row mt-3">
         <div class="col-4 mb-4">
-          <material-input id="rut" v-model="bancario.rut" is-required label="Rut" type="rut" variant="dynamic" />
+          <material-input id="rut" v-model="bancario.rut" is-required label="Rut" type="rut" variant="static" placeholder="xx.xxx.xxx-x"/>
         </div>
         <div class="col-4 mb-4">
           <material-input id="numeroCuenta" v-model="bancario.numeroCuenta" is-required label="Número de cuenta"
                           type="String"
-                          variant="dynamic" />
+                          variant="static" />
         </div>
         <div class="col-4 mb-4">
-          <material-input id="email" v-model="bancario.email" is-required label="Email" type="text" variant="dynamic" />
+          <material-input id="email" v-model="bancario.email" is-required label="Email" type="text" variant="static" />
         </div>
         <div class="col-4 mb-4">
-          <material-choices id="banco" v-model:text-choice="bancario.banco" :options="bancos" label="Banco"
+          <material-choices id="banco" v-model:text-choice="bancario.banco" :options="bancos" label="Banco" variant="static"
                             name="banco" />
         </div>
         <div class="col-4 mb-4">
           <material-choices id="tipoCuenta" v-model:text-choice="bancario.cuenta" :options="cuentas"
                             label="Tipo de cuenta"
-                            name="tipoCuenta" />
+                            name="tipoCuenta" variant="static"/>
         </div>
       </div>
       <div class="mt-4 button-row d-flex">

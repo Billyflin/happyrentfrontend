@@ -122,7 +122,7 @@ export default {
       <div class="row mt-4">
         <div class="col-md-2  mt-4">
           <MaterialChoices id="pronombres" v-model:text-choice="representante.tratamiento" :options="pronombres"
-                           label="Pronombres" name="Pronombres" />
+                           label="Pronombres" name="Pronombres" variant="static" />
         </div>
         <div class="col-sm-2  mt-4">
           <material-input
@@ -160,12 +160,12 @@ export default {
         <div class="col-md-2">
           <MaterialChoices id="estadoCivil" v-model:text-choice="representante.estadoCivil"
                            :options="opcionsEstadoCivil" label="Estado Civil"
-                           name="estadoCivil"
+                           name="estadoCivil" variant="static"
           />
         </div>
         <div class="col-md-2">
           <MaterialChoices id="nacionalidad" v-model:text-choice="representante.nacionalidad" :options="nacionalidad"
-                           label="Nacionalidad" name="Nacionalidad" />
+                           label="Nacionalidad" name="Nacionalidad" variant="static"/>
         </div>
         <div class="col-md-2">
           <material-input
