@@ -81,9 +81,6 @@ export default {
     }
   },
   methods: {
-    logRowData(row) {
-      console.log(row)
-    },
     verContrato(contrato) {
       this.auth.contrato = contrato
       this.$router.push({ name: 'ContratoDetails', params: { id: contrato.id } })

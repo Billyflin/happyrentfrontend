@@ -113,7 +113,7 @@ const irANuevoContrato = () => {
 <style scoped>
 .image-standard {
   width: 100%;
-  height: 200px; /* Ajusta la altura según tus necesidades */
+  height: 300px; /* Ajusta la altura según tus necesidades */
   object-fit: cover; /* Esto asegura que la imagen se recorte adecuadamente si es necesario */
 }
 </style>

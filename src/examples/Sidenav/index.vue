@@ -29,7 +29,8 @@ import SidenavList from './SidenavList.vue'
 import logo from '@/assets/img/logos/LogoHappBlanco.svg'
 import logoDark from '@/assets/img/logos/LogoHapp.svg'
 import { storeToRefs } from 'pinia'
-import { useAppStore } from '@/store/index.js'
+import { useAppStore } from '@/store/appStore.js'
+
 
 const store = useAppStore()
 const { sidebarType, isDarkMode } = storeToRefs(store)
