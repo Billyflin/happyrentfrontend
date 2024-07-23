@@ -87,8 +87,8 @@
 import { computed, ref, onBeforeMount, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
+import { useAppStore } from '@/store/index.js'
 import { activateDarkMode, deactivateDarkMode } from '@/assets/js/dark-mode'
-import { useAppStore } from '@/store/appStore.js'
 
 const props = defineProps(['toggle'])
 const route = useRoute()

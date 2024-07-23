@@ -149,7 +149,7 @@ import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import MaterialInput from '@/components/MaterialInput.vue'
 import Breadcrumbs from '../Breadcrumbs.vue'
-import { useAppStore } from '@/store/appStore.js'
+import { useAppStore } from '@/store/index.js'
 
 const props = defineProps(['minNav', 'color'])
 const store = useAppStore()

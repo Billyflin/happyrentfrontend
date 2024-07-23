@@ -1,7 +1,7 @@
 <script>
 import MaterialAvatar from '@/components/MaterialAvatar.vue'
 import imagen from '@/assets/img/bruce-mars.jpg'
-import { useAuthStore } from '@/store/authStore.js'
+import { useAuthStore } from '@/store/index.js'
 
 export default {
   name: 'SideNav',

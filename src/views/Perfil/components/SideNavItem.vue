@@ -2,7 +2,7 @@
 import MaterialAvatar from '@/components/MaterialAvatar.vue'
 import MaterialSwitch from '@/components/MaterialSwitch.vue'
 import MaterialInput from '@/components/MaterialInput.vue'
-import { useAuthStore } from '@/store/authStore.js'
+import { useAuthStore } from '@/store/index.js'
 import MaterialButton from '@/components/MaterialButton.vue'
 import MaterialChoices from '@/components/MaterialChoices.vue'
 
