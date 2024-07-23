@@ -5,7 +5,7 @@
     <img
       alt="pattern-lines"
       class="page-header top-0 position-absolute opacity-8 start-0 w-100"
-      src="../../assets/img/bg-pricing.jpg"
+      src="../../assets/img/illustrations/pattern-tree.svg"
     />
     <router-link to="/">
       <img alt="logo-Happ" class="position-absolute z-index-3 top-3 start-1" height="150"
