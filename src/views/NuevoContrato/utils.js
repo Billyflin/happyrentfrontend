@@ -1,5 +1,4 @@
 // src/utils/utils.js
-import numberToWords from 'number-to-words';
 
 export function formatDate(date) {
   const d = new Date(date);
