@@ -47,7 +47,7 @@
         </div>
           <div class="col-md-2 mt-4">
             <material-input
-              id="FechaNacimientoRepresentanteLegal"
+              id="FechaNacimiento"
               v-model="persona.fechaNacimiento"
               is-required
               label="Fecha de Nacimiento"
@@ -74,20 +74,26 @@
       </div>
     </div>
   </div>
+  <div v-if="alertMessage" class="alert" :class="alertClass" role="alert">
+    {{ alertMessage }}
+  </div>
+
+  <!-- Formulario de persona -->
   <div class="row">
-    <material-button class="mt-2 mb-6" full-width size="lg" variant="success" @click="emitData"> Crear Persona
+    <material-button :disabled="isSending" class="mt-2 mb-6" full-width size="lg" variant="success" @click="emitData">
+      Crear Persona
     </material-button>
   </div>
 </template>
 <script>
 import { ref } from 'vue'
 import { useVuelidate } from '@vuelidate/core'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
-import MaterialButton from '@/components/MaterialButton.vue'
-import axios from 'axios'
 import router from '@/router/index.js'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
+import { postPersona } from '@/servicios/personasService.js'
 
 export default {
   components: {
@@ -104,6 +110,7 @@ export default {
       nombre: '',
       apellidoPaterno: '',
       apellidoMaterno: '',
+      fechaNacimiento: '',
       telefono: '',
       ocupacion: '',
       direccion: {
@@ -119,7 +126,11 @@ export default {
       estadoCivil: ''
     })
     const v$ = useVuelidate()
-    return { persona, v$ }
+    const isSending = ref(false)
+    const alertMessage = ref('')
+    const alertClass = ref('')
+
+    return { persona, v$, isSending, alertMessage, alertClass }
   },
   data() {
     return {
@@ -141,15 +152,25 @@ export default {
   },
   emits: ['update:persona', 'next:step'],
   methods: {
-    emitData() {
-      this.v$.$validate()
-      // console.log(this.v$)
-      // console.log(this.persona)
+    showAlert(message, type) {
+      this.alertMessage = message
+      this.alertClass = type === 'success' ? 'alert-success' : 'alert-danger'
+      setTimeout(() => {
+        this.alertMessage = ''
+        this.alertClass = ''
+      }, 3000)
+    },
+    async emitData() {
+      await this.v$.$validate()
       if (!this.v$.$error) {
-        axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/perfil`, this.persona).then((response) => {
-          console.log(response)
-          router.push('/Personas')
+        this.isSending = true // Deshabilita el botón
+        postPersona(this.persona).then((response) => {
+          this.showAlert('Persona creada exitosamente.', 'success')
+          setTimeout(() => {
+            router.push('/Personas')
+          }, 3000)
         }).catch((error) => {
+          this.showAlert('Error al crear la persona: ' + error.response.data, 'error')
           console.log(error)
         })
       }

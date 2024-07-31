@@ -43,14 +43,14 @@
   <app-footer />
 </template>
 <script>
-import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
 import NavPill from '@/assets/js/nav-pills.js'
-import MaterialButton from '@/components/MaterialButton.vue'
 import router from '@/router/index.js'
 import AcordeonLanding from '@/views/PlantillasPlanas/components/AcordeonLanding.vue'
 import PreciosLanding from '@/views/PlantillasPlanas/components/PreciosLanding.vue'
 import LogosLanding from '@/views/PlantillasPlanas/components/LogosLanding.vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import { useAppStore } from '@/store/appStore.js'
 
 export default {
   name: 'PrincipalPlanes',

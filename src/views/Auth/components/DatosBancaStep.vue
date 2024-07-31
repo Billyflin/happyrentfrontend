@@ -39,10 +39,11 @@
 </template>
 
 <script>
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import { useAppStore } from '@/store/index.js'
+
 import setTooltip from '@/assets/js/tooltip.js'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import { useAppStore } from '@/store/appStore.js'
 
 export default {
   name: 'DatosBancaStep',

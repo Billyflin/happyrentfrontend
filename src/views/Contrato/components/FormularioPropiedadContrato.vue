@@ -1,7 +1,8 @@
 <script setup>
-import { useAuthStore } from '@/store/index.js'
 
-const store = useAuthStore()
+import { useContratosStore } from '@/store/contratosStore.js'
+
+const store = useContratosStore()
 const formatDate = (date) => {
   const options = { year: 'numeric', month: 'long', day: 'numeric' }
   return new Date(date).toLocaleDateString('es-CL', options)

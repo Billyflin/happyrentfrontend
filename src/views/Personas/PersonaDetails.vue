@@ -1,101 +1,117 @@
 <script>
-import { useAuthStore } from '@/store/index.js'
-import { onUnmounted, ref } from 'vue'
-import MaterialButton from '@/components/MaterialButton.vue'
-import ListaDatosPersona from '@/views/Personas/ListaDatosPersona.vue'
-import ListaDireccionPersona from '@/views/Personas/ListaDireccionPersona.vue'
-import ModalConfirmacion from '@/views/Personas/ModalConfirmacion.vue'
-import ModalPreview from '@/views/Personas/ModalPreview.vue'
+import { onMounted, onUnmounted, ref } from 'vue'
+import ModalConfirmacion from '@/views/Personas/components/ModalConfirmacion.vue'
+import ListaDireccionPersona from '@/views/Personas/components/ListaDireccionPersona.vue'
+import ModalPreview from '@/views/Personas/components/ModalPreview.vue'
+import ListaDatosPersona from '@/views/Personas/components/ListaDatosPersona.vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import { usePersonasStore } from '@/store/personasStore.js'
+import router from '@/router/index.js'
+import { postPersona } from '@/servicios/personasService.js'
 
 export default {
-name: 'SolicitudDetails',
-components: { ModalPreview, ModalConfirmacion, ListaDireccionPersona, ListaDatosPersona, MaterialButton },
-setup() {
-const auth = useAuthStore()
-const archivoPrevisualizado = ref(null)
-const mostrarModal = ref(false)
-const mostrarModalConfirmacion = ref(false)
-const archivoSeleccionado = ref(null)
-const editMode = ref(false)
+  name: 'PersonaDetails',
+  components: { ModalPreview, ModalConfirmacion, ListaDireccionPersona, ListaDatosPersona, MaterialButton },
+  setup() {
+    const auth = usePersonasStore()
+    const archivoPrevisualizado = ref(null)
+    const mostrarModal = ref(false)
+    const mostrarModalConfirmacion = ref(false)
+    const archivoSeleccionado = ref(null)
+    const editMode = ref(false)
+    const loading = ref(false)
 
-const previsualizarArchivo = (archivo) => {
-archivoPrevisualizado.value = `data:application/pdf;base64,${archivo.contenido}`
-mostrarModal.value = true
-}
+    const previsualizarArchivo = (archivo) => {
+      archivoPrevisualizado.value = `data:application/pdf;base64,${archivo.contenido}`
+      mostrarModal.value = true
+    }
 
-const getFileIconClass = (filename) => {
-if (filename.endsWith('.pdf')) return 'fas fa-file-pdf'
-if (filename.endsWith('.doc') || filename.endsWith('.docx')) return 'fas fa-file-word'
-if (filename.endsWith('.xls') || filename.endsWith('.xlsx')) return 'fas fa-file-excel'
-return 'fas fa-file'
-}
+    const getFileIconClass = (filename) => {
+      if (filename.endsWith('.pdf')) return 'fas fa-file-pdf'
+      if (filename.endsWith('.doc') || filename.endsWith('.docx')) return 'fas fa-file-word'
+      if (filename.endsWith('.xls') || filename.endsWith('.xlsx')) return 'fas fa-file-excel'
+      return 'fas fa-file'
+    }
 
-const descargarArchivo = (archivo) => {
-const link = document.createElement('a')
-link.href = `data:application/pdf;base64,${archivo.contenido}`
-link.download = archivo.nombre
-link.click()
-}
+    const descargarArchivo = (archivo) => {
+      const link = document.createElement('a')
+      link.href = `data:application/pdf;base64,${archivo.contenido}`
+      link.download = archivo.nombre
+      link.click()
+    }
 
-const confirmarEliminarPersona = () =>{
-mostrarModalConfirmacion.value = true
-}
+    const confirmarEliminarPersona = () => {
+      mostrarModalConfirmacion.value = true
+    }
 
-const eliminarArchivo = () => {
+    const eliminarArchivo = () => {
 // Aquí debes agregar la lógica para eliminar el archivo seleccionado
 // Por ejemplo, podrías llamar a una API para eliminar el archivo del servidor
 
-mostrarModalConfirmacion.value = false
-archivoSeleccionado.value = null
-}
+      mostrarModalConfirmacion.value = false
+      archivoSeleccionado.value = null
+    }
 
-const cerrarModal = () => {
-mostrarModal.value = false
-archivoPrevisualizado.value = null
-}
+    const cerrarModal = () => {
+      mostrarModal.value = false
+      archivoPrevisualizado.value = null
+    }
 
-const cerrarModalConfirmacion = () => {
-mostrarModalConfirmacion.value = false
-archivoSeleccionado.value = null
-}
+    const cerrarModalConfirmacion = () => {
+      mostrarModalConfirmacion.value = false
+      archivoSeleccionado.value = null
+    }
 
-const toggleEditMode = () => {
-editMode.value = !editMode.value
-}
+    const toggleEditMode = () => {
+      editMode.value = !editMode.value
+    }
 
-const saveChanges = () => {
+    const saveChanges = () => {
 // Aquí debes agregar la lógica para guardar los cambios
-toggleEditMode()
-}
+      loading.value = true
+      postPersona(auth.persona).then(
+        () => {
+          loading.value = false
+          toggleEditMode()
+        }
+      )
+    }
 
-const cancelEdit = () => {
+    const cancelEdit = () => {
 // Aquí debes agregar la lógica para cancelar la edición
-toggleEditMode()
-}
+      toggleEditMode()
+    }
 
-onUnmounted(() => {
-auth.persona = null
-})
+    onMounted(() => {
+        if (!auth.persona) {
+          router.push('/Personas')
+      }
+      }
+    )
 
-return {
-auth,
-archivoPrevisualizado,
-mostrarModal,
-mostrarModalConfirmacion,
-archivoSeleccionado,
-previsualizarArchivo,
-descargarArchivo,
-confirmarEliminarArchivo: confirmarEliminarPersona,
-eliminarArchivo,
-cerrarModal,
-cerrarModalConfirmacion,
-getFileIconClass,
-editMode,
-toggleEditMode,
-saveChanges,
-cancelEdit
-}
-}
+    onUnmounted(() => {
+      auth.persona = null
+    })
+
+    return {
+      auth,
+      archivoPrevisualizado,
+      mostrarModal,
+      mostrarModalConfirmacion,
+      archivoSeleccionado,
+      previsualizarArchivo,
+      descargarArchivo,
+      confirmarEliminarArchivo: confirmarEliminarPersona,
+      eliminarArchivo,
+      cerrarModal,
+      cerrarModalConfirmacion,
+      getFileIconClass,
+      editMode,
+      toggleEditMode,
+      saveChanges,
+      cancelEdit
+    }
+  }
 }
 </script>
 
@@ -121,12 +137,16 @@ cancelEdit
               <span class="material-symbols-outlined me-1">edit</span>
               {{ editMode ? 'Cancelar' : 'Editar' }}
             </material-button>
+
           </div>
           <div class="card-body">
-            <div class="row">
-              <ListaDatosPersona  :class="(auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-5`" :auth="auth" :edit-mode="editMode" />
-              <ListaDireccionPersona  :class="(auth.persona.archivos.length > 0)?`col-lg-3`: `col-lg-5`" :auth="auth" :edit-mode="editMode" />
-              <div v-if="auth.persona.archivos && auth.persona.archivos.length > 0" class="col-lg-5">
+            <div  v-if="auth.persona" class="row">
+              <ListaDatosPersona :class="(auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-5`" :auth="auth"
+                                 :edit-mode="editMode" />
+              <ListaDireccionPersona :class="(auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-5`" :auth="auth"
+                                     :edit-mode="editMode" />
+
+              <div v-if="auth.persona.archivos && auth.persona.archivos.length > 0" class="col-lg-4">
                 <h5 class="mb-3">Archivos adjuntos</h5>
                 <ul class="list-group mb-3">
                   <li v-for="archivo in auth.persona.archivos" :key="archivo.id"
@@ -147,7 +167,7 @@ cancelEdit
               </div>
             </div>
           </div>
-          <div class="card-footer text-sm text-center text-capitalize align-middle">
+          <div class="card-footer text-sm text-center align-middle">
             <material-button v-if="editMode" color="primary" @click="saveChanges"
                              class="btn btn-primary text-small d-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2">
               <span class="material-symbols-outlined me-1">save</span>
@@ -158,6 +178,11 @@ cancelEdit
               <span class="material-symbols-outlined me-1">delete</span>
               Eliminar
             </material-button>
+            <div v-if="editMode" class="mt-4">
+              <div class="alert alert-danger text-light text-center">En esta version happ rent no se hace cargo de la
+                modificación de datos.
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -168,7 +193,8 @@ cancelEdit
                   :mostrar-modal="mostrarModal" />
 
     <!-- Modal para la confirmación de eliminación -->
-    <ModalConfirmacion :auth="auth" :cerrar-modal-confirmacion="cerrarModalConfirmacion" :eliminar-archivo="eliminarArchivo"
+    <ModalConfirmacion :auth="auth" :cerrar-modal-confirmacion="cerrarModalConfirmacion"
+                       :eliminar-archivo="eliminarArchivo"
                        :mostrar-modal-confirmacion="mostrarModalConfirmacion" />
   </div>
 </template>

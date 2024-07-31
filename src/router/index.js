@@ -1,41 +1,109 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Dashboard from '../views/Dashboard.vue'
-import Profile from '../views/Perfil/Profile.vue'
-import SignIn from '../views/Auth/SignIn.vue'
-import SignUp from '../views/Auth/SignUp.vue'
-import { useAuthStore } from '@/store'
-import { ref } from 'vue'
+import { useAuthStore } from '@/store/authStore.js'
 
 
-const routes = [{
-  path: '/', name: '/', redirect: '/Propiedades'
-}, {
-  path: '/dashboard', name: 'Dashboard', component: Dashboard, meta: {
-    requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
-  }
-}, {
-  path: '/Indicadores', name: 'Indicadores', component: () => import('@/views/Indicadores/Indicador.vue'), meta: {
-    requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
+const routes = [
+  {
+    path: '/', name: '/', redirect: '/Propiedades'
+  },
+  {
+    path: '/Propiedades',
+    name: 'Propiedades',
+    component: () => import('@/views/Propiedades/Propiedades.vue'),
+    meta: {
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
+    }
+  },
+  {
+    path: '/sign-in', name: 'SignIn', component: () => import('@/views/Auth/SignIn.vue')
+  },
+
+  {
+    path: '/dashboard', name: 'Dashboard', component: () => import('@/views/Dashboard/Dashboard.vue'), meta: {
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
+    }
+  },
+  {
+    path: '/Indicadores', name: 'Indicadores', component: () => import('@/views/Indicadores/Indicador.vue'), meta: {
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
+    }
+  }, {
+
+    path: '/sign-up', name: 'SignUp', component: () => import('@/views/Auth/SignUp.vue')
+  },
+  {
+    path: '/rememberPassword',
+    name: 'rememberPassword',
+    component: () => import('@/views/Auth/RememberPassword.vue')
+  }, {
+    path: '/Corredora',
+    name: 'Corredora',
+    component: () => import('@/views/Corredora/Corredora.vue')
+  },
+  {
+    path: '/Solicitudes',
+    name: 'SolicitarDatos',
+    component: () => import('@/views/Solicitudes/SolicitarDatos.vue')
+  },
+  {
+    path: '/SolicitudEnviada',
+    name: 'SolicitudEnviada',
+    component: () => import('@/views/Solicitudes/SolicitudEnviada.vue')
+  },
+  {
+    path: '/Personas',
+    name: 'Personas',
+    component: () => import('@/views/Personas/Personas.vue')
+  },
+  {
+    path: '/PersonaDetails',
+    name: 'PersonaDetails',
+    component: () => import('@/views/Personas/PersonaDetails.vue'),
+    props: true
+  },
+  {
+    path: '/Solicitud',
+    name: 'Solicitud',
+    component: () => import( '@/views/Solicitudes/Solicitud.vue'),
+    props: route => ({
+      token: route.query.token,
+      carnet: route.query.carnet === 'true',
+      liquidaciones: route.query.liquidaciones === 'true',
+      certificadoAFP: route.query.certificadoAFP === 'true',
+      certificadoDicom: route.query.certificadoDicom === 'true',
+      carpetaTributaria: route.query.carpetaTributaria === 'true',
+      contratoTrabajo: route.query.contratoTrabajo === 'true'
+    })
+  },
+  {
+    path: '/SolicitudDetails',
+    name: 'SolicitudDetails',
+    component: () => import('@/views/Solicitudes/SolicitudDetails.vue'),
+
+  },
+  {
+    path: '/Contratos', name: 'Contratos', component: () => import('@/views/Contrato/Contratos.vue'), meta: {
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
+    }
   }
 
-}, {
-  path: '/profile', name: 'Profile', component: Profile, meta: {
-    requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
-  }
-}, {
+  , {
+    path: '/profile', name: 'Profile', component: () => import('@/views/Perfil/Perfil.vue'), meta: {
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
+    }
+  },
+  {
+    path: '/Calculadora', name: 'Calculadora', component: () => import('@/views/Calculadora/Calculadora.vue'), meta: {
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
+    }
+  },
+{
   path: '/forgot-password',
   name: 'forgot-password',
   component: () => import( '@/views/Auth/ForgotPassword.vue'),
   props: route => ({ token: route.query.token })
-}, {
-  path: '/sign-in', name: 'SignIn', component: SignIn
-}, {
-  path: '/sign-up', name: 'SignUp', component: SignUp
-}, {
-  path: '/misContratos', name: 'MisContratos', component: () => import('@/views/Contrato/MisContratos.vue'), meta: {
-    requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
-  }
-}, {
+},
+{
   path: '/nuevoContrato',
   name: 'NuevoContrato',
   component: () => import('@/views/Contrato/NuevoContrato.vue'),
@@ -43,7 +111,8 @@ const routes = [{
   meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
   }
-}, {
+},
+{
   path: '/clausulasNuevoContrato',
   name: 'ClausulasNuevoContrato',
   component: () => import('@/views/Contrato/ClausulasNuevoContrato.vue'),
@@ -51,52 +120,34 @@ const routes = [{
   meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
   }
-}
-  ,
-
-  {
-    // todo /formularioInvitado/:uuid
-    path: '/formularioInvitado',
-    name: 'FormularioInvitado',
-    component: () => import('@/views/Contrato/FormularioInvitado.vue'),
-    meta: {
-      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
-    }
-  }, {
-    path: '/agregarPropiedad/',
+},
+{
+    path: '/agregarPropiedad',
     name: 'AgregarPropiedad',
     component: () => import('@/views/Propiedades/AgregarPropiedad.vue'),
     meta: {
       requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
     }
   },
-  // {
-  //     path: '/propiedad/:id',
-  //     name: 'Propiedad',
-  //     component: () => import('@/views/Propiedades/Propiedad.vue'),
-  //     meta: {}
-  // },
   {
-    path: '/propiedad/edit/:id',
-    name: 'PropiedadEdit',
+    path: '/EditarPropiedad',
+    name: 'EditarPropiedad',
     component: () => import('@/views/Propiedades/EditarPropiedad.vue'),
     meta: {}
-  }, {
+  },
+  {
     path: '/formularioRegistro',
     name: 'FormularioRegistro',
     component: () => import('@/views/Auth/FormularioRegistro.vue'),
     props: true
   },
-
+//
+//   {
+//     path: '/contrato/:id', name: 'Contrato', component: () => import('@/views/Contrato/Contrato.vue'), meta: {
+//       requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
+//     }
+//   },
   {
-    path: '/contrato/:id', name: 'Contrato', component: () => import('@/views/Contrato/Contrato.vue'), meta: {
-      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
-    }
-  }, {
-    path: '/rememberPassword',
-    name: 'rememberPassword',
-    component: () => import('@/views/Auth/RememberPassword.vue')
-  }, {
     path: '/error', name: 'Error', component: () => import('@/views/PlantillasPlanas/Error.vue')
   }, {
     path: '/:pathMatch(.*)*', name: 'NotFound', component: () => import('@/views/PlantillasPlanas/NotFound.vue')
@@ -119,70 +170,49 @@ const routes = [{
     path: '/principalPlanes',
     name: 'PrincipalPlanes',
     component: () => import('@/views/PlantillasPlanas/PrincipalPlanes.vue')
-  }, {
-    path: '/detallesContrato/:uuid', name: 'detallesContrato',
+  },
+  {
+    path: '/detallesContrato/:id', name: 'DetallesContrato',
     props: true,
     component: () => import('@/views/Contrato/DetallesContrato.vue')
-  }, {
-    path: '/billy', name: 'Billy', component: () => import('@/views/Dev.vue')
-  }, {
-    path: '/danko', name: 'Danko', component: () => import('@/views/Corredora/components/AgregarPersona.vue')
-  }, {
-    path: '/Propiedades',
-    name: 'Propiedades',
-    component: () => import('@/views/Propiedades/Propiedades.vue'),
-    meta: {
-      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
-    }
-  }, {
-    path: '/Corredora',
-    name: 'Corredora',
-    component: () => import('@/views/Corredora/Corredora.vue')
-  }, {
-    path: '/detallesCorredora',
-    name: 'detallesCorredora',
-    component: () => import('@/views/Corredora/DetallesCorredora.vue')
   },
   {
-    path: '/Personas',
-    name: 'Personas',
-    component: () => import('@/views/Personas/Personas.vue')
+    path: '/billy', name: 'Billy', component: () => import('@/views/NuevoContrato/EditorDeContratos.vue')
   },
-  {
-    path: '/PersonaDetails',
-    name: 'PersonaDetails',
-    component: () => import('@/views/Personas/PersonaDetails.vue')
-  },
+//   {
+//     path: '/danko', name: 'Danko', component: () => import('@/views/Corredora/components/AgregarPersona.vue')
+//   },  {
+//     path: '/detallesCorredora',
+//     name: 'detallesCorredora',
+//     component: () => import('@/views/Corredora/DetallesCorredora.vue')
+//   },
+//
+//   {
+//     path: '/PersonaDetails',
+//     name: 'PersonaDetails',
+//     component: () => import('@/views/Personas/PersonaDetails.vue')
+//   } ,
   {
     path: '/AgregarPersona',
     name: 'AgregarPersona',
     component: () => import('@/views/Personas/AgregarPersona.vue')
   }
-  , {
-    path: '/Solicitudes',
-    name: 'SolicitarDatos',
-    component: () => import('@/views/Solicitudes/SolicitarDatos.vue')
-  },
-  {
-    path: '/SolicitudDetails',
-    name: 'SolicitudDetails',
-    component: () => import('@/views/Solicitudes/SolicitudDetails.vue'),
-    props: true
-  },
-  {
-    path: '/Solicitud',
-    name: 'Solicitud',
-    component: () => import( '@/views/Solicitudes/Solicitud.vue'),
-    props: route => ({
-      token: route.query.token,
-      carnet: route.query.carnet === 'true',
-      liquidaciones: route.query.liquidaciones === 'true',
-      certificadoAFP: route.query.certificadoAFP === 'true',
-      certificadoDicom: route.query.certificadoDicom === 'true',
-      carpetaTributaria: route.query.carpetaTributaria === 'true',
-      contratoTrabajo: route.query.contratoTrabajo === 'true'
-    })
-  }
+  ,
+
+//   {
+//     path: '/Solicitud',
+//     name: 'Solicitud',
+//     component: () => import( '@/views/Solicitudes/Solicitud.vue'),
+//     props: route => ({
+//       token: route.query.token,
+//       carnet: route.query.carnet === 'true',
+//       liquidaciones: route.query.liquidaciones === 'true',
+//       certificadoAFP: route.query.certificadoAFP === 'true',
+//       certificadoDicom: route.query.certificadoDicom === 'true',
+//       carpetaTributaria: route.query.carpetaTributaria === 'true',
+//       contratoTrabajo: route.query.contratoTrabajo === 'true'
+//     })
+//   }
 
 
 ]
@@ -195,15 +225,15 @@ router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
   // console.log(to)
   if (to.matched.some(record => record.meta.requiresAuth)) {
-    if (!authStore.isLoggedIn) {
+    if (!authStore.currentUser) {
       next({ name: 'SignIn' })
     } else {
       const userHasRequiredRole = to.meta.roles.some(role =>
-        authStore.userInfo.authorities.some(auth => auth.authority === role)
+        authStore.authorities.some(auth => auth.authority === role)
       )
       // console.log(to.meta.roles, authStore.userInfo.authorities)
       console.log(userHasRequiredRole, 'Aer asdasd')
-      const userHasProvisionalRole = authStore.userInfo.authorities.some(auth => auth.authority === 'ROLE_PROVICIONAL')
+      const userHasProvisionalRole = authStore.authorities.some(auth => auth.authority === 'ROLE_PROVICIONAL')
       // console.log(userHasProvisionalRole,"Aer asdasd")
       if (userHasRequiredRole) {
         next()

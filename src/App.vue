@@ -12,15 +12,15 @@
     <configurator :class="[showConfig ? 'show' : '', hideConfigButton ? 'd-none' : '']" :toggle="toggleConfigurator" />
   </main>
 </template>
-
 <script setup>
 import { onBeforeMount } from 'vue'
 import { storeToRefs } from 'pinia'
-import Sidenav from './examples/Sidenav/index.vue'
-import Configurator from '@/examples/Configurator.vue'
-import Navbar from '@/examples/Navbars/Navbar.vue'
-import AppFooter from '@/examples/Footer.vue'
-import { useAppStore, useAuthStore } from '@/store/index.js'
+import { useAppStore } from '@/store/appStore.js'
+import { useAuthStore } from '@/store/authStore.js'
+import Sidenav from '@/components/Sidenav/index.vue'
+import Configurator from '@/components/Configurator.vue'
+import AppFooter from '@/components/Footer.vue'
+import Navbar from '@/components/Navbars/Navbar.vue'
 
 const store = useAppStore()
 const {
@@ -41,7 +41,7 @@ const { navbarMinimize, toggleConfigurator } = store
 const authStore = useAuthStore()
 
 onBeforeMount(async () => {
-  await authStore.getCurrentUser()
+  await authStore.fetchCurrentUser()
 })
 
 

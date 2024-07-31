@@ -1,7 +1,7 @@
 <script>
-import axios from 'axios'
-import { useAuthStore } from '@/store/index.js'
 import router from '@/router/index.js'
+import { useAuthStore } from '@/store/authStore.js'
+import { crearUsuario } from '@/servicios/authService.js'
 
 export default {
   name: 'ResumenStep',
@@ -15,11 +15,11 @@ export default {
     enviarFormulario() {
       console.log(this.perfil)
       const store = useAuthStore()
-      axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/perfil`, this.perfil)
+      crearUsuario(this.perfil)
         .then((response) => {
           console.log('Usuario registrado')
           console.log(response.data)
-          store.getCurrentUser().then(() => {
+          store.fetchCurrentUser().then(() => {
               router.push({ name: 'Propiedades' })
             }
           )

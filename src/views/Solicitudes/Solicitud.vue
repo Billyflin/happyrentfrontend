@@ -22,7 +22,21 @@
       <div class="card-body pt-0">
         <!--        Contenido?-->
         <div v-if="!sending" class="row">
-          <div class="col-md-2 mt-4">
+          <div class="col-md-3 mt-4">
+            <material-input id="nombres" v-model="persona.nombre" is-required label="Nombres"
+                            variant="static" />
+          </div>
+          <div class="col-md-3 mt-4">
+            <material-input id="apellidoPaterno" v-model="persona.apellidoPaterno" is-required
+                            label="Apellido Paterno"
+                            variant="static" />
+          </div>
+          <div class="col-md-3 mt-4">
+            <material-input id="apellidoMaterno" v-model="persona.apellidoMaterno" is-required
+                            label="Apellido Materno"
+                            variant="static" />
+          </div>
+          <div class="col-md-3 mt-4">
             <material-input id="rut" v-model="persona.rut" is-required label="RUT" type="rut"
                             variant="static" />
           </div>
@@ -38,34 +52,42 @@
             <material-input id="ocupacion" v-model="persona.ocupacion" is-required label="Ocupación" type="text"
                             variant="static" />
           </div>
-          <div class="col-md-4 mt-4">
+          <div class="col-md-2 mt-4">
+            <MaterialChoices id="pronombres" v-model:text-choice="persona.tratamiento" :options="pronombres"
+                             label="Pronombres" name="Pronombres" />
+          </div>
+          <div class="col-md-2 mt-4">
             <material-input id="telefono" v-model="persona.telefono" is-required label="Teléfono"
                             placeholder="9 xxxxxxxx"
                             type="telefono"
                             variant="static" />
           </div>
-          <div class="col-md-6 mt-4">
+          <div class="col-md-2 mt-4">
+            <material-input
+              id="FechaNacimiento"
+              v-model="persona.fechaNacimiento"
+              is-required
+              label="Fecha de Nacimiento"
+              placeholder="dd/mm/aaaa"
+              type="date"
+              variant="static"
+            />
+          </div>
+          <div class="col-md-4 mt-4">
             <material-input id="email" v-model="persona.email" is-required label="Email" type="text"
                             variant="static" />
           </div>
-          <div class="col-md-2 mt-4">
-            <MaterialChoices id="pronombres" v-model:text-choice="persona.tratamiento" :options="pronombres"
-                             label="Pronombres" name="Pronombres" />
+          <div class="col-4 mt-4">
+            <material-input
+              id="confirmEmailRepresentanteLegal"
+              label="Confimar Email"
+              placeholder="Confirma Email"
+              type="email"
+              variant="static"
+
+            />
           </div>
-          <div class="col-md-4 mt-4">
-            <material-input id="nombres" v-model="persona.nombre" is-required label="Nombres"
-                            variant="static" />
-          </div>
-          <div class="col-md-4 mt-4">
-            <material-input id="apellidoPaterno" v-model="persona.apellidoPaterno" is-required
-                            label="Apellido Paterno"
-                            variant="static" />
-          </div>
-          <div class="col-md-4 mt-4">
-            <material-input id="apellidoMaterno" v-model="persona.apellidoMaterno" is-required
-                            label="Apellido Materno"
-                            variant="static" />
-          </div>
+
           <LocalidadForm v-model="persona.direccion" />
 
 
@@ -77,9 +99,22 @@
             </div>
           </div>
         </div>
-        <div class="mt-4" v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo">
+        <div class="mt-3">
+          <b>Inserte
+            <span v-if="carnet">Carnet</span>
+            <span v-if="liquidaciones">,  Liquidaciones</span>
+            <span v-if="certificadoAFP">,  Certificado AFP</span>
+            <span v-if="certificadoDicom">,  Certificado Dicom</span>
+            <span v-if="carpetaTributaria">,  Carpeta Tributaria</span>
+            <span v-if="contratoTrabajo">,  Contrato de Trabajo</span>
+          </b>
+        </div>
+
+
+        <div v-if="carnet || liquidaciones || certificadoAFP|| carpetaTributaria||certificadoDicom || contratoTrabajo && !sending"
+             class="mt-4">
           <!--    dropzone para documentos -->
-          <div class="file-dropzone">
+          <div  class="file-dropzone">
             <div id="idDropzone" class="dropzone"></div>
           </div>
         </div>
@@ -95,17 +130,18 @@
 </template>
 
 <script>
-import { useAppStore } from '@/store/index.js'
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialButton from '@/components/MaterialButton.vue'
-import MaterialSwitch from '@/components/MaterialSwitch.vue'
-import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
 import { useVuelidate } from '@vuelidate/core'
-import MaterialChoices from '@/components/MaterialChoices.vue'
 import { validate as isValidUUID } from 'uuid'
-import axios from 'axios'
 import Dropzone from 'dropzone'
+import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import { useAppStore } from '@/store/appStore.js'
+import { createSolicitud } from '@/servicios/solicitudService.js'
+import router from '@/router/index.js'
+import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
 
 export default {
   name: 'Solicitud',
@@ -122,9 +158,8 @@ export default {
   data() {
     return {
       pronombres: [
-        { value: 'Sr.', text: 'Sr.' },
-        { value: 'Sra.', text: 'Sra.' },
-        { value: 'Srta.', text: 'Srta.' }
+        { value: 'Don.', text: 'Don.' },
+        { value: 'Doña.', text: 'Doña.' }
       ],
       opcionsEstadoCivil: [
         { value: 'Soltero', text: 'Soltero' },
@@ -145,23 +180,19 @@ export default {
   },
   methods: {
     async emitData() {
-      this.v$.$validate()
+      await this.v$.$validate()
       if (!this.v$.$error) {
         this.sending = true
         const formData = new FormData()
         formData.append('persona', new Blob([JSON.stringify(this.persona)], { type: 'application/json' }))
         this.files.forEach(file => formData.append('files', file))
         try {
-          await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/temporal?idUsuario=${this.token}`,
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data'
-              }
-            }
+          await createSolicitud(
+            this.token,
+            formData
           ).then((it) => {
             console.log(it)
-            this.$router.push({ name: 'Dashboard' })
+           router.push({ name: 'SolicitudEnviada' })
           }).catch((err) => {
             console.error(err)
             if (err.response && err.response.status === 500 && err.response.data === 'Token Invalido.') {
@@ -188,6 +219,7 @@ export default {
       nombre: '',
       apellidoPaterno: '',
       apellidoMaterno: '',
+      fechaNacimiento: '',
       telefono: '',
       ocupacion: '',
       direccion: {
@@ -214,7 +246,7 @@ export default {
           url: '/', // URL de destino para la carga
           autoProcessQueue: false,
           acceptedFiles: '.pdf,.doc,.docx,.xls,.xlsx',
-          dictDefaultMessage: "Arrastra los archivos aquí o haz clic para subir documentos",
+          dictDefaultMessage: 'Arrastra los archivos aquí o haz clic para subir documentos',
           maxFilesize: 5, // Tamaño máximo del archivo en MB
           previewTemplate: `
             <div class="dz-preview dz-file-preview card">
@@ -258,9 +290,8 @@ export default {
             this.on('removedfile', (file) => {
               files.value = files.value.filter(f => f !== file)
             })
-            this.on('error', (file, message) => {
-              alert(message); // Mostrar mensaje de error
-              this.removeFile(file); // Eliminar archivo de la lista
+            this.on('error', (file) => {
+              this.removeFile(file) // Eliminar archivo de la lista
             })
           }
         })

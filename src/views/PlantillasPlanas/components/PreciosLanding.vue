@@ -1,6 +1,6 @@
 <script setup>
 
-import PricingCard from '@/views/components/PricingCard.vue'
+import PricingCard from '@/components/PricingCard.vue'
 </script>
 
 <template>

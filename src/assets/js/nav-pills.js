@@ -1,150 +1,114 @@
 /* eslint-disable */
 
 export default function setNavPills() {
-  var total = document.querySelectorAll('.nav-pills')
+  const navPills = document.querySelectorAll('.nav-pills')
+
+  function createMovingDiv(item) {
+    const movingDiv = document.createElement('div')
+    const firstLi = item.querySelector('li:first-child .nav-link')
+    const tab = firstLi.cloneNode()
+    tab.innerHTML = '-'
+
+    movingDiv.classList.add('moving-tab', 'position-absolute', 'nav-link')
+    movingDiv.appendChild(tab)
+    item.appendChild(movingDiv)
+
+    return movingDiv
+  }
+
+  function updateMovingDivPosition(item, movingDiv, li, nodes) {
+    let sum = 0
+    const index = nodes.indexOf(li) + 1
+
+    if (item.classList.contains('flex-column')) {
+      for (let j = 1; j <= nodes.indexOf(li); j++) {
+        sum += item.querySelector(`li:nth-child(${j})`).offsetHeight
+      }
+      movingDiv.style.transform = `translate3d(0px, ${sum}px, 0px)`
+      movingDiv.style.height = `${item.querySelector(`li:nth-child(${index})`).offsetHeight}px`
+    } else {
+      for (let j = 1; j <= nodes.indexOf(li); j++) {
+        sum += item.querySelector(`li:nth-child(${j})`).offsetWidth
+      }
+      movingDiv.style.transform = `translate3d(${sum}px, 0px, 0px)`
+      movingDiv.style.width = `${item.querySelector(`li:nth-child(${index})`).offsetWidth}px`
+    }
+  }
 
   function initNavs() {
-    total.forEach(function(item, i) {
-      var moving_div = document.createElement('div')
-      var first_li = item.querySelector('li:first-child .nav-link')
-      var tab = first_li.cloneNode()
-      tab.innerHTML = '-'
+    navPills.forEach(item => {
+      const movingDiv = createMovingDiv(item)
+      const listLength = item.getElementsByTagName('li').length
 
-      moving_div.classList.add('moving-tab', 'position-absolute', 'nav-link')
-      moving_div.appendChild(tab)
-      item.appendChild(moving_div)
+      movingDiv.style.padding = '0px'
+      movingDiv.style.width = `${item.querySelector('li:nth-child(1)').offsetWidth}px`
+      movingDiv.style.transform = 'translate3d(0px, 0px, 0px)'
+      movingDiv.style.transition = '.5s ease'
 
-      var list_length = item.getElementsByTagName('li').length
-
-      moving_div.style.padding = '0px'
-      moving_div.style.width = item.querySelector('li:nth-child(1)').offsetWidth + 'px'
-      moving_div.style.transform = 'translate3d(0px, 0px, 0px)'
-      moving_div.style.transition = '.5s ease'
-
-      item.onmouseover = function(event) {
-        let target = getEventTarget(event)
-        let li = target.closest('li') // get reference
+      item.addEventListener('mouseover', event => {
+        const target = getEventTarget(event)
+        const li = target.closest('li')
         if (li) {
-          let nodes = Array.from(li.closest('ul').children) // get array
-          let index = nodes.indexOf(li) + 1
-          item.querySelector('li:nth-child(' + index + ') .nav-link').onclick = function() {
-            moving_div = item.querySelector('.moving-tab')
-            let sum = 0
-            if (item.classList.contains('flex-column')) {
-              for (var j = 1; j <= nodes.indexOf(li); j++) {
-                sum += item.querySelector('li:nth-child(' + j + ')').offsetHeight
-              }
-              moving_div.style.transform = 'translate3d(0px,' + sum + 'px, 0px)'
-              moving_div.style.height = item.querySelector('li:nth-child(' + j + ')').offsetHeight
-            } else {
-              for (var j = 1; j <= nodes.indexOf(li); j++) {
-                sum += item.querySelector('li:nth-child(' + j + ')').offsetWidth
-              }
-              moving_div.style.transform = 'translate3d(' + sum + 'px, 0px, 0px)'
-              moving_div.style.width = item.querySelector('li:nth-child(' + index + ')').offsetWidth + 'px'
-            }
+          const nodes = Array.from(li.closest('ul').children)
+          item.querySelector(`li:nth-child(${nodes.indexOf(li) + 1}) .nav-link`).onclick = () => {
+            updateMovingDivPosition(item, movingDiv, li, nodes)
           }
         }
-      }
+      })
     })
   }
 
-  setTimeout(function() {
-    initNavs()
-  }, 100)
-
-  // Tabs navigation resize
-
-  window.addEventListener('resize', function(event) {
-    total.forEach(function(item, i) {
+  function handleResize() {
+    navPills.forEach(item => {
       item.querySelector('.moving-tab').remove()
-      var moving_div = document.createElement('div')
-      var tab = item.querySelector('.nav-link.active').cloneNode()
-      tab.innerHTML = '-'
+      const movingDiv = createMovingDiv(item)
 
-      moving_div.classList.add('moving-tab', 'position-absolute', 'nav-link')
-      moving_div.appendChild(tab)
+      movingDiv.style.padding = '0px'
+      movingDiv.style.transition = '.5s ease'
 
-      item.appendChild(moving_div)
-
-      moving_div.style.padding = '0px'
-      moving_div.style.transition = '.5s ease'
-
-      let li = item.querySelector('.nav-link.active').parentElement
-
-      if (li) {
-        let nodes = Array.from(li.closest('ul').children) // get array
-        let index = nodes.indexOf(li) + 1
-
-        let sum = 0
-        if (item.classList.contains('flex-column')) {
-          for (var j = 1; j <= nodes.indexOf(li); j++) {
-            sum += item.querySelector('li:nth-child(' + j + ')').offsetHeight
-          }
-          moving_div.style.transform = 'translate3d(0px,' + sum + 'px, 0px)'
-          moving_div.style.width = item.querySelector('li:nth-child(' + index + ')').offsetWidth + 'px'
-          moving_div.style.height = item.querySelector('li:nth-child(' + j + ')').offsetHeight
-        } else {
-          for (var j = 1; j <= nodes.indexOf(li); j++) {
-            sum += item.querySelector('li:nth-child(' + j + ')').offsetWidth
-          }
-          moving_div.style.transform = 'translate3d(' + sum + 'px, 0px, 0px)'
-          moving_div.style.width = item.querySelector('li:nth-child(' + index + ')').offsetWidth + 'px'
-
-        }
+      const activeLi = item.querySelector('.nav-link.active').parentElement
+      if (activeLi) {
+        const nodes = Array.from(activeLi.closest('ul').children)
+        updateMovingDivPosition(item, movingDiv, activeLi, nodes)
       }
     })
 
     if (window.innerWidth < 991) {
-      total.forEach(function(item, i) {
+      navPills.forEach(item => {
         if (!item.classList.contains('flex-column')) {
           item.classList.remove('flex-row')
           item.classList.add('flex-column', 'on-resize')
-          let li = item.querySelector('.nav-link.active').parentElement
-          let nodes = Array.from(li.closest('ul').children) // get array
-          let index = nodes.indexOf(li) + 1
-          let sum = 0
-          for (var j = 1; j <= nodes.indexOf(li); j++) {
-            sum += item.querySelector('li:nth-child(' + j + ')').offsetHeight
-          }
-          var moving_div = document.querySelector('.moving-tab')
-          moving_div.style.width = item.querySelector('li:nth-child(1)').offsetWidth + 'px'
-          moving_div.style.transform = 'translate3d(0px,' + sum + 'px, 0px)'
-
+          const activeLi = item.querySelector('.nav-link.active').parentElement
+          const nodes = Array.from(activeLi.closest('ul').children)
+          updateMovingDivPosition(item, document.querySelector('.moving-tab'), activeLi, nodes)
         }
       })
     } else {
-      total.forEach(function(item, i) {
+      navPills.forEach(item => {
         if (item.classList.contains('on-resize')) {
           item.classList.remove('flex-column', 'on-resize')
           item.classList.add('flex-row')
-          let li = item.querySelector('.nav-link.active').parentElement
-          let nodes = Array.from(li.closest('ul').children) // get array
-          let index = nodes.indexOf(li) + 1
-          let sum = 0
-          for (var j = 1; j <= nodes.indexOf(li); j++) {
-            sum += item.querySelector('li:nth-child(' + j + ')').offsetWidth
-          }
-          var moving_div = document.querySelector('.moving-tab')
-          moving_div.style.transform = 'translate3d(' + sum + 'px, 0px, 0px)'
-          moving_div.style.width = item.querySelector('li:nth-child(' + index + ')').offsetWidth + 'px'
+          const activeLi = item.querySelector('.nav-link.active').parentElement
+          const nodes = Array.from(activeLi.closest('ul').children)
+          updateMovingDivPosition(item, document.querySelector('.moving-tab'), activeLi, nodes)
         }
       })
     }
-  })
+  }
 
-  // Function to remove flex row on mobile devices
+  function getEventTarget(e) {
+    return e.target || e.srcElement
+  }
+
+  setTimeout(initNavs, 100)
+  window.addEventListener('resize', handleResize)
+
   if (window.innerWidth < 991) {
-    total.forEach(function(item, i) {
+    navPills.forEach(item => {
       if (item.classList.contains('flex-row')) {
         item.classList.remove('flex-row')
         item.classList.add('flex-column', 'on-resize')
       }
     })
-  }
-
-  function getEventTarget(e) {
-    e = e || window.event
-    return e.target || e.srcElement
   }
 }

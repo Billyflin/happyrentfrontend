@@ -39,7 +39,7 @@ import MultiStepsFormProgress from '@/views/Auth/components/MultiStepsFormProgre
 import CuentaStep from '@/views/Auth/components/CuentaStep.vue'
 import RepresentanteStep from '@/views/Auth/components/RepresentanteStep.vue'
 import ResumenStep from '@/views/Auth/components/ResumenStep.vue'
-import DatosBancaStep from '@/views/Auth/components/DatosBancaStep.vue'
+import DatosBancaStep from '../../../../../happ-frontend2/src/views/Auth/components/DatosBancaStep.vue'
 
 /**
  * import other form panel components

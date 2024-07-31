@@ -5,8 +5,11 @@
                    to="/Propiedades">
         <span class="material-symbols-outlined mx-1"> arrow_back </span> Volver
       </router-link>
+      <router-link to="/Billy">
+        <material-button class="ms-auto" size="md" variant="success">Billy</material-button>
+      </router-link>
       <div class="col-lg-12 mt-lg-0 mt-4">
-          <formulario-propiedad-contrato />
+        <formulario-propiedad-contrato />
         <div v-if="store2.propiedad.arrendado" class="row mt-4">
           <div class="col-12">
             <div class="alert alert-danger text-light text-center">La propiedad ya está arrendada</div>
@@ -28,11 +31,11 @@
 
             </div>
           </div>
-          <div class="row mt-4">
-            <div class="col">
-              <reajuste-contrato />
-            </div>
-          </div>
+<!--          <div class="row mt-4">-->
+<!--            <div class="col">-->
+<!--              <reajuste-contrato />-->
+<!--            </div>-->
+<!--          </div>-->
           <router-link to="/clausulasNuevoContrato">
             <material-button class="mt-4 mb-6" full-width size="lg" variant="success">Crear Contrato</material-button>
           </router-link>
@@ -43,25 +46,26 @@
 </template>
 
 <script setup>
-import { useAppStore, useAuthStore } from '@/store/index.js'
 import { onMounted, onUnmounted, ref, watch } from 'vue'
-import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
 import FormularioPropiedadContrato from '@/views/Contrato/components/FormularioPropiedadContrato.vue'
-import MaterialButton from '@/components/MaterialButton.vue'
+import router from '@/router/index.js'
+import { useAppStore } from '@/store/appStore.js'
+import { useContratosStore } from '@/store/contratosStore.js'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
 import SeleccionarArrendatario from '@/views/Contrato/components/SeleccionarArrendatario.vue'
 import SeleccionarCodeudor from '@/views/Contrato/components/SeleccionarCodeudor.vue'
-import router from '@/router/index.js'
+import ReajusteContrato from '@/views/Contrato/components/ReajusteContrato.vue'
 
 const store = useAppStore()
-const store2 = useAuthStore()
+const store2 = useContratosStore()
 const { toggleEveryDisplay, toggleHideConfig } = store
 
 const codeudor = ref(false)
 
-
 const aer = () => {
   router.push('/clausulasNuevoContrato')
 }
+
 watch(() => [store2.codeudor?.id, store2.arrendatario?.id, store2.propiedad?.propietario.id], ([codeudorId, arrendatarioId, propietarioId]) => {
   if (codeudorId === arrendatarioId) {
     store2.contratoError = 'El codeudor no puede ser el mismo que el arrendatario'

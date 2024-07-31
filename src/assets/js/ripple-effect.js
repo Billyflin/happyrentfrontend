@@ -1,14 +1,12 @@
-/* eslint-disable */
-
 window.onload = function() {
-  var ripples = document.querySelectorAll('.btn')
+  const ripples = document.querySelectorAll('.btn')
 
-  for (var i = 0; i < ripples.length; i++) {
+  for (let i = 0; i < ripples.length; i++) {
     ripples[i].addEventListener(
       'click',
       function(e) {
-        var targetEl = e.target
-        var rippleDiv = targetEl.querySelector('.ripple')
+        const targetEl = e.target
+        let rippleDiv = targetEl.querySelector('.ripple')
 
         rippleDiv = document.createElement('span')
         rippleDiv.classList.add('ripple')

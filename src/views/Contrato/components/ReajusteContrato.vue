@@ -1,15 +1,3 @@
-<script setup>
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
-
-const validateInput = (event) => {
-  if (event.target.value < 0) {
-    event.target.value = 0
-  }
-}
-</script>
-
 <template>
   <div id="Pagos" class="card">
     <div class="card-header">
@@ -50,9 +38,10 @@ const validateInput = (event) => {
                              {value: '2', label: '30 dias'}
                              ]"
                            label="Fecha de aviso"
-                           name="fechaAviso"
-          />
+                           v-model:text-choice="fechaAviso"
+           name="fecha"/>
         </div>
+        {{fechaAviso}}
       </div>
 
       <div class="row mt-2">
@@ -85,19 +74,18 @@ const validateInput = (event) => {
                                       {value: 'Variable', label: 'Variable',selected:true}]"
                            label="Tipo Reajuste"
                            name="tipoReajuste" />
-
         </div>
         <div class="col-4">
-          <MaterialChoices id="reajuste" :options="[{value: 'IPC', label: 'IPC',selected:true},
+          <MaterialChoices id="reajuste" v-model="reajusteSeleccionado" :options="[{value: 'IPC', label: 'IPC',selected:true},
                                       {value: 'UVT', label: 'Acordado'},
                                       {value: 'Dolar', label: 'Dolar'},
                                       {value: 'Otra', label: 'Otra'}]"
                            label="Reajuste"
                            name="reajuste" />
         </div>
-        <div class="col-4">
+        <div class="col-4" v-if="reajusteSeleccionado !== 'IPC'">
           <material-input id="porcentajeReajuste"
-                          label="porcentaje Reajuste"
+                          label="Porcentaje Reajuste"
                           placeholder="% Reajuste"
                           type="number"
                           variant="static"
@@ -105,10 +93,92 @@ const validateInput = (event) => {
           />
         </div>
       </div>
+
+      <div v-if="reajusteSeleccionado === 'IPC'" class="mt-4">
+        <h5>Calculadora de Reajuste de IPC</h5>
+        <form @submit.prevent="calcularReajusteIPC">
+          <div class="row">
+            <div class="col-4">
+              <label for="valorInicial" class="form-label">Valor Inicial</label>
+              <input type="number" class="form-control" id="valorInicial" v-model.number="valorInicial" required />
+            </div>
+            <div class="col-4">
+              <label for="ipcInicial" class="form-label">Fecha IPC Inicial</label>
+              <select class="form-control" id="ipcInicial" v-model="ipcInicial" required>
+                <option disabled value="">Seleccione una fecha</option>
+                <option v-for="date in ipcFechas" :key="date" :value="date">{{ date }}</option>
+              </select>
+            </div>
+            <div class="col-4">
+              <label for="ipcFinal" class="form-label">Fecha IPC Final</label>
+              <select class="form-control" id="ipcFinal" v-model="ipcFinal" required>
+                <option disabled value="">Seleccione una fecha</option>
+                <option v-for="date in ipcFechas" :key="date" :value="date">{{ date }}</option>
+              </select>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary mt-3">Calcular Reajuste</button>
+        </form>
+
+        <div v-if="reajuste !== null" class="mt-4">
+          <h4>Resultado del Reajuste</h4>
+          <p>Valor Reajustado: {{ reajuste.toFixed(2) }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </template>
+<script setup>
+import { ref, computed, onMounted } from 'vue'
+import axios from 'axios'
+import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
 
-<style scoped>
+const validateInput = (event) => {
+  if (event.target.value < 0) {
+    event.target.value = 0
+  }
+}
 
-</style>
+const fechaAviso = ref("")
+const valorInicial = ref(0)
+const ipcInicial = ref(null)
+const ipcFinal = ref(null)
+const reajuste = ref(null)
+const ipcData = ref([])
+
+const reajusteSeleccionado = ref('IPC')
+
+const fetchIPCData = async () => {
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ipc`)
+    if (response.data && response.data.Series && response.data.Series.Obs) {
+      ipcData.value = response.data.Series.Obs.map(obs => ({
+        date: new Date(obs.indexDateString),
+        value: parseFloat(obs.value)
+      }))
+    }
+  } catch (error) {
+    console.error('Error fetching IPC data:', error)
+  }
+}
+
+const calcularReajusteIPC = () => {
+  if (!ipcInicial.value || !ipcFinal.value) {
+    alert('Debes seleccionar valores de IPC válidos.')
+    return
+  }
+
+  const ipcInicialValue = ipcData.value.find(item => item.date.toISOString().split('T')[0] === ipcInicial.value).value
+  const ipcFinalValue = ipcData.value.find(item => item.date.toISOString().split('T')[0] === ipcFinal.value).value
+
+  reajuste.value = (ipcFinalValue / ipcInicialValue) * valorInicial.value
+}
+
+const ipcFechas = computed(() => {
+  return ipcData.value.map(item => item.date.toISOString().split('T')[0])
+})
+
+onMounted(fetchIPCData)
+</script>

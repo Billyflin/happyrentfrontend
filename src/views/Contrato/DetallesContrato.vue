@@ -2,7 +2,7 @@
   <div class="row mt-3">
     <div class="col-lg-3">
       <router-link class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
-                   to="/">
+                   to="/contratos">
   <span class="material-symbols-outlined mx-2">
     arrow_back
   </span>
@@ -69,7 +69,7 @@
           <div>Código postal: {{ detalleContrato.propiedad.direccion.codigoPostal }}</div>
         </div>
         <div class="col-2">
-          <div>Tipo Propiedad: {{ detalleContrato.propiedad.tipoPropiedad.tipo }}</div>
+          <div>Tipo Propiedad: {{ detalleContrato.propiedad.type}}</div>
         </div>
       </div>
       <div class="row mt-3">
@@ -115,42 +115,44 @@
         <div class="col-2">
           <div>Nombre: {{ detalleContrato.propiedad.propietario.nombreCompleto }}</div>
         </div>
+
         <div class="col-2">
-          <div>Email: {{ detalleContrato.propiedad.propietario.persona.email }}</div>
+          <div>Email: {{ detalleContrato.propiedad.propietario.email }}</div>
+        </div>
+
+        <div class="col-2">
+          <div>Teléfono: {{ detalleContrato.propiedad.propietario.telefono }}</div>
         </div>
         <div class="col-2">
-          <div>Teléfono: {{ detalleContrato.propiedad.propietario.persona.telefono }}</div>
-        </div>
-        <div class="col-2">
-          <div>Estado Civil: {{ detalleContrato.propiedad.propietario.persona.estadoCivil }}</div>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-2">
-          <div>Nacionalidad: {{ detalleContrato.propiedad.propietario.persona.nacionalidad }}</div>
-        </div>
-        <div class="col-2">
-          <div>Ocupación: {{ detalleContrato.propiedad.propietario.persona.ocupacion }}</div>
-        </div>
-        <div class="col-2">
-          <div>Calle: {{ detalleContrato.propiedad.propietario.persona.direccion.calle }}</div>
-        </div>
-        <div class="col-2">
-          <div>Número: {{ detalleContrato.propiedad.propietario.persona.direccion.numero }}</div>
+          <div>Estado Civil: {{ detalleContrato.propiedad.propietario.estadoCivil }}</div>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-2">
-          <div>Ciudad: {{ detalleContrato.propiedad.propietario.persona.direccion.ciudad }}</div>
+          <div>Nacionalidad: {{ detalleContrato.propiedad.propietario.nacionalidad }}</div>
         </div>
         <div class="col-2">
-          <div>Región: {{ detalleContrato.propiedad.propietario.persona.direccion.region }}</div>
+          <div>Ocupación: {{ detalleContrato.propiedad.propietario.ocupacion }}</div>
         </div>
         <div class="col-2">
-          <div>País: {{ detalleContrato.propiedad.propietario.persona.direccion.pais }}</div>
+          <div>Calle: {{ detalleContrato.propiedad.propietario.direccion.calle }}</div>
         </div>
         <div class="col-2">
-          <div>Código Postal: {{ detalleContrato.propiedad.propietario.persona.direccion.codigoPostal }}</div>
+          <div>Número: {{ detalleContrato.propiedad.propietario.direccion.numero }}</div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-2">
+          <div>Ciudad: {{ detalleContrato.propiedad.propietario.direccion.ciudad }}</div>
+        </div>
+        <div class="col-2">
+          <div>Región: {{ detalleContrato.propiedad.propietario.direccion.region }}</div>
+        </div>
+        <div class="col-2">
+          <div>País: {{ detalleContrato.propiedad.propietario.direccion.pais }}</div>
+        </div>
+        <div class="col-2">
+          <div>Código Postal: {{ detalleContrato.propiedad.propietario.direccion.codigoPostal }}</div>
         </div>
       </div>
     </div>
@@ -236,47 +238,47 @@
     <div class="card-body pt-0">
       <div class="row">
         <div class="col-2">
-          <div>Nombre: {{ detalleContrato.arrendatario.persona.nombres }}</div>
+          <div>Nombre: {{ detalleContrato.arrendatario.nombres }}</div>
         </div>
         <div class="col-2">
-          <div>Email: {{ detalleContrato.arrendatario.persona.email }}</div>
+          <div>Email: {{ detalleContrato.arrendatario.email }}</div>
         </div>
         <div class="col-2">
-          <div>Teléfono: {{ detalleContrato.arrendatario.persona.telefono }}</div>
+          <div>Teléfono: {{ detalleContrato.arrendatario.telefono }}</div>
         </div>
         <div class="col-2">
-          <div>Estado Civil: {{ detalleContrato.arrendatario.persona.estadoCivil }}</div>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-2">
-          <div>Nacionalidad: {{ detalleContrato.arrendatario.persona.nacionalidad }}</div>
-        </div>
-        <div class="col-2">
-          <div>Ocupación: {{ detalleContrato.arrendatario.persona.ocupacion }}</div>
-        </div>
-        <div class="col-2">
-          <div>Calle: {{ detalleContrato.arrendatario.persona.direccion.calle }}</div>
-        </div>
-        <div class="col-2">
-          <div>comuna: {{ detalleContrato.arrendatario.persona.direccion.ciudad }}</div>
+          <div>Estado Civil: {{ detalleContrato.arrendatario.estadoCivil }}</div>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-2">
-          <div>Número: {{ detalleContrato.arrendatario.persona.direccion.numero }}</div>
+          <div>Nacionalidad: {{ detalleContrato.arrendatario.nacionalidad }}</div>
         </div>
         <div class="col-2">
-          <div>Ciudad: {{ detalleContrato.arrendatario.persona.direccion.ciudad }}</div>
+          <div>Ocupación: {{ detalleContrato.arrendatario.ocupacion }}</div>
         </div>
         <div class="col-2">
-          <div>Región: {{ detalleContrato.arrendatario.persona.direccion.region }}</div>
+          <div>Calle: {{ detalleContrato.arrendatario.direccion.calle }}</div>
         </div>
         <div class="col-2">
-          <div>País: {{ detalleContrato.arrendatario.persona.direccion.pais }}</div>
+          <div>comuna: {{ detalleContrato.arrendatario.direccion.ciudad }}</div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-2">
+          <div>Número: {{ detalleContrato.arrendatario.direccion.numero }}</div>
         </div>
         <div class="col-2">
-          <div>Código Postal: {{ detalleContrato.arrendatario.persona.direccion.codigoPostal }}</div>
+          <div>Ciudad: {{ detalleContrato.arrendatario.direccion.ciudad }}</div>
+        </div>
+        <div class="col-2">
+          <div>Región: {{ detalleContrato.arrendatario.direccion.region }}</div>
+        </div>
+        <div class="col-2">
+          <div>País: {{ detalleContrato.arrendatario.direccion.pais }}</div>
+        </div>
+        <div class="col-2">
+          <div>Código Postal: {{ detalleContrato.arrendatario.direccion.codigoPostal }}</div>
         </div>
       </div>
     </div>
@@ -289,49 +291,49 @@
     <div class="card-body pt-0">
       <div class="row">
         <div class="col-2">
-          <div>Nombre: {{ detalleContrato.codeudor.persona.nombres }}</div>
+          <div>Nombre: {{ detalleContrato.codeudor.nombres }}</div>
         </div>
         <div class="col-2">
-          <div>Email: {{ detalleContrato.codeudor.persona.email }}</div>
+          <div>Email: {{ detalleContrato.codeudor.email }}</div>
         </div>
         <div class="col-2">
-          <div>Teléfono: {{ detalleContrato.codeudor.persona.telefono }}</div>
+          <div>Teléfono: {{ detalleContrato.codeudor.telefono }}</div>
         </div>
         <div class="col-2">
-          <div>Estado Civil: {{ detalleContrato.codeudor.persona.estadoCivil }}</div>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col-2">
-          <div>Nacionalidad: {{ detalleContrato.codeudor.persona.nacionalidad }}</div>
-        </div>
-        <div class="col-2">
-          <div>Ocupación: {{ detalleContrato.codeudor.persona.ocupacion }}</div>
-        </div>
-        <div class="col-2">
-          <div>Calle: {{ detalleContrato.codeudor.persona.direccion.calle }}</div>
-        </div>
-        <div class="col-2">
-          <div>comuna: {{ detalleContrato.codeudor.persona.direccion.ciudad }}</div>
+          <div>Estado Civil: {{ detalleContrato.codeudor.estadoCivil }}</div>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col-2">
-          <div>Número: {{ detalleContrato.codeudor.persona.direccion.numero }}</div>
+          <div>Nacionalidad: {{ detalleContrato.codeudor.nacionalidad }}</div>
         </div>
         <div class="col-2">
-          <div>Ciudad: {{ detalleContrato.codeudor.persona.direccion.ciudad }}</div>
+          <div>Ocupación: {{ detalleContrato.codeudor.ocupacion }}</div>
         </div>
         <div class="col-2">
-          <div>Región: {{ detalleContrato.codeudor.persona.direccion.region }}</div>
+          <div>Calle: {{ detalleContrato.codeudor.direccion.calle }}</div>
         </div>
         <div class="col-2">
-          <div>País: {{ detalleContrato.codeudor.persona.direccion.pais }}</div>
+          <div>comuna: {{ detalleContrato.codeudor.direccion.ciudad }}</div>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col-2">
+          <div>Número: {{ detalleContrato.codeudor.direccion.numero }}</div>
+        </div>
+        <div class="col-2">
+          <div>Ciudad: {{ detalleContrato.codeudor.direccion.ciudad }}</div>
+        </div>
+        <div class="col-2">
+          <div>Región: {{ detalleContrato.codeudor.direccion.region }}</div>
+        </div>
+        <div class="col-2">
+          <div>País: {{ detalleContrato.codeudor.direccion.pais }}</div>
         </div>
       </div>
     </div>
   </div>
-  <!--Tipo Reajuste-->
+<!--  Tipo Reajuste-->
   <div v-if="detalleContrato.tipoReajuste" id="TipoReajuste" class="card mt-4">
     <div class="card-header">
       <h5>Tipo de Reajuste</h5>
@@ -356,19 +358,15 @@
       </div>
     </div>
   </div>
-  <div>
-
-  </div>
-
 </template>
 <script>
 
-import axios from 'axios'
+import { getContrato } from '@/servicios/contratosService.js'
 
 export default {
   name: 'DetallesContratos',
   props: {
-    uuid: String
+    id: String
   },
   components: {},
   data() {
@@ -379,7 +377,8 @@ export default {
   methods: {
     fetchItems: async function() {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:8080/contrato/${this.uuid}`)
+        const response = await getContrato(this.id)
+        console.log(response)
         this.detalleContrato = response.data
         console.log(this.detalleContrato)
       } catch (e) {

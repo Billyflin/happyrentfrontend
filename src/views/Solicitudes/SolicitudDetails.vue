@@ -1,13 +1,14 @@
 <script>
-import { useAuthStore } from '@/store/index.js'
 import { onUnmounted, ref } from 'vue'
-import MaterialButton from '@/components/MaterialButton.vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import { usePersonasStore } from '@/store/personasStore.js'
+import router from '@/router/index.js'
 
 export default {
   name: 'SolicitudDetails',
   components: { MaterialButton },
   setup() {
-    const auth = useAuthStore()
+    const auth = usePersonasStore()
     const archivoPrevisualizado = ref(null)
     const mostrarModal = ref(false)
 
@@ -27,6 +28,13 @@ export default {
       mostrarModal.value = false
       archivoPrevisualizado.value = null
     }
+
+
+    if (!auth.solicitud) {
+      router.push('/Solicitudes')
+    }
+
+
 
     onUnmounted(() => {
       auth.solicitud = null
@@ -54,7 +62,7 @@ export default {
           <div class="card-header">
             <h3>Detalles de la solicitud</h3>
           </div>
-          <div class="card-body">
+          <div class="card-body" v-if="auth.solicitud">
             <div class="row">
               <div class="col-lg-4">
                 <h5 class="mb-3">Datos del solicitante</h5>
@@ -71,7 +79,8 @@ export default {
                   <li class="list-group-item text-start"><strong>Ocupación:</strong> {{ auth.solicitud.ocupacion }}</li>
                   <li class="list-group-item text-start"><strong>Estado Civil:</strong> {{ auth.solicitud.estadoCivil }}
                   </li>
-                  <li class="list-group-item text-start"><strong>Nacionalidad:</strong> {{ auth.solicitud.nacionalidad }}
+                  <li class="list-group-item text-start"><strong>Nacionalidad:</strong> {{ auth.solicitud.nacionalidad
+                    }}
                   </li>
                   <li class="list-group-item text-start"><strong>Fecha de Nacimiento:</strong>
                     {{ auth.solicitud.fechaNacimiento }}
@@ -85,10 +94,12 @@ export default {
               <div class="col-lg-3">
                 <h5 class="mb-3">Dirección</h5>
                 <ul class="list-group mb-3">
-                  <li class="list-group-item text-start"><strong>Calle:</strong> {{ auth.solicitud.direccion.calle }}</li>
+                  <li class="list-group-item text-start"><strong>Calle:</strong> {{ auth.solicitud.direccion.calle }}
+                  </li>
                   <li class="list-group-item text-start"><strong>Número:</strong> {{ auth.solicitud.direccion.numero }}
                   </li>
-                  <li class="list-group-item text-start"><strong>Detalle:</strong> {{ auth.solicitud.direccion.detalle }}
+                  <li class="list-group-item text-start"><strong>Detalle:</strong> {{ auth.solicitud.direccion.detalle
+                    }}
                   </li>
                   <li class="list-group-item text-start"><strong>Región:</strong> {{ auth.solicitud.direccion.region }}
                   </li>

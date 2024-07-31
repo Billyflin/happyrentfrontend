@@ -22,7 +22,7 @@
 </template>
 <script>
 import PropietarioForm from '@/views/Auth/components/PropietarioForm.vue'
-import CorredoraForm from '@/views/Auth/components/CorredoraForm.vue'
+import CorredoraForm from '../../../../../happ-frontend2/src/views/Auth/components/CorredoraForm.vue'
 import RepresentanteStep from '@/views/Auth/components/RepresentanteStep.vue'
 
 export default {

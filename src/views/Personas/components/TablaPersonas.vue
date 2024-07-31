@@ -7,7 +7,7 @@
             class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
           {{ header.title }}
         </th>
-        <th v-if="deletable || editable" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
+        <th v-if="details" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
           Acciones
         </th>
       </tr>
@@ -34,12 +34,12 @@
 <script>
 import { createApp, h } from 'vue'
 import { DataTable } from 'simple-datatables'
-import MaterialButton from '@/components/MaterialButton.vue'
-import { useAuthStore } from '@/store/index.js'
-import _ from 'lodash'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import { usePersonasStore } from '@/store/personasStore.js'
+import router from '@/router/index.js'
 
 export default {
-  name: 'MyDataTablePersonas',
+  name: 'TablaPersonas',
   components: { MaterialButton },
   props: {
     headers: {
@@ -51,14 +51,6 @@ export default {
       type: Array,
       default: () => [],
       required: true
-    },
-    editable: {
-      type: Boolean,
-      default: false
-    },
-    deletable: {
-      type: Boolean,
-      default: false
     },
     details: {
       type: Boolean,
@@ -72,9 +64,9 @@ export default {
   },
   data() {
     return {
+      store: usePersonasStore(),
       dataTable: null,
       error: null,
-      auth: useAuthStore()
     }
   },
   watch: {
@@ -86,31 +78,24 @@ export default {
       immediate: true
     }
   },
+  mounted() {
+    if (this.tableData.length > 0) {
+      this.populateTable()
+    }
+  },
   methods: {
-    logRowData(row) {
-      console.log(row)
-    },
     verPersona(persona) {
-      this.auth.persona = persona
-      if (_.isEqual(this.auth.persona.archivos, persona.archivos)) {
-        this.$router.push({ name: 'PersonaDetails' })
-      } else {
-        console.log('Los archivos no son iguales.')
-      }
-    },
-    handleEdit(row) {
-      this.$emit('edit', row)
-      console.log('Edit:', row)
-    },
-    handleDelete(row) {
-      this.$emit('delete', row)
-      console.log('Delete:', row)
-    },
-    handleDetails(row) {
-      this.$emit('details', row)
-      console.log('Details:', row)
+      console.log('Ver persona:', persona)
+      this.store.fetchPersona(persona.id).then(
+        () => router.push({ name: 'PersonaDetails' })
+      )
     },
     populateTable() {
+      if (!this.$refs.dataTable) {
+        console.error('No se encontró la referencia a la tabla')
+        return
+      }
+
       if (this.dataTable) {
         this.dataTable.destroy()
       }
@@ -136,58 +121,42 @@ export default {
           } else if (header.key === 'nombre') {
             const a = document.createElement('a')
             a.className = 'font-weight-bold'
-            a.textContent = `${row[header.key]}${row.apellidoPaterno ? ' ' + row.apellidoPaterno : ''}${row.apellidoMaterno ? ' ' + row.apellidoMaterno : ''}`
+            a.textContent = `${row.nombre}${row.apellidoPaterno ? ' ' + row.apellidoPaterno : ''}${row.apellidoMaterno ? ' ' + row.apellidoMaterno : ''}`
             a.addEventListener('click', () => this.verPersona(row))
             td.appendChild(a)
           } else if (header.key === 'direccion') {
             td.innerHTML = `
               <p class="mb-0 text-sm font-weight-bold text-secondary">
-                ${row[header.key].calle} ${row[header.key].numero}, ${row[header.key].ciudad},
-                <span class="text-success">${row[header.key].region}</span>
+                ${row.calle} ${row.numero}, ${row.ciudad},
+                <span class="text-success">${row.region}</span>
               </p>
             `
           } else if (header.key === 'email') {
             const a = document.createElement('a')
-            a.href = `mailto:${row[header.key]}`
+            a.href = `mailto:${row.email}`
             a.className = 'mb-0 text-sm'
             a.textContent = row[header.key]
             td.appendChild(a)
           } else if (header.key === 'archivos') {
-            td.textContent = row[header.key].length
-          } else {
+            td.textContent = row[header.key]
+          } else if (header.key === 'rut') {
             td.textContent = row[header.key]
           }
-
           tr.appendChild(td)
         })
 
-        if (this.deletable || this.editable || this.details) {
+        if (this.details) {
           const actionTd = document.createElement('td')
           actionTd.className = 'align-middle'
 
           const actionContainer = document.createElement('div')
           actionContainer.className = 'd-flex justify-content-center'
 
-          if (this.editable) {
-            const editContainer = document.createElement('div')
-            editContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
-            this.mountButton(editContainer, 'primary', 'Editar', () => this.handleEdit(row), 'person_edit')
-            actionContainer.appendChild(editContainer)
-          }
+          const detailsContainer = document.createElement('div')
+          detailsContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
+          this.mountButton(detailsContainer, 'primary', 'Detalles', () => this.verPersona(row), 'visibility')
+          actionContainer.appendChild(detailsContainer)
 
-          if (this.deletable) {
-            const deleteContainer = document.createElement('div')
-            deleteContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
-            this.mountButton(deleteContainer, 'danger', 'Eliminar', () => this.handleDelete(row), 'person_remove')
-            actionContainer.appendChild(deleteContainer)
-          }
-
-          if (this.details) {
-            const detailsContainer = document.createElement('div')
-            detailsContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
-            this.mountButton(detailsContainer, 'primary', 'Detalles', () => this.verPersona(row), 'visibility')
-            actionContainer.appendChild(detailsContainer)
-          }
 
           actionTd.appendChild(actionContainer)
           tr.appendChild(actionTd)
@@ -205,7 +174,7 @@ export default {
             color,
             size: 'sm',
             variant: 'gradient',
-            class: 'd-flex align-items-center justify-content-center', // Alineación centrada
+            class: 'd-flex align-items-center justify-content-center',
             onClick
           }, {
             default: () => [
@@ -223,7 +192,7 @@ export default {
       if (this.$refs.dataTable) {
         this.dataTable = new DataTable(this.$refs.dataTable, {
           searchable: true,
-          perPage: 5,
+          perPage: 20,
           labels: {
             placeholder: 'Buscar...',
             searchTitle: 'Buscar en la tabla',
@@ -239,4 +208,3 @@ export default {
   }
 }
 </script>
-

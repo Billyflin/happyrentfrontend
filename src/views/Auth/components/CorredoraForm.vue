@@ -1,8 +1,9 @@
 <script>
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
+
 import { useVuelidate } from '@vuelidate/core'
+import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
 
 export default {
   components: {

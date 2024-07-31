@@ -7,8 +7,7 @@
     <div class="shadow-lg card">
       <div class="pt-3 pb-0 bg-transparent card-header">
         <div class="float-start">
-          <h5 class="mt-3 mb-0">Material UI Configurator</h5>
-          <p>See our dashboard options.</p>
+          <h5 class="mt-3 mb-0">Tema</h5>
         </div>
         <div class="mt-4 float-end" @click="props.toggle">
           <button class="p-0 btn btn-link text-dark fixed-plugin-close-button">
@@ -20,27 +19,26 @@
       <hr class="my-1 horizontal dark" />
       <div class="pt-0 card-body pt-sm-3">
         <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
-        </div>
-        <a class="switch-trigger background-color" href="#">
-          <div class="my-2 badge-colors text-start">
-            <span class="badge filter bg-gradient-primary" data-color="primary" @click="sidebarColor('primary')"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" @click="sidebarColor('dark')"></span>
-          </div>
-        </a>
+        <!--        <div>-->
+        <!--          <h6 class="mb-0">Sidebar Colors</h6>-->
+        <!--        </div>-->
+        <!--        <a href="#" class="switch-trigger background-color">-->
+        <!--          <div class="my-2 badge-colors text-start">-->
+        <!--            <span class="badge filter bg-gradient-primary" data-color="primary" @click="sidebarColor('primary')"></span>-->
+        <!--            <span class="badge filter bg-gradient-happyLight" data-color="happLight" @click="sidebarColor('happLight')"></span>-->
+        <!--          </div>-->
+        <!--        </a>-->
         <!-- Sidenav Type -->
         <div class="mt-3">
-          <h6 class="mb-0">Sidenav Type</h6>
-          <p class="text-sm">Choose between 2 different sidenav types.</p>
+          <h6 class="mb-0">Tema</h6>
         </div>
         <div class="d-flex">
           <button
             id="btn-dark"
             ref="btnDark"
-            :class="{active: sidebarType === 'bg-gradient-dark'}"
+            :class="{active: sidebarType === 'bg-gradient-dark', disabled: isBtnDisabled}"
             class="px-3 mb-2 btn bg-gradient-dark"
-            @click="sidebar('bg-gradient-dark')"
+            @click="sidebar('bg-gradient-dark');sidebarColor('primary')"
           >
             Dark
           </button>
@@ -49,7 +47,7 @@
             ref="btnTransparent"
             :class="{active: sidebarType === 'bg-transparent', disabled: isBtnDisabled}"
             class="px-3 mb-2 btn bg-gradient-dark ms-2"
-            @click="sidebar('bg-transparent')"
+            @click="sidebar('bg-transparent');sidebarColor('happLight')"
           >
             Transparent
           </button>
@@ -58,12 +56,12 @@
             ref="btnWhite"
             :class="{active: sidebarType === 'bg-white', disabled: isBtnDisabled}"
             class="px-3 mb-2 btn bg-gradient-dark ms-2"
-            @click="sidebar('bg-white')"
+            @click="sidebar('bg-white');sidebarColor('happLight')"
           >
             White
           </button>
         </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
+        <!--        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>-->
 
         <!-- Navbar Fixed -->
         <hr class="horizontal dark my-3" />
@@ -72,6 +70,7 @@
           <div class="form-check form-switch ps-0 ms-auto my-auto">
             <input
               :checked="store.isDarkMode"
+              :disabled="isBtnDisabled"
               class="form-check-input mt-1 ms-auto"
               type="checkbox"
               @click="darkMode"
@@ -85,11 +84,11 @@
 </template>
 
 <script setup>
-import { computed, ref, onBeforeMount } from 'vue'
+import { computed, onBeforeMount, onMounted, ref } from 'vue'
 import { useRoute } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useAppStore } from '@/store/index.js'
 import { activateDarkMode, deactivateDarkMode } from '@/assets/js/dark-mode'
+import { useAppStore } from '@/store/appStore.js'
 
 const props = defineProps(['toggle'])
 const route = useRoute()
@@ -97,9 +96,25 @@ const store = useAppStore()
 let { isNavFixed } = storeToRefs(store)
 const { setColor } = store
 
+try {
+  if (localStorage.getItem('isDarkMode') === 'true') {
+    store.isDarkMode = true
+  }
+  if (!document.querySelector('#sidenav-main')) {
+    store.toggleEveryDisplay()
+  }
+} catch (e) {
+  console.error(e)
+}
+
 function sidebarColor(color = 'success') {
-  document.querySelector('#sidenav-main').setAttribute('data-color', color)
-  setColor(color)
+  const sidenavMain = document.querySelector('#sidenav-main');
+  if (sidenavMain) {
+    sidenavMain.setAttribute('data-color', color)
+    setColor(color)
+  } else {
+    console.error('Sidebar element not found')
+  }
 }
 
 function sidebar(type) {
@@ -113,14 +128,16 @@ function setNavbarFixed() {
 }
 
 function darkMode() {
+  store.isDarkMode = !store.isDarkMode
+
   if (store.isDarkMode) {
-    store.isDarkMode = false
-    deactivateDarkMode()
-
-  } else {
-    store.isDarkMode = true
     activateDarkMode()
-
+    sidebar('bg-gradient-dark')
+    sidebarColor('primary')
+  } else {
+    deactivateDarkMode()
+    sidebar('bg-white')
+    sidebarColor('happLight')
   }
 }
 
@@ -134,6 +151,18 @@ function sidenavTypeOnResize() {
 
 const sidebarType = computed(() => {
   return store.sidebarType
+})
+
+onMounted(() => {
+  if (store.isDarkMode) {
+    activateDarkMode()
+    sidebar('bg-gradient-dark')
+    sidebarColor('primary')
+  } else {
+    deactivateDarkMode()
+    sidebar('bg-white')
+    sidebarColor('happLight')
+  }
 })
 
 onBeforeMount(() => {

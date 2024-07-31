@@ -4,7 +4,8 @@
       <div class="col-12 col-lg-9">
         <h4>Estas son las propiedades a las que tienes acceso</h4>
         <p class="text-muted">
-          Puedes ver, editar y crear contratos para las propiedades que te pertenecen,<br> <b>arrastra el cursor sobre la propiedad para ver más</b>
+          Puedes ver, editar y crear contratos para las propiedades que te pertenecen,<br> <b>arrastra el cursor sobre
+          la propiedad para ver más</b>
         </p>
       </div>
       <div class="col-12 col-lg-3 d-flex flex-column justify-content-center text-lg-right text-center">
@@ -16,27 +17,48 @@
         </router-link>
       </div>
     </div>
-    <div class="row mt-4">
-      <div v-if="auth.propiedades.length === 0" class="col-12">
+    <div v-if="loading" class="col-lg-12 position-relative z-index-2">
+      <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+        <div class="spinner-border text-primary" role="status" style="width:4rem; height: 4rem;">
+          <span class="visually-hidden">Cargando...</span>
+        </div>
+      </div>
+    </div>
+    <div v-else class="row mt-4">
+      <div v-if="proyection.length === 0" class="col-12">
         <div class="alert alert-primary text-light text-center">No tienes propiedades registradas</div>
       </div>
-      <div v-for="propiedad in auth.propiedades" :key="propiedad.id" class="col-12 col-md-6 col-lg-4 mb-6">
-        <propiedades-card
-          :img="propiedad.imagenPortada.contenido"
+      <div v-for="propiedad in proyection" :key="propiedad.id" class="col-12 col-md-6 col-lg-4 mb-6">
+        <propiedades-card-proyection
+          :img="propiedad.archivo.contenido"
           :propiedad="propiedad"
         />
       </div>
-    </div>
+      </div>
   </div>
 </template>
 
 <script setup>
-import PropiedadesCard from '@/views/components/PropiedadesCard/PropiedadesCard.vue'
-import { useAuthStore } from '@/store/index.js'
-import { onMounted } from 'vue'
+import { onMounted, ref } from 'vue'
+import { getPropiedadesProyection } from '@/servicios/propiedadesService.js'
+import PropiedadesCardProyection from '@/views/Propiedades/components/PropiedadesCardProyection.vue'
+import { useAppStore } from '@/store/appStore.js'
 
-const auth = useAuthStore()
+const loading = ref(false)
+const proyection = ref([])
+ const store= useAppStore()
 onMounted(async () => {
-  await auth.getPropiedades()
+  store.showNavbar = true
+  store.showSidenav = true
+  store.showFooter = true
+  loading.value = true
+  try {
+    const response = await getPropiedadesProyection()
+    proyection.value = response.data
+  } catch (err) {
+    console.error(err)
+  }
+  loading.value = false
 })
+
 </script>

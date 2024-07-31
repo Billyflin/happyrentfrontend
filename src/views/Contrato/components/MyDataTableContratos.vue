@@ -3,11 +3,10 @@
     <table ref="dataTable" class="table table-flush table-hover">
       <thead>
       <tr>
-        <th v-for="header in headers" :key="header.key"
-            class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
+        <th v-for="header in headers" :key="header.key" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
           {{ header.title }}
         </th>
-        <th v-if="deletable || editable" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
+        <th v-if="details" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
           Acciones
         </th>
       </tr>
@@ -30,11 +29,12 @@
     <h6>No hay datos para mostrar.</h6>
   </div>
 </template>
+
 <script>
 import { createApp, h } from 'vue'
 import { DataTable } from 'simple-datatables'
-import MaterialButton from '@/components/MaterialButton.vue'
-import { useAuthStore } from '@/store/index.js'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import router from '@/router/index.js'
 
 export default {
   name: 'MyDataTableContratos',
@@ -50,11 +50,7 @@ export default {
       default: () => [],
       required: true
     },
-    editable: {
-      type: Boolean,
-      default: false
-    },
-    deletable: {
+    details: {
       type: Boolean,
       default: false
     },
@@ -68,142 +64,131 @@ export default {
     return {
       dataTable: null,
       error: null,
-      auth: useAuthStore()
     }
   },
   watch: {
     tableData: {
       handler() {
-        this.$nextTick(this.populateTable)
+        this.populateTable()
       },
       deep: true,
       immediate: true
     }
   },
+  mounted() {
+    this.populateTable()
+  },
   methods: {
-    logRowData(row) {
-      console.log(row)
+    handleDetails(row) {
+      console.log('Detalles:', row)
+      // this.auth.contrato = row
+      router.push({ name: 'DetallesContrato', params: { id: row.id } })
     },
     verContrato(contrato) {
-      this.auth.contrato = contrato
-      this.$router.push({ name: 'ContratoDetails', params: { id: contrato.id } })
-    },
-    handleEdit(row) {
-      this.$emit('edit', row)
-      console.log('Edit:', row)
-    },
-    handleDelete(row) {
-      this.$emit('delete', row)
-      console.log('Delete:', row)
+      console.log('Ver contrato:', contrato)
+      // this.auth.contrato = contrato
+      // this.$router.push({ name: 'ContratoDetails', params: { id: contrato.id } })
     },
     populateTable() {
-      if (this.dataTable) {
-        this.dataTable.destroy()
-      }
-
-      const tbody = this.$refs.dataTable.querySelector('tbody')
-      tbody.innerHTML = '' // Clear existing rows
-
-      this.tableData.forEach(row => {
-        const tr = document.createElement('tr')
-        tr.className = 'text-sm text-center text-capitalize align-middle'
-
-        this.headers.forEach(header => {
-          const td = document.createElement('td')
-
-          if (header.key === 'propietarioTipo') {
-            if (row[header.key] === 'persona') {
-              td.innerHTML = '<span class="mb-0 mt-0 badge badge-info">Persona</span>'
-            } else if (row[header.key] === 'empresa') {
-              td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Empresa</span>'
-            } else {
-              td.textContent = row[header.key] ? row[header.key] : 'N/A'
-            }
-          } else if (header.key === 'activo') {
-            if (row[header.key] === true) {
-              td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Activo</span>'
-            } else {
-              td.innerHTML = '<span class="mb-0 mt-0 badge badge-danger">Inactivo</span>'
-            }
-          } else if (header.key === 'propiedadArrendado') {
-            if (row[header.key] === true) {
-              td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Arrendado</span>'
-            } else {
-              td.innerHTML = '<span class="mb-0 mt-0 badge badge-danger">No Arrendado</span>'
-            }
-          } else if (header.key === 'propiedadTipo') {
-            if (row[header.key] === 'departamento') {
-              td.innerHTML = '<span class="mb-0 mt-0 badge badge-info">Departamento</span>'
-            } else if (row[header.key] === 'casa') {
-              td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Casa</span>'
-            } else {
-              td.textContent = row[header.key] ? row[header.key] : 'N/A'
-            }
-          } else if (header.key === 'createDate') {
-            td.textContent = new Date(row[header.key]).toLocaleDateString()
-          } else if (header.key === 'fechaInicio' || header.key === 'fechaTermino') {
-            td.textContent = new Date(row[header.key]).toLocaleDateString()
-          } else if (header.key === 'renta') {
-            td.textContent = `$${row[header.key].toLocaleString()}`
-          } else if (header.key === 'duracionMeses') {
-            td.textContent = `${row[header.key]} Meses`
-          } else if (header.key === 'propietarioNombre') {
-            const a = document.createElement('a')
-            a.className = 'font-weight-bold'
-            a.textContent = `${row[header.key]}${row.propietarioApellido ? ' ' + row.propietarioApellido : ''}${row.propietarioMaterno ? ' ' + row.propietarioMaterno : ''}`
-            a.addEventListener('click', () => this.verContrato(row))
-            td.appendChild(a)
-          } else if (header.key === 'direccion') {
-            td.innerHTML = `
-<p class="mb-0 text-sm font-weight-bold text-secondary">
-${row.direccionCalle} ${row.direccionNumero}, ${row.direccionCiudad},
-<span class="text-success">${row.direccionRegion}</span>, ${row.direccionPais}
-</p>
-`
-          } else {
-            td.textContent = row[header.key] ? row[header.key] : 'N/A'
-          }
-
-          tr.appendChild(td)
-        })
-
-        if (this.deletable || this.editable|| this.details) {
-          const actionTd = document.createElement('td')
-          actionTd.className = 'align-middle'
-
-          const actionContainer = document.createElement('div')
-          actionContainer.className = 'd-flex justify-content-center'
-
-
-          if (this.editable) {
-            const editContainer = document.createElement('div')
-            editContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
-            this.mountButton(editContainer, 'primary', 'Editar', () => this.handleEdit(row), 'person_edit')
-            actionContainer.appendChild(editContainer)
-          }
-
-          if (this.deletable) {
-            const deleteContainer = document.createElement('div')
-            deleteContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
-            this.mountButton(deleteContainer, 'danger', 'Eliminar', () => this.handleDelete(row), 'person_remove')
-            actionContainer.appendChild(deleteContainer)
-          }
-
-          if (this.details) {
-            const detailsContainer = document.createElement('div')
-            detailsContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
-            this.mountButton(detailsContainer, 'primary', 'Detalles', () => this.handleDetails(row), 'visibility')
-            actionContainer.appendChild(detailsContainer)
-          }
-
-          actionTd.appendChild(actionContainer)
-          tr.appendChild(actionTd)
+      this.$nextTick(() => {
+        if (!this.$refs.dataTable) {
+          console.error('DataTable ref is not available.')
+          return
         }
 
-        tbody.appendChild(tr)
-      })
+        if (this.dataTable) {
+          this.dataTable.destroy()
+        }
 
-      this.initializeDataTable()
+        const tbody = this.$refs.dataTable.querySelector('tbody')
+        tbody.innerHTML = '' // Clear existing rows
+
+        this.tableData.forEach(row => {
+          const tr = document.createElement('tr')
+          tr.className = 'text-sm text-center text-capitalize align-middle'
+
+          this.headers.forEach(header => {
+            const td = document.createElement('td')
+
+            if (header.key === 'propietarioTipo') {
+              if (row[header.key] === 'persona') {
+                td.innerHTML = '<span class="mb-0 mt-0 badge badge-info">Persona</span>'
+              } else if (row[header.key] === 'empresa') {
+                td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Empresa</span>'
+              } else {
+                td.textContent = row[header.key] ? row[header.key] : 'N/A'
+              }
+            } else if (header.key === 'activo') {
+              if (row[header.key] === true) {
+                td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Activo</span>'
+              } else {
+                td.innerHTML = '<span class="mb-0 mt-0 badge badge-danger">Inactivo</span>'
+              }
+            } else if (header.key === 'propiedadArrendado') {
+              if (row[header.key] === true) {
+                td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Arrendado</span>'
+              } else {
+                td.innerHTML = '<span class="mb-0 mt-0 badge badge-danger">No Arrendado</span>'
+              }
+            } else if (header.key === 'propiedadTipo') {
+              if (row[header.key] === 'departamento') {
+                td.innerHTML = '<span class="mb-0 mt-0 badge badge-info">Departamento</span>'
+              } else if (row[header.key] === 'casa') {
+                td.innerHTML = '<span class="mb-0 mt-0 badge badge-success">Casa</span>'
+              } else {
+                td.textContent = row[header.key] ? row[header.key] : 'N/A'
+              }
+            } else if (header.key === 'createDate') {
+              td.textContent = new Date(row[header.key]).toLocaleDateString()
+            } else if (header.key === 'fechaInicio' || header.key === 'fechaTermino') {
+              td.textContent = new Date(row[header.key]).toLocaleDateString()
+            } else if (header.key === 'renta') {
+              td.textContent = `$${row[header.key].toLocaleString()}`
+            } else if (header.key === 'duracionMeses') {
+              td.textContent = `${row[header.key]} Meses`
+            } else if (header.key === 'propietarioNombre') {
+              const a = document.createElement('a')
+              a.className = 'font-weight-bold'
+              a.textContent = `${row[header.key]}${row.propietarioApellido ? ' ' + row.propietarioApellido : ''}${row.propietarioMaterno ? ' ' + row.propietarioMaterno : ''}`
+              a.addEventListener('click', () => this.verContrato(row))
+              td.appendChild(a)
+            } else if (header.key === 'direccion') {
+              td.innerHTML = `
+                <p class="mb-0 text-sm font-weight-bold text-secondary">
+                  ${row.direccionCalle} ${row.direccionNumero}, ${row.direccionCiudad},
+                  <span class="text-success">${row.direccionRegion}</span>, ${row.direccionPais}
+                </p>
+              `
+            } else {
+              td.textContent = row[header.key] ? row[header.key] : 'N/A'
+            }
+
+            tr.appendChild(td)
+          })
+
+          if (this.details) {
+            const actionTd = document.createElement('td')
+            actionTd.className = 'align-middle'
+
+            const actionContainer = document.createElement('div')
+            actionContainer.className = 'd-flex justify-content-center'
+
+            if (this.details) {
+              const detailsContainer = document.createElement('div')
+              detailsContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
+              this.mountButton(detailsContainer, 'primary', 'Detalles', () => this.handleDetails(row), 'visibility')
+              actionContainer.appendChild(detailsContainer)
+            }
+
+            actionTd.appendChild(actionContainer)
+            tr.appendChild(actionTd)
+          }
+
+          tbody.appendChild(tr)
+        })
+
+        this.initializeDataTable()
+      })
     },
     mountButton(container, color, text, onClick, icon) {
       createApp({
@@ -212,7 +197,7 @@ ${row.direccionCalle} ${row.direccionNumero}, ${row.direccionCiudad},
             color,
             size: 'sm',
             variant: 'gradient',
-            class: 'd-flex align-items-center justify-content-center', // Alineación centrada
+            class: 'd-flex align-items-center justify-content-center',
             onClick
           }, {
             default: () => [
@@ -231,7 +216,7 @@ ${row.direccionCalle} ${row.direccionNumero}, ${row.direccionCiudad},
       if (this.$refs.dataTable) {
         this.dataTable = new DataTable(this.$refs.dataTable, {
           searchable: true,
-          perPage: 5,
+          perPage: 20,
           labels: {
             placeholder: 'Buscar...',
             searchTitle: 'Buscar en la tabla',

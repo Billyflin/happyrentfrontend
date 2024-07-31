@@ -22,10 +22,10 @@
   </div>
 </template>
 <script>
-import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
 import { activateDarkMode, deactivateDarkMode } from '@/assets/js/dark-mode.js'
 import router from '@/router/index.js'
+import { useAppStore } from '@/store/appStore.js'
 
 export default {
   name: 'NotFound',

@@ -1,6 +1,6 @@
 <script setup>
 
-import AccordionItem from '@/views/components/AccordionItem.vue'
+import AccordionItem from '@/components/AccordionItem.vue'
 </script>
 
 <template>

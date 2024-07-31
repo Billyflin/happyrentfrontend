@@ -1,11 +1,11 @@
 <script setup>
 import { nextTick, ref, watch } from 'vue'
-import MaterialSwitch from '@/components/MaterialSwitch.vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialTextarea from '@/components/MaterialTextarea.vue'
-import Dropzone from 'dropzone'
-import MaterialButton from '@/components/MaterialButton.vue'
 import axios from 'axios'
+import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import MaterialTextarea from '@/components/Material/MaterialTextarea.vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import Dropzone from 'dropzone'
 
 let myDropzone = null
 

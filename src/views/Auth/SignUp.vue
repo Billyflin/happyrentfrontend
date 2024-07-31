@@ -83,13 +83,15 @@
 
 <script setup>
 import { onBeforeMount, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
-import MaterialButton from '@/components/MaterialButton.vue'
+
 import Image from '@/assets/img/illustrations/illustration-signin.jpg'
-import { useAppStore, useRegisterFormStore } from '@/store/index.js'
 import { useRouter } from 'vue-router'
 import axios from 'axios'
+import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import { useRegisterFormStore } from '@/store/formStore.js'
+import { useAppStore } from '@/store/appStore.js'
 
 
 const body = document.getElementsByTagName('body')[0]

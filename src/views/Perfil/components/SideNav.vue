@@ -1,7 +1,7 @@
 <script>
-import MaterialAvatar from '@/components/MaterialAvatar.vue'
 import imagen from '@/assets/img/bruce-mars.jpg'
-import { useAuthStore } from '@/store/index.js'
+import { useAuthStore } from '@/store/authStore.js'
+import MaterialAvatar from '@/components/Material/MaterialAvatar.vue'
 
 export default {
   name: 'SideNav',
@@ -30,8 +30,8 @@ export default {
         </div>
         <div class="col-sm-auto col-8 my-auto">
           <div class="h-100">
-            <h5 class="mb-1 font-weight-bolder">{{ store.userInfo.username }}</h5>
-            <p class="mb-0 font-weight-bold text-sm text-capitalize">{{ store.userInfo.perfil.type }}</p>
+            <h5 class="mb-1 font-weight-bolder">{{ store.currentUser.username }}</h5>
+            <p class="mb-0 font-weight-bold text-sm text-capitalize">{{ store.currentUser.perfil.type }}</p>
           </div>
         </div>
         <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">

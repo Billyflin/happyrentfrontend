@@ -61,11 +61,11 @@
 </template>
 
 <script setup>
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialButton from '@/components/MaterialButton.vue'
-import { useAppStore } from '@/store/index.js'
 import { onBeforeMount, onBeforeUnmount, ref } from 'vue'
 import axios from 'axios'
+import { useAppStore } from '@/store/appStore.js'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
 
 const state = ref(false)
 const emailValue = ref('')

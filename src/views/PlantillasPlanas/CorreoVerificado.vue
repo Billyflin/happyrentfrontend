@@ -43,11 +43,11 @@
 
 </template>
 <script>
-import { useAppStore } from '@/store/index.js'
 import { onMounted, onUnmounted } from 'vue'
-import MaterialButton from '@/components/MaterialButton.vue'
 import { activateDarkMode, deactivateDarkMode } from '@/assets/js/dark-mode.js'
 import router from '@/router/index.js'
+import { useAppStore } from '@/store/appStore.js'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
 
 export default {
   name: 'CorreoVerificado',

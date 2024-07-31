@@ -1,10 +1,17 @@
 <template>
-  <div v-if="lists.length === 0">
+  <div v-if="loading">
+    <div class="d-flex justify-content-center align-items-center" style="height: 50vh;">
+      <div class="spinner-border text-primary" role="status" style="width:4rem; height: 4rem;">
+        <span class="visually-hidden">Cargando...</span>
+      </div>
+    </div>
+  </div>
+  <div v-else-if="solicitudes.length === 0 && !loading">
     <div class="mt-4">
       <div class="alert alert-primary text-light text-center">No hay solicitudes entrantes</div>
     </div>
   </div>
-  <div class="mt-4 card" v-else>
+  <div v-else class="mt-4 card">
     <div class="pb-0 card-header d-flex align-items-center justify-content-between">
       <h5>Solicitudes Entrantes</h5>
     </div>
@@ -13,29 +20,21 @@
         <table class="table mb-0 align-items-center">
           <thead>
           <tr>
-            <th
-              v-for="(header, index) in headers"
-              :key="index"
-              :class="index >= 1 ? 'text-center ps-2' : ''"
-              class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
-            >
+            <th v-for="(header, index) in headers" :key="index" :class="index >= 1 ? 'text-center ps-2' : ''" class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
               {{ header }}
             </th>
           </tr>
           </thead>
-          <transition-group name="list" tag="tbody" v-if="lists">
-            <tr
-              v-for="(list, index) in lists"
-              :key="list.id"
-            >
-              <td @click="console.log(list); auth.solicitud = list.perfil">
+          <transition-group v-if="solicitudes" name="list" tag="tbody">
+            <tr v-for="(solicitud, index) in solicitudes" :key="solicitud.id">
+              <td>
                 <div class="px-3 py-1 d-flex">
-                  <div class="d-flex flex-column justify-content-center">
-                    <router-link :to="{ name: 'SolicitudDetails' }">
-                      <h6 class="mb-0 text-sm text-capitalize">{{ list.perfil.nombre }}</h6>
+                  <div class="d-flex flex-column justify-content-center" @click="verDetalle(solicitud.perfil.id)">
+                    <router-link :to="{ name: 'SolicitudDetails' }" >
+                      <h6 class="mb-0 text-sm text-capitalize">{{ solicitud.perfil.nombre}}</h6>
                       <p class="mb-0 text-sm font-weight-bold text-secondary">
-                        <span class="text-success">{{ list.perfil.direccion.ciudad }}</span>
-                        {{ list.perfil.direccion.region + ', ' + list.perfil.direccion.pais }}
+                        <span class="text-success">{{ solicitud.perfil.direccion.ciudad }}</span>
+                        {{ solicitud.perfil.direccion.region + ', ' + solicitud.perfil.direccion.pais }}
                       </p>
                     </router-link>
                   </div>
@@ -43,60 +42,36 @@
               </td>
               <td>
                 <p class="text-center mb-0 text-sm font-weight-bold">
-                  {{ list.perfil.rut }}
+                  {{ solicitud.perfil.rut }}
                 </p>
               </td>
               <td class="text-sm align-middle">
                 <p class="text-center mb-0 text-sm font-weight-bold">
-                  {{ list.perfil.email }}
+                  {{ solicitud.perfil.email }}
                 </p>
               </td>
               <td class="align-middle text-center">
                 <p class="text-center mb-0 text-sm font-weight-bold">
-                  {{ list.perfil.direccion.calle + ' ' + list.perfil.direccion.numero }}
+                  {{ solicitud.perfil.direccion.calle + ' ' + solicitud.perfil.direccion.numero }}
                 </p>
               </td>
               <td class="align-middle text-center">
                 <p class="text-center mb-0 text-sm font-weight-bold">
-                  {{ list.perfil.type.charAt(0).toUpperCase() + list.perfil.type.slice(1) }}
+                  {{ solicitud.perfil.type.charAt(0).toUpperCase() + solicitud.perfil.type.slice(1) }}
                 </p>
               </td>
               <td class="align-middle text-center">
                 <p class="text-center mb-0 text-sm font-weight-bold">
-                  {{ list.perfil.archivos.length }}
+                  {{ solicitud.perfil.archivos.length }}
                 </p>
               </td>
               <td class="align-middle text-center">
                 <div class="text-center d-flex align-items-center">
-                  <material-button
-                    class="my-sm-auto mt-2 mb-0 mx-1 d-flex align-items-center"
-                    color="success"
-                    name="button"
-                    size="sm"
-                    type="button"
-                    variant="gradient"
-                    @click="aceptarSolicitud(list.id,index)"
-                  >
-                    <span
-                      class="material-symbols-outlined mr-3"
-                      style="font-size: 16px; margin-right: 10px;"
-                    >person_add</span
-                    >Aceptar
+                  <material-button class="my-sm-auto mt-2 mb-0 mx-1 d-flex align-items-center" color="success" name="button" size="sm" type="button" variant="gradient" @click="aceptarSolicitud(solicitud.id, index)">
+                    <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;">person_add</span>Aceptar
                   </material-button>
-                  <material-button
-                    class="my-sm-auto mt-2 mb-0 d-flex align-items-center"
-                    color="danger"
-                    name="button"
-                    size="sm"
-                    type="button"
-                    variant="gradient"
-                    @click="removeSolicitud(list.id, index)"
-                  >
-                    <span
-                      class="material-symbols-outlined mr-3"
-                      style="font-size: 16px; margin-right: 10px;"
-                    >person_remove</span
-                    >Eliminar
+                  <material-button class="my-sm-auto mt-2 mb-0 d-flex align-items-center" color="danger" name="button" size="sm" type="button" variant="gradient" @click="removeSolicitud(solicitud.id, index)">
+                    <span class="material-symbols-outlined mr-3" style="font-size: 16px; margin-right: 10px;">person_remove</span>Eliminar
                   </material-button>
                 </div>
               </td>
@@ -109,14 +84,14 @@
 </template>
 
 <script>
-import MaterialButton from '@/components/MaterialButton.vue'
-import SolicitudDetails from '@/views/Solicitudes/SolicitudDetails.vue'
-import { useAuthStore } from '@/store/index.js'
-import axios from 'axios'
+import MaterialButton from '@/components/Material/MaterialButton.vue';
+import { ref, onMounted } from 'vue';
+import { aceptarSolicitud, getSolicitudes, rechazarSolicitud } from '@/servicios/solicitudService.js'
+import { usePersonasStore } from '@/store/personasStore.js'
 
 export default {
   name: 'TablaPerfilesTemporales',
-  components: { SolicitudDetails, MaterialButton },
+  components: { MaterialButton },
   props: {
     headers: {
       type: Array,
@@ -124,48 +99,60 @@ export default {
         'Nombre', 'Rut', 'Email', 'Direccion', 'Tipo Entidad', 'Archivos', 'Accion'
       ]
     },
-    lists: {
-      type: Array,
-      default: () => []
-    }
   },
-  data() {
-    return {
-      auth: useAuthStore(),
-      sending: false
-    }
-  },
-  methods: {
-    removeSolicitud(id, index) {
-      // Eliminar solicitud con animación
-      this.lists.splice(index, 1)
-      console.log(id)
-    },
-    aceptarSolicitud(id,index) {
+  setup() {
+    const solicitudes = ref([]);
+    const loading = ref(false);
+    const store = usePersonasStore();
+    const fetchSolicitudes = async () => {
       try {
-        this.sending = true
-        axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/temporal/real`,
-          {
-            idUsuario: id
-          })
-          .then((it) => {
-            console.log(it)
-            this.sending = false
-            this.lists.splice(index, 1)
-          })
-          .catch((err) => {
-            console.error(err)
-            if (err.response && err.response.status === 500 && err.response.data === 'Token Invalido.') {
-              this.isTokenValid = false
-            }
-            console.error(err)
-          })
-      } catch (e) {
-        console.error(e)
+        loading.value = true;
+        const response = await getSolicitudes();
+        solicitudes.value = response.data;
+        loading.value = false;
+      } catch (error) {
+        console.error('Error fetching solicitudes:', error);
+        loading.value = false;
       }
-    }
-  }
-}
+    };
+
+    const aceptarSolicitudHandler = async (id, index) => {
+      try {
+        await aceptarSolicitud(id);
+        solicitudes.value.splice(index, 1);
+      } catch (error) {
+        console.error('Error accepting solicitud:', error);
+      }
+    };
+
+    const rechazarSolicitudHandler = async (id, index) => {
+      try {
+        // await rechazarSolicitud(id);
+        solicitudes.value.splice(index, 1);
+      } catch (error) {
+        console.error('Error rejecting solicitud:', error);
+      }
+    };
+
+    const verDetalle = (solicitud) => {
+      console.log('Ver detalle de solicitud:', solicitud);
+      // Lógica para ver detalle de solicitud
+      store.fetchSolicitud(solicitud);
+    };
+
+    onMounted(() => {
+      fetchSolicitudes();
+    });
+
+    return {
+      solicitudes,
+      aceptarSolicitud: aceptarSolicitudHandler,
+      removeSolicitud: rechazarSolicitudHandler,
+      verDetalle,
+      loading
+    };
+  },
+};
 </script>
 
 <style scoped>

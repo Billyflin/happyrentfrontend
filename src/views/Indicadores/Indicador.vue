@@ -115,12 +115,11 @@
 <script setup>
 import { onBeforeMount, ref } from 'vue'
 import axios from 'axios'
-import LineChart from '@/examples/Charts/LineChart.vue'
-import ChartHolderCard from '@/views/components/ChartHolderCard.vue'
-import MiniStatisticsCard from '@/views/components/MiniStatisticsCard/MiniStatisticsCard.vue'
 import logoBancoCentral from '@/assets/img/logos/layout_set_logo.svg'
-import MaterialAvatar from '@/components/MaterialAvatar.vue'
-
+import MaterialAvatar from '@/components/Material/MaterialAvatar.vue'
+import LineChart from '@/components/Charts/LineChart.vue'
+import MiniStatisticsCard from '@/views/Indicadores/component/MiniStatisticsCard.vue'
+import ChartHolderCard from '@/views/Indicadores/component/ChartHolderCard.vue'
 
 let UTMData = ref(null)
 let DOLARData = ref(null)

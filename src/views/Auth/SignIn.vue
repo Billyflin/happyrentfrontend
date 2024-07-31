@@ -36,7 +36,7 @@
                   </material-button>
                 </div>
                 <p class="mt-4 text-xs text-center">
-                  <span class="text-danger">{{ auth.errMsg }}</span>
+                  <span class="text-danger">{{ auth.errorMessage }}</span>
                 </p>
                 <p class="mt-4 text-sm text-center">
                   No tienes una cuenta?
@@ -74,12 +74,13 @@
 
 <script setup>
 import { onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialSwitch from '@/components/MaterialSwitch.vue'
-import MaterialButton from '@/components/MaterialButton.vue'
-import { useAppStore, useAuthStore } from '@/store/index.js'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
 import router from '@/router/index.js'
 import BackPerfilFoto from '@/assets/img/illustrations/pattern-tree.svg'
+import { useAuthStore } from '@/store/authStore.js'
+import { useAppStore } from '@/store/appStore.js'
 
 
 const auth = useAuthStore()
@@ -88,13 +89,12 @@ const password = ref('')
 const rememberMe = ref(false)
 
 const loginHandler = async () => {
-  auth.setRememberMe(document.getElementById('rememberMe').value)
-  await auth.loginHandler(document.getElementById('username').value, document.getElementById('password').value)
+  await auth.login(username.value, password.value)
 }
 
 const store = useAppStore()
-const { toggleEveryDisplay, toggleHideConfig } = store
-watch(() => auth.userInfo, (value) => {
+const { toggleEveryDisplay } = store
+watch(() => auth.currentUser, (value) => {
   if (value) {
     router.push({ name: 'Dashboard' })
   }

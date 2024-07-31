@@ -127,9 +127,9 @@ Stroke effects - Nucleo outline icons
 
 .icon-outline.icon-stroke-1 use,
 .icon-outline.icon-stroke-3 use {
-    -webkit-transform: translateX(0.5px) translateY(0.5px);
-    -moz-transform: translateX(0.5px) translateY(0.5px);
-    -ms-transform: translateX(0.5px) translateY(0.5px);
-    -o-transform: translateX(0.5px) translateY(0.5px);
-    transform: translateX(0.5px) translateY(0.5px);
+    -webkit-transform: translateX(1px) translateY(1px);
+    -moz-transform: translateX(1px) translateY(1px);
+    -ms-transform: translateX(1px) translateY(1px);
+    -o-transform: translateX(1px) translateY(1px);
+    transform: translateX(1px) translateY(1px);
 }

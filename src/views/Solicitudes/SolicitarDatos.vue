@@ -1,14 +1,12 @@
 <script setup>
-
-import SolicitarDatosContrato from '@/views/Contrato/components/SolicitarDatosContrato.vue'
 import TablaPerfilesTemporales from '@/views/Solicitudes/TablaPerfilesTemporales.vue'
 import { onMounted } from 'vue'
-import { useAuthStore } from '@/store/index.js'
+import { getSolicitudes } from '@/servicios/solicitudService.js'
+import SolicitarDatosContrato from '@/views/Solicitudes/component/SolicitarDatosContrato.vue'
 
 
-const auth = useAuthStore()
 onMounted(() => {
-  auth.getSolicitudes()
+  getSolicitudes()
 })
 </script>
 
@@ -16,9 +14,7 @@ onMounted(() => {
   <div class="container-fluid mb-4">
     <solicitar-datos-contrato />
 
-    <tabla-perfiles-temporales
-      :lists="auth.solicitudes"
-    />
+    <tabla-perfiles-temporales />
   </div>
 </template>
 

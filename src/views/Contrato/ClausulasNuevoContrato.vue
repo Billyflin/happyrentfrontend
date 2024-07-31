@@ -1,20 +1,24 @@
 <script>
 import { onMounted, onUnmounted, ref } from 'vue'
-import { useAppStore, useAuthStore } from '@/store/index.js'
-import NavPill from '@/views/components/NavPill/NavPill.vue'
-import SideNav from '@/views/Contrato/components/SideNav.vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import MaterialSwitch from '@/components/MaterialSwitch.vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialBadge from '@/components/MaterialBadge.vue'
-import MaterialTextarea from '@/components/MaterialTextarea.vue'
-import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
-import MaterialButton from '@/components/MaterialButton.vue'
+
 import axios from 'axios'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
+import MaterialTextarea from '@/components/Material/MaterialTextarea.vue'
+import MaterialBadge from '@/components/Material/MaterialBadge.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
+import SideNavClausulas from '@/views/Contrato/components/SideNavClausulas.vue'
+import { useContratosStore } from '@/store/contratosStore.js'
+import SideNav from '@/views/Contrato/components/SideNavClausulas.vue'
+import { getDocumento, postContrato } from '@/servicios/contratosService.js'
+import { useAppStore } from '@/store/appStore.js'
 
 export default {
   name: 'ClausulasNuevoContrato',
   components: {
+    SideNav,
     MaterialButton,
     MaterialCheckbox,
     MaterialTextarea,
@@ -22,8 +26,7 @@ export default {
     MaterialInput,
     MaterialSwitch,
     MaterialChoices,
-    SideNav,
-    NavPill
+    SideNavClausulas
   },
   data() {
     return {
@@ -89,8 +92,8 @@ export default {
     }
   },
   setup() {
-    const store = useAppStore()
-    const store2 = useAuthStore()
+    const store = useContratosStore()
+    const store2 = useContratosStore()
     const Comparecencia = ref(null)
     const Clausula1 = ref(null)
     const Clausula2 = ref(null)
@@ -117,7 +120,7 @@ export default {
     const visitasPermitidas = ref(true)
     const numeroVisitas = ref(0)
 
-    const { toggleEveryDisplay } = store
+    const { toggleEveryDisplay } = useAppStore()
     onMounted(() => {
       toggleEveryDisplay()
     })
@@ -127,7 +130,10 @@ export default {
       return new Date(date).toLocaleDateString('es-CL', options)
     }
 
+
+
     onUnmounted(() => {
+      store.clearContratoStore()
       toggleEveryDisplay()
     })
     return {
@@ -166,74 +172,62 @@ export default {
       return text.charAt(0).toUpperCase() + text.slice(1)
     },
     getDoc() {
-      axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato/reporte/${this.reporteID}`, { responseType: 'blob' })
-        .then((response) => {
-          const url = window.URL.createObjectURL(new Blob([response.data]))
-          const link = document.createElement('a')
-          link.href = url
-          link.setAttribute('download', `contrato_${this.reporteID}.pdf`) // o cualquier otro nombre de archivo
-          document.body.appendChild(link)
-          link.click()
-        })
-        .catch((error) => {
-          console.error(error)
-        })
-
+      getDocumento(this.reporteID)
     },
     enviarContrato() {
-      let response = axios.post(
-        `${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/contrato`,
-        {
-          comparecencia: this.Comparecencia.innerText,
-          clausula1: this.Clausula1.innerText,
-          clausula2: this.Clausula2.innerText,
-          clausula3: this.Clausula3.innerText,
-          clausula4: this.Clausula4.innerText,
-          clausula5: this.Clausula5.innerText,
-          clausula6: this.Clausula6.innerText,
-          clausula7: this.Clausula7.innerText,
-          clausula8: this.Clausula8.innerText,
-          clausula9: this.Clausula9.innerText,
-          clausula10: this.Clausula10.innerText,
-          clausula11: this.Clausula11.innerText,
-          clausula12: this.Clausula12.innerText,
-          clausula13: this.Clausula13.innerText,
-          clausula14: this.Clausula14.innerText,
-          clausula15: this.Clausula15.innerText,
-          clausula16: this.Clausula16.innerText,
-          clausula17: this.Clausula17.innerText,
-          clausula18: this.Clausula18.innerText,
-          comparecenciaEdit: this.comparecenciaEdit,
-          clausula1Edit: this.clausula1edit,
-          clausula2Edit: this.clausula2edit,
-          clausula3Edit: this.clausula3edit,
-          clausula4Edit: this.clausula4edit,
-          clausula5Edit: this.clausula5edit,
-          clausula6Edit: this.clausula6edit,
-          clausula7Edit: this.clausula7edit,
-          clausula8Edit: this.clausula8edit,
-          clausula9Edit: this.clausula9edit,
-          clausula10Edit: this.clausula10edit,
-          clausula11Edit: this.clausula11edit,
-          clausula12Edit: this.clausula12edit,
-          clausula13Edit: this.clausula13edit,
-          clausula14Edit: this.clausula14edit,
-          clausula15Edit: this.clausula15edit,
-          clausula16Edit: this.clausula16edit,
-          clausula17Edit: this.clausula17edit,
-          clausula18Edit: this.clausula18edit,
-          propiedadId: this.store2.propiedad.id,
-          arrendatarioId: this.store2.arrendatario.id,
-          arrendadorId: this.store2.propiedad.propietario.id
-          // codeudorId: this.store2.codeudor.id,
-          // fechaInicio: this.fechaInicioContrato,
-        }
-      ).catch((error) => {
-        console.log(error)
-      }).then((response) => {
-        console.log(response)
-        this.reporteID = response.data.clausulas.id
-      })
+      const contrato = {
+        comparecencia: this.Comparecencia.innerText,
+        clausula1: this.Clausula1.innerText,
+        clausula2: this.Clausula2.innerText,
+        clausula3: this.Clausula3.innerText,
+        clausula4: this.Clausula4.innerText,
+        clausula5: this.Clausula5.innerText,
+        clausula6: this.Clausula6.innerText,
+        clausula7: this.Clausula7.innerText,
+        clausula8: this.Clausula8.innerText,
+        clausula9: this.Clausula9.innerText,
+        clausula10: this.Clausula10.innerText,
+        clausula11: this.Clausula11.innerText,
+        clausula12: this.Clausula12.innerText,
+        clausula13: this.Clausula13.innerText,
+        clausula14: this.Clausula14.innerText,
+        clausula15: this.Clausula15.innerText,
+        clausula16: this.Clausula16.innerText,
+        clausula17: this.Clausula17.innerText,
+        clausula18: this.Clausula18.innerText,
+        comparecenciaEdit: this.comparecenciaEdit,
+        clausula1Edit: this.clausula1edit,
+        clausula2Edit: this.clausula2edit,
+        clausula3Edit: this.clausula3edit,
+        clausula4Edit: this.clausula4edit,
+        clausula5Edit: this.clausula5edit,
+        clausula6Edit: this.clausula6edit,
+        clausula7Edit: this.clausula7edit,
+        clausula8Edit: this.clausula8edit,
+        clausula9Edit: this.clausula9edit,
+        clausula10Edit: this.clausula10edit,
+        clausula11Edit: this.clausula11edit,
+        clausula12Edit: this.clausula12edit,
+        clausula13Edit: this.clausula13edit,
+        clausula14Edit: this.clausula14edit,
+        clausula15Edit: this.clausula15edit,
+        clausula16Edit: this.clausula16edit,
+        clausula17Edit: this.clausula17edit,
+        clausula18Edit: this.clausula18edit,
+        propiedadId: this.store2.propiedad.id,
+        arrendatarioId: this.store2.arrendatario.id,
+        arrendadorId: this.store2.propiedad.propietario.id
+        // codeudorId: this.store2.codeudor.id,
+        // fechaInicio: this.fechaInicioContrato,
+      };
+      postContrato(contrato)
+        .then((response) => {
+          console.log(response);
+          this.reporteID = response.data.id;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }
   }
 }
@@ -267,7 +261,7 @@ export default {
                 </div>
               </div>
 
-              <!--             Comparecencia-->
+              <!--             Comparecenciay-->
               <div class="row align-items-center">
                 <div class="col-9">
                   <div class="row">
@@ -289,7 +283,7 @@ export default {
                         cédula nacional de identidad n° {{ store2.propiedad.propietario.rut }},
                         nacionalidad {{ capitalize(store2.propiedad.propietario.nacionalidad) }},
                         {{ capitalize(store2.propiedad.propietario.estadoCivil) }},
-                        <template v-if="store2.propiedad.propietario.tratamiento==='Sr.'">domiciliado</template>
+                        <template v-if="store2.propiedad.propietario.tratamiento==='Don.'">domiciliado</template>
                         <template v-else>domiciliada</template>
                         en
                         {{ store2.propiedad.propietario.direccion.calle }},
@@ -307,7 +301,7 @@ export default {
                         {{ capitalize(store2.propiedad.propietario.representante.apellidoPaterno) }}
                         {{ capitalize(store2.propiedad.propietario.representante.apellidoMaterno) }},
                         cédula nacional de identidad n° {{ store2.propiedad.propietario.representante.rut }},
-                        <template v-if="store2.propiedad.propietario.representante.tratamiento==='Sr.'">domiciliado
+                        <template v-if="store2.propiedad.propietario.representante.tratamiento==='Don.'">domiciliado
                         </template>
                         <template v-else>domiciliada</template>
                         en
@@ -326,7 +320,7 @@ export default {
                         n° {{ store2.arrendatario.rut }},
                         nacionalidad {{ capitalize(store2.arrendatario.nacionalidad) }},
                         {{ capitalize(store2.arrendatario.estadoCivil) }},
-                        <template v-if="store2.arrendatario.tratamiento==='Sr.'">domiciliado</template>
+                        <template v-if="store2.arrendatario.tratamiento==='Don.'">domiciliado</template>
                         <template v-else>domiciliada</template>
                         en {{ store2.arrendatario.direccion.calle }} {{ store2.arrendatario.direccion.numero }},
                         comuna de {{ store2.arrendatario.direccion.ciudad }},
@@ -375,7 +369,7 @@ export default {
               </div>
 
 
-              <!--              Clausula 1-->
+              <!--              Clausula 1 y-->
               <div class="row align-items-center"> <!-- Añade la clase 'align-items-center' -->
                 <div class="col-9">
                   <div class="row">
@@ -434,6 +428,7 @@ export default {
                 </div>
               </div>
 
+<!--              Clausula2 y-->
               <div class="row align-items-center">
                 <div class="col-9">
                   <div class="row">
@@ -464,7 +459,7 @@ export default {
                   </div>
                 </div>
               </div>
-
+<!--y-->
               <div class="row align-items-center">
                 <div class="col-9">
                   <div class="row">
@@ -484,7 +479,7 @@ export default {
                   </div>
                 </div>
               </div>
-
+<!--y-->
               <div class="row align-items-center">
                 <div class="col-9">
 

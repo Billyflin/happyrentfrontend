@@ -1,11 +1,12 @@
 <script>
-import MaterialSwitch from '@/components/MaterialSwitch.vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
-import { useAuthStore } from '@/store/index.js'
-import { onMounted, onUnmounted, ref, watch } from 'vue'
-import MaterialButton from '@/components/MaterialButton.vue'
+import { computed, onMounted, ref, watch } from 'vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
+import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
+import { useContratosStore } from '@/store/contratosStore.js'
+import { usePersonasStore } from '@/store/personasStore.js'
 
 export default {
   name: 'SeleccionarCodeudor',
@@ -18,22 +19,24 @@ export default {
   },
   data() {
     return {
-      propietario_existente: null
+      propietario_existente: null,
+      error: null,
     }
   },
   watch: {
     propietario_existente: {
-      handler: function(val) {
-        if (val !== undefined) {
-          const store = useAuthStore()
-          store.codeudor = val.value
+      handler: async function(val) {
+        if (val !== undefined && val !== null) {
+          const store = useContratosStore()
+          await store.fetchCodeudor(val.value.id)
         }
       },
       deep: true
     }
   },
   setup() {
-    const store = useAuthStore()
+    const store = useContratosStore()
+    const store2 = usePersonasStore()
     let opcionsPersonas = ref([])
 
     watch(() => store.arrendatario, (newValue) => {
@@ -42,16 +45,17 @@ export default {
 
 
     const fetchPersonas = async () => {
-      await store.getPersonas()
-      console.log(store.personas)
-      opcionsPersonas.value = formatPersonas(store.personas)
+      await store2.fetchPersonas()
+      console.log(store2.personas)
+      opcionsPersonas.value = formatPersonas(store2.personas)
     }
+
 
     const formatPersonas = (personas) => {
       return personas.map(persona => {
         let label = persona.type === 'empresa'
-          ? `${persona.rut} - ${persona.nombre} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
-          : `${persona.rut} - ${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
+          ? `${persona.rut} - ${persona.nombre} - ${persona.calle} ${persona.numero} ${persona.ciudad} ${persona.region} ${persona.pais} - ${persona.type}`
+          : `${persona.rut} - ${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.calle} ${persona.numero} ${persona.ciudad} ${persona.region} ${persona.pais} - ${persona.type}`
 
         return {
           value: persona,
@@ -60,17 +64,18 @@ export default {
       })
     }
 
-    onMounted(fetchPersonas)
-    onUnmounted(() => {
-    })
+    const containsArrendatario = (text) => text.toLowerCase().includes('codeudor')
 
-    return { store, opcionsPersonas }
+    const contratoError = computed(() => store.contratoError && containsArrendatario(store.contratoError))
+
+    onMounted(fetchPersonas)
+
+    return { store, opcionsPersonas, contratoError }
   }
 }
 </script>
-
 <template>
-  <div class="card">
+  <div :class="['card', { 'border-danger animate__animated animate__shakeX': contratoError }]">
     <div class="card-header d-flex justify-content-between align-items-center">
       <div>
         <h5>Seleccionar Codeudor o Aval</h5>
@@ -139,12 +144,12 @@ export default {
             <p class="text-capitalize">{{ propietario_existente.value.nacionalidad }}</p>
 
           </div>
-          <div v-if="propietario_existente.value.direccion" class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Dirección</h6>
-            <p class="text-capitalize">{{ propietario_existente.value.direccion.calle }}
-              {{ propietario_existente.value.direccion.numero }},
-              {{ propietario_existente.value.direccion.ciudad }} ,
-              {{ propietario_existente.value.direccion.region }}, {{ propietario_existente.value.direccion.pais }}
+            <p class="text-capitalize">{{ propietario_existente.value.calle }}
+              {{ propietario_existente.value.numero }},
+              {{ propietario_existente.value.ciudad }} ,
+              {{ propietario_existente.value.region }}, {{ propietario_existente.value.pais }}
             </p>
           </div>
         </div>
@@ -178,12 +183,12 @@ export default {
             <h6 class="font-weight-normal">Razón Social</h6>
             <p class="text-capitalize">{{ propietario_existente.value.razonSocial }}</p>
           </div>
-          <div v-if="propietario_existente.value.direccion" class="d-flex justify-content-between align-items-center">
+          <div v-if="propietario_existente.value" class="d-flex justify-content-between align-items-center">
             <h6 class="font-weight-normal">Dirección</h6>
-            <p class="text-capitalize">{{ propietario_existente.value.direccion.calle }}
-              {{ propietario_existente.value.direccion.numero }},
-              {{ propietario_existente.value.direccion.ciudad }} ,
-              {{ propietario_existente.value.direccion.region }}, {{ propietario_existente.value.direccion.pais }}
+            <p class="text-capitalize">{{ propietario_existente.value.calle }}
+              {{ propietario_existente.value.numero }},
+              {{ propietario_existente.value.ciudad }} ,
+              {{ propietario_existente.value.region }}, {{ propietario_existente.value.pais }}
             </p>
           </div>
 

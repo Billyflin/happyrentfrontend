@@ -1,12 +1,11 @@
 <script setup>
 import { onMounted, ref, watch, watchEffect } from 'vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialCheckbox from '@/components/MaterialCheckbox.vue'
 import Dropzone from 'dropzone'
-import MaterialButton from '@/components/MaterialButton.vue'
-import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
-import Casa from '@/views/Propiedades/components/Casa.vue'
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
 
 let myDropzone = null
 
@@ -727,7 +726,7 @@ onMounted(() => {
               <material-choices id="uso" v-model:value-choice="propiedad.uso" :options="[
                 { value: 'comercial', label: 'Comercial' , selected: true},
                 { value: 'industrial', label: 'Industrial' }
-                ]" label="Uso">
+                ]" label="Uso" name="uso">
               </material-choices>
             </div>
             <div class="col-3">

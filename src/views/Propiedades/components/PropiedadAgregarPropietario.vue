@@ -1,10 +1,12 @@
 <script>
-import MaterialSwitch from '@/components/MaterialSwitch.vue'
-import MaterialInput from '@/components/MaterialInput.vue'
-import MaterialChoices from '@/components/MaterialChoices.vue'
-import LocalidadForm from '@/views/Propiedades/components/LocalidadForm.vue'
-import { useAuthStore } from '@/store/index.js'
+
+
 import { onMounted, ref } from 'vue'
+import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
+import MaterialInput from '@/components/Material/MaterialInput.vue'
+import MaterialChoices from '@/components/Material/MaterialChoices.vue'
+import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
+import { usePersonasStore } from '@/store/personasStore.js'
 
 export default {
   name: 'PropiedadAgregarPropietario',
@@ -21,11 +23,11 @@ export default {
   },
   emits: ['update:propietario'],
   setup() {
-    const store = useAuthStore()
+    const store = usePersonasStore()
     let opcionsPersonas = ref([])
 
     const fetchPersonas = async () => {
-      await store.getPersonas()
+      await store.fetchPersonas()
       console.log(store.personas)
       opcionsPersonas.value = formatPersonas(store.personas)
     }
@@ -33,8 +35,8 @@ export default {
     const formatPersonas = (personas) => {
       return personas.map(persona => {
         let label = persona.type === 'empresa'
-          ? `${persona.rut} - ${persona.nombre} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
-          : `${persona.rut} - ${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.direccion.calle} ${persona.direccion.numero} ${persona.direccion.ciudad} ${persona.direccion.region} ${persona.direccion.pais} - ${persona.type}`
+          ? `${persona.rut} - ${persona.nombre} - ${persona.calle} ${persona.numero} ${persona.ciudad} ${persona.region} ${persona.pais} - ${persona.type}`
+          : `${persona.rut} - ${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno} - ${persona.calle} ${persona.numero} ${persona.ciudad} ${persona.region} ${persona.pais} - ${persona.type}`
 
         return {
           value: persona,
