@@ -10,13 +10,35 @@
       </div>
       <div class="mb-3 mt-3 ms-3">
         <p ref="Clausula18" :contenteditable="store.clausula18edit" class="text-justify">
-          Por el presente a este acto don David Alberto Roig Salgado y, declaran que se constituyen como
-          aval y codeudor solidario de las obligaciones contraídas en este acto por el arrendatario don
-          Nicolás Alberto Pérez Pérez, aceptando, desde luego las variaciones en la renta de
-          arrendamiento,
-          renovaciones tácitas o expresas de la vigencia de este contrato y especialmente cualquier otra
-          modificación acordada por las partes.</p>
+          Por el presente acto,
+          <template v-if="store2.codeudor.type === 'persona' && store2.arrendatario.type === 'persona'">
+            {{ store2.codeudor.nombre }} {{ store2.codeudor.apellidoPaterno }} {{ store2.codeudor.apellidoMaterno }}
+            declaran que se constituyen como aval y codeudor solidario de las obligaciones contraídas en este acto por
+            el arrendatario {{ store2.arrendatario.nombre }} {{ store2.arrendatario.apellidoPaterno }}
+            {{ store2.arrendatario.apellidoMaterno }}
+          </template>
+          <template v-if="store2.codeudor.type === 'persona' && store2.arrendatario.type === 'empresa'">
+            {{ store2.codeudor.nombre }} {{ store2.codeudor.apellidoPaterno }} {{ store2.codeudor.apellidoMaterno }}
+            declaran que se constituyen como aval y codeudor solidario de las obligaciones contraídas en este acto por
+            el arrendatario  {{ store2.arrendatario.nombre }} {{ store2.arrendatario.razonSocial }}
+          </template>
+          <template v-if="store2.codeudor.type === 'empresa' && store2.arrendatario.type === 'persona'">
+            {{ store2.codeudor.nombre }} {{ store2.codeudor.razonSocial }} declaran que se constituyen como aval y
+            codeudor solidario de las obligaciones contraídas en este acto por el arrendatario
+            {{ store2.arrendatario.nombre }} {{ store2.arrendatario.apellidoPaterno }}
+            {{ store2.arrendatario.apellidoMaterno }}
+          </template>
+          <template v-if="store2.codeudor.type === 'empresa' && store2.arrendatario.type === 'empresa'">
+            {{ store2.codeudor.nombre }} {{ store2.codeudor.razonSocial }} declaran que se constituyen como aval y
+            codeudor solidario de las obligaciones contraídas en este acto por el arrendatario
+            {{ store2.arrendatario.nombre }}   {{ store2.arrendatario.razonSocial }}
+          </template>
+          , aceptando, desde luego, las variaciones en la renta de arrendamiento, renovaciones tácitas o expresas de la
+          vigencia de este contrato y especialmente cualquier otra modificación acordada por las partes.
+        </p>
       </div>
+
+
     </div>
   </div>
 </template>

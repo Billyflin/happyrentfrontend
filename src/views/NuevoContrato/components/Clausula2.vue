@@ -9,36 +9,41 @@
         </div>
       </div>
       <div class="mb-3 mt-3 ms-3">
-        <p ref="Clausula2" :contenteditable="store.clausula2edit" class="text-justify">
-          La renta mensual de arrendamiento por los inmuebles individualizados en la cláusula primera
-          precedente es y será la suma de <strong>          $ {{formatNumberWithDots( store.valorRenta )}}.-        </strong>
-          mensuales
-                                ( {{ numberToWordsInSpanish(store.valorRenta)}} )
-          .
-          La renta se pagará por mes anticipado, dentro de los
-          primeros cinco días hábiles de cada mes, depositándola a nombre de <strong>PROPIETARIA</strong>
-          <!--                      {{ store2.propiedad.propietario.datosBanca }} en {{ store2.propiedad.propietario.datosBanca.cuenta }}, cuenta-->
-          <!--                      {{ store2.contrato.tipoCuentaBanco }} Nº-->
-          <!--                      {{ store2.contrato.numeroCuentaBanco }},-->
-          RUT: {{ store2.propiedad.propietario.rut }} y deberá ser
-          informada al correo electrónico:
-          {{ store2.propiedad.propietario.email }}. Será suficiente para acreditar el pago de las rentas
-          antes señaladas la exhibición de los comprobantes de depósito o de transferencia electrónica de
-          fondos hecha a la cuenta corriente antes singularizada.
-        </p>
+          <p ref="Clausula2" :contenteditable="store.clausula2edit" class="text-justify">
+            La renta mensual de arrendamiento por los inmuebles individualizados en la cláusula primera
+            precedente es y será la suma de <strong>
+            <template v-if="store.moneda==='Pesos'">$</template>
+            {{ formatNumberWithDots(store.valorRenta) }}
+            <template v-if="store.moneda==='Pesos'">CLP</template>
+            <template v-if="store.moneda==='UF'"> UF</template>
+            <template v-if="store.moneda==='Dólares'"> USD</template>
+            .-
+          </strong>
+            mensuales
+            ({{ numberToWordsInSpanish(store.valorRenta) }}
+            <strong>{{ store.moneda.toLowerCase() }}</strong>).
+            La renta se pagará por mes anticipado, dentro de los
+            <strong>primeros cinco días hábiles de cada mes</strong>,
+            a través de la <strong>pasarela de pagos de la aplicación Happ Rent</strong>,
+            o mediante depósito o transferencia electrónica de fondos a la cuenta corriente de la propietaria,
+            depositándola a nombre de <strong>PROPIETARIA</strong>
+            <template v-if="cuentaActiva">
+              en la cuenta {{ cuentaActiva.tipoCuenta }} Nº
+              {{ cuentaActiva.numeroCuenta }} del banco {{ cuentaActiva.banco }}, RUT:
+              {{ store2.propiedad.propietario.rut }}
+            </template>.
+            El pago deberá ser informado al correo electrónico:
+            {{ store2.propiedad.propietario.email }}. Será suficiente para acreditar el pago de las rentas
+            antes señaladas la exhibición de los comprobantes de depósito o de transferencia electrónica de
+            fondos hecha a la cuenta corriente antes mencionada.
+          </p>
       </div>
     </div>
     <div class="col-3">
-      <div class="input-group mb-3">
-        <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" >Dropdown</button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
-      </div>
-      <material-input id="Renta" v-model="store.valorRenta" label="Renta" type="number" />
-
+      Ingresa el valor de la renta:
+      <material-input id="Renta" v-model="store.valorRenta" label="Renta" type="number" size="lg" />
+      Seleccione la moneda en la que se pagará la renta:
+      <material-dropdown v-model="store.moneda" />
   </div>
   </div>
 </template>
@@ -48,16 +53,22 @@ import { useNewContratoStore } from '@/store/newContratoStore.js'
 import { useContratosStore } from '@/store/contratosStore.js'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
 import { formatNumberWithDots, numberToWordsInSpanish } from '../utils.js'
+import MaterialDropdown from '@/components/Material/MaterialDropdown.vue'
+import MaterialDropdownCuentas from '@/views/NuevoContrato/components/MaterialDropdownCuentas.vue'
 
 export default {
   name: 'Clausula2',
   methods: { formatNumberWithDots, numberToWordsInSpanish },
-  components: { MaterialInput, MaterialCheckbox },
+  components: { MaterialDropdownCuentas, MaterialDropdown, MaterialInput, MaterialCheckbox },
   data() {
     return {
       store: useNewContratoStore(),
       store2: useContratosStore(),
+      cuentaActiva: null
     }
+  },
+  created() {
+    this.cuentaActiva = this.store2.propiedad.propietario.datosBancarios.find(cuenta => cuenta.activa)
   },
   watch: {
     'this.$refs.Clausula2': {
@@ -70,11 +81,11 @@ export default {
       immediate: true
     },
   },
-
   mounted() {
     if (this.$refs.Clausula2) {
       this.store.clausula2 = this.$refs.Clausula2.innerText;
     }
+
   }
 }
 </script>

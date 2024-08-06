@@ -7,9 +7,7 @@
     <!-- Seccion Propietario -->
     <propiedad-agregar-propietario @update:propietario="propiedad.propietario=$event;console.log($event)" />
 
-    <div v-if="alertMessage" class="alert mt-2" :class="alertClass" role="alert">
-      {{ alertMessage }}
-    </div>
+    <crear-inventario-form @update:inventario="propiedad.inventario=$event" />
     <!-- Boton enviar -->
     <material-button :disabled="isSending" class="mt-4" full-width size="lg" variant="success" @click="emitData">
       Enviar
@@ -27,13 +25,13 @@ import CrearInventarioForm from '@/views/Propiedades/components/CrearInventarioF
 import { useVuelidate } from '@vuelidate/core'
 import router from '@/router/index.js'
 import { createPropiedad } from '@/servicios/propiedadesService.js'
+import { useNotificationsStore } from '@/store/notifications.js'
 
 export default {
   components: {
     PropiedadAgregarPropiedad,
     PropiedadAgregarPropietario,
     MaterialButton,
-    // eslint-disable-next-line vue/no-unused-components
     CrearInventarioForm
   },
   setup() {
@@ -43,18 +41,11 @@ export default {
     const v$ = useVuelidate()
     const alertMessage = ref('')
     const alertClass = ref('')
+    const store4 = useNotificationsStore()
 
-    return { propiedad, isSending, imagenPortada, v$, alertMessage, alertClass }
+    return { propiedad, isSending,store4, imagenPortada, v$, alertMessage, alertClass }
   },
   methods: {
-    showAlert(message, type) {
-      this.alertMessage = message
-      this.alertClass = type === 'success' ? 'alert-success' : 'alert-danger'
-      setTimeout(() => {
-        this.alertMessage = ''
-        this.alertClass = ''
-      }, 3000)
-    },
     async emitData() {
       await this.v$.$validate()
       console.log(this.propiedad)
@@ -67,15 +58,14 @@ export default {
 
         try {
           await createPropiedad(formData).then(() => {
-            this.showAlert('Propiedad creada exitosamente.', 'success')
+            this.store4.createNotification('success', 'Propiedad agregada' , 'La propiedad se ha creado con éxito')
             setTimeout(() => {
               router.push('/Propiedades')
             }, 3000)
           })
         } catch (error) {
-          this.showAlert('Error al crear la propiedad: ' + error.response.data, 'error')
+          this.store4.createNotification('danger', 'Error', 'Hubo un error al guardar la propiedad' + error)
           console.log(error)
-          this.isSending = false
         }
       }
     }

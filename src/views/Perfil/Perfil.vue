@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid mt-4">
     <div class="row mb-5">
-      <div class="col-lg-3">
+      <div class="col-lg-2">
         <side-nav />
       </div>
-      <div class="col-lg-9 mt-lg-0 mt-4">
+      <div class="col-lg-10 mt-lg-0 mt-4">
         <side-nav-item />
       </div>
     </div>

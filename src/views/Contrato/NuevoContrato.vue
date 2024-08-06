@@ -5,9 +5,9 @@
                    to="/Propiedades">
         <span class="material-symbols-outlined mx-1"> arrow_back </span> Volver
       </router-link>
-      <router-link to="/Billy">
-        <material-button class="ms-auto" size="md" variant="success">Billy</material-button>
-      </router-link>
+<!--      <router-link to="/Billy">-->
+<!--        <material-button class="ms-auto" size="md" variant="success">Billy</material-button>-->
+<!--      </router-link>-->
       <div class="col-lg-12 mt-lg-0 mt-4">
         <formulario-propiedad-contrato />
         <div v-if="store2.propiedad.arrendado" class="row mt-4">
@@ -36,7 +36,7 @@
 <!--              <reajuste-contrato />-->
 <!--            </div>-->
 <!--          </div>-->
-          <router-link to="/clausulasNuevoContrato">
+          <router-link to="/EditorNuevoContrato">
             <material-button class="mt-4 mb-6" full-width size="lg" variant="success">Crear Contrato</material-button>
           </router-link>
         </div>

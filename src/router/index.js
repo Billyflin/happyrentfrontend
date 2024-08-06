@@ -111,11 +111,17 @@ const routes = [
   meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
   }
-},
+},{
+  path: '/felicidades!',
+  name: 'Felicidades',
+  component: () => import('@/views/PlantillasPlanas/Felicidades.vue'),
+
+
+  },
 {
-  path: '/clausulasNuevoContrato',
-  name: 'ClausulasNuevoContrato',
-  component: () => import('@/views/Contrato/ClausulasNuevoContrato.vue'),
+  path: '/EditorNuevoContrato',
+  name: 'Editor',
+  component: () => import('@/views/NuevoContrato/EditorDeContratos.vue'),
   props: true,
   meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
@@ -177,7 +183,7 @@ const routes = [
     component: () => import('@/views/Contrato/DetallesContrato.vue')
   },
   {
-    path: '/billy', name: 'Billy', component: () => import('@/views/NuevoContrato/EditorDeContratos.vue')
+    path: '/billy', name: 'Billy', component: () => import('@/views/Shared/Dev.vue')
   },
 //   {
 //     path: '/danko', name: 'Danko', component: () => import('@/views/Corredora/components/AgregarPersona.vue')

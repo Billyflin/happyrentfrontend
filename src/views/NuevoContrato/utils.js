@@ -1,12 +1,27 @@
-// src/utils/utils.js
 
 export function formatDate(date) {
+
+  console.log('date', date)
   const d = new Date(date);
-  return `${d.getDate()} de ${d.toLocaleString('es-CL', { month: 'long' })} de ${d.getFullYear()}`;
+  console.log('date', d)
+
+  const opciones = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  return d.toLocaleString( 'es-CL', opciones);
 }
 
+
+
 export function capitalize(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  try {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  } catch (e) {
+    console.log('errorn en capitalize en utils', e)
+    return 'error'
+  }
 }
 
 export function numberToWordsInSpanish(number) {

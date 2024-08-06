@@ -86,6 +86,8 @@
           </template>
           en adelante la parte “arrendataria”
           <template v-if="store2.codeudor">
+
+          <template v-if="store2.codeudor.type==='persona'">
             y don <strong>CODEUDOR</strong> {{ capitalize(store2.codeudor.tratamiento) }}
             {{ capitalize(store2.codeudor.nombre) }}
             {{ capitalize(store2.codeudor.apellidoPaterno) }} {{ capitalize(store2.codeudor.apellidoMaterno)
@@ -97,6 +99,25 @@
             comuna {{ store2.codeudor.direccion.ciudad }}, {{ store2.codeudor.direccion.region }}, en su
             calidad de Aval y Codeudor
             Solidario de la parte "arrendataria",
+          </template>
+          <template v-else-if="store2.codeudor.type==='empresa'">
+            y <strong>CODEUDOR</strong> la empresa <strong>{{ capitalize(store2.codeudor.nombre) }}</strong>
+            {{ store2.codeudor.razonSocial }}, representada por don
+            {{ capitalize(store2.codeudor.representante.tratamiento) }}
+            {{ capitalize(store2.codeudor.representante.nombre) }}
+            {{ capitalize(store2.codeudor.representante.apellidoPaterno) }}
+            {{ capitalize(store2.codeudor.representante.apellidoMaterno) }},
+            cédula nacional de identidad N° {{ store2.codeudor.representante.rut }},
+            {{ capitalize(store2.codeudor.representante.nacionalidad) }},
+            {{ capitalize(store2.codeudor.representante.estadoCivil) }},
+            domiciliado en {{ store2.codeudor.representante.direccion.calle }}
+            {{ store2.codeudor.representante.direccion.numero }},
+            comuna {{ store2.codeudor.representante.direccion.ciudad }},
+            {{ store2.codeudor.representante.direccion.region }}, celular
+            {{ store2.codeudor.representante.telefono }}, email:
+            {{ store2.codeudor.representante.email }}, en su calidad de Aval y Codeudor Solidario de la
+            parte "arrendataria",
+          </template>
           </template>
           todos los comparecientes mayores de edad y libres disponedores de sus bienes, quienes han
           convenido el siguiente contrato de arrendamiento:

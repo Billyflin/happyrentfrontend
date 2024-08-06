@@ -1,49 +1,51 @@
 <template>
   <div class="col-lg-3">
     <h5 class="mb-3">Dirección</h5>
-    <ul class="list-group mb-3">
+    <ul class="list-group mb-3" v-if="!editMode">
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong>Calle:</strong>
         <span v-if="!editMode">{{ auth.persona.direccion.calle }}</span>
-        <input v-else v-model="auth.persona.direccion.calle" class="form-control w-75 editor-input"/>
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong>Número:</strong>
         <span v-if="!editMode">{{ auth.persona.direccion.numero }}</span>
-        <input v-else v-model="auth.persona.direccion.numero" class="form-control w-75 editor-input"/>
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong>Detalle:</strong>
         <span v-if="!editMode">{{ auth.persona.direccion.detalle }}</span>
-        <input v-else v-model="auth.persona.direccion.detalle" class="form-control w-75 editor-input"/>
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong>Región:</strong>
         <span v-if="!editMode">{{ auth.persona.direccion.region }}</span>
-        <input v-else v-model="auth.persona.direccion.region" class="form-control w-75 editor-input"/>
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong>Ciudad:</strong>
         <span v-if="!editMode">{{ auth.persona.direccion.ciudad }}</span>
-        <input v-else v-model="auth.persona.direccion.ciudad" class="form-control w-75 editor-input"/>
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong>País:</strong>
         <span v-if="!editMode">{{ auth.persona.direccion.pais }}</span>
-        <input v-else v-model="auth.persona.direccion.pais" class="form-control w-75 editor-input"/>
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong>Código Postal:</strong>
         <span v-if="!editMode">{{ auth.persona.direccion.codigoPostal }}</span>
-        <input v-else v-model="auth.persona.direccion.codigoPostal" class="form-control w-75 editor-input"/>
       </li>
     </ul>
+    <div v-if="editMode" class="card border card-plain border-radius-lg mb-3">
+      <div class="card-body">
+      <localidad-form-vertical   :model-value="auth.persona.direccion"/>
+  </div>
+  </div>
   </div>
 </template>
 
 <script>
+import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
+import LocalidadFormVertical from '@/views/Shared/LocalidadFormVertical.vue'
+
 export default {
   name: 'ListaDireccionPersona',
+  components: { LocalidadFormVertical, LocalidadForm },
   props: {
     auth: Object,
     editMode: Boolean

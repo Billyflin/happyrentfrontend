@@ -10,6 +10,7 @@
     <router-view />
     <app-footer v-show="showFooter" />
     <configurator :class="[showConfig ? 'show' : '', hideConfigButton ? 'd-none' : '']" :toggle="toggleConfigurator" />
+    <notifications />
   </main>
 </template>
 <script setup>
@@ -21,6 +22,7 @@ import Sidenav from '@/components/Sidenav/index.vue'
 import Configurator from '@/components/Configurator.vue'
 import AppFooter from '@/components/Footer.vue'
 import Navbar from '@/components/Navbars/Navbar.vue'
+import Notifications from '@/views/Shared/Notifications.vue'
 
 const store = useAppStore()
 const {

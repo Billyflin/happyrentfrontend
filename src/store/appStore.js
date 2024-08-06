@@ -44,6 +44,12 @@ export const useAppStore = defineStore({
       this.showSidenav = !this.showSidenav
       this.showFooter = !this.showFooter
     },
+    toggleNavbar() {
+      this.showNavbar = !this.showNavbar
+    },
+    toggleSidenav() {
+      this.showSidenav = !this.showSidenav
+    },
     toggleHideConfig() {
       this.hideConfigButton = !this.hideConfigButton
     },

@@ -8,12 +8,15 @@ import MaterialButton from '@/components/Material/MaterialButton.vue'
 import { usePersonasStore } from '@/store/personasStore.js'
 import router from '@/router/index.js'
 import { postPersona } from '@/servicios/personasService.js'
+import MaterialAlert from '@/components/Material/MaterialAlert.vue'
+import { useNotificationsStore } from '@/store/notifications.js'
 
 export default {
   name: 'PersonaDetails',
-  components: { ModalPreview, ModalConfirmacion, ListaDireccionPersona, ListaDatosPersona, MaterialButton },
+  components: { MaterialAlert, ModalPreview, ModalConfirmacion, ListaDireccionPersona, ListaDatosPersona, MaterialButton },
   setup() {
     const auth = usePersonasStore()
+    const notificationsStore = useNotificationsStore()
     const archivoPrevisualizado = ref(null)
     const mostrarModal = ref(false)
     const mostrarModalConfirmacion = ref(false)
@@ -69,12 +72,27 @@ export default {
     const saveChanges = () => {
 // Aquí debes agregar la lógica para guardar los cambios
       loading.value = true
-      postPersona(auth.persona).then(
-        () => {
-          loading.value = false
-          toggleEditMode()
-        }
-      )
+      try {
+        postPersona(auth.persona).then(
+          () => {
+            loading.value = false
+            toggleEditMode()
+            notificationsStore.createNotification(
+              'success',
+              'Cambios guardados',
+              'Los cambios se han guardado correctamente.'
+            )
+          }
+        )
+      } catch (error) {
+        console.error('Error al guardar los cambios:', error)
+        notificationsStore.createNotification(
+          'danger',
+          'Error',
+          'Hubo un error al guardar los cambios.'
+        )
+      }
+
     }
 
     const cancelEdit = () => {
@@ -140,6 +158,21 @@ export default {
 
           </div>
           <div class="card-body">
+            <material-alert v-if="editMode" class="font-weight-light" color="danger" dismissible>
+              <span
+              >En esta version happ rent no se hace cargo de la
+                modificación de datos.
+              </span
+              >
+            </material-alert>
+            <material-alert v-if="editMode" class="font-weight-light" color="info" dismissible>
+              <span
+              >A pesar de que los datos pueden ser modificados,
+                estos no se verán reflejados en la base de datos hasta que hagas click en guardar
+              </span
+              >
+            </material-alert>
+
             <div  v-if="auth.persona" class="row">
               <ListaDatosPersona :class="(auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-5`" :auth="auth"
                                  :edit-mode="editMode" />
@@ -178,11 +211,6 @@ export default {
               <span class="material-symbols-outlined me-1">delete</span>
               Eliminar
             </material-button>
-            <div v-if="editMode" class="mt-4">
-              <div class="alert alert-danger text-light text-center">En esta version happ rent no se hace cargo de la
-                modificación de datos.
-              </div>
-            </div>
           </div>
         </div>
       </div>

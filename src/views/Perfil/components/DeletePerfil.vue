@@ -1,5 +1,5 @@
 <template>
-  <div id="delete" class="card mt-4">
+  <div id="delete-account" class="card mt-4">
     <div class="card-header">
       <h5>Eliminar Cuenta</h5>
       <p class="text-sm mb-0">

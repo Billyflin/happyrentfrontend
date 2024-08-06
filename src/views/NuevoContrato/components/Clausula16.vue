@@ -10,25 +10,40 @@
       </div>
       <div class="mb-3 mt-3 ms-3">
         <p ref="Clausula16" :contenteditable="store.clausula16edit" class="text-justify">
-          Las partes pagarán una comisión de corretaje por un monto equivalente al 50% de un mes de
-          arriendo
-          al momento de la firma de contrato a la corredora de propiedades Alejandra Solis Pradenas, rut
-          8.493.004-0, cta cte 47 60 758 398, Banco Chile, email: a.solis@delacasapropiedades.cl.
+          Las partes acuerdan que se pagará una comisión de corretaje equivalente al {{ store.valorCorretaje }}% de un
+          mes de arriendo establecido en el presente contrato. Este monto asciende a
+          <b>{{ formatNumberWithDots(store.valorRenta * store.valorCorretaje / 100) + ' ' + store.moneda.toLowerCase()
+            }}.-</b>
+          ({{ numberToWordsInSpanish(store.valorRenta * store.valorCorretaje / 100) + ' ' + store.moneda.toLowerCase()
+          }}), el cual será abonado por la parte arrendataria en la cuenta {{ cuenta }}.
         </p>
       </div>
+
+
     </div>
+    <div class="col-3">
+      La cuenta de la comisión de corretaje es seleccionada en la pestaña perfil, puedes ir
+      haciendo clic en <strong>
+      <router-link to="/profile">aquí</router-link>
+    </strong>
+      para seleccionar la cuenta.
+  </div>
   </div>
 </template>
 <script>
 import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
 import { useNewContratoStore } from '@/store/newContratoStore.js'
+import { obtenerCuentaActual } from '@/servicios/authService.js'
+import { formatNumberWithDots, numberToWordsInSpanish } from '../utils.js'
 
 export default {
   name: 'Clausula16',
+  methods: { numberToWordsInSpanish, formatNumberWithDots },
   components: { MaterialCheckbox },
   data() {
     return {
-      store: useNewContratoStore()
+      store: useNewContratoStore(),
+      cuenta: null
     }
   },
   watch: {
@@ -47,6 +62,16 @@ export default {
     if (this.$refs.Clausula16) {
       this.store.clausula16 = this.$refs.Clausula16.innerText;
     }
+    try {
+        obtenerCuentaActual().then(
+          res => {
+            this.cuenta = res.data.tipoCuenta + ' Nº ' + res.data.numeroCuenta + ' del banco ' + res.data.banco + ', RUT: ' + res.data.rut
+          }
+        )
+    } catch (error) {
+      console.log(error)
+    }
+
   }
 }
 </script>

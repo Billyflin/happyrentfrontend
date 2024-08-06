@@ -18,8 +18,19 @@
           servicios e instalaciones y, en general, para responder al fiel cumplimiento de las
           estipulaciones
           de este contrato, la arrendataria entrega en garantía en este acto a la arrendadora la suma de
-          <strong>  $ {{formatNumberWithDots( store.valorRenta )}}.- </strong>
-          ( {{ numberToWordsInSpanish(store.valorRenta)}} ) equivalente a 01 (un) mes de la renta estipulada,
+          <strong> $ {{ formatNumberWithDots(store.valorRenta * store.mesesGarantia) }}.- </strong>
+          ( {{ numberToWordsInSpanish(store.valorRenta * store.mesesGarantia) }} ) equivalente
+
+          a {{ store.mesesGarantia }} ({{ numberToWordsInSpanish(store.mesesGarantia) }})
+          <template v-if="store.mesesGarantia===1">
+            mes
+          </template>
+          <template v-else>
+
+            meses
+          </template>
+
+          de la renta estipulada,
           que
           la arrendadora se obliga a restituir por igual equivalencia dentro de los 30 días siguientes a
           la
@@ -31,13 +42,45 @@
           de
           arrendamiento, ni aún tratándose de la renta del último mes. Asimismo, a la firma del contrato
           se
-          pagará mediante transferencia electrónica la suma de:
+          pagará mediante transferencia electrónica la suma de
+          <b>{{ formatNumberWithDots(Math.round(store.valorRenta * store.mesesGarantia + store.valorRenta * store.valorCorretaje / 100)) + ' ' + store.moneda.toLowerCase()
+            }}</b>
+          ({{ numberToWordsInSpanish(Math.round(store.valorRenta * store.mesesGarantia + store.valorRenta * store.valorCorretaje / 100)) + ' ' + store.moneda.toLowerCase()
+          }})
+          en concepto de:
 
-          <br>Garantía:  <strong>  $ {{formatNumberWithDots( store.valorRenta )}}.- </strong>
-          ( {{ numberToWordsInSpanish(store.valorRenta)}} )
-          <br>Honorarios de corretaje: <b>$ {{formatNumberWithDots( store.valorRenta/2 )}}.-</b> ( {{ numberToWordsInSpanish(store.valorRenta/2)}} )
+          <br>Garantía: <strong> $
+          {{ formatNumberWithDots(Math.round(store.valorRenta * store.mesesGarantia)) + ' ' + store.moneda.toLowerCase()
+          }}.- </strong>
+          (
+          {{ numberToWordsInSpanish(Math.round(store.valorRenta * store.mesesGarantia)) + ' ' + store.moneda.toLowerCase()
+          }} )
+          <br>Honorarios de corretaje: <b>$
+          {{ formatNumberWithDots(Math.round(store.valorRenta * store.valorCorretaje / 100)) + ' ' + store.moneda.toLowerCase()
+          }}.-</b>
+          (
+          {{ numberToWordsInSpanish(Math.round(store.valorRenta * store.valorCorretaje / 100)) + ' ' + store.moneda.toLowerCase()
+          }}
+          )
         </p>
       </div>
+    </div>
+    <div class="col-3">
+      Selecciona los meses de garantía que se entregarán en el contrato:
+
+      <material-dropdown id="mesesGarantia" v-model="store.mesesGarantia"
+                         :items="[1, 2, 3, 4, 5, 6]"></material-dropdown>
+
+      Arrastra aquí para cambiar el valor del corretaje, ahora mismo está en <b>
+      {{ store.valorCorretaje }}%
+    </b>
+      que equivale a
+      <b>
+        {{ formatNumberWithDots(Math.round(store.valorRenta * store.valorCorretaje / 100)) }}
+      </b>
+      <input v-model="store.valorCorretaje" type="range" id="inputValue" class="form-control border draggable-input mt-3"
+             value="50" min="10" max="100">
+
     </div>
   </div>
 </template>
@@ -45,14 +88,15 @@
 import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
 import { useNewContratoStore } from '@/store/newContratoStore.js'
 import { formatNumberWithDots, numberToWordsInSpanish } from '../utils.js'
+import MaterialDropdown from '@/components/Material/MaterialDropdown.vue'
 
 export default {
   name: 'Clausula12',
   methods: { numberToWordsInSpanish, formatNumberWithDots },
-  components: { MaterialCheckbox },
+  components: { MaterialDropdown, MaterialCheckbox },
   data() {
     return {
-      store: useNewContratoStore()
+      store: useNewContratoStore(),
     }
   },
   watch: {

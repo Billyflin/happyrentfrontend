@@ -5,7 +5,7 @@
     ${!v$.internalValue.$error && v$.internalValue.$anyDirty ? 'is-valid' : ''} `"
     class="input-group"
   >
-    <label :class="variant === 'static' ? '' : 'form-label'">{{ label }}</label>
+    <label :class="`${variant === 'static' ? '' : 'form-label'} ${bold ? 'text-bold':''}`">{{ label }}</label>
     <input
       :id="id"
       v-model="internalValue"
@@ -15,8 +15,10 @@
       :placeholder="placeholder"
       :required="isRequired"
       :type="type"
+      :list="list"
       class="form-control"
     />
+    <slot name="datalist"></slot>
   </div>
   <!--    <p>{{ v$.internalValue}}</p>-->
   <div v-for="v of v$.$errors" :key="v.$uid">
@@ -35,7 +37,7 @@ export default {
   name: 'MaterialInput',
   props: {
     modelValue: {
-      type: [Number, String],
+      type: [Number, String,Date],
       default: ''
     },
     variant: {
@@ -49,6 +51,10 @@ export default {
     size: {
       type: String,
       default: 'default'
+    },
+    list: {
+      type: String,
+      default: ''
     },
     success: {
       type: Boolean,
@@ -77,6 +83,10 @@ export default {
     type: {
       type: String,
       default: 'text'
+    },
+    bold:{
+      type: Boolean,
+      default: false
     },
     isRequired: {
       type: Boolean,

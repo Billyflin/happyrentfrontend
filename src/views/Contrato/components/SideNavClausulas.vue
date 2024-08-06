@@ -44,10 +44,10 @@ export default  {
         'security', // Garantía de arriendo
         'flight_land', // Entrega y restitución del inmueble
         'gavel', // Arbitraje
-        'group', // Codeudor solidario
+        'place', // Domicilio
         'local_atm', // Comisión
         'list', // Otras condiciones
-        'place' // Domicilio
+        'group', // Codeudor solidario
       ],
       clausulas: [
         { id: 'Clausula1', nombre: 'propiedad' },
@@ -64,10 +64,10 @@ export default  {
         { id: 'Clausula12', nombre: 'garantía de arriendo' },
         { id: 'Clausula13', nombre: 'entrega y restitución del inmueble' },
         { id: 'Clausula14', nombre: 'arbitraje' },
-        { id: 'Clausula15', nombre: 'codeudor solidario' },
+        { id: 'Clausula15', nombre: 'domicilio' },
         { id: 'Clausula16', nombre: 'comisión' },
         { id: 'Clausula17', nombre: 'otras condiciones' },
-        { id: 'Clausula18', nombre: 'domicilio' }
+        { id: 'Clausula18', nombre: 'codeudor solidario' }
       ]
 
     }

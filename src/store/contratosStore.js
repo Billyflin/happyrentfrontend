@@ -71,5 +71,11 @@ export const useContratosStore = defineStore('contratos', {
         this.loading = false
       }
     },
+    clearAll() {
+      this.codeudor = null
+      this.arrendatario = null
+      this.propiedad = null
+      this.contratoError = null
+    }
   }
 })

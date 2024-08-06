@@ -1,6 +1,6 @@
 <template>
   <div :class="`input-group-${variant}`" class="form-group">
-    <label :for="id" class="form-label">{{ label }}</label>
+    <label :for="id" :class="`form-label ${bold ? 'text-bold':''}`">{{ label }}</label>
     <select :id="id"
             ref="choicesElement"
             v-model="selectedValue"
@@ -29,6 +29,10 @@ export default {
     label: {
       type: String,
       default: ''
+    },
+    bold: {
+      type: Boolean,
+      default: false
     },
     showLabel: {
       type: Boolean,

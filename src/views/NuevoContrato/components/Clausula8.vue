@@ -34,15 +34,24 @@
         </p>
       </div>
     </div>
+    <div class="col-3" >
+      <material-alert class="font-weight-light" color="danger" dismissible>
+        <span class="text-sm">
+          <b>¡Atención!</b>
+          Revisar esto con las muchachas
+        </span>
+      </material-alert>
+    </div>
   </div>
 </template>
 <script>
 import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
 import { useNewContratoStore } from '@/store/newContratoStore.js'
+import MaterialAlert from '@/components/Material/MaterialAlert.vue'
 
 export default {
   name: 'Clausula8',
-  components: { MaterialCheckbox },
+  components: { MaterialAlert, MaterialCheckbox },
   data() {
     return {
       store: useNewContratoStore(),

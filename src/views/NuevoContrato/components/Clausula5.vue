@@ -10,7 +10,7 @@
       </div>
       <div class="mb-3 mt-3 ms-3">
         <p ref="Clausula5" :contenteditable="store.clausula5edit" class="text-justify">
-          El presente contrato comenzará a regir a partir de {{ formatDate(fechaInicioContrato) }}, y tendrá
+          El presente contrato comenzará a regir a partir de {{ formatDate(store.fechaInicioContrato) }}, y tendrá
           una duración de {{ duracionContrato }} meses,
           <template v-if="prorrogaAutomatica">
             que se prorrogará automática y sucesivamente por períodos de <strong>
@@ -81,14 +81,14 @@ import { useContratosStore } from '@/store/contratosStore.js'
 export default {
   name: 'Clausula5',
   components: { MaterialSwitch, MaterialInput, MaterialCheckbox },
-  methods: { formatDate },
+  methods: {  formatDate },
   data() {
     return {
       store: useNewContratoStore(),
       store2: useContratosStore(),
-      fechaInicioContrato: Date.now(),
       duracionContrato: 6,
       periodoProrroga: 12,
+      fechaInicioContrato: new Date(),
       prorrogaAutomatica: false,
     }
   },
@@ -98,6 +98,15 @@ export default {
         if (newVal) {
           this.store.clausula5 = newVal.innerText;
         }
+      },
+      deep: true,
+      immediate: true
+    },
+    fechaInicioContrato: {
+      handler(newVal) {
+        const date = new Date(newVal);
+        date.setHours(date.getHours() + 5 );
+        this.store.fechaInicioContrato = date;
       },
       deep: true,
       immediate: true
