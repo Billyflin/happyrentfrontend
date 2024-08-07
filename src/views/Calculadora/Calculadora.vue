@@ -12,15 +12,15 @@
               <h4 class="mb-3">Datos del Reajuste</h4>
               <div class="form-group mb-3">
                 <label for="initialValue">Valor Inicial del Arriendo</label>
-                <input type="number" class="form-control" id="initialValue" v-model.number="initialValue" required>
+                <input type="number" class="form-control border" id="initialValue" v-model.number="initialValue" required>
               </div>
               <div class="form-group mb-3">
                 <label for="startDate">Fecha de Inicio</label>
-                <input type="date" class="form-control" id="startDate" v-model="startDate" required>
+                <input type="date" class="form-control border" id="startDate" v-model="startDate" required>
               </div>
               <div class="form-group mb-3">
                 <label for="endDate">Fecha de Fin</label>
-                <input type="date" class="form-control" id="endDate" v-model="endDate" required>
+                <input type="date" class="form-control border" id="endDate" v-model="endDate" required>
               </div>
               <button type="submit" class="btn btn-primary w-100">Calcular Reajuste</button>
             </form>
