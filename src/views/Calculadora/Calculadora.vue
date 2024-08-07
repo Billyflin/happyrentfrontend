@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-5">
     <div class="card shadow-sm">
-      <div class="card-header">
+      <div class="card-header pb-0">
         <h2 class="mb-0">Calculadora de Reajuste de Arriendo</h2>
         <p class="mb-3">Calcula el reajuste de un arriendo en base a la variación del IPC.</p>
       </div>
