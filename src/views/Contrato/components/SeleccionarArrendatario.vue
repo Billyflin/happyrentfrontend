@@ -1,5 +1,5 @@
 <script>
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
 import MaterialChoices from '@/components/Material/MaterialChoices.vue'
@@ -95,7 +95,7 @@ export default {
           />
         </div>
       </div>
-      <div v-if="propietario_existente && !store.contratoError" class="mx-4 col ">
+      <div v-if="propietario_existente " class="mx-4 col ">
 
 
         <div v-if="propietario_existente.value.type === 'persona'" class=" col ">
