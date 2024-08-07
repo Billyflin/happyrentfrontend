@@ -1,6 +1,4 @@
 <script>
-
-
 import { onMounted, ref } from 'vue'
 import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
@@ -64,7 +62,7 @@ export default {
 </script>
 
 <template>
-  <div id="Propietario" class="card mt-5">
+  <div id="Propietario" class="card ">
     <div class="card-header">
 
       <h5>Seleccionar Propietario</h5>

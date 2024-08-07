@@ -1,4 +1,5 @@
 <template>
+  <svg-background v-if="authStore.currentUser && store.background" />
   <sidenav v-if="showSidenav" :class="['fixed-start']" :custom_class="color" />
   <main class="main-content position-relative max-height-vh-100 h-100 overflow-x-hidden">
     <navbar
@@ -23,6 +24,7 @@ import Configurator from '@/components/Configurator.vue'
 import AppFooter from '@/components/Footer.vue'
 import Navbar from '@/components/Navbars/Navbar.vue'
 import Notifications from '@/views/Shared/Notifications.vue'
+import SvgBackground from '@/views/Shared/SvgBackground.vue'
 
 const store = useAppStore()
 const {

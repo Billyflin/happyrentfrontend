@@ -5,7 +5,7 @@
         <router-link to="/">
           <div class="d-flex">
             <div class="row mt-3">
-              <img alt="Logo" class="btn btn-link px-3" height="90" src="../../assets/img/logos/LogoHapp.svg"
+              <img alt="Logo" class="btn btn-link px-3" height="90" src="../../assets/img/logos/LogoHappBlanco.svg"
                    width="100" />
             </div>
           </div>

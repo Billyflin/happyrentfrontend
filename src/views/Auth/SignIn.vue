@@ -1,9 +1,9 @@
 <template>
   <div
-    :style="`background-image: url(${BackPerfilFoto}); background-size: contain; background-position: center; background-repeat: no-repeat;`"
-    class="page-header align-items-start min-vh-100 bg-gradient-secondary"
+    :style="`background-image:linear-gradient(195deg, #009d6a 0%, #000000 100%);`"
+    class="page-header align-items-start min-vh-100 "
   >
-    <span class="mask bg-gradient-faded-dark-vertical opacity-6"></span>
+    <fondo />
     <div class="container my-auto">
       <div class="row">
         <div class="col-lg-4 col-md-8 col-12 mx-auto">
@@ -78,9 +78,9 @@ import MaterialInput from '@/components/Material/MaterialInput.vue'
 import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
 import MaterialButton from '@/components/Material/MaterialButton.vue'
 import router from '@/router/index.js'
-import BackPerfilFoto from '@/assets/img/illustrations/pattern-tree.svg'
 import { useAuthStore } from '@/store/authStore.js'
 import { useAppStore } from '@/store/appStore.js'
+import Fondo from '@/views/Auth/Fondo.vue'
 
 
 const auth = useAuthStore()

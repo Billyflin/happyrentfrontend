@@ -78,7 +78,7 @@
       <b>
         {{ formatNumberWithDots(Math.round(store.valorRenta * store.valorCorretaje / 100)) }}
       </b>
-      <input v-model="store.valorCorretaje" type="range" id="inputValue" class="form-control border draggable-input mt-3"
+      <input v-model="store.valorCorretaje" type="range" id="inputValue" class="form-control form-range border draggable-input mt-3"
              value="50" min="10" max="100">
 
     </div>

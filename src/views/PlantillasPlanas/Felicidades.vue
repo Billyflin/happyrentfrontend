@@ -1,6 +1,6 @@
 <template>
   <div class="congratulations d-flex flex-column align-items-center justify-content-center min-vh-100">
-    <div class="card text-center p-4 shadow-lg border-success">
+    <div class="card text-center p-4 shadow-lg  border-success">
       <div class="card-header bg-success">
         <h2 class=" text-white">¡Felicitaciones!</h2>
       </div>
@@ -38,6 +38,8 @@ export default {
     onMounted(() => {
       toggleEveryDisplay()
       store2.triggerConfetti()
+      store.showFooter = false
+      store.showNavbar = false
 
       // toggleHideConfig()
     })

@@ -5,6 +5,7 @@ export const useAppStore = defineStore({
   state: () => ({
     hideConfigButton: true,
     isPinned: true,
+    background:true,
     showConfig: false,
     sidebarType: 'bg-white',
     color: 'happLight',

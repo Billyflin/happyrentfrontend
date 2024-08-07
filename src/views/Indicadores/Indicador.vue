@@ -12,21 +12,21 @@
         <div v-else class="row">
           <mini-statistics-card v-if="DOLARData"
                                 :data="DOLARData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'success' }"
+                                :icon="{ name: 'attach_money', color: 'text-white', background: 'primary' }"
                                 title="Dólar"
           />
           <mini-statistics-card v-if="UTMData"
                                 :data="UTMData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'happLight' }"
+                                :icon="{ name: 'attach_money', color: 'text-white', background: 'secondary' }"
                                 title="UTM"
           />
           <mini-statistics-card v-if="UFData"
                                 :data="UFData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'primary' }"
+                                :icon="{ name: 'attach_money', color: 'text-white', background: 'success' }"
                                 title="UF" />
           <mini-statistics-card v-if="IPCData"
                                 :data="IPCData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'secondary' }"
+                                :icon="{ name: 'attach_money', color: 'text-white', background: 'happDark' }"
                                 title="IPC"
           />
         </div>
@@ -34,7 +34,7 @@
           <div class="col-lg-6 col-md-6 mt-6">
             <ChartHolderCard v-if="DOLARData"
                              :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="success"
+                             color="secondary"
                              subtitle="Últimos valores"
                              title="Valor del Dólar"
             >
@@ -46,7 +46,7 @@
           <div class="col-lg-6 col-md-6 mt-6">
             <ChartHolderCard v-if="UTMData"
                              :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="happLight"
+                             color="primary"
                              subtitle="Últimos valores"
                              title="Valor del UTM"
             >
@@ -59,7 +59,7 @@
           <div class="col-lg-6 col-md-6 mt-6">
             <ChartHolderCard v-if="UFData"
                              :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="primary"
+                             color="success"
                              subtitle="Últimos valores"
                              title="Valor del UF"
             >
@@ -71,7 +71,7 @@
           <div class="col-lg-6 col-md-6 mt-6">
             <ChartHolderCard v-if="IPCData"
                              :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="secondary"
+                             color="happDark"
                              subtitle="Últimos valores"
                              title="Valor del IPC"
             >

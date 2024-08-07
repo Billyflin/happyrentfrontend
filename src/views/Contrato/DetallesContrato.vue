@@ -10,6 +10,7 @@
       </router-link>
     </div>
   </div>
+  
   <div class="header ms-4">
     <h1>Detalles contrato</h1>
   </div>

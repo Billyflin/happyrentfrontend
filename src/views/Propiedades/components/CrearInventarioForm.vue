@@ -102,13 +102,13 @@ watch(agregarInventario, (newValue) => {
 
 
 <template>
-  <div id="Inventario" class="card mt-4">
+  <div id="Inventario" class="card">
     <div class="card-header">
       <h4>Inventario</h4>
     </div>
     <div class="card-body pt-0">
       <div class="row mt-4">
-        <div class="col-3">
+        <div class="col">
           <material-switch id="agregar_inventario" v-model:checked="agregarInventario" checked
                            label-class="mb-0 text-body text-truncate w-100"
                            name="agregar_inventario">

@@ -2,12 +2,25 @@
   <div class="container-fluid mt-4">
     <!-- Mensaje de alerta -->
 
-    <!-- Seccion propiedad -->
-    <propiedad-agregar-propiedad @update:propiedad="propiedad = $event" @update:imagenPortada="imagenPortada= $event" />
-    <!-- Seccion Propietario -->
-    <propiedad-agregar-propietario @update:propietario="propiedad.propietario=$event;console.log($event)" />
+    <div class="row">
+      <div class="col-lg-8">
 
-    <crear-inventario-form @update:inventario="propiedad.inventario=$event" />
+        <!-- Seccion propiedad -->
+        <propiedad-agregar-propiedad @update:propiedad="propiedad = $event"/>
+
+
+        <!-- Seccion Propietario -->
+        <FormularioInventario class="mt-4" />
+      </div>
+      <div class="col-lg-4">
+        <propiedad-agregar-thumbnail @update:imagenPortada="imagenPortada= $event" />
+        <propiedad-agregar-propietario class="mt-4" @update:propietario="propiedad.propietario=$event;console.log($event)" />
+<!--    <crear-inventario-form class="mt-4" @update:inventario="propiedad.inventario=$event" />-->
+        <ListaInventario class="mt-4" />
+
+      </div>
+
+    </div>
     <!-- Boton enviar -->
     <material-button :disabled="isSending" class="mt-4" full-width size="lg" variant="success" @click="emitData">
       Enviar
@@ -21,18 +34,22 @@ import { ref } from 'vue'
 import PropiedadAgregarPropiedad from '@/views/Propiedades/components/PropiedadAgregarPropiedad.vue'
 import PropiedadAgregarPropietario from '@/views/Propiedades/components/PropiedadAgregarPropietario.vue'
 import MaterialButton from '@/components/Material/MaterialButton.vue'
-import CrearInventarioForm from '@/views/Propiedades/components/CrearInventarioForm.vue'
 import { useVuelidate } from '@vuelidate/core'
 import router from '@/router/index.js'
 import { createPropiedad } from '@/servicios/propiedadesService.js'
 import { useNotificationsStore } from '@/store/notifications.js'
+import PropiedadAgregarThumbnail from '@/views/Propiedades/PropiedadAgregarThumbnail.vue'
+import ListaInventario from '@/views/Propiedades/ListaInventario.vue'
+import FormularioInventario from '@/views/Propiedades/FormularioInventario.vue'
 
 export default {
   components: {
+    FormularioInventario,
+    ListaInventario,
+    PropiedadAgregarThumbnail,
     PropiedadAgregarPropiedad,
     PropiedadAgregarPropietario,
-    MaterialButton,
-    CrearInventarioForm
+    MaterialButton
   },
   setup() {
     const isSending = ref(false)

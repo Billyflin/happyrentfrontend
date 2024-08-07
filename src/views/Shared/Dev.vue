@@ -1,4 +1,7 @@
 <template>
+
+
+  <prueba />
   <div class="py-4 container-fluid">
     <div class="row gx-4">
       <div class="mt-4 col-lg-6 mt-lg-0">
@@ -157,9 +160,11 @@
 <script>
 import TimelineList from '@/components/Cards/TimelineList.vue'
 import TimelineItem from '@/components/Cards/TimelineItem.vue'
+import Prueba from '@/views/Shared/Prueba.vue'
+import SvgBackground from '@/views/Shared/SvgBackground.vue'
 
 export default {
   name: "Timeline",
-  components: { TimelineList, TimelineItem },
+  components: { SvgBackground, Prueba, TimelineList, TimelineItem },
 };
 </script>

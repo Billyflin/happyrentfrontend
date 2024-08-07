@@ -47,7 +47,7 @@
             ref="btnTransparent"
             :class="{active: sidebarType === 'bg-transparent', disabled: isBtnDisabled}"
             class="px-3 mb-2 btn bg-gradient-dark ms-2"
-            @click="sidebar('bg-transparent');sidebarColor('happLight')"
+            @click="sidebar('bg-transparent');sidebarColor('light')"
           >
             Transparent
           </button>
@@ -66,7 +66,7 @@
         <!-- Navbar Fixed -->
         <hr class="horizontal dark my-3" />
         <div class="mt-2 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
+          <h6 class="mb-0">Dark mode</h6>
           <div class="form-check form-switch ps-0 ms-auto my-auto">
             <input
               :checked="store.isDarkMode"
@@ -78,6 +78,17 @@
           </div>
         </div>
         <hr class="horizontal dark my-sm-4" />
+        <div class="mt-2 d-flex">
+          <h6 class="mb-0">Fondo</h6>
+          <div class="form-check form-switch ps-0 ms-auto my-auto">
+            <input
+              :checked="store.background"
+              class="form-check-input mt-1 ms-auto"
+              type="checkbox"
+              @click="store.background = !store.background"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>

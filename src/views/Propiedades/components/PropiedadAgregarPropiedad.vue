@@ -1,13 +1,9 @@
 <script setup>
-import { onMounted, ref, watch, watchEffect } from 'vue'
-import Dropzone from 'dropzone'
-import MaterialButton from '@/components/Material/MaterialButton.vue'
+import { ref, watch, watchEffect } from 'vue'
 import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
 import MaterialChoices from '@/components/Material/MaterialChoices.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
 import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
-
-let myDropzone = null
 
 const tiposPropiedad = {
   casa: {
@@ -148,7 +144,6 @@ const terrenos = [
   { value: 'habitacional', label: 'Habitacional' },
   { value: 'urbano', label: 'Urbano' }
 ]
-const imagenPortadaData = ref('')
 const propiedad = ref({
   type: 'terreno',
   direccion: {
@@ -199,75 +194,27 @@ const validateInput = (event) => {
   }
 }
 
-const openDropzone = () => {
-  myDropzone.hiddenFileInput.click()
-}
-const removeImage = () => {
-  myDropzone.removeAllFiles()
-  imagenPortadaData.value = null
-  emit('update:imagenPortada', null)
-}
-
-
-const emit = defineEmits(['update:propiedad', 'update:imagenPortada'])
+const emit = defineEmits(['update:propiedad'])
 watchEffect(() => {
   emit('update:propiedad', propiedad.value)
 })
 
-onMounted(() => {
-  myDropzone = new Dropzone('#productImg', {
-    maxFiles: 1,
-    acceptedFiles: 'image/*',
-    autoProcessQueue: false,
-    addRemoveLinks: true,
-    dictRemoveFile: 'Eliminar',
-    dictDefaultMessage: 'Arrastra aquí tus imágenes',
-    dictFallbackMessage: 'Tu navegador no soporta arrastrar y soltar para subir archivos',
-    dictInvalidFileType: 'No puedes subir este tipo de archivo',
-    dictFileTooBig: 'El archivo es muy grande',
-    dictCancelUpload: 'Cancelar subida'
-  })
-
-  myDropzone.on('addedfile', (file) => {
-    if (myDropzone.files.length > 1) {
-      myDropzone.removeFile(myDropzone.files[0])
-    }
-    const reader = new FileReader()
-    reader.onload = (e) => {
-      imagenPortadaData.value = e.target.result
-      console.log(imagenPortadaData.value)
-    }
-    reader.readAsDataURL(file)
-    emit('update:imagenPortada', file)
-  })
-})
 </script>
 
 
 <template>
-  <div id="Agregar Propiedad" class="card mt-4">
+  <div id="Agregar Propiedad" class="card ">
     <div class="card-header">
-      <h4>Agregar {{ propiedad.type }}</h4>
+      <h5>Agregar {{ propiedad.type }}</h5>
     </div>
     <div class="card-body pt-0">
       <div class="row">
-        <!--    Agregar imagenes-->
+        <div class="col flex-grow">
+          <material-choices id="tipo_propiedad"
+                            v-model:value-choice="propiedad.type"
+                            :options="opcionsTipoPropiedad"
+                            :serach-enabled="false" label="Tipo Propiedad" name="TipoPropiedad" />
 
-        <div class="col-xl-4 col-lg-5">
-          <h5 class="font-weight-bolder">Imágen de portada</h5>
-          <p>1. Sube una imagen para identificar fácilmente la propiedad</p>
-          <img
-            v-if="imagenPortadaData"
-            :src="imagenPortadaData"
-            alt="portada"
-            class="w-100 border-radius-lg  mb-4 shadow-lg mx-auto"
-          />
-          <material-button v-if="imagenPortadaData" class="mx-3" color="danger" @click="removeImage">Eliminar imagen
-          </material-button>
-          <material-button @click="openDropzone">Subir imagen</material-button>
-        </div>
-        <div class="mx-4 col flex-grow">
-          <h5 class="font-weight-bolder mb-3">Datos de la propiedad</h5>
           <div v-if="['casa', 'departamento', 'oficina', 'bodega', 'local'].includes(propiedad.type)" class="col-2">
             <material-checkbox
               id="amoblado"
@@ -278,11 +225,6 @@ onMounted(() => {
             </material-checkbox>
           </div>
 
-
-          <material-choices id="tipo_propiedad"
-                            v-model:value-choice="propiedad.type"
-                            :options="opcionsTipoPropiedad"
-                            :serach-enabled="false" label="Tipo Propiedad" name="TipoPropiedad" />
 
 
           <div v-if="propiedad.type === 'casa'" class="row">
@@ -304,7 +246,7 @@ onMounted(() => {
                 ¿Jardines?
               </material-checkbox>
             </div>
-            <div class="col-2 mb-2 mt-3">
+            <div class="col-2 mt-3">
               <material-checkbox
                 id="patio"
                 v-model="propiedad.patio"
@@ -313,7 +255,7 @@ onMounted(() => {
                 ¿Patio?
               </material-checkbox>
             </div>
-            <div class="col-3 mb-2 mt-3">
+            <div class="col-3 mt-3">
               <material-checkbox
                 id="gastosComunes"
                 v-model="propiedad.gastosComunes"
@@ -322,7 +264,7 @@ onMounted(() => {
                 ¿Gastos comunes?
               </material-checkbox>
             </div>
-            <div class="col-3 mb-2 mt-3">
+            <div class="col-3 mt-3">
               <material-checkbox
                 id="contribuciones"
                 v-model="propiedad.contribuciones"
@@ -340,7 +282,7 @@ onMounted(() => {
                 ¿ASEO?
               </material-checkbox>
             </div>
-            <div class="col-3">
+            <div class="col-2 mt-3">
               <material-input
                 id="rol"
                 v-model="propiedad.rol"
@@ -351,7 +293,7 @@ onMounted(() => {
                 variant="static"
               />
             </div>
-            <div class="col-3">
+            <div class="col-2 mt-3">
               <material-input
                 id="numPisos"
                 v-model="propiedad.numeroDePisos"
@@ -363,7 +305,7 @@ onMounted(() => {
                 @input="validateInput"
               />
             </div>
-            <div class="col-3">
+            <div class="col-3 mt-3 ">
               <material-input
                 id="numPiezas"
                 v-model="propiedad.habitaciones"
@@ -375,7 +317,7 @@ onMounted(() => {
                 @input="validateInput"
               />
             </div>
-            <div class="col-3">
+            <div class="col-2 mt-3">
               <material-input
                 id="numBanos"
                 v-model="propiedad.banios"
@@ -387,7 +329,7 @@ onMounted(() => {
                 @input="validateInput"
               />
             </div>
-            <div class="col-3 mt-3">
+            <div class="col-2 mt-3">
               <material-input
                 id="antiguedad"
                 v-model="propiedad.antiguedad"
@@ -399,7 +341,7 @@ onMounted(() => {
                 @input="validateInput"
               />
             </div>
-            <div class="col-3">
+            <div class="col-3 mt-3">
               <material-input
                 id="numEstacionamientos"
                 v-model="propiedad.estacionamientos"
@@ -411,7 +353,7 @@ onMounted(() => {
                 @input="validateInput"
               />
             </div>
-            <div class="col-3">
+            <div class="col-3 mt-3">
               <material-input
                 id="metrosCuadradosDeTerreno"
                 v-model="propiedad.metrosCuadradosDeTerreno"
@@ -423,7 +365,7 @@ onMounted(() => {
                 @input="validateInput"
               />
             </div>
-            <div class="col-3">
+            <div class="col-4 mt-3">
               <material-input
                 id="metrosCuadradosDeConstruccion"
                 v-model="propiedad.metrosCuadradosDeConstruccion"

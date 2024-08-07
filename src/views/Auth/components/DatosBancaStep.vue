@@ -5,7 +5,6 @@
         <h5 class="font-weight-normal">Datos bancarios</h5>
       </div>
     </div>
-    <div class="multisteps-form__content">
       <div class="row mt-3">
         <div class="col-4 mb-4">
           <material-input id="rut" v-model="bancario.rut" is-required label="Rut" type="rut" variant="static" placeholder="xx.xxx.xxx-x"/>
@@ -35,11 +34,9 @@
         </button>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
-
 import setTooltip from '@/assets/js/tooltip.js'
 import MaterialChoices from '@/components/Material/MaterialChoices.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
