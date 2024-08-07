@@ -10,13 +10,13 @@
 
 
         <!-- Seccion Propietario -->
-        <FormularioInventario class="mt-4" />
+<!--        <FormularioInventario class="mt-4" />-->
       </div>
       <div class="col-lg-4">
         <propiedad-agregar-thumbnail @update:imagenPortada="imagenPortada= $event" />
         <propiedad-agregar-propietario class="mt-4" @update:propietario="propiedad.propietario=$event;console.log($event)" />
 <!--    <crear-inventario-form class="mt-4" @update:inventario="propiedad.inventario=$event" />-->
-        <ListaInventario class="mt-4" />
+<!--        <ListaInventario class="mt-4" />-->
 
       </div>
 

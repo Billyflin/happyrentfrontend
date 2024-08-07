@@ -3,13 +3,11 @@
 import { useVuelidate } from '@vuelidate/core'
 import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
-import MaterialChoices from '@/components/Material/MaterialChoices.vue'
 
 export default {
   components: {
     LocalidadForm,
     MaterialInput,
-    MaterialChoices
   },
   name: 'CorredoraForm',
   data() {
@@ -17,6 +15,7 @@ export default {
       empresa: {
         type: 'empresa',
         rut: '',
+        nombre: '',
         razonSocial: '',
         giro: '',
         direccion: {
