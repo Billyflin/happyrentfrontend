@@ -3,10 +3,39 @@ import { onUnmounted, ref } from 'vue'
 import MaterialButton from '@/components/Material/MaterialButton.vue'
 import { usePersonasStore } from '@/store/personasStore.js'
 import router from '@/router/index.js'
+import imgBancoChile from '@/assets/img/logos/bank/BCH.svg'
+import imgBancoEstado from '@/assets/img/logos/bank/BE.svg'
+import imgItau from '@/assets/img/logos/bank/ITUB.svg'
+import imgBCI from '@/assets/img/logos/bank/BCI.SN.png'
+import imgSantander from '@/assets/img/logos/bank/SAN.svg'
+import imgScotiabank from '@/assets/img/logos/bank/BNS.svg'
 
 export default {
   name: 'SolicitudDetails',
   components: { MaterialButton },
+  data() {
+    return {
+      cuenta: {
+        banco: 'Banco Estado',
+        tipoCuenta: 'Cuenta Corriente',
+        numeroCuenta: '123456789',
+        activa: true
+      },
+      logos: {
+        "Banco de Chile": imgBancoChile,
+        "Banco Estado": imgBancoEstado,
+        "Itau": imgItau,
+        "BCI": imgBCI,
+        "Santander": imgSantander,
+        "Scotiabank": imgScotiabank
+      }
+    }
+  },
+  methods: {
+    getBankLogo(banco) {
+      return this.logos[banco] || this.logos["Banco de Chile"]; // Devuelve un logo por defecto si el banco no se encuentra
+    }
+  },
   setup() {
     const auth = usePersonasStore()
     const archivoPrevisualizado = ref(null)
@@ -126,6 +155,22 @@ export default {
                     </div>
                   </li>
                 </ul>
+                <div class="card border card-plain border-radius-lg mb-3">
+                  <div class="card-body d-flex align-items-center flex-row">
+                    <img
+                      class="w-10 me-3 mb-0"
+                      :src="getBankLogo(cuenta.banco)"
+                      alt="logo"
+                    />
+                    <div>
+                      <h6 class="mb-0">{{ cuenta.banco }} - {{ cuenta.tipoCuenta }}</h6>
+                      <p class="mb-0">
+                        {{ cuenta.numeroCuenta }}
+                        <span v-if="cuenta.activa" class="badge bg-success ms-2">Activa</span>
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
               <div v-else class="col-lg-2">
                 <h5 class="mb-3">Sin archivos adjuntos</h5>

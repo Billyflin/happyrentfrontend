@@ -24,7 +24,7 @@
             @update:direccion="perfil.direccion = $event;console.log(this.perfil)"
             @update:empresa="perfil = $event;console.log($event);console.log(this.perfil)"
             @update:representante="perfil.representante = $event;console.log($event);console.log(this.perfil)"
-            @update:banco="perfil.banco = $event;console.log($event);console.log(this.perfil)"
+            @update:datosBancarios="perfil.datosBancarios = $event;console.log($event);console.log(this.perfil)"
             @next:step="nextStep"
           />
         </div>
@@ -55,7 +55,7 @@ export default {
     DatosBancaStep,
     ResumenStep
   },
-  emits: ['update:active-step', 'next:step', 'update:authority', 'update:direccion', 'update:persona', 'update:empresa', 'update:representante','update:banco'],
+  emits: ['update:active-step', 'next:step', 'update:authority', 'update:direccion', 'update:persona', 'update:empresa', 'update:representante','update:datosBancarios'],
   data() {
     return {
       activeStep: 0,

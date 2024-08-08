@@ -15,8 +15,10 @@
         <h1>Solicitud</h1>
       </div>
     </div>
-    <div id="Arrendatario" class="card">
-      <div class="card-header">
+    <div class="row">
+      <div class="col-lg-7">
+        <div id="Arrendatario" class="card">
+      <div class="card-header pb-0">
         <h5>Datos del Arrendatario</h5>
       </div>
       <div class="card-body pt-0">
@@ -37,7 +39,7 @@
                             variant="static" />
           </div>
           <div class="col-md-3 mt-4">
-            <material-input id="rut" v-model="persona.rut" is-required label="RUT" type="rut"
+            <material-input id="rut" v-model="persona.rut" is-required label="RUT de la persona" type="rut"
                             variant="static" />
           </div>
           <div class="col-md-3 mt-4">
@@ -88,7 +90,7 @@
             />
           </div>
 
-          <LocalidadForm v-model="persona.direccion" />
+
 
 
         </div>
@@ -120,8 +122,34 @@
         </div>
       </div>
     </div>
+      </div>
+      <div class="col-lg-5">
+        <div id="Direccion" class="card">
+          <div class="card-header pb-0">
+            <h5>Dirección</h5>
+          </div>
+          <div class="card-body pt-0">
+            <div class="row">
+              <div class="col-12">
+                <LocalidadForm v-model="persona.direccion" />
+              </div>
+            </div>
+          </div>
+          </div>
 
-    <material-button :disabled="sending" class="mt-4 " full-width size="lg" variant="success" @click="emitData">Enviar
+        <div id="DatosBancarios" class="card mt-4">
+          <div class="card-header pb-0">
+            <h5>Datos bancarios</h5>
+          </div>
+          <div class="card-body pt-0">
+            <datos-banca-solicitud :persona="persona" />
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <material-button :disabled="sending" class="mt-4 mb-7 " full-width size="lg" variant="success" @click="emitData">Enviar
     </material-button>
   </div>
 
@@ -141,16 +169,17 @@ import MaterialInput from '@/components/Material/MaterialInput.vue'
 import { useAppStore } from '@/store/appStore.js'
 import { createSolicitud } from '@/servicios/solicitudService.js'
 import router from '@/router/index.js'
-import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
+import DatosBancaSolicitud from '@/views/Solicitudes/component/DatosBancaSolicitud.vue'
 
 export default {
   name: 'Solicitud',
-  components: { MaterialChoices, LocalidadForm, MaterialSwitch, MaterialButton, MaterialInput },
+  components: { DatosBancaSolicitud, MaterialChoices, LocalidadForm, MaterialButton, MaterialInput },
   props: {
     token: { type: String, required: true },
     carnet: Boolean,
     liquidaciones: Boolean,
     certificadoAFP: Boolean,
+    datosBancarios: Boolean,
     certificadoDicom: Boolean,
     carpetaTributaria: Boolean,
     contratoTrabajo: Boolean
@@ -174,6 +203,7 @@ export default {
         { value: 'Argentina', text: 'Argentina' },
         { value: 'Perú', text: 'Perú' }
       ],
+
       files: [], // Asegúrate de inicializar `files` como un array
       sending: false
     }
@@ -231,6 +261,13 @@ export default {
         region: '',
         ciudad: ''
       },
+      datosBancarios: [{
+        banco: '',
+        tipoCuenta: '',
+        numeroCuenta: '',
+        rut: '',
+        email: ''
+      }],
       email: '',
       tratamiento: '',
       estadoCivil: ''
@@ -249,7 +286,7 @@ export default {
           dictDefaultMessage: 'Arrastra los archivos aquí o haz clic para subir documentos',
           maxFilesize: 5, // Tamaño máximo del archivo en MB
           previewTemplate: `
-            <div class="dz-preview dz-file-preview card">
+            <div class="dz-preview dz-file-preview card border">
               <div class="card-body d-flex align-items-center row">
                 <div class="dz-thumbnail col-12 d-flex justify-content-center">
                   <i class="fas fa-file-alt fa-3x" data-dz-thumbnail></i>

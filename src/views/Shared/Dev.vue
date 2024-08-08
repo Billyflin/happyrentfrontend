@@ -1,6 +1,15 @@
 <template>
 
-
+  <div class="card border col-md-5 mx-auto">
+    <img :src="light" alt="light" class="p-2 card-img-top">
+    <div class="card-body">
+      <h5 class="card-title">Light Theme</h5>
+      <p class="card-text">
+        Activar el modo claro
+      </p>
+      <a href="/" class="btn btn-primary stretched-link">Boton de prueba</a>
+    </div>
+  </div>
   <prueba />
   <div class="py-4 container-fluid">
     <div class="row gx-4">
@@ -161,10 +170,16 @@
 import TimelineList from '@/components/Cards/TimelineList.vue'
 import TimelineItem from '@/components/Cards/TimelineItem.vue'
 import Prueba from '@/views/Shared/Prueba.vue'
-import SvgBackground from '@/views/Shared/SvgBackground.vue'
+import light from '@/assets/img/appearance/light.svg'
+import CardWaves from '@/views/Perfil/components/CardWaves.vue'
 
 export default {
   name: "Timeline",
-  components: { SvgBackground, Prueba, TimelineList, TimelineItem },
+  components: { CardWaves,  Prueba, TimelineList, TimelineItem },
+  data() {
+    return {
+      light: light,
+    };
+  },
 };
 </script>

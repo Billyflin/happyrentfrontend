@@ -5,8 +5,9 @@
         <img
           :src="'data:image/png;base64,' + img"
           alt="img-blur-shadow"
-          class="img-fluid shadow border-radius-lg image-standard"
+          class="img-fluid border-radius-lg image-standard"
         />
+        <svg-footer-card />
       </a>
       <div
         :style="`background-image: url('data:image/png;base64,' + img)`"
@@ -75,6 +76,7 @@
 import { usePropiedadesStore } from '@/store/propiedadesStore.js'
 import router from '@/router/index.js'
 import { useContratosStore } from '@/store/contratosStore.js'
+import SvgFooterCard from '@/views/Propiedades/components/SvgFooterCard.vue'
 
 const store = usePropiedadesStore()
 const store2 = useContratosStore()

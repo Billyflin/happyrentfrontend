@@ -48,7 +48,7 @@ const routes = [
   {
     path: '/SolicitudEnviada',
     name: 'SolicitudEnviada',
-    component: () => import('@/views/Solicitudes/SolicitudEnviada.vue')
+    component: () => import('@/views/PlantillasPlanas/SolicitudEnviada.vue')
   },
   {
     path: '/Personas',
