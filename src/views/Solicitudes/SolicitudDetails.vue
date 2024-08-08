@@ -141,10 +141,36 @@ export default {
                 </ul>
               </div>
 
-              <div v-if="auth.solicitud.archivos && auth.solicitud.archivos.length > 0" class="col-lg-5">
+              <div class="col-lg-5">
+                <div v-if="auth.solicitud.datosBancarios[0]">
+                  <h5 class="mb-3">Datos Bancarios</h5>
+                  <div v-if="auth.solicitud.datosBancarios[0]" class="card border card-plain border-radius-lg mb-3">
+                    <div class="card-body d-flex align-items-center flex-row">
+                      <img
+                        class="w-10 me-3 mb-0"
+                        :src="getBankLogo(auth.solicitud.datosBancarios[0].banco)"
+                        alt="logo"
+                      />
+                      <div>
+                        <h6 class="mb-0">{{ auth.solicitud.datosBancarios[0].banco }} -
+                          {{ auth.solicitud.datosBancarios[0].tipoCuenta }}</h6>
+                        <p class="mb-0">
+                          {{ auth.solicitud.datosBancarios[0].numeroCuenta }}
+                          <span v-if="auth.solicitud.datosBancarios[0].activa"
+                                class="badge bg-success ms-2">Activa</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div v-else>
+                  <h5 class="mb-3">Sin datos bancarios</h5>
+                </div>
+
+                <div v-if="(auth.solicitud.archivos && auth.solicitud.archivos.length > 0)">
                 <h5 class="mb-3">Archivos adjuntos</h5>
                 <ul class="list-group mb-3">
-                  <li v-for="archivo in auth.solicitud.archivos" :key="archivo.id"
+                  <li v-for="archivo in auth.solicitud.archivos  " :key="archivo.id"
                       class="list-group-item d-flex align-items-center">
                     <span class="material-symbols-outlined mx-2">insert_drive_file</span>
                     <a :href="archivo.url" class="text-sm" target="_blank">{{ archivo.nombre }}</a>
@@ -155,25 +181,10 @@ export default {
                     </div>
                   </li>
                 </ul>
-                <div class="card border card-plain border-radius-lg mb-3">
-                  <div class="card-body d-flex align-items-center flex-row">
-                    <img
-                      class="w-10 me-3 mb-0"
-                      :src="getBankLogo(cuenta.banco)"
-                      alt="logo"
-                    />
-                    <div>
-                      <h6 class="mb-0">{{ cuenta.banco }} - {{ cuenta.tipoCuenta }}</h6>
-                      <p class="mb-0">
-                        {{ cuenta.numeroCuenta }}
-                        <span v-if="cuenta.activa" class="badge bg-success ms-2">Activa</span>
-                      </p>
-                    </div>
-                  </div>
-                </div>
               </div>
-              <div v-else class="col-lg-2">
+                <div v-else>
                 <h5 class="mb-3">Sin archivos adjuntos</h5>
+              </div>
               </div>
             </div>
           </div>

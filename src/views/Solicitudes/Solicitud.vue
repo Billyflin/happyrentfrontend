@@ -5,7 +5,7 @@
         <router-link to="/">
           <div class="d-flex">
             <div class="row mt-3">
-              <img alt="Logo" class="btn btn-link px-3" height="90" src="../../assets/img/logos/LogoHappBlanco.svg"
+              <img alt="Logo" class="btn btn-link px-3" height="90" :src="logoHappBlanco"
                    width="100" />
             </div>
           </div>
@@ -124,18 +124,23 @@
     </div>
       </div>
       <div class="col-lg-5">
-        <div id="Direccion" class="card">
+        <div id="Direccion" class="card mt-4 mt-lg-0">
           <div class="card-header pb-0">
             <h5>Dirección</h5>
           </div>
           <div class="card-body pt-0">
             <div class="row">
-              <div class="col-12">
+              <div class="d-none d-lg-block">
                 <LocalidadForm v-model="persona.direccion" />
+              </div>
+              <!-- Mostrar este componente en pantallas grandes -->
+              <div class="d-lg-none mt-4">
+                <LocalidadFormVertical v-model="persona.direccion" />
               </div>
             </div>
           </div>
-          </div>
+        </div>
+
 
         <div id="DatosBancarios" class="card mt-4">
           <div class="card-header pb-0">
@@ -170,10 +175,19 @@ import { useAppStore } from '@/store/appStore.js'
 import { createSolicitud } from '@/servicios/solicitudService.js'
 import router from '@/router/index.js'
 import DatosBancaSolicitud from '@/views/Solicitudes/component/DatosBancaSolicitud.vue'
+import LocalidadFormVertical from '@/views/Shared/LocalidadFormVertical.vue'
+import LogoHappBlanco from '@/assets/img/logos/LogoHappBlanco.svg'
 
 export default {
   name: 'Solicitud',
-  components: { DatosBancaSolicitud, MaterialChoices, LocalidadForm, MaterialButton, MaterialInput },
+  components: {
+    LocalidadFormVertical,
+    DatosBancaSolicitud,
+    MaterialChoices,
+    LocalidadForm,
+    MaterialButton,
+    MaterialInput
+  },
   props: {
     token: { type: String, required: true },
     carnet: Boolean,
@@ -203,6 +217,7 @@ export default {
         { value: 'Argentina', text: 'Argentina' },
         { value: 'Perú', text: 'Perú' }
       ],
+      logoHappBlanco: LogoHappBlanco,
 
       files: [], // Asegúrate de inicializar `files` como un array
       sending: false

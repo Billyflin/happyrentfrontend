@@ -1,25 +1,25 @@
 <template>
   <div class="row mt-4">
-    <div class="col-4 mb-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
       <material-input id="rut" v-model="persona.datosBancarios[0].rut" is-required label="Rut de la cuenta bancaria"
                       type="rut" variant="static" placeholder="11.111.111-1" />
     </div>
-    <div class="col-4 mb-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
       <material-input id="numeroCuenta" v-model="persona.datosBancarios[0].numeroCuenta" is-required
                       label="Número de cuenta"
                       type="String"
                       variant="static" />
     </div>
-    <div class="col-4 mb-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
       <material-input id="email" v-model="persona.datosBancarios[0].email" is-required label="Email para notificacion" type="email"
                       variant="static" />
     </div>
-    <div class="col-4 mb-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
       <material-choices id="banco" v-model:text-choice="persona.datosBancarios[0].banco" :options="bancos" label="Banco"
                         variant="static"
                         name="banco" />
     </div>
-    <div class="col-4 mb-4">
+    <div class="col-12 col-md-6 col-lg-4 mb-4">
       <material-choices id="tipoCuenta" v-model:text-choice="persona.datosBancarios[0].tipoCuenta" :options="cuentas"
                         label="Tipo de cuenta"
                         name="tipoCuenta" variant="static" />
