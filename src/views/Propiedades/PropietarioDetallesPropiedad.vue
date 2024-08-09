@@ -1,7 +1,7 @@
 <template>
   <div class="card shadow-lg border-light" v-if="propietario">
     <div class="card-header">
-      <h5 class="mb-0">Detalles del Propietario</h5>
+      <h5 class="mb-0">{{ title }}</h5>
     </div>
     <div class="card-body pt-0">
       <h6 class="card-title">Información General</h6>
@@ -111,6 +111,10 @@ export default {
     propietario: {
       type: Object,
       default: () => ({})
+    },
+    title:{
+      type: String,
+      default: 'Detalles del Propietario'
     }
   }
 }

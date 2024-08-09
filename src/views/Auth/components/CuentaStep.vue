@@ -4,8 +4,7 @@
     <div class="text-center row">
       <div class="mx-auto col-10">
         <h5 class="font-weight-normal">Seleccione su tipo de cuenta</h5>
-        <p> Puede seleccionar el enfoque de su cuenta, la opción empresa puede ser activada o desactivada independiente
-          si su cuenta es propietario o corredor</p>
+        <p> Aca puedes selecionar el tipo de cuenta</p>
       </div>
     </div>
     <div class="multisteps-form__content">
@@ -16,7 +15,7 @@
           <label :for="'perfilSelection_Corredor_'" class="btn btn-lg btn-outline-success border-2 px-6 py-5">
             <i class="material-icons">brush</i>
           </label>
-          <h6>Corredor</h6>
+          <h6>Persona Juridica</h6>
         </div>
         <div class="col-sm-3 me-auto">
           <input :id="'perfilSelection_Propietario_'" v-model="selectedRole" class="btn-check" name="profileSelection"
@@ -24,7 +23,7 @@
           <label :for="'perfilSelection_Propietario_' " class="btn btn-lg btn-outline-success border-2 px-6 py-5">
             <i class="material-icons">integration_instructions</i>
           </label>
-          <h6>Propietario</h6>
+          <h6>Persona Natural</h6>
         </div>
       </div>
     </div>

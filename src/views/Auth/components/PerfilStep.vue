@@ -3,10 +3,10 @@
        data-animation="FadeIn">
     <div class="text-center row">
       <div v-if=" $parent.$data.formType === 'ROLE_PROPIETARIO'" class="mx-auto col-10">
-        <h5 class="font-weight-normal">REGISTRO PERSONA</h5>
+        <h5 class="font-weight-normal">REGISTRO PERSONA NATURAL</h5>
       </div>
       <div v-if=" $parent.$data.formType === 'ROLE_CORREDOR'" class="mx-auto col-10">
-        <h5 class="font-weight-normal">EMPRESA</h5>
+        <h5 class="font-weight-normal">REGISTRO PERSONA JURIDICA</h5>
       </div>
 
     </div>

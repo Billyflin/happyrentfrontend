@@ -150,10 +150,10 @@ export default {
         <PropietarioDetallesPropiedad :propietario="contrato.propiedad.propietario" />
       </div>
       <div :class="columnClass">
-        <PropietarioDetallesPropiedad :propietario="contrato.arrendatario" />
+        <PropietarioDetallesPropiedad title="Detalles del Arrendatario" :propietario="contrato.arrendatario" />
       </div>
       <div class="col-lg-4" v-if="contrato.codeudor">
-        <PropietarioDetallesPropiedad :propietario="contrato.codeudor" />
+        <PropietarioDetallesPropiedad  title="Detalles del Codeudor" :propietario="contrato.codeudor" />
       </div>
     </div>
   </div>
