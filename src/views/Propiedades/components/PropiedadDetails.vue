@@ -46,7 +46,7 @@ import ListaDatosPropiedad from './ListaDatosPropiedad.vue'
 import { deletePropiedad, updatePropiedad } from '@/servicios/propiedadesService.js'
 import { usePropiedadesStore } from '@/store/propiedadesStore.js'
 import router from '@/router/index.js'
-import { onUnmounted, ref } from 'vue'
+import { onUnmounted,  } from 'vue'
 
 export default {
   components: {
@@ -124,24 +124,5 @@ export default {
   max-width: 100%;
   height: auto;
   object-fit: cover;
-}
-.card {
-  margin-bottom: 20px;
-}
-.text-muted {
-  font-size: 0.9rem;
-}
-.alert {
-  margin-top: 20px;
-}
-.alert-success {
-  color: #155724;
-  background-color: #d4edda;
-  border-color: #c3e6cb;
-}
-.alert-danger {
-  color: #721c24;
-  background-color: #f8d7da;
-  border-color: #f5c6cb;
 }
 </style>

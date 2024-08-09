@@ -136,9 +136,9 @@ const routes = [
     }
   },
   {
-    path: '/EditarPropiedad',
-    name: 'EditarPropiedad',
-    component: () => import('@/views/Propiedades/EditarPropiedad.vue'),
+    path: '/DetallesPropiedad',
+    name: 'DetallesPropiedad',
+    component: () => import('@/views/Propiedades/DetallesPropiedad.vue'),
     meta: {}
   },
   {

@@ -40,12 +40,11 @@
 </template>
 
 <script>
-import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
 import LocalidadFormVertical from '@/views/Shared/LocalidadFormVertical.vue'
 
 export default {
   name: 'ListaDireccionPersona',
-  components: { LocalidadFormVertical, LocalidadForm },
+  components: { LocalidadFormVertical },
   props: {
     auth: Object,
     editMode: Boolean

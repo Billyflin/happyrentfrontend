@@ -13,6 +13,23 @@ export function formatDate(date) {
   return d.toLocaleString( 'es-CL', opciones);
 }
 
+export function formatDateTime(date) {
+
+  console.log('date', date)
+  const d = new Date(date);
+  console.log('date', d)
+
+  const opciones = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    second: 'numeric',
+  };
+  return d.toLocaleString( 'es-CL', opciones);
+}
+
 
 
 export function capitalize(string) {

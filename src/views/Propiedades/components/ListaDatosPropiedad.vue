@@ -2,33 +2,33 @@
   <div>
     <div v-if="!editable">
       <ul>
-        <li>Type: {{ datosPropiedad.type }}</li>
-        <li>Amoblado: {{ datosPropiedad.amoblado }}</li>
-        <li>Numero De Pisos: {{ datosPropiedad.numero }}</li>
-        <li>Habitaciones: {{ datosPropiedad.habitaciones }}</li>
-        <li>Baños: {{ datosPropiedad.banios }}</li>
-        <li>Estacionamientos: {{ datosPropiedad.estacionamientos }}</li>
-        <li>Piscina: {{ datosPropiedad.piscina }}</li>
-        <li>Jardines: {{ datosPropiedad.jardines }}</li>
-        <li>Patio: {{ datosPropiedad.patio }}</li>
-        <li>Gastos Comunes: {{ datosPropiedad.gastosComunes }}</li>
+        <li>Type: {{ propiedad.type }}</li>
+        <li>Amoblado: {{ propiedad.amoblado }}</li>
+        <li>Numero De Pisos: {{ propiedad.numero }}</li>
+        <li>Habitaciones: {{ propiedad.habitaciones }}</li>
+        <li>Baños: {{ propiedad.banios }}</li>
+        <li>Estacionamientos: {{ propiedad.estacionamientos }}</li>
+        <li>Piscina: {{ propiedad.piscina }}</li>
+        <li>Jardines: {{ propiedad.jardines }}</li>
+        <li>Patio: {{ propiedad.patio }}</li>
+        <li>Gastos Comunes: {{ propiedad.gastosComunes }}</li>
       </ul>
       <button @click="$emit('toggle-edit')">Editar</button>
     </div>
     <div v-else>
       <ul>
-        <li>Type: <input v-model="datosPropiedad.type" placeholder="Type" /></li>
-        <li>Amoblado: <input v-model="datosPropiedad.amoblado" placeholder="Amoblado" /></li>
-        <li>Numero De Pisos: <input v-model="datosPropiedad.numero" type="number" placeholder="Numero de Pisos" /></li>
-        <li>Habitaciones: <input v-model="datosPropiedad.habitaciones" type="number" placeholder="Habitaciones" /></li>
-        <li>Baños: <input v-model="datosPropiedad.banios" type="number" placeholder="Baños" /></li>
-        <li>Estacionamientos: <input v-model="datosPropiedad.estacionamientos" type="number" placeholder="Estacionamientos" /></li>
-        <li>Piscina: <input v-model="datosPropiedad.piscina" placeholder="Piscina" /></li>
-        <li>Jardines: <input v-model="datosPropiedad.jardines" placeholder="Jardines" /></li>
-        <li>Patio: <input v-model="datosPropiedad.patio" placeholder="Patio" /></li>
-        <li>Gastos Comunes: <input v-model="datosPropiedad.gastosComunes" placeholder="Gastos Comunes" /></li>
+        <li>Type: <input v-model="propiedad.type" placeholder="Type" /></li>
+        <li>Amoblado: <input v-model="propiedad.amoblado" placeholder="Amoblado" /></li>
+        <li>Numero De Pisos: <input v-model="propiedad.numero" type="number" placeholder="Numero de Pisos" /></li>
+        <li>Habitaciones: <input v-model="propiedad.habitaciones" type="number" placeholder="Habitaciones" /></li>
+        <li>Baños: <input v-model="propiedad.banios" type="number" placeholder="Baños" /></li>
+        <li>Estacionamientos: <input v-model="propiedad.estacionamientos" type="number" placeholder="Estacionamientos" /></li>
+        <li>Piscina: <input v-model="propiedad.piscina" placeholder="Piscina" /></li>
+        <li>Jardines: <input v-model="propiedad.jardines" placeholder="Jardines" /></li>
+        <li>Patio: <input v-model="propiedad.patio" placeholder="Patio" /></li>
+        <li>Gastos Comunes: <input v-model="propiedad.gastosComunes" placeholder="Gastos Comunes" /></li>
       </ul>
-      <button @click="$emit('update', datosPropiedad)">Guardar</button>
+      <button @click="$emit('update', propiedad)">Guardar</button>
       <button @click="$emit('toggle-edit')">Cancelar</button>
       <button @click="$emit('delete')">Eliminar</button>
     </div>
@@ -38,7 +38,7 @@
 <script>
 export default {
   props: {
-    datosPropiedad: {
+    propiedad: {
       type: Object,
       required: true,
     },

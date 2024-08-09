@@ -33,7 +33,7 @@
             data-bs-toggle="tooltip"
             title="Editar Propiedad"
           >
-            <span class="material-symbols-outlined text-lg">edit</span> Editar
+            <span class="material-symbols-outlined ">manage_search</span>Ver Propiedad
           </button>
       </div>
       <h5 class="font-weight-normal text-capitalize mt-3">
@@ -99,7 +99,7 @@ const irAEditarPropiedad = (id) => {
   console.log(id)
   store.fetchPropiedad(id).then(
     () =>
-      router.push({ name: 'EditarPropiedad' })
+      router.push({ name: 'DetallesPropiedad' })
   )
 }
 const irANuevoContrato =  (id) => {
