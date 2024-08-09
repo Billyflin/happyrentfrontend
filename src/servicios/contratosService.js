@@ -29,3 +29,7 @@ export const getDocumento = async (id) => {
       console.error(error)
     })
 }
+
+export const getContratoByPropiedadId = async (id) => {
+  return await axios.post('/api/v1/contrato/active', { id })
+}

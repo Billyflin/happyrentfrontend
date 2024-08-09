@@ -10,10 +10,19 @@ import router from '@/router/index.js'
 import { postPersona } from '@/servicios/personasService.js'
 import MaterialAlert from '@/components/Material/MaterialAlert.vue'
 import { useNotificationsStore } from '@/store/notifications.js'
+import ListaDatosBancarios from '@/views/Personas/ListaDatosBancarios.vue'
 
 export default {
   name: 'PersonaDetails',
-  components: { MaterialAlert, ModalPreview, ModalConfirmacion, ListaDireccionPersona, ListaDatosPersona, MaterialButton },
+  components: {
+    ListaDatosBancarios,
+    MaterialAlert,
+    ModalPreview,
+    ModalConfirmacion,
+    ListaDireccionPersona,
+    ListaDatosPersona,
+    MaterialButton
+  },
   setup() {
     const auth = usePersonasStore()
     const notificationsStore = useNotificationsStore()
@@ -178,25 +187,28 @@ export default {
                                  :edit-mode="editMode" />
               <ListaDireccionPersona :class="(auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-5`" :auth="auth"
                                      :edit-mode="editMode" />
-
-              <div v-if="auth.persona.archivos && auth.persona.archivos.length > 0" class="col-lg-4">
-                <h5 class="mb-3">Archivos adjuntos</h5>
-                <ul class="list-group mb-3">
-                  <li v-for="archivo in auth.persona.archivos" :key="archivo.id"
-                      class="list-group-item d-flex align-items-center">
-                    <i :class="getFileIconClass(archivo.nombre)" class="fa-3x me-2 text-lg"></i>
-                    <a :href="archivo.url" class="text-sm" target="_blank">{{ archivo.nombre }}</a>
-                    <div class="ms-auto">
-                      <MaterialButton v-if="archivo.nombre.endsWith('.pdf')" class="btn btn-link"
-                                      @click="previsualizarArchivo(archivo)">Previsualizar
-                      </MaterialButton>
-                      <MaterialButton class="btn btn-link" @click="descargarArchivo(archivo)">Descargar</MaterialButton>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              <div v-else class="col-lg-2">
-                <h5 class="mb-3">Sin archivos adjuntos</h5>
+              <div
+                :class="auth.persona.datosBancarios||(auth.persona.archivos && auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-2`">
+                <ListaDatosBancarios :datosBancarios="auth.persona.datosBancarios" />
+                <div v-if="(auth.persona.archivos && auth.persona.archivos.length > 0)">
+                  <h5 class="mb-3">Archivos adjuntos</h5>
+                  <ul class="list-group mb-3">
+                    <li v-for="archivo in auth.persona.archivos  " :key="archivo.id"
+                        class="list-group-item d-flex align-items-center">
+                      <span class="material-symbols-outlined mx-2">insert_drive_file</span>
+                      <a :href="archivo.url" class="text-sm" target="_blank">{{ archivo.nombre }}</a>
+                      <div class="ms-auto">
+                        <MaterialButton class="btn btn-link" @click="previsualizarArchivo(archivo)">Previsualizar
+                        </MaterialButton>
+                        <MaterialButton class="btn btn-link" @click="descargarArchivo(archivo)">Descargar
+                        </MaterialButton>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+                <div v-else>
+                  <h5 class="mb-3">Sin archivos adjuntos</h5>
+                </div>
               </div>
             </div>
           </div>

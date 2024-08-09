@@ -1,6 +1,6 @@
 <template>
   <div id="app" class="container-fluid">
-    <div class="row">
+    <div class="row"  v-if="store.propiedad">
       <div class="col-lg-8">
         <div class="row">
           <div class="col-lg-7">
@@ -8,7 +8,7 @@
           </div>
           <div class="col-lg-5">
             <ImgPropiedadDetails :store="store" />
-            <div class="mt-4" v-if="store.propiedad.direccion">
+            <div class="mt-4" v-if="store.propiedad">
               <ListaDireccionPropiedad :direccion="store.propiedad.direccion" />
             </div>
           </div>
@@ -37,10 +37,9 @@
 
           </timeline-list>
         </div>
-
       </div>
     </div>
-    <div class="row">
+    <div class="row"  v-if="store.propiedad">
       <div class="col-lg-5">
         <div class="mt-4" v-if="store.propiedad.propietario">
           <PropietarioDetallesPropiedad :propietario="store.propiedad.propietario" />
@@ -72,6 +71,7 @@ import { formatDateTime } from '@/views/NuevoContrato/utils.js'
 import PropietarioDetallesPropiedad from '@/views/Propiedades/PropietarioDetallesPropiedad.vue'
 import ListaInventariosPropiedad from '@/views/Propiedades/ListaInventariosPropiedad.vue'
 import ContactoPerfil from '@/views/Propiedades/ContactoPerfil.vue'
+import router from '@/router/index.js'
 
 export default {
   name: 'App',
@@ -89,6 +89,11 @@ export default {
   data() {
     return {
       store: usePropiedadesStore()
+    }
+  },
+  mounted() {
+    if (!this.store.propiedad) {
+      router.push('/Propiedades')
     }
   }
 }
