@@ -29,6 +29,7 @@ export default {
     return {
       store: usePropiedadesStore(),
       store4: useNotificationsStore(),
+      loading: false,
       contrato: null
     }
   },
@@ -57,13 +58,16 @@ export default {
           })
           await router.push({ name: 'Propiedades' })
         }
+        this.loading = true
         const response = await getContratoByPropiedadId(this.store.propiedad.id)
         console.log(response)
         this.contrato = response.data
         this.store.propiedad = response.data
+        this.loading = false
         console.log(this.contrato)
       } catch (e) {
         console.error(e)
+        this.loading = false
       }
     }
   },
@@ -74,7 +78,7 @@ export default {
 </script>
 
 <template>
-  <div class="container-fluid" v-if="contrato">
+  <div class="container-fluid" v-if="contrato&& !loading">
     <div class="row mb-4">
       <div class="col-lg-6 col-12 mt-md-0 mt-4">
 
@@ -153,4 +157,19 @@ export default {
       </div>
     </div>
   </div>
+  <div class="container-fluid" v-else>
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-center align-items-center">
+              <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Cargando datos del contrato...</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
 </template>
