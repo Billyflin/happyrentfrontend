@@ -177,11 +177,16 @@ const routes = [
     name: 'PrincipalPlanes',
     component: () => import('@/views/PlantillasPlanas/PrincipalPlanes.vue')
   },
+  // {
+  //   path: '/detallesdeContrato/:id', name: 'DetallesContrato',
+  //   props: true,
+  //   component: () => import('@/views/Contrato/DetallesContrato.vue')
+  // },
   {
-    path: '/detallesContrato/:id', name: 'DetallesContrato',
-    props: true,
-    component: () => import('@/views/Contrato/DetallesContrato.vue')
-  },
+    path: '/detallesContrato', name: 'DetallesContrato',
+    component: () => import('@/views/DetallesContrato/DetallesContrato.vue')
+  }
+  ,
   {
     path: '/billy', name: 'Billy', component: () => import('@/views/Shared/Dev.vue')
   },

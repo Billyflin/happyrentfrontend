@@ -76,6 +76,27 @@ export function numberToWordsInSpanish(number) {
   return convertToWords(number);
 }
 
+export  function   formatCurrency(value, currency) {
+  const formatter = new Intl.NumberFormat('es-CL', {
+    style: 'currency',
+    currency: this.getCurrencyCode(currency),
+    minimumFractionDigits: 0
+  });
+  return formatter.format(value);
+}
+
+export  function getCurrencyCode(currency) {
+  switch (currency) {
+    case 'Pesos':
+      return 'CLP';
+    case 'UF':
+      return 'CLF';
+    case 'Dólar':
+      return 'USD';
+    default:
+      return 'CLP';
+  }
+}
 
 
 export function formatNumberWithDots(number) {

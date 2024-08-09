@@ -3,8 +3,7 @@
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-center">
         <h5 class="mb-0">Contrato Activo</h5>
-        <router-link to="">
-
+        <router-link :to="{name:'DetallesContrato'}">
         <material-button class="btn btn-primary" size="lg">
           Ir a Contrato
         </material-button>
