@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid mt-5">
     <div class="card shadow-sm">
-      <div class="card-header pb-0">
+    <div class="card-header pb-0">
         <h2 class="mb-0">Calculadora de Reajuste de Arriendo</h2>
         <p >Calcula el reajuste de un arriendo mes a mes en base a la variación del IPC.</p>
       </div>
@@ -34,7 +34,7 @@
             <div v-if="monthlyAdjustments.length > 0" class="card text-white bg-success mb-3">
               <div class="card-body">
                 <h4 class="card-title">Arriendo Ajustado Final</h4>
-                <p class="card-text fs-4">{{ finalAdjustedRent.toFixed(2) }} CLP</p>
+                <p class="card-text fs-4">{{ Math.ceil(finalAdjustedRent / 100) * 100 }} CLP</p>
                 <p class="card-text">Variación total del IPC: {{ sumIPC.toFixed(2) }}%</p>
               </div>
             </div>
