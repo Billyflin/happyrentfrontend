@@ -53,7 +53,7 @@ import { getLastUpdate } from '@/servicios/indicadores.js'
 import GraficosIndicadores from '@/views/Indicadores/GraficosIndicadores.vue'
 
 // Inicializamos lastUpdated con una fecha por defecto
-let lastUpdated = ref(new Date("2024-08-23T02:26:05.579+00:00"))
+let lastUpdated = ref(new Date())
 let isLoading = ref(true)
 
 onBeforeMount(async () => {

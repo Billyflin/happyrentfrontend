@@ -5,7 +5,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted, watch } from 'vue'
 import * as echarts from 'echarts'
 
 const props = defineProps({
@@ -17,31 +17,26 @@ const props = defineProps({
     type: [Number, String],
     default: '170'
   },
-  roundedTo:{
+  roundedTo: {
     type: Number,
     default: 0
   },
-  // yAxisMin: {
-  //   type: Number,
-  // },
-  // yAxisMax: {
-  //   type: Number,
-  // },
   data: {
-    type: Array, // Cambié de Object a Array porque estás pasando un array
+    type: Array,
     required: true
   }
 })
 
-onMounted(() => {
+let echart
+
+const createChart = () => {
   const chartDom = document.getElementById(props.id)
-  const echart = echarts.init(chartDom)
-  window.addEventListener('resize', () => setTimeout(echart.resize, 200))
+  if (!chartDom) return
+  echart = echarts.init(chartDom)
 
   // Mapea los datos para el eje X y el eje Y
   const xAxisData = props.data.map(obs => new Date(obs.date).toLocaleDateString())
 
-  // Procesar los datos, manteniendo el último valor válido en caso de NaN
   let lastValidValue = 0
   const chartData = props.data.map(obs => {
     const value = parseFloat(obs.valor)
@@ -53,9 +48,8 @@ onMounted(() => {
     }
   })
 
-  const yAxisMaxValue = (props.roundedTo ===! 0) ? Math.round(Math.max(...chartData)+props.roundedTo) : Math.max(...chartData)
-  const yAxisMinValue = (props.roundedTo ===! 0) ? Math.round(Math.min(...chartData)-props.roundedTo) : Math.min(...chartData)
-
+  const yAxisMaxValue = (props.roundedTo !== 0) ? Math.round(Math.max(...chartData) + props.roundedTo) : Math.max(...chartData)
+  const yAxisMinValue = (props.roundedTo !== 0) ? Math.round(Math.min(...chartData) - props.roundedTo) : Math.min(...chartData)
 
   const option = {
     grid: {
@@ -127,8 +121,8 @@ onMounted(() => {
           type: 'dashed'
         }
       },
-      min: yAxisMinValue, // Utiliza el valor mínimo calculado
-      max: yAxisMaxValue  // Utiliza el valor máximo calculado
+      min: yAxisMinValue,
+      max: yAxisMaxValue
     },
     series: [
       {
@@ -157,13 +151,28 @@ onMounted(() => {
   }
 
   option && echart.setOption(option)
-})
-</script>
+}
 
+onMounted(() => {
+  createChart()
+
+  window.addEventListener('resize', () => {
+    if (echart) {
+      setTimeout(echart.resize, 200)
+    }
+  })
+})
+
+// Reactivar la creación del gráfico si cambian los datos
+watch(() => props.data, (newData, oldData) => {
+  if (echart && newData !== oldData) {
+    createChart()
+  }
+}, { deep: true })
+</script>
 
 <style scoped>
 .chart-canvas {
   width: 100%;
 }
 </style>
-

@@ -3,37 +3,50 @@
     <div class="card shadow-sm">
       <div class="card-header pb-0">
         <h2 class="mb-0">Calculadora de Reajuste de Arriendo</h2>
-        <p class="mb-3">Calcula el reajuste de un arriendo en base a la variación del IPC.</p>
+        <p class="mb-3">Calcula el reajuste de un arriendo mes a mes en base a la variación del IPC.</p>
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-lg-4 col-md-6">
             <form @submit.prevent="calculateAdjustment">
-              <h4 class="mb-3">Datos del Reajuste</h4>
-              <div class="form-group mb-3">
-                <label for="initialValue">Valor Inicial del Arriendo</label>
-                <input type="number" class="form-control border" id="initialValue" v-model.number="initialValue" required>
+              <div class="form-group">
+                <label for="initialRent">Valor Inicial del Arriendo</label>
+                <input type="number" id="initialRent" v-model.number="initialRent" class="form-control border"
+                       required />
               </div>
-              <div class="form-group mb-3">
+              <div class="form-group">
                 <label for="startDate">Fecha de Inicio</label>
-                <input type="date" class="form-control border" id="startDate" v-model="startDate" required>
+                <input type="month" id="startDate" v-model="startDate" class="form-control border" required />
               </div>
-              <div class="form-group mb-3">
+              <div class="form-group">
                 <label for="endDate">Fecha de Fin</label>
-                <input type="date" class="form-control border" id="endDate" v-model="endDate" required>
+                <input type="month" id="endDate" v-model="endDate" class="form-control border" required />
               </div>
-              <button type="submit" class="btn btn-primary w-100">Calcular Reajuste</button>
+              <button type="submit" class="btn btn-primary">Calcular Reajuste</button>
             </form>
+
           </div>
-          <div class="col-md-6">
-            <div v-if="adjustmentData.length > 0" class="result-section">
-              <h4 class="mb-3">Resultado del Reajuste</h4>
-              <div v-for="(data, index) in adjustmentData" :key="index" class="mb-3">
-                <p><strong>Variación IPC:</strong> {{ data.variacion_ipc }}</p>
-                <p><strong>Cantidad de meses:</strong> {{ data.cantidad_meses }}</p>
-                <p><strong>Periodo de cálculo:</strong> {{ data.periodo_de_calculo }}</p>
-                <p><strong>Valor ajustado del arriendo:</strong> {{ data.valorajustado }}</p>
-              </div>
+          <div class="col-lg-2 col-md-6">
+
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <div v-if="monthlyAdjustments.length > 0" class="mt-3">
+              <h4 class="mt-3">Arriendo Ajustado Final: {{ finalAdjustedRent.toFixed(2) }} CLP</h4>
+            </div>
+            <div v-if="IPCData" :class="`bg-gradient-happDark shadow-happDark`" class="border-radius-lg py-3 pe-1">
+              <LineChart id="line-chart-5" :data="IPCData" :rounded-to="0" />
+            </div>
+            <div v-if="monthlyAdjustments.length > 0" class="mt-3">
+              <h4>Reajustes Mensuales:</h4>
+              <ul>
+                <li v-for="(adjustment, index) in monthlyAdjustments" :key="index">
+                  <strong>{{ adjustment.month }}:</strong>
+                  Valor Inicial: {{ adjustment.initialPrice.toFixed(2) }} CLP,
+                  IPC: {{ adjustment.ipcValue }}%,
+                  Reajuste: {{ adjustment.adjustmentValue.toFixed(2) }} CLP,
+                  Valor Ajustado: {{ adjustment.adjustedPrice.toFixed(2) }} CLP
+                </li>
+              </ul>
             </div>
           </div>
         </div>
@@ -41,32 +54,86 @@
     </div>
   </div>
 </template>
+
 <script>
-import axios from 'axios';
+import ChartHolderCard from '@/views/Indicadores/component/ChartHolderCard.vue'
+import LineChart from '@/components/Charts/LineChart.vue'
+import { getIPCuntil } from '@/servicios/indicadores.js'
 
 export default {
+  name: 'Calculadora',
+  components: { LineChart, ChartHolderCard },
   data() {
     return {
-      initialValue: 300000,
-      startDate: '2024-06-29',
-      endDate: '2024-07-29',
-      adjustmentData: []
-    };
+      IPCData: null,
+      initialRent: 0,
+      startDate: '',
+      endDate: '',
+      monthlyAdjustments: [], // Almacena los ajustes mensuales
+      finalAdjustedRent: null
+    }
   },
   methods: {
     async calculateAdjustment() {
-      try {
-        const startMonth = new Date(this.startDate).getMonth();
-        const startYear = new Date(this.startDate).getFullYear();
-        const endMonth = new Date(this.endDate).getMonth();
-        const endYear = new Date(this.endDate).getFullYear();
-        const url = `https://api-calculadora.ine.cl/ServiciosCalculadoraVariacion?mesInicio=${startMonth}&AnioInicio=${startYear}&mesTermino=${endMonth}&AnioTermino=${endYear}&valor_a_ajustar=${this.initialValue}`;
-        const response = await axios.get(url);
-        this.adjustmentData = response.data;
-      } catch (error) {
-        console.error('Error fetching adjusted rent:', error);
+      // Convertir fechas a formato de mes y año
+      const [startYear, startMonth] = this.startDate.split('-').map(Number)
+      const [endYear, endMonth] = this.endDate.split('-').map(Number)
+
+      // Validar fechas
+      if (endYear < startYear || (endYear === startYear && endMonth <= startMonth)) {
+        alert('La fecha de fin debe ser posterior a la fecha de inicio.')
+        return
       }
+
+      // Obtener IPC desde la fecha de inicio
+      const monthsToFetch = (endYear - startYear) * 12 + (endMonth - startMonth) + 1
+      const startDate = new Date(startYear, startMonth - 1)
+      const ipcResponse = await getIPCuntil(startDate)
+      this.IPCData = ipcResponse.data
+
+      // Inicializar variables para cálculos
+      let currentRent = this.initialRent
+      let monthlyAdjustments = []
+
+      let currentYear = startYear
+      let currentMonth = startMonth
+
+      // Función para formatear fecha como YYYY-MM
+      const formatDate = (year, month) => `${year}-${month.toString().padStart(2, '0')}`
+
+      // Iterar sobre cada mes en el rango de fechas
+      while (currentYear < endYear || (currentYear === endYear && currentMonth <= endMonth)) {
+        const formattedDate = formatDate(currentYear, currentMonth)
+        const ipcRecord = this.IPCData.find(record => record.date.startsWith(formattedDate))
+
+        let adjustmentValue = 0
+        let ipcValue = 0
+        if (ipcRecord) {
+          ipcValue = ipcRecord.valor
+          adjustmentValue = currentRent * ipcValue / 100
+          currentRent += adjustmentValue
+        }
+
+        monthlyAdjustments.push({
+          month: formattedDate,
+          initialPrice: currentRent - adjustmentValue,
+          ipcValue,
+          adjustmentValue,
+          adjustedPrice: currentRent
+        })
+
+        // Moverse al siguiente mes
+        if (currentMonth === 12) {
+          currentMonth = 1
+          currentYear += 1
+        } else {
+          currentMonth += 1
+        }
+      }
+
+      this.monthlyAdjustments = monthlyAdjustments
+      this.finalAdjustedRent = currentRent
     }
   }
-};
+}
 </script>
