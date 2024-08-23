@@ -46,17 +46,17 @@
         <MaterialChoices id="nacionalidad" v-model:text-choice="persona.nacionalidad" :options="nacionalidad"
                          label="Nacionalidad" name="Nacionalidad" />
       </div>
-      <div class="col-md-2 mt-4">
-        <material-input
-          id="FechaNacimientoRepresentanteLegal"
-          v-model="persona.fechaNacimiento"
-          is-required
-          label="Fecha de Nacimiento"
-          placeholder="dd/mm/aaaa"
-          type="date"
-          variant="static"
-        />
-      </div>
+<!--      <div class="col-md-2 mt-4">-->
+<!--        <material-input-->
+<!--          id="FechaNacimientoRepresentanteLegal"-->
+<!--          v-model="persona.fechaNacimiento"-->
+<!--          is-required-->
+<!--          label="Fecha de Nacimiento"-->
+<!--          placeholder="dd/mm/aaaa"-->
+<!--          type="date"-->
+<!--          variant="static"-->
+<!--        />-->
+<!--      </div>-->
       <div class="col-md-3 mt-4">
         <material-input id="ocupacion" v-model="persona.ocupacion" is-required label="Ocupación" type="text"
                         variant="static" />

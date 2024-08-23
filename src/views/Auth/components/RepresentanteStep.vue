@@ -168,17 +168,17 @@ export default {
           <MaterialChoices id="nacionalidad" v-model:text-choice="representante.nacionalidad" :options="nacionalidad"
                            label="Nacionalidad" name="Nacionalidad" variant="static"/>
         </div>
-        <div class="col-md-2">
-          <material-input
-            id="FechaNacimientoRepresentanteLegal"
-            v-model="representante.fechaNacimiento"
-            is-required
-            label="Fecha de Nacimiento"
-            placeholder="dd/mm/aaaa"
-            type="date"
-            variant="static"
-          />
-        </div>
+<!--        <div class="col-md-2">-->
+<!--          <material-input-->
+<!--            id="FechaNacimientoRepresentanteLegal"-->
+<!--            v-model="representante.fechaNacimiento"-->
+<!--            is-required-->
+<!--            label="Fecha de Nacimiento"-->
+<!--            placeholder="dd/mm/aaaa"-->
+<!--            type="date"-->
+<!--            variant="static"-->
+<!--          />-->
+<!--        </div>-->
         <div class="col-sm-3">
           <material-input
             id="Ocupacion"
