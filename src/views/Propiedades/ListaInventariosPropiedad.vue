@@ -1,7 +1,7 @@
 <template>
   <div class="card shadow-lg border-light">
     <div class="card-header">
-      <h5 class="mb-0">Lista Inventario de la Propiedad</h5>
+      <h6 class="mb-0">Lista Inventario de la Propiedad</h6>
       {{inventarios}}
     </div>
     <div class="card-body">

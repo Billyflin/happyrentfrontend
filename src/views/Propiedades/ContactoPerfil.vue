@@ -1,12 +1,12 @@
 <template>
   <div class="card shadow-lg border-light">
-    <div class="card-header mb-0">
-      <h5 class="">Contacto</h5>
+    <div class="card-header pb-1 mb-0">
+      <h6 class="">Contacto</h6>
     </div>
     <div class="card-body pt-0">
-      <dl class="row">
+      <dl class="row text-sm">
         <template v-if="propietario.email">
-          <dt class="col-sm-4 mb-4">Email:</dt>
+          <dt class="col-sm-4 mb-3">Email:</dt>
           <a class="col-sm-8" :href="`mailto:${propietario.email}`">{{ propietario.email }}</a>
         </template>
         <template v-else>

@@ -3,15 +3,17 @@
     <div class="row"  v-if="store.propiedad">
       <div class="col-lg-8">
         <div class="row">
-          <div class="col-lg-7">
-              <DetallesDePropiedad :propiedad="store.propiedad" />
-          </div>
           <div class="col-lg-5">
             <ImgPropiedadDetails :store="store" />
             <div class="mt-4" v-if="store.propiedad">
               <ListaDireccionPropiedad :direccion="store.propiedad.direccion" />
             </div>
           </div>
+
+          <div class="col-lg-7">
+              <DetallesDePropiedad :propiedad="store.propiedad" />
+          </div>
+
         </div>
       </div>
       <div class="col-lg-4">
@@ -40,12 +42,12 @@
       </div>
     </div>
     <div class="row"  v-if="store.propiedad">
-      <div class="col-lg-5">
+      <div class="col-lg-4">
         <div class="mt-4" v-if="store.propiedad.propietario">
           <PropietarioDetallesPropiedad :propietario="store.propiedad.propietario" />
         </div>
       </div>
-      <div class="col-lg-4">
+      <div class="col-lg-5">
         <div class="mt-4 " v-if="store.propiedad.inventarios">
           <ListaInventariosPropiedad :inventarios="store.propiedad.inventarios" />
         </div>

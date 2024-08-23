@@ -1,7 +1,7 @@
 <template>
   <div class="card" v-if="store.propiedad">
     <div class="card-body">
-      <h5>Imagen de la Propiedad</h5>
+      <h6>Imagen de la Propiedad</h6>
       <div class="image-section">
         <img :src="'data:image/png;base64,' + store.propiedad.imagenPortada.contenido" alt="Imagen de la Propiedad"
              class="img-fluid border-radius-lg" />

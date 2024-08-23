@@ -11,6 +11,16 @@
       </ChartHolderCard>
     </div>
     <div class="col-lg-6 col-md-6 mt-6">
+      <ChartHolderCard v-if="IPCData"
+                       :update="'Actualizado'"
+                       color="happDark"
+                       subtitle="Últimos valores"
+                       title="Valor del IPC"
+      >
+        <LineChart id="line-chart-5" :data="IPCData" :rounded-to="0" />
+      </ChartHolderCard>
+    </div>
+    <div class="col-lg-6 col-md-6 mt-6">
       <ChartHolderCard v-if="UTMData"
                        :update=" 'Actualizado'"
                        color="primary"
@@ -28,19 +38,10 @@
                        subtitle="Últimos valores"
                        title="Valor del UF"
       >
-        <LineChart id="line-chart-4" :data="UFData" :rounded-to="500"/>
+        <LineChart id="line-chart-4" :data="UFData" :rounded-to="10"/>
       </ChartHolderCard>
     </div>
-    <div class="col-lg-6 col-md-6 mt-6">
-      <ChartHolderCard v-if="IPCData"
-                       :update="'Actualizado'"
-                       color="happDark"
-                       subtitle="Últimos valores"
-                       title="Valor del IPC"
-      >
-        <LineChart id="line-chart-5" :data="IPCData" :rounded-to="0" />
-      </ChartHolderCard>
-    </div>
+
   </div>
 </template>
 <script>

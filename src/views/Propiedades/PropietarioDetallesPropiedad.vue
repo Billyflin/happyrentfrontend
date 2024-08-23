@@ -1,9 +1,9 @@
 <template>
   <div class="card shadow-lg border-light" v-if="propietario">
-    <div class="card-header">
-      <h5 class="mb-0">{{ title }}</h5>
+    <div class="card-header pb-1">
+      <h6 class="mb-0">{{ title }}</h6>
     </div>
-    <div class="card-body pt-0">
+    <div class="card-body pt-0 text-sm">
       <h6 class="card-title">Información General</h6>
       <dl class="row">
         <template v-if="propietario.type">

@@ -45,22 +45,22 @@
                           type="telefono"
                           variant="static" />
         </div>
-          <div class="col-md-2 mt-4">
-            <material-input
-              id="FechaNacimiento"
-              v-model="persona.fechaNacimiento"
-              is-required
-              label="Fecha de Nacimiento"
-              placeholder="dd/mm/aaaa"
-              type="date"
-              variant="static"
-            />
-          </div>
-        <div class="col-md-4 mt-4">
+<!--          <div class="col-md-2 mt-4">-->
+          <!--            <material-input-->
+          <!--              id="FechaNacimiento"-->
+          <!--              v-model="persona.fechaNacimiento"-->
+          <!--              is-required-->
+          <!--              label="Fecha de Nacimiento"-->
+          <!--              placeholder="dd/mm/aaaa"-->
+          <!--              type="date"-->
+          <!--              variant="static"-->
+          <!--            />-->
+          <!--          </div>-->
+        <div class="col-md-5 mt-4">
           <material-input id="email" v-model="persona.email" is-required label="Email" type="text"
                           variant="static" />
         </div>
-          <div class="col-4 mt-4">
+          <div class="col-md-5 mt-4">
             <material-input
               id="confirmEmailRepresentanteLegal"
               label="Confimar Email"
