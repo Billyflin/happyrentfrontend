@@ -10,77 +10,9 @@
           </div>
         </div>
         <div v-else class="row">
-          <mini-statistics-card v-if="DOLARData"
-                                :data="DOLARData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'primary' }"
-                                title="Dólar"
-          />
-          <mini-statistics-card v-if="UTMData"
-                                :data="UTMData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'secondary' }"
-                                title="UTM"
-          />
-          <mini-statistics-card v-if="UFData"
-                                :data="UFData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'success' }"
-                                title="UF" />
-          <mini-statistics-card v-if="IPCData"
-                                :data="IPCData"
-                                :icon="{ name: 'attach_money', color: 'text-white', background: 'happDark' }"
-                                title="IPC"
-          />
+          <IndicadoresDiarios />
         </div>
-        <div class="row">
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard v-if="DOLARData"
-                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="secondary"
-                             subtitle="Últimos valores"
-                             title="Valor del Dólar"
-            >
-              <LineChart id="line-chart-dolar" :data="DOLARData"
-                         :y-axis-max="Math.max(...DOLARData.map(obs => parseFloat(obs.value)))"
-                         :yAxisMin="Math.min(...DOLARData.map(obs => parseFloat(obs.value)))" />
-            </ChartHolderCard>
-          </div>
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard v-if="UTMData"
-                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="primary"
-                             subtitle="Últimos valores"
-                             title="Valor del UTM"
-            >
-              <LineChart id="line-chart-3" :data="UTMData"
-                         :y-axis-max="Math.max(...UTMData.map(obs => parseFloat(obs.value)))"
-                         :yAxisMin="Math.min(...UTMData.map(obs => parseFloat(obs.value)))" />
-
-            </ChartHolderCard>
-          </div>
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard v-if="UFData"
-                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="success"
-                             subtitle="Últimos valores"
-                             title="Valor del UF"
-            >
-              <LineChart id="line-chart-4" :data="UFData"
-                         :y-axis-max="Math.max(...UFData.map(obs => parseFloat(obs.value)))"
-                         :yAxisMin="Math.min(...UFData.map(obs => parseFloat(obs.value)))" />
-            </ChartHolderCard>
-          </div>
-          <div class="col-lg-6 col-md-6 mt-6">
-            <ChartHolderCard v-if="IPCData"
-                             :update="getMinutesSinceLastUpdate() > 0 ? `${getMinutesSinceLastUpdate()} minutos` : 'Actualizado'"
-                             color="happDark"
-                             subtitle="Últimos valores"
-                             title="Valor del IPC"
-            >
-              <LineChart id="line-chart-5" :data="IPCData"
-                         :y-axis-max="Math.max(...IPCData.map(obs => parseFloat(obs.value)))"
-                         :yAxisMin="Math.min(...IPCData.map(obs => parseFloat(obs.value)))" />
-            </ChartHolderCard>
-          </div>
-        </div>
+        <GraficosIndicadores />
       </div>
       <div class="col-lg-12 position-relative z-index-2 mt-4">
         <div class="card card-body">
@@ -114,46 +46,26 @@
 
 <script setup>
 import { onBeforeMount, ref } from 'vue'
-import axios from 'axios'
 import logoBancoCentral from '@/assets/img/logos/layout_set_logo.svg'
 import MaterialAvatar from '@/components/Material/MaterialAvatar.vue'
-import LineChart from '@/components/Charts/LineChart.vue'
-import MiniStatisticsCard from '@/views/Indicadores/component/MiniStatisticsCard.vue'
-import ChartHolderCard from '@/views/Indicadores/component/ChartHolderCard.vue'
+import IndicadoresDiarios from '@/views/Indicadores/IndicadoresDiarios.vue'
+import { getLastUpdate } from '@/servicios/indicadores.js'
+import GraficosIndicadores from '@/views/Indicadores/GraficosIndicadores.vue'
 
-let UTMData = ref(null)
-let DOLARData = ref(null)
-let UFData = ref(null)
-let IPCData = ref(null)
-let lastUpdated = new Date()
+// Inicializamos lastUpdated con una fecha por defecto
+let lastUpdated = ref(new Date("2024-08-23T02:26:05.579+00:00"))
 let isLoading = ref(true)
 
-
-async function fetchData(url, dataRef) {
-  const response = await axios.get(url, {
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Methods': 'GET',
-      'Access-Control-Allow-Headers': 'Content-Type',
-      'Content-Type': 'application/json'
-    }
-  })
-  dataRef.value = response.data.Series.Obs.filter(obs => obs.value !== 'NaN')
-}
-
 onBeforeMount(async () => {
-
-  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/utm`, UTMData)
-  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/dolar`, DOLARData)
-  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/uf`, UFData)
-  await fetchData(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ipc`, IPCData)
-  isLoading.value = false
+  try {
+    const response = await getLastUpdate()
+    // Asegúrate de que la respuesta sea una cadena de fecha válida y conviértela a un objeto Date
+    lastUpdated.value = new Date(response.data)
+  } catch (error) {
+    console.error("Error al obtener la última actualización:", error)
+  } finally {
+    isLoading.value = false
+  }
 })
-
-function getMinutesSinceLastUpdate() {
-  let now = new Date()
-  let difference = now - lastUpdated
-  return Math.floor(difference / 1000 / 60)
-}
 
 </script>

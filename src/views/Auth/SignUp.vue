@@ -95,7 +95,7 @@ import { useAppStore } from '@/store/appStore.js'
 
 
 const body = document.getElementsByTagName('body')[0]
-const formStore = useRegisterFormStore()
+useRegisterFormStore()
 const store = useAppStore()
 const { toggleEveryDisplay, toggleHideConfig } = store
 

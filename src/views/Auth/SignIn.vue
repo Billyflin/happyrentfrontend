@@ -23,7 +23,7 @@
             <div class="card-body">
               <form class="text-start mt-3" role="form" @submit.prevent="loginHandler">
                 <div class="mb-3">
-                  <material-input id="username" v-model="username" label="Usuario o correo" name="username"
+                  <material-input id="username" v-model="username" label="Correo" name="username"
                                   type="text" />
                 </div>
                 <div class="mb-3">

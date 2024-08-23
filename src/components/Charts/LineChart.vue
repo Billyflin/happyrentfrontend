@@ -17,30 +17,44 @@ const props = defineProps({
     type: [Number, String],
     default: '170'
   },
-  yAxisMin: {
+  roundedTo:{
     type: Number,
     default: 0
   },
-  yAxisMax: {
-    type: Number,
-    default: null
-  },
+  // yAxisMin: {
+  //   type: Number,
+  // },
+  // yAxisMax: {
+  //   type: Number,
+  // },
   data: {
-    type: Object,
+    type: Array, // Cambié de Object a Array porque estás pasando un array
     required: true
   }
 })
 
 onMounted(() => {
-  console.log(props.data)
   const chartDom = document.getElementById(props.id)
   const echart = echarts.init(chartDom)
   window.addEventListener('resize', () => setTimeout(echart.resize, 200))
 
-  const xAxislDatas = props.data.map(obs => obs.indexDateString)
-  const chartData = props.data.map(obs => parseFloat(obs.value))
-  console.log(xAxislDatas)
-  console.log(chartData)
+  // Mapea los datos para el eje X y el eje Y
+  const xAxisData = props.data.map(obs => new Date(obs.date).toLocaleDateString())
+
+  // Procesar los datos, manteniendo el último valor válido en caso de NaN
+  let lastValidValue = 0
+  const chartData = props.data.map(obs => {
+    const value = parseFloat(obs.valor)
+    if (isNaN(value)) {
+      return lastValidValue
+    } else {
+      lastValidValue = value
+      return value
+    }
+  })
+
+  const yAxisMaxValue = (props.roundedTo ===! 0) ? Math.round(Math.max(...chartData)+props.roundedTo) : Math.max(...chartData)
+  const yAxisMinValue = (props.roundedTo ===! 0) ? Math.round(Math.min(...chartData)-props.roundedTo) : Math.min(...chartData)
 
 
   const option = {
@@ -64,13 +78,13 @@ onMounted(() => {
     },
     xAxis: {
       type: 'category',
-      data: xAxislDatas,
-      boundaryGap: false, // 坐标轴两边留白策略
+      data: xAxisData,
+      boundaryGap: false,
       axisLine: {
-        show: false // 隐藏X轴线
+        show: false
       },
       axisTick: {
-        show: false // 隐藏X轴刻度线
+        show: false
       },
       axisLabel: {
         color: '#f8f9fa',
@@ -82,7 +96,7 @@ onMounted(() => {
         lineHeight: 2
       },
       splitLine: {
-        show: false, // 显示X轴网格线
+        show: false,
         lineStyle: {
           color: 'rgba(255, 255, 255, .2)',
           type: 'dashed'
@@ -91,12 +105,12 @@ onMounted(() => {
     },
     yAxis: {
       type: 'value',
-      splitNumber: 3, // Y轴分段数
+      splitNumber: 3,
       axisLine: {
-        show: false // 隐藏Y轴线
+        show: false
       },
       axisTick: {
-        show: false // 隐藏Y轴刻度线
+        show: false
       },
       axisLabel: {
         color: '#fff',
@@ -107,15 +121,14 @@ onMounted(() => {
         lineHeight: 2
       },
       splitLine: {
-        show: true, // 显示Y轴网格线
+        show: true,
         lineStyle: {
           color: 'rgba(255, 255, 255, .4)',
           type: 'dashed'
         }
       },
-      min: props.yAxisMin,
-      max: props.yAxisMax !== null ? props.yAxisMax : Math.max(...chartData) < 100 ? Math.max(...chartData) + 10 : (Math.ceil(Math.max(...chartData) / 100) + 1) * 100
-
+      min: yAxisMinValue, // Utiliza el valor mínimo calculado
+      max: yAxisMaxValue  // Utiliza el valor máximo calculado
     },
     series: [
       {
@@ -137,7 +150,7 @@ onMounted(() => {
           color: 'transparent'
         },
         emphasis: {
-          scale: 0.8 // 鼠标移动到数据点时，将数据点缩小为初始大小的90%
+          scale: 0.8
         }
       }
     ]
@@ -146,6 +159,7 @@ onMounted(() => {
   option && echart.setOption(option)
 })
 </script>
+
 
 <style scoped>
 .chart-canvas {

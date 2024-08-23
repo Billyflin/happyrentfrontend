@@ -36,9 +36,6 @@ const props = defineProps({
   icon: {
     type: Object,
     required: true,
-    name: String,
-    color: String,
-    background: String,
     default: () => ({
       color: 'text-white',
       background: 'success'
@@ -50,26 +47,31 @@ const props = defineProps({
   }
 })
 
+// Clase para cambiar la dirección de los iconos
 const reverseDirection = 'flex-row-reverse justify-content-between'
 
-let lastValue = computed(() => {
-  return props.data[props.data.length - 1].value
+// Computed para obtener el último valor y el penúltimo valor
+const lastValue = computed(() => {
+  return props.data[0].valor // El último valor (primero en la lista después de ordenar)
 })
 
-let secondLastValue = computed(() => {
-  return props.data[props.data.length - 2].value
+const secondLastValue = computed(() => {
+  return props.data[1].valor // El penúltimo valor (segundo en la lista después de ordenar)
 })
 
-let change = computed(() => {
+// Computed para calcular el cambio entre los dos últimos valores
+const change = computed(() => {
   return lastValue.value - secondLastValue.value
 })
 
-let changePercentage = computed(() => {
+// Computed para calcular el porcentaje de cambio entre los dos últimos valores
+const changePercentage = computed(() => {
   let percentageChange = (change.value / secondLastValue.value) * 100
   return percentageChange.toFixed(2) // Redondea a 2 decimales
 })
 
-let footerText = computed(() => {
+// Computed para generar el texto del footer basado en el cambio
+const footerText = computed(() => {
   if (props.title === 'IPC') {
     return `<span class='${change.value >= 0 ? 'text-success' : 'text-danger'} text-sm font-weight-bolder'> ${change.value.toFixed(1)} </span> ${change.value >= 0 ? 'más' : 'menos'} que el mes pasado`
   } else {
