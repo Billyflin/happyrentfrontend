@@ -1,5 +1,5 @@
 <template>
-
+  <Aer />
   <div class="card border col-md-5 mx-auto">
     <img :src="light" alt="light" class="p-2 card-img-top">
     <div class="card-body">
@@ -171,11 +171,12 @@ import TimelineList from '@/components/Cards/TimelineList.vue'
 import TimelineItem from '@/components/Cards/TimelineItem.vue'
 import Prueba from '@/views/Shared/Prueba.vue'
 import light from '@/assets/img/appearance/light.svg'
-import CardWaves from '@/views/Perfil/components/CardWaves.vue'
+import UserTimeline from '@/views/Shared/UserTimeline.vue'
+import Aer from '@/views/Shared/aer.vue'
 
 export default {
   name: "Timeline",
-  components: { CardWaves,  Prueba, TimelineList, TimelineItem },
+  components: { Aer, UserTimeline, Prueba, TimelineList, TimelineItem },
   data() {
     return {
       light: light,

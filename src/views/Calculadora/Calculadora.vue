@@ -3,11 +3,14 @@
     <div class="card shadow-sm">
       <div class="card-header pb-0">
         <h2 class="mb-0">Calculadora de Reajuste de Arriendo</h2>
-        <p class="mb-3">Calcula el reajuste de un arriendo mes a mes en base a la variación del IPC.</p>
+        <p >Calcula el reajuste de un arriendo mes a mes en base a la variación del IPC.</p>
       </div>
       <div class="card-body">
         <div class="row">
-          <div class="col-lg-4 col-md-6">
+          <div class="col-lg-3 col-md-6">
+            <h4>
+              Ingresa los datos del arriendo
+            </h4>
             <form @submit.prevent="calculateAdjustment">
               <div class="form-group">
                 <label for="initialRent">Valor Inicial del Arriendo</label>
@@ -22,32 +25,29 @@
                 <label for="endDate">Fecha de Fin</label>
                 <input type="month" id="endDate" v-model="endDate" class="form-control border" required />
               </div>
-              <button type="submit" class="btn btn-primary">Calcular Reajuste</button>
+              <button type="submit" class="btn btn-primary mt-2">Calcular Reajuste</button>
             </form>
 
           </div>
-          <div class="col-lg-2 col-md-6">
+          <div class="col-lg-5 col-md-6">
+            <!-- Card para el arriendo ajustado final -->
+            <div v-if="monthlyAdjustments.length > 0" class="card text-white bg-success mb-3">
+              <div class="card-body">
+                <h4 class="card-title">Arriendo Ajustado Final</h4>
+                <p class="card-text fs-4">{{ finalAdjustedRent.toFixed(2) }} CLP</p>
+              </div>
+            </div>
 
+            <!-- Contenedor para el gráfico -->
+            <div v-if="IPCData" class="card border-0 bg-gradient-happDark shadow-happDark mb-3">
+              <div class="card-body p-3">
+                <LineChart id="line-chart-5" :data="IPCData" :rounded-to="0" />
+              </div>
+            </div>
           </div>
-          <div class="col-lg-6 col-md-6">
-            <div v-if="monthlyAdjustments.length > 0" class="mt-3">
-              <h4 class="mt-3">Arriendo Ajustado Final: {{ finalAdjustedRent.toFixed(2) }} CLP</h4>
-            </div>
-            <div v-if="IPCData" :class="`bg-gradient-happDark shadow-happDark`" class="border-radius-lg py-3 pe-1">
-              <LineChart id="line-chart-5" :data="IPCData" :rounded-to="0" />
-            </div>
-            <div v-if="monthlyAdjustments.length > 0" class="mt-3">
-              <h4>Reajustes Mensuales:</h4>
-              <ul>
-                <li v-for="(adjustment, index) in monthlyAdjustments" :key="index">
-                  <strong>{{ adjustment.month }}:</strong>
-                  Valor Inicial: {{ adjustment.initialPrice.toFixed(2) }} CLP,
-                  IPC: {{ adjustment.ipcValue }}%,
-                  Reajuste: {{ adjustment.adjustmentValue.toFixed(2) }} CLP,
-                  Valor Ajustado: {{ adjustment.adjustedPrice.toFixed(2) }} CLP
-                </li>
-              </ul>
-            </div>
+          <div class="col-lg-3 col-md-6">
+
+            <TimelineReajuste :monthly-adjustments="monthlyAdjustments" />
           </div>
         </div>
       </div>
@@ -56,13 +56,13 @@
 </template>
 
 <script>
-import ChartHolderCard from '@/views/Indicadores/component/ChartHolderCard.vue'
 import LineChart from '@/components/Charts/LineChart.vue'
 import { getIPCuntil } from '@/servicios/indicadores.js'
+import TimelineReajuste from '@/views/Calculadora/TimelineReajuste.vue'
 
 export default {
   name: 'Calculadora',
-  components: { LineChart, ChartHolderCard },
+  components: { TimelineReajuste, LineChart },
   data() {
     return {
       IPCData: null,
