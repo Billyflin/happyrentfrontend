@@ -5,13 +5,13 @@
         <h6>Dirección de la Propiedad</h6>
       </div>
       <div class="card-body pt-0">
-        <p class=" mt-0 mb-0">
-          {{ direccion.calle }} {{ direccion.numero }},
-          {{ direccion.ciudad }}, {{ direccion.region }}, {{ direccion.pais }}
-          <span v-if="direccion.detalle">
+        <p class="mt-0 mb-0 ">
+           <span class="text-dark text-bolder text-capitalize">{{ direccion.calle }} {{ direccion.numero }}</span>,<br>
+          {{ direccion.ciudad }},  <span class="text-success">{{ direccion.region }}</span>, {{ direccion.pais }}<br>
+          <span v-if="direccion.detalle"  class="text-sm">
              <strong>Detalle:</strong> {{ direccion.detalle }}
           </span>
-        </p>
+          </p>
       </div>
     </div>
   </div>
