@@ -35,6 +35,7 @@
               <div class="card-body">
                 <h4 class="card-title">Arriendo Ajustado Final</h4>
                 <p class="card-text fs-4">{{ finalAdjustedRent.toFixed(2) }} CLP</p>
+                <p class="card-text">Variación total del IPC: {{ sumIPC.toFixed(2) }}%</p>
               </div>
             </div>
 
@@ -67,6 +68,7 @@ export default {
     return {
       IPCData: null,
       initialRent: 0,
+      sumIPC:0,
       startDate: '',
       endDate: '',
       monthlyAdjustments: [], // Almacena los ajustes mensuales
@@ -130,7 +132,7 @@ export default {
           currentMonth += 1
         }
       }
-
+      this.sumIPC = monthlyAdjustments.reduce((acc, curr) => acc + curr.ipcValue, 0)
       this.monthlyAdjustments = monthlyAdjustments
       this.finalAdjustedRent = currentRent
     }
