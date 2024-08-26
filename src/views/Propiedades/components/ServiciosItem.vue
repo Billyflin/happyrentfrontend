@@ -95,6 +95,9 @@
                     <ul  class="list-group  ">
                     <h6 class="text-dark text-sm">Respuesta del servicio</h6>
                       <p>Si estas conforme con la respuesta, agregala a tu propiedad </p>
+                      <material-alert color="info" >
+                        En esta version happ rent no verifica la existencia de la cuenta de servicio en las empresas seleccionas por motivos de proteccion de datos
+                      </material-alert>
                       <li
                         class="list-group-item border-0 d-flex justify-content-between mb-2 border-radius-lg bg-success-subtle"
                       >
@@ -214,10 +217,11 @@ import { formatDate, formatNumberWithDots } from '@/views/NuevoContrato/utils.js
 import MaterialDropdown from '@/components/Material/MaterialDropdown.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
 import { useNotificationsStore } from '@/store/notifications.js'
+import MaterialAlert from '@/components/Material/MaterialAlert.vue'
 
 export default {
   name: 'ServiciosItem',
-  components: { MaterialInput, MaterialDropdown, MaterialButton },
+  components: { MaterialAlert, MaterialInput, MaterialDropdown, MaterialButton },
   methods: {
     formatDate,
     formatNumberWithDots,
