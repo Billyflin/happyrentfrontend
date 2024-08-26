@@ -12,7 +12,7 @@ export const getUF = async () => {
   return await axios.get('/indicadores/uf')
 }
 
-export const getDolar = async () => {
+export const getDolar = async () =>{
   return await axios.get('/indicadores/dolar')
 }
 
@@ -21,17 +21,17 @@ export const getLastUpdate = async () => {
 }
 
 export const getUTMuntil = async (date) => {
-  return await axios.post(`/indicadores/utm`, { date })
+  return await axios.post(`/indicadores/utm`,{date})
 }
 
 export const getUFuntil = async (date) => {
-  return await axios.post(`/indicadores/uf`, { date })
+  return await axios.post(`/indicadores/uf`,{date})
 }
 
 export const getDolaruntil = async (date) => {
-  return await axios.post(`/indicadores/dolar`, { date })
+  return await axios.post(`/indicadores/dolar`,{date})
 }
 
 export const getIPCuntil = async (date) => {
-  return await axios.post(`/indicadores/ipc`, { date })
+  return await axios.post(`/indicadores/ipc`,{date})
 }

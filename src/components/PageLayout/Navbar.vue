@@ -30,17 +30,13 @@
       <div id="navigation" class="collapse navbar-collapse">
         <ul class="navbar-nav mx-auto">
           <li class="nav-item">
-            <router-link
-              aria-current="page"
-              class="nav-link d-flex align-items-center me-2 active"
-              to="/products"
-            >
+            <router-link aria-current="page" class="nav-link d-flex align-items-center me-2 active" to="/products">
               <i
+
                 :class="isBlur ? 'text-dark' : 'text-white'"
                 aria-hidden="true"
                 class="material-icons-round opacity-6 me-1"
-                >house</i
-              >
+              >house</i>
               Home
             </router-link>
           </li>
@@ -56,11 +52,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link me-2" to="/sign-in">
-              <i
-                :class="isBlur ? 'text-dark' : 'text-white'"
-                aria-hidden="true"
-                class="fas fa-key opacity-6 me-1"
-              ></i>
+              <i :class="isBlur ? 'text-dark' : 'text-white'" aria-hidden="true" class="fas fa-key opacity-6 me-1"></i>
               Sign In
             </router-link>
           </li>

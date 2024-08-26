@@ -9,9 +9,9 @@
       >
         <div class="ms-2 me-auto text-sm">
           <div class="fw-bold text-dark">{{ adjustment.month }}</div>
-          Valor Inicial: {{ adjustment.initialPrice.toFixed(2) }} CLP<br />
-          IPC: {{ adjustment.ipcValue }}%<br />
-          Reajuste: {{ adjustment.adjustmentValue.toFixed(2) }} CLP<br />
+          Valor Inicial: {{ adjustment.initialPrice.toFixed(2) }} CLP<br>
+          IPC: {{ adjustment.ipcValue }}%<br>
+          Reajuste: {{ adjustment.adjustmentValue.toFixed(2) }} CLP<br>
           Valor Ajustado: {{ adjustment.adjustedPrice.toFixed(2) }} CLP
         </div>
         <span class="badge bg-primary rounded-pill">mes {{ index + 1 }}</span>

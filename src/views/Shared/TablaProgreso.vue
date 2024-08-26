@@ -6,7 +6,7 @@
   </div>
   <div v-else-if="isLoading" class="text-center mt-7 mb-6">
     <h6>Cargando datos...</h6>
-    <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem">
+    <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem;">
       <span class="visually-hidden">Cargando...</span>
     </div>
   </div>
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-import { DataTable } from 'simple-datatables'
-import { nextTick } from 'vue'
-import { usePersonasStore } from '@/store/personasStore.js'
+import { DataTable } from 'simple-datatables';
+import { nextTick } from 'vue';
+import { usePersonasStore } from '@/store/personasStore.js';
 
 export default {
   name: 'TablaPersonas',
@@ -64,60 +64,58 @@ export default {
   watch: {
     '$refs.dataTablePersona': {
       handler(newVal) {
-        console.log('Watcher triggered for $refs.dataTablePersona', newVal)
+        console.log('Watcher triggered for $refs.dataTablePersona', newVal);
         if (newVal) {
-          this.initializeDataTable()
+          this.initializeDataTable();
         }
       },
       immediate: true // Ejecuta el handler inmediatamente si ya existe
     },
     tableData: {
       handler(newData) {
-        console.log('Watcher triggered for tableData', newData)
+        console.log('Watcher triggered for tableData', newData);
         if (this.dataTable) {
-          console.log('Destroying existing DataTable')
-          this.dataTable.destroy()
-          this.dataTable = null // Asegúrate de que la referencia se reinicie
+          console.log('Destroying existing DataTable');
+          this.dataTable.destroy();
+          this.dataTable = null; // Asegúrate de que la referencia se reinicie
         }
-        this.initializeDataTable()
+        this.initializeDataTable();
       },
       deep: true
     }
   },
   mounted() {
-    console.log('Component mounted')
+    console.log('Component mounted');
     if (this.$refs.dataTablePersona) {
-      console.log('$refs.dataTablePersona exists in mounted')
-      this.initializeDataTable()
+      console.log('$refs.dataTablePersona exists in mounted');
+      this.initializeDataTable();
     }
   },
   methods: {
     logRowData(row) {
-      console.log('Row data:', row)
+      console.log('Row data:', row);
     },
     async initializeDataTable() {
-      console.log('Initializing DataTable')
-      await nextTick()
-      const tableElement = this.$refs.dataTablePersona
+      console.log('Initializing DataTable');
+      await nextTick();
+      const tableElement = this.$refs.dataTablePersona;
       if (tableElement) {
-        console.log('tableElement exists', tableElement)
+        console.log('tableElement exists', tableElement);
         const data = {
-          headings: [...this.headers.map((header) => header.title), 'Acciones'],
-          data: this.tableData.map((row) => [
-            ...this.headers.map((header) => row[header.key]),
-            this.details
-              ? {
-                  component: 'ActionButton',
-                  props: {
-                    text: 'Ver detalles',
-                    icon: 'visibility',
-                    onClick: () => this.logRowData(row)
-                  }
-                }
-              : null
+          headings: [...this.headers.map(header => header.title), 'Acciones'],
+          data: this.tableData.map(row => [
+            ...this.headers.map(header => row[header.key]),
+            this.details ? {
+              component: 'ActionButton',
+              props: {
+                text: 'Ver detalles',
+                icon: 'visibility',
+                onClick: () => this.logRowData(row)
+              }
+            } : null
           ])
-        }
-        console.log('Data for DataTable', data)
+        };
+        console.log('Data for DataTable', data);
         this.dataTable = new DataTable(tableElement, {
           searchable: true,
           perPage: 5,
@@ -131,10 +129,10 @@ export default {
             noResults: 'No se encontraron resultados para la búsqueda'
           },
           data
-        })
-        console.log('DataTable initialized')
+        });
+        console.log('DataTable initialized');
       } else {
-        console.log('tableElement does not exist')
+        console.log('tableElement does not exist');
       }
     }
   }

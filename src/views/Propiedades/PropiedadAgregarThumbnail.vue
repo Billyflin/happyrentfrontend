@@ -19,7 +19,7 @@
         <div id="idDropzone" class="dropzone"></div>
       </div>
 
-      <p v-if="!imagenPortadaPreview" class="text-center mt-2 mb-0">
+      <p class="text-center mt-2 mb-0" v-if="!imagenPortadaPreview">
         La imagen de portada es obligatoria
       </p>
     </div>
@@ -41,7 +41,7 @@ watch(imagenPortadaFile, (newFile) => {
 })
 const initializeDropzone = () => {
   myDropzone.value = new Dropzone('#idDropzone', {
-    url: '/', // Se requiere una URL dummy para inicializar Dropzone
+    url: "/", // Se requiere una URL dummy para inicializar Dropzone
     maxFiles: 1,
     acceptedFiles: 'image/*',
     autoProcessQueue: false,
@@ -50,7 +50,7 @@ const initializeDropzone = () => {
     dictFallbackMessage: 'Tu navegador no soporta arrastrar y soltar para subir archivos',
     dictInvalidFileType: 'No puedes subir este tipo de archivo',
     dictFileTooBig: 'El archivo es muy grande',
-    dictCancelUpload: 'Cancelar subida'
+    dictCancelUpload: 'Cancelar subida',
   })
 
   myDropzone.value.on('addedfile', (file) => {
@@ -80,7 +80,7 @@ const removeImage = () => {
 
 <style scoped>
 .file-dropzone {
-  border: 2px dashed #13505b;
+  border: 2px dashed #13505B;
   border-radius: 5px;
   text-align: center;
   cursor: pointer;

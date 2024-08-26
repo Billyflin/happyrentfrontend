@@ -36,36 +36,27 @@
           <button
             id="btn-dark"
             ref="btnDark"
-            :class="{ active: sidebarType === 'bg-gradient-dark', disabled: isBtnDisabled }"
+            :class="{active: sidebarType === 'bg-gradient-dark', disabled: isBtnDisabled}"
             class="px-3 mb-2 btn bg-gradient-dark"
-            @click="
-              sidebar('bg-gradient-dark')
-              sidebarColor('primary')
-            "
+            @click="sidebar('bg-gradient-dark');sidebarColor('primary')"
           >
             Dark
           </button>
           <button
             id="btn-transparent"
             ref="btnTransparent"
-            :class="{ active: sidebarType === 'bg-transparent', disabled: isBtnDisabled }"
+            :class="{active: sidebarType === 'bg-transparent', disabled: isBtnDisabled}"
             class="px-3 mb-2 btn bg-gradient-dark ms-2"
-            @click="
-              sidebar('bg-transparent')
-              sidebarColor('light')
-            "
+            @click="sidebar('bg-transparent');sidebarColor('light')"
           >
             Transparent
           </button>
           <button
             id="btn-white"
             ref="btnWhite"
-            :class="{ active: sidebarType === 'bg-white', disabled: isBtnDisabled }"
+            :class="{active: sidebarType === 'bg-white', disabled: isBtnDisabled}"
             class="px-3 mb-2 btn bg-gradient-dark ms-2"
-            @click="
-              sidebar('bg-white')
-              sidebarColor('happLight')
-            "
+            @click="sidebar('bg-white');sidebarColor('happLight')"
           >
             White
           </button>
@@ -128,7 +119,7 @@ try {
 }
 
 function sidebarColor(color = 'success') {
-  const sidenavMain = document.querySelector('#sidenav-main')
+  const sidenavMain = document.querySelector('#sidenav-main');
   if (sidenavMain) {
     sidenavMain.setAttribute('data-color', color)
     setColor(color)

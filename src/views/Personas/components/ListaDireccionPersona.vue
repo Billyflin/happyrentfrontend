@@ -1,7 +1,7 @@
 <template>
   <div class="col-lg-3">
     <h5 class="mb-3">Dirección</h5>
-    <ul v-if="!editMode" class="list-group mb-3">
+    <ul class="list-group mb-3" v-if="!editMode">
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong>Calle:</strong>
         <span v-if="!editMode">{{ auth.persona.direccion.calle }}</span>
@@ -33,9 +33,9 @@
     </ul>
     <div v-if="editMode" class="card border card-plain border-radius-lg mb-3">
       <div class="card-body">
-        <localidad-form-vertical :model-value="auth.persona.direccion" />
-      </div>
-    </div>
+      <localidad-form-vertical   :model-value="auth.persona.direccion"/>
+  </div>
+  </div>
   </div>
 </template>
 

@@ -32,10 +32,7 @@ async function enviar() {
       modificable: item.modificable,
       estado: item.estado
     }
-    formData.append(
-      'inventario',
-      new Blob([JSON.stringify(inventario)], { type: 'application/json' })
-    )
+    formData.append('inventario', new Blob([JSON.stringify(inventario)], { type: 'application/json' }))
 
     item.fotos.forEach((foto) => {
       const blob = dataURLtoBlob(foto.dataURL)
@@ -56,28 +53,20 @@ async function enviar() {
 }
 
 function dataURLtoBlob(dataurl) {
-  var arr = dataurl.split(','),
-    mime = 'image/jpg',
-    bstr = atob(arr[1]),
-    n = bstr.length,
-    u8arr = new Uint8Array(n)
+  var arr = dataurl.split(','), mime = 'image/jpg',
+    bstr = atob(arr[1]), n = bstr.length, u8arr = new Uint8Array(n)
   while (n--) {
     u8arr[n] = bstr.charCodeAt(n)
   }
   return new Blob([u8arr], { type: mime })
 }
 
+
 function agregarItem() {
   nuevoItem.value.fotos = myDropzone.files
   console.log('Nuevo item:', nuevoItem.value)
   items.value.push({ ...nuevoItem.value })
-  nuevoItem.value = {
-    nombre: '',
-    estado: '',
-    modificable: modificable.value,
-    descripcion: '',
-    fotos: []
-  }
+  nuevoItem.value = { nombre: '', estado: '', modificable: modificable.value, descripcion: '', fotos: [] }
   myDropzone.removeAllFiles()
 }
 
@@ -105,10 +94,12 @@ watch(agregarInventario, (newValue) => {
           myDropzone.removeFile(myDropzone.files[0])
         }
       })
+
     })
   }
 })
 </script>
+
 
 <template>
   <div id="Inventario" class="card">
@@ -118,13 +109,9 @@ watch(agregarInventario, (newValue) => {
     <div class="card-body pt-0">
       <div class="row mt-4">
         <div class="col">
-          <material-switch
-            id="agregar_inventario"
-            v-model:checked="agregarInventario"
-            checked
-            label-class="mb-0 text-body text-truncate w-100"
-            name="agregar_inventario"
-          >
+          <material-switch id="agregar_inventario" v-model:checked="agregarInventario" checked
+                           label-class="mb-0 text-body text-truncate w-100"
+                           name="agregar_inventario">
             {{ agregarInventario ? 'Agregar Inventario' : 'Sin inventario' }}
           </material-switch>
         </div>
@@ -134,12 +121,7 @@ watch(agregarInventario, (newValue) => {
           <h5>Agregar Item</h5>
           <form class="row mt-2" @submit.prevent="agregarItem">
             <div class="col-4 mt-3">
-              <material-switch
-                id="modificable"
-                v-model:checked="modificable"
-                checked
-                name="modificable"
-              >
+              <material-switch id="modificable" v-model:checked="modificable" checked name="modificable">
                 {{ modificable ? 'Es modificable' : 'No es modificable' }}
               </material-switch>
             </div>
@@ -153,7 +135,12 @@ watch(agregarInventario, (newValue) => {
               />
             </div>
             <div class="col-4">
-              <MaterialInput id="estado" v-model="nuevoItem.estado" isRequired label="Estado" />
+              <MaterialInput
+                id="estado"
+                v-model="nuevoItem.estado"
+                isRequired
+                label="Estado"
+              />
             </div>
             <div class="col-12 mt-2">
               <MaterialTextarea
@@ -164,16 +151,15 @@ watch(agregarInventario, (newValue) => {
                 placeholder="Añade una descripción..."
               />
             </div>
-            <div class="row mt-2">
+            <div class="row mt-2 ">
               <!--    Agregar imagenes-->
               <h5 class="font-weight-bolder">Imagenes</h5>
               <div class="multisteps-form__content">
                 <div class="mt-3 row">
                   <div class="col-12">
-                    <label class="form-control mb-0"
-                      >Puedes añadir imágenes arrastrando los archivos o haciendo click sobre este
-                      cuadro
-                    </label>
+                    <label class="form-control mb-0">Puedes añadir imágenes arrastrando los archivos o haciendo click
+                      sobre
+                      este cuadro </label>
                     <div
                       id="InventarioImg"
                       action="/file-upload"
@@ -193,20 +179,20 @@ watch(agregarInventario, (newValue) => {
         <div v-if="agregarInventario" class="table-responsive">
           <table id="datatable-search2" class="table table-flush">
             <thead class="thead-light">
-              <tr>
-                <th class="text-center">Nombre</th>
-                <th class="text-center">Estado</th>
-                <th class="text-center">Descripción</th>
-                <th class="text-center">Fotos</th>
-              </tr>
+            <tr>
+              <th class="text-center">Nombre</th>
+              <th class="text-center">Estado</th>
+              <th class="text-center">Descripción</th>
+              <th class="text-center">Fotos</th>
+            </tr>
             </thead>
             <tbody>
-              <tr v-for="(item, index) in items" :key="index">
-                <td class="text-sm font-weight-normal text-center">{{ item.nombre }}</td>
-                <td class="text-sm font-weight-normal text-center">{{ item.estado }}</td>
-                <td class="text-sm font-weight-normal text-center">{{ item.descripcion }}</td>
-                <td class="text-sm font-weight-normal text-center">{{ item.fotos.length }}</td>
-              </tr>
+            <tr v-for="(item, index) in items" :key="index">
+              <td class="text-sm font-weight-normal text-center">{{ item.nombre }}</td>
+              <td class="text-sm font-weight-normal text-center">{{ item.estado }}</td>
+              <td class="text-sm font-weight-normal text-center">{{ item.descripcion }}</td>
+              <td class="text-sm font-weight-normal text-center">{{ item.fotos.length }}</td>
+            </tr>
             </tbody>
           </table>
           <button class="btn btn-primary" @click="enviar">Guardar</button>

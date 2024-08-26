@@ -1,17 +1,15 @@
 <template>
-  <div class="page-header bg-gradient-dark position-relative m-3 border-radius-xl min-vh-50">
+  <div
+    class="page-header bg-gradient-dark position-relative m-3 border-radius-xl min-vh-50"
+  >
     <img
       alt="pattern-lines"
       class="page-header top-0 position-absolute opacity-8 start-0 w-100"
       src="../../assets/img/illustrations/pattern-tree.svg"
     />
     <router-link to="/">
-      <img
-        alt="logo-Happ"
-        class="position-absolute z-index-3 top-3 start-1"
-        height="150"
-        src="../../assets/img/logos/LogoHappGrandeBlanco.svg"
-      />
+      <img alt="logo-Happ" class="position-absolute z-index-3 top-3 start-1" height="150"
+           src="../../assets/img/logos/LogoHappGrandeBlanco.svg" />
     </router-link>
 
     <span class="mask bg-gradient-dark opacity-2"></span>

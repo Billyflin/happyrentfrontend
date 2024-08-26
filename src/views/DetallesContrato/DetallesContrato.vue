@@ -34,7 +34,7 @@ export default {
     }
   },
   watch: {
-    contrato: function () {
+    contrato: function() {
       console.log(this.contrato)
       if (!this.contrato) {
         router.push({ name: 'Propiedades' })
@@ -49,7 +49,7 @@ export default {
   methods: {
     formatDate,
     formatDateTime,
-    fetchItems: async function () {
+    fetchItems: async function() {
       try {
         if (!this.store.propiedad) {
           this.store4.addNotification({
@@ -78,46 +78,56 @@ export default {
 </script>
 
 <template>
-  <div v-if="contrato && !loading" class="container-fluid">
+  <div class="container-fluid" v-if="contrato&& !loading">
     <div class="row mb-4">
-      <div class="col-lg-6 col-12 mt-md-0 mt-4"></div>
+      <div class="col-lg-6 col-12 mt-md-0 mt-4">
+
+      </div>
       <div class="col-lg-6">
         <div class="row">
-          <div class="col-lg-6"></div>
           <div class="col-lg-6">
-            <RowRentaDetalleContrato :moneda="contrato.moneda" :renta="contrato.renta" />
+          </div>
+          <div class="col-lg-6">
+            <RowRentaDetalleContrato :renta="contrato.renta" :moneda="contrato.moneda" />
           </div>
         </div>
       </div>
     </div>
     <material-alert class="font-weight-light" color="danger" dismissible>
-      <span
-        >El arrendatario no ha pagado la renta correspondiente al mes de
-        <strong>{{ formatDate(Date.now()) }}</strong>
-      </span>
+              <span
+              >El arrendatario no ha pagado la renta correspondiente al mes de
+                <strong>{{ formatDate(Date.now()) }}</strong>
+              </span
+              >
     </material-alert>
-    <div v-if="store.propiedad" class="row">
+    <div class="row" v-if="store.propiedad">
       <div class="col-lg-8">
-        <div v-if="store.propiedad" class="row">
-          <div class="col-lg-4"></div>
-          <div class="col-lg-8"></div>
+
+        <div class="row" v-if="store.propiedad">
+          <div class="col-lg-4">
+
+          </div>
+          <div class="col-lg-8">
+
+          </div>
+
         </div>
-        <DatosContrato
-          :create-date="contrato.createDate"
-          :duracion-meses="contrato.duracionMeses"
-          :duracionMeses="contrato.duracionMeses"
-          :fecha-termino="contrato.fechaTermino"
-          :fechaInicio="contrato.fechaInicio"
-          :fechaTermino="contrato.fechaTermino"
-          :garantia="contrato.garantia"
-          :moneda="contrato.moneda"
-          :periodo-reajuste-contrato="contrato.periodoReajusteContrato"
-          :periodoReajusteContrato="contrato.periodoReajusteContrato"
-          :plazoAvisoDias="contrato.plazoAvisoDias"
-          :renta="contrato.renta"
-          :valor-corretaje="contrato.valorCorretaje"
-          :valorCorretaje="contrato.valorCorretaje"
+        <DatosContrato :renta="contrato.renta"
+                       :moneda="contrato.moneda"
+                       :fechaInicio="contrato.fechaInicio"
+                       :fechaTermino="contrato.fechaTermino"
+                       :garantia="contrato.garantia"
+                       :plazoAvisoDias="contrato.plazoAvisoDias"
+                       :duracionMeses="contrato.duracionMeses"
+                       :periodoReajusteContrato="contrato.periodoReajusteContrato"
+                       :valorCorretaje="contrato.valorCorretaje"
+                       :duracion-meses="contrato.duracionMeses"
+                       :periodo-reajuste-contrato="contrato.periodoReajusteContrato"
+                       :valor-corretaje="contrato.valorCorretaje"
+                       :fecha-termino="contrato.fechaTermino"
+                       :create-date="contrato.createDate"
         />
+
 
         <GraficoReajuste />
       </div>
@@ -128,35 +138,26 @@ export default {
             <PanelControlContrato :contrato="contrato" />
           </div>
           <div class="mt-4">
-            <TimeLineContrato
-              :contrato="contrato"
-              :format-date-time="formatDateTime(store.propiedad.createDate)"
-              :store="store"
-            />
+            <TimeLineContrato :contrato="contrato" :format-date-time="formatDateTime(store.propiedad.createDate)"
+                              :store="store" />
           </div>
         </div>
       </div>
     </div>
 
-    <div v-if="contrato" class="row mt-4">
+    <div class="row mt-4" v-if="contrato">
       <div :class="columnClass">
         <PropietarioDetallesPropiedad :propietario="contrato.propiedad.propietario" />
       </div>
       <div :class="columnClass">
-        <PropietarioDetallesPropiedad
-          :propietario="contrato.arrendatario"
-          title="Detalles del Arrendatario"
-        />
+        <PropietarioDetallesPropiedad title="Detalles del Arrendatario" :propietario="contrato.arrendatario" />
       </div>
-      <div v-if="contrato.codeudor" class="col-lg-4">
-        <PropietarioDetallesPropiedad
-          :propietario="contrato.codeudor"
-          title="Detalles del Codeudor"
-        />
+      <div class="col-lg-4" v-if="contrato.codeudor">
+        <PropietarioDetallesPropiedad  title="Detalles del Codeudor" :propietario="contrato.codeudor" />
       </div>
     </div>
   </div>
-  <div v-else class="container-fluid">
+  <div class="container-fluid" v-else>
     <div class="row">
       <div class="col-12">
         <div class="card">
@@ -170,5 +171,5 @@ export default {
         </div>
       </div>
     </div>
-  </div>
+    </div>
 </template>

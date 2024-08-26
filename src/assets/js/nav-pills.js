@@ -36,7 +36,7 @@ export default function setNavPills() {
   }
 
   function initNavs() {
-    navPills.forEach((item) => {
+    navPills.forEach(item => {
       const movingDiv = createMovingDiv(item)
       const listLength = item.getElementsByTagName('li').length
 
@@ -45,7 +45,7 @@ export default function setNavPills() {
       movingDiv.style.transform = 'translate3d(0px, 0px, 0px)'
       movingDiv.style.transition = '.5s ease'
 
-      item.addEventListener('mouseover', (event) => {
+      item.addEventListener('mouseover', event => {
         const target = getEventTarget(event)
         const li = target.closest('li')
         if (li) {
@@ -59,7 +59,7 @@ export default function setNavPills() {
   }
 
   function handleResize() {
-    navPills.forEach((item) => {
+    navPills.forEach(item => {
       item.querySelector('.moving-tab').remove()
       const movingDiv = createMovingDiv(item)
 
@@ -74,7 +74,7 @@ export default function setNavPills() {
     })
 
     if (window.innerWidth < 991) {
-      navPills.forEach((item) => {
+      navPills.forEach(item => {
         if (!item.classList.contains('flex-column')) {
           item.classList.remove('flex-row')
           item.classList.add('flex-column', 'on-resize')
@@ -84,7 +84,7 @@ export default function setNavPills() {
         }
       })
     } else {
-      navPills.forEach((item) => {
+      navPills.forEach(item => {
         if (item.classList.contains('on-resize')) {
           item.classList.remove('flex-column', 'on-resize')
           item.classList.add('flex-row')
@@ -104,7 +104,7 @@ export default function setNavPills() {
   window.addEventListener('resize', handleResize)
 
   if (window.innerWidth < 991) {
-    navPills.forEach((item) => {
+    navPills.forEach(item => {
       if (item.classList.contains('flex-row')) {
         item.classList.remove('flex-row')
         item.classList.add('flex-column', 'on-resize')

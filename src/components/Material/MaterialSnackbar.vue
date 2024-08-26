@@ -2,7 +2,9 @@
   <transition>
     <div :class="getColor(color)" class="toast fade show p-2 mt-2">
       <div class="toast-header bg-transparent border-0">
-        <i :class="getIcon(icon.color)" class="material-icons me-2">{{ icon.component }}</i>
+        <i :class="getIcon(icon.color)" class="material-icons me-2">{{
+            icon.component
+          }}</i>
         <span :class="getTextColor(color)" class="me-auto font-weight-bold">
           {{ title }}
         </span>
@@ -39,7 +41,8 @@ export default {
       type: Object,
       component: String,
       color: String,
-      default: () => {}
+      default: () => {
+      }
     },
     color: {
       type: String,
@@ -48,7 +51,8 @@ export default {
 
     closeHandler: {
       type: Function,
-      default: () => {}
+      default: () => {
+      }
     }
   },
   methods: {

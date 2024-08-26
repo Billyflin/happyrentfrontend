@@ -7,28 +7,28 @@
       <div class="mb-3">
         <material-input
           id="currentPassword"
-          v-model="currentPassword"
           label="Contraseña actual"
           type="password"
+          v-model="currentPassword"
         />
       </div>
       <div class="mb-3">
         <material-input
           id="newPassword"
-          v-model="newPassword"
           label="Nueva contraseña"
           type="password"
+          v-model="newPassword"
         />
       </div>
       <div class="mb-3">
         <material-input
           id="confirmPassword"
-          v-model="confirmPassword"
           label="Confirmar contraseña"
           type="password"
+          v-model="confirmPassword"
         />
       </div>
-      <span v-if="mensaje" class="badge badge-success mt-2">{{ mensaje }}</span>
+      <span class="badge badge-success mt-2" v-if="mensaje">{{mensaje}}</span>
       <h5 class="mt-5">Requerimientos de la contraseña</h5>
       <p class="text-muted mb-2">
         Asegurate que tu contraseña cumpla con los siguientes requerimientos:
@@ -79,15 +79,15 @@ export default {
   methods: {
     async updatePassword() {
       if (this.newPassword !== this.confirmPassword) {
-        this.mensaje = 'Las contraseñas no coinciden.'
-        return
+        this.mensaje = 'Las contraseñas no coinciden.';
+        return;
       }
 
       try {
-        const response = await changePassword(this.newPassword, this.currentPassword)
-        this.mensaje = response.data
+        const response = await changePassword(this.newPassword, this.currentPassword);
+        this.mensaje = response.data;
       } catch (error) {
-        this.mensaje = 'Error ' + (error.response?.data?.message || error.message)
+        this.mensaje = 'Error ' + (error.response?.data?.message || error.message);
       }
     }
   }

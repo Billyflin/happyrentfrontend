@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid">
     <div class="row mb-4">
-      <div class="col-lg-2 mt-4">
+      <div class="col-lg-2 mt-4 ">
         <side-nav />
       </div>
       <div class="col-lg-10 mt-lg-0 mt-4">
@@ -87,16 +87,17 @@
 
               <!-- clausula 18 -->
               <Clausula18 />
+
             </div>
           </div>
         </div>
-        <div class="mt-2">
-          <material-button class="mt-4" full-width size="lg" variant="success" @click="saveContrato"
-            >Crear Contrato
+        <div class="mt-2 ">
+          <material-button class="mt-4" full-width size="lg" variant="success" @click="saveContrato">Crear Contrato
           </material-button>
           <!--            <material-button v-if="reporteID" class="mt-4 mb-6" color="happLight" full-width size="lg" @click="getDoc">Ver-->
           <!--              documento provicional-->
           <!--            </material-button>-->
+
         </div>
       </div>
     </div>
@@ -142,6 +143,8 @@ const store4 = useNotificationsStore()
 const loading = ref(false)
 let reporteID = null
 
+
+
 const saveContrato = async () => {
   const contrato = {
     comparecencia: store2.comparecencia,
@@ -183,6 +186,7 @@ const saveContrato = async () => {
     clausula17Edit: store2.clausula17edit,
     clausula18Edit: store2.clausula18edit,
 
+
     propiedadId: store3.propiedad.id,
     arrendatarioId: store3.arrendatario.id,
     arrendadorId: store3.propiedad.propietario.id,
@@ -205,28 +209,27 @@ const saveContrato = async () => {
     .then((response) => {
       console.log(response)
       reporteID = response.data.id
-      store4.createNotification(
-        'success',
-        'Contrato guardado',
-        'El contrato ha sido guardado exitosamente'
-      )
-    })
-    .then(() => {
-      clearAllStores()
-      router.push({ name: 'Felicidades' })
-    })
-    .catch((error) => {
+      store4.createNotification('success', 'Contrato guardado', 'El contrato ha sido guardado exitosamente')
+    }).then(
+      () => {
+        clearAllStores()
+        router.push({ name: 'Felicidades' })
+      }
+    ).catch((error) => {
       console.log(error)
       store4.createNotification('danger', 'Error', 'Hubo un error al guardar el contrato' + error)
-    })
-    .finally(() => {
+    }).finally(() => {
       loading.value = false
-    })
+    }
+    )
 }
 const clearAllStores = () => {
   store2.clearAll()
   store3.clearAll()
 }
+
+
+
 
 onMounted(() => {
   // store.toggleEveryDisplay()

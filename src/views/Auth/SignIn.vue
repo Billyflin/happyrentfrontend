@@ -1,7 +1,7 @@
 <template>
   <div
     :style="`background-image:linear-gradient(195deg, #009d6a 0%, #000000 100%);`"
-    class="page-header align-items-start min-vh-100"
+    class="page-header align-items-start min-vh-100 "
   >
     <fondo />
     <div class="container my-auto">
@@ -12,13 +12,8 @@
               <div class="bg-gradient-primary shadow-success border-radius-lg py-3 pe-1">
                 <div class="d-flex justify-content-center align-items-center">
                   <div class="row mt-3">
-                    <img
-                      alt="Logo"
-                      class="btn btn-link px-3"
-                      height="90"
-                      src="../../assets/img/logos/LogoHapp.svg"
-                      width="150"
-                    />
+                    <img alt="Logo" class="btn btn-link px-3" height="90" src="../../assets/img/logos/LogoHapp.svg"
+                         width="150" />
                   </div>
                 </div>
 
@@ -28,34 +23,15 @@
             <div class="card-body">
               <form class="text-start mt-3" role="form" @submit.prevent="loginHandler">
                 <div class="mb-3">
-                  <material-input
-                    id="username"
-                    v-model="username"
-                    label="Correo"
-                    name="username"
-                    type="text"
-                  />
+                  <material-input id="username" v-model="username" label="Correo" name="username"
+                                  type="text" />
                 </div>
                 <div class="mb-3">
-                  <material-input
-                    id="password"
-                    v-model="password"
-                    label="Contraseña"
-                    name="password"
-                    type="password"
-                  />
+                  <material-input id="password" v-model="password" label="Contraseña" name="password" type="password" />
                 </div>
-                <material-switch id="rememberMe" v-model="rememberMe" name="rememberMe"
-                  >Recuerdame</material-switch
-                >
+                <material-switch id="rememberMe" v-model=rememberMe name="rememberMe">Recuerdame</material-switch>
                 <div class="text-center">
-                  <material-button
-                    class="my-4 mb-2"
-                    color="primary"
-                    fullWidth
-                    type="submit"
-                    variant="gradient"
-                  >
+                  <material-button class="my-4 mb-2" color="primary" fullWidth type="submit" variant="gradient">
                     Ingresar
                   </material-button>
                 </div>
@@ -64,18 +40,16 @@
                 </p>
                 <p class="mt-4 text-sm text-center">
                   No tienes una cuenta?
-                  <router-link
-                    :to="{ name: 'SignUp' }"
-                    class="text-primary text-gradient font-weight-bold"
-                    >Registrate!
-                  </router-link>
+                  <router-link :to="{name: 'SignUp'}" class="text-primary text-gradient font-weight-bold"
+                  >Registrate!
+                  </router-link
+                  >
                 </p>
                 <p class="mt-4 text-sm text-center">
-                  <router-link
-                    :to="{ name: 'rememberPassword' }"
-                    class="text-primary text-gradient font-weight-bold"
-                    >Olvidaste tu contraseña?
-                  </router-link>
+                  <router-link :to="{name: 'rememberPassword'}" class="text-primary text-gradient font-weight-bold"
+                  >Olvidaste tu contraseña?
+                  </router-link
+                  >
                 </p>
               </form>
             </div>
@@ -88,8 +62,7 @@
         <div class="row align-items-center justify-content-lg-between">
           <div class="col-12 col-md-6 my-auto">
             <div class="copyright text-center text-sm text-white text-lg-start">
-              © {{ new Date().getFullYear() }}, HappRent
-              <i aria-hidden="true" class="fa fa-heart"></i> by
+              © {{ new Date().getFullYear() }}, HappRent <i aria-hidden="true" class="fa fa-heart"></i> by
               <a class="font-weight-bold text-white" target="_blank">Happy Services SpA</a>
             </div>
           </div>
@@ -109,6 +82,7 @@ import { useAuthStore } from '@/store/authStore.js'
 import { useAppStore } from '@/store/appStore.js'
 import Fondo from '@/views/Auth/Fondo.vue'
 
+
 const auth = useAuthStore()
 const username = ref('')
 const password = ref('')
@@ -120,14 +94,11 @@ const loginHandler = async () => {
 
 const store = useAppStore()
 const { toggleEveryDisplay } = store
-watch(
-  () => auth.currentUser,
-  (value) => {
-    if (value) {
-      router.push({ name: 'Dashboard' })
-    }
+watch(() => auth.currentUser, (value) => {
+  if (value) {
+    router.push({ name: 'Dashboard' })
   }
-)
+})
 
 onBeforeMount(() => {
   toggleEveryDisplay()

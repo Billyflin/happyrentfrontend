@@ -7,7 +7,7 @@
       <dl class="row text-sm">
         <template v-if="propietario.email">
           <dt class="col-sm-4 mb-3">Email:</dt>
-          <a :href="`mailto:${propietario.email}`" class="col-sm-8">{{ propietario.email }}</a>
+          <a class="col-sm-8" :href="`mailto:${propietario.email}`">{{ propietario.email }}</a>
         </template>
         <template v-else>
           <dt class="col-sm-4">Email:</dt>
@@ -16,9 +16,7 @@
 
         <template v-if="propietario.telefono">
           <dt class="col-sm-4">Teléfono:</dt>
-          <a :href="`tel:+569${propietario.telefono}`" class="col-sm-8"
-            >+569 {{ propietario.telefono }}</a
-          >
+          <a class="col-sm-8" :href="`tel:+569${propietario.telefono}`">+569 {{ propietario.telefono }}</a>
         </template>
         <template v-else>
           <dt class="col-sm-4">Teléfono:</dt>

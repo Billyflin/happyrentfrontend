@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <div :id="id" :style="{ width: '100%', height: height + 'px' }" class="chart-canvas"></div>
+    <div :id="id" :style="{width: '100%', height: height + 'px'}" class="chart-canvas"></div>
   </div>
 </template>
 
@@ -105,8 +105,7 @@ onMounted(() => {
         }
       },
       min: 0,
-      max:
-        Math.max(...data) < 100 ? Math.max(...data) + 10 : Math.ceil(Math.max(...data) / 100) * 100
+      max: Math.max(...data) < 100 ? Math.max(...data) + 10 : Math.ceil(Math.max(...data) / 100) * 100
     },
     series: [
       {

@@ -1,4 +1,5 @@
 <script>
+
 import { useVuelidate } from '@vuelidate/core'
 import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
@@ -82,7 +83,7 @@ export default {
     <div class="row mt-4">
       <!--  Seccion Empresa-->
       <div class="row mt-4">
-        <h5 class="mt-3 mb-3">REPRESENTANTE LEGAL</h5>
+        <h5 class=" mt-3 mb-3">REPRESENTANTE LEGAL</h5>
       </div>
       <div class="row mt-4">
         <div class="col-4">
@@ -120,17 +121,11 @@ export default {
         </div>
       </div>
       <div class="row mt-4">
-        <div class="col-md-2 mt-4">
-          <MaterialChoices
-            id="pronombres"
-            v-model:text-choice="representante.tratamiento"
-            :options="pronombres"
-            label="Pronombres"
-            name="Pronombres"
-            variant="static"
-          />
+        <div class="col-md-2  mt-4">
+          <MaterialChoices id="pronombres" v-model:text-choice="representante.tratamiento" :options="pronombres"
+                           label="Pronombres" name="Pronombres" variant="static" />
         </div>
-        <div class="col-sm-2 mt-4">
+        <div class="col-sm-2  mt-4">
           <material-input
             id="Rut"
             v-model="representante.rut"
@@ -157,41 +152,33 @@ export default {
             placeholder="Confirma Email"
             type="email"
             variant="static"
+
           />
         </div>
+
       </div>
       <div class="row mt-4">
         <div class="col-md-2">
-          <MaterialChoices
-            id="estadoCivil"
-            v-model:text-choice="representante.estadoCivil"
-            :options="opcionsEstadoCivil"
-            label="Estado Civil"
-            name="estadoCivil"
-            variant="static"
+          <MaterialChoices id="estadoCivil" v-model:text-choice="representante.estadoCivil"
+                           :options="opcionsEstadoCivil" label="Estado Civil"
+                           name="estadoCivil" variant="static"
           />
         </div>
         <div class="col-md-2">
-          <MaterialChoices
-            id="nacionalidad"
-            v-model:text-choice="representante.nacionalidad"
-            :options="nacionalidad"
-            label="Nacionalidad"
-            name="Nacionalidad"
-            variant="static"
-          />
+          <MaterialChoices id="nacionalidad" v-model:text-choice="representante.nacionalidad" :options="nacionalidad"
+                           label="Nacionalidad" name="Nacionalidad" variant="static"/>
         </div>
-        <!--        <div class="col-md-2">-->
-        <!--          <material-input-->
-        <!--            id="FechaNacimientoRepresentanteLegal"-->
-        <!--            v-model="representante.fechaNacimiento"-->
-        <!--            is-required-->
-        <!--            label="Fecha de Nacimiento"-->
-        <!--            placeholder="dd/mm/aaaa"-->
-        <!--            type="date"-->
-        <!--            variant="static"-->
-        <!--          />-->
-        <!--        </div>-->
+<!--        <div class="col-md-2">-->
+<!--          <material-input-->
+<!--            id="FechaNacimientoRepresentanteLegal"-->
+<!--            v-model="representante.fechaNacimiento"-->
+<!--            is-required-->
+<!--            label="Fecha de Nacimiento"-->
+<!--            placeholder="dd/mm/aaaa"-->
+<!--            type="date"-->
+<!--            variant="static"-->
+<!--          />-->
+<!--        </div>-->
         <div class="col-sm-3">
           <material-input
             id="Ocupacion"
@@ -214,6 +201,7 @@ export default {
             variant="static"
           />
         </div>
+
       </div>
 
       <div class="row text-start">
@@ -222,12 +210,7 @@ export default {
     </div>
   </div>
   <div class="mt-4 button-row d-flex">
-    <button
-      class="mb-0 btn bg-gradient-dark ms-auto js-btn-next"
-      title="Next"
-      type="button"
-      @click="emitData"
-    >
+    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" title="Next" type="button" @click="emitData">
       Siguiente
     </button>
   </div>

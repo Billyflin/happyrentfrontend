@@ -6,10 +6,7 @@
       <p class="text-sm" v-html="description"></p>
     </div>
     <div class="p-3 card-body">
-      <div
-        :data-timeline-axis-style="darkMode ? 'dashed' : 'dotted'"
-        class="timeline timeline-one-side"
-      >
+      <div :data-timeline-axis-style="darkMode ? 'dashed' : 'dotted'" class="timeline timeline-one-side">
         <slot />
       </div>
     </div>

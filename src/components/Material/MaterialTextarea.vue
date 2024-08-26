@@ -1,5 +1,8 @@
 <template>
-  <div :class="`input-group-${variant} ${getStatus(error, success)}`" class="input-group">
+  <div
+    :class="`input-group-${variant} ${getStatus(error, success)}`"
+    class="input-group"
+  >
     <textarea
       :id="id"
       :disabled="disabled"

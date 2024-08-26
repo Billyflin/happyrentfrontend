@@ -18,10 +18,12 @@ import setTooltip from '@/assets/js/tooltip.js'
 import SideNav from '@/views/Perfil/components/SideNav.vue'
 import SideNavItem from '@/views/Perfil/components/SideNavItem.vue'
 
+
 onMounted(() => {
   setNavPills()
   setTooltip()
 })
 
-onBeforeUnmount(() => {})
+onBeforeUnmount(() => {
+})
 </script>

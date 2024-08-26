@@ -49,18 +49,8 @@ const themeColors = [
 
 // Crear una lista ponderada de colores para aumentar la probabilidad de primary y happLight
 const weightedColors = [
-  '#13505B',
-  '#13505B',
-  '#13505B',
-  '#13505B',
-  '#13505B',
-  '#13505B', // primary más probable
-  '#bedc4b',
-  '#bedc4b',
-  '#bedc4b',
-  '#bedc4b',
-  '#bedc4b',
-  '#bedc4b', // happLight más probable
+  '#13505B', '#13505B', '#13505B', '#13505B', '#13505B', '#13505B', // primary más probable
+  '#bedc4b', '#bedc4b', '#bedc4b', '#bedc4b', '#bedc4b', '#bedc4b', // happLight más probable
   ...themeColors
 ]
 
@@ -73,7 +63,10 @@ const getRandomColor = () => {
   do {
     colorIndex = Math.floor(Math.random() * weightedColors.length)
     color = weightedColors[colorIndex]
-  } while (color === lastColor)
+  } while (
+    (color === lastColor)
+    )
+
 
   secondLastColor = lastColor
   lastColor = color
@@ -159,8 +152,7 @@ const renderChart = () => {
         }
       },
       min: 0,
-      max:
-        Math.max(...data) < 100 ? Math.max(...data) + 10 : Math.ceil(Math.max(...data) / 100) * 100
+      max: Math.max(...data) < 100 ? Math.max(...data) + 10 : Math.ceil(Math.max(...data) / 100) * 100
     },
     series: [
       {
@@ -171,7 +163,7 @@ const renderChart = () => {
         itemStyle: {
           borderWidth: 0,
           borderRadius: 4,
-          color: function (params) {
+          color: function(params) {
             return getRandomColor()
           }
         }
@@ -186,13 +178,9 @@ onMounted(() => {
   renderChart()
 })
 
-watch(
-  () => props.chart,
-  () => {
-    renderChart()
-  },
-  { deep: true }
-)
+watch(() => props.chart, () => {
+  renderChart()
+}, { deep: true })
 </script>
 
 <style scoped>

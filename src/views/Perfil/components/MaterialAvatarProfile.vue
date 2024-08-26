@@ -1,22 +1,30 @@
 <template>
   <div class="avatar avatar-xl position-relative">
-    <img :alt="alt" :src="img" alt="team-2" class="border-radius-md" />
+    <img
+      :alt="alt"
+      class="border-radius-md"
+      alt="team-2"
+      :src="img" />
     <a
       class="btn btn-sm btn-icon-only bg-gradient-primary position-absolute bottom-0 end-0 mb-n2 me-n2 d-grid"
       @click="triggerFileInput"
     >
       <span
-        aria-hidden="true"
-        aria-label="Edit Image"
         class="material-icons text-xs top-0"
-        data-bs-original-title="Editar Imagen"
-        data-bs-placement="top"
         data-bs-toggle="tooltip"
+        data-bs-placement="top"
         title
-        >edit</span
-      >
+        aria-hidden="true"
+        data-bs-original-title="Editar Imagen"
+        aria-label="Edit Image"
+      >edit</span>
     </a>
-    <input ref="fileInput" class="d-none" type="file" @change="handleFileChange" />
+    <input
+      type="file"
+      ref="fileInput"
+      class="d-none"
+      @change="handleFileChange"
+    />
   </div>
 </template>
 
@@ -35,17 +43,17 @@ export default {
   },
   methods: {
     triggerFileInput() {
-      this.$refs.fileInput.click()
+      this.$refs.fileInput.click();
     },
     handleFileChange(event) {
-      const file = event.target.files[0]
+      const file = event.target.files[0];
       if (file) {
-        const reader = new FileReader()
+        const reader = new FileReader();
         reader.onload = (e) => {
-          this.$emit('update:img', e.target.result)
-        }
-        reader.readAsDataURL(file)
-        console.log(file)
+          this.$emit('update:img', e.target.result);
+        };
+        reader.readAsDataURL(file);
+        console.log(file);
       }
     }
   }

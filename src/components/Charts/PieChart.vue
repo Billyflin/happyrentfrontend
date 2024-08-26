@@ -70,14 +70,10 @@ export default {
         '#f44335' // danger
       ]
 
-      // Crear una lista ponderada de colores para aumentar la probabilidad de primary y happLight
+// Crear una lista ponderada de colores para aumentar la probabilidad de primary y happLight
       const weightedColors = [
-        '#13505B',
-        '#13505B',
-        '#13505B', // primary más probable
-        '#bedc4b',
-        '#bedc4b',
-        '#bedc4b', // happLight más probable
+        '#13505B', '#13505B', '#13505B', // primary más probable
+        '#bedc4b', '#bedc4b', '#bedc4b', // happLight más probable
         ...themeColors
       ]
 
@@ -89,7 +85,9 @@ export default {
         do {
           colorIndex = Math.floor(Math.random() * weightedColors.length)
           color = weightedColors[colorIndex]
-        } while (color === lastColor)
+        } while (
+          (color === lastColor)
+          )
 
         lastColor = color
 
@@ -98,12 +96,8 @@ export default {
       // Set colors based on isBooleanChart prop
       let backgroundColors
       if (this.isBooleanChart) {
-        backgroundColors = this.chart.labels.map((label) =>
-          label.toLowerCase() === 'activo' ||
-          label.toLowerCase() === 'sí' ||
-          label.toLowerCase() === 'arrendado'
-            ? '#4caf50'
-            : '#f44335'
+        backgroundColors = this.chart.labels.map(label =>
+          label.toLowerCase() === 'activo' || label.toLowerCase() === 'sí' || label.toLowerCase() === 'arrendado' ? '#4caf50' : '#f44335'
         )
       } else {
         backgroundColors = this.chart.labels.map(() => getRandomColor())

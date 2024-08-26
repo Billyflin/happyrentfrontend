@@ -26,19 +26,14 @@
                 aria-labelledby="dropdownUsers1"
                 class="px-2 py-3 dropdown-menu dropdown-menu-end"
               >
-                <li
-                  v-for="(drop, index) in dropdown"
-                  :key="index"
-                  class="d-flex align-items-center"
-                >
-                  <a
-                    class="dropdown-item border-radius-md d-flex align-items-center"
-                    @click="drop.action"
-                  >
+                <li v-for="(drop, index) in dropdown" :key="index" class="d-flex align-items-center">
+                  <a class="dropdown-item border-radius-md d-flex align-items-center" @click="drop.action">
                     {{ drop.label }}
                     <span class="material-symbols-outlined mx-2 ml-2">{{ drop.icon }}</span>
                   </a>
                 </li>
+
+
               </ul>
             </div>
           </div>
@@ -49,6 +44,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'DefaultStatisticsCard',
   props: {
@@ -70,7 +66,8 @@ export default {
     },
     percentage: {
       type: Object,
-      default: () => {},
+      default: () => {
+      },
       color: 'dark',
       value: '0',
       label: ' '

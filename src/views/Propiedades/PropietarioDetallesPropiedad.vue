@@ -1,5 +1,5 @@
 <template>
-  <div v-if="propietario" class="card shadow-lg border-light">
+  <div class="card shadow-lg border-light" v-if="propietario">
     <div class="card-header pb-1">
       <h6 class="mb-0">{{ title }}</h6>
     </div>
@@ -13,10 +13,7 @@
 
         <template v-if="propietario.nombre">
           <dt class="col-sm-4">Nombre:</dt>
-          <dd class="col-sm-8">
-            {{ propietario.nombre }} {{ propietario.apellidoPaterno }}
-            {{ propietario.apellidoMaterno }}
-          </dd>
+          <dd class="col-sm-8">{{ propietario.nombre }} {{propietario.apellidoPaterno}} {{propietario.apellidoMaterno}}</dd>
         </template>
         <template v-if="propietario.rut">
           <dt class="col-sm-4">RUT:</dt>
@@ -54,14 +51,15 @@
         </template>
       </dl>
 
-      <h6 v-if="propietario.razonSocial" class="card-title">Representante</h6>
-      <dl v-if="propietario.razonSocial" class="row">
+
+
+
+      <h6 class="card-title" v-if="propietario.razonSocial">Representante</h6>
+      <dl class="row" v-if="propietario.razonSocial">
         <template v-if="propietario.representante">
           <dt class="col-sm-4">Nombre:</dt>
           <dd class="col-sm-8">
-            {{ propietario.representante.tratamiento }} {{ propietario.representante.nombre }}
-            {{ propietario.representante.apellidoPaterno }}
-            {{ propietario.representante.apellidoMaterno }}
+            {{ propietario.representante.tratamiento }} {{ propietario.representante.nombre }} {{ propietario.representante.apellidoPaterno }} {{ propietario.representante.apellidoMaterno }}
           </dd>
 
           <template v-if="propietario.representante.ocupacion">
@@ -81,9 +79,7 @@
 
           <template v-if="propietario.representante.fechaNacimiento">
             <dt class="col-sm-4">Fecha de Nacimiento:</dt>
-            <dd class="col-sm-8">
-              {{ new Date(propietario.representante.fechaNacimiento).toLocaleDateString() }}
-            </dd>
+            <dd class="col-sm-8">{{ new Date(propietario.representante.fechaNacimiento).toLocaleDateString() }}</dd>
           </template>
         </template>
       </dl>
@@ -92,10 +88,7 @@
       <dl class="row">
         <template v-if="propietario.direccion">
           <dt class="col-sm-4">Calle:</dt>
-          <dd class="col-sm-8">
-            {{ propietario.direccion.calle }} {{ propietario.direccion.numero }}
-            {{ propietario.direccion.detalle }}
-          </dd>
+          <dd class="col-sm-8">{{ propietario.direccion.calle }} {{ propietario.direccion.numero }} {{ propietario.direccion.detalle }}</dd>
 
           <dt class="col-sm-4">Ciudad:</dt>
           <dd class="col-sm-8">{{ propietario.direccion.ciudad }}</dd>
@@ -119,7 +112,7 @@ export default {
       type: Object,
       default: () => ({})
     },
-    title: {
+    title:{
       type: String,
       default: 'Detalles del Propietario'
     }

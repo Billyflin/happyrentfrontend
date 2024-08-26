@@ -1,11 +1,11 @@
 <template>
   <div class="py-4 container-fluid">
     <div class="col-lg-3">
-      <router-link
-        class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
-        to="/propiedades"
-      >
-        <span class="material-symbols-outlined mx-2"> arrow_back </span>
+      <router-link class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
+                   to="/propiedades">
+  <span class="material-symbols-outlined mx-2">
+    arrow_back
+  </span>
         Volver
       </router-link>
     </div>
@@ -25,11 +25,13 @@
   </div>
 </template>
 
+
 <script>
 import MyDataTableContratos from '@/views/Contrato/components/MyDataTableContratos.vue'
 import { getContratosProyection } from '@/servicios/contratosService.js'
 import { useAppStore } from '@/store/appStore.js'
 import { onMounted, onUnmounted } from 'vue'
+
 
 export default {
   components: { MyDataTableContratos },
@@ -67,6 +69,7 @@ export default {
   setup() {
     const store = useAppStore()
 
+
     onMounted(() => {
       store.toggleSidenav()
       // toggleHideConfig()
@@ -78,4 +81,5 @@ export default {
     })
   }
 }
+
 </script>

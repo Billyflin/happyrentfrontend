@@ -5,19 +5,17 @@
     ${!v$.internalValue.$error && v$.internalValue.$anyDirty ? 'is-valid' : ''} `"
     class="input-group"
   >
-    <label :class="`${variant === 'static' ? '' : 'form-label'} ${bold ? 'text-bold' : ''}`">{{
-      label
-    }}</label>
+    <label :class="`${variant === 'static' ? '' : 'form-label'} ${bold ? 'text-bold':''}`">{{ label }}</label>
     <input
       :id="id"
       v-model="internalValue"
       :class="classes"
       :disabled="disabled"
-      :list="list"
       :name="name"
       :placeholder="placeholder"
       :required="isRequired"
       :type="type"
+      :list="list"
       class="form-control"
     />
     <slot name="datalist"></slot>
@@ -39,7 +37,7 @@ export default {
   name: 'MaterialInput',
   props: {
     modelValue: {
-      type: [Number, String, Date],
+      type: [Number, String,Date],
       default: ''
     },
     variant: {
@@ -86,7 +84,7 @@ export default {
       type: String,
       default: 'text'
     },
-    bold: {
+    bold:{
       type: Boolean,
       default: false
     },
@@ -100,7 +98,7 @@ export default {
       return {
         internalValue: {
           required: helpers.withMessage('Rut es requerido', required),
-          validRut: helpers.withMessage('Rut inválido', (value) => {
+          validRut: helpers.withMessage('Rut inválido', value => {
             let cleanValue = value.replace(/\./g, '').replace(/-/g, '')
             if (!/^[0-9]+[0-9kK]{1}$/.test(cleanValue)) return false
 
@@ -128,44 +126,50 @@ export default {
     if (this.type === 'telefono') {
       return {
         internalValue: {
-          required: helpers.withMessage('Teléfono es requerido', required),
-          validPhone: helpers.withMessage('Teléfono inválido', (value) => {
-            let cleanValue = value.replace(/\s/g, '')
-            return /^[0-9]{9}$/.test(cleanValue)
-          })
+          required: helpers.withMessage('Teléfono es requerido',
+            required
+          ),
+          validPhone: helpers.withMessage('Teléfono inválido',
+            value => {
+              let cleanValue = value.replace(/\s/g, '')
+              return /^[0-9]{9}$/.test(cleanValue)
+            }
+          )
         }
       }
     }
     if (this.type === 'email') {
       return {
         internalValue: {
-          required: helpers.withMessage('Email es requerido', required),
-          validEmail: helpers.withMessage('Email inválido', email)
+          required: helpers.withMessage('Email es requerido',
+            required
+          ),
+          validEmail: helpers.withMessage('Email inválido',
+            email
+          )
         }
       }
     }
     if (this.type === 'password') {
       return {
         internalValue: {
-          required: helpers.withMessage('Contraseña es requerida', required),
-          passwordUppercase: helpers.withMessage(
-            'Contraseña debe tener al menos una letra mayúscula',
-            (value) => /[A-Z]/.test(value)
+          required: helpers.withMessage('Contraseña es requerida',
+            required
           ),
-          passwordLowercase: helpers.withMessage(
-            'Contraseña debe tener al menos una letra minúscula',
-            (value) => /[a-z]/.test(value)
+          passwordUppercase: helpers.withMessage('Contraseña debe tener al menos una letra mayúscula',
+            value => /[A-Z]/.test(value)
           ),
-          passwordDigit: helpers.withMessage('Contraseña debe tener al menos un dígito', (value) =>
-            /[0-9]/.test(value)
+          passwordLowercase: helpers.withMessage('Contraseña debe tener al menos una letra minúscula',
+            value => /[a-z]/.test(value)
           ),
-          passwordSpecial: helpers.withMessage(
-            'Contraseña debe tener al menos un carácter especial',
-            (value) => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)
+          passwordDigit: helpers.withMessage('Contraseña debe tener al menos un dígito',
+            value => /[0-9]/.test(value)
           ),
-          minLength: helpers.withMessage(
-            'Contraseña debe tener al menos 8 caracteres',
-            (value) => value.length >= 8
+          passwordSpecial: helpers.withMessage('Contraseña debe tener al menos un carácter especial',
+            value => /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value)
+          ),
+          minLength: helpers.withMessage('Contraseña debe tener al menos 8 caracteres',
+            value => value.length >= 8
           )
         }
       }
@@ -173,16 +177,25 @@ export default {
     if (this.type === 'number') {
       return {
         internalValue: {
-          required: helpers.withMessage('Número es requerido', required),
-          isNumber: helpers.withMessage('Número inválido', (value) => !isNaN(value)),
-          isPositive: helpers.withMessage('Número debe ser positivo o 0', (value) => value >= -1)
+          required: helpers.withMessage('Número es requerido',
+            required
+          ),
+          isNumber: helpers.withMessage('Número inválido',
+            value => !isNaN(value)
+          ),
+          isPositive: helpers.withMessage('Número debe ser positivo o 0',
+            value => value >= -1
+          )
         }
       }
     }
     if (this.isRequired) {
       return {
         internalValue: {
-          required: helpers.withMessage(`${this.label} es requerido`, required)
+          required:
+            helpers.withMessage(`${this.label} es requerido`,
+              required
+            )
         }
       }
     } else {
@@ -200,18 +213,22 @@ export default {
   watch: {
     modelValue(newValue) {
       this.internalValue = newValue
-    },
+    }
+    ,
     internalValue(newValue) {
       this.$emit('update:modelValue', newValue)
       this.v$.internalValue.$touch()
     }
-  },
+  }
+  ,
   mounted() {
     setMaterialInput()
-  },
+  }
+  ,
   setup() {
     return { v$: useVuelidate() }
-  },
+  }
+  ,
   computed: {
     classes() {
       return this.size ? `form-control-${this.size}` : null

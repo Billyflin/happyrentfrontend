@@ -25,7 +25,7 @@
           <span class="material-symbols-outlined">history_edu</span> Crear Contrato
         </button>
 
-        <router-link :to="'/propiedad/edit/' + propiedad.id">
+        <router-link :to="'/propiedad/edit/'+propiedad.id">
           <button
             class="btn btn-link text-primary border-0 d-flex align-items-center justify-content-center"
             data-bs-placement="bottom"
@@ -37,18 +37,12 @@
         </router-link>
       </div>
       <h5 class="font-weight-normal text-capitalize mt-3">
-        <a href="javascript:">{{
-          propiedad.direccion.calle + ' ' + propiedad.direccion.numero
-        }}</a>
+        <a href="javascript:;">{{ propiedad.direccion.calle + ' ' + propiedad.direccion.numero }}</a>
       </h5>
       <p class="mb-0">
         {{
           propiedad.propietario.type === 'persona'
-            ? propiedad.propietario.nombre +
-              ' ' +
-              propiedad.propietario.apellidoPaterno +
-              ' ' +
-              propiedad.propietario.apellidoMaterno
+            ? propiedad.propietario.nombre + ' ' + propiedad.propietario.apellidoPaterno + ' ' + propiedad.propietario.apellidoMaterno
             : propiedad.propietario.nombre
         }}
       </p>
@@ -72,9 +66,7 @@
     <div class="card-footer d-flex">
       <p class="font-weight-normal my-auto">{{ formatDate(propiedad.createDate) }}</p>
       <i class="material-icons position-relative ms-auto text-lg me-1 my-auto">place</i>
-      <p class="text-sm my-auto">
-        {{ propiedad.direccion.ciudad + ', ' + propiedad.direccion.pais }}
-      </p>
+      <p class="text-sm my-auto">{{ propiedad.direccion.ciudad + ', ' + propiedad.direccion.pais }}</p>
     </div>
   </div>
 </template>

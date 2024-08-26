@@ -165,27 +165,18 @@ const propiedad = ref({
   ...tiposPropiedad.casa
 })
 
-watch(
-  () => propiedad.value.contribuciones,
-  (newValue) => {
-    if (newValue) {
-      propiedad.value.aseo = false
-    }
+watch(() => propiedad.value.contribuciones, (newValue) => {
+  if (newValue) {
+    propiedad.value.aseo = false
   }
-)
+})
 watchEffect(() => {
   // Primero, obtenemos las propiedades del tipo seleccionado
   const propiedadesTipo = tiposPropiedad[propiedad.value.type]
 
   // Luego, eliminamos las propiedades antiguas del objeto 'propiedad'
   for (const key in propiedad.value) {
-    if (
-      !(key in propiedadesTipo) &&
-      key !== 'type' &&
-      key !== 'direccion' &&
-      key !== 'imagenPortada' &&
-      key !== 'propietario'
-    ) {
+    if (!(key in propiedadesTipo) && key !== 'type' && key !== 'direccion' && key !== 'imagenPortada' && key !== 'propietario') {
       delete propiedad.value[key]
     }
   }
@@ -207,47 +198,60 @@ const emit = defineEmits(['update:propiedad'])
 watchEffect(() => {
   emit('update:propiedad', propiedad.value)
 })
+
 </script>
 
+
 <template>
-  <div id="Agregar Propiedad" class="card">
+  <div id="Agregar Propiedad" class="card ">
     <div class="card-header">
       <h5>Agregar {{ propiedad.type }}</h5>
     </div>
     <div class="card-body pt-0">
       <div class="row">
         <div class="col flex-grow">
-          <material-choices
-            id="tipo_propiedad"
-            v-model:value-choice="propiedad.type"
-            :options="opcionsTipoPropiedad"
-            :serach-enabled="false"
-            label="Tipo Propiedad"
-            name="TipoPropiedad"
-          />
+          <material-choices id="tipo_propiedad"
+                            v-model:value-choice="propiedad.type"
+                            :options="opcionsTipoPropiedad"
+                            :serach-enabled="false" label="Tipo Propiedad" name="TipoPropiedad" />
 
-          <div
-            v-if="['casa', 'departamento', 'oficina', 'bodega', 'local'].includes(propiedad.type)"
-            class="col-2"
-          >
-            <material-checkbox id="amoblado" v-model="propiedad.amoblado" label="Amoblado">
+          <div v-if="['casa', 'departamento', 'oficina', 'bodega', 'local'].includes(propiedad.type)" class="col-2">
+            <material-checkbox
+              id="amoblado"
+              v-model="propiedad.amoblado"
+              label="Amoblado"
+            >
               ¿AMOBLADO?
             </material-checkbox>
           </div>
 
+
+
           <div v-if="propiedad.type === 'casa'" class="row">
             <div class="col-2 mt-3">
-              <material-checkbox id="piscina" v-model="propiedad.piscina" label="Piscina">
+              <material-checkbox
+                id="piscina"
+                v-model="propiedad.piscina"
+                label="Piscina"
+              >
                 ¿Piscina?
               </material-checkbox>
             </div>
             <div class="col-2 mt-3">
-              <material-checkbox id="jardines" v-model="propiedad.jardines" label="Jardines">
+              <material-checkbox
+                id="jardines"
+                v-model="propiedad.jardines"
+                label="Jardines"
+              >
                 ¿Jardines?
               </material-checkbox>
             </div>
             <div class="col-2 mt-3">
-              <material-checkbox id="patio" v-model="propiedad.patio" label="Patio">
+              <material-checkbox
+                id="patio"
+                v-model="propiedad.patio"
+                label="Patio"
+              >
                 ¿Patio?
               </material-checkbox>
             </div>
@@ -270,7 +274,11 @@ watchEffect(() => {
               </material-checkbox>
             </div>
             <div v-if="!propiedad.contribuciones" class="col-2 mb-3 mt-3">
-              <material-checkbox id="aseo" v-model="propiedad.aseo" label="aseo">
+              <material-checkbox
+                id="aseo"
+                v-model="propiedad.aseo"
+                label="aseo"
+              >
                 ¿ASEO?
               </material-checkbox>
             </div>
@@ -297,7 +305,7 @@ watchEffect(() => {
                 @input="validateInput"
               />
             </div>
-            <div class="col-3 mt-3">
+            <div class="col-3 mt-3 ">
               <material-input
                 id="numPiezas"
                 v-model="propiedad.habitaciones"
@@ -369,6 +377,7 @@ watchEffect(() => {
                 @input="validateInput"
               />
             </div>
+
           </div>
           <div v-if="propiedad.type === 'terreno'" class="row">
             <div class="col-3 mb-2 mt-3">
@@ -411,14 +420,10 @@ watchEffect(() => {
               />
             </div>
             <div class="col-3">
-              <material-choices
-                id="tipoTerreno"
-                v-model:value-choice="propiedad.tipoTerreno"
-                :options="terrenos"
-                :serach-enabled="false"
-                label="Tipo de terreno"
-                name="tipoTerreno"
-              />
+              <material-choices id="tipoTerreno"
+                                v-model:value-choice="propiedad.tipoTerreno"
+                                :options="terrenos"
+                                :serach-enabled="false" label="Tipo de terreno" name="tipoTerreno" />
             </div>
             <div class="col-3">
               <material-input
@@ -432,14 +437,10 @@ watchEffect(() => {
               ></material-input>
             </div>
             <div class="col-3">
-              <material-choices
-                id="orientacion"
-                v-model:value-choice="propiedad.orientacion"
-                :options="orientaciones"
-                :serach-enabled="false"
-                label="Orientación"
-                name="orientacion"
-              />
+              <material-choices id="orientacion"
+                                v-model:value-choice="propiedad.orientacion"
+                                :options="orientaciones"
+                                :serach-enabled="false" label="Orientación" name="orientacion" />
             </div>
             <div class="col-3">
               <material-input
@@ -501,7 +502,11 @@ watchEffect(() => {
           </div>
           <div v-if="propiedad.type === 'departamento'" class="row">
             <div class="col-2 mt-3">
-              <material-checkbox id="terraza" v-model="propiedad.terraza" label="Terraza">
+              <material-checkbox
+                id="terraza"
+                v-model="propiedad.terraza"
+                label="Terraza"
+              >
                 ¿Terraza?
               </material-checkbox>
             </div>
@@ -515,7 +520,11 @@ watchEffect(() => {
               </material-checkbox>
             </div>
             <div v-if="!propiedad.contribuciones" class="col-2 mb-3 mt-3">
-              <material-checkbox id="aseo" v-model="propiedad.aseo" label="aseo">
+              <material-checkbox
+                id="aseo"
+                v-model="propiedad.aseo"
+                label="aseo"
+              >
                 ¿ASEO?
               </material-checkbox>
             </div>
@@ -619,14 +628,10 @@ watchEffect(() => {
               ></material-input>
             </div>
             <div class="col-3">
-              <material-choices
-                id="orientacion"
-                v-model:value-choice="propiedad.orientacion"
-                :options="orientaciones"
-                :serach-enabled="false"
-                label="Orientación"
-                name="orientacion"
-              />
+              <material-choices id="orientacion"
+                                v-model:value-choice="propiedad.orientacion"
+                                :options="orientaciones"
+                                :serach-enabled="false" label="Orientación" name="orientacion" />
             </div>
           </div>
           <div v-if="propiedad.type === 'bodega'" class="row">
@@ -660,16 +665,10 @@ watchEffect(() => {
               />
             </div>
             <div class="col-3">
-              <material-choices
-                id="uso"
-                v-model:value-choice="propiedad.uso"
-                :options="[
-                  { value: 'comercial', label: 'Comercial', selected: true },
-                  { value: 'industrial', label: 'Industrial' }
-                ]"
-                label="Uso"
-                name="uso"
-              >
+              <material-choices id="uso" v-model:value-choice="propiedad.uso" :options="[
+                { value: 'comercial', label: 'Comercial' , selected: true},
+                { value: 'industrial', label: 'Industrial' }
+                ]" label="Uso" name="uso">
               </material-choices>
             </div>
             <div class="col-3">
@@ -793,14 +792,10 @@ watchEffect(() => {
               ></material-input>
             </div>
             <div class="col-3">
-              <material-choices
-                id="orientacion"
-                v-model:value-choice="propiedad.orientacion"
-                :options="orientaciones"
-                :serach-enabled="false"
-                label="Orientación"
-                name="orientacion"
-              />
+              <material-choices id="orientacion"
+                                v-model:value-choice="propiedad.orientacion"
+                                :options="orientaciones"
+                                :serach-enabled="false" label="Orientación" name="orientacion" />
             </div>
             <div class="col-3">
               <material-input
@@ -812,6 +807,7 @@ watchEffect(() => {
                 type="number"
                 variant="static"
               ></material-input>
+
             </div>
             <div class="col-3">
               <material-input
@@ -1124,24 +1120,16 @@ watchEffect(() => {
               ></material-input>
             </div>
             <div class="col-3">
-              <material-choices
-                id="tipoTerreno"
-                v-model:value-choice="propiedad.tipoTerreno"
-                :options="terrenos"
-                :serach-enabled="false"
-                label="Tipo de terreno"
-                name="tipoTerreno"
-              />
+              <material-choices id="tipoTerreno"
+                                v-model:value-choice="propiedad.tipoTerreno"
+                                :options="terrenos"
+                                :serach-enabled="false" label="Tipo de terreno" name="tipoTerreno" />
             </div>
             <div class="col-3">
-              <material-choices
-                id="orientacion"
-                v-model:value-choice="propiedad.orientacion"
-                :options="orientaciones"
-                :serach-enabled="false"
-                label="Orientación"
-                name="orientacion"
-              />
+              <material-choices id="orientacion"
+                                v-model:value-choice="propiedad.orientacion"
+                                :options="orientaciones"
+                                :serach-enabled="false" label="Orientación" name="orientacion" />
             </div>
             <div class="col-3">
               <material-input
@@ -1180,7 +1168,10 @@ watchEffect(() => {
             </div>
           </div>
 
+
           <LocalidadForm v-model="propiedad.direccion" />
+
+
         </div>
       </div>
     </div>
@@ -1190,7 +1181,7 @@ watchEffect(() => {
       id="productImg"
       action="/file-upload"
       class="form-control border dropzone"
-      style="display: none"
+      style="display: none;"
     ></div>
   </div>
 </template>

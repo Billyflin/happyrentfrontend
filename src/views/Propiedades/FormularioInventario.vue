@@ -2,19 +2,14 @@
   <div class="card">
     <div class="card-header">
       <h5>Agregar Item</h5>
-      <material-alert color="danger" dismissible>
-        <span class="text-sm">No se funcional, requiere optimizacion en la respuesta</span>
-      </material-alert>
+    <material-alert color="danger" dismissible>
+      <span class="text-sm">No se funcional, requiere optimizacion en la respuesta</span>
+    </material-alert>
     </div>
     <div class="card-body pt-0">
       <form class="row mt-2" @submit.prevent="agregarItem">
         <div class="col-4 mt-3">
-          <material-switch
-            id="modificable"
-            v-model:checked="modificable"
-            checked
-            name="modificable"
-          >
+          <material-switch id="modificable" v-model:checked="modificable" checked name="modificable">
             {{ modificable ? 'Es modificable' : 'No es modificable' }}
           </material-switch>
         </div>
@@ -28,7 +23,12 @@
           />
         </div>
         <div class="col-4">
-          <MaterialInput id="estado" v-model="nuevoItem.estado" isRequired label="Estado" />
+          <MaterialInput
+            id="estado"
+            v-model="nuevoItem.estado"
+            isRequired
+            label="Estado"
+          />
         </div>
         <div class="col-12 mt-2">
           <MaterialTextarea
@@ -39,20 +39,14 @@
             placeholder="Añade una descripción..."
           />
         </div>
-        <div class="row mt-2">
+        <div class="row mt-2 ">
           <h5 class="font-weight-bolder">Imagenes</h5>
           <div class="multisteps-form__content">
             <div class="mt-3 row">
               <div class="col-12">
-                <label class="form-control mb-0"
-                  >Puedes añadir imágenes arrastrando los archivos o haciendo click sobre este
-                  cuadro
-                </label>
-                <div
-                  id="InventarioImg"
-                  action="/file-upload"
-                  class="form-control border dropzone"
-                ></div>
+                <label class="form-control mb-0">Puedes añadir imágenes arrastrando los archivos o haciendo click sobre
+                  este cuadro </label>
+                <div id="InventarioImg" action="/file-upload" class="form-control border dropzone"></div>
               </div>
             </div>
           </div>
@@ -61,7 +55,7 @@
           <material-button color="success" type="submit">Agregar</material-button>
         </div>
       </form>
-    </div>
+  </div>
   </div>
 </template>
 
@@ -87,13 +81,7 @@ watch(modificable, (newValue) => {
 function agregarItem() {
   nuevoItem.value.fotos = myDropzone.files
   items.value.push({ ...nuevoItem.value })
-  nuevoItem.value = {
-    nombre: '',
-    estado: '',
-    modificable: modificable.value,
-    descripcion: '',
-    fotos: []
-  }
+  nuevoItem.value = { nombre: '', estado: '', modificable: modificable.value, descripcion: '', fotos: [] }
   myDropzone.removeAllFiles()
 }
 

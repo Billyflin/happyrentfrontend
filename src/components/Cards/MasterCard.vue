@@ -2,7 +2,7 @@
   <div class="card bg-transparent shadow-xl">
     <div
       :style="{
-        backgroundImage: 'url(\'src/assets/img/curved14.jpg\')'
+        backgroundImage: 'url(\'src/assets/img/curved14.jpg\')',
       }"
       class="overflow-hidden position-relative border-radius-xl"
     >

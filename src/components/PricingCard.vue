@@ -4,10 +4,13 @@
       <span
         :class="[`bg-${badge.color}`, darkMode ? 'text-white' : 'text-dark']"
         class="badge rounded-pill w-30 mt-n2 mx-auto"
-        >{{ badge.label }}</span
+      >{{ badge.label }}</span
       >
       <div class="card-header text-center pt-4 pb-3 bg-transparent">
-        <h1 :class="darkMode ? 'text-white' : 'text-dark'" class="font-weight-bold mt-2">
+        <h1
+          :class="darkMode ? 'text-white' : 'text-dark'"
+          class="font-weight-bold mt-2"
+        >
           <small class="text-lg align-top">{{ price.currency }}</small>
           <!--  eslint-disable-next-line prettier/prettier -->
           {{ price.value }}
@@ -24,7 +27,9 @@
           :key="index"
           class="p-2 d-flex justify-content-lg-start justify-content-center"
         >
-          <i class="material-icons my-auto">{{ includes === true ? 'done' : 'remove' }}</i>
+          <i class="material-icons my-auto">{{
+              includes === true ? 'done' : 'remove'
+            }}</i>
           <span class="ps-3">{{ label }}</span>
         </div>
         <a

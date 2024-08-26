@@ -1,5 +1,7 @@
 <template>
-  <div class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3">
+  <div
+    class="bg-gradient-success shadow-success border-radius-lg pt-4 pb-3"
+  >
     <div class="multisteps-form__progress">
       <button
         v-for="(step, index) in steps"

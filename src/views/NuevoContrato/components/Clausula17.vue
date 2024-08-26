@@ -5,17 +5,18 @@
         <div class="col-2" />
         <h5 id="Clausula17" class="col-8 card-title text-center">Clausula 17 OTRAS CONDICIONES:</h5>
         <div class="col-2">
-          <material-checkbox id="editClausula17" v-model="store.clausula17edit"
-            >Editar</material-checkbox
-          >
+          <material-checkbox id="editClausula17" v-model="store.clausula17edit">Editar</material-checkbox>
         </div>
       </div>
       <div class="mb-3 mt-3 ms-3">
         <p ref="Clausula17" :contenteditable="store.clausula17edit" class="text-justify">
-          En caso de que una de las partes quisiera dar término al presente contrato, antes del
-          primer año estipulado se cancelará un mes de arriendo como indemnización que las partes
-          establecen como suma de los perjuicios causados, a partir del segundo año bastará el aviso
-          con 60 días de anticipación a la fecha de salida.
+          En caso de que una de las partes quisiera dar término al presente contrato, antes del primer
+          año
+          estipulado se cancelará un mes de arriendo como indemnización que las partes establecen como
+          suma
+          de los perjuicios causados, a partir del segundo año bastará el aviso con 60 días de
+          anticipación
+          a la fecha de salida.
         </p>
       </div>
     </div>
@@ -37,17 +38,17 @@ export default {
     'this.$refs.Clausula17': {
       handler(newVal) {
         if (newVal) {
-          this.store.clausula17 = newVal.innerText
+          this.store.clausula17 = newVal.innerText;
         }
       },
       deep: true,
       immediate: true
-    }
+    },
   },
 
   mounted() {
     if (this.$refs.Clausula17) {
-      this.store.clausula17 = this.$refs.Clausula17.innerText
+      this.store.clausula17 = this.$refs.Clausula17.innerText;
     }
   }
 }

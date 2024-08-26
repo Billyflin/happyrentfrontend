@@ -1,6 +1,6 @@
 <template>
   <div class="chart">
-    <div :id="id" :style="{ width: '100%', height: height + 'px' }" class="chart-canvas"></div>
+    <div :id="id" :style="{width: '100%', height: height + 'px'}" class="chart-canvas"></div>
   </div>
 </template>
 
@@ -35,10 +35,10 @@ const createChart = () => {
   echart = echarts.init(chartDom)
 
   // Mapea los datos para el eje X y el eje Y
-  const xAxisData = props.data.map((obs) => new Date(obs.date).toLocaleDateString())
+  const xAxisData = props.data.map(obs => new Date(obs.date).toLocaleDateString())
 
   let lastValidValue = 0
-  const chartData = props.data.map((obs) => {
+  const chartData = props.data.map(obs => {
     const value = parseFloat(obs.valor)
     if (isNaN(value)) {
       return lastValidValue
@@ -48,14 +48,8 @@ const createChart = () => {
     }
   })
 
-  const yAxisMaxValue =
-    props.roundedTo !== 0
-      ? Math.round(Math.max(...chartData) + props.roundedTo)
-      : Math.max(...chartData)
-  const yAxisMinValue =
-    props.roundedTo !== 0
-      ? Math.round(Math.min(...chartData) - props.roundedTo)
-      : Math.min(...chartData)
+  const yAxisMaxValue = (props.roundedTo !== 0) ? Math.round(Math.max(...chartData) + props.roundedTo) : Math.max(...chartData)
+  const yAxisMinValue = (props.roundedTo !== 0) ? Math.round(Math.min(...chartData) - props.roundedTo) : Math.min(...chartData)
 
   const option = {
     grid: {
@@ -170,15 +164,11 @@ onMounted(() => {
 })
 
 // Reactivar la creación del gráfico si cambian los datos
-watch(
-  () => props.data,
-  (newData, oldData) => {
-    if (echart && newData !== oldData) {
-      createChart()
-    }
-  },
-  { deep: true }
-)
+watch(() => props.data, (newData, oldData) => {
+  if (echart && newData !== oldData) {
+    createChart()
+  }
+}, { deep: true })
 </script>
 
 <style scoped>

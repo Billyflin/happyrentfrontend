@@ -57,8 +57,8 @@ export default {
     }
 
     const eliminarArchivo = () => {
-      // Aquí debes agregar la lógica para eliminar el archivo seleccionado
-      // Por ejemplo, podrías llamar a una API para eliminar el archivo del servidor
+// Aquí debes agregar la lógica para eliminar el archivo seleccionado
+// Por ejemplo, podrías llamar a una API para eliminar el archivo del servidor
 
       mostrarModalConfirmacion.value = false
       archivoSeleccionado.value = null
@@ -79,18 +79,20 @@ export default {
     }
 
     const saveChanges = () => {
-      // Aquí debes agregar la lógica para guardar los cambios
+// Aquí debes agregar la lógica para guardar los cambios
       loading.value = true
       try {
-        postPersona(auth.persona).then(() => {
-          loading.value = false
-          toggleEditMode()
-          notificationsStore.createNotification(
-            'success',
-            'Cambios guardados',
-            'Los cambios se han guardado correctamente.'
-          )
-        })
+        postPersona(auth.persona).then(
+          () => {
+            loading.value = false
+            toggleEditMode()
+            notificationsStore.createNotification(
+              'success',
+              'Cambios guardados',
+              'Los cambios se han guardado correctamente.'
+            )
+          }
+        )
       } catch (error) {
         console.error('Error al guardar los cambios:', error)
         notificationsStore.createNotification(
@@ -99,18 +101,20 @@ export default {
           'Hubo un error al guardar los cambios.'
         )
       }
+
     }
 
     const cancelEdit = () => {
-      // Aquí debes agregar la lógica para cancelar la edición
+// Aquí debes agregar la lógica para cancelar la edición
       toggleEditMode()
     }
 
     onMounted(() => {
-      if (!auth.persona) {
-        router.push('/Personas')
+        if (!auth.persona) {
+          router.push('/Personas')
       }
-    })
+      }
+    )
 
     onUnmounted(() => {
       auth.persona = null
@@ -138,15 +142,16 @@ export default {
 }
 </script>
 
+
 <template>
   <div class="container-fluid mt-4">
     <div class="row mt-3">
       <div class="col-lg-3">
-        <router-link
-          class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
-          to="/Personas"
-        >
-          <span class="material-symbols-outlined mx-2"> arrow_back </span>
+        <router-link class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
+                     to="/Personas">
+        <span class="material-symbols-outlined mx-2">
+          arrow_back
+        </span>
           Volver
         </router-link>
       </div>
@@ -154,64 +159,48 @@ export default {
         <div id="Persona" class="card">
           <div class="pb-0 card-header d-flex align-items-center justify-content-between">
             <h3>Detalles de la Persona</h3>
-            <material-button
-              class="btn btn-primary text-small d-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2"
-              color="primary"
-              @click="toggleEditMode"
-            >
+            <material-button color="primary" @click="toggleEditMode"
+                             class="btn btn-primary text-small d-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2">
               <span class="material-symbols-outlined me-1">edit</span>
               {{ editMode ? 'Cancelar' : 'Editar' }}
             </material-button>
+
           </div>
           <div class="card-body">
             <material-alert v-if="editMode" class="font-weight-light" color="danger" dismissible>
-              <span>En esta version happ rent no se hace cargo de la modificación de datos. </span>
+              <span
+              >En esta version happ rent no se hace cargo de la
+                modificación de datos.
+              </span
+              >
             </material-alert>
             <material-alert v-if="editMode" class="font-weight-light" color="info" dismissible>
               <span
-                >A pesar de que los datos pueden ser modificados, estos no se verán reflejados en la
-                base de datos hasta que hagas click en guardar
-              </span>
+              >A pesar de que los datos pueden ser modificados,
+                estos no se verán reflejados en la base de datos hasta que hagas click en guardar
+              </span
+              >
             </material-alert>
 
-            <div v-if="auth.persona" class="row">
-              <ListaDatosPersona
-                :auth="auth"
-                :class="auth.persona.archivos.length > 0 ? `col-lg-4` : `col-lg-5`"
-                :edit-mode="editMode"
-              />
-              <ListaDireccionPersona
-                :auth="auth"
-                :class="auth.persona.archivos.length > 0 ? `col-lg-4` : `col-lg-5`"
-                :edit-mode="editMode"
-              />
+            <div  v-if="auth.persona" class="row">
+              <ListaDatosPersona :class="(auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-5`" :auth="auth"
+                                 :edit-mode="editMode" />
+              <ListaDireccionPersona :class="(auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-5`" :auth="auth"
+                                     :edit-mode="editMode" />
               <div
-                :class="
-                  auth.persona.datosBancarios ||
-                  (auth.persona.archivos && auth.persona.archivos.length > 0)
-                    ? `col-lg-4`
-                    : `col-lg-2`
-                "
-              >
+                :class="auth.persona.datosBancarios||(auth.persona.archivos && auth.persona.archivos.length > 0)?`col-lg-4`: `col-lg-2`">
                 <ListaDatosBancarios :datosBancarios="auth.persona.datosBancarios" />
-                <div v-if="auth.persona.archivos && auth.persona.archivos.length > 0">
+                <div v-if="(auth.persona.archivos && auth.persona.archivos.length > 0)">
                   <h5 class="mb-3">Archivos adjuntos</h5>
                   <ul class="list-group mb-3">
-                    <li
-                      v-for="archivo in auth.persona.archivos"
-                      :key="archivo.id"
-                      class="list-group-item d-flex align-items-center"
-                    >
+                    <li v-for="archivo in auth.persona.archivos  " :key="archivo.id"
+                        class="list-group-item d-flex align-items-center">
                       <span class="material-symbols-outlined mx-2">insert_drive_file</span>
-                      <a :href="archivo.url" class="text-sm" target="_blank">{{
-                        archivo.nombre
-                      }}</a>
+                      <a :href="archivo.url" class="text-sm" target="_blank">{{ archivo.nombre }}</a>
                       <div class="ms-auto">
-                        <MaterialButton class="btn btn-link" @click="previsualizarArchivo(archivo)"
-                          >Previsualizar
+                        <MaterialButton class="btn btn-link" @click="previsualizarArchivo(archivo)">Previsualizar
                         </MaterialButton>
-                        <MaterialButton class="btn btn-link" @click="descargarArchivo(archivo)"
-                          >Descargar
+                        <MaterialButton class="btn btn-link" @click="descargarArchivo(archivo)">Descargar
                         </MaterialButton>
                       </div>
                     </li>
@@ -224,21 +213,13 @@ export default {
             </div>
           </div>
           <div class="card-footer text-sm text-center align-middle">
-            <material-button
-              v-if="editMode"
-              class="btn btn-primary text-small d-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2"
-              color="primary"
-              @click="saveChanges"
-            >
+            <material-button v-if="editMode" color="primary" @click="saveChanges"
+                             class="btn btn-primary text-small d-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2">
               <span class="material-symbols-outlined me-1">save</span>
               Guardar
             </material-button>
-            <material-button
-              v-else
-              class="btn btn-danger text-small d-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2"
-              color="danger"
-              @click="mostrarModalConfirmacion = true"
-            >
+            <material-button v-else color="danger" @click="mostrarModalConfirmacion=true"
+                             class="btn btn-danger text-small d-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2">
               <span class="material-symbols-outlined me-1">delete</span>
               Eliminar
             </material-button>
@@ -248,18 +229,13 @@ export default {
     </div>
 
     <!-- Modal para la previsualización -->
-    <ModalPreview
-      :archivo-previsualizado="archivoPrevisualizado"
-      :cerrar-modal="cerrarModal"
-      :mostrar-modal="mostrarModal"
-    />
+    <ModalPreview :archivo-previsualizado="archivoPrevisualizado" :cerrar-modal="cerrarModal"
+                  :mostrar-modal="mostrarModal" />
 
     <!-- Modal para la confirmación de eliminación -->
-    <ModalConfirmacion
-      :auth="auth"
-      :cerrar-modal-confirmacion="cerrarModalConfirmacion"
-      :eliminar-archivo="eliminarArchivo"
-      :mostrar-modal-confirmacion="mostrarModalConfirmacion"
-    />
+    <ModalConfirmacion :auth="auth" :cerrar-modal-confirmacion="cerrarModalConfirmacion"
+                       :eliminar-archivo="eliminarArchivo"
+                       :mostrar-modal-confirmacion="mostrarModalConfirmacion" />
   </div>
 </template>
+

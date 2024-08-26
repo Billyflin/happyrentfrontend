@@ -1,93 +1,55 @@
 <template>
   <div>
-    <material-button
-      color="dark"
-      data-bs-target="#addAccountModal"
-      data-bs-toggle="modal"
-      variant="gradient"
-    >
+    <material-button color="dark" variant="gradient" data-bs-toggle="modal" data-bs-target="#addAccountModal">
       <i class="fas fa-plus me-2"></i>
       Añadir Nueva Cuenta
     </material-button>
 
-    <div
-      id="addAccountModal"
-      aria-hidden="true"
-      aria-labelledby="addAccountModalLabel"
-      class="modal fade"
-    >
+    <div class="modal fade" id="addAccountModal" aria-labelledby="addAccountModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 id="addAccountModalLabel" class="modal-title fs-5">Añadir Nueva Cuenta</h1>
-            <button
-              aria-label="Close"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              type="button"
-            ></button>
+            <h1 class="modal-title fs-5" id="addAccountModalLabel">Añadir Nueva Cuenta</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+
             <form @submit.prevent="addNewAccount">
               <div class="row form-control">
                 <material-select
-                  id="bankSelect"
                   v-model="newAccount.banco"
                   :options="bankOptions"
                   label="Banco"
+                  id="bankSelect"
                 />
                 <material-select
-                  id="accountTypeSelect"
                   v-model="newAccount.tipoCuenta"
                   :options="accountTypeOptions"
                   label="Tipo de Cuenta"
+                  id="accountTypeSelect"
                 />
 
                 <div class="col mb-3">
-                  <material-input
-                    id="numberAccount"
-                    v-model="newAccount.numeroCuenta"
-                    label="Número de Cuenta"
-                    placeholder="8888 8888 8888 0000"
-                    type="number"
-                    variant="static"
-                  />
+                  <material-input v-model="newAccount.numeroCuenta" type="number" variant="static" label="Número de Cuenta" placeholder="8888 8888 8888 0000"  id="numberAccount"/>
                 </div>
 
                 <div class="col mb-3">
-                  <material-input
-                    id="rut"
-                    v-model="newAccount.rut"
-                    label="Rut de Cuenta"
-                    placeholder="11111111-1"
-                    type="rut"
-                    variant="static"
-                  />
+                  <material-input v-model="newAccount.rut" type="rut" variant="static" label="Rut de Cuenta" placeholder="11111111-1"  id="rut"/>
                 </div>
 
                 <div class="col mb-3">
-                  <material-input
-                    id="emailAccount"
-                    v-model="newAccount.email"
-                    label="Correo notificación"
-                    placeholder="cuenta@dominio.com"
-                    type="email"
-                    variant="static"
-                  />
+                  <material-input v-model="newAccount.email" type="email" variant="static" label="Correo notificación" placeholder="cuenta@dominio.com"  id="emailAccount"/>
                 </div>
 
                 <div class="col mb-3">
-                  <material-checkbox v-model="newAccount.activa"> Activo </material-checkbox>
+                  <material-checkbox v-model="newAccount.activa" >
+                    Activo
+                  </material-checkbox>
                 </div>
                 <span v-if="error" class="badge badge-danger text-xs mt-2">{{ error }}</span>
               </div>
               <div class="modal-footer">
-                <material-button
-                  color="dark"
-                  data-bs-dismiss="modal"
-                  type="submit"
-                  variant="gradient"
-                >
+                <material-button color="dark" variant="gradient" type="submit" data-bs-dismiss="modal">
                   Guardar Cambios
                 </material-button>
               </div>
@@ -107,7 +69,7 @@ import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
 import MaterialSelect from '@/components/Material/MaterialSelect.vue'
 
 export default {
-  name: 'ModalNuevaCuentaBancaria',
+  name: "ModalNuevaCuentaBancaria",
   components: { MaterialSelect, MaterialCheckbox, MaterialInput, MaterialButton },
   emits: ['cuentaAgregada'],
   data() {
@@ -117,7 +79,7 @@ export default {
         tipoCuenta: '',
         numeroCuenta: '',
         email: '',
-        rut: '',
+        rut:'',
         activa: false
       },
       error: null,
@@ -134,35 +96,30 @@ export default {
         { value: 'Vista', text: 'Vista' },
         { value: 'Ahorro', text: 'Ahorro' }
       ]
-    }
+    };
   },
   methods: {
     async addNewAccount() {
       try {
-        if (
-          !this.newAccount.banco ||
-          !this.newAccount.tipoCuenta ||
-          !this.newAccount.numeroCuenta ||
-          !this.newAccount.email
-        ) {
-          this.error = 'Por favor, complete todos los campos.'
-          return
+        if (!this.newAccount.banco || !this.newAccount.tipoCuenta || !this.newAccount.numeroCuenta || !this.newAccount.email) {
+          this.error = 'Por favor, complete todos los campos.';
+          return;
         }
-        const response = await agregarCuentaBancaria(this.newAccount)
+        const response = await agregarCuentaBancaria(this.newAccount);
         if (response.status === 200) {
-          this.$emit('cuentaAgregada', this.newAccount)
+          this.$emit('cuentaAgregada', this.newAccount);
           // Resetea los campos del formulario
           this.newAccount = {
             numeroCuenta: '',
             email: '',
-            rut: '',
+            rut:'',
             activa: false
-          }
+          };
         }
       } catch (error) {
-        console.error('Error al agregar la cuenta bancaria:', error)
+        console.error('Error al agregar la cuenta bancaria:', error);
       }
     }
   }
-}
+};
 </script>

@@ -1,5 +1,9 @@
 <template>
-  <div :class="getClasses(color, dismissible)" class="alert text-white" role="alert">
+  <div
+    :class="getClasses(color, dismissible)"
+    class="alert text-white"
+    role="alert"
+  >
     <span class="alert-icon">
       <i :class="getIcon(icon)" />
     </span>

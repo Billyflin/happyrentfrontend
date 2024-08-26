@@ -16,19 +16,14 @@
           <li class="nav-item d-flex align-items-center">
             <router-link
               :class="color ? color : 'text-body'"
-              :to="{ name: 'Profile' }"
+              :to="{name: 'Profile'}"
               class="px-0 nav-link font-weight-bold lh-1"
             >
               <i class="material-icons me-sm-1"> account_circle </i>
             </router-link>
           </li>
           <li class="nav-item d-xxl-none ps-3 d-flex align-items-center">
-            <a
-              id="iconNavbarSidenav"
-              class="p-0 nav-link text-body lh-1"
-              href="#"
-              @click="toggleSidebar"
-            >
+            <a id="iconNavbarSidenav" class="p-0 nav-link text-body lh-1" href="#" @click="toggleSidebar">
               <div class="sidenav-toggler-inner">
                 <i class="sidenav-toggler-line"></i>
                 <i class="sidenav-toggler-line"></i>
@@ -37,11 +32,7 @@
             </a>
           </li>
           <li class="px-3 nav-item d-flex align-items-center">
-            <a
-              :class="color ? color : 'text-body'"
-              class="p-0 nav-link lh-1"
-              @click="toggleConfigurator"
-            >
+            <a :class="color ? color : 'text-body'" class="p-0 nav-link lh-1" @click="toggleConfigurator">
               <i class="material-icons fixed-plugin-button-nav cursor-pointer"> settings </i>
             </a>
           </li>
@@ -66,11 +57,7 @@
                 <a class="dropdown-item border-radius-md" href="javascript:">
                   <div class="py-1 d-flex">
                     <div class="my-auto">
-                      <img
-                        alt="user image"
-                        class="avatar avatar-sm me-3"
-                        src="../../assets/img/Billyflin.jpg"
-                      />
+                      <img alt="user image" class="avatar avatar-sm me-3" src="../../assets/img/Billyflin.jpg" />
                     </div>
                     <div class="d-flex flex-column justify-content-center">
                       <h6 class="mb-1 text-sm font-weight-normal">
@@ -118,11 +105,7 @@
                       >
                         <title>credit-card</title>
                         <g fill="none" fill-rule="evenodd" stroke="none" stroke-width="1">
-                          <g
-                            fill="#FFFFFF"
-                            fill-rule="nonzero"
-                            transform="translate(-2169.000000, -745.000000)"
-                          >
+                          <g fill="#FFFFFF" fill-rule="nonzero" transform="translate(-2169.000000, -745.000000)">
                             <g transform="translate(1716.000000, 291.000000)">
                               <g transform="translate(453.000000, 454.000000)">
                                 <path
@@ -141,9 +124,7 @@
                       </svg>
                     </div>
                     <div class="d-flex flex-column justify-content-center">
-                      <h6 class="mb-1 text-sm font-weight-normal">
-                        Payment successfully completed
-                      </h6>
+                      <h6 class="mb-1 text-sm font-weight-normal">Payment successfully completed</h6>
                       <p class="mb-0 text-xs text-secondary">
                         <i class="fa fa-clock me-1"></i>
                         2 days

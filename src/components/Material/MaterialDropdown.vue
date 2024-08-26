@@ -1,6 +1,6 @@
 <template>
   <div class="input-group mb-3">
-    <button class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" type="button">
+    <button class="btn btn-outline-dark dropdown-toggle" type="button" data-bs-toggle="dropdown">
       {{ modelValue }}
     </button>
     <ul class="dropdown-menu border border-radius-lg">
@@ -16,7 +16,7 @@ export default {
   name: 'MaterialDropdown',
   props: {
     modelValue: {
-      type: [String, Number],
+      type: [String,Number],
       default: 'Pesos'
     },
     items: {
@@ -26,8 +26,8 @@ export default {
   },
   methods: {
     selectItem(item) {
-      this.$emit('update:modelValue', item)
+      this.$emit('update:modelValue', item);
     }
   }
-}
+};
 </script>

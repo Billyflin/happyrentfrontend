@@ -8,7 +8,7 @@
         </div>
         <div>
           <material-button size="lg" @click="getDocumento(contratoId)"> Descargar</material-button>
-        </div>
+      </div>
       </div>
     </div>
   </div>
