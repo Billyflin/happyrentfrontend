@@ -6,7 +6,7 @@
     <div class="card-body pt-0">
       <div class="row">
         <template v-if="propiedad.type">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Tipo de Propiedad:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -20,7 +20,7 @@
         </template>
 
         <template v-if="propiedad.habitaciones">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">N° Habitaciones:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -34,7 +34,7 @@
         </template>
 
         <template v-if="propiedad.banios">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">N° Baños:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -48,7 +48,7 @@
         </template>
 
         <template v-if="propiedad.estacionamientos">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">N° Estacionamientos:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -62,7 +62,7 @@
         </template>
 
         <template v-if="propiedad.amoblado">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Amoblado:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -76,7 +76,7 @@
         </template>
 
         <template v-if="propiedad.numeroDePisos">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">N° Pisos:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -90,7 +90,7 @@
         </template>
 
         <template v-if="propiedad.piscina ">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Piscina:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -104,7 +104,7 @@
         </template>
 
         <template v-if="propiedad.jardines">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Jardines:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -118,7 +118,7 @@
         </template>
 
         <template v-if="propiedad.patio">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Patio:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -132,7 +132,7 @@
         </template>
 
         <template v-if="propiedad.gastosComunes">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12 col mb-3">
             <p class="text-sm text-dark mb-1">Gastos Comunes:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -146,7 +146,7 @@
         </template>
 
         <template v-if="propiedad.contribuciones">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Contribuciones:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -160,7 +160,7 @@
         </template>
 
         <template v-if="propiedad.aseo ">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Aseo:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -174,7 +174,7 @@
         </template>
 
         <template v-if="propiedad.metrosCuadradosDeTerreno ">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Metros Cuadrados de Terreno:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -188,7 +188,7 @@
         </template>
 
         <template v-if="propiedad.metrosCuadradosDeConstruccion ">
-          <div class="col mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Metros Cuadrados de Construcción:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -202,7 +202,7 @@
         </template>
 
         <template v-if="propiedad.antiguedad ">
-          <div class="col-md-4 mb-3">
+          <div class="col-lg-4 col-sm-12  mb-3">
             <p class="text-sm text-dark mb-1">Antigüedad:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">

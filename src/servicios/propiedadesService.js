@@ -33,3 +33,7 @@ export const deletePropiedad = async (id) => {
     data: { id }
   });
 }
+
+export const getPropiedadServices = async (id) => {
+  return await axios.post('/api/v1/propiedad/servicios', { id })
+}
