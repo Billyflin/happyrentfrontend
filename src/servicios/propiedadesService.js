@@ -37,3 +37,15 @@ export const deletePropiedad = async (id) => {
 export const getPropiedadServices = async (id) => {
   return await axios.post('/api/v1/propiedad/servicios', { id })
 }
+
+export const addPropiedadService = async (idPropiedad, numeroCliente,proveedorServicio) => {
+  return await axios.post('/api/v1/propiedad/servicios/save', { idPropiedad, numeroCliente,proveedorServicio })
+}
+
+export const testPropiedadService = async ( numeroCliente,proveedorServicio) => {
+  return await axios.post('/api/v1/propiedad/servicios/test', {  numeroCliente,proveedorServicio })
+}
+
+export const deletePropiedadService = async (id) => {
+  return await axios.post('/api/v1/propiedad/servicios/delete', { id })
+}
