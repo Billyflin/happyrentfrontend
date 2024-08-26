@@ -9,15 +9,18 @@ const instance = axios.create({
   withCredentials: true
 })
 
-instance.interceptors.request.use(config => {
-  const authStore = useAuthStore()
-  console.log(authStore.token, 'aer')
-  if (authStore.token) {
-    config.headers.Authorization = `Bearer ${authStore.token}`
+instance.interceptors.request.use(
+  (config) => {
+    const authStore = useAuthStore()
+    console.log(authStore.token, 'aer')
+    if (authStore.token) {
+      config.headers.Authorization = `Bearer ${authStore.token}`
+    }
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
   }
-  return config
-}, error => {
-  return Promise.reject(error)
-})
+)
 
 export default instance

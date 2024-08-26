@@ -2,7 +2,7 @@
   <div class="card shadow-lg border-light">
     <div class="card-header">
       <h6 class="mb-0">Lista Inventario de la Propiedad</h6>
-      {{inventarios}}
+      {{ inventarios }}
     </div>
     <div class="card-body">
       <p class="card-text">

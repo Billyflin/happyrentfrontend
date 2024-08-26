@@ -20,7 +20,6 @@
 </template>
 
 <script setup>
-
 import { useAppStore } from '@/store/appStore.js'
 import { useRoute } from 'vue-router'
 import { computed, ref } from 'vue'

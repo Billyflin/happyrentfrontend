@@ -9,12 +9,15 @@
           </div>
           <div class="card-body p-3 mb-4">
             <div class="row">
-                <pie-chart :id="'chart-arrendadas'" :chart="propiedadesArrendadasChart" is-boolean-chart />
+              <pie-chart
+                :id="'chart-arrendadas'"
+                :chart="propiedadesArrendadasChart"
+                is-boolean-chart
+              />
 
-                <h6 class="mt-4 text-sm">Propiedades Arrendadas vs No Arrendadas</h6>
-                <p class="text-sm">Comparación de propiedades arrendadas y no arrendadas.
-                </p>
-              </div>
+              <h6 class="mt-4 text-sm">Propiedades Arrendadas vs No Arrendadas</h6>
+              <p class="text-sm">Comparación de propiedades arrendadas y no arrendadas.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -25,12 +28,17 @@
             <h4 class="mb-0">Contratos Activos</h4>
           </div>
           <div class="card-body p-3 mb-4">
-                <pie-chart :id="'chart-contratos-activos'" :chart="contratosActivosChart" is-boolean-chart />
+            <pie-chart
+              :id="'chart-contratos-activos'"
+              :chart="contratosActivosChart"
+              is-boolean-chart
+            />
 
-                <h6 class="mt-4 text-sm">Estado de los Contratos</h6>
-                <p class="text-sm">Comparación entre contratos activos e inactivos.
-                  Esto indica los contratos que estan vigentes y los que ya han finalizado.
-                </p>
+            <h6 class="mt-4 text-sm">Estado de los Contratos</h6>
+            <p class="text-sm">
+              Comparación entre contratos activos e inactivos. Esto indica los contratos que estan
+              vigentes y los que ya han finalizado.
+            </p>
           </div>
         </div>
       </div>
@@ -55,7 +63,7 @@
             <h4 class="mb-0">Renta por Región</h4>
           </div>
           <div class="card-body">
-            <bar-chart-dashboard :id="'chart-renta-region'" :chart="rentaPorRegionChart"/>
+            <bar-chart-dashboard :id="'chart-renta-region'" :chart="rentaPorRegionChart" />
             <h6>Renta por Región</h6>
             <p>Renta generada por propiedades en diferentes regiones.</p>
           </div>
@@ -75,7 +83,6 @@
           </div>
         </div>
       </div>
-
 
       <!-- Tipos de propiedad -->
       <div v-if="tiposDePropiedadChart.labels.length" class="col-12 col-md-4 mb-4">
@@ -98,22 +105,24 @@
             <h4 class="mb-0">Contratos por Mes</h4>
           </div>
           <div class="card-body p-3 mb-4">
-            <bar-chart-dashboard :id="'chart-contratos-mes'" :chart="contratosPorMesChart" height="200"/>
+            <bar-chart-dashboard
+              :id="'chart-contratos-mes'"
+              :chart="contratosPorMesChart"
+              height="200"
+            />
             <h6 class="mt-4">Contratos por Mes</h6>
             <p>Distribución mensual de los contratos.</p>
           </div>
         </div>
       </div>
     </div>
-    <div class="row" v-if="propiedadesData.length>=0 && contratosData>=0 ">
+    <div v-if="propiedadesData.length >= 0 && contratosData >= 0" class="row">
       <div class="alert alert-primary text-light text-center">No hay datos para mostrar</div>
     </div>
   </div>
 </template>
 
-
 <script>
-import axios from 'axios'
 import BarChartDashboard from '@/components/Charts/BarChartDashboard.vue'
 import LineChart from '@/components/Charts/LineChart.vue'
 import BarChart from '@/components/Charts/BarChart.vue'
@@ -261,9 +270,7 @@ export default {
     this.fetchContratosData()
   }
 }
-
 </script>
-
 
 <!--import PieChart from '@/examples/Charts/PieChart.vue';-->
 <!--import BarChart from '@/examples/Charts/BarChart.vue';-->

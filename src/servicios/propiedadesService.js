@@ -5,7 +5,7 @@ export const getPropiedades = async () => {
 }
 
 export const getPropiedad = async (id) => {
-  return axios.post(`/api/v1/propiedad/info`,{id})
+  return axios.post(`/api/v1/propiedad/info`, { id })
 }
 
 export const getPropiedadesProyection = async () => {
@@ -31,19 +31,23 @@ export const updatePropiedad = async (propiedad) => {
 export const deletePropiedad = async (id) => {
   return await axios.delete(`/api/v1/propiedad/delete`, {
     data: { id }
-  });
+  })
 }
 
 export const getPropiedadServices = async (id) => {
   return await axios.post('/api/v1/propiedad/servicios', { id })
 }
 
-export const addPropiedadService = async (idPropiedad, numeroCliente,proveedorServicio) => {
-  return await axios.post('/api/v1/propiedad/servicios/save', { idPropiedad, numeroCliente,proveedorServicio })
+export const addPropiedadService = async (idPropiedad, numeroCliente, proveedorServicio) => {
+  return await axios.post('/api/v1/propiedad/servicios/save', {
+    idPropiedad,
+    numeroCliente,
+    proveedorServicio
+  })
 }
 
-export const testPropiedadService = async ( numeroCliente,proveedorServicio) => {
-  return await axios.post('/api/v1/propiedad/servicios/test', {  numeroCliente,proveedorServicio })
+export const testPropiedadService = async (numeroCliente, proveedorServicio) => {
+  return await axios.post('/api/v1/propiedad/servicios/test', { numeroCliente, proveedorServicio })
 }
 
 export const deletePropiedadService = async (id) => {

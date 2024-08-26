@@ -10,12 +10,8 @@
         type="button"
       >
         <slot name="question" />
-        <i
-          class="pt-1 text-xs collapse-close fa fa-plus position-absolute end-0 me-3"
-        ></i>
-        <i
-          class="pt-1 text-xs collapse-open fa fa-minus position-absolute end-0 me-3"
-        ></i>
+        <i class="pt-1 text-xs collapse-close fa fa-plus position-absolute end-0 me-3"></i>
+        <i class="pt-1 text-xs collapse-open fa fa-minus position-absolute end-0 me-3"></i>
       </button>
     </h5>
     <div

@@ -1,16 +1,16 @@
 <template>
   <div class="row mt-3">
     <div class="col-lg-3">
-      <router-link class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
-                   to="/contratos">
-  <span class="material-symbols-outlined mx-2">
-    arrow_back
-  </span>
+      <router-link
+        class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
+        to="/contratos"
+      >
+        <span class="material-symbols-outlined mx-2"> arrow_back </span>
         Volver
       </router-link>
     </div>
   </div>
-  
+
   <div class="header ms-4">
     <h1>Detalles contrato</h1>
   </div>
@@ -70,7 +70,7 @@
           <div>Código postal: {{ detalleContrato.propiedad.direccion.codigoPostal }}</div>
         </div>
         <div class="col-2">
-          <div>Tipo Propiedad: {{ detalleContrato.propiedad.type}}</div>
+          <div>Tipo Propiedad: {{ detalleContrato.propiedad.type }}</div>
         </div>
       </div>
       <div class="row mt-3">
@@ -101,7 +101,9 @@
           <div>Metros² Terreno: {{ detalleContrato.propiedad.metrosCuadradosTerreno }}</div>
         </div>
         <div class="col-2">
-          <div>Metros² Construidos : {{ detalleContrato.propiedad.metrosCuadradosConstruidos }}</div>
+          <div>
+            Metros² Construidos : {{ detalleContrato.propiedad.metrosCuadradosConstruidos }}
+          </div>
         </div>
       </div>
     </div>
@@ -153,7 +155,9 @@
           <div>País: {{ detalleContrato.propiedad.propietario.direccion.pais }}</div>
         </div>
         <div class="col-2">
-          <div>Código Postal: {{ detalleContrato.propiedad.propietario.direccion.codigoPostal }}</div>
+          <div>
+            Código Postal: {{ detalleContrato.propiedad.propietario.direccion.codigoPostal }}
+          </div>
         </div>
       </div>
     </div>
@@ -209,7 +213,10 @@
       <!--   pendiente terminar persona dentro de representante legal-->
       <div class="row mt-3">
         <div class="col-3">
-          <div>Representante Legal: {{ detalleContrato.empresa.representanteLegal.persona.nombreCompleto }}</div>
+          <div>
+            Representante Legal:
+            {{ detalleContrato.empresa.representanteLegal.persona.nombreCompleto }}
+          </div>
         </div>
         <div class="col-3">
           <div>Email: {{ detalleContrato.empresa.representanteLegal.persona.email }}</div>
@@ -220,10 +227,14 @@
       </div>
       <div class="row mt-3">
         <div class="col-3">
-          <div>Estado Civil: {{ detalleContrato.empresa.representanteLegal.persona.estadoCivil }}</div>
+          <div>
+            Estado Civil: {{ detalleContrato.empresa.representanteLegal.persona.estadoCivil }}
+          </div>
         </div>
         <div class="col-3">
-          <div>Nacionalidad: {{ detalleContrato.empresa.representanteLegal.persona.nacionalidad }}</div>
+          <div>
+            Nacionalidad: {{ detalleContrato.empresa.representanteLegal.persona.nacionalidad }}
+          </div>
         </div>
         <div class="col-3">
           <div>Ocupación: {{ detalleContrato.empresa.representanteLegal.persona.ocupacion }}</div>
@@ -334,7 +345,7 @@
       </div>
     </div>
   </div>
-<!--  Tipo Reajuste-->
+  <!--  Tipo Reajuste-->
   <div v-if="detalleContrato.tipoReajuste" id="TipoReajuste" class="card mt-4">
     <div class="card-header">
       <h5>Tipo de Reajuste</h5>
@@ -361,7 +372,6 @@
   </div>
 </template>
 <script>
-
 import { getContrato } from '@/servicios/contratosService.js'
 
 export default {
@@ -376,7 +386,7 @@ export default {
     }
   },
   methods: {
-    fetchItems: async function() {
+    fetchItems: async function () {
       try {
         const response = await getContrato(this.id)
         console.log(response)
@@ -392,4 +402,3 @@ export default {
   }
 }
 </script>
-

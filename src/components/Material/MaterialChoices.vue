@@ -1,12 +1,13 @@
 <template>
   <div :class="`input-group-${variant}`" class="form-group">
-    <label :for="id" :class="`form-label ${bold ? 'text-bold':''}`">{{ label }}</label>
-    <select :id="id"
-            ref="choicesElement"
-            v-model="selectedValue"
-            :multiple="isMultiple"
-            :name="name"
-            class="form-control"
+    <label :class="`form-label ${bold ? 'text-bold' : ''}`" :for="id">{{ label }}</label>
+    <select
+      :id="id"
+      ref="choicesElement"
+      v-model="selectedValue"
+      :multiple="isMultiple"
+      :name="name"
+      class="form-control"
     />
   </div>
 </template>

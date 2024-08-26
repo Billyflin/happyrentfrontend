@@ -1,6 +1,10 @@
 <template>
   <div class="input-group mb-3">
-    <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown">
+    <button
+      class="btn btn-outline-secondary dropdown-toggle"
+      data-bs-toggle="dropdown"
+      type="button"
+    >
       {{ modelValue }}
     </button>
     <ul class="dropdown-menu border border-radius-lg">
@@ -26,8 +30,8 @@ export default {
   },
   methods: {
     selectItem(item) {
-      this.$emit('update:modelValue', item);
+      this.$emit('update:modelValue', item)
     }
   }
-};
+}
 </script>

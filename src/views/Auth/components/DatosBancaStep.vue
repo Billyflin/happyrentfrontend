@@ -5,35 +5,70 @@
         <h5 class="font-weight-normal">Datos bancarios</h5>
       </div>
     </div>
-      <div class="row mt-3">
-        <div class="col-4 mb-4">
-          <material-input id="rut" v-model="datosBancarios[0].rut" is-required label="Rut" type="rut" variant="static" placeholder="xx.xxx.xxx-x"/>
-        </div>
-        <div class="col-4 mb-4">
-          <material-input id="numeroCuenta" v-model="datosBancarios[0].numeroCuenta" is-required label="Número de cuenta"
-                          type="String"
-                          variant="static" />
-        </div>
-        <div class="col-4 mb-4">
-          <material-input id="email" v-model="datosBancarios[0].email" is-required label="Email" type="text" variant="static" />
-        </div>
-        <div class="col-4 mb-4">
-          <material-choices id="banco" v-model:text-choice="datosBancarios[0].banco" :options="bancos" label="Banco" variant="static"
-                            name="banco" />
-        </div>
-        <div class="col-4 mb-4">
-          <material-choices id="tipoCuenta" v-model:text-choice="datosBancarios[0].tipoCuenta" :options="cuentas"
-                            label="Tipo de cuenta"
-                            name="tipoCuenta" variant="static"/>
-        </div>
+    <div class="row mt-3">
+      <div class="col-4 mb-4">
+        <material-input
+          id="rut"
+          v-model="datosBancarios[0].rut"
+          is-required
+          label="Rut"
+          placeholder="xx.xxx.xxx-x"
+          type="rut"
+          variant="static"
+        />
       </div>
-      <div class="mt-4 button-row d-flex">
-        <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" title="Next" type="button"
-                @click="nexStep">
-          Siguiente
-        </button>
+      <div class="col-4 mb-4">
+        <material-input
+          id="numeroCuenta"
+          v-model="datosBancarios[0].numeroCuenta"
+          is-required
+          label="Número de cuenta"
+          type="String"
+          variant="static"
+        />
+      </div>
+      <div class="col-4 mb-4">
+        <material-input
+          id="email"
+          v-model="datosBancarios[0].email"
+          is-required
+          label="Email"
+          type="text"
+          variant="static"
+        />
+      </div>
+      <div class="col-4 mb-4">
+        <material-choices
+          id="banco"
+          v-model:text-choice="datosBancarios[0].banco"
+          :options="bancos"
+          label="Banco"
+          name="banco"
+          variant="static"
+        />
+      </div>
+      <div class="col-4 mb-4">
+        <material-choices
+          id="tipoCuenta"
+          v-model:text-choice="datosBancarios[0].tipoCuenta"
+          :options="cuentas"
+          label="Tipo de cuenta"
+          name="tipoCuenta"
+          variant="static"
+        />
       </div>
     </div>
+    <div class="mt-4 button-row d-flex">
+      <button
+        class="mb-0 btn bg-gradient-dark ms-auto js-btn-next"
+        title="Next"
+        type="button"
+        @click="nexStep"
+      >
+        Siguiente
+      </button>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -63,17 +98,19 @@ export default {
         { value: 'Banco Scotiabank', text: 'banco14' }
       ],
       cuentas: [
-        { value: 'Vista', text: 'cuenta1', },
+        { value: 'Vista', text: 'cuenta1' },
         { value: 'Ahorro', text: 'cuenta2' },
         { value: 'Cuenta Corriente', text: 'cuenta3', selected: true }
       ],
-      datosBancarios: [{
-        banco: '',
-        tipoCuenta: '',
-        numeroCuenta: '',
-        rut: '',
-        email: ''
-      }]
+      datosBancarios: [
+        {
+          banco: '',
+          tipoCuenta: '',
+          numeroCuenta: '',
+          rut: '',
+          email: ''
+        }
+      ]
     }
   },
   methods: {

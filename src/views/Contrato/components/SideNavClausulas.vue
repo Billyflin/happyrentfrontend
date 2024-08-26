@@ -1,12 +1,18 @@
 <template>
-  <router-link class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
-               to="/Propiedades">
+  <router-link
+    class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
+    to="/Propiedades"
+  >
     <span class="material-symbols-outlined mx-1"> arrow_back </span> Volver
   </router-link>
   <div class="card position-sticky top-1 mt-4">
     <ul class="nav flex-column bg-white border-radius-lg p-3">
       <li class="nav-item">
-        <a :data-scroll="'#Comparecencia'" class="nav-link align-items-center text-dark d-flex" href="#Comparecencia">
+        <a
+          :data-scroll="'#Comparecencia'"
+          class="nav-link align-items-center text-dark d-flex"
+          href="#Comparecencia"
+        >
           <i class="material-symbols-outlined text-xl me-2">contract_edit</i>
           <span class="text-xs">Comparecencia</span>
         </a>
@@ -14,8 +20,11 @@
 
       <!-- Clausulas -->
       <li v-for="(clausula, i) in clausulas" :key="i" class="nav-item pt-2">
-        <a :data-scroll="'#' + clausula.id" :href="'#' + clausula.id"
-           class="nav-link nav-link align-items-center text-dark d-flex">
+        <a
+          :data-scroll="'#' + clausula.id"
+          :href="'#' + clausula.id"
+          class="nav-link nav-link align-items-center text-dark d-flex"
+        >
           <i class="material-symbols-outlined text-xl me-2">{{ iconos[i] }}</i>
           <span class="text-xs text-capitalize">{{ clausula.nombre }}</span>
         </a>
@@ -25,7 +34,7 @@
 </template>
 
 <script>
-export default  {
+export default {
   name: 'SideNav',
   data() {
     return {
@@ -47,7 +56,7 @@ export default  {
         'place', // Domicilio
         'local_atm', // Comisión
         'list', // Otras condiciones
-        'group', // Codeudor solidario
+        'group' // Codeudor solidario
       ],
       clausulas: [
         { id: 'Clausula1', nombre: 'propiedad' },
@@ -69,7 +78,6 @@ export default  {
         { id: 'Clausula17', nombre: 'otras condiciones' },
         { id: 'Clausula18', nombre: 'codeudor solidario' }
       ]
-
     }
   }
 }

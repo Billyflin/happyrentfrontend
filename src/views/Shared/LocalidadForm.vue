@@ -43,29 +43,34 @@
     </div>
   </div>
   <div class="row mt-4">
-    <material-choices id="Pais"
-                      v-model:text-choice="direccion.pais"
-                      :is-multiple="false"
-                      :options="paises"
-                      class="col-3"
-                      disabled
-                      label="Pais"
-                      name="pais" />
-    <MaterialChoices id="Region"
-                     v-model:text-choice="direccion.region"
-                     v-model:value-choice="regionNum"
-                     :is-multiple="false"
-                     :options="regiones"
-                     class="col-5"
-                     label="Region"
-                     name="region" />
-    <MaterialChoices id="Ciudad"
-                     v-model:text-choice="direccion.ciudad"
-                     :is-multiple="false"
-                     :options="ciudades"
-                     class="col-4"
-                     label="Comuna"
-                     name="ciudad"
+    <material-choices
+      id="Pais"
+      v-model:text-choice="direccion.pais"
+      :is-multiple="false"
+      :options="paises"
+      class="col-3"
+      disabled
+      label="Pais"
+      name="pais"
+    />
+    <MaterialChoices
+      id="Region"
+      v-model:text-choice="direccion.region"
+      v-model:value-choice="regionNum"
+      :is-multiple="false"
+      :options="regiones"
+      class="col-5"
+      label="Region"
+      name="region"
+    />
+    <MaterialChoices
+      id="Ciudad"
+      v-model:text-choice="direccion.ciudad"
+      :is-multiple="false"
+      :options="ciudades"
+      class="col-4"
+      label="Comuna"
+      name="ciudad"
     />
   </div>
 </template>
@@ -107,34 +112,37 @@ export default {
     }
   },
   mounted() {
-    axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/region/38`)
-      .then(response => {
-        this.regiones = response.data.map(region => ({
+    axios
+      .get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/region/38`)
+      .then((response) => {
+        this.regiones = response.data.map((region) => ({
           value: region.numero,
           label: region.nombre,
           selected: region.nombre === 'Región Metropolitana de Santiago' ? true : undefined
         }))
         // console.log('Regiones: ', this.regiones)
       })
-      .catch(error => {
+      .catch((error) => {
         console.error(error)
       })
   },
   watch: {
     regionNum() {
-      axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ciudad/${this.regionNum}`)
-        .then(response => {
-          this.ciudades = response.data.map(ciudad => ({
+      axios
+        .get(
+          `${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ciudad/${this.regionNum}`
+        )
+        .then((response) => {
+          this.ciudades = response.data.map((ciudad) => ({
             value: ciudad.nombre,
             label: ciudad.nombre
           }))
           // console.log('Ciudades: ', this.ciudades)
         })
-        .catch(error => {
+        .catch((error) => {
           console.error(error)
         })
     }
   }
 }
-
 </script>

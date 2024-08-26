@@ -1,5 +1,4 @@
 <script setup>
-
 import PricingCard from '@/components/PricingCard.vue'
 </script>
 
@@ -8,11 +7,7 @@ import PricingCard from '@/components/PricingCard.vue'
     <div class="row mb-5">
       <div class="col-lg-4 col-md-6 col-7 mx-auto text-center">
         <div class="nav-wrapper mt-5 position-relative z-index-2">
-          <ul
-            id="tabs-pricing"
-            class="nav nav-pills nav-fill flex-row p-1"
-            role="tablist"
-          >
+          <ul id="tabs-pricing" class="nav nav-pills nav-fill flex-row p-1" role="tablist">
             <li class="nav-item">
               <a
                 id="tabs-iconpricing-tab-1"
@@ -22,7 +17,7 @@ import PricingCard from '@/components/PricingCard.vue'
                 data-bs-toggle="tab"
                 href="#personal"
                 role="tab"
-              >Personal</a
+                >Personal</a
               >
             </li>
             <li class="nav-item">
@@ -34,7 +29,7 @@ import PricingCard from '@/components/PricingCard.vue'
                 data-bs-toggle="tab"
                 href="#ejecutivo"
                 role="tab"
-              >Ejecutivo</a
+                >Ejecutivo</a
               >
             </li>
           </ul>
@@ -46,68 +41,68 @@ import PricingCard from '@/components/PricingCard.vue'
         <div class="row">
           <pricing-card
             :action="{
-                  color: 'dark',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
+              color: 'dark',
+              route: 'javascript:;',
+              label: 'Obtener'
+            }"
             :badge="{ color: 'light', label: 'Crecimiento' }"
             :price="{ currency: '$', value: '0,8 UF', charged: 'Mes + iva' }"
             :specifications="[
-                  { label: 'Desde 1 a 10 Propiedades', includes: true },
-                  { label: 'Organizador de cartera', includes: true },
-                  { label: 'Envío Automático de mails y cobranzas', includes: true },
-                  { label: 'Generación de contrato', includes: false },
-                  { label: 'Información consolidada de pagos', includes: false },
-                  { label: 'Deshboard con análisis de datos', includes: false },
-                  { label: 'Servicio al cliente vía mail', includes: false },
-                  { label: 'Informe de liquidación automática', includes: false },
-                  { label: 'Perfil del corredor', includes: false },
-                  { label: 'Perfil del propietario', includes: false },
-                ]"
+              { label: 'Desde 1 a 10 Propiedades', includes: true },
+              { label: 'Organizador de cartera', includes: true },
+              { label: 'Envío Automático de mails y cobranzas', includes: true },
+              { label: 'Generación de contrato', includes: false },
+              { label: 'Información consolidada de pagos', includes: false },
+              { label: 'Deshboard con análisis de datos', includes: false },
+              { label: 'Servicio al cliente vía mail', includes: false },
+              { label: 'Informe de liquidación automática', includes: false },
+              { label: 'Perfil del corredor', includes: false },
+              { label: 'Perfil del propietario', includes: false }
+            ]"
           />
           <pricing-card
             :action="{
-                  color: 'success',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
+              color: 'success',
+              route: 'javascript:;',
+              label: 'Obtener'
+            }"
             :badge="{ color: 'success', label: 'Desarrollo' }"
             :price="{ currency: '$', value: '1,4 UF', charged: 'Mes + iva' }"
             :specifications="[
-                  { label: 'Hasta 20 Propiedades', includes: true },
-                  { label: 'Organizador de cartera', includes: true },
-                  { label: 'Envío Automático de mails y cobranzas', includes: true },
-                  { label: 'Generación de contrato', includes: true },
-                  { label: 'Información consolidada de pagos', includes: true },
-                  { label: 'Deshboard con análisis de datos', includes: false },
-                  { label: 'Servicio al cliente vía mail', includes: false },
-                  { label: 'Informe de liquidación automática', includes: false },
-                  { label: 'Perfil del corredor', includes: false },
-                  { label: 'Perfil del propietario', includes: false },
-                ]"
+              { label: 'Hasta 20 Propiedades', includes: true },
+              { label: 'Organizador de cartera', includes: true },
+              { label: 'Envío Automático de mails y cobranzas', includes: true },
+              { label: 'Generación de contrato', includes: true },
+              { label: 'Información consolidada de pagos', includes: true },
+              { label: 'Deshboard con análisis de datos', includes: false },
+              { label: 'Servicio al cliente vía mail', includes: false },
+              { label: 'Informe de liquidación automática', includes: false },
+              { label: 'Perfil del corredor', includes: false },
+              { label: 'Perfil del propietario', includes: false }
+            ]"
             color="dark"
             dark-mode
           />
           <pricing-card
             :action="{
-                  color: 'dark',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
+              color: 'dark',
+              route: 'javascript:;',
+              label: 'Obtener'
+            }"
             :badge="{ color: 'light', label: 'Avance' }"
             :price="{ currency: '$', value: '3,0 UF', charged: 'Mes + iva' }"
             :specifications="[
-                  { label: 'Hasta 80 Propiedades', includes: true },
-                  { label: 'Organizador de cartera', includes: true },
-                  { label: 'Envío Automático de mails y cobranzas', includes: true },
-                  { label: 'Generación de contrato', includes: true },
-                  { label: 'Información consolidada de pagos', includes: true },
-                  { label: 'Deshboard con análisis de datos', includes: true },
-                  { label: 'Servicio al cliente vía mail', includes: true },
-                  { label: 'Informe de liquidación automática', includes: true },
-                  { label: 'Perfil del corredor', includes: true },
-                  { label: 'Perfil del propietario', includes: true },
-                ]"
+              { label: 'Hasta 80 Propiedades', includes: true },
+              { label: 'Organizador de cartera', includes: true },
+              { label: 'Envío Automático de mails y cobranzas', includes: true },
+              { label: 'Generación de contrato', includes: true },
+              { label: 'Información consolidada de pagos', includes: true },
+              { label: 'Deshboard con análisis de datos', includes: true },
+              { label: 'Servicio al cliente vía mail', includes: true },
+              { label: 'Informe de liquidación automática', includes: true },
+              { label: 'Perfil del corredor', includes: true },
+              { label: 'Perfil del propietario', includes: true }
+            ]"
           />
         </div>
       </div>
@@ -115,45 +110,45 @@ import PricingCard from '@/components/PricingCard.vue'
         <div class="row">
           <pricing-card
             :action="{
-                  color: 'dark',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
+              color: 'dark',
+              route: 'javascript:;',
+              label: 'Obtener'
+            }"
             :badge="{ color: 'light', label: 'Consolidado' }"
             :price="{ currency: '$', value: '4,0 UF', charged: 'Mes + iva' }"
             :specifications="[
-                  { label: 'Hasta 200 Propiedades', includes: true },
-                  { label: 'Organizador de cartera', includes: true },
-                  { label: 'Envío Automático de mails y cobranzas', includes: true },
-                  { label: 'Generación de contrato', includes: true },
-                  { label: 'Información consolidada de pagos', includes: true },
-                  { label: 'Deshboard con análisis de datos', includes: false },
-                  { label: 'Servicio al cliente vía mail', includes: false },
-                  { label: 'Informe de liquidación automática', includes: false },
-                  { label: 'Perfil del corredor', includes: false },
-                  { label: 'Perfil del propietario', includes: false },
-                ]"
+              { label: 'Hasta 200 Propiedades', includes: true },
+              { label: 'Organizador de cartera', includes: true },
+              { label: 'Envío Automático de mails y cobranzas', includes: true },
+              { label: 'Generación de contrato', includes: true },
+              { label: 'Información consolidada de pagos', includes: true },
+              { label: 'Deshboard con análisis de datos', includes: false },
+              { label: 'Servicio al cliente vía mail', includes: false },
+              { label: 'Informe de liquidación automática', includes: false },
+              { label: 'Perfil del corredor', includes: false },
+              { label: 'Perfil del propietario', includes: false }
+            ]"
           />
           <pricing-card
             :action="{
-                  color: 'success',
-                  route: 'javascript:;',
-                  label: 'Obtener',
-                }"
+              color: 'success',
+              route: 'javascript:;',
+              label: 'Obtener'
+            }"
             :badge="{ color: 'success', label: 'Infinito' }"
             :price="{ currency: '$', value: '9,0 UF', charged: 'Mes + iva' }"
             :specifications="[
-                  { label: 'Hasta 500 Propiedades', includes: true },
-                  { label: 'Organizador de cartera', includes: true },
-                  { label: 'Envío Automático de mails y cobranzas', includes: true },
-                  { label: 'Generación de contrato', includes: true },
-                  { label: 'Información consolidada de pagos', includes: true },
-                  { label: 'Deshboard con análisis de datos', includes: false },
-                  { label: 'Servicio al cliente vía mail', includes: false },
-                  { label: 'Informe de liquidación automática', includes: false },
-                  { label: 'Perfil del corredor', includes: false },
-                  { label: 'Perfil del propietario', includes: false },
-                ]"
+              { label: 'Hasta 500 Propiedades', includes: true },
+              { label: 'Organizador de cartera', includes: true },
+              { label: 'Envío Automático de mails y cobranzas', includes: true },
+              { label: 'Generación de contrato', includes: true },
+              { label: 'Información consolidada de pagos', includes: true },
+              { label: 'Deshboard con análisis de datos', includes: false },
+              { label: 'Servicio al cliente vía mail', includes: false },
+              { label: 'Informe de liquidación automática', includes: false },
+              { label: 'Perfil del corredor', includes: false },
+              { label: 'Perfil del propietario', includes: false }
+            ]"
             color="dark"
             dark-mode
           />
@@ -163,6 +158,4 @@ import PricingCard from '@/components/PricingCard.vue'
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

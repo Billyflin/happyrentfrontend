@@ -3,11 +3,21 @@
     <div class="container">
       <div class="row">
         <div class="mx-auto mb-4 text-center col-lg-8">
-          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank"> Company </a>
-          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank"> About Us </a>
-          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank"> Team </a>
-          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank"> Products </a>
-          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank"> Blog </a>
+          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank">
+            Company
+          </a>
+          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank">
+            About Us
+          </a>
+          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank">
+            Team
+          </a>
+          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank">
+            Products
+          </a>
+          <a class="mb-2 text-secondary me-xl-5 me-3 mb-sm-0" href="javascript:" target="_blank">
+            Blog
+          </a>
           <a class="mb-2 text-secondary mb-sm-0" href="javascript:" target="_blank"> Pricing </a>
         </div>
         <div class="mx-auto mt-2 mb-4 text-center col-lg-8">
@@ -30,7 +40,9 @@
       </div>
       <div class="row">
         <div class="mx-auto mt-1 text-center col-8">
-          <p class="mb-0 text-secondary">Copyright © {{ new Date().getFullYear() }} Soft by Laulou.</p>
+          <p class="mb-0 text-secondary">
+            Copyright © {{ new Date().getFullYear() }} Soft by Laulou.
+          </p>
         </div>
       </div>
     </div>

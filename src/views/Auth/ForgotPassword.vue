@@ -1,7 +1,13 @@
 <template>
   <main v-if="isTokenValid" class="mt-0 main-content main-content-bg">
-    <div class="page-header align-items-start min-height-300 m-3 border-radius-xl bg-gray-200"
-         style="background-image: url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80'); background-size: cover; background-position: center;">
+    <div
+      class="page-header align-items-start min-height-300 m-3 border-radius-xl bg-gray-200"
+      style="
+        background-image: url('https://images.unsplash.com/photo-1545569341-9eb8b30979d9?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+        background-position: center;
+      "
+    >
       <span class="mask bg-gradient-dark opacity-4"></span>
     </div>
     <div class="container">
@@ -11,26 +17,23 @@
             <div v-if="!state" class="card-header">
               <div class="text-center">
                 <h1 class="mb-3">Recuperar contraseña</h1>
-                <p> La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una minúscula, un
-                  dígito y un carácter especial. No se permiten espacios en blanco. No puede tener el caracter especial
-                  "!" . </p>
+                <p>
+                  La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula,
+                  una minúscula, un dígito y un carácter especial. No se permiten espacios en
+                  blanco. No puede tener el caracter especial "!" .
+                </p>
               </div>
             </div>
             <div v-else class="card-header">
               <div class="text-center">
-                <h1 class="mb-3">¡Listo! </h1>
-                <h3> Contraseña cambiada </h3>
+                <h1 class="mb-3">¡Listo!</h1>
+                <h3>Contraseña cambiada</h3>
               </div>
             </div>
             <div v-if="state" class="card-body">
-              <p class="text-center"> Ya puedes volver a iniciar sesión</p>
+              <p class="text-center">Ya puedes volver a iniciar sesión</p>
               <router-link to="/sign-in">
-                <material-button
-                  class=" mb-4"
-                  color="success"
-                  full-width
-                  variant="gradient"
-                >
+                <material-button class="mb-4" color="success" full-width variant="gradient">
                   Volver
                 </material-button>
               </router-link>
@@ -60,12 +63,7 @@
                 <span class="badge badge-danger">Las contraseñas no coinciden</span>
               </div>
               <div class="mt-4">
-                <material-button
-                  :disabled="sending"
-                  color="success"
-                  full-width
-                  variant="gradient"
-                >
+                <material-button :disabled="sending" color="success" full-width variant="gradient">
                   Cambiar contraseña
                 </material-button>
               </div>
@@ -85,9 +83,7 @@
       <div class="row mt-lg-10 mt-md-10 mt-10 justify-content-center">
         <div class="col-lg-8 col-md-7 mb-3">
           <div class="card card-body">
-            <h1 class="text-center">
-              El token no es válido.
-            </h1>
+            <h1 class="text-center">El token no es válido.</h1>
           </div>
         </div>
       </div>
@@ -139,20 +135,28 @@ export default {
 
       sending.value = true
       try {
-        const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/forgot-password-token`, {
-          token: props.token,
-          password: password.value
-        })
+        const response = await axios.post(
+          `${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/api/v1/auth/forgot-password-token`,
+          {
+            token: props.token,
+            password: password.value
+          }
+        )
 
         if (response.status === 200) {
           state.value = true
         }
       } catch (err) {
-        if (err.response && err.response.status === 500 && err.response.data === 'Token Invalido.') {
+        if (
+          err.response &&
+          err.response.status === 500 &&
+          err.response.data === 'Token Invalido.'
+        ) {
           error.value = 'El token no es válido.'
           isTokenValid.value = false
         } else {
-          error.value = 'Hubo un error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.'
+          error.value =
+            'Hubo un error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.'
         }
         console.error(err)
       } finally {
@@ -173,5 +177,3 @@ export default {
   }
 }
 </script>
-
-

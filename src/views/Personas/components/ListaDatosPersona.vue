@@ -4,23 +4,23 @@
     <ul class="list-group">
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong class="me-2">Nombre:</strong>
-        <span >{{ auth.persona.nombre }}</span>
-<!--        <input v-else v-model="auth.persona.nombre" class="form-control editor-input w-60" />-->
+        <span>{{ auth.persona.nombre }}</span>
+        <!--        <input v-else v-model="auth.persona.nombre" class="form-control editor-input w-60" />-->
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong class="me-2">Apellido Paterno:</strong>
-        <span >{{ auth.persona.apellidoPaterno }}</span>
-<!--        <input v-else v-model="auth.persona.apellidoPaterno" class="form-control editor-input w-60" />-->
+        <span>{{ auth.persona.apellidoPaterno }}</span>
+        <!--        <input v-else v-model="auth.persona.apellidoPaterno" class="form-control editor-input w-60" />-->
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong class="me-2">Apellido Materno:</strong>
         <span>{{ auth.persona.apellidoMaterno }}</span>
-<!--        <input v-else v-model="auth.persona.apellidoMaterno" class="form-control editor-input w-60" />-->
+        <!--        <input v-else v-model="auth.persona.apellidoMaterno" class="form-control editor-input w-60" />-->
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong class="me-2">RUT:</strong>
         <span>{{ auth.persona.rut }}</span>
-<!--        <input v-else v-model="auth.persona.rut" class="form-control editor-input w-60" />-->
+        <!--        <input v-else v-model="auth.persona.rut" class="form-control editor-input w-60" />-->
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong class="me-2">Tratamiento:</strong>
@@ -45,7 +45,11 @@
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong class="me-2">Fecha de Nacimiento:</strong>
         <span v-if="!editMode">{{ auth.persona.fechaNacimiento }}</span>
-        <input v-else v-model="auth.persona.fechaNacimiento" class="form-control editor-input w-60" />
+        <input
+          v-else
+          v-model="auth.persona.fechaNacimiento"
+          class="form-control editor-input w-60"
+        />
       </li>
       <li class="list-group-item text-start d-flex justify-content-between align-items-center">
         <strong class="me-2">Email:</strong>
@@ -57,7 +61,6 @@
         <span v-if="!editMode">{{ auth.persona.telefono }}</span>
         <input v-else v-model="auth.persona.telefono" class="form-control editor-input w-60" />
       </li>
-
     </ul>
   </div>
 </template>

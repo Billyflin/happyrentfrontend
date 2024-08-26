@@ -16,37 +16,25 @@
         <!--                <i class="bg-success"></i>-->
         <!--                <span class="text-dark">Pagos Recibidos</span>-->
         <!--              </span>-->
-        <span
-          class="badge badge-lg badge-dot me-4 d-inline-block text-start"
-        >
-                <i class="bg-dark"></i>
-                <span class="text-dark">Renta</span>
-              </span>
+        <span class="badge badge-lg badge-dot me-4 d-inline-block text-start">
+          <i class="bg-dark"></i>
+          <span class="text-dark">Renta</span>
+        </span>
       </div>
     </div>
     <div class="p-3 card-body">
       <gradient-line-chart
         id="chart-line"
-        title="Line chart with gradient"
         :chart="{
-                labels: [
-                  'Apr',
-                  'May',
-                  'Jun',
-                  'Jul',
-                  'Aug',
-                  'Sep',
-                  'Oct',
-                  'Nov',
-                  'Dec'
-                ],
-                 datasets: [
-                  {
-                    label: 'Renta',
-                    data: [300000,300000, 300000, 300000, 300000, 300000, 305100, 305100, 305100]
-                  }
-                ]
-              }"
+          labels: ['Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+          datasets: [
+            {
+              label: 'Renta',
+              data: [300000, 300000, 300000, 300000, 300000, 300000, 305100, 305100, 305100]
+            }
+          ]
+        }"
+        title="Line chart with gradient"
       />
     </div>
   </div>

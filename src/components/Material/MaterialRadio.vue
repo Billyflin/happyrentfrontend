@@ -1,12 +1,6 @@
 <template>
   <div class="form-check">
-    <input
-      :id="id"
-      :checked="checked"
-      :name="name"
-      class="form-check-input"
-      type="radio"
-    />
+    <input :id="id" :checked="checked" :name="name" class="form-check-input" type="radio" />
     <label :for="id" class="custom-control-label">
       <slot />
     </label>

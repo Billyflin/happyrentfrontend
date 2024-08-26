@@ -82,17 +82,17 @@
     }
 
     &.bg-white {
-        .nav-item {
-          .nav-link {
-              color: $white !important;
+      .nav-item {
+        .nav-link {
+          color: $white !important;
 
-            &.active {
-              i,
-              .nav-link-text {
-                color: $dark !important;
-              }
+          &.active {
+            i,
+            .nav-link-text {
+              color: $dark !important;
             }
           }
+        }
       }
     }
   }
@@ -116,6 +116,7 @@
             i {
               color: $dark; // Establece el color del icono al pasar el ratón
             }
+
             span {
               color: $dark; // Establece el color del texto al pasar el ratón
             }
@@ -126,9 +127,11 @@
             i {
               color: $white !important; // Establece el color del icono activo
             }
+
             .nav-link-text {
               color: $white !important; // Establece el color del texto del enlace activo
             }
+
             span {
               color: $white !important; // Establece el color del texto activo
             }
@@ -182,8 +185,6 @@
   }
 
 
-
-
   .card,
   .swal2-popup,
   .dropdown .dropdown-menu,
@@ -196,15 +197,15 @@
     }
 
     p {
-      color: $white ;
+      color: $white;
     }
 
     h1.titulo-contrato {
-      color:  $happLight !important;
+      color: $happLight !important;
     }
 
     .clase {
-      color: $white ;
+      color: $white;
       text-align: justify; // Ejemplo de alineación de texto, puedes cambiar esto según tus necesidades
       strong {
         color: $happLight !important;
@@ -459,7 +460,7 @@
   }
 
 
-  .dropzone{
+  .dropzone {
     background-color: $dark-version-bg-color !important;
     color: $white !important;
     border-color: $dark-version-border-color !important;

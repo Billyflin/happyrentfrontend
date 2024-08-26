@@ -13,11 +13,12 @@
       <div class="col-sm-auto col-8 my-auto">
         <div class="h-100">
           <h5 class="mb-1 font-weight-bolder">{{ store.currentUser.username }}</h5>
-          <p class="mb-0 font-weight-bold text-sm text-capitalize">{{ store.currentUser.perfil.type }}</p>
+          <p class="mb-0 font-weight-bold text-sm text-capitalize">
+            {{ store.currentUser.perfil.type }}
+          </p>
         </div>
       </div>
-      <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
-      </div>
+      <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex"></div>
     </div>
   </div>
 </template>

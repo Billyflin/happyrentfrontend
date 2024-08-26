@@ -11,11 +11,7 @@
         class="top-0 p-3 cursor-pointer fas fa-times text-secondary opacity-5 position-absolute end-0 d-none d-xl-none"
       ></i>
       <a class="m-0 navbar-brand" href="/">
-        <img
-          :src="getLogo"
-          alt="main_logo"
-          class="navbar-brand-img h-100"
-        />
+        <img :src="getLogo" alt="main_logo" class="navbar-brand-img h-100" />
         <!--        <span class="ms-2 font-weight-bold text-white">HappyRent</span>-->
       </a>
     </div>
@@ -32,17 +28,15 @@ import { storeToRefs } from 'pinia'
 import { useAppStore } from '@/store/appStore.js'
 import { computed } from 'vue'
 
-
 const store = useAppStore()
 const { sidebarType, isDarkMode } = storeToRefs(store)
 const getLogo = computed(() => {
-  if (sidebarType.value === 'bg-white' ) {
+  if (sidebarType.value === 'bg-white') {
     return logoDark
   }
-  if ( sidebarType.value === 'bg-transparent'){
+  if (sidebarType.value === 'bg-transparent') {
     return logo
   }
   return isDarkMode.value && sidebarType.value === 'bg-transparent' ? logoDark : logo
 })
-
 </script>

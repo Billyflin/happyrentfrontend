@@ -1,8 +1,5 @@
 <template>
-  <button
-    :class="getClasses(variant, color, size, fullWidth, active)"
-    class="btn mb-0"
-  >
+  <button :class="getClasses(variant, color, size, fullWidth, active)" class="btn mb-0">
     <slot />
   </button>
 </template>

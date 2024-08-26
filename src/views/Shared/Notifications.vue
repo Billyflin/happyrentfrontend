@@ -3,12 +3,12 @@
     <MaterialSnackbar
       v-for="(notification, index) in store.notifications"
       :key="index"
-      :title="notification.title"
+      :closeHandler="() => store.removeNotification(index)"
+      :color="notification.color"
       :date="notification.date"
       :description="notification.description"
       :icon="notification.icon"
-      :color="notification.color"
-      :closeHandler="() => store.removeNotification(index)"
+      :title="notification.title"
     />
   </div>
 </template>

@@ -2,23 +2,30 @@
   <div v-if="tableData.length > 0" class="table-responsive p-3">
     <table ref="dataTable" class="table table-flush table-hover">
       <thead>
-      <tr>
-        <th v-for="header in headers" :key="header.key" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
-          {{ header.title }}
-        </th>
-        <th v-if="details" class="text-uppercase text-center text-xs font-weight-bolder opacity-7">
-          Acciones
-        </th>
-      </tr>
+        <tr>
+          <th
+            v-for="header in headers"
+            :key="header.key"
+            class="text-uppercase text-center text-xs font-weight-bolder opacity-7"
+          >
+            {{ header.title }}
+          </th>
+          <th
+            v-if="details"
+            class="text-uppercase text-center text-xs font-weight-bolder opacity-7"
+          >
+            Acciones
+          </th>
+        </tr>
       </thead>
       <tbody>
-      <!-- El contenido del cuerpo de la tabla será llenado dinámicamente -->
+        <!-- El contenido del cuerpo de la tabla será llenado dinámicamente -->
       </tbody>
     </table>
   </div>
   <div v-else-if="isLoading" class="text-center mt-7 mb-6">
     <h6>Cargando datos...</h6>
-    <div class="spinner-border text-primary" role="status" style="width:4rem; height: 4rem;">
+    <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem">
       <span class="visually-hidden">Cargando...</span>
     </div>
   </div>
@@ -63,7 +70,7 @@ export default {
   data() {
     return {
       dataTable: null,
-      error: null,
+      error: null
     }
   },
   watch: {
@@ -103,11 +110,11 @@ export default {
         const tbody = this.$refs.dataTable.querySelector('tbody')
         tbody.innerHTML = '' // Clear existing rows
 
-        this.tableData.forEach(row => {
+        this.tableData.forEach((row) => {
           const tr = document.createElement('tr')
           tr.className = 'text-sm text-center text-capitalize align-middle'
 
-          this.headers.forEach(header => {
+          this.headers.forEach((header) => {
             const td = document.createElement('td')
 
             if (header.key === 'propietarioTipo') {
@@ -175,8 +182,15 @@ export default {
 
             if (this.details) {
               const detailsContainer = document.createElement('div')
-              detailsContainer.className = 'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
-              this.mountButton(detailsContainer, 'primary', 'Detalles', () => this.handleDetails(row), 'visibility')
+              detailsContainer.className =
+                'd-flex justify-content-center align-items-center my-sm-auto mt-2 mb-0 ms-2'
+              this.mountButton(
+                detailsContainer,
+                'primary',
+                'Detalles',
+                () => this.handleDetails(row),
+                'visibility'
+              )
               actionContainer.appendChild(detailsContainer)
             }
 
@@ -193,21 +207,29 @@ export default {
     mountButton(container, color, text, onClick, icon) {
       createApp({
         render() {
-          return h(MaterialButton, {
-            color,
-            size: 'sm',
-            variant: 'gradient',
-            class: 'd-flex align-items-center justify-content-center',
-            onClick
-          }, {
-            default: () => [
-              h('span', {
-                class: 'material-symbols-outlined mr-3',
-                style: 'font-size: 16px; margin-right: 10px;'
-              }, icon),
-              text
-            ]
-          })
+          return h(
+            MaterialButton,
+            {
+              color,
+              size: 'sm',
+              variant: 'gradient',
+              class: 'd-flex align-items-center justify-content-center',
+              onClick
+            },
+            {
+              default: () => [
+                h(
+                  'span',
+                  {
+                    class: 'material-symbols-outlined mr-3',
+                    style: 'font-size: 16px; margin-right: 10px;'
+                  },
+                  icon
+                ),
+                text
+              ]
+            }
+          )
         }
       }).mount(container)
     },

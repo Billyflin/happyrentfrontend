@@ -16,10 +16,10 @@
                 </span>
                 <div class="vertical-timeline-element-content bounce-in text-sm">
                   <h4 class="timeline-title text-sm">{{ event.title }}</h4>
-                  <p class="text-sm" v-if="event.description">
+                  <p v-if="event.description" class="text-sm">
                     {{ event.description }}
                   </p>
-                  <p class="text-sm" v-if="event.additionalInfo">
+                  <p v-if="event.additionalInfo" class="text-sm">
                     {{ event.additionalInfo }}
                   </p>
                   <span class="vertical-timeline-element-date text-sm">{{ event.time }}</span>
@@ -35,17 +35,17 @@
 
 <script>
 export default {
-  name: "UserTimeline",
+  name: 'UserTimeline',
   props: {
     title: {
       type: String,
-      default: "User Timeline",
+      default: 'User Timeline'
     },
     events: {
       type: Array,
       required: true,
-      default: () => [],
-    },
-  },
-};
+      default: () => []
+    }
+  }
+}
 </script>

@@ -1,5 +1,4 @@
 <script>
-
 import { useVuelidate } from '@vuelidate/core'
 import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
@@ -7,7 +6,7 @@ import MaterialInput from '@/components/Material/MaterialInput.vue'
 export default {
   components: {
     LocalidadForm,
-    MaterialInput,
+    MaterialInput
   },
   name: 'CorredoraForm',
   data() {
@@ -52,17 +51,17 @@ export default {
   <div class="row">
     <div class="row mt-4">
       <!--  Seccion Empresa-->
-      <div class="row mt-4">
-      </div>
+      <div class="row mt-4"></div>
       <div class="row mt-4">
         <div class="col-sm-6">
-          <material-input id="nombreEmpresa"
-                          v-model="empresa.nombre"
-                          is-required
-                          label="Nombre Comercial"
-                          placeholder="Nombre Empresa"
-                          type="text"
-                          variant="static"
+          <material-input
+            id="nombreEmpresa"
+            v-model="empresa.nombre"
+            is-required
+            label="Nombre Comercial"
+            placeholder="Nombre Empresa"
+            type="text"
+            variant="static"
           />
         </div>
         <div class="col-sm-6">
@@ -107,7 +106,6 @@ export default {
             variant="static"
           />
         </div>
-
       </div>
     </div>
     <div class="row text-start">
@@ -115,7 +113,12 @@ export default {
     </div>
   </div>
   <div class="mt-4 button-row d-flex">
-    <button class="mb-0 btn bg-gradient-dark ms-auto js-btn-next" title="Next" type="button" @click="emitData">
+    <button
+      class="mb-0 btn bg-gradient-dark ms-auto js-btn-next"
+      title="Next"
+      type="button"
+      @click="emitData"
+    >
       Siguiente
     </button>
   </div>

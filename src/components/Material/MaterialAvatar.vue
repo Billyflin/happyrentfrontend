@@ -1,10 +1,6 @@
 <template>
   <div :class="getSize(size)" class="avatar">
-    <img
-      :alt="alt"
-      :class="[getClasses(shadow, circular, borderRadius)]"
-      :src="img"
-    />
+    <img :alt="alt" :class="[getClasses(shadow, circular, borderRadius)]" :src="img" />
   </div>
 </template>
 

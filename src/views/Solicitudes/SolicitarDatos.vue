@@ -4,7 +4,6 @@ import { onMounted } from 'vue'
 import { getSolicitudes } from '@/servicios/solicitudService.js'
 import SolicitarDatosContrato from '@/views/Solicitudes/component/SolicitarDatosContrato.vue'
 
-
 onMounted(() => {
   getSolicitudes()
 })
@@ -18,6 +17,4 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>

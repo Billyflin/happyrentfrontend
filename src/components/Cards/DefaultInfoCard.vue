@@ -6,8 +6,8 @@
         class="icon icon-shape icon-lg shadow text-center border-radius-lg"
       >
         <i aria-hidden="true" class="material-icons opacity-10">{{
-            typeof icon === 'string' ? icon : icon.component
-          }}</i>
+          typeof icon === 'string' ? icon : icon.component
+        }}</i>
       </div>
     </div>
     <div class="p-3 pt-0 text-center card-body">

@@ -3,31 +3,45 @@
     <div class="card shadow-sm">
       <div class="card-header pb-0">
         <h2 class="mb-0">Calculadora de Reajuste de Arriendo</h2>
-        <p >Calcula el reajuste de un arriendo mes a mes en base a la variación del IPC.</p>
+        <p>Calcula el reajuste de un arriendo mes a mes en base a la variación del IPC.</p>
       </div>
       <div class="card-body">
         <div class="row">
           <div class="col-lg-3 col-md-6">
-            <h4>
-              Ingresa los datos del arriendo
-            </h4>
+            <h4>Ingresa los datos del arriendo</h4>
             <form @submit.prevent="calculateAdjustment">
               <div class="form-group">
                 <label for="initialRent">Valor Inicial del Arriendo</label>
-                <input type="number" id="initialRent" v-model.number="initialRent" class="form-control border"
-                       required />
+                <input
+                  id="initialRent"
+                  v-model.number="initialRent"
+                  class="form-control border"
+                  required
+                  type="number"
+                />
               </div>
               <div class="form-group">
                 <label for="startDate">Fecha de Inicio</label>
-                <input type="month" id="startDate" v-model="startDate" class="form-control border" required />
+                <input
+                  id="startDate"
+                  v-model="startDate"
+                  class="form-control border"
+                  required
+                  type="month"
+                />
               </div>
               <div class="form-group">
                 <label for="endDate">Fecha de Fin</label>
-                <input type="month" id="endDate" v-model="endDate" class="form-control border" required />
+                <input
+                  id="endDate"
+                  v-model="endDate"
+                  class="form-control border"
+                  required
+                  type="month"
+                />
               </div>
-              <button type="submit" class="btn btn-primary mt-2">Calcular Reajuste</button>
+              <button class="btn btn-primary mt-2" type="submit">Calcular Reajuste</button>
             </form>
-
           </div>
           <div class="col-lg-5 col-md-6">
             <!-- Card para el arriendo ajustado final -->
@@ -47,7 +61,6 @@
             </div>
           </div>
           <div class="col-lg-3 col-md-6">
-
             <TimelineReajuste :monthly-adjustments="monthlyAdjustments" />
           </div>
         </div>
@@ -68,7 +81,7 @@ export default {
     return {
       IPCData: null,
       initialRent: 0,
-      sumIPC:0,
+      sumIPC: 0,
       startDate: '',
       endDate: '',
       monthlyAdjustments: [], // Almacena los ajustes mensuales
@@ -106,13 +119,13 @@ export default {
       // Iterar sobre cada mes en el rango de fechas
       while (currentYear < endYear || (currentYear === endYear && currentMonth <= endMonth)) {
         const formattedDate = formatDate(currentYear, currentMonth)
-        const ipcRecord = this.IPCData.find(record => record.date.startsWith(formattedDate))
+        const ipcRecord = this.IPCData.find((record) => record.date.startsWith(formattedDate))
 
         let adjustmentValue = 0
         let ipcValue = 0
         if (ipcRecord) {
           ipcValue = ipcRecord.valor
-          adjustmentValue = currentRent * ipcValue / 100
+          adjustmentValue = (currentRent * ipcValue) / 100
           currentRent += adjustmentValue
         }
 

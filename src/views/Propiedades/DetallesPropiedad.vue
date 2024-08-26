@@ -1,29 +1,31 @@
 <template>
   <div class="container-fluid">
-    <div class="row"  v-if="store.propiedad">
+    <div v-if="store.propiedad" class="row">
       <div class="col-lg-9">
         <div class="row">
           <div class="col-lg-4">
             <ImgPropiedadDetails :store="store" />
-            <div class="mt-4" v-if="store.propiedad.propietario">
+            <div v-if="store.propiedad.propietario" class="mt-4">
               <PropietarioDetallesPropiedad :propietario="store.propiedad.propietario" />
             </div>
-
           </div>
           <div class="col-lg-8">
             <ListaDireccionPropiedad :direccion="store.propiedad.direccion" />
-            <div class="mt-4" v-if="store.propiedad">
+            <div v-if="store.propiedad" class="mt-4">
               <DetallesDePropiedad :propiedad="store.propiedad" />
             </div>
-            <div class="mt-4 " v-if="store.propiedad.inventarios">
+            <div v-if="store.propiedad.inventarios" class="mt-4">
               <ListaInventariosPropiedad :inventarios="store.propiedad.inventarios" />
             </div>
           </div>
         </div>
       </div>
       <div class="col-lg-3">
-        <div class="mb-4 " v-if="store.propiedad.arrendado">
-          <ContratoActivoPropiedad :arrendado="store.propiedad.arrendado" :propiedad-id="store.propiedad.id" />
+        <div v-if="store.propiedad.arrendado" class="mb-4">
+          <ContratoActivoPropiedad
+            :arrendado="store.propiedad.arrendado"
+            :propiedad-id="store.propiedad.id"
+          />
         </div>
         <div v-if="store.propiedad">
           <div>
@@ -32,7 +34,7 @@
           <div class="mt-4">
             <ContactoPerfil :propietario="store.propiedad.propietario" />
           </div>
-          <div class="mt-4" v-if="store.propiedad">
+          <div v-if="store.propiedad" class="mt-4">
             <TimelinePropiedad :propiedad="store.propiedad" />
           </div>
         </div>

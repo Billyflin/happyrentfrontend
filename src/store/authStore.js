@@ -49,7 +49,7 @@ export const useAuthStore = defineStore('auth', {
       this.errorMessage = null
       this.authorities = []
       delete instance.defaults.headers.common['Authorization']
-      router.push({ name: 'SignIn' }).then(r => r)
+      router.push({ name: 'SignIn' }).then((r) => r)
     }
   },
   persist: {

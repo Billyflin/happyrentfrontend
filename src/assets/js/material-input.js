@@ -14,7 +14,7 @@ function defocused(el) {
 
 // Ayudante para añadir múltiples atributos a un elemento
 function setAttributes(el, options) {
-  Object.keys(options).forEach(attr => {
+  Object.keys(options).forEach((attr) => {
     el.setAttribute(attr, options[attr])
   })
 }
@@ -22,17 +22,19 @@ function setAttributes(el, options) {
 // Añadir atributos a los inputs para llamar a las funciones de enfoque y desenfoque
 function addFocusListeners() {
   const allInputs = document.querySelectorAll('input.form-control')
-  allInputs.forEach(el => setAttributes(el, {
-    onfocus: 'focused(this)',
-    onblur: 'defocused(this)'
-  }))
+  allInputs.forEach((el) =>
+    setAttributes(el, {
+      onfocus: 'focused(this)',
+      onblur: 'defocused(this)'
+    })
+  )
 }
 
 // Configurar los inputs con Material Design
 export default function setMaterialInput() {
   const inputs = document.querySelectorAll('input')
 
-  inputs.forEach(input => {
+  inputs.forEach((input) => {
     // Agrega la clase 'is-filled' si el input tiene un valor
     if (input.value) {
       input.parentElement.classList.add('is-filled')

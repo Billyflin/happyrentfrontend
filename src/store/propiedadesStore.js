@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { getPropiedad, getPropiedades } from '../servicios/propiedadesService'
+import { getPropiedad } from '../servicios/propiedadesService'
 
 export const usePropiedadesStore = defineStore('propiedades', {
   state: () => ({
@@ -12,22 +12,19 @@ export const usePropiedadesStore = defineStore('propiedades', {
       try {
         this.loading = true
         console.log('id', id)
-        const response = await getPropiedad(id).then(
-          (response) => {
+        const response = await getPropiedad(id)
+          .then((response) => {
             console.log('response', response)
             this.propiedad = response.data
-          }
-        ).finally(
-          () => {
+          })
+          .finally(() => {
             console.log('finally')
             this.loading = false
-          }
-        )
+          })
       } catch (err) {
         console.error(err)
       } finally {
-
       }
-  }
+    }
   }
 })

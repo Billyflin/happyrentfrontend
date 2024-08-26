@@ -1,11 +1,13 @@
 <template>
   <div class="py-4 container-fluid">
     <div class="row mb-4">
-
       <div class="col-lg-12 position-relative z-index-2">
-        <div v-if="isLoading" class="d-flex justify-content-center align-items-center" style="height: 50vh;">
-
-          <div class="spinner-border text-primary" role="status" style="width:4rem; height: 4rem;">
+        <div
+          v-if="isLoading"
+          class="d-flex justify-content-center align-items-center"
+          style="height: 50vh"
+        >
+          <div class="spinner-border text-primary" role="status" style="width: 4rem; height: 4rem">
             <span class="visually-hidden">Cargando...</span>
           </div>
         </div>
@@ -18,10 +20,7 @@
         <div class="card card-body">
           <div class="row justify-content-center align-items-center">
             <div class="col-sm-auto col-4">
-              <material-avatar
-                :img="logoBancoCentral"
-                alt="bruce"
-              />
+              <material-avatar :img="logoBancoCentral" alt="bruce" />
             </div>
             <div class="col-sm-auto col-8 my-auto">
               <div class="h-100">
@@ -30,18 +29,17 @@
               </div>
             </div>
             <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
-              <p class="text-end mx-6"> Todos los datos fueron recopilados utilizando la api del <strong>
-                Banco
-                Central de Chile</strong> el dia
-                {{ lastUpdated.toLocaleString('es-CL', { timeZone: 'America/Santiago' }) }}</p>
+              <p class="text-end mx-6">
+                Todos los datos fueron recopilados utilizando la api del
+                <strong> Banco Central de Chile</strong> el dia
+                {{ lastUpdated.toLocaleString('es-CL', { timeZone: 'America/Santiago' }) }}
+              </p>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
-
 </template>
 
 <script setup>
@@ -62,10 +60,9 @@ onBeforeMount(async () => {
     // Asegúrate de que la respuesta sea una cadena de fecha válida y conviértela a un objeto Date
     lastUpdated.value = new Date(response.data)
   } catch (error) {
-    console.error("Error al obtener la última actualización:", error)
+    console.error('Error al obtener la última actualización:', error)
   } finally {
     isLoading.value = false
   }
 })
-
 </script>

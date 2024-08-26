@@ -7,62 +7,70 @@
       <div class="row">
         <div class="col-2">
           ¿Arriendo Mensual?
-          <material-checkbox id="arriendoMensual"
-                             label="Arriendo mensual"
-                             name="arriendoMensual"
+          <material-checkbox id="arriendoMensual" label="Arriendo mensual" name="arriendoMensual" />
+        </div>
+        <div class="col-3">
+          <material-input
+            id="renta"
+            label="Renta"
+            placeholder="Renta"
+            type="number"
+            variant="static"
+            @input="validateInput"
           />
         </div>
         <div class="col-3">
-          <material-input id="renta"
-                          label="Renta"
-                          placeholder="Renta"
-                          type="number"
-                          variant="static"
-                          @input="validateInput"
+          <MaterialChoices
+            id="garantia"
+            :options="[
+              { value: '1', label: '1 mes', selected: true },
+              { value: '2', label: '2 meses' }
+            ]"
+            label="Garantía"
+            name="Garantía"
           />
         </div>
         <div class="col-3">
-          <MaterialChoices id="garantia"
-                           :options="[
-                             {value: '1', label: '1 mes',selected: true},
-                             {value: '2', label: '2 meses'}
-                             ]"
-                           label="Garantía"
-                           name="Garantía"
+          <MaterialChoices
+            id="fechaAviso"
+            v-model:text-choice="fechaAviso"
+            :options="[
+              { value: '1', label: '60 dias', selected: true },
+              { value: '2', label: '30 dias' }
+            ]"
+            label="Fecha de aviso"
+            name="fecha"
           />
         </div>
-        <div class="col-3">
-          <MaterialChoices id="fechaAviso"
-                           :options="[
-                             {value: '1', label: '60 dias',selected: true},
-                             {value: '2', label: '30 dias'}
-                             ]"
-                           label="Fecha de aviso"
-                           v-model:text-choice="fechaAviso"
-           name="fecha"/>
-        </div>
-        {{fechaAviso}}
+        {{ fechaAviso }}
       </div>
 
       <div class="row mt-2">
         <div class="col-4">
-          <MaterialChoices id="periodoContrato"
-                           :options="[
-                             {value: 'Mensual', label: 'Mensual',selected: true},
-                             {value: 'Semestral', label: 'Semestral'},
-                             {value: 'Anual', label: 'Anual'},
-                             {value: 'Trimestral', label: 'Trimestral'}]"
-                           label="Periodicidad"
-                           name="periodoContrato"
+          <MaterialChoices
+            id="periodoContrato"
+            :options="[
+              { value: 'Mensual', label: 'Mensual', selected: true },
+              { value: 'Semestral', label: 'Semestral' },
+              { value: 'Anual', label: 'Anual' },
+              { value: 'Trimestral', label: 'Trimestral' }
+            ]"
+            label="Periodicidad"
+            name="periodoContrato"
           />
         </div>
         <div class="col-4">
-          <MaterialChoices id="moneda" :options="[{value: 'CLP', label: 'CLP',selected: true},
-                                      {value: 'USD', label: 'USD'},
-                                      {value: 'EUR', label: 'EUR'},
-                                      {value: 'UF' , label: 'UF'}]"
-                           label="Moneda"
-                           name="moneda" />
+          <MaterialChoices
+            id="moneda"
+            :options="[
+              { value: 'CLP', label: 'CLP', selected: true },
+              { value: 'USD', label: 'USD' },
+              { value: 'EUR', label: 'EUR' },
+              { value: 'UF', label: 'UF' }
+            ]"
+            label="Moneda"
+            name="moneda"
+          />
         </div>
       </div>
       <div>
@@ -70,26 +78,38 @@
       </div>
       <div class="row mt-2">
         <div class="col-4">
-          <MaterialChoices id="tipoReajuste" :options="[{value: 'Fijo', label: 'Fijo'},
-                                      {value: 'Variable', label: 'Variable',selected:true}]"
-                           label="Tipo Reajuste"
-                           name="tipoReajuste" />
+          <MaterialChoices
+            id="tipoReajuste"
+            :options="[
+              { value: 'Fijo', label: 'Fijo' },
+              { value: 'Variable', label: 'Variable', selected: true }
+            ]"
+            label="Tipo Reajuste"
+            name="tipoReajuste"
+          />
         </div>
         <div class="col-4">
-          <MaterialChoices id="reajuste" v-model="reajusteSeleccionado" :options="[{value: 'IPC', label: 'IPC',selected:true},
-                                      {value: 'UVT', label: 'Acordado'},
-                                      {value: 'Dolar', label: 'Dolar'},
-                                      {value: 'Otra', label: 'Otra'}]"
-                           label="Reajuste"
-                           name="reajuste" />
+          <MaterialChoices
+            id="reajuste"
+            v-model="reajusteSeleccionado"
+            :options="[
+              { value: 'IPC', label: 'IPC', selected: true },
+              { value: 'UVT', label: 'Acordado' },
+              { value: 'Dolar', label: 'Dolar' },
+              { value: 'Otra', label: 'Otra' }
+            ]"
+            label="Reajuste"
+            name="reajuste"
+          />
         </div>
-        <div class="col-4" v-if="reajusteSeleccionado !== 'IPC'">
-          <material-input id="porcentajeReajuste"
-                          label="Porcentaje Reajuste"
-                          placeholder="% Reajuste"
-                          type="number"
-                          variant="static"
-                          @input="validateInput"
+        <div v-if="reajusteSeleccionado !== 'IPC'" class="col-4">
+          <material-input
+            id="porcentajeReajuste"
+            label="Porcentaje Reajuste"
+            placeholder="% Reajuste"
+            type="number"
+            variant="static"
+            @input="validateInput"
           />
         </div>
       </div>
@@ -99,25 +119,31 @@
         <form @submit.prevent="calcularReajusteIPC">
           <div class="row">
             <div class="col-4">
-              <label for="valorInicial" class="form-label">Valor Inicial</label>
-              <input type="number" class="form-control" id="valorInicial" v-model.number="valorInicial" required />
+              <label class="form-label" for="valorInicial">Valor Inicial</label>
+              <input
+                id="valorInicial"
+                v-model.number="valorInicial"
+                class="form-control"
+                required
+                type="number"
+              />
             </div>
             <div class="col-4">
-              <label for="ipcInicial" class="form-label">Fecha IPC Inicial</label>
-              <select class="form-control" id="ipcInicial" v-model="ipcInicial" required>
+              <label class="form-label" for="ipcInicial">Fecha IPC Inicial</label>
+              <select id="ipcInicial" v-model="ipcInicial" class="form-control" required>
                 <option disabled value="">Seleccione una fecha</option>
                 <option v-for="date in ipcFechas" :key="date" :value="date">{{ date }}</option>
               </select>
             </div>
             <div class="col-4">
-              <label for="ipcFinal" class="form-label">Fecha IPC Final</label>
-              <select class="form-control" id="ipcFinal" v-model="ipcFinal" required>
+              <label class="form-label" for="ipcFinal">Fecha IPC Final</label>
+              <select id="ipcFinal" v-model="ipcFinal" class="form-control" required>
                 <option disabled value="">Seleccione una fecha</option>
                 <option v-for="date in ipcFechas" :key="date" :value="date">{{ date }}</option>
               </select>
             </div>
           </div>
-          <button type="submit" class="btn btn-primary mt-3">Calcular Reajuste</button>
+          <button class="btn btn-primary mt-3" type="submit">Calcular Reajuste</button>
         </form>
 
         <div v-if="reajuste !== null" class="mt-4">
@@ -129,7 +155,7 @@
   </div>
 </template>
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import axios from 'axios'
 import MaterialCheckbox from '@/components/Material/MaterialCheckbox.vue'
 import MaterialInput from '@/components/Material/MaterialInput.vue'
@@ -141,7 +167,7 @@ const validateInput = (event) => {
   }
 }
 
-const fechaAviso = ref("")
+const fechaAviso = ref('')
 const valorInicial = ref(0)
 const ipcInicial = ref(null)
 const ipcFinal = ref(null)
@@ -152,9 +178,11 @@ const reajusteSeleccionado = ref('IPC')
 
 const fetchIPCData = async () => {
   try {
-    const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ipc`)
+    const response = await axios.get(
+      `${import.meta.env.VITE_SERVER_URL}:${import.meta.env.VITE_SERVER_PORT}/ipc`
+    )
     if (response.data && response.data.Series && response.data.Series.Obs) {
-      ipcData.value = response.data.Series.Obs.map(obs => ({
+      ipcData.value = response.data.Series.Obs.map((obs) => ({
         date: new Date(obs.indexDateString),
         value: parseFloat(obs.value)
       }))
@@ -170,14 +198,18 @@ const calcularReajusteIPC = () => {
     return
   }
 
-  const ipcInicialValue = ipcData.value.find(item => item.date.toISOString().split('T')[0] === ipcInicial.value).value
-  const ipcFinalValue = ipcData.value.find(item => item.date.toISOString().split('T')[0] === ipcFinal.value).value
+  const ipcInicialValue = ipcData.value.find(
+    (item) => item.date.toISOString().split('T')[0] === ipcInicial.value
+  ).value
+  const ipcFinalValue = ipcData.value.find(
+    (item) => item.date.toISOString().split('T')[0] === ipcFinal.value
+  ).value
 
   reajuste.value = (ipcFinalValue / ipcInicialValue) * valorInicial.value
 }
 
 const ipcFechas = computed(() => {
-  return ipcData.value.map(item => item.date.toISOString().split('T')[0])
+  return ipcData.value.map((item) => item.date.toISOString().split('T')[0])
 })
 
 onMounted(fetchIPCData)

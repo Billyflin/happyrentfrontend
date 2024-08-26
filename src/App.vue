@@ -10,7 +10,10 @@
     />
     <router-view />
     <app-footer v-show="showFooter" />
-    <configurator :class="[showConfig ? 'show' : '', hideConfigButton ? 'd-none' : '']" :toggle="toggleConfigurator" />
+    <configurator
+      :class="[showConfig ? 'show' : '', hideConfigButton ? 'd-none' : '']"
+      :toggle="toggleConfigurator"
+    />
     <notifications />
   </main>
 </template>
@@ -47,7 +50,6 @@ const authStore = useAuthStore()
 onBeforeMount(async () => {
   await authStore.fetchCurrentUser()
 })
-
 
 onBeforeMount(() => {
   store.isTransparent = 'bg-transparent'

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="mostrarModal" class="modal fade show" style="display: block;" tabindex="-1">
+  <div v-if="mostrarModal" class="modal fade show" style="display: block" tabindex="-1">
     <div class="modal-dialog modal-xl">
       <div class="modal-content">
         <div class="modal-header">

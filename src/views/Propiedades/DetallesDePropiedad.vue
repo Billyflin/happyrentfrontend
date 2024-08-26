@@ -20,7 +20,7 @@
         </template>
 
         <template v-if="propiedad.habitaciones">
-          <div class="col-lg-4 col-sm-12  mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">N° Habitaciones:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -34,7 +34,7 @@
         </template>
 
         <template v-if="propiedad.banios">
-          <div class="col-lg-4 col-sm-12  mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">N° Baños:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -48,7 +48,7 @@
         </template>
 
         <template v-if="propiedad.estacionamientos">
-          <div class="col-lg-4 col-sm-12  mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">N° Estacionamientos:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -62,7 +62,7 @@
         </template>
 
         <template v-if="propiedad.amoblado">
-          <div class="col-lg-4 col-sm-12  mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Amoblado:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -76,7 +76,7 @@
         </template>
 
         <template v-if="propiedad.numeroDePisos">
-          <div class="col-lg-4 col-sm-12  mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">N° Pisos:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -89,8 +89,8 @@
           </div>
         </template>
 
-        <template v-if="propiedad.piscina ">
-          <div class="col-lg-4 col-sm-12  mb-3">
+        <template v-if="propiedad.piscina">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Piscina:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -104,7 +104,7 @@
         </template>
 
         <template v-if="propiedad.jardines">
-          <div class="col-lg-4 col-sm-12  mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Jardines:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -118,7 +118,7 @@
         </template>
 
         <template v-if="propiedad.patio">
-          <div class="col-lg-4 col-sm-12  mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Patio:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -136,7 +136,9 @@
             <p class="text-sm text-dark mb-1">Gastos Comunes:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
-                <span class="material-symbols-outlined text-dark align-middle">account_balance_wallet</span>
+                <span class="material-symbols-outlined text-dark align-middle"
+                  >account_balance_wallet</span
+                >
               </dt>
               <dd class="text-sm text-dark text-bold mb-0">
                 {{ propiedad.gastosComunes ? 'Sí' : 'No' }}
@@ -146,7 +148,7 @@
         </template>
 
         <template v-if="propiedad.contribuciones">
-          <div class="col-lg-4 col-sm-12  mb-3">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Contribuciones:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -159,12 +161,14 @@
           </div>
         </template>
 
-        <template v-if="propiedad.aseo ">
-          <div class="col-lg-4 col-sm-12  mb-3">
+        <template v-if="propiedad.aseo">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Aseo:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
-                <span class="material-symbols-outlined text-dark align-middle">cleaning_services</span>
+                <span class="material-symbols-outlined text-dark align-middle"
+                  >cleaning_services</span
+                >
               </dt>
               <dd class="text-sm text-dark text-bold mb-0">
                 {{ propiedad.aseo ? 'Sí' : 'No' }}
@@ -173,12 +177,14 @@
           </div>
         </template>
 
-        <template v-if="propiedad.metrosCuadradosDeTerreno ">
-          <div class="col-lg-4 col-sm-12  mb-3">
+        <template v-if="propiedad.metrosCuadradosDeTerreno">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Metros Cuadrados de Terreno:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
-                <span class="material-symbols-outlined text-dark align-middle">background_grid_small</span>
+                <span class="material-symbols-outlined text-dark align-middle"
+                  >background_grid_small</span
+                >
               </dt>
               <dd class="text-sm text-dark text-bold mb-0">
                 {{ propiedad.metrosCuadradosDeTerreno }}
@@ -187,8 +193,8 @@
           </div>
         </template>
 
-        <template v-if="propiedad.metrosCuadradosDeConstruccion ">
-          <div class="col-lg-4 col-sm-12  mb-3">
+        <template v-if="propiedad.metrosCuadradosDeConstruccion">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Metros Cuadrados de Construcción:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
@@ -201,20 +207,17 @@
           </div>
         </template>
 
-        <template v-if="propiedad.antiguedad ">
-          <div class="col-lg-4 col-sm-12  mb-3">
+        <template v-if="propiedad.antiguedad">
+          <div class="col-lg-4 col-sm-12 mb-3">
             <p class="text-sm text-dark mb-1">Antigüedad:</p>
             <div class="d-flex align-items-center">
               <dt class="text-sm me-2">
                 <span class="material-symbols-outlined text-dark align-middle">history</span>
               </dt>
-              <dd class="text-sm text-dark text-bold mb-0">
-                {{ propiedad.antiguedad }} años
-              </dd>
+              <dd class="text-sm text-dark text-bold mb-0">{{ propiedad.antiguedad }} años</dd>
             </div>
           </div>
         </template>
-
       </div>
     </div>
   </div>

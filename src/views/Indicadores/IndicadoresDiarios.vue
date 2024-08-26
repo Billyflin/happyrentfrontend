@@ -1,22 +1,27 @@
 <template>
-  <mini-statistics-card v-if="DOLARData"
-                        :data="DOLARData"
-                        :icon="{ name: 'attach_money', color: 'text-white', background: 'primary' }"
-                        title="Dólar"
+  <mini-statistics-card
+    v-if="DOLARData"
+    :data="DOLARData"
+    :icon="{ name: 'attach_money', color: 'text-white', background: 'primary' }"
+    title="Dólar"
   />
-  <mini-statistics-card v-if="UTMData"
-                        :data="UTMData"
-                        :icon="{ name: 'attach_money', color: 'text-white', background: 'secondary' }"
-                        title="UTM"
+  <mini-statistics-card
+    v-if="UTMData"
+    :data="UTMData"
+    :icon="{ name: 'attach_money', color: 'text-white', background: 'secondary' }"
+    title="UTM"
   />
-  <mini-statistics-card v-if="UFData"
-                        :data="UFData"
-                        :icon="{ name: 'attach_money', color: 'text-white', background: 'success' }"
-                        title="UF" />
-  <mini-statistics-card v-if="IPCData"
-                        :data="IPCData"
-                        :icon="{ name: 'attach_money', color: 'text-white', background: 'happDark' }"
-                        title="IPC"
+  <mini-statistics-card
+    v-if="UFData"
+    :data="UFData"
+    :icon="{ name: 'attach_money', color: 'text-white', background: 'success' }"
+    title="UF"
+  />
+  <mini-statistics-card
+    v-if="IPCData"
+    :data="IPCData"
+    :icon="{ name: 'attach_money', color: 'text-white', background: 'happDark' }"
+    title="IPC"
   />
 </template>
 <script>
@@ -35,18 +40,18 @@ export default {
     }
   },
   mounted() {
-    getIPC().then(data => {
+    getIPC().then((data) => {
       this.IPCData = data.data
     })
-    getUF().then(data => {
+    getUF().then((data) => {
       this.UFData = data.data
     })
-    getDolar().then(data => {
+    getDolar().then((data) => {
       this.DOLARData = data.data
     })
-    getUTM().then(data => {
+    getUTM().then((data) => {
       this.UTMData = data.data
     })
-  },
+  }
 }
 </script>

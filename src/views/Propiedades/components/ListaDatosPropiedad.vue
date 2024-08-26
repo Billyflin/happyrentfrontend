@@ -19,14 +19,29 @@
       <ul>
         <li>Type: <input v-model="propiedad.type" placeholder="Type" /></li>
         <li>Amoblado: <input v-model="propiedad.amoblado" placeholder="Amoblado" /></li>
-        <li>Numero De Pisos: <input v-model="propiedad.numero" type="number" placeholder="Numero de Pisos" /></li>
-        <li>Habitaciones: <input v-model="propiedad.habitaciones" type="number" placeholder="Habitaciones" /></li>
-        <li>Baños: <input v-model="propiedad.banios" type="number" placeholder="Baños" /></li>
-        <li>Estacionamientos: <input v-model="propiedad.estacionamientos" type="number" placeholder="Estacionamientos" /></li>
+        <li>
+          Numero De Pisos:
+          <input v-model="propiedad.numero" placeholder="Numero de Pisos" type="number" />
+        </li>
+        <li>
+          Habitaciones:
+          <input v-model="propiedad.habitaciones" placeholder="Habitaciones" type="number" />
+        </li>
+        <li>Baños: <input v-model="propiedad.banios" placeholder="Baños" type="number" /></li>
+        <li>
+          Estacionamientos:
+          <input
+            v-model="propiedad.estacionamientos"
+            placeholder="Estacionamientos"
+            type="number"
+          />
+        </li>
         <li>Piscina: <input v-model="propiedad.piscina" placeholder="Piscina" /></li>
         <li>Jardines: <input v-model="propiedad.jardines" placeholder="Jardines" /></li>
         <li>Patio: <input v-model="propiedad.patio" placeholder="Patio" /></li>
-        <li>Gastos Comunes: <input v-model="propiedad.gastosComunes" placeholder="Gastos Comunes" /></li>
+        <li>
+          Gastos Comunes: <input v-model="propiedad.gastosComunes" placeholder="Gastos Comunes" />
+        </li>
       </ul>
       <button @click="$emit('update', propiedad)">Guardar</button>
       <button @click="$emit('toggle-edit')">Cancelar</button>
@@ -40,11 +55,11 @@ export default {
   props: {
     propiedad: {
       type: Object,
-      required: true,
+      required: true
     },
     editable: {
       type: Boolean,
-      required: true,
+      required: true
     }
   }
 }

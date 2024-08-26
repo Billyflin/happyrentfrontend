@@ -1,16 +1,16 @@
 <script>
 import ProfileAvatar from '@/views/Perfil/components/ProfileAvatar.vue'
+
 export default {
   name: 'SideNav',
-  components: { ProfileAvatar },
+  components: { ProfileAvatar }
 }
 </script>
 
 <template>
-  <div class=" position-sticky top-1">
-    <ProfileAvatar/>
+  <div class="position-sticky top-1">
+    <ProfileAvatar />
     <div class="card mt-4">
-
       <ul class="nav flex-column bg-white border-radius-lg p-3">
         <li class="nav-item pt-2">
           <a class="nav-link d-flex" data-scroll href="#basic-info">
@@ -42,4 +42,3 @@ export default {
     </div>
   </div>
 </template>
-
