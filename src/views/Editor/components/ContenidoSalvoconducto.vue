@@ -38,8 +38,7 @@
 
 <script setup>
 import { usePropiedadesStore } from '@/store/propiedadesStore.js';
-import { formatDate } from '../NuevoContrato/utils.js';
-import logoHapp from '@/assets/img/logos/LogoHapp.svg'
+import { formatDate } from '../../NuevoContrato/utils.js';
 import jsPDF from 'jspdf';
 
 const store = usePropiedadesStore();
@@ -89,14 +88,15 @@ const downloadPDF = () => {
   // Párrafo 5: Emisión de la declaración
   const paragraph4 = `Emito la presente declaración en cumplimiento de la Ley 20.227 a fin de que se obtenga la correspondiente declaración jurada.`;
   pdf.text(paragraph4, marginLeft, cursorY, { maxWidth: textWidth, align: 'justify' });
-  cursorY += lineHeight * 2;
+  cursorY += lineHeight * 5;
 
   // Espacio para la firma
+  const signatureLineHeight = 30; // Incrementar la altura de la línea para la sección de la firma
   pdf.text('........................................', pageWidth / 2, cursorY, { align: 'center' });
-  cursorY += lineHeight;
+  cursorY += signatureLineHeight ;
 
   pdf.text(`${fullName(store.propiedad.arrendador)}`, pageWidth / 2, cursorY, { align: 'center' });
-  cursorY += lineHeight;
+  cursorY += signatureLineHeight;
 
   pdf.text(`${store.propiedad.arrendador.rut}`, pageWidth / 2, cursorY, { align: 'center' });
 

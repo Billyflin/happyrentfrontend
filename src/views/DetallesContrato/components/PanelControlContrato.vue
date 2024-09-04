@@ -16,6 +16,17 @@
           </router-link>
         </div>
       </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h5>Generar ACTA de RECEPCIÓN Y ENTREGA de propiedad</h5>
+          <p class="text-muted">Descarga el documento en formato PDF</p>
+        </div>
+        <div>
+          <router-link to="/EditorRecepcion">
+            <material-button size="lg"> Generar</material-button>
+          </router-link>
+        </div>
+      </div>
       <div class="row">
         <p class="text-muted">Aquí puedes renovar, ver el historial de pagos detallado o terminar el contrato en nombre del arrendatario,
 

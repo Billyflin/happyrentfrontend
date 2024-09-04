@@ -1,6 +1,6 @@
 <script setup>
 import MaterialButton from '@/components/Material/MaterialButton.vue'
-import ContenidoSalvoconducto from '@/views/Editor/components/ContenidoSalvoconducto.vue'
+import ContenidoRecepcion from '@/views/Editor/Recepcion/components/ContenidoRecepcion.vue'
 </script>
 
 <template>
@@ -14,7 +14,7 @@ import ContenidoSalvoconducto from '@/views/Editor/components/ContenidoSalvocond
         <div class="contrato card">
           <div class="row">
             <div class="card-body col-lg-10 mt-lg-0 mt-4 text-center text-dark clase">
-              <ContenidoSalvoconducto />
+              <ContenidoRecepcion />
             </div>
           </div>
         </div>

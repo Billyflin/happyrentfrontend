@@ -135,6 +135,15 @@ const routes = [
     meta: {
       requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
     }
+  }, {
+
+    path: '/EditorRecepcion',
+    name: 'EditorRecepcion',
+    component: () => import('@/views/Editor/Recepcion/EditorRecepcion.vue'),
+    props: true,
+    meta: {
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
+    }
   },
 {
     path: '/agregarPropiedad',
