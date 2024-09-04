@@ -5,6 +5,17 @@
       <h5 class="card-title  text-primary">Control de contrato</h5>
     </div>
     <div class="card-body pt-0">
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h5>Generar Salvoconducto</h5>
+          <p class="text-muted">Descarga el salvoconducto en formato PDF</p>
+        </div>
+        <div>
+          <router-link to="/EditorSalvoconducto">
+            <material-button size="lg"> Generar</material-button>
+          </router-link>
+        </div>
+      </div>
       <div class="row">
         <p class="text-muted">Aquí puedes renovar, ver el historial de pagos detallado o terminar el contrato en nombre del arrendatario,
 
@@ -23,8 +34,11 @@
   </div>
 </template>
 <script>
+import MaterialButton from '@/components/Material/MaterialButton.vue'
+
 export default {
   name: 'PanelControlContrato',
+  components: { MaterialButton },
   props: {
     contrato: {}
   }
