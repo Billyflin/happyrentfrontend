@@ -1,12 +1,14 @@
 <template>
   <div class="container-fluid mt-4">
+    <multiStepsFormPropiedades />
     <!-- Mensaje de alerta -->
 
     <div class="row">
       <div class="col-lg-8">
 
+
         <!-- Seccion propiedad -->
-        <propiedad-agregar-propiedad @update:propiedad="propiedad = $event"/>
+                <propiedad-agregar-propiedad @update:propiedad="propiedad = $event"/>
 
 
         <!-- Seccion Propietario -->
@@ -31,7 +33,6 @@
 
 <script>
 import { ref } from 'vue'
-import PropiedadAgregarPropiedad from '@/views/Propiedades/components/PropiedadAgregarPropiedad.vue'
 import PropiedadAgregarPropietario from '@/views/Propiedades/components/PropiedadAgregarPropietario.vue'
 import MaterialButton from '@/components/Material/MaterialButton.vue'
 import { useVuelidate } from '@vuelidate/core'
@@ -39,15 +40,14 @@ import router from '@/router/index.js'
 import { createPropiedad } from '@/servicios/propiedadesService.js'
 import { useNotificationsStore } from '@/store/notifications.js'
 import PropiedadAgregarThumbnail from '@/views/Propiedades/PropiedadAgregarThumbnail.vue'
-import ListaInventario from '@/views/Propiedades/ListaInventario.vue'
-import FormularioInventario from '@/views/Propiedades/FormularioInventario.vue'
+import MultiStepsFormPropiedades from '@/views/Propiedades/MultiStepsFormPropiedades.vue'
+import PropiedadAgregarPropiedad from '@/views/Propiedades/components/PropiedadAgregarPropiedad.vue'
 
 export default {
   components: {
-    FormularioInventario,
-    ListaInventario,
-    PropiedadAgregarThumbnail,
     PropiedadAgregarPropiedad,
+    MultiStepsFormPropiedades,
+    PropiedadAgregarThumbnail,
     PropiedadAgregarPropietario,
     MaterialButton
   },

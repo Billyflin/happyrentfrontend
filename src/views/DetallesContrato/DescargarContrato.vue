@@ -10,6 +10,17 @@
           <material-button size="lg" @click="getDocumento(contratoId)"> Descargar</material-button>
       </div>
       </div>
+      <div class="d-flex justify-content-between align-items-center">
+        <div>
+          <h5>Generar Salvoconducto</h5>
+          <p class="text-muted">Descarga el salvoconducto en formato PDF</p>
+        </div>
+        <div>
+          <router-link to="/EditorSalvoconducto">
+            <material-button size="lg"> Generar</material-button>
+          </router-link>
+        </div>
+      </div>
     </div>
   </div>
 </template>

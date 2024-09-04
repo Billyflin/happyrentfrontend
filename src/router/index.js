@@ -120,13 +120,22 @@ const routes = [
   },
 {
   path: '/EditorNuevoContrato',
-  name: 'Editor',
+  name: 'EditorNuevoContrato',
   component: () => import('@/views/NuevoContrato/EditorDeContratos.vue'),
   props: true,
   meta: {
     requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
   }
 },
+  {
+    path: '/EditorSalvoconducto',
+    name: 'EditorSavoconducto',
+    component: () => import('@/views/Editor/EditorSalvoconducto.vue'),
+    props: true,
+    meta: {
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
+    }
+  },
 {
     path: '/agregarPropiedad',
     name: 'AgregarPropiedad',
