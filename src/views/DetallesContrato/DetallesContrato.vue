@@ -34,37 +34,43 @@ export default {
     }
   },
   watch: {
-    contrato: function() {
-      console.log(this.contrato)
-      if (!this.contrato) {
+    contrato(newContrato) {
+      console.log(newContrato)
+      if (!newContrato) {
         router.push({ name: 'Propiedades' })
       }
     }
   },
   computed: {
     columnClass() {
-      return this.contrato.codeudor ? 'col-lg-4' : 'col-lg-6'
+      return this.contrato && this.contrato.codeudor ? 'col-lg-4' : 'col-lg-6'
     }
   },
   methods: {
     formatDate,
     formatDateTime,
-    fetchItems: async function() {
+    async fetchItems() {
       try {
-        if (!this.store.propiedad) {
+        if (!this.store.propiedad || !this.store.propiedad.id) {
           this.store4.addNotification({
             message: 'No se ha encontrado la propiedad',
             type: 'danger'
           })
           await router.push({ name: 'Propiedades' })
+          return
         }
         this.loading = true
+
         const response = await getContratoByPropiedadId(this.store.propiedad.id)
         console.log(response)
         this.contrato = response.data
-        this.store.propiedad = response.data
+
+        // Actualizar solo si el contrato es nuevo o diferente
+        if (!this.store.propiedad.clausulas) {
+          this.store.propiedad = { ...this.store.propiedad, ...response.data }
+        }
+
         this.loading = false
-        console.log(this.contrato)
       } catch (e) {
         console.error(e)
         this.loading = false
@@ -72,10 +78,16 @@ export default {
     }
   },
   async beforeMount() {
-    await this.fetchItems()
+    // Solo buscar el contrato si no se han cargado las cláusulas
+    if (!this.store.propiedad.clausulas || this.store.propiedad.clausulas.length === 0) {
+      await this.fetchItems()
+    } else {
+      this.contrato = this.store.propiedad
+    }
   }
 }
 </script>
+
 
 <template>
   <div class="container-fluid" v-if="contrato&& !loading">
@@ -85,7 +97,7 @@ export default {
       </div>
       <div class="col-lg-6">
         <div class="row">
-          <div class="col-lg-6">
+        <div class="col-lg-6">
           </div>
           <div class="col-lg-6">
             <RowRentaDetalleContrato :renta="contrato.renta" :moneda="contrato.moneda" />

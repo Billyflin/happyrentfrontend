@@ -5,7 +5,7 @@
     <p>
       Yo, <strong>{{ fullName(store.propiedad.arrendador) }}</strong>, cédula nacional de identidad número
       <strong>{{ store.propiedad.arrendador.rut }}</strong>, propietario/a del inmueble ubicado en
-      <strong>{{ store.propiedad.propiedad.direccion.calle }}</strong>, comuna <strong>{{ store.propiedad.propiedad.direccion.comuna }}</strong>,
+      <strong>{{ store.propiedad.propiedad.direccion.calle }}</strong>,
       ciudad <strong>{{ store.propiedad.propiedad.direccion.ciudad }}</strong>, país Chile.
     </p>
 
@@ -55,23 +55,32 @@ const downloadPDF = () => {
   });
 
   const marginLeft = 40;
-  const marginTop = 60;
+  const marginTop = 80;
   const lineHeight = 20;
   const pageWidth = pdf.internal.pageSize.getWidth();
   const textWidth = pageWidth - 2 * marginLeft;
 
   let cursorY = marginTop;
 
-  // Configuración de la fuente
+  // Título
+  pdf.setFont('Times', 'Bold');
+  pdf.setFontSize(16);
+  pdf.text('PODER SIMPLE', pageWidth / 2, cursorY, { align: 'center' });
+  cursorY += lineHeight;
+  pdf.text('SALVOCONDUCTO ARRENDATARIO', pageWidth / 2, cursorY, { align: 'center' });
+  cursorY += lineHeight * 2;
+
+  // Configuración de la fuente para el contenido
   pdf.setFont('Times', 'Roman');
   pdf.setFontSize(12);
 
   // Párrafo 1: Fecha
-  pdf.text(`Santiago, ${formatDate(Date.now())}.`, pageWidth - marginLeft, cursorY, { align: 'right' });
+  const fechaTexto = `Santiago, ${formatDate(Date.now())}.`;
+  pdf.text(fechaTexto, pageWidth - marginLeft, cursorY, { align: 'right' });
   cursorY += lineHeight * 2;
 
   // Párrafo 2: Declaración del propietario
-  const paragraph1 = `Yo, ${fullName(store.propiedad.arrendador)}, cédula nacional de identidad número ${store.propiedad.arrendador.rut}, propietario/a del inmueble ubicado en ${store.propiedad.propiedad.direccion.calle}, comuna ${store.propiedad.propiedad.direccion.comuna}, ciudad ${store.propiedad.propiedad.direccion.ciudad}, país Chile.`;
+  const paragraph1 = `Yo ${fullName(store.propiedad.arrendador)}, cédula nacional de identidad número ${store.propiedad.arrendador.rut}, propietario/a del inmueble ubicado en ${store.propiedad.propiedad.direccion.calle}, comuna ${store.propiedad.propiedad.direccion.comuna}, ciudad ${store.propiedad.propiedad.direccion.ciudad}, país Chile.`;
   pdf.text(paragraph1, marginLeft, cursorY, { maxWidth: textWidth, align: 'justify' });
   cursorY += lineHeight * 2;
 
@@ -91,18 +100,19 @@ const downloadPDF = () => {
   cursorY += lineHeight * 5;
 
   // Espacio para la firma
-  const signatureLineHeight = 30; // Incrementar la altura de la línea para la sección de la firma
+  const signatureLineHeight = 30;
   pdf.text('........................................', pageWidth / 2, cursorY, { align: 'center' });
-  cursorY += signatureLineHeight ;
-
-  pdf.text(`${fullName(store.propiedad.arrendador)}`, pageWidth / 2, cursorY, { align: 'center' });
   cursorY += signatureLineHeight;
 
-  pdf.text(`${store.propiedad.arrendador.rut}`, pageWidth / 2, cursorY, { align: 'center' });
+  pdf.text(fullName(store.propiedad.arrendador), pageWidth / 2, cursorY, { align: 'center' });
+  cursorY += signatureLineHeight;
+
+  pdf.text(store.propiedad.arrendador.rut, pageWidth / 2, cursorY, { align: 'center' });
 
   // Guardar el PDF
-  pdf.save('salvoconducto.pdf');
+  pdf.save(`Salvoconducto ${store.propiedad.propiedad.direccion.calle}, ciudad ${store.propiedad.propiedad.direccion.ciudad}.pdf`);
 };
+
 </script>
 
 <style scoped>
@@ -110,3 +120,4 @@ p {
   font-size: 1.1rem;
 }
 </style>
+<!--  pdf.save(`Salvoconducto ${store.propiedad.propiedad.direccion.calle}, comuna ${store.propiedad.propiedad.direccion.comuna}, ciudad ${store.propiedad.propiedad.direccion.ciudad}.pdf`);-->

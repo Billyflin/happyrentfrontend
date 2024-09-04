@@ -6,7 +6,7 @@ import ContenidoRecepcion from '@/views/Editor/Recepcion/components/ContenidoRec
 <template>
   <div class="container-fluid">
     <router-link class="btn btn-simple d-flex align-items-center ms-lg-auto me-lg-0 me-auto mt-lg-0"
-                 to="/Propiedades">
+                 to="/detallesContrato">
       <span class="material-symbols-outlined mx-1"> arrow_back </span> Volver
     </router-link>
     <div class="row mb-4">

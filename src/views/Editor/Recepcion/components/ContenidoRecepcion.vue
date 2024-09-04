@@ -1,8 +1,8 @@
 <template>
   <div class="container my-5" v-if="store">
-    <p class="text-end">{{ formatDate(Date.now()) }}</p>
 
     <h3 class="text-center mb-4">ACTA DE {{ isReception ? 'RECEPCIÓN' : 'ENTREGA' }} DE PROPIEDAD</h3>
+    <p class="text-end">{{ formatDate(Date.now()) }}</p>
 
     <p><strong>{{ isReception ? 'Recibido por' : 'Entregado por' }}:</strong> {{ fullName(store.propiedad.arrendador) }}</p>
     <p><strong>{{ isReception ? 'Entregado por' : 'Recibido por' }}:</strong> {{ fullName(store.propiedad.arrendatario) }}</p>
@@ -44,7 +44,7 @@ import { ref } from 'vue';
 const store = usePropiedadesStore();
 const isReception = ref(true); // Cambiar a `false` para que sea de entrega
 const motivo = isReception.value ? 'Recepción de propiedad' : 'Término de contrato';
-const propiedad = `${store.propiedad.propiedad.direccion.calle}, comuna ${store.propiedad.propiedad.direccion.comuna}, ciudad ${store.propiedad.propiedad.direccion.ciudad}, país Chile`;
+const propiedad = `${store.propiedad.propiedad.direccion.calle} ${store.propiedad.propiedad.direccion.numero}, ${store.propiedad.propiedad.direccion.ciudad}, Chile`;
 
 const fullName = (person) => {
   return `${person.nombre} ${person.apellidoPaterno} ${person.apellidoMaterno}`;
