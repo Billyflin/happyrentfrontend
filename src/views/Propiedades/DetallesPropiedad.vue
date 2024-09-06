@@ -56,6 +56,9 @@
           <div class="mt-4" v-if="store.propiedad">
             <TimelinePropiedad :propiedad="store.propiedad" />
           </div>
+          <div class="mt-4">
+            <EliminarPropiedad :propiedad="store.propiedad" />
+          </div>
         </div>
       </div>
     </div>
@@ -75,11 +78,13 @@ import ContactoPerfil from '@/views/Propiedades/ContactoPerfil.vue'
 import router from '@/router/index.js'
 import ServiciosItem from '@/views/Propiedades/components/ServiciosItem.vue'
 import TimelinePropiedad from '@/views/Propiedades/TimelinePropiedad.vue'
+import EliminarPropiedad from '@/views/Propiedades/EliminarPropiedad.vue'
 
 export default {
   name: 'App',
   methods: { formatDateTime },
   components: {
+    EliminarPropiedad,
     TimelinePropiedad,
     ServiciosItem,
     ContactoPerfil,

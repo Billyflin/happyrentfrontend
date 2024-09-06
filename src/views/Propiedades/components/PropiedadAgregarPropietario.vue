@@ -1,25 +1,19 @@
 <script>
 import { onMounted, ref } from 'vue'
-import MaterialSwitch from '@/components/Material/MaterialSwitch.vue'
-import MaterialInput from '@/components/Material/MaterialInput.vue'
 import MaterialChoices from '@/components/Material/MaterialChoices.vue'
-import LocalidadForm from '@/views/Shared/LocalidadForm.vue'
 import { usePersonasStore } from '@/store/personasStore.js'
 
 export default {
   name: 'PropiedadAgregarPropietario',
   components: {
-    MaterialSwitch,
-    MaterialInput,
     MaterialChoices,
-    LocalidadForm
   },
   data() {
     return {
       propietario_existente: null
     }
   },
-  emits: ['update:propietario'],
+  emits: ['update:propietario', 'update:propietarioPreview'],
   setup() {
     const store = usePersonasStore()
     let opcionsPersonas = ref([])
@@ -52,6 +46,7 @@ export default {
         if (val && val.value) {
           console.log(val.value)
           this.$emit('update:propietario', { id: val.value.id, type: val.value.type })
+          this.$emit('update:propietarioPreview', val.value)
         }
       },
       deep: true
@@ -62,17 +57,7 @@ export default {
 </script>
 
 <template>
-  <div id="Propietario" class="card ">
-    <div class="card-header">
-
-      <h5>Seleccionar Propietario</h5>
-      <p> Acá puedes seleccionar de los propietarios previamente registrados, en caso de no tener ninguno debes ir a la
-        pestaña
-        <router-link class="text-bold" to="/Personas">Personas</router-link>
-        para completar el registro
-      </p>
-    </div>
-    <div class="card-body pt-0">
+  <div id="Propietario" >
 
       <div class="row">
         <div class="col-12 mb-4">
@@ -179,5 +164,4 @@ export default {
 
       </div>
     </div>
-  </div>
 </template>

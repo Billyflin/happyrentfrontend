@@ -10,7 +10,7 @@
     </p>
 
     <p>
-      Declaro que el arrendatario u ocupante Don/Doña <strong>{{ fullName(store.propiedad.arrendatario) }}</strong>,
+      Declaro que el arrendatario u ocupante <strong>{{ fullName(store.propiedad.arrendatario) }}</strong>,
       cédula nacional de identidad número <strong>{{ store.propiedad.arrendatario.rut }}</strong>, se encuentra al día
       en todos los pagos involucrados en este arrendamiento, incluyendo la renta correspondiente
       al último mes y los servicios con que cuenta el inmueble.
@@ -85,7 +85,7 @@ const downloadPDF = () => {
   cursorY += lineHeight * 2;
 
   // Párrafo 3: Declaración sobre el arrendatario
-  const paragraph2 = `Declaro que el arrendatario u ocupante Don/Doña ${fullName(store.propiedad.arrendatario)}, cédula nacional de identidad número ${store.propiedad.arrendatario.rut}, se encuentra al día en todos los pagos involucrados en este arrendamiento, incluyendo la renta correspondiente al último mes y los servicios con que cuenta el inmueble.`;
+  const paragraph2 = `Declaro que el arrendatario u ocupante ${fullName(store.propiedad.arrendatario)}, cédula nacional de identidad número ${store.propiedad.arrendatario.rut}, se encuentra al día en todos los pagos involucrados en este arrendamiento, incluyendo la renta correspondiente al último mes y los servicios con que cuenta el inmueble.`;
   pdf.text(paragraph2, marginLeft, cursorY, { maxWidth: textWidth, align: 'justify' });
   cursorY += lineHeight * 2;
 

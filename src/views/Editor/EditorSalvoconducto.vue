@@ -19,7 +19,7 @@ import ContenidoSalvoconducto from '@/views/Editor/components/ContenidoSalvocond
           </div>
         </div>
         <div class="mt-2 ">
-          <material-button class="mt-4" full-width size="lg" variant="success" @click="saveContrato">Crear Contrato
+          <material-button class="mt-4" full-width size="lg" variant="success" >Accion...
           </material-button>
         </div>
       </div>
