@@ -8,26 +8,8 @@
             <div class="mt-4" v-if="store.propiedad.propietario">
               <PropietarioDetallesPropiedad :propietario="store.propiedad.propietario" />
             </div>
-            <div class="card mt-4">
-              <div class="card-header pb-0">
-                <h6>Generar Documentos</h6>
-                </div>
-
-              <ul class="nav flex-column bg-white border-radius-lg p-2 pt-0">
-                <li class="nav-item pt-2">
-                  <a class="nav-link d-flex" data-scroll href="#basic-info">
-                    <i class="material-icons text-lg me-2">receipt_long</i>
-                    <span class="text-sm">Generar Acta de entrega</span>
-                  </a>
-                </li>
-<!--                salvoconducto-->
-                <li class="nav-item pt-2">
-                  <a class="nav-link d-flex" data-scroll href="#bank-accounts">
-                    <i class="material-icons text-lg me-2">account_balance</i>
-                    <span class="text-sm">Generar Salvoconducto</span>
-                  </a>
-                </li>
-              </ul>
+            <div class="mt-4" v-if="store.propiedad.propietario">
+              <generarDocumentos />
             </div>
 
           </div>
@@ -48,6 +30,17 @@
         </div>
         <div v-if="store.propiedad">
           <div>
+            <div class="card">
+              <!--              comision-->
+              <div class="card-body ">
+                <div class="justify-between">
+                  <h5>Comisión</h5>
+                  <p class="card-text">Comisión: 10%</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-4">
             <ServiciosItem />
           </div>
           <div class="mt-4">
@@ -79,11 +72,13 @@ import router from '@/router/index.js'
 import ServiciosItem from '@/views/Propiedades/components/ServiciosItem.vue'
 import TimelinePropiedad from '@/views/Propiedades/TimelinePropiedad.vue'
 import EliminarPropiedad from '@/views/Propiedades/EliminarPropiedad.vue'
+import GenerarDocumentos from '@/views/Propiedades/GenerarDocumentos.vue'
 
 export default {
   name: 'App',
   methods: { formatDateTime },
   components: {
+    GenerarDocumentos,
     EliminarPropiedad,
     TimelinePropiedad,
     ServiciosItem,
