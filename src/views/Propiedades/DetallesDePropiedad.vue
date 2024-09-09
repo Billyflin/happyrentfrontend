@@ -4,6 +4,25 @@
       <h6>Detalles de la Propiedad</h6>
     </div>
     <div class="card-body pt-0">
+      <div class="row" v-if="propiedad.rol">
+        <template v-if="propiedad.rol">
+          <div class="col-lg-4 col-sm-12 mb-3">
+            <p class="text-sm text-dark mb-1">Rol de la Propiedad:</p>
+            <div class="d-flex align-items-center">
+              <dt class="text-sm me-2">
+                <span class="material-symbols-outlined text-dark align-middle">tag</span>
+              </dt>
+              <dd class="text-sm text-dark text-bold text-capitalize mb-0">
+                {{ propiedad.rol }}
+              </dd>
+            </div>
+          </div>
+        </template>
+
+
+
+      </div>
+
       <div class="row">
         <template v-if="propiedad.type">
           <div class="col-lg-4 col-sm-12 mb-3">
