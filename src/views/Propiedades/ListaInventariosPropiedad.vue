@@ -1,21 +1,21 @@
 <template>
   <div class="card pb-0 mt-4">
     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
-      <h6>Lista de Inventario de la Propiedad</h6>
+      <h6 class="text-center">Lista de Inventario de la Propiedad</h6>
       <a class="align-items-center text-decoration-none icon-link" @click="refreshInventario">
         <span class="material-symbols-outlined text-md">refresh</span>
         <small>Actualizar</small>
       </a>
     </div>
     <div class="card-body p-0">
-      <table class="table table-striped table-hover">
+      <table class="table table-striped table-hover ">
         <thead>
         <tr>
-          <th>Nombre</th>
-          <th>Descripción</th>
-          <th>Estado</th>
-          <th>Fotos</th>
-          <th>Acciones</th>
+          <th class="text-center">Nombre</th>
+          <th class="text-center">Descripción</th>
+          <th class="text-center">Estado</th>
+          <th class="text-center">Fotos</th>
+          <th class="text-center">Acciones</th>
         </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
         </tbody>
       </table>
     </div>
-    <div class="card-footer py-0">
+    <div class="card-footer py-0 d-flex justify-content-center">
       <button class="btn btn-primary btn-sm" @click="handleAddItemClick">
         <i class="bi bi-plus"></i> Agregar Inventario
       </button>

@@ -1,16 +1,16 @@
 <template>
   <tr>
-    <td>{{ item.nombre }}</td>
-    <td>{{ item.descripcion }}</td>
-    <td>
+    <td class="text-center">{{ item.nombre }}</td>
+    <td class="text-center">{{ item.descripcion }}</td>
+    <td class="text-center">
       <span :class="statusBadgeClass">{{ statusText }}</span>
     </td>
-    <td>
+    <td class="text-center">
       <button class="btn btn-outline-primary btn-sm" @click="$emit('open-photo-gallery', item)">
         <i class="bi bi-camera"></i> Ver fotos ({{ item.archivoes.length }})
       </button>
     </td>
-    <td>
+    <td class="text-center">
       <button class="btn btn-outline-secondary btn-sm" @click="$emit('edit-item', item)">
         <i class="bi bi-pencil-square"></i> Editar
       </button>
@@ -29,20 +29,28 @@ export default {
   },
   computed: {
     statusBadgeClass() {
-      const statusClasses = {
-        good: 'badge bg-success',
-        damaged: 'badge bg-warning',
-        missing: 'badge bg-danger'
-      };
-      return statusClasses[this.item.estado] || 'badge bg-secondary';
+      switch (this.item.estado) {
+        case 'good':
+          return 'badge bg-success';
+        case 'damaged':
+          return 'badge bg-warning';
+        case 'missing':
+          return 'badge bg-danger';
+        default:
+          return 'badge bg-secondary';
+      }
     },
     statusText() {
-      const statusTexts = {
-        good: 'Bueno',
-        damaged: 'Dañado',
-        missing: 'Faltante'
-      };
-      return statusTexts[this.item.estado] || 'Desconocido';
+      switch (this.item.estado) {
+        case 'good':
+          return 'Bueno';
+        case 'damaged':
+          return 'Dañado';
+        case 'missing':
+          return 'Faltante';
+        default:
+          return 'Desconocido';
+      }
     }
   }
 }
