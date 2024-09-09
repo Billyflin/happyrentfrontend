@@ -29,8 +29,8 @@
         </tbody>
       </table>
     </div>
-    <div class="card-footer py-0 d-flex justify-content-center">
-      <button class="btn btn-primary btn-sm" @click="handleAddItemClick">
+    <div class="card-footer pt-0 d-flex justify-content-end">
+      <button class="btn btn-primary " @click="handleAddItemClick">
         <i class="bi bi-plus"></i> Agregar Inventario
       </button>
     </div>

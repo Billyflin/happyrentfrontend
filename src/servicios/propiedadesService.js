@@ -78,3 +78,7 @@ export const saveInventario = async (inventario, archivos, idPropiedad) => {
 export const getInventario = async (id) => {
   return await axios.post(`/api/v1/propiedad/inventario`,{id})
 }
+
+export const  deleteInventario = async(id) => {
+  return await  axios.post(`/api/v1/propiedad/inventario/delete`,{id})
+}

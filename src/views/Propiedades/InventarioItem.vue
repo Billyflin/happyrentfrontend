@@ -1,23 +1,22 @@
 <template>
   <tr>
-    <td class="text-center">{{ item.nombre }}</td>
-    <td class="text-center">{{ item.descripcion }}</td>
-    <td class="text-center">
+    <td class="align-middle text-center">{{ item.nombre }}</td>
+    <td class="align-middle text-center">{{ item.descripcion }}</td>
+    <td class="align-middle text-center">
       <span :class="statusBadgeClass">{{ statusText }}</span>
     </td>
-    <td class="text-center">
-      <button class="btn btn-outline-primary btn-sm" @click="$emit('open-photo-gallery', item)">
+    <td class="align-items-center text-center">
+      <button class="btn btn-outline-primary btn-sm mb-0" @click="$emit('open-photo-gallery', item)">
         <i class="bi bi-camera"></i> Ver fotos ({{ item.archivoes.length }})
       </button>
     </td>
-    <td class="text-center">
-      <button class="btn btn-outline-secondary btn-sm" @click="$emit('edit-item', item)">
+    <td class="text-center align-middle">
+      <button class="btn btn-outline-secondary btn-sm mb-0 " @click="$emit('edit-item', item)">
         <i class="bi bi-pencil-square"></i> Editar
       </button>
     </td>
   </tr>
 </template>
-
 <script>
 export default {
   name: 'InventarioItem',

@@ -9,7 +9,6 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          {{ idPropiedad }}
           <h5 class="modal-title" id="inventarioModalLabel">
             {{ editing ? 'Editar' : 'Agregar' }} Inventario
           </h5>
@@ -26,7 +25,7 @@
               <label for="itemName" class="form-label">Nombre</label>
               <input
                 type="text"
-                class="form-control"
+                class="form-control border"
                 id="itemName"
                 v-model="editItemData.nombre"
                 required
@@ -35,7 +34,7 @@
             <div class="mb-3">
               <label for="itemDescription" class="form-label">Descripción</label>
               <textarea
-                class="form-control"
+                class="form-control border"
                 id="itemDescription"
                 v-model="editItemData.descripcion"
                 required
@@ -43,7 +42,7 @@
             </div>
             <div class="mb-3">
               <label for="itemStatus" class="form-label">Estado</label>
-              <select class="form-control" id="itemStatus" v-model="editItemData.estado">
+              <select class="form-control border" id="itemStatus" v-model="editItemData.estado">
                 <option value="good">Bueno</option>
                 <option value="damaged">Dañado</option>
                 <option value="missing">Faltante</option>
@@ -53,15 +52,20 @@
               <label for="itemPhotos" class="form-label">Agregar Fotos</label>
               <input
                 type="file"
-                class="form-control"
+                class="form-control border"
                 id="itemPhotos"
                 @change="handleFileUpload"
                 multiple
-              />
+                accept=".jpg, .jpeg, .png"              />
             </div>
-            <button type="submit" class="btn btn-primary">
-              {{ editing ? 'Actualizar' : 'Agregar' }}
-            </button>
+            <div class="d-flex justify-content-between">
+              <button type="submit" class="btn btn-primary">
+                {{ editing ? 'Actualizar' : 'Agregar' }}
+              </button>
+              <button v-if="editing" type="button" class="btn btn-danger" @click="deleteItem">
+                Borrar
+              </button>
+            </div>
           </form>
         </div>
       </div>
@@ -70,9 +74,9 @@
 </template>
 
 <script>
-import { saveInventario } from '@/servicios/propiedadesService.js'
-import { reactive, ref } from 'vue'
-import { Modal } from 'bootstrap'
+import { saveInventario, deleteInventario } from '@/servicios/propiedadesService.js';
+import { reactive, ref } from 'vue';
+import { Modal } from 'bootstrap';
 
 export default {
   name: 'InventarioModal',
@@ -82,65 +86,75 @@ export default {
       required: true
     }
   },
-  emits: ['save-item'],
+  emits: ['save-item', 'delete-item'],
   setup(props, { emit }) {
-    const editing = ref(false)
+    const editing = ref(false);
     const editItemData = reactive({
       id: null,
       nombre: '',
       descripcion: '',
       estado: 'good',
       archivoes: []
-    })
-    const archivos = ref([]) // Archivos a subir
-    let inventarioModal = null
+    });
+    const archivos = ref([]);
+    let inventarioModal = null;
 
     const openModal = (isEditing, item = null) => {
-      editing.value = isEditing
+      editing.value = isEditing;
       if (item) {
-        Object.assign(editItemData, item)
+        Object.assign(editItemData, item);
       } else {
-        resetEditItemData()
+        resetEditItemData();
       }
       if (!inventarioModal) {
-        inventarioModal = new Modal(document.getElementById('inventarioModal'))
+        inventarioModal = new Modal(document.getElementById('inventarioModal'));
       }
-      inventarioModal.show()
-    }
+      inventarioModal.show();
+    };
 
     const resetEditItemData = () => {
-      editItemData.id = null
-      editItemData.nombre = ''
-      editItemData.descripcion = ''
-      editItemData.estado = 'good'
-      editItemData.archivoes = []
-      archivos.value = []
-    }
+      editItemData.id = null;
+      editItemData.nombre = '';
+      editItemData.descripcion = '';
+      editItemData.estado = 'good';
+      editItemData.archivoes = [];
+      archivos.value = [];
+    };
 
     const handleFileUpload = (event) => {
-      archivos.value = Array.from(event.target.files)
-    }
+      archivos.value = Array.from(event.target.files);
+    };
 
     const saveItem = async () => {
       try {
-        console.log(props.idPropiedad, 'Aca esta el error ')
-        const result = await saveInventario(editItemData, archivos.value, props.idPropiedad)
-        emit('save-item', result) // Emitimos el evento con el inventario guardado
-        inventarioModal.hide()
-
+        const result = await saveInventario(editItemData, archivos.value, props.idPropiedad);
+        emit('save-item', result);
+        inventarioModal.hide();
       } catch (error) {
-        console.error('Error al guardar el inventario:', error)
-        // Aquí podrías manejar el error, por ejemplo, mostrando un mensaje en la UI
+        console.error('Error al guardar el inventario:', error);
       }
-    }
+    };
+
+    const deleteItem = async () => {
+      try {
+        if (editItemData.id) {
+          await deleteInventario(editItemData.id, props.idPropiedad);
+          emit('delete-item', editItemData.id);
+          inventarioModal.hide();
+        }
+      } catch (error) {
+        console.error('Error al borrar el inventario:', error);
+      }
+    };
 
     return {
       editing,
       editItemData,
       openModal,
       handleFileUpload,
-      saveItem
-    }
+      saveItem,
+      deleteItem
+    };
   }
-}
+};
 </script>
