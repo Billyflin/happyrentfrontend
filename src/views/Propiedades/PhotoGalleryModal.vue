@@ -8,7 +8,7 @@
         </div>
         <div class="modal-body">
           <div v-if="currentItem" class="text-center">
-            <img :src="currentPhoto" class="img-fluid mb-2" :alt="currentItem.nombre">
+            <img :src="currentPhotoUrl" class="img-fluid mb-2" :alt="currentItem.nombre">
             <div>
               <button class="btn btn-outline-primary me-2" @click="prevPhoto" :disabled="isFirstPhoto">
                 <i class="bi bi-chevron-left"></i> Anterior
@@ -45,7 +45,10 @@ export default {
       photoGalleryModal.show();
     };
 
-    const currentPhoto = computed(() => currentItem.value.archivoes[currentPhotoIndex.value]);
+    const currentPhotoUrl = computed(() => {
+      const base64String = currentItem.value.archivoes[currentPhotoIndex.value].contenido;
+      return `data:image/jpeg;base64,${base64String}`;
+    });
 
     const isFirstPhoto = computed(() => currentPhotoIndex.value === 0);
     const isLastPhoto = computed(() => currentPhotoIndex.value === currentItem.value.archivoes.length - 1);
@@ -62,7 +65,7 @@ export default {
       currentItem,
       currentPhotoIndex,
       openModal,
-      currentPhoto,
+      currentPhotoUrl,
       isFirstPhoto,
       isLastPhoto,
       nextPhoto,

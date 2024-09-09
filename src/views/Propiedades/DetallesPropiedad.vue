@@ -18,8 +18,8 @@
             <div class="mt-4" v-if="store.propiedad">
               <DetallesDePropiedad :propiedad="store.propiedad" />
             </div>
-            <div class="mt-4 " v-if="store.propiedad.inventarios">
-              <ListaInventariosPropiedad :inventarios="store.propiedad.inventarios" />
+            <div class="mt-4 " v-if="store.propiedad">
+              <ListaInventariosPropiedad   :id-propiedad="store.propiedad.id"/>
             </div>
           </div>
         </div>

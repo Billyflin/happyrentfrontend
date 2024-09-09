@@ -2,9 +2,10 @@
   <div class="card pb-0 mt-4">
     <div class="card-header pb-0 d-flex justify-content-between align-items-center">
       <h6>Lista de Inventario de la Propiedad</h6>
-      <button class="btn btn-primary btn-sm" @click="handleAddItemClick">
-        <i class="bi bi-plus"></i> Agregar Inventario
-      </button>
+      <a class="align-items-center text-decoration-none icon-link" @click="refreshInventario">
+        <span class="material-symbols-outlined text-md">refresh</span>
+        <small>Actualizar</small>
+      </a>
     </div>
     <div class="card-body p-0">
       <table class="table table-striped table-hover">
@@ -27,18 +28,23 @@
         />
         </tbody>
       </table>
-      {{inventarios}}
+    </div>
+    <div class="card-footer py-0">
+      <button class="btn btn-primary btn-sm" @click="handleAddItemClick">
+        <i class="bi bi-plus"></i> Agregar Inventario
+      </button>
     </div>
   </div>
   <PhotoGalleryModal ref="photoGalleryModal" />
-  <InventarioModal ref="inventarioModal" />
+  <InventarioModal ref="inventarioModal" :id-propiedad="idPropiedad" @action-completed="refreshInventario" @save-item="refreshInventario"/>
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import InventarioItem from './InventarioItem.vue';
 import PhotoGalleryModal from './PhotoGalleryModal.vue';
 import InventarioModal from './InventarioModal.vue';
+import { getInventario } from '@/servicios/propiedadesService.js';
 
 export default {
   name: 'ListaInventariosPropiedad',
@@ -48,20 +54,33 @@ export default {
     InventarioModal
   },
   props: {
-    inventarios: {
-      type: Array,
+    idPropiedad: {
+      type: String,
       required: true
     }
   },
-  setup() {
+  setup(props) {
+    const inventarios = ref([]);
     const photoGalleryModal = ref(null);
     const inventarioModal = ref(null);
 
+    // Función para cargar inventarios desde el servidor
+    const refreshInventario = async () => {
+      try {
+        const result = await getInventario(props.idPropiedad);
+        inventarios.value = result.data; // Actualiza la lista de inventarios
+        console.log(result)
+      } catch (error) {
+        console.error('Error al cargar los inventarios:', error);
+      }
+    };
+
     onMounted(() => {
+      refreshInventario(); // Carga los inventarios cuando se monta el componente
       if (photoGalleryModal.value && inventarioModal.value) {
-        console.log("Modales montados correctamente");
+        console.log('Modales montados correctamente');
       } else {
-        console.error("Error al montar los modales");
+        console.error('Error al montar los modales');
       }
     });
 
@@ -90,9 +109,11 @@ export default {
     };
 
     return {
+      inventarios,
       handleAddItemClick,
       handleEditItemClick,
       handleOpenPhotoGalleryClick,
+      refreshInventario,
       photoGalleryModal,
       inventarioModal
     };

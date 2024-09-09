@@ -49,3 +49,32 @@ export const testPropiedadService = async ( numeroCliente,proveedorServicio) => 
 export const deletePropiedadService = async (id) => {
   return await axios.post('/api/v1/propiedad/servicios/delete', { id })
 }
+
+export const saveInventario = async (inventario, archivos, idPropiedad) => {
+  console.log(idPropiedad, "desde el form")
+  const formData = new FormData();
+
+  formData.append('inventario', new Blob([JSON.stringify(inventario)], { type: 'application/json' }));
+
+  archivos.forEach((archivo) => {
+    formData.append('archivos', archivo);
+  });
+
+  formData.append('idPropiedad', idPropiedad);
+
+  try {
+    const response = await axios.post('/api/v1/propiedad/guardar-inventario', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error al guardar el inventario:', error);
+    throw error;
+  }
+}
+
+export const getInventario = async (id) => {
+  return await axios.post(`/api/v1/propiedad/inventario`,{id})
+}
