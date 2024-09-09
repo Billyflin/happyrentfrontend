@@ -1,42 +1,53 @@
 # happ-frontend
 
-This template should help get you started developing with Vue 3 in Vite.
+This template will help you get started with developing using Vue 3 and Vite.
 
 ## Recommended IDE Setup
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and
-disable Vetur).
+- [WebStorm](https://www.jetbrains.com/webstorm/)
+- [VS Code](https://code.visualstudio.com/) with [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (disable Vetur if installed).
 
-## Customize configuration
+## Customize Configuration
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Refer to the [Vite Configuration Reference](https://vitejs.dev/config/) for more details.
 
 ## Project Setup
 
 ```sh
-bun install
+pnpm install
 ```
 
 ### Compile and Hot-Reload for Development
 
 ```sh
-bun dev
+pnpm dev
 ```
 
 ### Compile and Minify for Production
 
 ```sh
-bun build
+pnpm build
 ```
 
 ### Run Unit Tests with [Vitest](https://vitest.dev/)
 
 ```sh
-bun test:unit
+pnpm test:unit
 ```
 
 ### Lint with [ESLint](https://eslint.org/)
 
 ```sh
-bun lint
+pnpm lint
 ```
+
+## Additional Tools
+- [axios](https://github.com/axios/axios): Promise-based HTTP client for the browser and node.js.
+- [lodash](https://lodash.com/): A modern JavaScript utility library delivering modularity, performance & extras.
+- [vue-router](https://router.vuejs.org/): The official router for Vue.js.
+- [pinia](https://pinia.vuejs.org/): The intuitive store for Vue.js.
+- [bootstrap](https://getbootstrap.com/): The most popular framework for building responsive, mobile-first projects on the web.
+
+## Version Control
+
+Follow the standard Git workflow for version control. Make sure to commit frequently and push to the repository.
