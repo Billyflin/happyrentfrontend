@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite ",
+    "prod": "vite --mode production",
     "build": "vite build",
     "preview": "vite preview",
     "test:unit": "vitest",
@@ -63,7 +64,7 @@
     "prettier": "^3.3.3",
     "sass": "^1.78.0",
     "sass-loader": "^16.0.1",
-    "vite": "^5.4.3",
+    "vite": "^5.4.8",
     "vite-plugin-vue-devtools": "^7.4.4",
     "vitest": "^2.0.5"
   },
