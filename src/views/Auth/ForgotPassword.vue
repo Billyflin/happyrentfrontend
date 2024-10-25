@@ -12,7 +12,7 @@
               <div class="text-center">
                 <h1 class="mb-3">Recuperar contraseña</h1>
                 <p> La contraseña debe tener al menos 8 caracteres, incluyendo una letra mayúscula, una minúscula, un
-                  dígito y un carácter especial. No se permiten espacios en blanco. No puede tener el caracter especial
+                  dígito y un carácter especial ($@%*?&_#/+=(){}~). No se permiten espacios en blanco. No puede tener el caracter especial
                   "!" . </p>
               </div>
             </div>
@@ -148,9 +148,12 @@ export default {
           state.value = true
         }
       } catch (err) {
+        console.log("err.response. :", err.response)
         if (err.response && err.response.status === 500 && err.response.data === 'Token Invalido.') {
           error.value = 'El token no es válido.'
           isTokenValid.value = false
+        } else if (err.response && err.response.status === 400 && err.response.data.message === "Validación fallida"){
+          error.value = err.response.data.errors.password
         } else {
           error.value = 'Hubo un error al cambiar la contraseña. Por favor, inténtalo de nuevo más tarde.'
         }
