@@ -19,7 +19,7 @@
         </div>
         <div class="col-sm-3 me-auto">
           <input :id="'perfilSelection_Propietario_'" v-model="selectedRole" class="btn-check" name="profileSelection"
-                 type="radio" value="ROLE_PROPIETARIO" @change="updateAuthority">
+                 type="radio" value="ROLE_CORREDOR" @change="updateAuthority">
           <label :for="'perfilSelection_Propietario_' " class="btn btn-lg btn-outline-success border-2 px-6 py-5">
             <i class="material-icons">integration_instructions</i>
           </label>

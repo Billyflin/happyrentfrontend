@@ -20,12 +20,12 @@ const routes = [
 
   {
     path: '/dashboard', name: 'Dashboard', component: () => import('@/views/Dashboard/Dashboard.vue'), meta: {
-      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
     }
   },
   {
     path: '/Indicadores', name: 'Indicadores', component: () => import('@/views/Indicadores/Indicador.vue'), meta: {
-      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR']
+      requiresAuth: true, roles: ['ROLE_ADMIN', 'ROLE_CORREDOR', 'ROLE_PROPIETARIO']
     }
   }, {
 
